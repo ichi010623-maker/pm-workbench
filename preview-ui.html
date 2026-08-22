@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>硬件PM工作台 · UI 改版提案（明亮清爽版）</title>
+<style>
+  :root{
+    /* ===== 新版设计 token（明亮清爽浅色）===== */
+    --bg:#f4f5f8;
+    --surface:#ffffff;
+    --surface-2:#fafbfc;
+    --surface-3:#f1f2f6;
+    --primary:#4f46e5;
+    --primary-strong:#4338ca;
+    --primary-weak:#eef0ff;
+    --primary-weak-2:#e0e3ff;
+    --text:#17171f;
+    --text-2:#6b6b7b;
+    --text-3:#a3a3b2;
+    --border:#ececf1;
+    --border-strong:#e1e1ea;
+    --shadow-sm:0 1px 2px rgba(20,20,45,.05);
+    --shadow-md:0 6px 20px rgba(20,20,45,.07);
+    --shadow-lg:0 12px 36px rgba(20,20,45,.10);
+    --r-sm:10px; --r-md:14px; --r-lg:20px; --r-xl:26px;
+    --success:#16a34a; --warn:#f59e0b; --danger:#ef4444;
+    /* 模块柔和色板（低饱和，协调不刺眼） */
+    --c-indigo:#4f46e5; --c-indigo-bg:#eef0ff;
+    --c-blue:#1c7ed6;   --c-blue-bg:#e8f1ff;
+    --c-teal:#0ca678;   --c-teal-bg:#e6f9f2;
+    --c-orange:#e8590c; --c-orange-bg:#fff1e6;
+    --c-pink:#c2255c;   --c-pink-bg:#ffe9f1;
+    --c-violet:#7048e8; --c-violet-bg:#f3ecff;
+    --c-green:#2f9e44;  --c-green-bg:#eaf7ec;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Microsoft YaHei",sans-serif;
+    background:#e9eaf0; color:var(--text); line-height:1.55; padding:32px 20px 64px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .doc-head{max-width:1120px;margin:0 auto 36px}
+  .doc-head h1{font-size:30px;font-weight:800;letter-spacing:-1px}
+  .doc-head p{color:var(--text-2);margin-top:8px;font-size:15px;max-width:760px}
+  .doc-head .tag{display:inline-block;background:var(--primary-weak);color:var(--primary);font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:14px}
+  main{max-width:1120px;margin:0 auto}
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;margin-bottom:28px;box-shadow:var(--shadow-sm)}
+  .panel h2{font-size:20px;font-weight:800;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+  .panel h2 .n{width:28px;height:28px;border-radius:9px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+
+  /* ===== 设计 token 展示 ===== */
+  .token-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:28px}
+  .swatch{height:64px;border-radius:var(--r-md);border:1px solid var(--border)}
+  .swatch-label{font-size:12px;color:var(--text-2);margin-top:8px}
+  .swatch-label b{color:var(--text);display:block;font-size:13px;font-weight:700}
+  .type-row{display:flex;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid var(--border)}
+  .type-row .t{width:120px;color:var(--text-3);font-size:12px;font-weight:600}
+  .type-sample{color:var(--text)}
+  .comp-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .btn{font-family:inherit;font-size:14px;font-weight:600;border:none;border-radius:var(--r-sm);padding:11px 20px;cursor:pointer}
+  .btn-primary{background:var(--primary);color:#fff;box-shadow:var(--shadow-sm)}
+  .btn-soft{background:var(--primary-weak);color:var(--primary)}
+  .btn-ghost{background:var(--surface-3);color:var(--text)}
+  .badge{display:inline-flex;align-items:center;font-size:12px;font-weight:700;padding:4px 10px;border-radius:8px}
+  .badge.b-blue{background:var(--c-blue-bg);color:var(--c-blue)}
+  .badge.b-green{background:var(--c-green-bg);color:var(--c-green)}
+  .badge.b-red{background:#fee2e2;color:var(--danger)}
+  .badge.b-gray{background:var(--surface-3);color:var(--text-2)}
+  .ipt{font-family:inherit;font-size:14px;padding:11px 14px;border:1px solid var(--border-strong);border-radius:var(--r-sm);background:var(--surface);color:var(--text);width:220px}
+  .ipt:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-weak)}
+  .mini-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:14px;box-shadow:var(--shadow-sm);width:200px}
+  .mini-card .mt{font-weight:700;font-size:14px}
+  .mini-card .mb{font-size:12px;color:var(--text-2);margin-top:4px}
+  .radius-demo{display:flex;gap:16px;align-items:flex-end}
+  .rd{background:var(--primary-weak);border:1px solid var(--border-strong)}
+  .rd span{display:block;text-align:center;font-size:11px;color:var(--text-2);padding-top:54px}
+
+  /* ===== 手机预览 ===== */
+  .phones{display:flex;gap:32px;flex-wrap:wrap;justify-content:center}
+  .phone{
+    width:380px;flex-shrink:0;background:var(--bg);border-radius:38px;border:10px solid #11131a;
+    box-shadow:var(--shadow-lg);overflow:hidden;position:relative;
+  }
+  .phone-name{position:absolute;top:-34px;left:0;right:0;text-align:center;font-size:13px;font-weight:700;color:var(--text-2);background:#e9eaf0;padding:6px}
+  .phone-screen{height:760px;overflow-y:auto;padding-bottom:90px}
+  .phone-screen::-webkit-scrollbar{width:0}
+  .p-header{padding:calc(env(safe-area-inset-top,0px) + 22px) 20px 14px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5}
+  .p-greet{font-size:24px;font-weight:800;letter-spacing:-.6px}
+  .p-date{font-size:13px;color:var(--text-2);margin-top:3px}
+  .p-sub{font-size:13px;color:var(--text-2);margin-top:2px}
+  .p-zone{display:flex;gap:8px;margin:14px 20px 0}
+  .p-zone-tab{flex:1;text-align:center;font-size:13px;font-weight:700;padding:9px;border-radius:999px;background:var(--surface-3);color:var(--text-2)}
+  .p-zone-tab.active{background:var(--primary);color:#fff}
+  .p-content{padding:18px 16px 0}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:14px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+  .stat.key{background:var(--primary-weak);border-color:var(--primary-weak-2)}
+  .stat .si{font-size:20px;margin-bottom:6px}
+  .stat .sv{font-size:26px;font-weight:800;letter-spacing:-.8px;color:var(--text)}
+  .stat.key .sv{color:var(--primary)}
+  .stat .sl{font-size:12px;color:var(--text-2);margin-top:2px}
+  .stat .alert-tag{display:inline-block;margin-top:6px;background:#fee2e2;color:var(--danger);font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+  .sec-title{font-size:17px;font-weight:800;margin:22px 4px 12px;display:flex;align-items:center;gap:8px}
+  .sec-title::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--primary)}
+  .sec-title .count{margin-left:auto;font-size:12px;font-weight:600;color:var(--text-3)}
+  .mod-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .mod{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 8px;text-align:center;box-shadow:var(--shadow-sm);position:relative}
+  .mod .mi{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;margin:0 auto 8px}
+  .mod .mt{font-size:12px;font-weight:700;color:var(--text)}
+  .mod .mc{position:absolute;top:7px;right:7px;background:var(--primary);color:#fff;font-size:10px;font-weight:800;min-width:17px;height:17px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+  .dyn{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:8px 14px;box-shadow:var(--shadow-sm)}
+  .dyn-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+  .dyn-row:last-child{border-bottom:none}
+  .dyn-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+  .dyn-tx{font-size:13px;font-weight:600;color:var(--text);flex:1}
+  .dyn-tm{font-size:11px;color:var(--text-3)}
+  /* 底部导航 */
+  .p-nav{position:absolute;bottom:0;left:0;right:0;display:flex;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:8px 0 10px}
+  .p-nav .ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--text-2);font-size:11px;font-weight:700}
+  .p-nav .ni.active{color:var(--primary)}
+  .p-nav .ne{font-size:24px}
+  .p-nav .fab{width:50px;height:50px;border-radius:50%;background:var(--primary);color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);margin-top:-20px}
+
+  /* 对照表 */
+  .diff{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .diff-col h3{font-size:15px;font-weight:800;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+  .diff-col.new h3{color:var(--primary)}
+  .diff-item{display:flex;gap:10px;margin-bottom:14px;font-size:13px;line-height:1.5}
+  .diff-item .mk{flex-shrink:0;font-size:16px;margin-top:1px}
+  .diff-item b{color:var(--text)}
+  .diff-col.old .diff-item{color:var(--text-2)}
+  .note{background:var(--primary-weak);border:1px solid var(--primary-weak-2);border-radius:var(--r-md);padding:16px 18px;font-size:14px;color:var(--primary-strong);margin-top:8px}
+  .note b{color:var(--primary-strong)}
+</style>
+</head>
+<body>
+  <div class="doc-head">
+    <span class="tag">UI 改版提案 · v0.1 预览</span>
+    <h1>硬件PM工作台 · 明亮清爽浅色方案</h1>
+    <p>针对你提到的「配色沉闷/太花、拥挤不透气、重点不明、视觉寡淡、板块界限模糊」五点，先给出一套新的设计语言，并把<b>首页</b>和<b>个人成长主页</b>用真实页面结构重做出来。确认方向后，再全站推行到所有模块页面与弹窗。</p>
+  </div>
+
+  <main>
+    <!-- ① 设计语言 -->
+    <section class="panel">
+      <h2><span class="n">1</span> 设计语言（新规范）</h2>
+      <div class="token-grid">
+        <div><div class="swatch" style="background:var(--bg)"></div><div class="swatch-label"><b>页面背景</b>#f4f5f8 浅灰白</div></div>
+        <div><div class="swatch" style="background:var(--surface)"></div><div class="swatch-label"><b>卡片表面</b>#ffffff 纯白浮起</div></div>
+        <div><div class="swatch" style="background:var(--primary)"></div><div class="swatch-label"><b>主色</b>#4f46e5 靛蓝（仅 1 个）</div></div>
+        <div><div class="swatch" style="background:var(--primary-weak)"></div><div class="swatch-label"><b>主色浅底</b>#eef0ff 强调块</div></div>
+        <div><div class="swatch" style="background:var(--text)"></div><div class="swatch-label"><b>主文字</b>#17171f 近黑</div></div>
+        <div><div class="swatch" style="background:var(--text-2)"></div><div class="swatch-label"><b>次文字</b>#6b6b7b 灰</div></div>
+        <div><div class="swatch" style="background:var(--border)"></div><div class="swatch-label"><b>描边</b>#ececf1 细线分界</div></div>
+        <div><div class="swatch" style="background:var(--success)"></div><div class="swatch-label"><b>成功</b>#16a34a 语义色</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+        <div>
+          <div class="type-row"><span class="t">标题 H1</span><span class="type-sample" style="font-size:26px;font-weight:800">产品经理工作台</span></div>
+          <div class="type-row"><span class="t">区块标题</span><span class="type-sample" style="font-size:17px;font-weight:800">工作台模块</span></div>
+          <div class="type-row"><span class="t">正文</span><span class="type-sample" style="font-size:14px">记录今日灵感与任务进度</span></div>
+          <div class="type-row"><span class="t">辅助文字</span><span class="type-sample" style="font-size:12px;color:var(--text-2)">8月2日 周日 · 已同步云端</span></div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--text-2);margin-bottom:12px">组件示例</div>
+          <div class="comp-row" style="margin-bottom:18px">
+            <button class="btn btn-primary">主按钮</button>
+            <button class="btn btn-soft">次要</button>
+            <button class="btn btn-ghost">幽灵</button>
+          </div>
+          <div class="comp-row" style="margin-bottom:18px">
+            <span class="badge b-blue">重要</span><span class="badge b-green">已同步</span><span class="badge b-red">超时</span><span class="badge b-gray">概念</span>
+          </div>
+          <div class="comp-row" style="margin-bottom:18px">
+            <input class="ipt" placeholder="输入框聚焦有主色光环">
+          </div>
+          <div class="comp-row">
+            <div class="mini-card"><div class="mt">统计卡</div><div class="mb">白底 · 细边框 · 柔和阴影</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ② 页面预览 -->
+    <section class="panel">
+      <h2><span class="n">2</span> 页面预览（真实结构重做）</h2>
+      <div class="phones">
+        <!-- 首页 -->
+        <div class="phone">
+          <div class="phone-name">工作区 · 首页</div>
+          <div class="phone-screen">
+            <div class="p-header">
+              <div class="p-greet">下午好 👋</div>
+              <div class="p-date">8月2日 周日</div>
+            </div>
+            <div class="p-zone">
+              <div class="p-zone-tab active">💼 工作区</div>
+              <div class="p-zone-tab">🌱 个人成长</div>
+            </div>
+            <div class="p-content">
+              <div class="stats">
+                <div class="stat key">
+                  <div class="si">📋</div><div class="sv">3 待办</div><div class="sl">今日任务</div>
+                  <span class="alert-tag">⚠ 待完成 3 项</span>
+                </div>
+                <div class="stat"><div class="si">💭</div><div class="sv">12</div><div class="sl">想法库</div></div>
+                <div class="stat"><div class="si">🔍</div><div class="sv">5</div><div class="sl">竞品追踪</div></div>
+                <div class="stat"><div class="si">📰</div><div class="sv">8</div><div class="sl">行业情报</div></div>
+              </div>
+
+              <div class="sec-title">工作台模块 <span class="count">7 个</span></div>
+              <div class="mod-grid">
+                <div class="mod"><div class="mi" style="background:var(--c-indigo-bg)">📋</div><div class="mt">工作台</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-violet-bg)">📊</div><div class="mt">产品看板</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-blue-bg)">📰</div><div class="mt">行业情报</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-orange-bg)">🔍</div><div class="mt">竞品研判</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-pink-bg)">💡</div><div class="mt">需求洞察</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-indigo-bg)">💭</div><div class="mt">想法库</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-green-bg)">🗺️</div><div class="mt">产品规划</div></div>
+              </div>
+
+              <div class="sec-title">最近动态</div>
+              <div class="dyn">
+                <div class="dyn-row"><div class="dyn-ic" style="background:var(--c-indigo-bg)">💭</div><div class="dyn-tx">记录想法：折叠屏铰链寿命测试方案</div><div class="dyn-tm">今天</div></div>
+                <div class="dyn-row"><div class="dyn-ic" style="background:var(--c-blue-bg)">📰</div><div class="dyn-tx">录入情报：Qi2 磁吸充电行业趋势</div><div class="dyn-tm">昨天</div></div>
+                <div class="dyn-row"><div class="dyn-ic" style="background:var(--c-orange-bg)">🔍</div><div class="dyn-tx">更新竞品：竞品 B 续航参数对比</div><div class="dyn-tm">周三</div></div>
+                <div class="dyn-row"><div class="dyn-ic" style="background:var(--c-violet-bg)">📊</div><div class="dyn-tx">新建产品：智能降噪耳机 Pro</div><div class="dyn-tm">周二</div></div>
+              </div>
+            </div>
+            <div class="p-nav">
+              <div class="ni active"><span class="ne">🏠</span>首页</div>
+              <div class="ni"><span class="ne">📋</span>工作台</div>
+              <div class="fab">+</div>
+              <div class="ni"><span class="ne">💭</span>想法</div>
+              <div class="ni"><span class="ne">⚙️</span>设置</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 个人成长主页 -->
+        <div class="phone">
+          <div class="phone-name">个人成长 · 主页</div>
+          <div class="phone-screen">
+            <div class="p-header">
+              <div class="p-greet">个人成长 🌱</div>
+              <div class="p-sub">每日习惯 · 复盘 · 自我提升</div>
+            </div>
+            <div class="p-zone">
+              <div class="p-zone-tab">💼 工作区</div>
+              <div class="p-zone-tab active">🌱 个人成长</div>
+            </div>
+            <div class="p-content">
+              <div class="stats">
+                <div class="stat key"><div class="si">📰</div><div class="sv">2</div><div class="sl">重要新闻未读</div></div>
+                <div class="stat"><div class="si">🔥</div><div class="sv">8</div><div class="sl">视频拆解</div></div>
+                <div class="stat"><div class="si">📚</div><div class="sv">36</div><div class="sl">英语单词(已掌握)</div></div>
+              </div>
+
+              <div class="sec-title">成长模块 <span class="count">7 个</span></div>
+              <div class="mod-grid">
+                <div class="mod"><div class="mi" style="background:var(--c-violet-bg)">📈</div><div class="mt">每日复盘</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-pink-bg)">👗</div><div class="mt">穿搭管理</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-blue-bg)">🧊</div><div class="mt">智能冰箱</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-orange-bg)">🔥</div><div class="mt">爆款视频</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-blue-bg)">📰</div><div class="mt">重要新闻</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-indigo-bg)">💰</div><div class="mt">我的账户</div></div>
+                <div class="mod"><div class="mi" style="background:var(--c-green-bg)">📚</div><div class="mt">英语学习</div></div>
+              </div>
+
+              <div class="sec-title">最近动态</div>
+              <div class="dyn">
+                <div class="dyn-row"><div class="dyn-ic" style="background:var(--c-violet-bg)">📈</div><div class="dyn-tx">完成复盘：本周产品规划对齐</div><div class="dyn-tm">今天</div></div>
+                <div class="dyn-row"><div class="dyn-ic" style="background:var(--c-blue-bg)">🧊</div><div class="dyn-tx">录入食材：鸡蛋 ×1 盒</div><div class="dyn-tm">今天</div></div>
+                <div class="dyn-row"><div class="dyn-ic" style="background:var(--c-pink-bg)">👗</div><div class="dyn-tx">新增搭配：通勤极简风</div><div class="dyn-tm">昨天</div></div>
+                <div class="dyn-row"><div class="dyn-ic" style="background:var(--c-orange-bg)">🔥</div><div class="dyn-tx">拆解视频：3C 产品开箱话术</div><div class="dyn-tm">昨天</div></div>
+              </div>
+            </div>
+            <div class="p-nav">
+              <div class="ni active"><span class="ne">🏠</span>主页</div>
+              <div class="ni"><span class="ne">📈</span>复盘</div>
+              <div class="fab">+</div>
+              <div class="ni"><span class="ne">🥗</span>饮食</div>
+              <div class="ni"><span class="ne">⚙️</span>设置</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ③ 新旧对照 -->
+    <section class="panel">
+      <h2><span class="n">3</span> 旧 → 新 对照（针对你的五点）</h2>
+      <div class="diff">
+        <div class="diff-col old">
+          <h3>❌ 旧版（深色）</h3>
+          <div class="diff-item"><span class="mk">🌑</span><div><b>背景沉闷</b>：纯黑 #0a0a0f，长时间看压抑、不透气。</div></div>
+          <div class="diff-item"><span class="mk">🎨</span><div><b>配色太花</b>：蓝/紫/粉/绿/橙/黄六色到处铺，每个卡片不同彩底，喧宾夺主。</div></div>
+          <div class="diff-item"><span class="mk">🧱</span><div><b>拥挤</b>：卡片间距 10px、内边距偏小，信息贴在一起。</div></div>
+          <div class="diff-item"><span class="mk">👁️</span><div><b>重点不明</b>：统计卡与导航卡都是同款灰块，待办和已读无区分。</div></div>
+          <div class="diff-item"><span class="mk">🌫️</span><div><b>视觉寡淡</b>：无层级、无区块边界，整页像一团灰。</div></div>
+        </div>
+        <div class="diff-col new">
+          <h3>✅ 新版（明亮清爽）</h3>
+          <div class="diff-item"><span class="mk">☀️</span><div><b>通透背景</b>：浅灰白 #f4f5f8 + 纯白卡片，呼吸感强。</div></div>
+          <div class="diff-item"><span class="mk">🎯</span><div><b>收敛主色</b>：仅 1 个靛蓝主色，模块图标用低饱和协调色板，不再花哨。</div></div>
+          <div class="diff-item"><span class="mk">🪟</span><div><b>更透气</b>：间距 12–14px、卡片浮起带柔和阴影 + 细描边。</div></div>
+          <div class="diff-item"><span class="mk">⭐</span><div><b>重点突出</b>：关键统计卡（待办）用主色浅底强调 + 红色"待完成"徽章。</div></div>
+          <div class="diff-item"><span class="mk">📐</span><div><b>板块清晰</b>：区块标题加主色竖条，卡片有边界与层级，一眼分区域。</div></div>
+        </div>
+      </div>
+      <div class="note">
+        💡 <b>下一步</b>：如果你认可这个方向，我会把新规范落地到 <code>css/style.css</code> 的浅色主题变量（并顺手把深色主题也精细化），重做首页/工作台/成长主页/导航/弹窗等所有页面，然后部署到正式地址、手机杀后台刷新即可看到。
+      </div>
+    </section>
+  </main>
+</body>
+</html>

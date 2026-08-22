@@ -1,0 +1,122 @@
+{
+  "generatedAt": "2026-07-29T12:10:55+08:00",
+  "session": "morning",
+  "categories": [
+    { "key": "跨境产品", "label": "跨境产品", "icon": "🌏" },
+    { "key": "美妆", "label": "美妆", "icon": "💄" },
+    { "key": "生活", "label": "生活", "icon": "🏠" },
+    { "key": "乡村", "label": "乡村", "icon": "🌾" }
+  ],
+  "items": [
+    {
+      "id": "vm1",
+      "title": "成本不到2美元售价超22美元，TikTok保健品赛道月销280万件",
+      "description": "加蓓健康等供应链借力TikTok短视频完成消费者教育，肠道清洁胶囊、南非醉茄软糖等爆款销量破百万，保健品正从补充营养向解决具体健康问题转型。",
+      "hashtags": ["#TikTokShop", "#跨境爆款", "#保健品", "#国货出海"],
+      "platform": "TikTok",
+      "category": "跨境产品",
+      "url": "https://www.cifnews.com/article/187789",
+      "image": "",
+      "customTags": []
+    },
+    {
+      "id": "vm2",
+      "title": "水龙头净水装置在TikTok美区爆火，上架30天GMV达150万元",
+      "description": "受水质焦虑影响，美国“filteration”搜索热度大涨，一款6层净水水龙头装置以56倍涨势登顶关键词销量第一，成为近期美区炙手可热的跨境单品。",
+      "hashtags": ["#TikTok", "#净水装置", "#跨境选品", "#美区爆款"],
+      "platform": "TikTok",
+      "category": "跨境产品",
+      "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_9656a5dec8c85252",
+      "image": "",
+      "customTags": []
+    },
+    {
+      "id": "vm3",
+      "title": "自带支架的中国吊床在TikTok卖出3.3万单，GMV超1400万元",
+      "description": "@kiah.shops等博主发布户外吊床视频，展示一体式钢制支架、450磅承重和快速收纳，带动Value-For-Money店铺吊床持续热销，登上TikTok美区家具热销榜。",
+      "hashtags": ["#TikTok", "#户外吊床", "#露营经济", "#跨境爆款"],
+      "platform": "TikTok",
+      "category": "跨境产品",
+      "url": "https://www.toutiao.com/article/7661893671737934379",
+      "image": "",
+      "customTags": []
+    },
+    {
+      "id": "vm4",
+      "title": "新手必学！5个抖音爆款妆容速成技巧（附拍摄避雷全攻略）",
+      "description": "针对镜头吃妆、显脏等痛点，拆解底妆、眉毛、眼妆、腮红、口红的5步速成法，强调水光肌+毛流感+渐变唇的爆款公式。",
+      "hashtags": ["#抖音妆容", "#化妆教程", "#新手化妆", "#爆款公式"],
+      "platform": "抖音",
+      "category": "美妆",
+      "url": "https://i.jiajutu.com/gonglue/024098.html",
+      "image": "",
+      "customTags": []
+    },
+    {
+      "id": "vm5",
+      "title": "10分钟搞定通勤妆：底妆3分钟眉眼4分钟，手残党也能画出干净气质妆",
+      "description": "分享5分钟快速通勤妆步骤，从护肤妆前到轻薄底妆、快速眉眼、提气色唇妆，给出职场得体又提气色的妆容方案。",
+      "hashtags": ["#通勤妆", "#早八人妆容", "#小红书", "#伪素颜教程"],
+      "platform": "小红书",
+      "category": "美妆",
+      "url": "https://post.m.smzdm.com/p/arz0zr8z",
+      "image": "",
+      "customTags": []
+    },
+    {
+      "id": "vm6",
+      "title": "白鹿春日粉彩妆出圈，化妆师金鹤龙手把手教新手一键变甜妹",
+      "description": "2026年7月23日抖音博主金鹤龙分享白鹿春日粉彩妆全过程，清透粉嫩、不挑场合，普通人也能get同款甜妹妆。",
+      "hashtags": ["#春日粉彩妆", "#白鹿同款", "#甜妹妆", "#抖音妆教"],
+      "platform": "抖音",
+      "category": "美妆",
+      "url": "https://www.toutiao.com/article/7618583631879864883",
+      "image": "",
+      "customTags": []
+    },
+    {
+      "id": "vm7",
+      "title": "生活博主热门爆款视频选题盘点：低成本改造与独居打工人日常",
+      "description": "文章盘点城市居家/租房生活爆款方向，包括月租300出租屋百元改造、10分钟懒人收纳、下班独居一人食等高热内容，适合家居好物变现。",
+      "hashtags": ["#生活博主", "#独居生活", "#收纳改造", "#热门选题"],
+      "platform": "抖音",
+      "category": "生活",
+      "url": "https://www.toutiao.com/a7665092377442271746",
+      "image": "",
+      "customTags": []
+    },
+    {
+      "id": "vm8",
+      "title": "被网友伸缩杆用法惊艳到，打开思路后秒变收纳神器",
+      "description": "整理小红书/抖音网友分享的门后鞋架、浴室窗台收纳等伸缩杆妙用，花几十块盘活家中闲置死角，收纳直接翻倍。",
+      "hashtags": ["#收纳神器", "#伸缩杆", "#小户型", "#生活技巧"],
+      "platform": "小红书",
+      "category": "生活",
+      "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_2666a696cbe20352",
+      "image": "",
+      "customTags": []
+    },
+    {
+      "id": "vm9",
+      "title": "山东寿光农村大姐“花花果果”在抖音爆火，一场直播十万人在线",
+      "description": "与旭旭宝宝连麦后，种地大姐花花果果从地头卖羊角蜜的农妇变身抖音头部，粉丝从10万飙到67.9万，真实乡土气息打动观众。",
+      "hashtags": ["#农村大姐", "#直播爆火", "#花花果果", "#抖音三农"],
+      "platform": "抖音",
+      "category": "乡村",
+      "url": "https://www.toutiao.com/article/7664468930676720182",
+      "image": "",
+      "customTags": []
+    },
+    {
+      "id": "vm10",
+      "title": "两男孩赶在大雨前抢收满院粮食，获千万网友点赞",
+      "description": "无滤镜真实记录下乡村孩童冒雨抢收稻谷花生，朴实勤劳的模样被人民网、央视新闻等央媒转发，冲上全网热搜。",
+      "hashtags": ["#乡村少年", "#抢收粮食", "#抖音热门", "#真实记录"],
+      "platform": "抖音",
+      "category": "乡村",
+      "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_7846a66a62068252",
+      "image": "",
+      "customTags": []
+    }
+  ]
+}

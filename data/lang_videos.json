@@ -1,0 +1,385 @@
+{
+  "updatedAt": "2026-08-08 10:49:56",
+  "courses": [
+    {
+      "bvid": "BV1DkKBzfEQH",
+      "title": "【低幼英文启蒙开口神器】英国BBC动画片",
+      "up": "清清妈妈资源宝库",
+      "cover": "https://i0.hdslb.com/bfs/archive/16ce855f954000c5c3c5bba6c6e1df379f5d5b63.png",
+      "lang": "en",
+      "tag": "启蒙动画",
+      "desc": "网络",
+      "totalSec": 18169,
+      "orientation": "landscape",
+      "episodes": [
+        {
+          "p": 1,
+          "title": "1.Banana",
+          "sec": 309
+        },
+        {
+          "p": 2,
+          "title": "2.Dog",
+          "sec": 309
+        },
+        {
+          "p": 3,
+          "title": "3.Book",
+          "sec": 309
+        },
+        {
+          "p": 4,
+          "title": "4.Boots",
+          "sec": 309
+        },
+        {
+          "p": 5,
+          "title": "5.Bike",
+          "sec": 309
+        },
+        {
+          "p": 6,
+          "title": "6.Duck",
+          "sec": 309
+        },
+        {
+          "p": 7,
+          "title": "7.Cup",
+          "sec": 309
+        },
+        {
+          "p": 8,
+          "title": "8.Bus",
+          "sec": 309
+        },
+        {
+          "p": 9,
+          "title": "9.peas",
+          "sec": 311
+        },
+        {
+          "p": 10,
+          "title": "10.Hat",
+          "sec": 311
+        },
+        {
+          "p": 11,
+          "title": "11.worm",
+          "sec": 311
+        },
+        {
+          "p": 12,
+          "title": "12.Boat",
+          "sec": 310
+        },
+        {
+          "p": 13,
+          "title": "13.House",
+          "sec": 310
+        },
+        {
+          "p": 14,
+          "title": "14.Lion",
+          "sec": 310
+        },
+        {
+          "p": 15,
+          "title": "15.Apple",
+          "sec": 310
+        },
+        {
+          "p": 16,
+          "title": "16.Ball",
+          "sec": 304
+        },
+        {
+          "p": 17,
+          "title": "17.Mouse",
+          "sec": 310
+        },
+        {
+          "p": 18,
+          "title": "18.Beans",
+          "sec": 309
+        },
+        {
+          "p": 19,
+          "title": "19.Car",
+          "sec": 309
+        },
+        {
+          "p": 20,
+          "title": "20.Bed",
+          "sec": 313
+        },
+        {
+          "p": 21,
+          "title": "1.Hair",
+          "sec": 298
+        },
+        {
+          "p": 22,
+          "title": "2.Bowl",
+          "sec": 305
+        },
+        {
+          "p": 23,
+          "title": "3.Whale",
+          "sec": 306
+        },
+        {
+          "p": 24,
+          "title": "4.Bee",
+          "sec": 306
+        },
+        {
+          "p": 25,
+          "title": "5.Moon",
+          "sec": 306
+        },
+        {
+          "p": 26,
+          "title": "6.Nose",
+          "sec": 306
+        },
+        {
+          "p": 27,
+          "title": "7.Bird",
+          "sec": 306
+        },
+        {
+          "p": 28,
+          "title": "8.Bath",
+          "sec": 306
+        },
+        {
+          "p": 29,
+          "title": "9.Monkey",
+          "sec": 306
+        },
+        {
+          "p": 30,
+          "title": "10.Bubble",
+          "sec": 305
+        },
+        {
+          "p": 31,
+          "title": "11.Cat",
+          "sec": 305
+        },
+        {
+          "p": 32,
+          "title": "13.Bag",
+          "sec": 305
+        },
+        {
+          "p": 33,
+          "title": "14.Tree",
+          "sec": 305
+        },
+        {
+          "p": 34,
+          "title": "15.Cloud",
+          "sec": 305
+        },
+        {
+          "p": 35,
+          "title": "16.Feet",
+          "sec": 305
+        },
+        {
+          "p": 36,
+          "title": "17.Goat",
+          "sec": 305
+        },
+        {
+          "p": 37,
+          "title": "18.Key",
+          "sec": 305
+        },
+        {
+          "p": 38,
+          "title": "19.Flower",
+          "sec": 305
+        },
+        {
+          "p": 39,
+          "title": "20.Kite",
+          "sec": 305
+        },
+        {
+          "p": 40,
+          "title": "1.Cake",
+          "sec": 311
+        },
+        {
+          "p": 41,
+          "title": "2.Fish",
+          "sec": 311
+        },
+        {
+          "p": 42,
+          "title": "3.Top",
+          "sec": 311
+        },
+        {
+          "p": 43,
+          "title": "4.Teddy",
+          "sec": 311
+        },
+        {
+          "p": 44,
+          "title": "5.Rocket",
+          "sec": 311
+        },
+        {
+          "p": 45,
+          "title": "6.Coat",
+          "sec": 311
+        },
+        {
+          "p": 46,
+          "title": "7.YO-yo",
+          "sec": 311
+        },
+        {
+          "p": 47,
+          "title": "8.Mango",
+          "sec": 311
+        },
+        {
+          "p": 48,
+          "title": "9.Digger",
+          "sec": 308
+        },
+        {
+          "p": 49,
+          "title": "10.Donkey",
+          "sec": 308
+        },
+        {
+          "p": 50,
+          "title": "11.Train",
+          "sec": 308
+        },
+        {
+          "p": 51,
+          "title": "12.Socks",
+          "sec": 308
+        },
+        {
+          "p": 52,
+          "title": "13.Cow",
+          "sec": 308
+        },
+        {
+          "p": 53,
+          "title": "14.Swing",
+          "sec": 308
+        },
+        {
+          "p": 54,
+          "title": "15.Egg",
+          "sec": 308
+        },
+        {
+          "p": 55,
+          "title": "16.Shoes",
+          "sec": 308
+        },
+        {
+          "p": 56,
+          "title": "17.Milk",
+          "sec": 308
+        },
+        {
+          "p": 57,
+          "title": "18.Plane",
+          "sec": 308
+        },
+        {
+          "p": 58,
+          "title": "19.Tiger",
+          "sec": 308
+        },
+        {
+          "p": 59,
+          "title": "20.Drum",
+          "sec": 308
+        }
+      ]
+    },
+    {
+      "bvid": "BV1W4Ne6nEhM",
+      "title": "【84集全】对国外小学生可能过于幼稚但对B站大学生刚刚好的英语动画短片，多个高质量英语动画故事帮助巩固英语语法、",
+      "up": "TED官方视频",
+      "cover": "http://i1.hdslb.com/bfs/archive/6d2693c0ce7a3a73cd869690ea3dbea42024f350.jpg",
+      "lang": "en",
+      "tag": "英语动画·TED",
+      "desc": "英语动画故事，巩固语法与表达",
+      "totalSec": 0,
+      "orientation": "landscape",
+      "episodes": [
+        {
+          "p": 1,
+          "title": "完整视频（共84集）",
+          "sec": 0
+        }
+      ]
+    },
+    {
+      "bvid": "BV1WG39zPETL",
+      "title": "全158集【影子跟读英语新概念第一册动画】(盲听+精学+影子跟读+成果检验)",
+      "up": "学霸动画加油站",
+      "cover": "http://i2.hdslb.com/bfs/archive/b7fbf328a3897152dd482db5028b57726521e692.png",
+      "lang": "en",
+      "tag": "新概念·影子跟读",
+      "desc": "新概念第一册动画，盲听+精学+影子跟读",
+      "totalSec": 0,
+      "orientation": "landscape",
+      "episodes": [
+        {
+          "p": 1,
+          "title": "完整视频（共158集）",
+          "sec": 0
+        }
+      ]
+    },
+    {
+      "bvid": "BV1pP41137BY",
+      "title": "【480集英语启蒙动画】English Singsing全套视频，含日常口语对话+英语儿歌+自然拼读+主题词汇等，免费系统学习英语！",
+      "up": "清清宝贝英语",
+      "cover": "http://i2.hdslb.com/bfs/archive/900747f15fd14027c09ddb94f56bfed68aa2c693.jpg",
+      "lang": "en",
+      "tag": "英语启蒙·English Singsing",
+      "desc": "日常口语+儿歌+自然拼读+主题词汇",
+      "totalSec": 0,
+      "orientation": "landscape",
+      "episodes": [
+        {
+          "p": 1,
+          "title": "完整视频（共179集）",
+          "sec": 0
+        }
+      ]
+    },
+    {
+      "bvid": "BV13E411x7i8",
+      "title": "【1000集全】原汁原味 美国儿童启蒙教育英语学习动画系列",
+      "up": "Mmxgxg",
+      "cover": "http://i0.hdslb.com/bfs/archive/107f69e224a50a131d6d034fb2709efa852e074b.jpg",
+      "lang": "en",
+      "tag": "美式启蒙动画",
+      "desc": "美国儿童启蒙教育英语动画系列",
+      "totalSec": 0,
+      "orientation": "landscape",
+      "episodes": [
+        {
+          "p": 1,
+          "title": "完整视频（共1000集）",
+          "sec": 0
+        }
+      ]
+    }
+  ]
+}

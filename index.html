@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PM工作台">
+  <meta name="theme-color" content="#f4f5f8">
+  <meta name="description" content="硬件产品经理每日中枢工作台 - 云端同步，登录后数据实时存于云端">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%20180%22%3E%3Crect%20width%3D%22180%22%20height%3D%22180%22%20rx%3D%2242%22%20fill%3D%22%23FF69B4%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2210%22%20width%3D%22160%22%20height%3D%22160%22%20rx%3D%2236%22%20fill%3D%22%23FF8EC5%22%20opacity%3D%220.5%22%2F%3E%3Ctext%20x%3D%2290%22%20y%3D%22126%22%20font-size%3D%2295%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22KaiTi%2CSTKaiti%2Cserif%22%20font-weight%3D%22bold%22%3E%E5%A3%B9%3C%2Ftext%3E%3C%2Fsvg%3E">
+  <title>硬件PM工作台 v5.9.49</title>
+  <link rel="stylesheet" href="css/style.css?v=5.9.49">
+<script async src="https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js"></script>
+<script>
+(function(){
+  try{
+    var beacon=new BeaconAction({
+      appkey:'0WEB06U85YBSLJNL',
+      versionCode:'1.0.0',
+      channelID:'share',
+      delay:1000,
+      sessionDuration:30*60*1000,
+      isOversea:false,
+      needReportRqdEvent:false
+    });
+    beacon.onDirectUserAction('preview_page_view',{
+      'url':location.href,
+      'referrer':document.referrer,
+      'title':document.title,
+      'sandbox_id':'142e00155b1b49f38e52dfefb529b82d'
+    });
+  }catch(e){}
+})();
+</script></head>
+<body>
+  <!-- Auth Screen (Supabase 登录/同步) -->
+  <div id="auth-screen" class="hidden">
+    <div class="auth-card">
+      <div class="auth-icon">☁️</div>
+      <h2>硬件PM工作台</h2>
+      <p class="auth-sub">登录以在手机与电脑间同步数据</p>
+      <input type="email" id="auth-email" class="auth-input" placeholder="邮箱地址" autocomplete="email" inputmode="email">
+      <input type="password" id="auth-password" class="auth-input" placeholder="密码（至少 6 位）" autocomplete="current-password">
+      <button class="auth-btn auth-btn-primary" id="auth-login-btn">登录</button>
+      <button class="auth-btn auth-btn-ghost" id="auth-signup-btn">注册新账号</button>
+      <div class="auth-msg" id="auth-msg"></div>
+      <p class="auth-hint">登录后数据实时同步至云端 · 请先登录账号使用</p>
+    </div>
+  </div>
+
+  <!-- App Lock Screen -->
+  <div id="lock-screen" class="hidden">
+    <div class="lock-container">
+      <div class="lock-icon">🔒</div>
+      <div class="lock-title">硬件PM工作台</div>
+      <div class="lock-subtitle">数据已加密保护</div>
+      <div class="lock-pin-dots" id="lock-pin-dots">
+        <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="lock-message" id="lock-message">请输入解锁密码</div>
+      <div class="lock-numpad" id="lock-numpad"></div>
+      <div class="lock-footer">
+        <button class="lock-bio-btn" id="lock-bio-btn" style="display:none">🖐️ 生物识别</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Notice -->
+  <div id="privacy-notice">
+    <div class="privacy-overlay">
+      <div class="privacy-card">
+        <div class="privacy-icon">🛡️</div>
+        <h2>隐私保护声明</h2>
+        <div class="privacy-body">
+          <ul>
+            <li><strong>数据云端同步存储</strong> — 登录后所有工作数据实时同步至 Supabase 云端，跨设备一致。</li>
+            <li><strong>图片本地处理</strong> — 上传的图片会被压缩后存储在您设备的 IndexedDB 中，不会外传。</li>
+            <li><strong>可选择应用锁</strong> — 您可以设置 4 位数字密码保护应用，密码哈希后存储在本地。</li>
+            <li><strong>数据加密可选</strong> — 高级模式下可选择对存储数据加密，使用 AES-GCM 算法。</li>
+            <li><strong>离线可用</strong> — 应用支持离线使用，所有功能不依赖网络连接。</li>
+            <li><strong>手动备份下载</strong> — 可随时把云端数据下载为 JSON 备份，用于换机或额外保险。</li>
+          </ul>
+        </div>
+        <div class="privacy-actions">
+          <label class="lock-toggle-label">
+            <input type="checkbox" id="privacy-enable-lock">
+            <span>启用应用锁（后续可在设置中开启）</span>
+          </label>
+          <button class="btn btn-primary" onclick="acceptPrivacy()" style="width:100%;margin-top:12px;font-size:17px;padding:14px;border-radius:14px;background:var(--accent-blue);color:#fff;border:none;font-weight:600;-webkit-appearance:none">我知道了，开始使用</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Bar -->
+  <div id="update-bar" class="hidden">
+    <div class="update-bar-content">
+      <span>🔄 新版本可用</span>
+      <button class="update-bar-btn" onclick="applyUpdate()">立即更新</button>
+    </div>
+  </div>
+
+  <!-- Undo Reset Bar -->
+  <div id="undo-bar" class="hidden">
+    <div class="undo-bar-content">
+      <span>⚠️ 数据已重置</span>
+      <button class="undo-bar-btn" onclick="undoReset()">↩ 撤销重置</button>
+      <button class="undo-bar-close" onclick="dismissUndo()">✕</button>
+    </div>
+  </div>
+
+  <!-- Review Reminder Bar (收盘复盘提醒) -->
+  <div id="review-reminder-bar" class="hidden">
+    <div class="review-reminder-content">
+      <span>📊 今日收盘复盘已生成，点击查看重点关注板块与持仓建议</span>
+      <button class="review-reminder-btn" onclick="markReviewSeen();navigate('reviews')">查看</button>
+      <button class="review-reminder-close" onclick="markReviewSeen()">✕</button>
+    </div>
+  </div>
+
+  <div id="app">
+    <div id="sync-bar" class="hidden"></div>
+    <nav id="app-nav"></nav>
+    <div id="app-main">
+      <header id="app-header"></header>
+      <!-- Zone Tab Switcher -->
+      <div id="zone-tabs" class="hidden"></div>
+      <main id="app-content"></main>
+    </div>
+    <div id="modal-overlay"></div>
+    <div id="modal-sheet"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/recipes.js?v=5.9.49"></script>
+  <script src="js/fridge.js?v=5.9.49"></script>
+  <script src="js/outfit.js?v=5.9.49"></script>
+  <script src="js/english.js?v=5.9.49"></script>
+  <script src="js/language.js?v=5.9.49"></script>
+  <script src="js/intel.js?v=5.9.49"></script>
+  <script src="js/invest.js?v=5.9.49"></script>
+  <script src="js/sport.js?v=5.9.49"></script>
+  <script src="js/fitness.js?v=5.9.49"></script>
+  <script src="js/checkin.js?v=5.9.49"></script>
+  <script src="js/xhs.js?v=5.9.49"></script>
+  <script src="js/mr.js?v=5.9.49"></script>
+  <script src="js/aioutputs.js?v=5.9.49"></script>
+  <script src="js/demandmine.js?v=5.9.49"></script>
+  <script src="js/truenorth.js?v=5.9.49"></script>
+  <script src="js/ari.js?v=5.9.49"></script>
+  <script src="js/vendor/hls.min.js?v=5.9.49"></script>
+  <script src="js/reading.js?v=5.9.49"></script>
+  <script src="js/audiosync.js?v=5.9.49"></script>
+  <script src="js/aihot.js?v=5.9.49"></script>
+  <script src="js/knowledge.js?v=5.9.49"></script>
+  <script src="js/xhsfav.js?v=5.9.49"></script>
+  <script src="js/diet.js?v=5.9.49"></script>
+  <script src="js/app.js?v=5.9.49"></script>
+</body>
+</html>
