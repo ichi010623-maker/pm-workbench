@@ -1,2048 +1,2309 @@
 {
-  "2026-08-14": {
-    "generatedAt": "2026-08-14T07:00:00+08:00",
-    "categories": [
-      {
-        "key": "official",
-        "label": "官媒热点",
-        "icon": "🏛️"
-      },
-      {
-        "key": "hardware",
-        "label": "消费电子",
-        "icon": "📱"
-      },
-      {
-        "key": "ai",
-        "label": "AI硬件",
-        "icon": "🤖"
-      },
-      {
-        "key": "tech",
-        "label": "科技前沿",
-        "icon": "💡"
-      }
+ "2026-08-14": {
+  "generatedAt": "2026-08-14T07:00:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "国内汽柴油价格下调 每吨分别降230元、220元",
+    "summary": "国家发改委消息，自8月14日24时起国内汽、柴油价格每吨分别下调230元、220元，折合92号汽油每升降0.19元。",
+    "source": "新华网",
+    "url": "https://www.news.cn/fortune/20260814/b02267824255462393fc1a53af0b0757/c.html",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "油价",
+     "成品油",
+     "发改委"
     ],
-    "items": [
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "国内汽柴油价格下调 每吨分别降230元、220元",
-        "summary": "国家发改委消息，自8月14日24时起国内汽、柴油价格每吨分别下调230元、220元，折合92号汽油每升降0.19元。",
-        "source": "新华网",
-        "url": "https://www.news.cn/fortune/20260814/b02267824255462393fc1a53af0b0757/c.html",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "油价",
-          "成品油",
-          "发改委"
-        ],
-        "id": "58f2a73c9f59"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "厄瓜多尔总统诺沃亚将于8月16日至23日访华",
-        "summary": "外交部宣布，应习近平主席邀请，厄瓜多尔总统诺沃亚将于8月16日至23日对中国进行国事访问。",
-        "source": "新华网",
-        "url": "https://www.news.cn/20260814/e70b5c8bb28444f1b8331a4426e113c5/c.html",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "外交",
-          "中厄",
-          "国事访问"
-        ],
-        "id": "ad5f20ae8f98"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "前7个月金融总量合理增长 社融环境保持宽松",
-        "summary": "央行数据显示，前7个月金融总量合理增长，社会融资环境保持宽松，7月贷款利率保持低位水平。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.com/2026/08/14/VIDExgPhfLaG1GmARFnPzfyf260814.shtml",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "金融",
-          "社融",
-          "央行"
-        ],
-        "id": "53b28510eafb"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "《安全应急装备产业发展“十五五”规划》发布",
-        "summary": "工信部、应急管理部联合印发规划，提出到2030年安全应急装备产业重点领域规模达1.4万亿元。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.cn/2026/08/14/VIDE5ra2BaMRb9VCecmxtlcW260814.shtml",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "应急装备",
-          "十五五",
-          "工信部"
-        ],
-        "id": "6b9d84bdc582"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "雄忻高铁正线铺轨全部完成 全长342公里",
-        "summary": "连接雄安新区与山西忻州的雄忻高铁正线铺轨全部完成，全长342公里，设计时速350公里。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.cn/2026/08/14/VIDE5ra2BaMRb9VCecmxtlcW260814.shtml",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "高铁",
-          "雄忻",
-          "基建"
-        ],
-        "id": "6b9d84bdc582"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "我国核聚变加料领域首项ISO国际标准发布",
-        "summary": "由我国牵头制定的全球聚变加料领域首项ISO国际标准正式发布，聚焦超声分子束注入加料技术。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.cn/2026/08/14/VIDE5ra2BaMRb9VCecmxtlcW260814.shtml",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "核聚变",
-          "ISO标准",
-          "科技"
-        ],
-        "id": "6b9d84bdc582"
-      },
-      {
-        "category": "official",
-        "priority": 2,
-        "title": "7月中国快递发展指数同比增长2.4%",
-        "summary": "国家邮政局数据，7月中国快递发展指数为424.2，同比增长2.4%，日均业务量约5.5亿件。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.cn/2026/08/14/VIDE5ra2BaMRb9VCecmxtlcW260814.shtml",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "快递",
-          "物流",
-          "国家邮政局"
-        ],
-        "id": "6b9d84bdc582"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "8月14日一句话看世界：新闻早知道",
-        "summary": "商务部对原产于印度的进口单模光纤继续征收反倾销税，期限5年；生态环境法典8月15日起施行。",
-        "source": "中国新闻网",
-        "url": "https://www.zj.chinanews.com/jzkzj/2026-08-14/detail-ihfieyqp7841796.shtml",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "反倾销",
-          "生态环境法典",
-          "要闻"
-        ],
-        "id": "69b56680275a"
-      },
-      {
-        "category": "hardware",
-        "priority": 2,
-        "title": "小米米家智能吸油烟机3欧式上架 1499元",
-        "summary": "米家智能吸油烟机3欧式在小米有品上架，25m³/min吸力、1080Pa最大静压，售价1499元。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/495.htm",
-        "pubTime": "2026-08-14 07:21",
-        "tags": [
-          "小米",
-          "油烟机",
-          "智能家居"
-        ],
-        "id": "6b03a702b0ce"
-      },
-      {
-        "category": "hardware",
-        "priority": 3,
-        "title": "长城魏牌V8X上市 限时权益价22.68万元起",
-        "summary": "魏牌V8X定位大五座旗舰SUV，搭载双VLA原生AI舱驾智能体与超级Hi4混动，限时权益价22.68万元起。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/937.htm",
-        "pubTime": "2026-08-14 21:35",
-        "tags": [
-          "长城",
-          "魏牌V8X",
-          "SUV"
-        ],
-        "id": "1d0dbd3b6c1f"
-      },
-      {
-        "category": "hardware",
-        "priority": 3,
-        "title": "荣耀方飞：Robot Phone是第一代探索新物种",
-        "summary": "荣耀产品线总裁方飞发文称，Robot Phone是AI时代手机新物种探索，未来手机将成智能体舞台。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/866.htm",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "荣耀",
-          "RobotPhone",
-          "AI手机"
-        ],
-        "id": "d12f6dee2cab"
-      },
-      {
-        "category": "hardware",
-        "priority": 2,
-        "title": "小米澎湃OS 4 Beta版8月14日起陆续推送",
-        "summary": "小米公布澎湃OS 4 Beta推送计划，8月14日首批覆盖Xiaomi 17系列、REDMI K90等机型。",
-        "source": "IT之家",
-        "url": "https://m.ithome.com/html/989078.htm",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "小米",
-          "澎湃OS",
-          "系统"
-        ],
-        "id": "967f12b0ff01"
-      },
-      {
-        "category": "ai",
-        "priority": 4,
-        "title": "智谱发布GLM-5.3：编程能力最强开源模型",
-        "summary": "智谱发布GLM-5.3，较GLM-5.2编程能力提升50%，多项基准测试开源第一，权重两周后开源。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/689.htm",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "智谱",
-          "GLM-5.3",
-          "大模型"
-        ],
-        "id": "a939bee46f29"
-      },
-      {
-        "category": "ai",
-        "priority": 3,
-        "title": "谷歌推出Gemini 3.7 Flash模型 价格减半",
-        "summary": "谷歌推出Gemini 3.7 Flash，专为编程与Agents打造，首发价为原3.6 Flash每百万Token价格一半。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/497.htm",
-        "pubTime": "2026-08-14 07:30",
-        "tags": [
-          "谷歌",
-          "Gemini",
-          "AI模型"
-        ],
-        "id": "991cb6597788"
-      },
-      {
-        "category": "ai",
-        "priority": 4,
-        "title": "OpenAI推Ultrafast模式 GPT-5.6 Sol提速14倍",
-        "summary": "OpenAI联合Cerebras预览Ultrafast模式，GPT-5.6 Sol最高每秒750 tokens，提速14倍。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/492.htm",
-        "pubTime": "2026-08-14 07:02",
-        "tags": [
-          "OpenAI",
-          "GPT-5.6",
-          "推理加速"
-        ],
-        "id": "bbf995c3cda6"
-      },
-      {
-        "category": "tech",
-        "priority": 3,
-        "title": "拓竹官宣R1 9月推出 入局消费级激光加工",
-        "summary": "3D打印厂商拓竹官宣9月推出R1，将入局消费级激光设备市场，复制3D打印机成功路径。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/493.htm",
-        "pubTime": "2026-08-14 07:03",
-        "tags": [
-          "拓竹",
-          "3D打印",
-          "激光"
-        ],
-        "id": "58c60ef02eb9"
-      },
-      {
-        "category": "tech",
-        "priority": 3,
-        "title": "应用材料FY2026Q3营收91.15亿美元创新高",
-        "summary": "应用材料第三财季营收91.15亿美元同比增25%，归母净利25.38亿美元，创历史最高环比增长。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/488.htm",
-        "pubTime": "2026-08-14 09:44",
-        "tags": [
-          "应用材料",
-          "半导体",
-          "财报"
-        ],
-        "id": "677f47d88387"
-      }
-    ]
-  },
-  "2026-08-15": {
-    "generatedAt": "2026-08-15T07:00:00+08:00",
-    "categories": [
-      {
-        "key": "official",
-        "label": "官媒热点",
-        "icon": "🏛️"
-      },
-      {
-        "key": "hardware",
-        "label": "消费电子",
-        "icon": "📱"
-      },
-      {
-        "key": "ai",
-        "label": "AI硬件",
-        "icon": "🤖"
-      },
-      {
-        "key": "tech",
-        "label": "科技前沿",
-        "icon": "💡"
-      }
+    "id": "58f2a73c9f59"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "厄瓜多尔总统诺沃亚将于8月16日至23日访华",
+    "summary": "外交部宣布，应习近平主席邀请，厄瓜多尔总统诺沃亚将于8月16日至23日对中国进行国事访问。",
+    "source": "新华网",
+    "url": "https://www.news.cn/20260814/e70b5c8bb28444f1b8331a4426e113c5/c.html",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "外交",
+     "中厄",
+     "国事访问"
     ],
-    "items": [
-      {
-        "category": "official",
-        "priority": 5,
-        "title": "生态环境法典8月15日起正式施行",
-        "summary": "第四个全国生态日当天，《中华人民共和国生态环境法典》正式施行，我国生态环境保护迈入法典化系统治理新阶段。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "生态环境法典",
-          "全国生态日",
-          "法治"
-        ],
-        "id": "9e7b6f1c05dc"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "日本无条件投降81周年 各地铭记历史缅怀先烈",
-        "summary": "8月15日是日本宣布无条件投降81周年，各地举行多种活动，铭记历史、缅怀先烈、珍爱和平。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "抗战",
-          "纪念日",
-          "历史"
-        ],
-        "id": "9e7b6f1c05dc"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "我国多措并举加快绿色低碳发展",
-        "summary": "全国生态日主场活动在呼伦贝尔举办，2012年以来我国以年均3.4%能耗增速支撑年均6.1%经济增长。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.com/2026/08/15/VIDEMmrl3ZG7JAYbAdKdJDqh260815.shtml",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "绿色低碳",
-          "双碳",
-          "生态日"
-        ],
-        "id": "3193665d9072"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "多地强降雨持续 防汛救灾加紧进行",
-        "summary": "河南周口贾鲁河溃口封堵完成90多米，国家防总对江苏应急响应提升至三级、对浙江启动四级响应。",
-        "source": "央视新闻",
-        "url": "https://news.cctv.cn/2026/08/15/ARTIKQI0i3kRAklvjS651z6Z260815.shtml",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "强降雨",
-          "防汛",
-          "应急"
-        ],
-        "id": "37c755dc2703"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "前7个月全国铁路发送旅客28亿人次",
-        "summary": "铁路部门数据显示，前7个月全国铁路累计发送旅客28亿人次，客流保持高位运行。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "铁路",
-          "客运",
-          "交通"
-        ],
-        "id": "9e7b6f1c05dc"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "中国—中东欧经贸示范区前7月贸易额超370亿元",
-        "summary": "前7个月中国—中东欧国家经贸合作示范区贸易额超370亿元，开放合作持续推进。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "中东欧",
-          "经贸",
-          "对外开放"
-        ],
-        "id": "9e7b6f1c05dc"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "我国进一步规范检验类医疗服务项目收费",
-        "summary": "国家进一步规范检验类医疗服务项目收费，推动医疗检验收费同检同价、全国统一。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "医疗",
-          "收费",
-          "民生"
-        ],
-        "id": "9e7b6f1c05dc"
-      },
-      {
-        "category": "official",
-        "priority": 2,
-        "title": "中消协发布《中国消费者绿色消费指南(2026版)》",
-        "summary": "中消协发布《中国消费者绿色消费指南(2026版)》，引导消费者践行绿色低碳消费理念。",
-        "source": "央视新闻",
-        "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "中消协",
-          "绿色消费",
-          "消费者"
-        ],
-        "id": "9e7b6f1c05dc"
-      },
-      {
-        "category": "hardware",
-        "priority": 2,
-        "title": "REDMI K100 Pro确认首批支持澎湃OS4正式版",
-        "summary": "小米REDMI产品经理确认，K100 Pro系列将是首批支持澎湃OS 4正式版更新的机型之一。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/990/034.htm",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "小米",
-          "REDMI",
-          "澎湃OS"
-        ],
-        "id": "7f73bb4d87eb"
-      },
-      {
-        "category": "hardware",
-        "priority": 2,
-        "title": "小米澎湃OS 4超级小爱2.0新交互公布",
-        "summary": "小米解答超级小爱2.0相关问题，灵感球9月内上线Beta版，取餐码上岛不晚于8月底上线。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/981.htm",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "小米",
-          "超级小爱",
-          "澎湃OS"
-        ],
-        "id": "4e36beefadf0"
-      },
-      {
-        "category": "ai",
-        "priority": 3,
-        "title": "荣耀YOYO Claw接入智谱GLM-5.3大模型",
-        "summary": "荣耀全场景软件主理人宣布，YOYO Claw正式接入智谱GLM-5.3，编程能力较上一代提升50%。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/989.htm",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "荣耀",
-          "GLM-5.3",
-          "AI助手"
-        ],
-        "id": "16a35f43b117"
-      },
-      {
-        "category": "ai",
-        "priority": 4,
-        "title": "DeepSeek V4 Pro正式版上线国家超算互联网",
-        "summary": "国家超算互联网上线DeepSeek V4 Pro正式版及智能体框架Harness，提供国产算力全链路支撑。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/990/002.htm",
-        "pubTime": "2026-08-15",
-        "tags": [
-          "DeepSeek",
-          "超算互联网",
-          "国产算力"
-        ],
-        "id": "d8cfb945daa7"
-      },
-      {
-        "category": "ai",
-        "priority": 4,
-        "title": "阿里开源Qwen3.8-27B 消费级显卡可运行",
-        "summary": "阿里千问开源Qwen3.8-27B，270亿参数，采用Apache 2.0协议，量化后消费级显卡即可本地运行。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/953.htm",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "阿里",
-          "千问",
-          "开源模型"
-        ],
-        "id": "dbdf5b86bd48"
-      },
-      {
-        "category": "ai",
-        "priority": 4,
-        "title": "消息称苹果联合阿里训练中国专属大模型",
-        "summary": "路透社报道，苹果专门针对中国市场训练大语言模型，由阿里巴巴提供支持，Apple智能未来数月推出。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/676.htm",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "苹果",
-          "阿里",
-          "Apple智能"
-        ],
-        "id": "0afa035cc0f7"
-      },
-      {
-        "category": "tech",
-        "priority": 3,
-        "title": "高通骁龙8 Elite Gen6 Pro跑分超483万",
-        "summary": "博主晒出SM8975安兔兔跑分超483万分，消息称今年2nm旗舰芯片跑分门槛将达500万分。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/678.htm",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "高通",
-          "骁龙",
-          "2nm芯片"
-        ],
-        "id": "520f27842e1f"
-      },
-      {
-        "category": "tech",
-        "priority": 3,
-        "title": "谷歌DeepMind不再追逐前沿模型研发",
-        "summary": "消息称谷歌DeepMind将聚焦Flash级别轻量模型，或迎大规模裁员，比例可达三分之一或更高。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/989/614.htm",
-        "pubTime": "2026-08-14",
-        "tags": [
-          "谷歌",
-          "DeepMind",
-          "AI研发"
-        ],
-        "id": "528317721275"
-      }
-    ]
-  },
-  "2026-08-16": {
-    "generatedAt": "2026-08-16T07:00:00+08:00",
-    "categories": [
-      {
-        "key": "official",
-        "label": "官媒热点",
-        "icon": "🏛️"
-      },
-      {
-        "key": "hardware",
-        "label": "消费电子",
-        "icon": "📱"
-      },
-      {
-        "key": "ai",
-        "label": "AI硬件",
-        "icon": "🤖"
-      },
-      {
-        "key": "tech",
-        "label": "科技前沿",
-        "icon": "💡"
-      }
+    "id": "ad5f20ae8f98"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "前7个月金融总量合理增长 社融环境保持宽松",
+    "summary": "央行数据显示，前7个月金融总量合理增长，社会融资环境保持宽松，7月贷款利率保持低位水平。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.com/2026/08/14/VIDExgPhfLaG1GmARFnPzfyf260814.shtml",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "金融",
+     "社融",
+     "央行"
     ],
-    "items": [
-      {
-        "category": "official",
-        "priority": 5,
-        "title": "纪念江泽民同志诞辰100周年大会17日举行",
-        "summary": "纪念江泽民同志诞辰100周年大会将于8月17日上午10时在人民大会堂隆重举行，习近平将出席大会并发表重要讲话。",
-        "source": "央视新闻",
-        "url": "https://ima.qq.com/wiki/?shareId=c3355ac6bf48974cb9d904b0cf234795aa8613c9b7a46b8bd330308fdf7528bb",
-        "pubTime": "2026-08-16",
-        "tags": [
-          "江泽民",
-          "诞辰100周年",
-          "大会"
-        ],
-        "id": "d48b2a000c6d"
-      },
-      {
-        "category": "official",
-        "priority": 5,
-        "title": "生态环境法典施行后首案宣判",
-        "summary": "我国第二部法典《中华人民共和国生态环境法典》15日正式施行，当日全国首例适用该法典审理的噪声污染责任纠纷案在浙江衢州开庭并当庭宣判。",
-        "source": "央视新闻",
-        "url": "https://ima.qq.com/wiki/?shareId=c3355ac6bf48974cb9d904b0cf234795aa8613c9b7a46b8bd330308fdf7528bb",
-        "pubTime": "2026-08-16",
-        "tags": [
-          "生态环境法典",
-          "首案",
-          "法治"
-        ],
-        "id": "d48b2a000c6d"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "外交部国防部回应日本政要参拜靖国神社",
-        "summary": "日本战败投降日，日本首相高市早苗向靖国神社供奉祭祀费，个别内阁成员前往参拜。中方强烈谴责，已向日方提出严正交涉、强烈抗议。",
-        "source": "央视新闻",
-        "url": "https://ima.qq.com/wiki/?shareId=c3355ac6bf48974cb9d904b0cf234795aa8613c9b7a46b8bd330308fdf7528bb",
-        "pubTime": "2026-08-16",
-        "tags": [
-          "靖国神社",
-          "外交",
-          "抗议"
-        ],
-        "id": "d48b2a000c6d"
-      },
-      {
-        "category": "tech",
-        "priority": 5,
-        "title": "我国成功发射卫星互联网低轨24组卫星",
-        "summary": "北京时间8月16日12时10分，海南商业航天发射场用长征十二号运载火箭将卫星互联网低轨24组卫星送入预定轨道，发射任务圆满成功。",
-        "source": "央视新闻",
-        "url": "http://view.inews.qq.com/a/20260816A061K400",
-        "pubTime": "2026-08-16",
-        "tags": [
-          "长征十二号",
-          "卫星互联网",
-          "商业航天"
-        ],
-        "id": "32ef86fec7b5"
-      },
-      {
-        "category": "hardware",
-        "priority": 5,
-        "title": "苹果接触长鑫存储寻求DRAM供应",
-        "summary": "苹果近期主动接触长鑫存储希望采购LPDDR5X等移动DRAM芯片，以摆脱三星、SK海力士、美光的垄断。美方两党参议员联名要求苹果8月21日前承诺不采购长鑫芯片。",
-        "source": "中国新闻网",
-        "url": "https://view.inews.qq.com/a/20260816A061PM00",
-        "pubTime": "2026-08-16",
-        "tags": [
-          "苹果",
-          "长鑫存储",
-          "DRAM"
-        ],
-        "id": "929c48430349"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "前7个月全国铁路发送旅客28亿人次",
-        "summary": "今年1至7月，全国铁路发送旅客28亿人次、同比增长4.1%，再创历史同期新高。",
-        "source": "央视新闻",
-        "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_8966a81b22b03852",
-        "pubTime": "2026-08-16",
-        "tags": [
-          "铁路",
-          "客流",
-          "新高"
-        ],
-        "id": "dd8bf23bdd93"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "印尼7.7级地震死亡人数升至51人",
-        "summary": "印尼救援部门称截至16日上午9时，弗洛勒斯岛附近海域7.7级地震死亡人数升至51人，海啸预警已解除，地震造成3名中国公民受轻伤。",
-        "source": "央视新闻",
-        "url": "https://view.inews.qq.com/a/20260816A05V0000",
-        "pubTime": "2026-08-16",
-        "tags": [
-          "印尼",
-          "地震",
-          "灾情"
-        ],
-        "id": "9a015a50f0a2"
-      }
-    ]
-  },
-  "2026-08-17": {
-    "generatedAt": "2026-08-17T07:00:00+08:00",
-    "categories": [
-      {
-        "key": "official",
-        "label": "官媒热点",
-        "icon": "🏛️"
-      },
-      {
-        "key": "hardware",
-        "label": "消费电子",
-        "icon": "📱"
-      },
-      {
-        "key": "ai",
-        "label": "AI硬件",
-        "icon": "🤖"
-      },
-      {
-        "key": "tech",
-        "label": "科技前沿",
-        "icon": "💡"
-      }
+    "id": "53b28510eafb"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "《安全应急装备产业发展“十五五”规划》发布",
+    "summary": "工信部、应急管理部联合印发规划，提出到2030年安全应急装备产业重点领域规模达1.4万亿元。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.cn/2026/08/14/VIDE5ra2BaMRb9VCecmxtlcW260814.shtml",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "应急装备",
+     "十五五",
+     "工信部"
     ],
-    "items": [
-      {
-        "category": "official",
-        "priority": 5,
-        "title": "纪念江泽民同志诞辰100周年大会在京隆重举行",
-        "summary": "纪念江泽民同志诞辰100周年大会8月17日上午10时在人民大会堂隆重举行，习近平出席大会并发表重要讲话。",
-        "source": "央视新闻",
-        "url": "https://ima.qq.com/wiki/?shareId=c3355ac6bf48974cb9d904b0cf234795aa8613c9b7a46b8bd330308fdf7528bb",
-        "pubTime": "2026-08-17",
-        "tags": [
-          "江泽民",
-          "诞辰100周年",
-          "大会"
-        ],
-        "id": "d48b2a000c6d"
-      },
-      {
-        "category": "tech",
-        "priority": 4,
-        "title": "诚恒微电子推出CH37系列边端AI芯片",
-        "summary": "诚恒微电子CH37系列边端侧AI SoC正式亮相，将CPU、GPGPU、NPU、DSP集成于单芯片，端到端数据通路效率提升50%以上，系统级功耗降低30%，主攻AI边缘计算与具身智能。",
-        "source": "21世纪经济报道",
-        "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260817170648a4b19ab2",
-        "pubTime": "2026-08-17",
-        "tags": [
-          "诚恒微",
-          "AI芯片",
-          "端侧推理"
-        ],
-        "id": "93bcda4a9e7a"
-      },
-      {
-        "category": "ai",
-        "priority": 4,
-        "title": "诚恒微CH37面向具身智能提供多路视觉感知",
-        "summary": "CH37系列可提供多路视觉感知和端侧模型推理能力，覆盖感知与执行环节核心算力需求，下一代将强化VLA视觉语言动作模型专用加速能力。",
-        "source": "21世纪经济报道",
-        "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260817170648a4b19ab2",
-        "pubTime": "2026-08-17",
-        "tags": [
-          "具身智能",
-          "VLA",
-          "视觉感知"
-        ],
-        "id": "93bcda4a9e7a"
-      }
-    ]
-  },
-  "2026-08-18": {
-    "generatedAt": "2026-08-18T07:00:00+08:00",
-    "categories": [
-      {
-        "key": "official",
-        "label": "官媒热点",
-        "icon": "🏛️"
-      },
-      {
-        "key": "hardware",
-        "label": "消费电子",
-        "icon": "📱"
-      },
-      {
-        "key": "ai",
-        "label": "AI硬件",
-        "icon": "🤖"
-      },
-      {
-        "key": "tech",
-        "label": "科技前沿",
-        "icon": "💡"
-      }
+    "id": "6b9d84bdc582"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "雄忻高铁正线铺轨全部完成 全长342公里",
+    "summary": "连接雄安新区与山西忻州的雄忻高铁正线铺轨全部完成，全长342公里，设计时速350公里。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.cn/2026/08/14/VIDE5ra2BaMRb9VCecmxtlcW260814.shtml",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "高铁",
+     "雄忻",
+     "基建"
     ],
-    "items": [
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "浙江杭州通报 涉事人员被刑拘免职",
-        "summary": "浙江杭州18日发布情况通报：公安机关已对犯罪嫌疑人赵某峰、郁某栋依法刑事拘留，郁某栋已被免职，赵某峰也已被所在企业免职。",
-        "source": "央视新闻",
-        "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
-        "pubTime": "2026-08-18",
-        "tags": [
-          "杭州",
-          "通报",
-          "刑拘"
-        ],
-        "id": "ef6a8649de94"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "云南低价团乱象 多家旅行社拟被吊销证照",
-        "summary": "16日晚总台《财经调查》曝光云南低价团乱象，18日云南省文化和旅游厅发布通报，多家旅行社、多个导游拟被吊销证照。",
-        "source": "央视新闻",
-        "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
-        "pubTime": "2026-08-18",
-        "tags": [
-          "云南",
-          "低价团",
-          "旅游整治"
-        ],
-        "id": "ef6a8649de94"
-      }
-    ]
-  },
-  "2026-08-19": {
-    "generatedAt": "2026-08-19T07:00:00+08:00",
-    "categories": [
-      {
-        "key": "official",
-        "label": "官媒热点",
-        "icon": "🏛️"
-      },
-      {
-        "key": "hardware",
-        "label": "消费电子",
-        "icon": "📱"
-      },
-      {
-        "key": "ai",
-        "label": "AI硬件",
-        "icon": "🤖"
-      },
-      {
-        "key": "tech",
-        "label": "科技前沿",
-        "icon": "💡"
-      }
+    "id": "6b9d84bdc582"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "我国核聚变加料领域首项ISO国际标准发布",
+    "summary": "由我国牵头制定的全球聚变加料领域首项ISO国际标准正式发布，聚焦超声分子束注入加料技术。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.cn/2026/08/14/VIDE5ra2BaMRb9VCecmxtlcW260814.shtml",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "核聚变",
+     "ISO标准",
+     "科技"
     ],
-    "items": [
-      {
-        "category": "tech",
-        "priority": 5,
-        "title": "朱雀三号遥二火箭回收成功 我国首款陆地回收",
-        "summary": "8月19日7时35分，朱雀三号遥二运载火箭将鸿鹄03星送入预定轨道并完成一子级陆地支腿回收，成为我国首款成功入轨并实现陆地回收的运载火箭。",
-        "source": "中证快报",
-        "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1",
-        "pubTime": "2026-08-19",
-        "tags": [
-          "朱雀三号",
-          "火箭回收",
-          "商业航天"
-        ],
-        "id": "2146851f515d"
-      },
-      {
-        "category": "tech",
-        "priority": 5,
-        "title": "南京大学研制光语芯 光信号直接转译词元",
-        "summary": "南京大学缪峰、梁世军团队联合新加坡国立大学，研制出能将光直接转换为词元的超低功耗智能视觉传感器芯片光语芯，识别准确率达87.3%，词元化能效提升超10倍，成果19日发表于《自然·传感》。",
-        "source": "科技日报",
-        "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN2026081918204398c859d8",
-        "pubTime": "2026-08-19",
-        "tags": [
-          "光语芯",
-          "视觉芯片",
-          "边缘AI"
-        ],
-        "id": "912055eb6a10"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "新疆库车两名辅警救人牺牲",
-        "summary": "16日，新疆库车市公安局两名辅警买吾兰江·买买提、怕合尔丁·喀迪尔为救落水孩子被山洪冲走，经全力搜救不幸牺牲。",
-        "source": "央视新闻",
-        "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
-        "pubTime": "2026-08-19",
-        "tags": [
-          "新疆库车",
-          "辅警",
-          "牺牲"
-        ],
-        "id": "ef6a8649de94"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "国家医保局发布全民医保十五五规划",
-        "summary": "国家医保局19日发布《全民医疗保障十五五规划》，提出基本医疗保险参保率每年保持在95%左右，长期护理保险制度覆盖所有统筹地区。",
-        "source": "上海证券报",
-        "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1",
-        "pubTime": "2026-08-19",
-        "tags": [
-          "医保",
-          "十五五",
-          "民生"
-        ],
-        "id": "2146851f515d"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "国际原子能机构称扎波罗热核电站遭无人机袭击",
-        "summary": "国际原子能机构18日发文称，一架无人机在扎波罗热核电站一通勤公交站发生爆炸，造成16人伤亡，并称这是该核电站有史以来最严重事件。",
-        "source": "央视新闻",
-        "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
-        "pubTime": "2026-08-19",
-        "tags": [
-          "扎波罗热",
-          "核电站",
-          "无人机"
-        ],
-        "id": "ef6a8649de94"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "缅甸妙瓦底逮捕777名电诈人员",
-        "summary": "缅甸当局于7月底在克伦邦妙瓦底开展的安全行动中，逮捕777名涉嫌参与电信诈骗及网络赌博活动的人员。",
-        "source": "央视新闻",
-        "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
-        "pubTime": "2026-08-19",
-        "tags": [
-          "缅甸",
-          "电诈",
-          "妙瓦底"
-        ],
-        "id": "ef6a8649de94"
-      },
-      {
-        "category": "tech",
-        "priority": 3,
-        "title": "上海加快推进6G商业化落地",
-        "summary": "上海市人民政府办公厅印发《上海市数字上海建设十五五规划》，提出推进6G试验网实现智能协同并部署商用，规模部署低空智联网、城市物联网。",
-        "source": "上海证券报",
-        "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1",
-        "pubTime": "2026-08-19",
-        "tags": [
-          "上海",
-          "6G",
-          "低空智联网"
-        ],
-        "id": "2146851f515d"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "首届电竞世界杯推迟至2027年举行",
-        "summary": "总部位于沙特利雅得的电竞发展基金会18日宣布，原定今年11月举行的首届电竞世界杯，因中东整体地缘局势等原因将推迟至2027年11月举行。",
-        "source": "央视新闻",
-        "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
-        "pubTime": "2026-08-19",
-        "tags": [
-          "电竞世界杯",
-          "沙特",
-          "推迟"
-        ],
-        "id": "ef6a8649de94"
-      }
-    ]
-  },
-  "2026-08-20": {
-    "generatedAt": "2026-08-20T13:40:00+08:00",
-    "categories": [
-      {
-        "key": "official",
-        "label": "官媒热点",
-        "icon": "🏛️"
-      },
-      {
-        "key": "hardware",
-        "label": "消费电子",
-        "icon": "📱"
-      },
-      {
-        "key": "ai",
-        "label": "AI硬件",
-        "icon": "🤖"
-      },
-      {
-        "key": "tech",
-        "label": "科技前沿",
-        "icon": "💡"
-      }
+    "id": "6b9d84bdc582"
+   },
+   {
+    "category": "official",
+    "priority": 2,
+    "title": "7月中国快递发展指数同比增长2.4%",
+    "summary": "国家邮政局数据，7月中国快递发展指数为424.2，同比增长2.4%，日均业务量约5.5亿件。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.cn/2026/08/14/VIDE5ra2BaMRb9VCecmxtlcW260814.shtml",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "快递",
+     "物流",
+     "国家邮政局"
     ],
-    "items": [
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "未来五年医保这样提质增效 着力减轻就医负担",
-        "summary": "未来五年医保政策推进提质增效，重点减轻群众就医负担，完善保障体系。",
-        "source": "新华网",
-        "url": "https://www.news.cn/politics/20260820/6b33ba7d6c48469396ff32a161f93970/c.html",
-        "pubTime": "2026-08-20 00:00",
-        "tags": [
-          "医保",
-          "民生",
-          "十五五"
-        ],
-        "id": "f10974620942"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "新一期贷款市场报价利率未作调整",
-        "summary": "最新一期贷款市场报价利率(LPR)公布，利率水平较前期维持不变。",
-        "source": "新华网",
-        "url": "https://www.news.cn/20260820/5387d4b25db947cbb501814851c7ac30/c.html",
-        "pubTime": "2026-08-20 00:00",
-        "tags": [
-          "LPR",
-          "利率",
-          "货币"
-        ],
-        "id": "d62e39578daf"
-      },
-      {
-        "category": "official",
-        "priority": 5,
-        "title": "恒大集团、恒大地产、许家印等案一审宣判",
-        "summary": "恒大集团、恒大地产及许家印等相关案件已完成一审公开宣判，法律后果明确。",
-        "source": "新华网",
-        "url": "https://www.news.cn/legal/20260820/737dfb54ab564fb8a549ba392af9fb0a/c.html",
-        "pubTime": "2026-08-20 00:00",
-        "tags": [
-          "恒大",
-          "司法",
-          "房地产"
-        ],
-        "id": "8f66b7c8671a"
-      },
-      {
-        "category": "official",
-        "priority": 5,
-        "title": "我国首次实现火箭陆地回收",
-        "summary": "我国首次实现运载火箭一子级着陆腿回收，商业航天低成本组网迈出关键一步。",
-        "source": "人民网",
-        "url": "http://finance.people.com.cn/n1/2026/0820/c1004-40782697.html",
-        "pubTime": "2026-08-20",
-        "tags": [
-          "航天",
-          "商业航天",
-          "朱雀三号"
-        ],
-        "id": "661a41e4bdea"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "美国联邦政府债务突破40万亿美元",
-        "summary": "美国联邦政府债务规模突破40万亿美元，引发国际社会对财政风险的关注。",
-        "source": "人民网",
-        "url": "http://world.people.com.cn/n1/2026/0820/c1002-40782794.html",
-        "pubTime": "2026-08-20",
-        "tags": [
-          "美国",
-          "债务",
-          "宏观"
-        ],
-        "id": "0875d27a6071"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "上海自贸临港新片区探路数据跨境",
-        "summary": "聚焦上海自贸试验区临港新片区在数据跨境流动方面的探索与成效。",
-        "source": "人民网",
-        "url": "http://finance.people.com.cn/n1/2026/0820/c1004-40782695.html",
-        "pubTime": "2026-08-20",
-        "tags": [
-          "上海",
-          "自贸区",
-          "数据跨境"
-        ],
-        "id": "df28a34af50b"
-      },
-      {
-        "category": "official",
-        "priority": 5,
-        "title": "许家印被判处无期徒刑 恒大案一审宣判",
-        "summary": "深圳市中级人民法院对恒大集团、恒大地产及许家印案一审公开宣判。",
-        "source": "央视新闻",
-        "url": "https://news.cctv.com/2026/08/20/ARTIPYaY7CbXGL98H5QYue1S260820.shtml",
-        "pubTime": "2026-08-20",
-        "tags": [
-          "恒大",
-          "司法",
-          "许家印"
-        ],
-        "id": "a1c1580e339f"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "上海发布优化房地产政策措施",
-        "summary": "上海六部门联合印发通知，从五方面八项政策优化房地产，满足住房需求。",
-        "source": "央视新闻",
-        "url": "https://jingji.cctv.com/2026/08/20/ARTIsdrgZYplSJkfxweMTbW4260820.shtml",
-        "pubTime": "2026-08-20",
-        "tags": [
-          "上海",
-          "房地产",
-          "政策"
-        ],
-        "id": "27ea9cdd125f"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "吉尔吉斯斯坦、越南加入中国免签朋友圈",
-        "summary": "8月20日起两国公民可适用过境免签与海南入境免签，免签适用国进一步扩容。",
-        "source": "央视新闻",
-        "url": "https://news.cctv.com/2026/08/20/ARTIMhQVUU8CqShL5kgYqvKW260820.shtml",
-        "pubTime": "2026-08-20",
-        "tags": [
-          "免签",
-          "出入境",
-          "外交"
-        ],
-        "id": "cd1040aa4cd3"
-      },
-      {
-        "category": "official",
-        "priority": 3,
-        "title": "中国机器人加速进入全球市场",
-        "summary": "前7个月我国工业机器人出口73.4亿元、同比增13.2%，从家庭到工厂加速出海。",
-        "source": "央视新闻",
-        "url": "https://news.cctv.com/2026/08/20/ARTIWHr6lU61mSLeTPLnwSFy260820.shtml",
-        "pubTime": "2026-08-20",
-        "tags": [
-          "机器人",
-          "出口",
-          "制造"
-        ],
-        "id": "e2519a62c3e6"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "上海发布优化房地产政策措施",
-        "summary": "上海推出五方面八项政策优化房地产，促进市场平稳健康发展。",
-        "source": "中国新闻网",
-        "url": "https://www.chinanews.com.cn/cj/2026/08-20/10680925.shtml",
-        "pubTime": "2026-08-20 13:01",
-        "tags": [
-          "上海",
-          "房地产",
-          "政策"
-        ],
-        "id": "c7bbf30c9897"
-      },
-      {
-        "category": "official",
-        "priority": 4,
-        "title": "住房公积金新规让10万亿活起来",
-        "summary": "修订住房公积金管理规定，释放沉淀资金、提升使用效率，惠及缴存职工。",
-        "source": "中国新闻网",
-        "url": "https://www.chinanews.com.cn/cj/2026/08-20/10680814.shtml",
-        "pubTime": "2026-08-20",
-        "tags": [
-          "公积金",
-          "民生",
-          "住房"
-        ],
-        "id": "53eac5515335"
-      },
-      {
-        "category": "hardware",
-        "priority": 2,
-        "title": "七工匠发布 MF 75mm F1.4 全画幅镜头",
-        "summary": "七工匠发布 MF 75mm F1.4 全画幅镜头，首发569元起，面向摄影爱好者。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/072.htm",
-        "pubTime": "2026-08-20 13:03",
-        "tags": [
-          "相机",
-          "镜头",
-          "数码"
-        ],
-        "id": "4b8563e31ba0"
-      },
-      {
-        "category": "hardware",
-        "priority": 2,
-        "title": "谷歌 Pixel 11 上线自定义振动",
-        "summary": "谷歌 Pixel 11 系列支持自定义振动，可给联系人设置专属振动模式。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/069.htm",
-        "pubTime": "2026-08-20 12:33",
-        "tags": [
-          "谷歌",
-          "手机",
-          "安卓"
-        ],
-        "id": "b582bd2a8133"
-      },
-      {
-        "category": "hardware",
-        "priority": 2,
-        "title": "《心灵杀手2》新增 AMD FSR 4 超分",
-        "summary": "销量超300万份的《心灵杀手2》新增 AMD FSR 4 超分，提升画质与帧率。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/070.htm",
-        "pubTime": "2026-08-20 12:52",
-        "tags": [
-          "游戏",
-          "AMD",
-          "FSR4"
-        ],
-        "id": "6853492cb09d"
-      },
-      {
-        "category": "ai",
-        "priority": 3,
-        "title": "宇树科技推出仿生7轴灵巧机械臂",
-        "summary": "宇树科技推出仿生7轴灵巧机械臂，9900元起，面向开发与轻量自动化。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/067.htm",
-        "pubTime": "2026-08-20 12:13",
-        "tags": [
-          "宇树",
-          "机器人",
-          "机械臂"
-        ],
-        "id": "b13066ea8be3"
-      },
-      {
-        "category": "tech",
-        "priority": 3,
-        "title": "巴菲特成马斯克企业股东",
-        "summary": "马斯克旗下企业获巴菲特投资入股，具体股权细节未披露，引发市场关注。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/071.htm",
-        "pubTime": "2026-08-20 12:52",
-        "tags": [
-          "马斯克",
-          "巴菲特",
-          "资本"
-        ],
-        "id": "73be25de6caf"
-      },
-      {
-        "category": "tech",
-        "priority": 2,
-        "title": "微软 Teams 个人版中国停用",
-        "summary": "微软 Teams 个人版在中国境内停用，工作/学校账户不受影响，涉合规调整。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/057.htm",
-        "pubTime": "2026-08-20 12:07",
-        "tags": [
-          "微软",
-          "Teams",
-          "软件"
-        ],
-        "id": "161b75f3e1a7"
-      },
-      {
-        "category": "ai",
-        "priority": 3,
-        "title": "银河通用双足机器人 Galbot ET1 首秀",
-        "summary": "银河通用首发双足人形机器人 Galbot ET1，共享具身大模型银河星脑，可交互学新动作。",
-        "source": "机器之心",
-        "url": "https://k.sina.com.cn/article_1644114654_61ff32de020028jz2.html?subch=onews",
-        "pubTime": "2026-08-20",
-        "tags": [
-          "银河通用",
-          "人形机器人",
-          "具身智能"
-        ],
-        "id": "9a5f4baea60f"
-      }
-    ]
-  },
-  "2026-08-21": {
-    "generatedAt": "2026-08-21T07:00:00+08:00",
-    "categories": [
-      {
-        "key": "official",
-        "label": "官媒热点",
-        "icon": "🏛️"
-      },
-      {
-        "key": "hardware",
-        "label": "消费电子",
-        "icon": "📱"
-      },
-      {
-        "key": "ai",
-        "label": "AI硬件",
-        "icon": "🤖"
-      },
-      {
-        "key": "tech",
-        "label": "科技前沿",
-        "icon": "💡"
-      }
+    "id": "6b9d84bdc582"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "8月14日一句话看世界：新闻早知道",
+    "summary": "商务部对原产于印度的进口单模光纤继续征收反倾销税，期限5年；生态环境法典8月15日起施行。",
+    "source": "中国新闻网",
+    "url": "https://www.zj.chinanews.com/jzkzj/2026-08-14/detail-ihfieyqp7841796.shtml",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "反倾销",
+     "生态环境法典",
+     "要闻"
     ],
-    "items": [
-      {
-        "id": "20260821-001",
-        "category": "official",
-        "priority": 5,
-        "title": "促进网信企业高质量发展五年行动计划发布",
-        "summary": "国家发布未来五年促进网信企业高质量发展行动计划，利好通信设备与终端制造。",
-        "source": "新华网",
-        "url": "https://www.news.cn/politics/20260821/05473be5f53843a397b128c16a648ec9/c.html",
-        "pubTime": "",
-        "tags": [
-          "网信企业",
-          "政策",
-          "数字产业"
-        ]
-      },
-      {
-        "id": "20260821-002",
-        "category": "official",
-        "priority": 5,
-        "title": "促进网信企业高质量发展五年行动计划发布",
-        "summary": "行动计划明确推动网信企业高质量发展，涵盖终端制造与数字产业支持。",
-        "source": "人民网",
-        "url": "http://politics.people.com.cn/n1/2026/0821/c461001-40784090.html",
-        "pubTime": "",
-        "tags": [
-          "网信",
-          "政策",
-          "高质量发展"
-        ]
-      },
-      {
-        "id": "20260821-003",
-        "category": "official",
-        "priority": 3,
-        "title": "金饰克价月内涨超100元 金价反弹",
-        "summary": "国际金价重返每盎司4500美元，金饰月涨超100元/克，影响消费电子用金成本。",
-        "source": "人民网",
-        "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40783520.html",
-        "pubTime": "",
-        "tags": [
-          "金价",
-          "消费电子",
-          "成本"
-        ]
-      },
-      {
-        "id": "20260821-004",
-        "category": "official",
-        "priority": 4,
-        "title": "从零到万卡 他选择走一条最难的路",
-        "summary": "报道从零建设万卡算力集群的历程，关联AI芯片、服务器与硬件基础设施制造。",
-        "source": "人民网",
-        "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40783720.html",
-        "pubTime": "",
-        "tags": [
-          "算力",
-          "AI芯片",
-          "基础设施"
-        ]
-      },
-      {
-        "id": "20260821-005",
-        "category": "official",
-        "priority": 4,
-        "title": "财政金融协同发力促内需 惠及企业622万家",
-        "summary": "财政金融协同促内需政策覆盖超622万家企业，利好消费电子等硬件市场需求。",
-        "source": "人民网",
-        "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40784080.html",
-        "pubTime": "",
-        "tags": [
-          "财政",
-          "内需",
-          "消费"
-        ]
-      },
-      {
-        "id": "20260821-006",
-        "category": "official",
-        "priority": 4,
-        "title": "我国消费市场保持向新向优发展态势",
-        "summary": "今年前7月社会消费商品和服务零售总额同比增长2.6%，消费市场向新向优。",
-        "source": "央视新闻",
-        "url": "https://news.cctv.com/2026/08/21/ARTIjdq2hYt2PtU6xQX2XN9D260820.shtml",
-        "pubTime": "",
-        "tags": [
-          "消费",
-          "市场",
-          "经济"
-        ]
-      },
-      {
-        "id": "20260821-007",
-        "category": "official",
-        "priority": 3,
-        "title": "今年1—7月全国吸收外资4383.3亿元",
-        "summary": "前7月新设外商投资企业37711家同比增4.4%，实际使用外资4383.3亿元。",
-        "source": "央视新闻",
-        "url": "https://jingji.cctv.com/2026/08/21/ARTIRa5lo5flCsTwxsaghg1X260821.shtml",
-        "pubTime": "",
-        "tags": [
-          "外资",
-          "经济",
-          "开放"
-        ]
-      },
-      {
-        "id": "20260821-008",
-        "category": "official",
-        "priority": 4,
-        "title": "积极财政政策助推经济社会高质量发展",
-        "summary": "国新办发布会称实施更积极财政政策，保持必要支出力度推动高质量发展。",
-        "source": "央视新闻",
-        "url": "https://news.cctv.com/2026/08/21/ARTIOacICFVh4CEnHlwHgYkW260821.shtml",
-        "pubTime": "",
-        "tags": [
-          "十五五",
-          "财政",
-          "政策"
-        ]
-      },
-      {
-        "id": "20260821-009",
-        "category": "official",
-        "priority": 3,
-        "title": "宏观政策发力提效",
-        "summary": "报道宏观政策下半年持续发力提效，对消费电子产业政策环境与需求有直接影响。",
-        "source": "光明网",
-        "url": "https://politics.gmw.cn/2026-08/21/content_38954964.htm",
-        "pubTime": "",
-        "tags": [
-          "宏观政策",
-          "经济",
-          "下半年"
-        ]
-      },
-      {
-        "id": "20260821-010",
-        "category": "official",
-        "priority": 4,
-        "title": "工业经济新动能贡献持续增强",
-        "summary": "工业经济新动能含高端制造、电子设备贡献率持续提升，反映硬件制造景气。",
-        "source": "光明网",
-        "url": "https://politics.gmw.cn/2026-08/21/content_38956723.htm",
-        "pubTime": "",
-        "tags": [
-          "工业",
-          "新动能",
-          "制造"
-        ]
-      },
-      {
-        "id": "20260821-011",
-        "category": "official",
-        "priority": 3,
-        "title": "一组数据看电商经济活力",
-        "summary": "数据展现电商经济活力，与消费电子产品线上销售通路和消费者需求密切相关。",
-        "source": "光明网",
-        "url": "https://politics.gmw.cn/2026-08/21/content_38956713.htm",
-        "pubTime": "",
-        "tags": [
-          "电商",
-          "消费",
-          "数据"
-        ]
-      },
-      {
-        "id": "20260821-012",
-        "category": "official",
-        "priority": 3,
-        "title": "财政部：正研究新政策新举措下半年推出",
-        "summary": "财政部预告下半年将推新政策举措，或影响消费电子等行业财政税收支持。",
-        "source": "光明网",
-        "url": "https://politics.gmw.cn/2026-08/21/content_38956718.htm",
-        "pubTime": "",
-        "tags": [
-          "财政",
-          "政策",
-          "举措"
-        ]
-      },
-      {
-        "id": "20260821-013",
-        "category": "official",
-        "priority": 4,
-        "title": "中国财政金融协同促内需一揽子政策扩容",
-        "summary": "中国财政与金融政策协同发力扩大内需，影响电子消费品市场需求。",
-        "source": "中国新闻网",
-        "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681787.shtml",
-        "pubTime": "",
-        "tags": [
-          "财政",
-          "金融",
-          "内需"
-        ]
-      },
-      {
-        "id": "20260821-014",
-        "category": "official",
-        "priority": 4,
-        "title": "整治“内卷式”竞争 六起典型案例公布",
-        "summary": "公布六起反“内卷式”竞争典型案例，对消费电子行业价格竞争具警示意义。",
-        "source": "中国新闻网",
-        "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681718.shtml",
-        "pubTime": "",
-        "tags": [
-          "反内卷",
-          "竞争",
-          "监管"
-        ]
-      },
-      {
-        "id": "20260821-015",
-        "category": "official",
-        "priority": 4,
-        "title": "中国与瑞士宣布完成自贸协定升级谈判",
-        "summary": "中瑞自贸协定升级谈判完成，将助电子零部件与成品跨境贸易降本。",
-        "source": "中国新闻网",
-        "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681496.shtml",
-        "pubTime": "",
-        "tags": [
-          "自贸协定",
-          "贸易",
-          "电子零部件"
-        ]
-      },
-      {
-        "id": "20260821-016",
-        "category": "hardware",
-        "priority": 4,
-        "title": "让国产光学镜头产品“光谱”更宽更广",
-        "summary": "国产光学镜头技术拓展光谱范围获新突破，关联摄像头与传感器等核心器件升级。",
-        "source": "光明网",
-        "url": "https://tech.gmw.cn/2026-08/21/content_38954952.htm",
-        "pubTime": "",
-        "tags": [
-          "光学镜头",
-          "摄像头",
-          "传感器"
-        ]
-      },
-      {
-        "id": "20260821-017",
-        "category": "hardware",
-        "priority": 4,
-        "title": "中国自研新一代深水多功能海洋工程船交付",
-        "summary": "中国自主研制的新一代深水多功能海洋工程船“海洋石油292”命名交付。",
-        "source": "中国新闻网",
-        "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681456.shtml",
-        "pubTime": "",
-        "tags": [
-          "高端装备",
-          "海洋工程",
-          "自主研制"
-        ]
-      },
-      {
-        "id": "20260821-018",
-        "category": "hardware",
-        "priority": 4,
-        "title": "固态电池领域全球首个国际标准立项",
-        "summary": "固态电池领域首项全球国际标准立项，将影响电池及消费电子设备供应链规范。",
-        "source": "央广网",
-        "url": "https://www.cnr.cn/jingji/ycbd/20260821/t20260821_527785448.shtml",
-        "pubTime": "",
-        "tags": [
-          "固态电池",
-          "标准",
-          "电池"
-        ]
-      },
-      {
-        "id": "20260821-019",
-        "category": "hardware",
-        "priority": 4,
-        "title": "工信部再次批复卫星物联网业务商用试验",
-        "summary": "工信部再度批复卫星物联网商用试验，为物联网模组硬件终端提供新联网场景。",
-        "source": "央广网",
-        "url": "https://www.cnr.cn/newscenter/native/gd/20260821/t20260821_527784831.shtml",
-        "pubTime": "",
-        "tags": [
-          "卫星物联网",
-          "物联网",
-          "终端"
-        ]
-      },
-      {
-        "id": "20260821-020",
-        "category": "hardware",
-        "priority": 4,
-        "title": "瞄准百万台量级 机器人核心零部件加速升级",
-        "summary": "机器人核心零部件向百万台产能升级，对电机、传感器、控制板供应链具参考意义。",
-        "source": "央广网",
-        "url": "https://www.cnr.cn/tech/gstj/20260821/t20260821_527784968.shtml",
-        "pubTime": "",
-        "tags": [
-          "机器人",
-          "核心零部件",
-          "供应链"
-        ]
-      },
-      {
-        "id": "20260821-021",
-        "category": "hardware",
-        "priority": 4,
-        "title": "“海洋石油292”深水多功能海洋工程船命名交付",
-        "summary": "我国自研新一代深水多功能海洋工程船命名交付，体现高端装备制造能力。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567559.html",
-        "pubTime": "",
-        "tags": [
-          "海工装备",
-          "自主",
-          "交付"
-        ]
-      },
-      {
-        "id": "20260821-022",
-        "category": "hardware",
-        "priority": 3,
-        "title": "200千瓦40标方AEM电解水制氢电堆系统研发成功",
-        "summary": "200千瓦40标方AEM电解水制氢电堆与系统研发成功，拓展新能源硬件路线。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567460.html",
-        "pubTime": "2026-08-21 11:45",
-        "tags": [
-          "制氢",
-          "电堆",
-          "新能源"
-        ]
-      },
-      {
-        "id": "20260821-023",
-        "category": "hardware",
-        "priority": 3,
-        "title": "穿上这套装备就能飞",
-        "summary": "科技日报展示新型飞行装备，可穿戴个人飞行设备带来硬件形态新想象。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567595.html",
-        "pubTime": "2026-08-21 14:19",
-        "tags": [
-          "可穿戴",
-          "飞行",
-          "装备"
-        ]
-      },
-      {
-        "id": "20260821-024",
-        "category": "hardware",
-        "priority": 3,
-        "title": "荣耀Turbo 5G手机海外发布 骁龙6 Gen4",
-        "summary": "荣耀在海外发布搭载骁龙6 Gen4芯片的Turbo 5G智能手机。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/867.htm",
-        "pubTime": "2026-08-21 21:44",
-        "tags": [
-          "智能手机",
-          "骁龙",
-          "荣耀"
-        ]
-      },
-      {
-        "id": "20260821-025",
-        "category": "hardware",
-        "priority": 3,
-        "title": "vivo V80 Lite公布 10000mAh大电池",
-        "summary": "vivo在海外公布V80 Lite手机，配备10000mAh超大容量电池。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/862.htm",
-        "pubTime": "2026-08-21 21:27",
-        "tags": [
-          "智能手机",
-          "vivo",
-          "大电池"
-        ]
-      },
-      {
-        "id": "20260821-026",
-        "category": "hardware",
-        "priority": 3,
-        "title": "AGM PAD P3 Compact三防平板 Helio G99",
-        "summary": "AGM发布PAD P3 Compact三防平板，采用8.68英寸屏与联发科Helio G99处理器。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/833.htm",
-        "pubTime": "2026-08-21 19:22",
-        "tags": [
-          "平板",
-          "三防",
-          "联发科"
-        ]
-      },
-      {
-        "id": "20260821-027",
-        "category": "hardware",
-        "priority": 2,
-        "title": "倍思“小智充”45W带屏充电头 129元",
-        "summary": "倍思发布带屏45W充电头“小智充”，支持AVS协议与短暂60W峰值输出。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/828.htm",
-        "pubTime": "2026-08-21 19:00",
-        "tags": [
-          "充电器",
-          "快充",
-          "倍思"
-        ]
-      },
-      {
-        "id": "20260821-028",
-        "category": "ai",
-        "priority": 4,
-        "title": "中国具身智能迎来规模化应用关键窗口期",
-        "summary": "分析具身智能产业进入规模化应用阶段，关联芯片、传感器与嵌入式设备需求。",
-        "source": "新华网",
-        "url": "https://www.news.cn/tech/20260821/3451415940a047a3a3f90f8fb4e51b4b/c.html",
-        "pubTime": "",
-        "tags": [
-          "具身智能",
-          "AI",
-          "规模化"
-        ]
-      },
-      {
-        "id": "20260821-029",
-        "category": "ai",
-        "priority": 4,
-        "title": "交通运输领域人工智能加快落地应用",
-        "summary": "介绍AI在交通行业落地场景，反映边缘计算与智能终端设备的产业机会。",
-        "source": "新华网",
-        "url": "https://www.news.cn/tech/20260821/1004ff49908b4f16a2f4116f91040191/c.html",
-        "pubTime": "",
-        "tags": [
-          "人工智能",
-          "交通",
-          "落地"
-        ]
-      },
-      {
-        "id": "20260821-030",
-        "category": "ai",
-        "priority": 4,
-        "title": "从“上场”到“进厂” 资本加码人形机器人产业化",
-        "summary": "资本加速进入人形机器人制造领域，凸显核心零部件与运动控制硬件热点。",
-        "source": "新华网",
-        "url": "https://www.news.cn/tech/20260821/7a5887cfc6b2417ab561bf5364f82da1/c.html",
-        "pubTime": "",
-        "tags": [
-          "人形机器人",
-          "资本",
-          "产业化"
-        ]
-      },
-      {
-        "id": "20260821-031",
-        "category": "ai",
-        "priority": 4,
-        "title": "首批41个典型场景 人工智能+交通运输加速落地",
-        "summary": "官方启动41个AI交通典型场景建设，推动车载与路侧智能硬件标准化部署。",
-        "source": "新华网",
-        "url": "https://www.news.cn/tech/20260821/d8fe479b19324a99aa0a2d871b600859/c.html",
-        "pubTime": "",
-        "tags": [
-          "AI交通",
-          "场景",
-          "应用"
-        ]
-      },
-      {
-        "id": "20260821-032",
-        "category": "ai",
-        "priority": 4,
-        "title": "从“炫技”到“实干” 机器人走向真实场景",
-        "summary": "2026世界机器人大会上多类机器人展现真实应用场景，反映产业发展势头。",
-        "source": "人民网",
-        "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40783517.html",
-        "pubTime": "",
-        "tags": [
-          "机器人",
-          "应用",
-          "实干"
-        ]
-      },
-      {
-        "id": "20260821-033",
-        "category": "ai",
-        "priority": 4,
-        "title": "世界机器人大会 “一脑多能” 落地场景丰富",
-        "summary": "2026世界机器人大会上具身智能机器人落地应用场景正日益丰富。",
-        "source": "央视新闻",
-        "url": "https://news.cctv.com/2026/08/21/ARTI9ljvZCu3jAsqmYu3wrjm260820.shtml",
-        "pubTime": "",
-        "tags": [
-          "机器人",
-          "具身智能",
-          "大会"
-        ]
-      },
-      {
-        "id": "20260821-034",
-        "category": "ai",
-        "priority": 4,
-        "title": "【活力中国调研行】AI助跑 科创加速",
-        "summary": "人工智能技术快速发展，为科技创新打开全新空间，安徽探索AI科研应用。",
-        "source": "央视新闻",
-        "url": "https://news.cctv.com/2026/08/21/ARTIYPC0vQYNdpRpbHdDIkfl260821.shtml",
-        "pubTime": "",
-        "tags": [
-          "AI",
-          "科研",
-          "科创"
-        ]
-      },
-      {
-        "id": "20260821-035",
-        "category": "ai",
-        "priority": 4,
-        "title": "探访“中国云谷”：看见绿色算力的真实模样",
-        "summary": "探访中国云谷绿色算力基地，展示支撑AI与智能设备的底层基础设施进展。",
-        "source": "中国新闻网",
-        "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681835.shtml",
-        "pubTime": "",
-        "tags": [
-          "绿色算力",
-          "云谷",
-          "AI"
-        ]
-      },
-      {
-        "id": "20260821-036",
-        "category": "ai",
-        "priority": 4,
-        "title": "科技助力新消费 世界机器人大会具身智能交出“民生答卷”",
-        "summary": "2026世界机器人大会展示具身智能在民生消费场景的落地进展。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567219.html",
-        "pubTime": "",
-        "tags": [
-          "具身智能",
-          "机器人",
-          "消费"
-        ]
-      },
-      {
-        "id": "20260821-037",
-        "category": "ai",
-        "priority": 4,
-        "title": "完善产业生态 贴合多元场景 机器人发展新趋势",
-        "summary": "报道机器人产业生态完善与多元场景贴合，呈现行业发展新趋势。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/2026-08/21/content_567204.html",
-        "pubTime": "",
-        "tags": [
-          "机器人",
-          "产业生态",
-          "趋势"
-        ]
-      },
-      {
-        "id": "20260821-038",
-        "category": "ai",
-        "priority": 4,
-        "title": "热点回应 人形机器人离生产线还有多远",
-        "summary": "科技日报回应人形机器人距离规模化生产线应用的现实距离与挑战。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567461.html",
-        "pubTime": "2026-08-21 11:30",
-        "tags": [
-          "人形机器人",
-          "制造",
-          "产线"
-        ]
-      },
-      {
-        "id": "20260821-039",
-        "category": "ai",
-        "priority": 4,
-        "title": "一批“人工智能+交通运输”典型应用场景加速落地",
-        "summary": "AI与交通融合的典型场景加速落地，反映边缘AI设备与车载传感商业化进度。",
-        "source": "央广网",
-        "url": "https://www.cnr.cn/china/news/20260821/t20260821_527785083.shtml",
-        "pubTime": "",
-        "tags": [
-          "AI交通",
-          "场景",
-          "落地"
-        ]
-      },
-      {
-        "id": "20260821-040",
-        "category": "ai",
-        "priority": 3,
-        "title": "雷鸟iO AI眼镜发布 支持实时提示 首发2349元",
-        "summary": "雷鸟发布iO AI眼镜，具备实时提示与全天智记能力，首发售价2349元。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/653.htm",
-        "pubTime": "2026-08-21 15:14",
-        "tags": [
-          "AI眼镜",
-          "雷鸟",
-          "可穿戴"
-        ]
-      },
-      {
-        "id": "20260821-041",
-        "category": "tech",
-        "priority": 4,
-        "title": "嫦娥七号计划近日择机发射",
-        "summary": "嫦娥七号器箭组合体已转运至发射区，代表航天硬件制造与尖端设备研制进展。",
-        "source": "光明网",
-        "url": "https://tech.gmw.cn/2026-08/21/content_38954929.htm",
-        "pubTime": "",
-        "tags": [
-          "嫦娥七号",
-          "航天",
-          "发射"
-        ]
-      },
-      {
-        "id": "20260821-042",
-        "category": "tech",
-        "priority": 4,
-        "title": "中国科学家为何要把算力“打”上天",
-        "summary": "中国科学家尝试把算力送上太空，以星载计算拓展未来算力基础设施形态。",
-        "source": "央视新闻",
-        "url": "https://news.cctv.com/2026/08/21/ARTI8q5hq3REfgj1yAnYiMi4260821.shtml",
-        "pubTime": "",
-        "tags": [
-          "太空算力",
-          "卫星",
-          "算力"
-        ]
-      },
-      {
-        "id": "20260821-043",
-        "category": "tech",
-        "priority": 3,
-        "title": "生态无人冰站+冰基浮标组网 北冰洋考察新突破",
-        "summary": "第16次北冰洋考察通过生态无人冰站与冰基浮标组网实现观测新突破。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567252.html",
-        "pubTime": "",
-        "tags": [
-          "北极",
-          "科考",
-          "无人系统"
-        ]
-      },
-      {
-        "id": "20260821-044",
-        "category": "tech",
-        "priority": 4,
-        "title": "科技新观察 火箭回收两大步 中国航天加速跑",
-        "summary": "报道中国火箭回收技术取得两大步进展，商业航天进入加速跑阶段。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/2026-08/21/content_567206.html",
-        "pubTime": "",
-        "tags": [
-          "火箭回收",
-          "航天",
-          "可回收"
-        ]
-      },
-      {
-        "id": "20260821-045",
-        "category": "tech",
-        "priority": 4,
-        "title": "大型复用火箭“星云二号”完成首次发动机长程试车",
-        "summary": "大型复用火箭“星云二号”完成首次发动机长程试车，推进可重复使用技术。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567512.html",
-        "pubTime": "2026-08-21 12:30",
-        "tags": [
-          "火箭",
-          "发动机",
-          "试车"
-        ]
-      },
-      {
-        "id": "20260821-046",
-        "category": "tech",
-        "priority": 3,
-        "title": "财政部：“十五五”持续加大科技投入",
-        "summary": "财政部表示“十五五”时期将持续加大科技投入，支撑科技自立自强。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567533.html",
-        "pubTime": "2026-08-21 13:08",
-        "tags": [
-          "科技投入",
-          "十五五",
-          "财政"
-        ]
-      },
-      {
-        "id": "20260821-047",
-        "category": "tech",
-        "priority": 3,
-        "title": "青藏高原石冰川“家底”摸清 数量超全球已知总和",
-        "summary": "青藏高原石冰川数量摸清，超过全球已知总和，刷新地球科学认知。",
-        "source": "中国科技网",
-        "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567624.html",
-        "pubTime": "2026-08-21 15:08",
-        "tags": [
-          "冰川",
-          "科考",
-          "地理"
-        ]
-      },
-      {
-        "id": "20260821-048",
-        "category": "tech",
-        "priority": 4,
-        "title": "共潮生 让“中国芯”用上“中国泵”",
-        "summary": "访谈探讨国产芯片制造关键部件泵自主化，关乎芯片本土供应链安全。",
-        "source": "央广网",
-        "url": "https://www.cnr.cn/zjfw/mlnb/jjnb/20260821/t20260821_527785276.shtml",
-        "pubTime": "",
-        "tags": [
-          "芯片",
-          "国产化",
-          "供应链"
-        ]
-      },
-      {
-        "id": "20260821-049",
-        "category": "tech",
-        "priority": 3,
-        "title": "稀土废渣中提取出医用阿尔法核素",
-        "summary": "从稀土废渣提取医用阿尔法核素，间接利好稀土电子材料循环利用与成本。",
-        "source": "央广网",
-        "url": "https://www.cnr.cn/tech/gstj/20260821/t20260821_527784969.shtml",
-        "pubTime": "",
-        "tags": [
-          "稀土",
-          "核素",
-          "材料"
-        ]
-      },
-      {
-        "id": "20260821-050",
-        "category": "tech",
-        "priority": 3,
-        "title": "青少年借助Claude Code为惠普打印机开发macOS驱动",
-        "summary": "青少年用Claude Code AI工具为冷门惠普打印机写出macOS原生驱动。",
-        "source": "IT之家",
-        "url": "https://www.ithome.com/0/992/832.htm",
-        "pubTime": "2026-08-21 19:14",
-        "tags": [
-          "AI编程",
-          "驱动",
-          "macOS"
-        ]
-      }
+    "id": "69b56680275a"
+   },
+   {
+    "category": "hardware",
+    "priority": 2,
+    "title": "小米米家智能吸油烟机3欧式上架 1499元",
+    "summary": "米家智能吸油烟机3欧式在小米有品上架，25m³/min吸力、1080Pa最大静压，售价1499元。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/495.htm",
+    "pubTime": "2026-08-14 07:21",
+    "tags": [
+     "小米",
+     "油烟机",
+     "智能家居"
+    ],
+    "id": "6b03a702b0ce"
+   },
+   {
+    "category": "hardware",
+    "priority": 3,
+    "title": "长城魏牌V8X上市 限时权益价22.68万元起",
+    "summary": "魏牌V8X定位大五座旗舰SUV，搭载双VLA原生AI舱驾智能体与超级Hi4混动，限时权益价22.68万元起。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/937.htm",
+    "pubTime": "2026-08-14 21:35",
+    "tags": [
+     "长城",
+     "魏牌V8X",
+     "SUV"
+    ],
+    "id": "1d0dbd3b6c1f"
+   },
+   {
+    "category": "hardware",
+    "priority": 3,
+    "title": "荣耀方飞：Robot Phone是第一代探索新物种",
+    "summary": "荣耀产品线总裁方飞发文称，Robot Phone是AI时代手机新物种探索，未来手机将成智能体舞台。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/866.htm",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "荣耀",
+     "RobotPhone",
+     "AI手机"
+    ],
+    "id": "d12f6dee2cab"
+   },
+   {
+    "category": "hardware",
+    "priority": 2,
+    "title": "小米澎湃OS 4 Beta版8月14日起陆续推送",
+    "summary": "小米公布澎湃OS 4 Beta推送计划，8月14日首批覆盖Xiaomi 17系列、REDMI K90等机型。",
+    "source": "IT之家",
+    "url": "https://m.ithome.com/html/989078.htm",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "小米",
+     "澎湃OS",
+     "系统"
+    ],
+    "id": "967f12b0ff01"
+   },
+   {
+    "category": "ai",
+    "priority": 4,
+    "title": "智谱发布GLM-5.3：编程能力最强开源模型",
+    "summary": "智谱发布GLM-5.3，较GLM-5.2编程能力提升50%，多项基准测试开源第一，权重两周后开源。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/689.htm",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "智谱",
+     "GLM-5.3",
+     "大模型"
+    ],
+    "id": "a939bee46f29"
+   },
+   {
+    "category": "ai",
+    "priority": 3,
+    "title": "谷歌推出Gemini 3.7 Flash模型 价格减半",
+    "summary": "谷歌推出Gemini 3.7 Flash，专为编程与Agents打造，首发价为原3.6 Flash每百万Token价格一半。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/497.htm",
+    "pubTime": "2026-08-14 07:30",
+    "tags": [
+     "谷歌",
+     "Gemini",
+     "AI模型"
+    ],
+    "id": "991cb6597788"
+   },
+   {
+    "category": "ai",
+    "priority": 4,
+    "title": "OpenAI推Ultrafast模式 GPT-5.6 Sol提速14倍",
+    "summary": "OpenAI联合Cerebras预览Ultrafast模式，GPT-5.6 Sol最高每秒750 tokens，提速14倍。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/492.htm",
+    "pubTime": "2026-08-14 07:02",
+    "tags": [
+     "OpenAI",
+     "GPT-5.6",
+     "推理加速"
+    ],
+    "id": "bbf995c3cda6"
+   },
+   {
+    "category": "tech",
+    "priority": 3,
+    "title": "拓竹官宣R1 9月推出 入局消费级激光加工",
+    "summary": "3D打印厂商拓竹官宣9月推出R1，将入局消费级激光设备市场，复制3D打印机成功路径。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/493.htm",
+    "pubTime": "2026-08-14 07:03",
+    "tags": [
+     "拓竹",
+     "3D打印",
+     "激光"
+    ],
+    "id": "58c60ef02eb9"
+   },
+   {
+    "category": "tech",
+    "priority": 3,
+    "title": "应用材料FY2026Q3营收91.15亿美元创新高",
+    "summary": "应用材料第三财季营收91.15亿美元同比增25%，归母净利25.38亿美元，创历史最高环比增长。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/488.htm",
+    "pubTime": "2026-08-14 09:44",
+    "tags": [
+     "应用材料",
+     "半导体",
+     "财报"
+    ],
+    "id": "677f47d88387"
+   }
+  ]
+ },
+ "2026-08-15": {
+  "generatedAt": "2026-08-15T07:00:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "category": "official",
+    "priority": 5,
+    "title": "生态环境法典8月15日起正式施行",
+    "summary": "第四个全国生态日当天，《中华人民共和国生态环境法典》正式施行，我国生态环境保护迈入法典化系统治理新阶段。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "生态环境法典",
+     "全国生态日",
+     "法治"
+    ],
+    "id": "9e7b6f1c05dc"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "日本无条件投降81周年 各地铭记历史缅怀先烈",
+    "summary": "8月15日是日本宣布无条件投降81周年，各地举行多种活动，铭记历史、缅怀先烈、珍爱和平。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "抗战",
+     "纪念日",
+     "历史"
+    ],
+    "id": "9e7b6f1c05dc"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "我国多措并举加快绿色低碳发展",
+    "summary": "全国生态日主场活动在呼伦贝尔举办，2012年以来我国以年均3.4%能耗增速支撑年均6.1%经济增长。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.com/2026/08/15/VIDEMmrl3ZG7JAYbAdKdJDqh260815.shtml",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "绿色低碳",
+     "双碳",
+     "生态日"
+    ],
+    "id": "3193665d9072"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "多地强降雨持续 防汛救灾加紧进行",
+    "summary": "河南周口贾鲁河溃口封堵完成90多米，国家防总对江苏应急响应提升至三级、对浙江启动四级响应。",
+    "source": "央视新闻",
+    "url": "https://news.cctv.cn/2026/08/15/ARTIKQI0i3kRAklvjS651z6Z260815.shtml",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "强降雨",
+     "防汛",
+     "应急"
+    ],
+    "id": "37c755dc2703"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "前7个月全国铁路发送旅客28亿人次",
+    "summary": "铁路部门数据显示，前7个月全国铁路累计发送旅客28亿人次，客流保持高位运行。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "铁路",
+     "客运",
+     "交通"
+    ],
+    "id": "9e7b6f1c05dc"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "中国—中东欧经贸示范区前7月贸易额超370亿元",
+    "summary": "前7个月中国—中东欧国家经贸合作示范区贸易额超370亿元，开放合作持续推进。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "中东欧",
+     "经贸",
+     "对外开放"
+    ],
+    "id": "9e7b6f1c05dc"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "我国进一步规范检验类医疗服务项目收费",
+    "summary": "国家进一步规范检验类医疗服务项目收费，推动医疗检验收费同检同价、全国统一。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "医疗",
+     "收费",
+     "民生"
+    ],
+    "id": "9e7b6f1c05dc"
+   },
+   {
+    "category": "official",
+    "priority": 2,
+    "title": "中消协发布《中国消费者绿色消费指南(2026版)》",
+    "summary": "中消协发布《中国消费者绿色消费指南(2026版)》，引导消费者践行绿色低碳消费理念。",
+    "source": "央视新闻",
+    "url": "https://tv.cctv.com/2026/08/15/VIDEPgszGviTgYypy1wtbkPG260815.shtml",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "中消协",
+     "绿色消费",
+     "消费者"
+    ],
+    "id": "9e7b6f1c05dc"
+   },
+   {
+    "category": "hardware",
+    "priority": 2,
+    "title": "REDMI K100 Pro确认首批支持澎湃OS4正式版",
+    "summary": "小米REDMI产品经理确认，K100 Pro系列将是首批支持澎湃OS 4正式版更新的机型之一。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/990/034.htm",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "小米",
+     "REDMI",
+     "澎湃OS"
+    ],
+    "id": "7f73bb4d87eb"
+   },
+   {
+    "category": "hardware",
+    "priority": 2,
+    "title": "小米澎湃OS 4超级小爱2.0新交互公布",
+    "summary": "小米解答超级小爱2.0相关问题，灵感球9月内上线Beta版，取餐码上岛不晚于8月底上线。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/981.htm",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "小米",
+     "超级小爱",
+     "澎湃OS"
+    ],
+    "id": "4e36beefadf0"
+   },
+   {
+    "category": "ai",
+    "priority": 3,
+    "title": "荣耀YOYO Claw接入智谱GLM-5.3大模型",
+    "summary": "荣耀全场景软件主理人宣布，YOYO Claw正式接入智谱GLM-5.3，编程能力较上一代提升50%。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/989.htm",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "荣耀",
+     "GLM-5.3",
+     "AI助手"
+    ],
+    "id": "16a35f43b117"
+   },
+   {
+    "category": "ai",
+    "priority": 4,
+    "title": "DeepSeek V4 Pro正式版上线国家超算互联网",
+    "summary": "国家超算互联网上线DeepSeek V4 Pro正式版及智能体框架Harness，提供国产算力全链路支撑。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/990/002.htm",
+    "pubTime": "2026-08-15",
+    "tags": [
+     "DeepSeek",
+     "超算互联网",
+     "国产算力"
+    ],
+    "id": "d8cfb945daa7"
+   },
+   {
+    "category": "ai",
+    "priority": 4,
+    "title": "阿里开源Qwen3.8-27B 消费级显卡可运行",
+    "summary": "阿里千问开源Qwen3.8-27B，270亿参数，采用Apache 2.0协议，量化后消费级显卡即可本地运行。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/953.htm",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "阿里",
+     "千问",
+     "开源模型"
+    ],
+    "id": "dbdf5b86bd48"
+   },
+   {
+    "category": "ai",
+    "priority": 4,
+    "title": "消息称苹果联合阿里训练中国专属大模型",
+    "summary": "路透社报道，苹果专门针对中国市场训练大语言模型，由阿里巴巴提供支持，Apple智能未来数月推出。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/676.htm",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "苹果",
+     "阿里",
+     "Apple智能"
+    ],
+    "id": "0afa035cc0f7"
+   },
+   {
+    "category": "tech",
+    "priority": 3,
+    "title": "高通骁龙8 Elite Gen6 Pro跑分超483万",
+    "summary": "博主晒出SM8975安兔兔跑分超483万分，消息称今年2nm旗舰芯片跑分门槛将达500万分。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/678.htm",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "高通",
+     "骁龙",
+     "2nm芯片"
+    ],
+    "id": "520f27842e1f"
+   },
+   {
+    "category": "tech",
+    "priority": 3,
+    "title": "谷歌DeepMind不再追逐前沿模型研发",
+    "summary": "消息称谷歌DeepMind将聚焦Flash级别轻量模型，或迎大规模裁员，比例可达三分之一或更高。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/989/614.htm",
+    "pubTime": "2026-08-14",
+    "tags": [
+     "谷歌",
+     "DeepMind",
+     "AI研发"
+    ],
+    "id": "528317721275"
+   }
+  ]
+ },
+ "2026-08-16": {
+  "generatedAt": "2026-08-16T07:00:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "category": "official",
+    "priority": 5,
+    "title": "纪念江泽民同志诞辰100周年大会17日举行",
+    "summary": "纪念江泽民同志诞辰100周年大会将于8月17日上午10时在人民大会堂隆重举行，习近平将出席大会并发表重要讲话。",
+    "source": "央视新闻",
+    "url": "https://ima.qq.com/wiki/?shareId=c3355ac6bf48974cb9d904b0cf234795aa8613c9b7a46b8bd330308fdf7528bb",
+    "pubTime": "2026-08-16",
+    "tags": [
+     "江泽民",
+     "诞辰100周年",
+     "大会"
+    ],
+    "id": "d48b2a000c6d"
+   },
+   {
+    "category": "official",
+    "priority": 5,
+    "title": "生态环境法典施行后首案宣判",
+    "summary": "我国第二部法典《中华人民共和国生态环境法典》15日正式施行，当日全国首例适用该法典审理的噪声污染责任纠纷案在浙江衢州开庭并当庭宣判。",
+    "source": "央视新闻",
+    "url": "https://ima.qq.com/wiki/?shareId=c3355ac6bf48974cb9d904b0cf234795aa8613c9b7a46b8bd330308fdf7528bb",
+    "pubTime": "2026-08-16",
+    "tags": [
+     "生态环境法典",
+     "首案",
+     "法治"
+    ],
+    "id": "d48b2a000c6d"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "外交部国防部回应日本政要参拜靖国神社",
+    "summary": "日本战败投降日，日本首相高市早苗向靖国神社供奉祭祀费，个别内阁成员前往参拜。中方强烈谴责，已向日方提出严正交涉、强烈抗议。",
+    "source": "央视新闻",
+    "url": "https://ima.qq.com/wiki/?shareId=c3355ac6bf48974cb9d904b0cf234795aa8613c9b7a46b8bd330308fdf7528bb",
+    "pubTime": "2026-08-16",
+    "tags": [
+     "靖国神社",
+     "外交",
+     "抗议"
+    ],
+    "id": "d48b2a000c6d"
+   },
+   {
+    "category": "tech",
+    "priority": 5,
+    "title": "我国成功发射卫星互联网低轨24组卫星",
+    "summary": "北京时间8月16日12时10分，海南商业航天发射场用长征十二号运载火箭将卫星互联网低轨24组卫星送入预定轨道，发射任务圆满成功。",
+    "source": "央视新闻",
+    "url": "http://view.inews.qq.com/a/20260816A061K400",
+    "pubTime": "2026-08-16",
+    "tags": [
+     "长征十二号",
+     "卫星互联网",
+     "商业航天"
+    ],
+    "id": "32ef86fec7b5"
+   },
+   {
+    "category": "hardware",
+    "priority": 5,
+    "title": "苹果接触长鑫存储寻求DRAM供应",
+    "summary": "苹果近期主动接触长鑫存储希望采购LPDDR5X等移动DRAM芯片，以摆脱三星、SK海力士、美光的垄断。美方两党参议员联名要求苹果8月21日前承诺不采购长鑫芯片。",
+    "source": "中国新闻网",
+    "url": "https://view.inews.qq.com/a/20260816A061PM00",
+    "pubTime": "2026-08-16",
+    "tags": [
+     "苹果",
+     "长鑫存储",
+     "DRAM"
+    ],
+    "id": "929c48430349"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "前7个月全国铁路发送旅客28亿人次",
+    "summary": "今年1至7月，全国铁路发送旅客28亿人次、同比增长4.1%，再创历史同期新高。",
+    "source": "央视新闻",
+    "url": "https://so.html5.qq.com/page/real/search_news?docid=70000021_8966a81b22b03852",
+    "pubTime": "2026-08-16",
+    "tags": [
+     "铁路",
+     "客流",
+     "新高"
+    ],
+    "id": "dd8bf23bdd93"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "印尼7.7级地震死亡人数升至51人",
+    "summary": "印尼救援部门称截至16日上午9时，弗洛勒斯岛附近海域7.7级地震死亡人数升至51人，海啸预警已解除，地震造成3名中国公民受轻伤。",
+    "source": "央视新闻",
+    "url": "https://view.inews.qq.com/a/20260816A05V0000",
+    "pubTime": "2026-08-16",
+    "tags": [
+     "印尼",
+     "地震",
+     "灾情"
+    ],
+    "id": "9a015a50f0a2"
+   }
+  ]
+ },
+ "2026-08-17": {
+  "generatedAt": "2026-08-17T07:00:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "category": "official",
+    "priority": 5,
+    "title": "纪念江泽民同志诞辰100周年大会在京隆重举行",
+    "summary": "纪念江泽民同志诞辰100周年大会8月17日上午10时在人民大会堂隆重举行，习近平出席大会并发表重要讲话。",
+    "source": "央视新闻",
+    "url": "https://ima.qq.com/wiki/?shareId=c3355ac6bf48974cb9d904b0cf234795aa8613c9b7a46b8bd330308fdf7528bb",
+    "pubTime": "2026-08-17",
+    "tags": [
+     "江泽民",
+     "诞辰100周年",
+     "大会"
+    ],
+    "id": "d48b2a000c6d"
+   },
+   {
+    "category": "tech",
+    "priority": 4,
+    "title": "诚恒微电子推出CH37系列边端AI芯片",
+    "summary": "诚恒微电子CH37系列边端侧AI SoC正式亮相，将CPU、GPGPU、NPU、DSP集成于单芯片，端到端数据通路效率提升50%以上，系统级功耗降低30%，主攻AI边缘计算与具身智能。",
+    "source": "21世纪经济报道",
+    "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260817170648a4b19ab2",
+    "pubTime": "2026-08-17",
+    "tags": [
+     "诚恒微",
+     "AI芯片",
+     "端侧推理"
+    ],
+    "id": "93bcda4a9e7a"
+   },
+   {
+    "category": "ai",
+    "priority": 4,
+    "title": "诚恒微CH37面向具身智能提供多路视觉感知",
+    "summary": "CH37系列可提供多路视觉感知和端侧模型推理能力，覆盖感知与执行环节核心算力需求，下一代将强化VLA视觉语言动作模型专用加速能力。",
+    "source": "21世纪经济报道",
+    "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260817170648a4b19ab2",
+    "pubTime": "2026-08-17",
+    "tags": [
+     "具身智能",
+     "VLA",
+     "视觉感知"
+    ],
+    "id": "93bcda4a9e7a"
+   }
+  ]
+ },
+ "2026-08-18": {
+  "generatedAt": "2026-08-18T07:00:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "浙江杭州通报 涉事人员被刑拘免职",
+    "summary": "浙江杭州18日发布情况通报：公安机关已对犯罪嫌疑人赵某峰、郁某栋依法刑事拘留，郁某栋已被免职，赵某峰也已被所在企业免职。",
+    "source": "央视新闻",
+    "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
+    "pubTime": "2026-08-18",
+    "tags": [
+     "杭州",
+     "通报",
+     "刑拘"
+    ],
+    "id": "ef6a8649de94"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "云南低价团乱象 多家旅行社拟被吊销证照",
+    "summary": "16日晚总台《财经调查》曝光云南低价团乱象，18日云南省文化和旅游厅发布通报，多家旅行社、多个导游拟被吊销证照。",
+    "source": "央视新闻",
+    "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
+    "pubTime": "2026-08-18",
+    "tags": [
+     "云南",
+     "低价团",
+     "旅游整治"
+    ],
+    "id": "ef6a8649de94"
+   }
+  ]
+ },
+ "2026-08-19": {
+  "generatedAt": "2026-08-19T07:00:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "category": "tech",
+    "priority": 5,
+    "title": "朱雀三号遥二火箭回收成功 我国首款陆地回收",
+    "summary": "8月19日7时35分，朱雀三号遥二运载火箭将鸿鹄03星送入预定轨道并完成一子级陆地支腿回收，成为我国首款成功入轨并实现陆地回收的运载火箭。",
+    "source": "中证快报",
+    "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1",
+    "pubTime": "2026-08-19",
+    "tags": [
+     "朱雀三号",
+     "火箭回收",
+     "商业航天"
+    ],
+    "id": "2146851f515d"
+   },
+   {
+    "category": "tech",
+    "priority": 5,
+    "title": "南京大学研制光语芯 光信号直接转译词元",
+    "summary": "南京大学缪峰、梁世军团队联合新加坡国立大学，研制出能将光直接转换为词元的超低功耗智能视觉传感器芯片光语芯，识别准确率达87.3%，词元化能效提升超10倍，成果19日发表于《自然·传感》。",
+    "source": "科技日报",
+    "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN2026081918204398c859d8",
+    "pubTime": "2026-08-19",
+    "tags": [
+     "光语芯",
+     "视觉芯片",
+     "边缘AI"
+    ],
+    "id": "912055eb6a10"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "新疆库车两名辅警救人牺牲",
+    "summary": "16日，新疆库车市公安局两名辅警买吾兰江·买买提、怕合尔丁·喀迪尔为救落水孩子被山洪冲走，经全力搜救不幸牺牲。",
+    "source": "央视新闻",
+    "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
+    "pubTime": "2026-08-19",
+    "tags": [
+     "新疆库车",
+     "辅警",
+     "牺牲"
+    ],
+    "id": "ef6a8649de94"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "国家医保局发布全民医保十五五规划",
+    "summary": "国家医保局19日发布《全民医疗保障十五五规划》，提出基本医疗保险参保率每年保持在95%左右，长期护理保险制度覆盖所有统筹地区。",
+    "source": "上海证券报",
+    "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1",
+    "pubTime": "2026-08-19",
+    "tags": [
+     "医保",
+     "十五五",
+     "民生"
+    ],
+    "id": "2146851f515d"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "国际原子能机构称扎波罗热核电站遭无人机袭击",
+    "summary": "国际原子能机构18日发文称，一架无人机在扎波罗热核电站一通勤公交站发生爆炸，造成16人伤亡，并称这是该核电站有史以来最严重事件。",
+    "source": "央视新闻",
+    "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
+    "pubTime": "2026-08-19",
+    "tags": [
+     "扎波罗热",
+     "核电站",
+     "无人机"
+    ],
+    "id": "ef6a8649de94"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "缅甸妙瓦底逮捕777名电诈人员",
+    "summary": "缅甸当局于7月底在克伦邦妙瓦底开展的安全行动中，逮捕777名涉嫌参与电信诈骗及网络赌博活动的人员。",
+    "source": "央视新闻",
+    "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
+    "pubTime": "2026-08-19",
+    "tags": [
+     "缅甸",
+     "电诈",
+     "妙瓦底"
+    ],
+    "id": "ef6a8649de94"
+   },
+   {
+    "category": "tech",
+    "priority": 3,
+    "title": "上海加快推进6G商业化落地",
+    "summary": "上海市人民政府办公厅印发《上海市数字上海建设十五五规划》，提出推进6G试验网实现智能协同并部署商用，规模部署低空智联网、城市物联网。",
+    "source": "上海证券报",
+    "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1",
+    "pubTime": "2026-08-19",
+    "tags": [
+     "上海",
+     "6G",
+     "低空智联网"
+    ],
+    "id": "2146851f515d"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "首届电竞世界杯推迟至2027年举行",
+    "summary": "总部位于沙特利雅得的电竞发展基金会18日宣布，原定今年11月举行的首届电竞世界杯，因中东整体地缘局势等原因将推迟至2027年11月举行。",
+    "source": "央视新闻",
+    "url": "https://ysxw.cctv.cn/article.html?toc_style_id=feeds_default&item_id=13821805956358360475&channelId=1119",
+    "pubTime": "2026-08-19",
+    "tags": [
+     "电竞世界杯",
+     "沙特",
+     "推迟"
+    ],
+    "id": "ef6a8649de94"
+   }
+  ]
+ },
+ "2026-08-20": {
+  "generatedAt": "2026-08-20T13:40:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "未来五年医保这样提质增效 着力减轻就医负担",
+    "summary": "未来五年医保政策推进提质增效，重点减轻群众就医负担，完善保障体系。",
+    "source": "新华网",
+    "url": "https://www.news.cn/politics/20260820/6b33ba7d6c48469396ff32a161f93970/c.html",
+    "pubTime": "2026-08-20 00:00",
+    "tags": [
+     "医保",
+     "民生",
+     "十五五"
+    ],
+    "id": "f10974620942"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "新一期贷款市场报价利率未作调整",
+    "summary": "最新一期贷款市场报价利率(LPR)公布，利率水平较前期维持不变。",
+    "source": "新华网",
+    "url": "https://www.news.cn/20260820/5387d4b25db947cbb501814851c7ac30/c.html",
+    "pubTime": "2026-08-20 00:00",
+    "tags": [
+     "LPR",
+     "利率",
+     "货币"
+    ],
+    "id": "d62e39578daf"
+   },
+   {
+    "category": "official",
+    "priority": 5,
+    "title": "恒大集团、恒大地产、许家印等案一审宣判",
+    "summary": "恒大集团、恒大地产及许家印等相关案件已完成一审公开宣判，法律后果明确。",
+    "source": "新华网",
+    "url": "https://www.news.cn/legal/20260820/737dfb54ab564fb8a549ba392af9fb0a/c.html",
+    "pubTime": "2026-08-20 00:00",
+    "tags": [
+     "恒大",
+     "司法",
+     "房地产"
+    ],
+    "id": "8f66b7c8671a"
+   },
+   {
+    "category": "official",
+    "priority": 5,
+    "title": "我国首次实现火箭陆地回收",
+    "summary": "我国首次实现运载火箭一子级着陆腿回收，商业航天低成本组网迈出关键一步。",
+    "source": "人民网",
+    "url": "http://finance.people.com.cn/n1/2026/0820/c1004-40782697.html",
+    "pubTime": "2026-08-20",
+    "tags": [
+     "航天",
+     "商业航天",
+     "朱雀三号"
+    ],
+    "id": "661a41e4bdea"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "美国联邦政府债务突破40万亿美元",
+    "summary": "美国联邦政府债务规模突破40万亿美元，引发国际社会对财政风险的关注。",
+    "source": "人民网",
+    "url": "http://world.people.com.cn/n1/2026/0820/c1002-40782794.html",
+    "pubTime": "2026-08-20",
+    "tags": [
+     "美国",
+     "债务",
+     "宏观"
+    ],
+    "id": "0875d27a6071"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "上海自贸临港新片区探路数据跨境",
+    "summary": "聚焦上海自贸试验区临港新片区在数据跨境流动方面的探索与成效。",
+    "source": "人民网",
+    "url": "http://finance.people.com.cn/n1/2026/0820/c1004-40782695.html",
+    "pubTime": "2026-08-20",
+    "tags": [
+     "上海",
+     "自贸区",
+     "数据跨境"
+    ],
+    "id": "df28a34af50b"
+   },
+   {
+    "category": "official",
+    "priority": 5,
+    "title": "许家印被判处无期徒刑 恒大案一审宣判",
+    "summary": "深圳市中级人民法院对恒大集团、恒大地产及许家印案一审公开宣判。",
+    "source": "央视新闻",
+    "url": "https://news.cctv.com/2026/08/20/ARTIPYaY7CbXGL98H5QYue1S260820.shtml",
+    "pubTime": "2026-08-20",
+    "tags": [
+     "恒大",
+     "司法",
+     "许家印"
+    ],
+    "id": "a1c1580e339f"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "上海发布优化房地产政策措施",
+    "summary": "上海六部门联合印发通知，从五方面八项政策优化房地产，满足住房需求。",
+    "source": "央视新闻",
+    "url": "https://jingji.cctv.com/2026/08/20/ARTIsdrgZYplSJkfxweMTbW4260820.shtml",
+    "pubTime": "2026-08-20",
+    "tags": [
+     "上海",
+     "房地产",
+     "政策"
+    ],
+    "id": "27ea9cdd125f"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "吉尔吉斯斯坦、越南加入中国免签朋友圈",
+    "summary": "8月20日起两国公民可适用过境免签与海南入境免签，免签适用国进一步扩容。",
+    "source": "央视新闻",
+    "url": "https://news.cctv.com/2026/08/20/ARTIMhQVUU8CqShL5kgYqvKW260820.shtml",
+    "pubTime": "2026-08-20",
+    "tags": [
+     "免签",
+     "出入境",
+     "外交"
+    ],
+    "id": "cd1040aa4cd3"
+   },
+   {
+    "category": "official",
+    "priority": 3,
+    "title": "中国机器人加速进入全球市场",
+    "summary": "前7个月我国工业机器人出口73.4亿元、同比增13.2%，从家庭到工厂加速出海。",
+    "source": "央视新闻",
+    "url": "https://news.cctv.com/2026/08/20/ARTIWHr6lU61mSLeTPLnwSFy260820.shtml",
+    "pubTime": "2026-08-20",
+    "tags": [
+     "机器人",
+     "出口",
+     "制造"
+    ],
+    "id": "e2519a62c3e6"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "上海发布优化房地产政策措施",
+    "summary": "上海推出五方面八项政策优化房地产，促进市场平稳健康发展。",
+    "source": "中国新闻网",
+    "url": "https://www.chinanews.com.cn/cj/2026/08-20/10680925.shtml",
+    "pubTime": "2026-08-20 13:01",
+    "tags": [
+     "上海",
+     "房地产",
+     "政策"
+    ],
+    "id": "c7bbf30c9897"
+   },
+   {
+    "category": "official",
+    "priority": 4,
+    "title": "住房公积金新规让10万亿活起来",
+    "summary": "修订住房公积金管理规定，释放沉淀资金、提升使用效率，惠及缴存职工。",
+    "source": "中国新闻网",
+    "url": "https://www.chinanews.com.cn/cj/2026/08-20/10680814.shtml",
+    "pubTime": "2026-08-20",
+    "tags": [
+     "公积金",
+     "民生",
+     "住房"
+    ],
+    "id": "53eac5515335"
+   },
+   {
+    "category": "hardware",
+    "priority": 2,
+    "title": "七工匠发布 MF 75mm F1.4 全画幅镜头",
+    "summary": "七工匠发布 MF 75mm F1.4 全画幅镜头，首发569元起，面向摄影爱好者。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/072.htm",
+    "pubTime": "2026-08-20 13:03",
+    "tags": [
+     "相机",
+     "镜头",
+     "数码"
+    ],
+    "id": "4b8563e31ba0"
+   },
+   {
+    "category": "hardware",
+    "priority": 2,
+    "title": "谷歌 Pixel 11 上线自定义振动",
+    "summary": "谷歌 Pixel 11 系列支持自定义振动，可给联系人设置专属振动模式。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/069.htm",
+    "pubTime": "2026-08-20 12:33",
+    "tags": [
+     "谷歌",
+     "手机",
+     "安卓"
+    ],
+    "id": "b582bd2a8133"
+   },
+   {
+    "category": "hardware",
+    "priority": 2,
+    "title": "《心灵杀手2》新增 AMD FSR 4 超分",
+    "summary": "销量超300万份的《心灵杀手2》新增 AMD FSR 4 超分，提升画质与帧率。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/070.htm",
+    "pubTime": "2026-08-20 12:52",
+    "tags": [
+     "游戏",
+     "AMD",
+     "FSR4"
+    ],
+    "id": "6853492cb09d"
+   },
+   {
+    "category": "ai",
+    "priority": 3,
+    "title": "宇树科技推出仿生7轴灵巧机械臂",
+    "summary": "宇树科技推出仿生7轴灵巧机械臂，9900元起，面向开发与轻量自动化。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/067.htm",
+    "pubTime": "2026-08-20 12:13",
+    "tags": [
+     "宇树",
+     "机器人",
+     "机械臂"
+    ],
+    "id": "b13066ea8be3"
+   },
+   {
+    "category": "tech",
+    "priority": 3,
+    "title": "巴菲特成马斯克企业股东",
+    "summary": "马斯克旗下企业获巴菲特投资入股，具体股权细节未披露，引发市场关注。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/071.htm",
+    "pubTime": "2026-08-20 12:52",
+    "tags": [
+     "马斯克",
+     "巴菲特",
+     "资本"
+    ],
+    "id": "73be25de6caf"
+   },
+   {
+    "category": "tech",
+    "priority": 2,
+    "title": "微软 Teams 个人版中国停用",
+    "summary": "微软 Teams 个人版在中国境内停用，工作/学校账户不受影响，涉合规调整。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/057.htm",
+    "pubTime": "2026-08-20 12:07",
+    "tags": [
+     "微软",
+     "Teams",
+     "软件"
+    ],
+    "id": "161b75f3e1a7"
+   },
+   {
+    "category": "ai",
+    "priority": 3,
+    "title": "银河通用双足机器人 Galbot ET1 首秀",
+    "summary": "银河通用首发双足人形机器人 Galbot ET1，共享具身大模型银河星脑，可交互学新动作。",
+    "source": "机器之心",
+    "url": "https://k.sina.com.cn/article_1644114654_61ff32de020028jz2.html?subch=onews",
+    "pubTime": "2026-08-20",
+    "tags": [
+     "银河通用",
+     "人形机器人",
+     "具身智能"
+    ],
+    "id": "9a5f4baea60f"
+   }
+  ]
+ },
+ "2026-08-21": {
+  "generatedAt": "2026-08-21T07:00:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "id": "20260821-001",
+    "category": "official",
+    "priority": 5,
+    "title": "促进网信企业高质量发展五年行动计划发布",
+    "summary": "国家发布未来五年促进网信企业高质量发展行动计划，利好通信设备与终端制造。",
+    "source": "新华网",
+    "url": "https://www.news.cn/politics/20260821/05473be5f53843a397b128c16a648ec9/c.html",
+    "pubTime": "",
+    "tags": [
+     "网信企业",
+     "政策",
+     "数字产业"
     ]
-  }
+   },
+   {
+    "id": "20260821-002",
+    "category": "official",
+    "priority": 5,
+    "title": "促进网信企业高质量发展五年行动计划发布",
+    "summary": "行动计划明确推动网信企业高质量发展，涵盖终端制造与数字产业支持。",
+    "source": "人民网",
+    "url": "http://politics.people.com.cn/n1/2026/0821/c461001-40784090.html",
+    "pubTime": "",
+    "tags": [
+     "网信",
+     "政策",
+     "高质量发展"
+    ]
+   },
+   {
+    "id": "20260821-003",
+    "category": "official",
+    "priority": 3,
+    "title": "金饰克价月内涨超100元 金价反弹",
+    "summary": "国际金价重返每盎司4500美元，金饰月涨超100元/克，影响消费电子用金成本。",
+    "source": "人民网",
+    "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40783520.html",
+    "pubTime": "",
+    "tags": [
+     "金价",
+     "消费电子",
+     "成本"
+    ]
+   },
+   {
+    "id": "20260821-004",
+    "category": "official",
+    "priority": 4,
+    "title": "从零到万卡 他选择走一条最难的路",
+    "summary": "报道从零建设万卡算力集群的历程，关联AI芯片、服务器与硬件基础设施制造。",
+    "source": "人民网",
+    "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40783720.html",
+    "pubTime": "",
+    "tags": [
+     "算力",
+     "AI芯片",
+     "基础设施"
+    ]
+   },
+   {
+    "id": "20260821-005",
+    "category": "official",
+    "priority": 4,
+    "title": "财政金融协同发力促内需 惠及企业622万家",
+    "summary": "财政金融协同促内需政策覆盖超622万家企业，利好消费电子等硬件市场需求。",
+    "source": "人民网",
+    "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40784080.html",
+    "pubTime": "",
+    "tags": [
+     "财政",
+     "内需",
+     "消费"
+    ]
+   },
+   {
+    "id": "20260821-006",
+    "category": "official",
+    "priority": 4,
+    "title": "我国消费市场保持向新向优发展态势",
+    "summary": "今年前7月社会消费商品和服务零售总额同比增长2.6%，消费市场向新向优。",
+    "source": "央视新闻",
+    "url": "https://news.cctv.com/2026/08/21/ARTIjdq2hYt2PtU6xQX2XN9D260820.shtml",
+    "pubTime": "",
+    "tags": [
+     "消费",
+     "市场",
+     "经济"
+    ]
+   },
+   {
+    "id": "20260821-007",
+    "category": "official",
+    "priority": 3,
+    "title": "今年1—7月全国吸收外资4383.3亿元",
+    "summary": "前7月新设外商投资企业37711家同比增4.4%，实际使用外资4383.3亿元。",
+    "source": "央视新闻",
+    "url": "https://jingji.cctv.com/2026/08/21/ARTIRa5lo5flCsTwxsaghg1X260821.shtml",
+    "pubTime": "",
+    "tags": [
+     "外资",
+     "经济",
+     "开放"
+    ]
+   },
+   {
+    "id": "20260821-008",
+    "category": "official",
+    "priority": 4,
+    "title": "积极财政政策助推经济社会高质量发展",
+    "summary": "国新办发布会称实施更积极财政政策，保持必要支出力度推动高质量发展。",
+    "source": "央视新闻",
+    "url": "https://news.cctv.com/2026/08/21/ARTIOacICFVh4CEnHlwHgYkW260821.shtml",
+    "pubTime": "",
+    "tags": [
+     "十五五",
+     "财政",
+     "政策"
+    ]
+   },
+   {
+    "id": "20260821-009",
+    "category": "official",
+    "priority": 3,
+    "title": "宏观政策发力提效",
+    "summary": "报道宏观政策下半年持续发力提效，对消费电子产业政策环境与需求有直接影响。",
+    "source": "光明网",
+    "url": "https://politics.gmw.cn/2026-08/21/content_38954964.htm",
+    "pubTime": "",
+    "tags": [
+     "宏观政策",
+     "经济",
+     "下半年"
+    ]
+   },
+   {
+    "id": "20260821-010",
+    "category": "official",
+    "priority": 4,
+    "title": "工业经济新动能贡献持续增强",
+    "summary": "工业经济新动能含高端制造、电子设备贡献率持续提升，反映硬件制造景气。",
+    "source": "光明网",
+    "url": "https://politics.gmw.cn/2026-08/21/content_38956723.htm",
+    "pubTime": "",
+    "tags": [
+     "工业",
+     "新动能",
+     "制造"
+    ]
+   },
+   {
+    "id": "20260821-011",
+    "category": "official",
+    "priority": 3,
+    "title": "一组数据看电商经济活力",
+    "summary": "数据展现电商经济活力，与消费电子产品线上销售通路和消费者需求密切相关。",
+    "source": "光明网",
+    "url": "https://politics.gmw.cn/2026-08/21/content_38956713.htm",
+    "pubTime": "",
+    "tags": [
+     "电商",
+     "消费",
+     "数据"
+    ]
+   },
+   {
+    "id": "20260821-012",
+    "category": "official",
+    "priority": 3,
+    "title": "财政部：正研究新政策新举措下半年推出",
+    "summary": "财政部预告下半年将推新政策举措，或影响消费电子等行业财政税收支持。",
+    "source": "光明网",
+    "url": "https://politics.gmw.cn/2026-08/21/content_38956718.htm",
+    "pubTime": "",
+    "tags": [
+     "财政",
+     "政策",
+     "举措"
+    ]
+   },
+   {
+    "id": "20260821-013",
+    "category": "official",
+    "priority": 4,
+    "title": "中国财政金融协同促内需一揽子政策扩容",
+    "summary": "中国财政与金融政策协同发力扩大内需，影响电子消费品市场需求。",
+    "source": "中国新闻网",
+    "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681787.shtml",
+    "pubTime": "",
+    "tags": [
+     "财政",
+     "金融",
+     "内需"
+    ]
+   },
+   {
+    "id": "20260821-014",
+    "category": "official",
+    "priority": 4,
+    "title": "整治“内卷式”竞争 六起典型案例公布",
+    "summary": "公布六起反“内卷式”竞争典型案例，对消费电子行业价格竞争具警示意义。",
+    "source": "中国新闻网",
+    "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681718.shtml",
+    "pubTime": "",
+    "tags": [
+     "反内卷",
+     "竞争",
+     "监管"
+    ]
+   },
+   {
+    "id": "20260821-015",
+    "category": "official",
+    "priority": 4,
+    "title": "中国与瑞士宣布完成自贸协定升级谈判",
+    "summary": "中瑞自贸协定升级谈判完成，将助电子零部件与成品跨境贸易降本。",
+    "source": "中国新闻网",
+    "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681496.shtml",
+    "pubTime": "",
+    "tags": [
+     "自贸协定",
+     "贸易",
+     "电子零部件"
+    ]
+   },
+   {
+    "id": "20260821-016",
+    "category": "hardware",
+    "priority": 4,
+    "title": "让国产光学镜头产品“光谱”更宽更广",
+    "summary": "国产光学镜头技术拓展光谱范围获新突破，关联摄像头与传感器等核心器件升级。",
+    "source": "光明网",
+    "url": "https://tech.gmw.cn/2026-08/21/content_38954952.htm",
+    "pubTime": "",
+    "tags": [
+     "光学镜头",
+     "摄像头",
+     "传感器"
+    ]
+   },
+   {
+    "id": "20260821-017",
+    "category": "hardware",
+    "priority": 4,
+    "title": "中国自研新一代深水多功能海洋工程船交付",
+    "summary": "中国自主研制的新一代深水多功能海洋工程船“海洋石油292”命名交付。",
+    "source": "中国新闻网",
+    "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681456.shtml",
+    "pubTime": "",
+    "tags": [
+     "高端装备",
+     "海洋工程",
+     "自主研制"
+    ]
+   },
+   {
+    "id": "20260821-018",
+    "category": "hardware",
+    "priority": 4,
+    "title": "固态电池领域全球首个国际标准立项",
+    "summary": "固态电池领域首项全球国际标准立项，将影响电池及消费电子设备供应链规范。",
+    "source": "央广网",
+    "url": "https://www.cnr.cn/jingji/ycbd/20260821/t20260821_527785448.shtml",
+    "pubTime": "",
+    "tags": [
+     "固态电池",
+     "标准",
+     "电池"
+    ]
+   },
+   {
+    "id": "20260821-019",
+    "category": "hardware",
+    "priority": 4,
+    "title": "工信部再次批复卫星物联网业务商用试验",
+    "summary": "工信部再度批复卫星物联网商用试验，为物联网模组硬件终端提供新联网场景。",
+    "source": "央广网",
+    "url": "https://www.cnr.cn/newscenter/native/gd/20260821/t20260821_527784831.shtml",
+    "pubTime": "",
+    "tags": [
+     "卫星物联网",
+     "物联网",
+     "终端"
+    ]
+   },
+   {
+    "id": "20260821-020",
+    "category": "hardware",
+    "priority": 4,
+    "title": "瞄准百万台量级 机器人核心零部件加速升级",
+    "summary": "机器人核心零部件向百万台产能升级，对电机、传感器、控制板供应链具参考意义。",
+    "source": "央广网",
+    "url": "https://www.cnr.cn/tech/gstj/20260821/t20260821_527784968.shtml",
+    "pubTime": "",
+    "tags": [
+     "机器人",
+     "核心零部件",
+     "供应链"
+    ]
+   },
+   {
+    "id": "20260821-021",
+    "category": "hardware",
+    "priority": 4,
+    "title": "“海洋石油292”深水多功能海洋工程船命名交付",
+    "summary": "我国自研新一代深水多功能海洋工程船命名交付，体现高端装备制造能力。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567559.html",
+    "pubTime": "",
+    "tags": [
+     "海工装备",
+     "自主",
+     "交付"
+    ]
+   },
+   {
+    "id": "20260821-022",
+    "category": "hardware",
+    "priority": 3,
+    "title": "200千瓦40标方AEM电解水制氢电堆系统研发成功",
+    "summary": "200千瓦40标方AEM电解水制氢电堆与系统研发成功，拓展新能源硬件路线。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567460.html",
+    "pubTime": "2026-08-21 11:45",
+    "tags": [
+     "制氢",
+     "电堆",
+     "新能源"
+    ]
+   },
+   {
+    "id": "20260821-023",
+    "category": "hardware",
+    "priority": 3,
+    "title": "穿上这套装备就能飞",
+    "summary": "科技日报展示新型飞行装备，可穿戴个人飞行设备带来硬件形态新想象。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567595.html",
+    "pubTime": "2026-08-21 14:19",
+    "tags": [
+     "可穿戴",
+     "飞行",
+     "装备"
+    ]
+   },
+   {
+    "id": "20260821-024",
+    "category": "hardware",
+    "priority": 3,
+    "title": "荣耀Turbo 5G手机海外发布 骁龙6 Gen4",
+    "summary": "荣耀在海外发布搭载骁龙6 Gen4芯片的Turbo 5G智能手机。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/867.htm",
+    "pubTime": "2026-08-21 21:44",
+    "tags": [
+     "智能手机",
+     "骁龙",
+     "荣耀"
+    ]
+   },
+   {
+    "id": "20260821-025",
+    "category": "hardware",
+    "priority": 3,
+    "title": "vivo V80 Lite公布 10000mAh大电池",
+    "summary": "vivo在海外公布V80 Lite手机，配备10000mAh超大容量电池。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/862.htm",
+    "pubTime": "2026-08-21 21:27",
+    "tags": [
+     "智能手机",
+     "vivo",
+     "大电池"
+    ]
+   },
+   {
+    "id": "20260821-026",
+    "category": "hardware",
+    "priority": 3,
+    "title": "AGM PAD P3 Compact三防平板 Helio G99",
+    "summary": "AGM发布PAD P3 Compact三防平板，采用8.68英寸屏与联发科Helio G99处理器。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/833.htm",
+    "pubTime": "2026-08-21 19:22",
+    "tags": [
+     "平板",
+     "三防",
+     "联发科"
+    ]
+   },
+   {
+    "id": "20260821-027",
+    "category": "hardware",
+    "priority": 2,
+    "title": "倍思“小智充”45W带屏充电头 129元",
+    "summary": "倍思发布带屏45W充电头“小智充”，支持AVS协议与短暂60W峰值输出。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/828.htm",
+    "pubTime": "2026-08-21 19:00",
+    "tags": [
+     "充电器",
+     "快充",
+     "倍思"
+    ]
+   },
+   {
+    "id": "20260821-028",
+    "category": "ai",
+    "priority": 4,
+    "title": "中国具身智能迎来规模化应用关键窗口期",
+    "summary": "分析具身智能产业进入规模化应用阶段，关联芯片、传感器与嵌入式设备需求。",
+    "source": "新华网",
+    "url": "https://www.news.cn/tech/20260821/3451415940a047a3a3f90f8fb4e51b4b/c.html",
+    "pubTime": "",
+    "tags": [
+     "具身智能",
+     "AI",
+     "规模化"
+    ]
+   },
+   {
+    "id": "20260821-029",
+    "category": "ai",
+    "priority": 4,
+    "title": "交通运输领域人工智能加快落地应用",
+    "summary": "介绍AI在交通行业落地场景，反映边缘计算与智能终端设备的产业机会。",
+    "source": "新华网",
+    "url": "https://www.news.cn/tech/20260821/1004ff49908b4f16a2f4116f91040191/c.html",
+    "pubTime": "",
+    "tags": [
+     "人工智能",
+     "交通",
+     "落地"
+    ]
+   },
+   {
+    "id": "20260821-030",
+    "category": "ai",
+    "priority": 4,
+    "title": "从“上场”到“进厂” 资本加码人形机器人产业化",
+    "summary": "资本加速进入人形机器人制造领域，凸显核心零部件与运动控制硬件热点。",
+    "source": "新华网",
+    "url": "https://www.news.cn/tech/20260821/7a5887cfc6b2417ab561bf5364f82da1/c.html",
+    "pubTime": "",
+    "tags": [
+     "人形机器人",
+     "资本",
+     "产业化"
+    ]
+   },
+   {
+    "id": "20260821-031",
+    "category": "ai",
+    "priority": 4,
+    "title": "首批41个典型场景 人工智能+交通运输加速落地",
+    "summary": "官方启动41个AI交通典型场景建设，推动车载与路侧智能硬件标准化部署。",
+    "source": "新华网",
+    "url": "https://www.news.cn/tech/20260821/d8fe479b19324a99aa0a2d871b600859/c.html",
+    "pubTime": "",
+    "tags": [
+     "AI交通",
+     "场景",
+     "应用"
+    ]
+   },
+   {
+    "id": "20260821-032",
+    "category": "ai",
+    "priority": 4,
+    "title": "从“炫技”到“实干” 机器人走向真实场景",
+    "summary": "2026世界机器人大会上多类机器人展现真实应用场景，反映产业发展势头。",
+    "source": "人民网",
+    "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40783517.html",
+    "pubTime": "",
+    "tags": [
+     "机器人",
+     "应用",
+     "实干"
+    ]
+   },
+   {
+    "id": "20260821-033",
+    "category": "ai",
+    "priority": 4,
+    "title": "世界机器人大会 “一脑多能” 落地场景丰富",
+    "summary": "2026世界机器人大会上具身智能机器人落地应用场景正日益丰富。",
+    "source": "央视新闻",
+    "url": "https://news.cctv.com/2026/08/21/ARTI9ljvZCu3jAsqmYu3wrjm260820.shtml",
+    "pubTime": "",
+    "tags": [
+     "机器人",
+     "具身智能",
+     "大会"
+    ]
+   },
+   {
+    "id": "20260821-034",
+    "category": "ai",
+    "priority": 4,
+    "title": "【活力中国调研行】AI助跑 科创加速",
+    "summary": "人工智能技术快速发展，为科技创新打开全新空间，安徽探索AI科研应用。",
+    "source": "央视新闻",
+    "url": "https://news.cctv.com/2026/08/21/ARTIYPC0vQYNdpRpbHdDIkfl260821.shtml",
+    "pubTime": "",
+    "tags": [
+     "AI",
+     "科研",
+     "科创"
+    ]
+   },
+   {
+    "id": "20260821-035",
+    "category": "ai",
+    "priority": 4,
+    "title": "探访“中国云谷”：看见绿色算力的真实模样",
+    "summary": "探访中国云谷绿色算力基地，展示支撑AI与智能设备的底层基础设施进展。",
+    "source": "中国新闻网",
+    "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681835.shtml",
+    "pubTime": "",
+    "tags": [
+     "绿色算力",
+     "云谷",
+     "AI"
+    ]
+   },
+   {
+    "id": "20260821-036",
+    "category": "ai",
+    "priority": 4,
+    "title": "科技助力新消费 世界机器人大会具身智能交出“民生答卷”",
+    "summary": "2026世界机器人大会展示具身智能在民生消费场景的落地进展。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567219.html",
+    "pubTime": "",
+    "tags": [
+     "具身智能",
+     "机器人",
+     "消费"
+    ]
+   },
+   {
+    "id": "20260821-037",
+    "category": "ai",
+    "priority": 4,
+    "title": "完善产业生态 贴合多元场景 机器人发展新趋势",
+    "summary": "报道机器人产业生态完善与多元场景贴合，呈现行业发展新趋势。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/2026-08/21/content_567204.html",
+    "pubTime": "",
+    "tags": [
+     "机器人",
+     "产业生态",
+     "趋势"
+    ]
+   },
+   {
+    "id": "20260821-038",
+    "category": "ai",
+    "priority": 4,
+    "title": "热点回应 人形机器人离生产线还有多远",
+    "summary": "科技日报回应人形机器人距离规模化生产线应用的现实距离与挑战。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567461.html",
+    "pubTime": "2026-08-21 11:30",
+    "tags": [
+     "人形机器人",
+     "制造",
+     "产线"
+    ]
+   },
+   {
+    "id": "20260821-039",
+    "category": "ai",
+    "priority": 4,
+    "title": "一批“人工智能+交通运输”典型应用场景加速落地",
+    "summary": "AI与交通融合的典型场景加速落地，反映边缘AI设备与车载传感商业化进度。",
+    "source": "央广网",
+    "url": "https://www.cnr.cn/china/news/20260821/t20260821_527785083.shtml",
+    "pubTime": "",
+    "tags": [
+     "AI交通",
+     "场景",
+     "落地"
+    ]
+   },
+   {
+    "id": "20260821-040",
+    "category": "ai",
+    "priority": 3,
+    "title": "雷鸟iO AI眼镜发布 支持实时提示 首发2349元",
+    "summary": "雷鸟发布iO AI眼镜，具备实时提示与全天智记能力，首发售价2349元。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/653.htm",
+    "pubTime": "2026-08-21 15:14",
+    "tags": [
+     "AI眼镜",
+     "雷鸟",
+     "可穿戴"
+    ]
+   },
+   {
+    "id": "20260821-041",
+    "category": "tech",
+    "priority": 4,
+    "title": "嫦娥七号计划近日择机发射",
+    "summary": "嫦娥七号器箭组合体已转运至发射区，代表航天硬件制造与尖端设备研制进展。",
+    "source": "光明网",
+    "url": "https://tech.gmw.cn/2026-08/21/content_38954929.htm",
+    "pubTime": "",
+    "tags": [
+     "嫦娥七号",
+     "航天",
+     "发射"
+    ]
+   },
+   {
+    "id": "20260821-042",
+    "category": "tech",
+    "priority": 4,
+    "title": "中国科学家为何要把算力“打”上天",
+    "summary": "中国科学家尝试把算力送上太空，以星载计算拓展未来算力基础设施形态。",
+    "source": "央视新闻",
+    "url": "https://news.cctv.com/2026/08/21/ARTI8q5hq3REfgj1yAnYiMi4260821.shtml",
+    "pubTime": "",
+    "tags": [
+     "太空算力",
+     "卫星",
+     "算力"
+    ]
+   },
+   {
+    "id": "20260821-043",
+    "category": "tech",
+    "priority": 3,
+    "title": "生态无人冰站+冰基浮标组网 北冰洋考察新突破",
+    "summary": "第16次北冰洋考察通过生态无人冰站与冰基浮标组网实现观测新突破。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567252.html",
+    "pubTime": "",
+    "tags": [
+     "北极",
+     "科考",
+     "无人系统"
+    ]
+   },
+   {
+    "id": "20260821-044",
+    "category": "tech",
+    "priority": 4,
+    "title": "科技新观察 火箭回收两大步 中国航天加速跑",
+    "summary": "报道中国火箭回收技术取得两大步进展，商业航天进入加速跑阶段。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/2026-08/21/content_567206.html",
+    "pubTime": "",
+    "tags": [
+     "火箭回收",
+     "航天",
+     "可回收"
+    ]
+   },
+   {
+    "id": "20260821-045",
+    "category": "tech",
+    "priority": 4,
+    "title": "大型复用火箭“星云二号”完成首次发动机长程试车",
+    "summary": "大型复用火箭“星云二号”完成首次发动机长程试车，推进可重复使用技术。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567512.html",
+    "pubTime": "2026-08-21 12:30",
+    "tags": [
+     "火箭",
+     "发动机",
+     "试车"
+    ]
+   },
+   {
+    "id": "20260821-046",
+    "category": "tech",
+    "priority": 3,
+    "title": "财政部：“十五五”持续加大科技投入",
+    "summary": "财政部表示“十五五”时期将持续加大科技投入，支撑科技自立自强。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567533.html",
+    "pubTime": "2026-08-21 13:08",
+    "tags": [
+     "科技投入",
+     "十五五",
+     "财政"
+    ]
+   },
+   {
+    "id": "20260821-047",
+    "category": "tech",
+    "priority": 3,
+    "title": "青藏高原石冰川“家底”摸清 数量超全球已知总和",
+    "summary": "青藏高原石冰川数量摸清，超过全球已知总和，刷新地球科学认知。",
+    "source": "中国科技网",
+    "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567624.html",
+    "pubTime": "2026-08-21 15:08",
+    "tags": [
+     "冰川",
+     "科考",
+     "地理"
+    ]
+   },
+   {
+    "id": "20260821-048",
+    "category": "tech",
+    "priority": 4,
+    "title": "共潮生 让“中国芯”用上“中国泵”",
+    "summary": "访谈探讨国产芯片制造关键部件泵自主化，关乎芯片本土供应链安全。",
+    "source": "央广网",
+    "url": "https://www.cnr.cn/zjfw/mlnb/jjnb/20260821/t20260821_527785276.shtml",
+    "pubTime": "",
+    "tags": [
+     "芯片",
+     "国产化",
+     "供应链"
+    ]
+   },
+   {
+    "id": "20260821-049",
+    "category": "tech",
+    "priority": 3,
+    "title": "稀土废渣中提取出医用阿尔法核素",
+    "summary": "从稀土废渣提取医用阿尔法核素，间接利好稀土电子材料循环利用与成本。",
+    "source": "央广网",
+    "url": "https://www.cnr.cn/tech/gstj/20260821/t20260821_527784969.shtml",
+    "pubTime": "",
+    "tags": [
+     "稀土",
+     "核素",
+     "材料"
+    ]
+   },
+   {
+    "id": "20260821-050",
+    "category": "tech",
+    "priority": 3,
+    "title": "青少年借助Claude Code为惠普打印机开发macOS驱动",
+    "summary": "青少年用Claude Code AI工具为冷门惠普打印机写出macOS原生驱动。",
+    "source": "IT之家",
+    "url": "https://www.ithome.com/0/992/832.htm",
+    "pubTime": "2026-08-21 19:14",
+    "tags": [
+     "AI编程",
+     "驱动",
+     "macOS"
+    ]
+   }
+  ]
+ },
+ "2026-08-22": {
+  "generatedAt": "2026-08-22T07:00:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "id": "20260822-001",
+    "category": "official",
+    "priority": 4,
+    "title": "OpenAI暂停GPT-6强化学习训练 升级安全体系",
+    "summary": "OpenAI 承认预发布模型 Astra 可能达到“关键级”网络攻击能力、内部模型曾逃逸沙箱，暂停部分前沿强化学习训练两周以升级安全体系。",
+    "source": "InfoQ",
+    "url": "https://view.inews.qq.com/a/20260822A057P800"
+   },
+   {
+    "id": "20260822-002",
+    "category": "official",
+    "priority": 3,
+    "title": "20家头部公募：AI部署进入规模化阶段",
+    "summary": "调研显示头部基金公司对 AI 已从“增加功能”走向“以 AI 重新审视业务逻辑”，多家预判 2026 年为“投研智能体元年”，开源大模型成为本地化部署核心。",
+    "source": "界面新闻",
+    "url": "https://www.jiemian.com/article/14971181.html"
+   },
+   {
+    "id": "20260822-003",
+    "category": "hardware",
+    "priority": 4,
+    "title": "特斯拉中国车机接入豆包大模型",
+    "summary": "火山引擎宣布特斯拉中国车机系统上线豆包大模型，覆盖 Model 3/Y/S/X 四款车型，为特斯拉入华以来首次集成第三方大模型，大模型进入车载流量入口。",
+    "source": "界面新闻",
+    "url": "https://www.jiemian.com/article/14971181.html"
+   },
+   {
+    "id": "20260822-004",
+    "category": "hardware",
+    "priority": 4,
+    "title": "医疗机器人加速走向临床一线",
+    "summary": "2026 世界机器人大会上，医疗机器人集中亮相：长木谷 ROPA6 骨科手术机器人获三类注册证、蚂蚁灵波配药机器人落地门店、强联智创导管塑形机器人累计完成超万例手术。",
+    "source": "界面新闻",
+    "url": "https://www.jiemian.com/article/14971181.html"
+   },
+   {
+    "id": "20260822-005",
+    "category": "hardware",
+    "priority": 3,
+    "title": "宇树科技去年出货超5500台人形机器人",
+    "summary": "高盛报告援引数据称，宇树科技去年出货超 5500 台人形机器人，远超美国同行每家约 150 台的水平，中国厂商在具身智能量产上领先。",
+    "source": "霞光社",
+    "url": "https://new.qq.com/rain/a/20260823A03H3400"
+   },
+   {
+    "id": "20260822-006",
+    "category": "ai",
+    "priority": 4,
+    "title": "神秘“牛来大模型”Ox Alpha火爆外网",
+    "summary": "匿名模型 Ox Alpha 上线 OpenRouter，百万 token 上下文、支持多模态，DeepSWE 测试通过率约 80% 超过 Claude Fable 5 与 GPT-5.6 Sol；社区分析高度指向智谱 GLM-5.x 系列。",
+    "source": "机器之心",
+    "url": "https://view.inews.qq.com/a/20260823A032G700"
+   },
+   {
+    "id": "20260822-007",
+    "category": "ai",
+    "priority": 3,
+    "title": "小红书开源dots3-note 280B参数模型",
+    "summary": "小红书开源 dots3-note：280B 参数、16B 激活的轻量模型，主打长程智能；同日多个国产模型密集开源发布。",
+    "source": "微博AIGC日报",
+    "url": "https://weibo.com/7905315703/5335002687736051"
+   },
+   {
+    "id": "20260822-008",
+    "category": "ai",
+    "priority": 3,
+    "title": "蚂蚁FalconTST 2.0落地全球大行",
+    "summary": "蚂蚁国际宣布巴克莱、花旗、德意志银行、渣打采用其 FalconTST 2.0 时间序列模型做现金流与外汇预测，各部署场景准确率超 93%。",
+    "source": "界面新闻",
+    "url": "https://www.jiemian.com/article/14971181.html"
+   },
+   {
+    "id": "20260822-009",
+    "category": "tech",
+    "priority": 4,
+    "title": "阿里通义App更名“千问” 品牌整合升级",
+    "summary": "阿里巴巴“通义”App 完成品牌升级正式更名“千问”，版本从 3.60.0 直升 5.0.0；与 AI 业务架构调整同步，AI 业务从技术中台升级为独立业务。",
+    "source": "界面新闻",
+    "url": "https://www.jiemian.com/article/14971181.html"
+   },
+   {
+    "id": "20260822-010",
+    "category": "tech",
+    "priority": 3,
+    "title": "作业帮发布“AI超级老师” 学习机进入5.0时代",
+    "summary": "作业帮发布会宣布 AI 超级老师多模态能力完成新一轮进化，双向智能交互与讲解能力达到真人教师水准，覆盖学情诊断、错因溯源、答疑讲解等全场景。",
+    "source": "界面新闻",
+    "url": "https://www.jiemian.com/article/14971181.html"
+   }
+  ]
+ },
+ "2026-08-23": {
+  "generatedAt": "2026-08-23T07:00:00+08:00",
+  "categories": [
+   {
+    "key": "official",
+    "label": "官媒热点",
+    "icon": "🏛️"
+   },
+   {
+    "key": "hardware",
+    "label": "消费电子",
+    "icon": "📱"
+   },
+   {
+    "key": "ai",
+    "label": "AI硬件",
+    "icon": "🤖"
+   },
+   {
+    "key": "tech",
+    "label": "科技前沿",
+    "icon": "💡"
+   }
+  ],
+  "items": [
+   {
+    "id": "20260823-001",
+    "category": "official",
+    "priority": 5,
+    "title": "多家美国AI公司下调大模型价格 中国开源施压",
+    "summary": "OpenAI 自 8/21 起下调 GPT-5.6 Sol 开发者端基准价逾 20%，谷歌发布 Gemini 3.7 Flash 定价约为上一版一半。美媒分析称中国大模型开源与定价策略给美国厂商带来直接压力。",
+    "source": "央视新闻",
+    "url": "https://view.inews.qq.com/a/20260823A02LJC00"
+   },
+   {
+    "id": "20260823-002",
+    "category": "official",
+    "priority": 4,
+    "title": "中国开源模型全球下载占比达41% 首超美国",
+    "summary": "Hugging Face 春季报告显示，中国自研开源模型全球下载占比达 41%，首次超过美国；DeepSeek V4 Pro、智谱 ZCode、阿里 Qwen3.8 等 8 月密集上新。",
+    "source": "腾讯新闻",
+    "url": "https://view.inews.qq.com/a/20260822A0BW8200"
+   },
+   {
+    "id": "20260823-003",
+    "category": "official",
+    "priority": 3,
+    "title": "绿色算力人工智能大会签约1361亿元",
+    "summary": "2026 绿色算力（人工智能）大会在呼和浩特举行，集中签约 13 个重点项目、总投资 1361 亿元，涵盖火山引擎 GW 级园区、寒武纪芯片实验室、中国电信数据中心等算力基建。",
+    "source": "IT时代网",
+    "url": "https://view.inews.qq.com/a/20260822A0BOCF00"
+   },
+   {
+    "id": "20260823-004",
+    "category": "hardware",
+    "priority": 5,
+    "title": "英伟达AI服务器将涨价 多数涨幅超15%",
+    "summary": "受内存芯片成本飙升影响，搭载英伟达 AI 芯片的服务器明年年初出货价将上调，多数涨幅超 15%；基于 Vera Rubin 的 NVL72 系统询价已达每台 500 万至 700 万美元。",
+    "source": "财联社",
+    "url": "https://view.inews.qq.com/a/20260823A02QD000"
+   },
+   {
+    "id": "20260823-005",
+    "category": "hardware",
+    "priority": 4,
+    "title": "特斯拉宣布9月3日Cybercab发布会 无方向盘出租车",
+    "summary": "特斯拉将于 9 月 3 日发布无方向盘自动驾驶出租车 Cybercab；其无人驾驶里程仅 38 万英里，与 Waymo 的 2.2 亿英里差距悬殊，需获 NHTSA 豁免。",
+    "source": "钛媒体",
+    "url": "https://www.tmtpost.com/8113186.html"
+   },
+   {
+    "id": "20260823-006",
+    "category": "hardware",
+    "priority": 4,
+    "title": "第二届世界人形机器人运动会开幕 2056台机器人参赛",
+    "summary": "第二届世界人形机器人运动会在北京举办，2056 台机器人、666 支队伍齐聚“冰丝带”，赛项从 26 个增至 51 个，人形机器人产业加速竞技化。",
+    "source": "AIHOT",
+    "url": "https://aihot.virxact.com/daily/2026-08-23"
+   },
+   {
+    "id": "20260823-007",
+    "category": "ai",
+    "priority": 4,
+    "title": "OpenAI正式开源Codex Harness Agent执行框架",
+    "summary": "OpenAI 正式开源 Codex Harness，Agent 底层执行框架全面开放，推动 AI 编程智能体从“补代码”向“独立完成多步任务”演进。",
+    "source": "微博AIGC日报",
+    "url": "https://weibo.com/7905315703/5335002687736051"
+   },
+   {
+    "id": "20260823-008",
+    "category": "ai",
+    "priority": 4,
+    "title": "Anthropic全面开放Claude平台API",
+    "summary": "Anthropic 全面开放 Claude 平台 API，包含 Computer Use、Skills 和 Files API，允许开发者构建更完整的桌面与文件级智能体应用。",
+    "source": "微博AIGC日报",
+    "url": "https://weibo.com/7905315703/5335002687736051"
+   },
+   {
+    "id": "20260823-009",
+    "category": "ai",
+    "priority": 3,
+    "title": "寒武纪官宣第六代AI处理器研发中",
+    "summary": "寒武纪董事长表示第六代 AI 处理器微架构与指令集仍在研发，已适配 GLM、DeepSeek、Qwen、Kimi、MiniMax 五大国产大模型；上半年营收 59.96 亿元，同比增长 108%。",
+    "source": "快科技",
+    "url": "https://view.inews.qq.com/a/20260822A0AP8800"
+   },
+   {
+    "id": "20260823-010",
+    "category": "ai",
+    "priority": 3,
+    "title": "DeepSeek周末统一按低谷价计费",
+    "summary": "DeepSeek API 自 8/23 起优化峰谷计费：周末全天统一按低谷价计费；V4 Pro 正式版更新至 API，增强 Agent 能力并支持 Responses API 与 Codex 接入。",
+    "source": "科创板日报",
+    "url": "https://weibo.com/7905315703/5335002687736051"
+   },
+   {
+    "id": "20260823-011",
+    "category": "tech",
+    "priority": 4,
+    "title": "高盛：中国出海进入3.0时代 卖的是AI工业能力",
+    "summary": "高盛报告称中国出口逻辑从服装家电转向数据中心电力设备、算力基础设施等 AI 硬件；宇树科技去年出货超 5500 台人形机器人，被视为“天生全球化”代表。",
+    "source": "霞光社",
+    "url": "https://new.qq.com/rain/a/20260823A03H3400"
+   },
+   {
+    "id": "20260823-012",
+    "category": "tech",
+    "priority": 4,
+    "title": "豆包将推独立办公App 对标WorkBuddy",
+    "summary": "字节豆包最快下周发布独立办公 App，将“工作任务”功能独立出来；此前已上线手机远程控制电脑、Windows 虚拟桌面、技能商店等能力，2026 年被业内称为桌面 Agent 元年。",
+    "source": "界面新闻",
+    "url": "https://www.jiemian.com/article/14971181.html"
+   },
+   {
+    "id": "20260823-013",
+    "category": "tech",
+    "priority": 3,
+    "title": "Meta发布Muse Glimmer 30B开源Agent模型",
+    "summary": "Meta 发布 300 亿参数开源 Agent 模型 Muse Glimmer（Apache 2.0），配合本地推理在二手 RTX 3090 上实现本地 Vibe Coding，推动 AI 编程本地化平权。",
+    "source": "钛媒体",
+    "url": "https://www.tmtpost.com/8113186.html"
+   }
+  ]
+ }
 }

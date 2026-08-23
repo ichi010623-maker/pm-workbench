@@ -1,727 +1,144 @@
 {
-  "generatedAt": "2026-08-21T07:00:00+08:00",
-  "categories": [
-    {
-      "key": "official",
-      "label": "官媒热点",
-      "icon": "🏛️"
-    },
-    {
-      "key": "hardware",
-      "label": "消费电子",
-      "icon": "📱"
-    },
-    {
-      "key": "ai",
-      "label": "AI硬件",
-      "icon": "🤖"
-    },
-    {
-      "key": "tech",
-      "label": "科技前沿",
-      "icon": "💡"
-    }
-  ],
-  "items": [
-    {
-      "category": "official",
-      "priority": 5,
-      "title": "促进网信企业高质量发展五年行动计划发布",
-      "summary": "国家发布未来五年促进网信企业高质量发展行动计划，利好通信设备与终端制造。",
-      "source": "新华网",
-      "url": "https://www.news.cn/politics/20260821/05473be5f53843a397b128c16a648ec9/c.html",
-      "pubTime": "",
-      "tags": [
-        "网信企业",
-        "政策",
-        "数字产业"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 5,
-      "title": "促进网信企业高质量发展五年行动计划发布",
-      "summary": "行动计划明确推动网信企业高质量发展，涵盖终端制造与数字产业支持。",
-      "source": "人民网",
-      "url": "http://politics.people.com.cn/n1/2026/0821/c461001-40784090.html",
-      "pubTime": "",
-      "tags": [
-        "网信",
-        "政策",
-        "高质量发展"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 3,
-      "title": "金饰克价月内涨超100元 金价反弹",
-      "summary": "国际金价重返每盎司4500美元，金饰月涨超100元/克，影响消费电子用金成本。",
-      "source": "人民网",
-      "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40783520.html",
-      "pubTime": "",
-      "tags": [
-        "金价",
-        "消费电子",
-        "成本"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 4,
-      "title": "从零到万卡 他选择走一条最难的路",
-      "summary": "报道从零建设万卡算力集群的历程，关联AI芯片、服务器与硬件基础设施制造。",
-      "source": "人民网",
-      "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40783720.html",
-      "pubTime": "",
-      "tags": [
-        "算力",
-        "AI芯片",
-        "基础设施"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 4,
-      "title": "财政金融协同发力促内需 惠及企业622万家",
-      "summary": "财政金融协同促内需政策覆盖超622万家企业，利好消费电子等硬件市场需求。",
-      "source": "人民网",
-      "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40784080.html",
-      "pubTime": "",
-      "tags": [
-        "财政",
-        "内需",
-        "消费"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 4,
-      "title": "我国消费市场保持向新向优发展态势",
-      "summary": "今年前7月社会消费商品和服务零售总额同比增长2.6%，消费市场向新向优。",
-      "source": "央视新闻",
-      "url": "https://news.cctv.com/2026/08/21/ARTIjdq2hYt2PtU6xQX2XN9D260820.shtml",
-      "pubTime": "",
-      "tags": [
-        "消费",
-        "市场",
-        "经济"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 3,
-      "title": "今年1—7月全国吸收外资4383.3亿元",
-      "summary": "前7月新设外商投资企业37711家同比增4.4%，实际使用外资4383.3亿元。",
-      "source": "央视新闻",
-      "url": "https://jingji.cctv.com/2026/08/21/ARTIRa5lo5flCsTwxsaghg1X260821.shtml",
-      "pubTime": "",
-      "tags": [
-        "外资",
-        "经济",
-        "开放"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 4,
-      "title": "积极财政政策助推经济社会高质量发展",
-      "summary": "国新办发布会称实施更积极财政政策，保持必要支出力度推动高质量发展。",
-      "source": "央视新闻",
-      "url": "https://news.cctv.com/2026/08/21/ARTIOacICFVh4CEnHlwHgYkW260821.shtml",
-      "pubTime": "",
-      "tags": [
-        "十五五",
-        "财政",
-        "政策"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 3,
-      "title": "宏观政策发力提效",
-      "summary": "报道宏观政策下半年持续发力提效，对消费电子产业政策环境与需求有直接影响。",
-      "source": "光明网",
-      "url": "https://politics.gmw.cn/2026-08/21/content_38954964.htm",
-      "pubTime": "",
-      "tags": [
-        "宏观政策",
-        "经济",
-        "下半年"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 4,
-      "title": "工业经济新动能贡献持续增强",
-      "summary": "工业经济新动能含高端制造、电子设备贡献率持续提升，反映硬件制造景气。",
-      "source": "光明网",
-      "url": "https://politics.gmw.cn/2026-08/21/content_38956723.htm",
-      "pubTime": "",
-      "tags": [
-        "工业",
-        "新动能",
-        "制造"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 3,
-      "title": "一组数据看电商经济活力",
-      "summary": "数据展现电商经济活力，与消费电子产品线上销售通路和消费者需求密切相关。",
-      "source": "光明网",
-      "url": "https://politics.gmw.cn/2026-08/21/content_38956713.htm",
-      "pubTime": "",
-      "tags": [
-        "电商",
-        "消费",
-        "数据"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 3,
-      "title": "财政部：正研究新政策新举措下半年推出",
-      "summary": "财政部预告下半年将推新政策举措，或影响消费电子等行业财政税收支持。",
-      "source": "光明网",
-      "url": "https://politics.gmw.cn/2026-08/21/content_38956718.htm",
-      "pubTime": "",
-      "tags": [
-        "财政",
-        "政策",
-        "举措"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 4,
-      "title": "中国财政金融协同促内需一揽子政策扩容",
-      "summary": "中国财政与金融政策协同发力扩大内需，影响电子消费品市场需求。",
-      "source": "中国新闻网",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681787.shtml",
-      "pubTime": "",
-      "tags": [
-        "财政",
-        "金融",
-        "内需"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 4,
-      "title": "整治“内卷式”竞争 六起典型案例公布",
-      "summary": "公布六起反“内卷式”竞争典型案例，对消费电子行业价格竞争具警示意义。",
-      "source": "中国新闻网",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681718.shtml",
-      "pubTime": "",
-      "tags": [
-        "反内卷",
-        "竞争",
-        "监管"
-      ]
-    },
-    {
-      "category": "official",
-      "priority": 4,
-      "title": "中国与瑞士宣布完成自贸协定升级谈判",
-      "summary": "中瑞自贸协定升级谈判完成，将助电子零部件与成品跨境贸易降本。",
-      "source": "中国新闻网",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681496.shtml",
-      "pubTime": "",
-      "tags": [
-        "自贸协定",
-        "贸易",
-        "电子零部件"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 4,
-      "title": "让国产光学镜头产品“光谱”更宽更广",
-      "summary": "国产光学镜头技术拓展光谱范围获新突破，关联摄像头与传感器等核心器件升级。",
-      "source": "光明网",
-      "url": "https://tech.gmw.cn/2026-08/21/content_38954952.htm",
-      "pubTime": "",
-      "tags": [
-        "光学镜头",
-        "摄像头",
-        "传感器"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 4,
-      "title": "中国自研新一代深水多功能海洋工程船交付",
-      "summary": "中国自主研制的新一代深水多功能海洋工程船“海洋石油292”命名交付。",
-      "source": "中国新闻网",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681456.shtml",
-      "pubTime": "",
-      "tags": [
-        "高端装备",
-        "海洋工程",
-        "自主研制"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 4,
-      "title": "固态电池领域全球首个国际标准立项",
-      "summary": "固态电池领域首项全球国际标准立项，将影响电池及消费电子设备供应链规范。",
-      "source": "央广网",
-      "url": "https://www.cnr.cn/jingji/ycbd/20260821/t20260821_527785448.shtml",
-      "pubTime": "",
-      "tags": [
-        "固态电池",
-        "标准",
-        "电池"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 4,
-      "title": "工信部再次批复卫星物联网业务商用试验",
-      "summary": "工信部再度批复卫星物联网商用试验，为物联网模组硬件终端提供新联网场景。",
-      "source": "央广网",
-      "url": "https://www.cnr.cn/newscenter/native/gd/20260821/t20260821_527784831.shtml",
-      "pubTime": "",
-      "tags": [
-        "卫星物联网",
-        "物联网",
-        "终端"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 4,
-      "title": "瞄准百万台量级 机器人核心零部件加速升级",
-      "summary": "机器人核心零部件向百万台产能升级，对电机、传感器、控制板供应链具参考意义。",
-      "source": "央广网",
-      "url": "https://www.cnr.cn/tech/gstj/20260821/t20260821_527784968.shtml",
-      "pubTime": "",
-      "tags": [
-        "机器人",
-        "核心零部件",
-        "供应链"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 4,
-      "title": "“海洋石油292”深水多功能海洋工程船命名交付",
-      "summary": "我国自研新一代深水多功能海洋工程船命名交付，体现高端装备制造能力。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567559.html",
-      "pubTime": "",
-      "tags": [
-        "海工装备",
-        "自主",
-        "交付"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 3,
-      "title": "200千瓦40标方AEM电解水制氢电堆系统研发成功",
-      "summary": "200千瓦40标方AEM电解水制氢电堆与系统研发成功，拓展新能源硬件路线。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567460.html",
-      "pubTime": "2026-08-21 11:45",
-      "tags": [
-        "制氢",
-        "电堆",
-        "新能源"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 3,
-      "title": "穿上这套装备就能飞",
-      "summary": "科技日报展示新型飞行装备，可穿戴个人飞行设备带来硬件形态新想象。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567595.html",
-      "pubTime": "2026-08-21 14:19",
-      "tags": [
-        "可穿戴",
-        "飞行",
-        "装备"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 3,
-      "title": "荣耀Turbo 5G手机海外发布 骁龙6 Gen4",
-      "summary": "荣耀在海外发布搭载骁龙6 Gen4芯片的Turbo 5G智能手机。",
-      "source": "IT之家",
-      "url": "https://www.ithome.com/0/992/867.htm",
-      "pubTime": "2026-08-21 21:44",
-      "tags": [
-        "智能手机",
-        "骁龙",
-        "荣耀"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 3,
-      "title": "vivo V80 Lite公布 10000mAh大电池",
-      "summary": "vivo在海外公布V80 Lite手机，配备10000mAh超大容量电池。",
-      "source": "IT之家",
-      "url": "https://www.ithome.com/0/992/862.htm",
-      "pubTime": "2026-08-21 21:27",
-      "tags": [
-        "智能手机",
-        "vivo",
-        "大电池"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 3,
-      "title": "AGM PAD P3 Compact三防平板 Helio G99",
-      "summary": "AGM发布PAD P3 Compact三防平板，采用8.68英寸屏与联发科Helio G99处理器。",
-      "source": "IT之家",
-      "url": "https://www.ithome.com/0/992/833.htm",
-      "pubTime": "2026-08-21 19:22",
-      "tags": [
-        "平板",
-        "三防",
-        "联发科"
-      ]
-    },
-    {
-      "category": "hardware",
-      "priority": 2,
-      "title": "倍思“小智充”45W带屏充电头 129元",
-      "summary": "倍思发布带屏45W充电头“小智充”，支持AVS协议与短暂60W峰值输出。",
-      "source": "IT之家",
-      "url": "https://www.ithome.com/0/992/828.htm",
-      "pubTime": "2026-08-21 19:00",
-      "tags": [
-        "充电器",
-        "快充",
-        "倍思"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "中国具身智能迎来规模化应用关键窗口期",
-      "summary": "分析具身智能产业进入规模化应用阶段，关联芯片、传感器与嵌入式设备需求。",
-      "source": "新华网",
-      "url": "https://www.news.cn/tech/20260821/3451415940a047a3a3f90f8fb4e51b4b/c.html",
-      "pubTime": "",
-      "tags": [
-        "具身智能",
-        "AI",
-        "规模化"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "交通运输领域人工智能加快落地应用",
-      "summary": "介绍AI在交通行业落地场景，反映边缘计算与智能终端设备的产业机会。",
-      "source": "新华网",
-      "url": "https://www.news.cn/tech/20260821/1004ff49908b4f16a2f4116f91040191/c.html",
-      "pubTime": "",
-      "tags": [
-        "人工智能",
-        "交通",
-        "落地"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "从“上场”到“进厂” 资本加码人形机器人产业化",
-      "summary": "资本加速进入人形机器人制造领域，凸显核心零部件与运动控制硬件热点。",
-      "source": "新华网",
-      "url": "https://www.news.cn/tech/20260821/7a5887cfc6b2417ab561bf5364f82da1/c.html",
-      "pubTime": "",
-      "tags": [
-        "人形机器人",
-        "资本",
-        "产业化"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "首批41个典型场景 人工智能+交通运输加速落地",
-      "summary": "官方启动41个AI交通典型场景建设，推动车载与路侧智能硬件标准化部署。",
-      "source": "新华网",
-      "url": "https://www.news.cn/tech/20260821/d8fe479b19324a99aa0a2d871b600859/c.html",
-      "pubTime": "",
-      "tags": [
-        "AI交通",
-        "场景",
-        "应用"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "从“炫技”到“实干” 机器人走向真实场景",
-      "summary": "2026世界机器人大会上多类机器人展现真实应用场景，反映产业发展势头。",
-      "source": "人民网",
-      "url": "http://finance.people.com.cn/n1/2026/0821/c1004-40783517.html",
-      "pubTime": "",
-      "tags": [
-        "机器人",
-        "应用",
-        "实干"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "世界机器人大会 “一脑多能” 落地场景丰富",
-      "summary": "2026世界机器人大会上具身智能机器人落地应用场景正日益丰富。",
-      "source": "央视新闻",
-      "url": "https://news.cctv.com/2026/08/21/ARTI9ljvZCu3jAsqmYu3wrjm260820.shtml",
-      "pubTime": "",
-      "tags": [
-        "机器人",
-        "具身智能",
-        "大会"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "【活力中国调研行】AI助跑 科创加速",
-      "summary": "人工智能技术快速发展，为科技创新打开全新空间，安徽探索AI科研应用。",
-      "source": "央视新闻",
-      "url": "https://news.cctv.com/2026/08/21/ARTIYPC0vQYNdpRpbHdDIkfl260821.shtml",
-      "pubTime": "",
-      "tags": [
-        "AI",
-        "科研",
-        "科创"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "探访“中国云谷”：看见绿色算力的真实模样",
-      "summary": "探访中国云谷绿色算力基地，展示支撑AI与智能设备的底层基础设施进展。",
-      "source": "中国新闻网",
-      "url": "https://www.chinanews.com.cn/cj/2026/08-21/10681835.shtml",
-      "pubTime": "",
-      "tags": [
-        "绿色算力",
-        "云谷",
-        "AI"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "科技助力新消费 世界机器人大会具身智能交出“民生答卷”",
-      "summary": "2026世界机器人大会展示具身智能在民生消费场景的落地进展。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567219.html",
-      "pubTime": "",
-      "tags": [
-        "具身智能",
-        "机器人",
-        "消费"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "完善产业生态 贴合多元场景 机器人发展新趋势",
-      "summary": "报道机器人产业生态完善与多元场景贴合，呈现行业发展新趋势。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/2026-08/21/content_567204.html",
-      "pubTime": "",
-      "tags": [
-        "机器人",
-        "产业生态",
-        "趋势"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "热点回应 人形机器人离生产线还有多远",
-      "summary": "科技日报回应人形机器人距离规模化生产线应用的现实距离与挑战。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567461.html",
-      "pubTime": "2026-08-21 11:30",
-      "tags": [
-        "人形机器人",
-        "制造",
-        "产线"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 4,
-      "title": "一批“人工智能+交通运输”典型应用场景加速落地",
-      "summary": "AI与交通融合的典型场景加速落地，反映边缘AI设备与车载传感商业化进度。",
-      "source": "央广网",
-      "url": "https://www.cnr.cn/china/news/20260821/t20260821_527785083.shtml",
-      "pubTime": "",
-      "tags": [
-        "AI交通",
-        "场景",
-        "落地"
-      ]
-    },
-    {
-      "category": "ai",
-      "priority": 3,
-      "title": "雷鸟iO AI眼镜发布 支持实时提示 首发2349元",
-      "summary": "雷鸟发布iO AI眼镜，具备实时提示与全天智记能力，首发售价2349元。",
-      "source": "IT之家",
-      "url": "https://www.ithome.com/0/992/653.htm",
-      "pubTime": "2026-08-21 15:14",
-      "tags": [
-        "AI眼镜",
-        "雷鸟",
-        "可穿戴"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 4,
-      "title": "嫦娥七号计划近日择机发射",
-      "summary": "嫦娥七号器箭组合体已转运至发射区，代表航天硬件制造与尖端设备研制进展。",
-      "source": "光明网",
-      "url": "https://tech.gmw.cn/2026-08/21/content_38954929.htm",
-      "pubTime": "",
-      "tags": [
-        "嫦娥七号",
-        "航天",
-        "发射"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 4,
-      "title": "中国科学家为何要把算力“打”上天",
-      "summary": "中国科学家尝试把算力送上太空，以星载计算拓展未来算力基础设施形态。",
-      "source": "央视新闻",
-      "url": "https://news.cctv.com/2026/08/21/ARTI8q5hq3REfgj1yAnYiMi4260821.shtml",
-      "pubTime": "",
-      "tags": [
-        "太空算力",
-        "卫星",
-        "算力"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 3,
-      "title": "生态无人冰站+冰基浮标组网 北冰洋考察新突破",
-      "summary": "第16次北冰洋考察通过生态无人冰站与冰基浮标组网实现观测新突破。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567252.html",
-      "pubTime": "",
-      "tags": [
-        "北极",
-        "科考",
-        "无人系统"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 4,
-      "title": "科技新观察 火箭回收两大步 中国航天加速跑",
-      "summary": "报道中国火箭回收技术取得两大步进展，商业航天进入加速跑阶段。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/2026-08/21/content_567206.html",
-      "pubTime": "",
-      "tags": [
-        "火箭回收",
-        "航天",
-        "可回收"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 4,
-      "title": "大型复用火箭“星云二号”完成首次发动机长程试车",
-      "summary": "大型复用火箭“星云二号”完成首次发动机长程试车，推进可重复使用技术。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567512.html",
-      "pubTime": "2026-08-21 12:30",
-      "tags": [
-        "火箭",
-        "发动机",
-        "试车"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 3,
-      "title": "财政部：“十五五”持续加大科技投入",
-      "summary": "财政部表示“十五五”时期将持续加大科技投入，支撑科技自立自强。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567533.html",
-      "pubTime": "2026-08-21 13:08",
-      "tags": [
-        "科技投入",
-        "十五五",
-        "财政"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 3,
-      "title": "青藏高原石冰川“家底”摸清 数量超全球已知总和",
-      "summary": "青藏高原石冰川数量摸清，超过全球已知总和，刷新地球科学认知。",
-      "source": "中国科技网",
-      "url": "https://www.stdaily.com/web/gdxw/2026-08/21/content_567624.html",
-      "pubTime": "2026-08-21 15:08",
-      "tags": [
-        "冰川",
-        "科考",
-        "地理"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 4,
-      "title": "共潮生 让“中国芯”用上“中国泵”",
-      "summary": "访谈探讨国产芯片制造关键部件泵自主化，关乎芯片本土供应链安全。",
-      "source": "央广网",
-      "url": "https://www.cnr.cn/zjfw/mlnb/jjnb/20260821/t20260821_527785276.shtml",
-      "pubTime": "",
-      "tags": [
-        "芯片",
-        "国产化",
-        "供应链"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 3,
-      "title": "稀土废渣中提取出医用阿尔法核素",
-      "summary": "从稀土废渣提取医用阿尔法核素，间接利好稀土电子材料循环利用与成本。",
-      "source": "央广网",
-      "url": "https://www.cnr.cn/tech/gstj/20260821/t20260821_527784969.shtml",
-      "pubTime": "",
-      "tags": [
-        "稀土",
-        "核素",
-        "材料"
-      ]
-    },
-    {
-      "category": "tech",
-      "priority": 3,
-      "title": "青少年借助Claude Code为惠普打印机开发macOS驱动",
-      "summary": "青少年用Claude Code AI工具为冷门惠普打印机写出macOS原生驱动。",
-      "source": "IT之家",
-      "url": "https://www.ithome.com/0/992/832.htm",
-      "pubTime": "2026-08-21 19:14",
-      "tags": [
-        "AI编程",
-        "驱动",
-        "macOS"
-      ]
-    }
-  ]
+ "generatedAt": "2026-08-23T07:00:00+08:00",
+ "categories": [
+  {
+   "key": "official",
+   "label": "官媒热点",
+   "icon": "🏛️"
+  },
+  {
+   "key": "hardware",
+   "label": "消费电子",
+   "icon": "📱"
+  },
+  {
+   "key": "ai",
+   "label": "AI硬件",
+   "icon": "🤖"
+  },
+  {
+   "key": "tech",
+   "label": "科技前沿",
+   "icon": "💡"
+  }
+ ],
+ "items": [
+  {
+   "id": "20260823-001",
+   "category": "official",
+   "priority": 5,
+   "title": "多家美国AI公司下调大模型价格 中国开源施压",
+   "summary": "OpenAI 自 8/21 起下调 GPT-5.6 Sol 开发者端基准价逾 20%，谷歌发布 Gemini 3.7 Flash 定价约为上一版一半。美媒分析称中国大模型开源与定价策略给美国厂商带来直接压力。",
+   "source": "央视新闻",
+   "url": "https://view.inews.qq.com/a/20260823A02LJC00"
+  },
+  {
+   "id": "20260823-002",
+   "category": "official",
+   "priority": 4,
+   "title": "中国开源模型全球下载占比达41% 首超美国",
+   "summary": "Hugging Face 春季报告显示，中国自研开源模型全球下载占比达 41%，首次超过美国；DeepSeek V4 Pro、智谱 ZCode、阿里 Qwen3.8 等 8 月密集上新。",
+   "source": "腾讯新闻",
+   "url": "https://view.inews.qq.com/a/20260822A0BW8200"
+  },
+  {
+   "id": "20260823-003",
+   "category": "official",
+   "priority": 3,
+   "title": "绿色算力人工智能大会签约1361亿元",
+   "summary": "2026 绿色算力（人工智能）大会在呼和浩特举行，集中签约 13 个重点项目、总投资 1361 亿元，涵盖火山引擎 GW 级园区、寒武纪芯片实验室、中国电信数据中心等算力基建。",
+   "source": "IT时代网",
+   "url": "https://view.inews.qq.com/a/20260822A0BOCF00"
+  },
+  {
+   "id": "20260823-004",
+   "category": "hardware",
+   "priority": 5,
+   "title": "英伟达AI服务器将涨价 多数涨幅超15%",
+   "summary": "受内存芯片成本飙升影响，搭载英伟达 AI 芯片的服务器明年年初出货价将上调，多数涨幅超 15%；基于 Vera Rubin 的 NVL72 系统询价已达每台 500 万至 700 万美元。",
+   "source": "财联社",
+   "url": "https://view.inews.qq.com/a/20260823A02QD000"
+  },
+  {
+   "id": "20260823-005",
+   "category": "hardware",
+   "priority": 4,
+   "title": "特斯拉宣布9月3日Cybercab发布会 无方向盘出租车",
+   "summary": "特斯拉将于 9 月 3 日发布无方向盘自动驾驶出租车 Cybercab；其无人驾驶里程仅 38 万英里，与 Waymo 的 2.2 亿英里差距悬殊，需获 NHTSA 豁免。",
+   "source": "钛媒体",
+   "url": "https://www.tmtpost.com/8113186.html"
+  },
+  {
+   "id": "20260823-006",
+   "category": "hardware",
+   "priority": 4,
+   "title": "第二届世界人形机器人运动会开幕 2056台机器人参赛",
+   "summary": "第二届世界人形机器人运动会在北京举办，2056 台机器人、666 支队伍齐聚“冰丝带”，赛项从 26 个增至 51 个，人形机器人产业加速竞技化。",
+   "source": "AIHOT",
+   "url": "https://aihot.virxact.com/daily/2026-08-23"
+  },
+  {
+   "id": "20260823-007",
+   "category": "ai",
+   "priority": 4,
+   "title": "OpenAI正式开源Codex Harness Agent执行框架",
+   "summary": "OpenAI 正式开源 Codex Harness，Agent 底层执行框架全面开放，推动 AI 编程智能体从“补代码”向“独立完成多步任务”演进。",
+   "source": "微博AIGC日报",
+   "url": "https://weibo.com/7905315703/5335002687736051"
+  },
+  {
+   "id": "20260823-008",
+   "category": "ai",
+   "priority": 4,
+   "title": "Anthropic全面开放Claude平台API",
+   "summary": "Anthropic 全面开放 Claude 平台 API，包含 Computer Use、Skills 和 Files API，允许开发者构建更完整的桌面与文件级智能体应用。",
+   "source": "微博AIGC日报",
+   "url": "https://weibo.com/7905315703/5335002687736051"
+  },
+  {
+   "id": "20260823-009",
+   "category": "ai",
+   "priority": 3,
+   "title": "寒武纪官宣第六代AI处理器研发中",
+   "summary": "寒武纪董事长表示第六代 AI 处理器微架构与指令集仍在研发，已适配 GLM、DeepSeek、Qwen、Kimi、MiniMax 五大国产大模型；上半年营收 59.96 亿元，同比增长 108%。",
+   "source": "快科技",
+   "url": "https://view.inews.qq.com/a/20260822A0AP8800"
+  },
+  {
+   "id": "20260823-010",
+   "category": "ai",
+   "priority": 3,
+   "title": "DeepSeek周末统一按低谷价计费",
+   "summary": "DeepSeek API 自 8/23 起优化峰谷计费：周末全天统一按低谷价计费；V4 Pro 正式版更新至 API，增强 Agent 能力并支持 Responses API 与 Codex 接入。",
+   "source": "科创板日报",
+   "url": "https://weibo.com/7905315703/5335002687736051"
+  },
+  {
+   "id": "20260823-011",
+   "category": "tech",
+   "priority": 4,
+   "title": "高盛：中国出海进入3.0时代 卖的是AI工业能力",
+   "summary": "高盛报告称中国出口逻辑从服装家电转向数据中心电力设备、算力基础设施等 AI 硬件；宇树科技去年出货超 5500 台人形机器人，被视为“天生全球化”代表。",
+   "source": "霞光社",
+   "url": "https://new.qq.com/rain/a/20260823A03H3400"
+  },
+  {
+   "id": "20260823-012",
+   "category": "tech",
+   "priority": 4,
+   "title": "豆包将推独立办公App 对标WorkBuddy",
+   "summary": "字节豆包最快下周发布独立办公 App，将“工作任务”功能独立出来；此前已上线手机远程控制电脑、Windows 虚拟桌面、技能商店等能力，2026 年被业内称为桌面 Agent 元年。",
+   "source": "界面新闻",
+   "url": "https://www.jiemian.com/article/14971181.html"
+  },
+  {
+   "id": "20260823-013",
+   "category": "tech",
+   "priority": 3,
+   "title": "Meta发布Muse Glimmer 30B开源Agent模型",
+   "summary": "Meta 发布 300 亿参数开源 Agent 模型 Muse Glimmer（Apache 2.0），配合本地推理在二手 RTX 3090 上实现本地 Vibe Coding，推动 AI 编程本地化平权。",
+   "source": "钛媒体",
+   "url": "https://www.tmtpost.com/8113186.html"
+  }
+ ]
 }
