@@ -61,7 +61,69 @@
         "content": "Regular exercise is good for your body and mind. Sports can be fun and rewarding.",
         "translation": "定期锻炼对你的身体和心灵都有好处。运动可以是乐趣和回报。"
       }
+    ],
+    "2026-08-24": [
+      {
+        "level": "入门",
+        "title": "Smart Homes",
+        "content": "Smart homes are becoming more popular. They use technology to make living easier. Features include voice assistants and automated lights.",
+        "translation": "智能家居越来越受欢迎。它们使用技术让生活更轻松。功能包括语音助手机器和自动灯光。"
+      },
+      {
+        "level": "进阶",
+        "title": "Eco-Friendly Fashion",
+        "content": "Eco-friendly fashion is a growing trend. It focuses on sustainable materials and ethical production. Choose organic cotton or recycled fabrics.",
+        "translation": "环保时尚正在成为一种趋势。它关注可持续材料和道德生产。选择有机棉或回收面料。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Power of Positive Thinking",
+        "content": "Positive thinking can improve your life. It helps you face challenges with optimism. Practice gratitude and visualize success.",
+        "translation": "积极思考可以改善你的生活。它帮助你以乐观的态度面对挑战。练习感恩和想象成功。"
+      },
+      {
+        "level": "入门",
+        "title": "Cooking with Spices",
+        "content": "Spices add flavor to your meals. They also have health benefits. Try using turmeric, cinnamon, or garlic in your cooking.",
+        "translation": "香料可以为你的饭菜增添风味。它们还有健康益处。尝试在你的烹饪中使用姜黄、肉桂或大蒜。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Science of Sleep",
+        "content": "Sleep is crucial for health. It helps your brain and body recover. Aim for 7-9 hours of quality sleep each night.",
+        "translation": "睡眠对健康至关重要。它帮助你的大脑和身体恢复。每晚争取7-9小时的高质量睡眠。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Art of Public Speaking",
+        "content": "Public speaking can be intimidating. Practice and preparation are key. Start with a clear message and engage your audience.",
+        "translation": "公共演讲可能会令人畏惧。练习和准备是关键。从一个清晰的信息开始，并与你的听众互动。"
+      },
+      {
+        "level": "入门",
+        "title": "Travel Apps",
+        "content": "Travel apps make planning easier. They offer maps, reviews, and recommendations. Use them to find the best spots for your trip.",
+        "translation": "旅行应用让规划变得更简单。它们提供地图、评论和推荐。使用它们来找到你旅途中最佳地点。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Importance of Exercise",
+        "content": "Regular exercise is vital for a healthy lifestyle. It boosts your mood and improves your physical health. Start with simple activities like walking or swimming.",
+        "translation": "定期锻炼对健康的生活方式至关重要。它提升你的情绪并改善你的身体健康。从简单的活动如散步或游泳开始。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Psychology of Decision Making",
+        "content": "Decision-making involves complex processes. Understanding these can help you make better choices. Consider the pros and cons before deciding.",
+        "translation": "决策涉及复杂的过程。了解这些可以帮助你做出更好的选择。在做出决定之前考虑利弊。"
+      },
+      {
+        "level": "入门",
+        "title": "The Benefits of Reading",
+        "content": "Reading is a great way to learn and relax. It improves your vocabulary and understanding. Find a book that interests you and start reading.",
+        "translation": "阅读是学习和放松的好方法。它提高你的词汇量和理解力。找到一本你感兴趣的书并开始阅读。"
+      }
     ]
   },
-  "updatedAt": "2026-08-25T02:31:00+08:00"
+  "updatedAt": "2026-08-24T02:34:00+08:00"
 }

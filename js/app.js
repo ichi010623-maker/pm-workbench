@@ -1,5 +1,5 @@
 /* ============================================
-   硬件PM工作台 v5.9.64 - 应用逻辑
+   硬件PM工作台 v5.9.65 - 应用逻辑
    新增: 云端自动备份(含图片) / 跨设备迁移 /
          自动下载备份包 / 一键完整恢复 /
          PWA自动更新 + APP_VERSION 强制刷新 /
@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.64";
+var APP_VERSION = "5.9.65";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
