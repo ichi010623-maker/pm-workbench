@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-24T07:00:00+08:00",
+  "generatedAt": "2026-08-25 02:25+08:00",
   "categories": [
     {
       "key": "official",
@@ -26,146 +26,119 @@
     {
       "id": "2026-08-24-001",
       "category": "official",
-      "priority": 5,
+      "priority": 4,
       "title": "长存控股IPO获受理 股东及供应商有望受益",
       "summary": "长江存储控股股份有限公司科创板IPO申请已获受理，拟募资330亿元用于产线建设升级和技术研发提升。",
       "source": "上证早知道",
-      "url": "https://www.shanghaistock.com.cn/"
+      "url": "http://www.shanghaistock.com.cn"
     },
     {
       "id": "2026-08-24-002",
       "category": "hardware",
-      "priority": 4,
+      "priority": 3,
       "title": "阿里募资800亿投AI 算力竞赛提升硬件需求",
-      "summary": "阿里巴巴集团计划募资800亿人民币投入AI领域，推动算力竞赛，进一步增加对硬件的需求。",
+      "summary": "阿里巴巴集团计划募资800亿人民币投资AI领域，推动算力竞赛，进一步增加硬件需求。",
       "source": "上证早知道",
-      "url": "https://www.shanghaistock.com.cn/"
+      "url": "http://www.shanghaistock.com.cn"
     },
     {
       "id": "2026-08-24-003",
-      "category": "tech",
-      "priority": 4,
+      "category": "ai",
+      "priority": 5,
       "title": "人形机器人运动会开幕 跑跳成绩大幅提升",
-      "summary": "人形机器人运动会开幕，机器人跑跳成绩大幅提升，展现人工智能在运动领域的应用潜力。",
+      "summary": "人形机器人运动会在上海开幕，机器人跑跳成绩较以往有大幅提升，展示了AI技术的进步。",
       "source": "上证早知道",
-      "url": "https://www.shanghaistock.com.cn/"
+      "url": "http://www.shanghaistock.com.cn"
     },
     {
       "id": "2026-08-24-004",
-      "category": "official",
+      "category": "tech",
       "priority": 4,
       "title": "华阳集团实控人变更 多公司上半年业绩大增",
-      "summary": "华阳集团实控人发生变更，多公司上半年业绩大增，反映出行业整体增长态势。",
+      "summary": "华阳集团实控人变更，多公司上半年业绩大幅增长，反映出市场对科技行业的乐观态度。",
       "source": "上证早知道",
-      "url": "https://www.shanghaistock.com.cn/"
+      "url": "http://www.shanghaistock.com.cn"
     },
     {
       "id": "2026-08-24-005",
-      "category": "ai",
+      "category": "official",
       "priority": 3,
-      "title": "AI商业化速率和空间引关注 科技股短期震荡",
-      "summary": "AI商业化的速率和空间成为市场关注焦点，科技股短期震荡，投资者需关注基本面信号。",
+      "title": "美债利率高企及AI叙事分歧引发科技股短期震荡",
+      "summary": "美债利率高企及AI叙事分歧导致科技股短期震荡，市场建议投资者均衡布局。",
       "source": "上证早知道",
-      "url": "https://www.shanghaistock.com.cn/"
+      "url": "http://www.shanghaistock.com.cn"
     },
     {
       "id": "2026-08-24-006",
       "category": "hardware",
-      "priority": 3,
-      "title": "AMD发布Helios全栈AI平台 向英伟达发起挑战",
-      "summary": "AMD发布Helios全栈AI平台，向英伟达发起系统性挑战，标志着AMD转型为一站式AI解决方案厂商。",
-      "source": "36氪",
-      "url": "https://www.36kr.com/"
+      "priority": 4,
+      "title": "英特尔Q2财报大幅超预期，AI业务暴涨59%",
+      "summary": "英特尔第二季度财报显示，AI业务营收同比增长59%，成为公司业绩增长的主要动力。",
+      "source": "新浪财经",
+      "url": "http://finance.sina.com.cn"
     },
     {
       "id": "2026-08-24-007",
-      "category": "tech",
-      "priority": 3,
-      "title": "英特尔Q2财报超预期 AI业务暴涨59%",
-      "summary": "英特尔发布2026年第二季度财报，数据中心与AI业务营收增长59%，成为公司业绩核心引擎。",
-      "source": "新浪财经",
-      "url": "https://finance.sina.com.cn/"
+      "category": "ai",
+      "priority": 5,
+      "title": "AMD发布Helios全栈AI平台，挑战英伟达",
+      "summary": "AMD发布全栈AI平台Helios，挑战英伟达在高端企业级AI算力市场的地位。",
+      "source": "IT之家",
+      "url": "http://www.it之家.com"
     },
     {
       "id": "2026-08-24-008",
-      "category": "ai",
+      "category": "tech",
       "priority": 3,
-      "title": "若创科技完成Pre-A轮融资近亿美元",
-      "summary": "AI智能硬件与机器人企业若创科技完成Pre-A轮融资近亿美元，用于技术研发和全球市场拓展。",
-      "source": "企名片",
-      "url": "https://www.qicard.com/"
+      "title": "全球机构看好电力/电网/能源/铜成为瓶颈资产",
+      "summary": "多家机构看好电力、电网、能源和铜等瓶颈资产，认为其具有长期投资价值。",
+      "source": "上证早知道",
+      "url": "http://www.shanghaistock.com.cn"
     },
     {
       "id": "2026-08-24-009",
-      "category": "hardware",
-      "priority": 3,
-      "title": "华秋获数亿元D轮融资 加速AI重构电子产业全链路",
-      "summary": "华秋智联股份有限公司完成数亿元D轮融资，加速AI重构电子产业全链路。",
+      "category": "ai",
+      "priority": 4,
+      "title": "若创科技完成Pre-A轮融资近亿美元",
+      "summary": "AI智能硬件与机器人企业若创科技完成Pre-A轮融资近亿美元，用于产品研发和市场拓展。",
       "source": "企名片",
-      "url": "https://www.qicard.com/"
+      "url": "http://www.qicard.com"
     },
     {
       "id": "2026-08-24-010",
       "category": "tech",
-      "priority": 5,
-      "title": "全球AI算力格局重构 从单点押注转向多元均衡",
-      "summary": "全球AI算力格局重构，从单点押注转向多元均衡，关注质量股、AI应用层与\"非科技\"板块。",
-      "source": "高盛、大摩、贝莱德等机构报告",
-      "url": "https://www.bloomberg.com/"
+      "priority": 3,
+      "title": "华秋获数亿元D轮融资，加速AI重构电子产业全链路",
+      "summary": "电子产业一站式智能基础设施平台华秋完成数亿元D轮融资，加速AI在电子产业全链路的重构。",
+      "source": "企名片",
+      "url": "http://www.qicard.com"
     },
     {
       "id": "2026-08-24-011",
-      "category": "ai",
-      "priority": 4,
-      "title": "华为云发布全新AI大模型ModelArts 3.0",
-      "summary": "华为云发布全新AI大模型ModelArts 3.0，提供更强大的AI开发能力。",
-      "source": "华为云官方发布",
-      "url": "https://www.huaweicloud.com/"
+      "category": "tech",
+      "priority": 3,
+      "title": "超70家企业共话AI硬件增长新周期",
+      "summary": "超70家AI硬件企业共话AI硬件增长新周期，探讨行业发展趋势和机遇。",
+      "source": "企名片",
+      "url": "http://www.qicard.com"
     },
     {
       "id": "2026-08-24-012",
-      "category": "tech",
+      "category": "hardware",
       "priority": 3,
-      "title": "腾讯云发布AI算力平台WeTest AI，助力AI应用落地",
-      "summary": "腾讯云发布AI算力平台WeTest AI，助力AI应用落地，提供一站式AI开发与测试服务。",
-      "source": "腾讯云官方发布",
-      "url": "https://www.cloud.tencent.com/"
+      "title": "全球AI算力格局重构，国产芯片与消费电子迎来多重里程碑",
+      "summary": "全球AI算力格局重构，国产芯片和消费电子迎来多重里程碑，展示中国科技实力。",
+      "source": "36氪",
+      "url": "http://www.36kr.com"
     },
     {
       "id": "2026-08-24-013",
-      "category": "tech",
-      "priority": 3,
-      "title": "英特尔与微软合作开发AI芯片，加速AI应用落地",
-      "summary": "英特尔与微软合作开发AI芯片，旨在加速AI应用落地。",
-      "source": "英特尔官方发布",
-      "url": "https://news.intel.com/"
-    },
-    {
-      "id": "2026-08-24-014",
-      "category": "hardware",
-      "priority": 3,
-      "title": "苹果发布新款MacBook Pro，搭载M2芯片",
-      "summary": "苹果发布新款MacBook Pro，搭载M2芯片，提供更强大的性能。",
-      "source": "苹果官方发布",
-      "url": "https://www.apple.com/"
-    },
-    {
-      "id": "2026-08-24-015",
-      "category": "tech",
-      "priority": 3,
-      "title": "特斯拉发布全新Model Y，采用全新AI驾驶系统",
-      "summary": "特斯拉发布全新Model Y，采用全新AI驾驶系统，提供更高级的自动驾驶功能。",
-      "source": "特斯拉官方发布",
-      "url": "https://www.tesla.com/"
-    },
-    {
-      "id": "2026-08-24-016",
-      "category": "tech",
-      "priority": 3,
-      "title": "谷歌发布Pixel 7系列手机，搭载Tensor G2芯片",
-      "summary": "谷歌发布Pixel 7系列手机，搭载Tensor G2芯片，提供更强大的AI计算能力。",
-      "source": "谷歌官方发布",
-      "url": "https://www.google.com/"
+      "category": "ai",
+      "priority": 4,
+      "title": "高盛、大摩等机构释放AI行情内部结构重构信号",
+      "summary": "高盛、大摩等机构释放AI行情内部结构重构信号，配置重心转向质量股、AI应用层和非科技板块。",
+      "source": "上证早知道",
+      "url": "http://www.shanghaistock.com.cn"
     },
     {
       "id": "2026-08-25-001",
