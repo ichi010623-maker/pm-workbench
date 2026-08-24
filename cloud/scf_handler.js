@@ -10,7 +10,9 @@ const gitee = require("./lib_gitee");
 
 const SYNC_FILES = [
   "data/knowledge.json", "data/news.json", "data/news-archive.json",
-  "data/aihot.json", "data/lang_reading.json", "index.html", "js/app.js", "sw.js"
+  "data/aihot.json", "data/lang_reading.json", "data/phonetics.json",
+  "js/language.js", "css/style.css",
+  "index.html", "js/app.js", "sw.js"
 ];
 
 // 把打包进函数的仓库快照复制到 /tmp 工作区，并从 Gitee 拉取最新版本（覆盖快照，保证基于最新数据）
