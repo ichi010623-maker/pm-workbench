@@ -40,6 +40,9 @@ def env_map():
         "GITEE_TOKEN": os.environ.get("GITEE_TOKEN",""),
         "GITEE_OWNER": "ichi0623",
         "GITEE_REPO": "pm-workbench",
+        "NETLIFY_TOKEN": os.environ.get("NETLIFY_TOKEN",""),
+        "NETLIFY_SITE_ID": os.environ.get("NETLIFY_SITE_ID",""),
+        "SITE_URL": os.environ.get("SITE_URL","https://pm-workbench.netlify.app"),
     }
 
 def exists(cli):
