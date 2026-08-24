@@ -45,15 +45,15 @@ function ok(c, m) { if (c) { pass++; } else { fail++; console.log("✗ " + m); }
 
 (function () {
   // A. 日期历史结构完整性
-  ok(Array.isArray(DATA.pool) && DATA.pool.length === 591, "pool 共 591 张（AI 126 + 金融 125 + 认知 120 + 硬件PM 110 + 营销 110）");
+  ok(Array.isArray(DATA.pool) && DATA.pool.length === 641, "pool 共 641 张（AI 136 + 金融 135 + 认知 130 + 硬件PM 120 + 营销 120）");
   ok(Array.isArray(DATA.cats) && DATA.cats.length === 5, "cats 共 5 个分类");
   ok(Array.isArray(DATA.history) && DATA.history.length >= 20, "history 已回填 ≥ 20 天");
-  ok(F.learnItemsByCat("ai").length === 126, "AI 小知识 126 张");
-  ok(F.learnItemsByCat("finance").length === 125, "金融小知识 125 张");
-  ok(F.learnItemsByCat("think").length === 120, "认知思维 120 张");
-  ok(F.learnItemsByCat("hwpm").length === 110, "硬件产品经理 110 张");
-  ok(F.learnItemsByCat("mkt").length === 110, "市场营销 110 张");
-  ok(F.learnItemsByCat("all").length === 591, "全部 591 张");
+  ok(F.learnItemsByCat("ai").length === 136, "AI 小知识 136 张");
+  ok(F.learnItemsByCat("finance").length === 135, "金融小知识 135 张");
+  ok(F.learnItemsByCat("think").length === 130, "认知思维 130 张");
+  ok(F.learnItemsByCat("hwpm").length === 120, "硬件产品经理 120 张");
+  ok(F.learnItemsByCat("mkt").length === 120, "市场营销 120 张");
+  ok(F.learnItemsByCat("all").length === 641, "全部 641 张");
   ok(F.learnCatMeta("ai").name === "AI 小知识", "分类元信息含名称");
   ok(DATA.pool.every(function (it) { return it.id && it.title && it.content && it.points && it.points.length === 3 && it.tip && it.diagram && it.cat; }),
     "每张卡含 id/标题/内容/3要点/口诀/图示/分类");
@@ -128,7 +128,7 @@ function ok(c, m) { if (c) { pass++; } else { fail++; console.log("✗ " + m); }
 
   // H. 统计
   delete store["hw_pm_learn_seen"]; delete store["hw_pm_learn_fav"];
-  ok(F.learnStats().total === 591, "统计总数 591");
+  ok(F.learnStats().total === 641, "统计总数 641");
   ok(typeof F.learnStats().seen === "number" && typeof F.learnStats().fav === "number", "统计含已学/收藏数");
 })();
 

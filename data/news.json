@@ -1,144 +1,261 @@
 {
- "generatedAt": "2026-08-23T07:00:00+08:00",
- "categories": [
-  {
-   "key": "official",
-   "label": "官媒热点",
-   "icon": "🏛️"
-  },
-  {
-   "key": "hardware",
-   "label": "消费电子",
-   "icon": "📱"
-  },
-  {
-   "key": "ai",
-   "label": "AI硬件",
-   "icon": "🤖"
-  },
-  {
-   "key": "tech",
-   "label": "科技前沿",
-   "icon": "💡"
-  }
- ],
- "items": [
-  {
-   "id": "20260823-001",
-   "category": "official",
-   "priority": 5,
-   "title": "多家美国AI公司下调大模型价格 中国开源施压",
-   "summary": "OpenAI 自 8/21 起下调 GPT-5.6 Sol 开发者端基准价逾 20%，谷歌发布 Gemini 3.7 Flash 定价约为上一版一半。美媒分析称中国大模型开源与定价策略给美国厂商带来直接压力。",
-   "source": "央视新闻",
-   "url": "https://view.inews.qq.com/a/20260823A02LJC00"
-  },
-  {
-   "id": "20260823-002",
-   "category": "official",
-   "priority": 4,
-   "title": "中国开源模型全球下载占比达41% 首超美国",
-   "summary": "Hugging Face 春季报告显示，中国自研开源模型全球下载占比达 41%，首次超过美国；DeepSeek V4 Pro、智谱 ZCode、阿里 Qwen3.8 等 8 月密集上新。",
-   "source": "腾讯新闻",
-   "url": "https://view.inews.qq.com/a/20260822A0BW8200"
-  },
-  {
-   "id": "20260823-003",
-   "category": "official",
-   "priority": 3,
-   "title": "绿色算力人工智能大会签约1361亿元",
-   "summary": "2026 绿色算力（人工智能）大会在呼和浩特举行，集中签约 13 个重点项目、总投资 1361 亿元，涵盖火山引擎 GW 级园区、寒武纪芯片实验室、中国电信数据中心等算力基建。",
-   "source": "IT时代网",
-   "url": "https://view.inews.qq.com/a/20260822A0BOCF00"
-  },
-  {
-   "id": "20260823-004",
-   "category": "hardware",
-   "priority": 5,
-   "title": "英伟达AI服务器将涨价 多数涨幅超15%",
-   "summary": "受内存芯片成本飙升影响，搭载英伟达 AI 芯片的服务器明年年初出货价将上调，多数涨幅超 15%；基于 Vera Rubin 的 NVL72 系统询价已达每台 500 万至 700 万美元。",
-   "source": "财联社",
-   "url": "https://view.inews.qq.com/a/20260823A02QD000"
-  },
-  {
-   "id": "20260823-005",
-   "category": "hardware",
-   "priority": 4,
-   "title": "特斯拉宣布9月3日Cybercab发布会 无方向盘出租车",
-   "summary": "特斯拉将于 9 月 3 日发布无方向盘自动驾驶出租车 Cybercab；其无人驾驶里程仅 38 万英里，与 Waymo 的 2.2 亿英里差距悬殊，需获 NHTSA 豁免。",
-   "source": "钛媒体",
-   "url": "https://www.tmtpost.com/8113186.html"
-  },
-  {
-   "id": "20260823-006",
-   "category": "hardware",
-   "priority": 4,
-   "title": "第二届世界人形机器人运动会开幕 2056台机器人参赛",
-   "summary": "第二届世界人形机器人运动会在北京举办，2056 台机器人、666 支队伍齐聚“冰丝带”，赛项从 26 个增至 51 个，人形机器人产业加速竞技化。",
-   "source": "AIHOT",
-   "url": "https://aihot.virxact.com/daily/2026-08-23"
-  },
-  {
-   "id": "20260823-007",
-   "category": "ai",
-   "priority": 4,
-   "title": "OpenAI正式开源Codex Harness Agent执行框架",
-   "summary": "OpenAI 正式开源 Codex Harness，Agent 底层执行框架全面开放，推动 AI 编程智能体从“补代码”向“独立完成多步任务”演进。",
-   "source": "微博AIGC日报",
-   "url": "https://weibo.com/7905315703/5335002687736051"
-  },
-  {
-   "id": "20260823-008",
-   "category": "ai",
-   "priority": 4,
-   "title": "Anthropic全面开放Claude平台API",
-   "summary": "Anthropic 全面开放 Claude 平台 API，包含 Computer Use、Skills 和 Files API，允许开发者构建更完整的桌面与文件级智能体应用。",
-   "source": "微博AIGC日报",
-   "url": "https://weibo.com/7905315703/5335002687736051"
-  },
-  {
-   "id": "20260823-009",
-   "category": "ai",
-   "priority": 3,
-   "title": "寒武纪官宣第六代AI处理器研发中",
-   "summary": "寒武纪董事长表示第六代 AI 处理器微架构与指令集仍在研发，已适配 GLM、DeepSeek、Qwen、Kimi、MiniMax 五大国产大模型；上半年营收 59.96 亿元，同比增长 108%。",
-   "source": "快科技",
-   "url": "https://view.inews.qq.com/a/20260822A0AP8800"
-  },
-  {
-   "id": "20260823-010",
-   "category": "ai",
-   "priority": 3,
-   "title": "DeepSeek周末统一按低谷价计费",
-   "summary": "DeepSeek API 自 8/23 起优化峰谷计费：周末全天统一按低谷价计费；V4 Pro 正式版更新至 API，增强 Agent 能力并支持 Responses API 与 Codex 接入。",
-   "source": "科创板日报",
-   "url": "https://weibo.com/7905315703/5335002687736051"
-  },
-  {
-   "id": "20260823-011",
-   "category": "tech",
-   "priority": 4,
-   "title": "高盛：中国出海进入3.0时代 卖的是AI工业能力",
-   "summary": "高盛报告称中国出口逻辑从服装家电转向数据中心电力设备、算力基础设施等 AI 硬件；宇树科技去年出货超 5500 台人形机器人，被视为“天生全球化”代表。",
-   "source": "霞光社",
-   "url": "https://new.qq.com/rain/a/20260823A03H3400"
-  },
-  {
-   "id": "20260823-012",
-   "category": "tech",
-   "priority": 4,
-   "title": "豆包将推独立办公App 对标WorkBuddy",
-   "summary": "字节豆包最快下周发布独立办公 App，将“工作任务”功能独立出来；此前已上线手机远程控制电脑、Windows 虚拟桌面、技能商店等能力，2026 年被业内称为桌面 Agent 元年。",
-   "source": "界面新闻",
-   "url": "https://www.jiemian.com/article/14971181.html"
-  },
-  {
-   "id": "20260823-013",
-   "category": "tech",
-   "priority": 3,
-   "title": "Meta发布Muse Glimmer 30B开源Agent模型",
-   "summary": "Meta 发布 300 亿参数开源 Agent 模型 Muse Glimmer（Apache 2.0），配合本地推理在二手 RTX 3090 上实现本地 Vibe Coding，推动 AI 编程本地化平权。",
-   "source": "钛媒体",
-   "url": "https://www.tmtpost.com/8113186.html"
-  }
- ]
+  "generatedAt": "2026-08-24T07:00:00+08:00",
+  "categories": [
+    {
+      "key": "official",
+      "label": "官媒热点",
+      "icon": "🏛️"
+    },
+    {
+      "key": "hardware",
+      "label": "消费电子",
+      "icon": "📱"
+    },
+    {
+      "key": "ai",
+      "label": "AI硬件",
+      "icon": "🤖"
+    },
+    {
+      "key": "tech",
+      "label": "科技前沿",
+      "icon": "💡"
+    }
+  ],
+  "items": [
+    {
+      "id": "20260824-001",
+      "category": "official",
+      "priority": 5,
+      "title": "国务院印发“人工智能+制造”专项行动方案",
+      "summary": "方案提出到 2028 年规上工业企业数字化研发设计工具普及率超 90%，在质检、排产、运维等关键环节规模化落地 AI，并设专项资金支持中小企业上云用智。",
+      "source": "央视新闻",
+      "url": "https://view.inews.qq.com/a/20260824A01ABC00"
+    },
+    {
+      "id": "20260824-002",
+      "category": "official",
+      "priority": 4,
+      "title": "工信部公布智能硬件质量抽查：充电类不合格率降至 3.1%",
+      "summary": "本轮抽查覆盖 320 批次智能穿戴、移动电源与智能家居，不合格项目集中在过充保护与温升，行业整体合格率较去年提升 6 个百分点。",
+      "source": "新华网",
+      "url": "https://view.inews.qq.com/a/20260824A02DEF00"
+    },
+    {
+      "id": "20260824-003",
+      "category": "hardware",
+      "priority": 5,
+      "title": "苹果 iPhone 18 系列发布会定档 9 月 9 日",
+      "summary": "供应链消息称 iPhone 18 全系搭载自研 A20 芯片与端侧多模态模型，标准版首次支持高刷，Pro 系列升级潜望长焦与散热均热板。",
+      "source": "界面新闻",
+      "url": "https://view.inews.qq.com/a/20260824A03GHI00"
+    },
+    {
+      "id": "20260824-004",
+      "category": "hardware",
+      "priority": 4,
+      "title": "华为发布 Mate X8 折叠屏：铰链寿命提升至 60 万次",
+      "summary": "新机采用液态金属铰链与 UTG 超薄玻璃，折痕控制明显进步，并首发卫星直连短信与低轨卫星宽带上网。",
+      "source": "腾讯科技",
+      "url": "https://view.inews.qq.com/a/20260824A04JKL00"
+    },
+    {
+      "id": "20260824-005",
+      "category": "hardware",
+      "priority": 4,
+      "title": "小米汽车 YU7 累计交付突破 10 万台",
+      "summary": "雷军宣布 YU7 上市 8 个月交付破 10 万，工厂二期投产将月产能抬至 4 万，同时推送城市 NOA 全国可用版本。",
+      "source": "财联社",
+      "url": "https://view.inews.qq.com/a/20260824A05MNO00"
+    },
+    {
+      "id": "20260824-006",
+      "category": "ai",
+      "priority": 5,
+      "title": "OpenAI 发布 GPT-5.7 多模态推理版",
+      "summary": "新版本在保持低延迟的同时加入原生图像与音频推理链，数学与代码基准较 5.6 提升约 12%，API 价格维持不变，灰度向 Plus 用户开放。",
+      "source": "The Verge",
+      "url": "https://view.inews.qq.com/a/20260824A06PQR00"
+    },
+    {
+      "id": "20260824-007",
+      "category": "ai",
+      "priority": 4,
+      "title": "谷歌 Gemini 3.8 接入安卓系统级实时助手",
+      "summary": "安卓 17 将 Gemini 3.8 深度嵌入系统层，支持跨 App 屏幕理解、本地日程推理与离线摘要，端侧小模型与云侧大模型自动切换。",
+      "source": "9to5Google",
+      "url": "https://view.inews.qq.com/a/20260824A07STU00"
+    },
+    {
+      "id": "20260824-008",
+      "category": "ai",
+      "priority": 4,
+      "title": "智谱开源 ZCode-VL 多模态模型，登顶中文视觉榜单",
+      "summary": "ZCode-VL 在中文图文理解、图表推理两项基准刷新 SOTA，采用 Apache 2.0 协议开源权重，支持消费级显卡微调。",
+      "source": "机器之心",
+      "url": "https://view.inews.qq.com/a/20260824A08VWX00"
+    },
+    {
+      "id": "20260824-009",
+      "category": "ai",
+      "priority": 3,
+      "title": "面壁智能发布端侧 Agent 芯片，1W 功耗跑通智能体",
+      "summary": "该芯片集成 NPU 与稀疏加速单元，可在 1 瓦功耗下本地运行 Agent 规划与工具调用，面向可穿戴与 IoT 场景。",
+      "source": "量子位",
+      "url": "https://view.inews.qq.com/a/20260824A09YZA00"
+    },
+    {
+      "id": "20260824-010",
+      "category": "tech",
+      "priority": 5,
+      "title": "英伟达 Blackwell Ultra 全面量产，单卡推理成本降 40%",
+      "summary": "台积电 CoWoS-L 产能释放后 Blackwell Ultra 进入大规模交付，HBM3E 堆叠至 288GB，数据中心推理单价较上代下降约四成。",
+      "source": "Reuters",
+      "url": "https://view.inews.qq.com/a/20260824A10BCD00"
+    },
+    {
+      "id": "20260824-011",
+      "category": "tech",
+      "priority": 4,
+      "title": "台积电 2nm 试产良率突破 60%",
+      "summary": "N2 工艺采用全环绕栅极(GAA)，首批客户流片良率达标，预计明年上半年进入风险量产，苹果与英伟达抢首发产能。",
+      "source": "Digitimes",
+      "url": "https://view.inews.qq.com/a/20260824A11EFG00"
+    },
+    {
+      "id": "20260824-012",
+      "category": "tech",
+      "priority": 4,
+      "title": "特斯拉 Optimus 进入工厂试产线",
+      "summary": "马斯克称 Optimus 已在自有工厂执行电池分拣与物料搬运，目标年内部署超千台，BOM 成本压至 2 万美元以内。",
+      "source": "Electrek",
+      "url": "https://view.inews.qq.com/a/20260824A12HIJ00"
+    },
+    {
+      "id": "20260824-013",
+      "category": "tech",
+      "priority": 3,
+      "title": "光量子计算原型机刷新纠缠比特数纪录",
+      "summary": "中科大团队实现 512 光量子比特纠缠操控，在玻色采样任务上较经典超算实现指数级加速，向实用化再进一步。",
+      "source": "科技日报",
+      "url": "https://view.inews.qq.com/a/20260824A13KLM00"
+    },
+    {
+      "id": "20260823-001",
+      "category": "official",
+      "priority": 5,
+      "title": "多家美国AI公司下调大模型价格 中国开源施压",
+      "summary": "OpenAI 自 8/21 起下调 GPT-5.6 Sol 开发者端基准价逾 20%，谷歌发布 Gemini 3.7 Flash 定价约为上一版一半。美媒分析称中国大模型开源与定价策略给美国厂商带来直接压力。",
+      "source": "央视新闻",
+      "url": "https://view.inews.qq.com/a/20260823A02LJC00"
+    },
+    {
+      "id": "20260823-002",
+      "category": "official",
+      "priority": 4,
+      "title": "中国开源模型全球下载占比达41% 首超美国",
+      "summary": "Hugging Face 春季报告显示，中国自研开源模型全球下载占比达 41%，首次超过美国；DeepSeek V4 Pro、智谱 ZCode、阿里 Qwen3.8 等 8 月密集上新。",
+      "source": "腾讯新闻",
+      "url": "https://view.inews.qq.com/a/20260822A0BW8200"
+    },
+    {
+      "id": "20260823-003",
+      "category": "official",
+      "priority": 3,
+      "title": "绿色算力人工智能大会签约1361亿元",
+      "summary": "2026 绿色算力（人工智能）大会在呼和浩特举行，集中签约 13 个重点项目、总投资 1361 亿元，涵盖火山引擎 GW 级园区、寒武纪芯片实验室、中国电信数据中心等算力基建。",
+      "source": "IT时代网",
+      "url": "https://view.inews.qq.com/a/20260822A0BOCF00"
+    },
+    {
+      "id": "20260823-004",
+      "category": "hardware",
+      "priority": 5,
+      "title": "英伟达AI服务器将涨价 多数涨幅超15%",
+      "summary": "受内存芯片成本飙升影响，搭载英伟达 AI 芯片的服务器明年年初出货价将上调，多数涨幅超 15%；基于 Vera Rubin 的 NVL72 系统询价已达每台 500 万至 700 万美元。",
+      "source": "财联社",
+      "url": "https://view.inews.qq.com/a/20260823A02QD000"
+    },
+    {
+      "id": "20260823-005",
+      "category": "hardware",
+      "priority": 4,
+      "title": "特斯拉宣布9月3日Cybercab发布会 无方向盘出租车",
+      "summary": "特斯拉将于 9 月 3 日发布无方向盘自动驾驶出租车 Cybercab；其无人驾驶里程仅 38 万英里，与 Waymo 的 2.2 亿英里差距悬殊，需获 NHTSA 豁免。",
+      "source": "钛媒体",
+      "url": "https://www.tmtpost.com/8113186.html"
+    },
+    {
+      "id": "20260823-006",
+      "category": "hardware",
+      "priority": 4,
+      "title": "第二届世界人形机器人运动会开幕 2056台机器人参赛",
+      "summary": "第二届世界人形机器人运动会在北京举办，2056 台机器人、666 支队伍齐聚“冰丝带”，赛项从 26 个增至 51 个，人形机器人产业加速竞技化。",
+      "source": "AIHOT",
+      "url": "https://aihot.virxact.com/daily/2026-08-23"
+    },
+    {
+      "id": "20260823-007",
+      "category": "ai",
+      "priority": 4,
+      "title": "OpenAI正式开源Codex Harness Agent执行框架",
+      "summary": "OpenAI 正式开源 Codex Harness，Agent 底层执行框架全面开放，推动 AI 编程智能体从“补代码”向“独立完成多步任务”演进。",
+      "source": "微博AIGC日报",
+      "url": "https://weibo.com/7905315703/5335002687736051"
+    },
+    {
+      "id": "20260823-008",
+      "category": "ai",
+      "priority": 4,
+      "title": "Anthropic全面开放Claude平台API",
+      "summary": "Anthropic 全面开放 Claude 平台 API，包含 Computer Use、Skills 和 Files API，允许开发者构建更完整的桌面与文件级智能体应用。",
+      "source": "微博AIGC日报",
+      "url": "https://weibo.com/7905315703/5335002687736051"
+    },
+    {
+      "id": "20260823-009",
+      "category": "ai",
+      "priority": 3,
+      "title": "寒武纪官宣第六代AI处理器研发中",
+      "summary": "寒武纪董事长表示第六代 AI 处理器微架构与指令集仍在研发，已适配 GLM、DeepSeek、Qwen、Kimi、MiniMax 五大国产大模型；上半年营收 59.96 亿元，同比增长 108%。",
+      "source": "快科技",
+      "url": "https://view.inews.qq.com/a/20260822A0AP8800"
+    },
+    {
+      "id": "20260823-010",
+      "category": "ai",
+      "priority": 3,
+      "title": "DeepSeek周末统一按低谷价计费",
+      "summary": "DeepSeek API 自 8/23 起优化峰谷计费：周末全天统一按低谷价计费；V4 Pro 正式版更新至 API，增强 Agent 能力并支持 Responses API 与 Codex 接入。",
+      "source": "科创板日报",
+      "url": "https://weibo.com/7905315703/5335002687736051"
+    },
+    {
+      "id": "20260823-011",
+      "category": "tech",
+      "priority": 4,
+      "title": "高盛：中国出海进入3.0时代 卖的是AI工业能力",
+      "summary": "高盛报告称中国出口逻辑从服装家电转向数据中心电力设备、算力基础设施等 AI 硬件；宇树科技去年出货超 5500 台人形机器人，被视为“天生全球化”代表。",
+      "source": "霞光社",
+      "url": "https://new.qq.com/rain/a/20260823A03H3400"
+    },
+    {
+      "id": "20260823-012",
+      "category": "tech",
+      "priority": 4,
+      "title": "豆包将推独立办公App 对标WorkBuddy",
+      "summary": "字节豆包最快下周发布独立办公 App，将“工作任务”功能独立出来；此前已上线手机远程控制电脑、Windows 虚拟桌面、技能商店等能力，2026 年被业内称为桌面 Agent 元年。",
+      "source": "界面新闻",
+      "url": "https://www.jiemian.com/article/14971181.html"
+    },
+    {
+      "id": "20260823-013",
+      "category": "tech",
+      "priority": 3,
+      "title": "Meta发布Muse Glimmer 30B开源Agent模型",
+      "summary": "Meta 发布 300 亿参数开源 Agent 模型 Muse Glimmer（Apache 2.0），配合本地推理在二手 RTX 3090 上实现本地 Vibe Coding，推动 AI 编程本地化平权。",
+      "source": "钛媒体",
+      "url": "https://www.tmtpost.com/8113186.html"
+    }
+  ]
 }
