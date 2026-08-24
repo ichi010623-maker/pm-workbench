@@ -8,6 +8,7 @@ const { execSync, spawnSync } = require("child_process");
 const knowGen = require("./gen_knowledge_llm");
 const newsGen = require("./gen_news_llm");
 const gitee = require("./lib_gitee");
+const netlify = require("./deploy_netlify");
 
 function todayStr() { return new Date().toISOString().slice(0, 10); }
 
@@ -96,11 +97,19 @@ function ensureEdgeone(BASE) {
   return bin;
 }
 
-function deployEdgeOne(BASE) {
-  // 云端模式：部署主通道是 EdgeOne Makers「Git 集成」（push Gitee 后自动部署），
-  // 云端无 edgeone CLI（依赖 354MB 超 /tmp 限制），直接跳过，不浪费时间尝试安装。
+async function deployEdgeOne(BASE) {
+  // 云端模式：部署主通道 = Netlify（境外免费托管，免备案，HTTP 直传无需 CLI）
   if (process.env.CLOUD === "1") {
-    console.log("[deploy] 云端模式：跳过 CLI 部署，依赖 Git 集成自动部署");
+    if (!process.env.NETLIFY_TOKEN) {
+      console.warn("[deploy] 云端模式：无 NETLIFY_TOKEN，跳过部署（内容已同步 Gitee）");
+      return;
+    }
+    try {
+      const url = await netlify.deploy(BASE, process.env.NETLIFY_TOKEN, process.env.NETLIFY_SITE_ID || "");
+      if (url) console.log("[deploy] Netlify 已上线: " + url);
+    } catch (e) {
+      console.warn("[deploy] Netlify 部署失败(不影响 Gitee 同步):", e.message);
+    }
     return;
   }
   // 本地/手动模式：尽力而为，失败仅告警
@@ -155,7 +164,7 @@ async function main(baseArg, dateArg) {
   }
 
   // 5. 部署
-  deployEdgeOne(BASE);
+  await deployEdgeOne(BASE);
 
   console.log(`[run_daily] 完成 ${DATE} → v${nv}`);
 }
