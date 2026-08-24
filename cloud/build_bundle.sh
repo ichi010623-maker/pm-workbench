@@ -5,8 +5,8 @@ set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/scf_bundle.zip"
 cd "$ROOT"
-rm -f "$OUT"
-zip -r "$OUT" . \
+# 普通 zip -r：对已存在 archive 会就地更新变更条目，无需 rm 删除文件
+zip -q -r "$OUT" . \
   -x '*.git*' \
   -x 'node_modules/*' \
   -x '.workbuddy/*' \

@@ -26,6 +26,7 @@ function getCode(url, cookie) {
 
 async function diagnose(SITE, COOKIE) {
   const issues = [];
+  let healable = false; // 仅当 Gitee 也缺内容（生成缺失）时才自愈；部署滞后/站点未就绪不折腾
   // 1. 关键端点可达
   for (const ep of ["/", "/data/knowledge.json", "/data/news.json", "/data/aihot.json", "/migrate.html"]) {
     const c = getCode(SITE + ep, COOKIE);
@@ -44,8 +45,8 @@ async function diagnose(SITE, COOKIE) {
     giteeHasToday = (gk.history || []).some((h) => h.date === todayStr());
   } catch (e) { giteeHasToday = null; }
   if (!siteHasToday) {
-    if (giteeHasToday) issues.push(`线上知识卡缺今日(${todayStr()})，Gitee 已有 → 部署滞后/失败`);
-    else issues.push(`知识卡 history 缺今日(${todayStr()})，Gitee 亦缺 → 生成缺失`);
+    if (giteeHasToday) issues.push(`线上知识卡缺今日(${todayStr()})，Gitee 已有 → 部署滞后`);
+    else { issues.push(`知识卡 history 缺今日(${todayStr()})，Gitee 亦缺 → 生成缺失`); healable = true; }
   }
   // 3. 资讯新鲜度（同样对照 Gitee）
   let siteNewsToday = false;
@@ -59,10 +60,10 @@ async function diagnose(SITE, COOKIE) {
     giteeNewsToday = (gn.generatedAt || "").slice(0, 10) === todayStr();
   } catch (e) { giteeNewsToday = null; }
   if (!siteNewsToday) {
-    if (giteeNewsToday) issues.push(`线上资讯 generatedAt 非今日，Gitee 已是今日 → 部署滞后/失败`);
-    else issues.push(`资讯 generatedAt 非今日，Gitee 亦非 → 生成缺失`);
+    if (giteeNewsToday) issues.push(`线上资讯 generatedAt 非今日，Gitee 已是今日 → 部署滞后`);
+    else { issues.push(`资讯 generatedAt 非今日，Gitee 亦非 → 生成缺失`); healable = true; }
   }
-  return issues;
+  return { issues, healable };
 }
 
 async function heal(BASE) {
@@ -77,12 +78,18 @@ async function main(baseArg) {
   const COOKIE = process.env.AUTH_COOKIE || "";
 
   console.log(`[patrol] 巡检 ${SITE}`);
-  const issues = await diagnose(SITE, COOKIE);
+  const { issues, healable } = await diagnose(SITE, COOKIE);
   if (issues.length === 0) {
     console.log("[patrol] 健康 ✅ 无需处理");
     return { ok: true, issues: [] };
   }
   console.warn("[patrol] 发现问题:\n - " + issues.join("\n - "));
+  if (!healable) {
+    // Gitee 内容正常，只是站点未就绪/部署滞后（如旧域名需授权、Git 集成部署中）
+    // 此时自愈无意义（会空涨版本号），等 Git 集成自动部署即可
+    console.warn("[patrol] 内容源正常，属部署滞后/站点未就绪 → 跳过自愈，等待 Git 集成部署");
+    return { ok: true, skipped: true, issues };
+  }
   const healed = await heal(BASE);
   if (healed) {
     console.log("[patrol] 自愈完成 ✅");
