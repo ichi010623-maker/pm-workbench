@@ -1,0 +1,16 @@
+{
+  "name": "pm-workbench-cloud",
+  "version": "1.0.0",
+  "description": "PM工作台云端每日生成+部署+巡逻自愈（腾讯云 SCF）",
+  "private": true,
+  "scripts": {
+    "daily": "node cloud/run_daily.js ..",
+    "patrol": "node cloud/patrol.js .."
+  },
+  "dependencies": {
+    "edgeone": "1.6.28"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
