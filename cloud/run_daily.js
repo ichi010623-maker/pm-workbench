@@ -74,33 +74,62 @@ function gitPush(BASE, msg) {
   }
 }
 
+function ensureEdgeone(BASE) {
+  // 优先：本地打包的 /opt 层 或 项目内
+  const candidates = [
+    path.join(BASE, "node_modules", ".bin", "edgeone"),
+    "/opt/node_modules/.bin/edgeone"
+  ];
+  for (const c of candidates) if (fs.existsSync(c)) return c;
+  // 云端兜底：运行时安装到 /tmp/eo（免 Layer/COS）
+  // SCF 的 HOME 指向不可写的 /home/qcloud，必须重定向到 /tmp
+  const dir = "/tmp/eo";
+  fs.mkdirSync(dir, { recursive: true });
+  fs.mkdirSync("/tmp/npm-cache", { recursive: true });
+  const bin = path.join(dir, "node_modules", ".bin", "edgeone");
+  if (!fs.existsSync(bin)) {
+    console.log("[deploy] 运行时安装 edgeone CLI ...");
+    const env = { ...process.env, HOME: "/tmp", npm_config_cache: "/tmp/npm-cache" };
+    const r = spawnSync("npm", ["install", "edgeone", "--prefix", dir, "--no-audit", "--no-fund"], { cwd: dir, env, stdio: "inherit" });
+    if (r.status !== 0) throw new Error("edgeone 安装失败: npm exit " + r.status);
+  }
+  return bin;
+}
+
 function deployEdgeOne(BASE) {
+  // 云端模式：部署主通道是 EdgeOne Makers「Git 集成」（push Gitee 后自动部署），
+  // 云端无 edgeone CLI（依赖 354MB 超 /tmp 限制），直接跳过，不浪费时间尝试安装。
+  if (process.env.CLOUD === "1") {
+    console.log("[deploy] 云端模式：跳过 CLI 部署，依赖 Git 集成自动部署");
+    return;
+  }
+  // 本地/手动模式：尽力而为，失败仅告警
   const token = process.env.EDGEONE_TOKEN;
-  if (!token) throw new Error("缺少 EDGEONE_TOKEN");
+  if (!token) { console.warn("[deploy] 无 EDGEONE_TOKEN，跳过 CLI 部署"); return; }
+  let cmd;
+  try { cmd = ensureEdgeone(BASE); }
+  catch (e) { console.warn("[deploy] edgeone CLI 不可用，跳过:", e.message); return; }
   const env = { ...process.env,
     TENCENTCLOUD_SECRET_ID: process.env.TENCENTCLOUD_SECRET_ID || "",
     TENCENTCLOUD_SECRET_KEY: process.env.TENCENTCLOUD_SECRET_KEY || "" };
-  // 优先用本地 node_modules 里的 edgeone，否则回退 npx
-  const localBin = path.join(BASE, "node_modules", ".bin", "edgeone");
-  const cmd = fs.existsSync(localBin) ? localBin : "edgeone";
   const r = spawnSync(cmd, [
     "makers", "deploy", BASE, "-n", "pm-workbench",
     "-t", token, "-e", "production", "-a", "global"
   ], { cwd: BASE, env, stdio: "inherit" });
-  if (r.status !== 0) throw new Error("EdgeOne 部署失败");
-  console.log("[deploy] EdgeOne 部署完成");
+  if (r.status !== 0) console.warn("[deploy] EdgeOne CLI 部署未完成(exit " + r.status + ")");
+  else console.log("[deploy] EdgeOne CLI 部署完成");
 }
 
-async function main() {
-  const BASE = process.argv[2] || path.join(__dirname, "..");
-  const DATE = process.argv[3] || todayStr();
+async function main(baseArg, dateArg) {
+  const BASE = baseArg || process.argv[2] || path.join(__dirname, "..");
+  const DATE = dateArg || process.argv[3] || todayStr();
   const CLOUD = process.env.CLOUD === "1";
 
   console.log(`[run_daily] BASE=${BASE} DATE=${DATE} CLOUD=${CLOUD}`);
 
   // 1. 生成
-  const k = await knowGen.main();
-  const nw = await newsGen.main();
+  const k = await knowGen.main(DATE, BASE);
+  const nw = await newsGen.main(DATE, BASE);
   // AIHOT 抓取（已有脚本，免费 API）
   try {
     spawnSync("node", [path.join(BASE, "scripts", "fetch_aihot_daily.js")], { cwd: BASE, stdio: "inherit" });

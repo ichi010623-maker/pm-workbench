@@ -15,12 +15,12 @@ function parseDateArg(argv) {
 }
 function argv_dir(argv) { return argv[3] || path.join(__dirname, ".."); }
 
-async function main() {
-  const DATE = parseDateArg(process.argv);
-  const DIR = argv_dir(process.argv);
+async function main(dateArg, dirArg) {
+  const DATE = dateArg || process.argv[2] || new Date().toISOString().slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
+  const DIR = dirArg || argv_dir(process.argv);
   const nfile = path.join(DIR, "data", "news.json");
   const afile = path.join(DIR, "data", "news-archive.json");
-  const hfile = path.join(DIR, "data", "aihot.json");
 
   const n = JSON.parse(fs.readFileSync(nfile, "utf8"));
   if ((n.items || []).some((it) => String(it.id).startsWith(DATE + "-"))) {
@@ -36,7 +36,7 @@ async function main() {
 额外返回字段：leadTitle（一句话概括今日最大热点，≤60字）。
 要求：返回 {"items":[...13条], "leadTitle":"..."}。只写真实新闻，不确定则降低 priority 或省略。`;
 
-  const data = await chatJSON(system, user, { temperature: 0.5, maxTokens: 6000 });
+  const data = await chatJSON(system, user, { temperature: 0.5, maxTokens: 6000, webSearch: true });
   let items = data.items;
   if (!Array.isArray(items) || items.length === 0) throw new Error("LLM 返回资讯异常");
 
@@ -64,13 +64,7 @@ async function main() {
   arc[DATE] = { generatedAt: n.generatedAt, categories: n.categories, items: out };
   fs.writeFileSync(afile, JSON.stringify(arc, null, 2));
 
-  // aihot.json 日报
-  const a = JSON.parse(fs.readFileSync(hfile, "utf8"));
-  a.dailies = (a.dailies || []).filter((d) => d.date !== DATE);
-  a.dailies.unshift({ date: DATE, leadTitle, url: `https://aihot.virxact.com/daily/${DATE}` });
-  fs.writeFileSync(hfile, JSON.stringify(a, null, 2));
-
-  console.log(`[news] ${DATE} 生成 ${out.length} 条；archive + aihot 已更新`);
+  console.log(`[news] ${DATE} 生成 ${out.length} 条；archive 已更新（aihot 由 fetch_aihot_daily.js 管理）`);
   return { date: DATE, count: out.length, leadTitle };
 }
 

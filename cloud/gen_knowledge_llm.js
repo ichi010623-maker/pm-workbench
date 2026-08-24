@@ -30,9 +30,55 @@ function nextId(pool, cat) {
   return cat + "-" + (max + 1);
 }
 
-async function main() {
-  const DATE = parseDateArg(process.argv);
-  const DIR = argv_dir(process.argv);
+// 按分类默认 diagram（模型给错时回退）
+const CAT_DIAGRAM = { ai: "llm", finance: "compound", think: "feedback", hwpm: "pareto", mkt: "feedback" };
+
+function salvage(c, cat, existingTitles) {
+  if (!c || !c.title || existingTitles.has(c.title)) return null;
+  // 强制归类（请求的就是该分类，不必信模型自填 cat）
+  let diagram = WHITELIST.has(c.diagram) ? c.diagram : CAT_DIAGRAM[cat];
+  // points 容错：补足/截断为 3 条
+  let points = Array.isArray(c.points) ? c.points.filter(Boolean) : [];
+  if (points.length === 0) points = [c.content || "了解核心要点", "对比异同", "落地实践"];
+  points = points.slice(0, 3);
+  while (points.length < 3) points.push("结合实际应用");
+  return {
+    cat, id: "",
+    title: c.title, tag: c.tag || "", question: c.question || "",
+    content: c.content || "", points,
+    tip: c.tip || "", diagram, source: c.source || "云端 LLM 生成"
+  };
+}
+
+async function genCategory(cat, DATE, existingTitles) {
+  const catName = { ai: "AI/大模型", finance: "金融投资", think: "认知思维", hwpm: "硬件产品经理", mkt: "市场营销" }[cat];
+  const system = `你是${catName}领域的知识卡片作者。基于真实准确的知识创作，避免虚构。只输出严格 JSON。`;
+  const user = `为日期 ${DATE} 创作 ${PER_CAT} 张「${catName}」知识卡片。每张结构：
+{"cat":"${cat}","title":"简短有力(≤14字)","tag":"标签(≤6字)","question":"用户视角的为什么/是什么","content":"通俗解释(60-120字)","points":["要点1","要点2","要点3"],"tip":"一句话实践建议","diagram":"${[...WHITELIST].join("|")} 之一","source":"来源说明"}
+要求：返回 {"cards":[...]} 恰好${PER_CAT}张；标题全新不重复；points 恰好3条；diagram 必须是指定白名单之一；内容真实、面向产品经理实用优先。`;
+
+  const out = [];
+  for (let attempt = 0; attempt < 3 && out.length < PER_CAT; attempt++) {
+    try {
+      const data = await chatJSON(system, user, { temperature: 0.85, maxTokens: 1600 });
+      let cards = Array.isArray(data) ? data : data.cards;
+      if (!Array.isArray(cards)) continue;
+      for (const c of cards.filter(Boolean)) {
+        if (out.length >= PER_CAT) break;
+        const s = salvage(c, cat, existingTitles);
+        if (s) { out.push(s); existingTitles.add(s.title); }
+      }
+    } catch (e) {
+      console.warn(`[knowledge] ${cat} 第${attempt + 1}次失败: ${e.message}`);
+    }
+  }
+  return out;
+}
+
+async function main(dateArg, dirArg) {
+  const DATE = dateArg || process.argv[2] || new Date().toISOString().slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
+  const DIR = dirArg || argv_dir(process.argv);
   const kfile = path.join(DIR, "data", "knowledge.json");
   const k = JSON.parse(fs.readFileSync(kfile, "utf8"));
 
@@ -43,48 +89,23 @@ async function main() {
   }
 
   const existingTitles = new Set(k.pool.map((p) => p.title));
-
-  const system = `你是硬件/AI/投资/认知/营销领域的知识卡片作者。请基于真实、准确的知识创作卡片，避免虚构数据与错误结论。输出严格 JSON。`;
-  const user = `请为日期 ${DATE} 创作 ${CATS.length * PER_CAT} 张知识卡片，覆盖5个分类各${PER_CAT}张：
-- ai（AI/大模型）、finance（金融投资）、think（认知思维）、hwpm（硬件产品经理）、mkt（市场营销）。
-每张卡片 JSON 结构：
-{"cat":"ai|finance|think|hwpm|mkt","title":"简短有力(≤14字)","tag":"分类标签(≤6字)","question":"用户视角的为什么/是什么","content":"通俗解释(60-120字)","points":["要点1","要点2","要点3"],"tip":"一句话实践建议","diagram":"${[...WHITELIST].join("|")} 之一","source":"来源说明"}
-要求：
-1. 返回 {"cards":[...]} 共${CATS.length * PER_CAT}张，每分类恰好${PER_CAT}张。
-2. 标题必须全新、不重复；points 必须恰好3条；diagram 必须是指定白名单之一。
-3. 内容真实准确，面向产品经理/创业者，实用优先。`;
-
-  const data = await chatJSON(system, user, { temperature: 0.8, maxTokens: 8000 });
-  let cards = Array.isArray(data) ? data : data.cards;
-  if (!Array.isArray(cards)) throw new Error("LLM 返回结构异常");
-
-  // 校验 + 赋 id
-  const usedTitles = new Set(existingTitles);
   const out = [];
-  let dropped = 0;
-  for (const c of cards) {
-    if (!CATS.includes(c.cat)) { dropped++; continue; }
-    if (!c.title || usedTitles.has(c.title)) { dropped++; continue; }
-    if (!Array.isArray(c.points) || c.points.length !== 3) { dropped++; continue; }
-    if (!WHITELIST.has(c.diagram)) { dropped++; continue; }
-    const id = nextId(k.pool.concat(out), c.cat);
-    out.push({
-      cat: c.cat, id,
-      title: c.title, tag: c.tag || "", question: c.question || "",
-      content: c.content || "", points: c.points,
-      tip: c.tip || "", diagram: c.diagram, source: c.source || "云端 LLM 生成"
-    });
-    usedTitles.add(c.title);
+  for (const cat of CATS) {
+    const part = await genCategory(cat, DATE, existingTitles);
+    out.push(...part);
+    for (const o of part) o.id = nextId(k.pool.concat(out), cat);
+    console.log(`[knowledge] ${cat}: ${part.length}/${PER_CAT} 张`);
   }
 
-  if (out.length < CATS.length * PER_CAT) {
-    console.warn(`[knowledge] 有效卡 ${out.length}/${CATS.length * PER_CAT}，缺失 ${CATS.length * PER_CAT - out.length} 张（dropped ${dropped}）`);
+  const total = CATS.length * PER_CAT;
+  if (out.length < total) {
+    console.warn(`[knowledge] 有效卡 ${out.length}/${total}，缺失 ${total - out.length} 张`);
   }
 
   // 写入 pool + history
   k.pool = k.pool.concat(out);
   k.history = (k.history || []).concat({ date: DATE, itemIds: out.map((o) => o.id) });
-  k.dailyCount = PER_CAT * CATS.length;
+  k.dailyCount = total;
   fs.writeFileSync(kfile, JSON.stringify(k, null, 2));
 
   console.log(`[knowledge] ${DATE} 生成 ${out.length} 张，pool=${k.pool.length}`);

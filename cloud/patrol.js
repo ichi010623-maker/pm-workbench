@@ -5,6 +5,7 @@
 const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");
+const gitee = require("./lib_gitee");
 
 function todayStr() { return new Date().toISOString().slice(0, 10); }
 function httpGet(url, cookie) {
@@ -23,26 +24,44 @@ function getCode(url, cookie) {
   return r.stdout.toString().trim();
 }
 
-function diagnose(SITE, COOKIE) {
+async function diagnose(SITE, COOKIE) {
   const issues = [];
   // 1. 关键端点可达
   for (const ep of ["/", "/data/knowledge.json", "/data/news.json", "/data/aihot.json", "/migrate.html"]) {
     const c = getCode(SITE + ep, COOKIE);
     if (c !== "200") issues.push(`端点 ${ep} 状态码 ${c}`);
   }
-  // 2. 知识卡含今日
+  // 2. 知识卡含今日（对照 Gitee 真值，区分"内容缺失"与"部署滞后"）
+  let siteHasToday = false;
+  let giteeHasToday = null; // null=无法获取
   try {
     const k = JSON.parse(httpGet(SITE + "/data/knowledge.json", COOKIE).body);
-    const dates = (k.history || []).map((h) => h.date);
-    if (!dates.includes(todayStr())) issues.push(`知识卡 history 缺今日(${todayStr()})`);
+    siteHasToday = (k.history || []).some((h) => h.date === todayStr());
     if (!k.pool || k.pool.length < 600) issues.push(`知识池异常(${k.pool?.length})`);
-  } catch (e) { issues.push("解析 knowledge.json 失败: " + e.message); }
-  // 3. 资讯新鲜度
+  } catch (e) { issues.push("解析线上 knowledge.json 失败: " + e.message); }
+  try {
+    const gk = JSON.parse((await gitee.getFile("data/knowledge.json")).content);
+    giteeHasToday = (gk.history || []).some((h) => h.date === todayStr());
+  } catch (e) { giteeHasToday = null; }
+  if (!siteHasToday) {
+    if (giteeHasToday) issues.push(`线上知识卡缺今日(${todayStr()})，Gitee 已有 → 部署滞后/失败`);
+    else issues.push(`知识卡 history 缺今日(${todayStr()})，Gitee 亦缺 → 生成缺失`);
+  }
+  // 3. 资讯新鲜度（同样对照 Gitee）
+  let siteNewsToday = false;
+  let giteeNewsToday = null;
   try {
     const n = JSON.parse(httpGet(SITE + "/data/news.json", COOKIE).body);
-    const g = (n.generatedAt || "").slice(0, 10);
-    if (g !== todayStr()) issues.push(`资讯 generatedAt=${g} 非今日`);
-  } catch (e) { issues.push("解析 news.json 失败: " + e.message); }
+    siteNewsToday = (n.generatedAt || "").slice(0, 10) === todayStr();
+  } catch (e) { issues.push("解析线上 news.json 失败: " + e.message); }
+  try {
+    const gn = JSON.parse((await gitee.getFile("data/news.json")).content);
+    giteeNewsToday = (gn.generatedAt || "").slice(0, 10) === todayStr();
+  } catch (e) { giteeNewsToday = null; }
+  if (!siteNewsToday) {
+    if (giteeNewsToday) issues.push(`线上资讯 generatedAt 非今日，Gitee 已是今日 → 部署滞后/失败`);
+    else issues.push(`资讯 generatedAt 非今日，Gitee 亦非 → 生成缺失`);
+  }
   return issues;
 }
 
@@ -52,13 +71,13 @@ async function heal(BASE) {
   return r.status === 0;
 }
 
-async function main() {
-  const BASE = process.argv[2] || path.join(__dirname, "..");
+async function main(baseArg) {
+  const BASE = baseArg || process.argv[2] || path.join(__dirname, "..");
   const SITE = (process.env.SITE_URL || "https://pm-workbench-dqtlusrk.edgeone.cool").replace(/\/$/, "");
   const COOKIE = process.env.AUTH_COOKIE || "";
 
   console.log(`[patrol] 巡检 ${SITE}`);
-  const issues = diagnose(SITE, COOKIE);
+  const issues = await diagnose(SITE, COOKIE);
   if (issues.length === 0) {
     console.log("[patrol] 健康 ✅ 无需处理");
     return { ok: true, issues: [] };

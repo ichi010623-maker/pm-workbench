@@ -29,14 +29,16 @@ async function putFile(path, content, message, sha) {
     branch: "main"
   };
   if (sha) body.sha = sha;
+  // Gitee：文件已存在(有 sha)用 PUT 更新，否则 POST 新建
+  const method = sha ? "PUT" : "POST";
   const r = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...(TOKEN ? {} : {}) },
+    method,
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body)
   });
   if (!r.ok) {
     const txt = await r.text();
-    throw new Error("Gitee PUT " + r.status + " " + txt.slice(0, 200));
+    throw new Error("Gitee " + method + " " + r.status + " " + txt.slice(0, 200));
   }
   return r.json();
 }
