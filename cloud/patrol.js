@@ -48,20 +48,20 @@ async function diagnose(SITE, COOKIE) {
     if (giteeHasToday) issues.push(`线上知识卡缺今日(${todayStr()})，Gitee 已有 → 部署滞后`);
     else { issues.push(`知识卡 history 缺今日(${todayStr()})，Gitee 亦缺 → 生成缺失`); healable = true; }
   }
-  // 3. 资讯新鲜度（同样对照 Gitee）
+  // 3. 资讯新鲜度（对照 Gitee；与 newsGen 幂等口径一致：按 items id 前缀「UTC 日期」判断当日）
   let siteNewsToday = false;
   let giteeNewsToday = null;
   try {
     const n = JSON.parse(httpGet(SITE + "/data/news.json", COOKIE).body);
-    siteNewsToday = (n.generatedAt || "").slice(0, 10) === todayStr();
+    siteNewsToday = (n.items || []).some((it) => String(it.id).startsWith(todayStr() + "-"));
   } catch (e) { issues.push("解析线上 news.json 失败: " + e.message); }
   try {
     const gn = JSON.parse((await gitee.getFile("data/news.json")).content);
-    giteeNewsToday = (gn.generatedAt || "").slice(0, 10) === todayStr();
+    giteeNewsToday = (gn.items || []).some((it) => String(it.id).startsWith(todayStr() + "-"));
   } catch (e) { giteeNewsToday = null; }
   if (!siteNewsToday) {
-    if (giteeNewsToday) issues.push(`线上资讯 generatedAt 非今日，Gitee 已是今日 → 部署滞后`);
-    else { issues.push(`资讯 generatedAt 非今日，Gitee 亦非 → 生成缺失`); healable = true; }
+    if (giteeNewsToday) issues.push(`线上资讯缺当日(id前缀${todayStr()})，Gitee 已有 → 部署滞后`);
+    else { issues.push(`资讯缺当日(id前缀${todayStr()})，Gitee 亦缺 → 生成缺失`); healable = true; }
   }
   return { issues, healable };
 }
