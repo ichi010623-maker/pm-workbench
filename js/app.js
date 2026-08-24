@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.51";
+var APP_VERSION = "5.9.52";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -4373,6 +4373,7 @@ async function renderSettings() {
     '<div class="card" onclick="openFreeApiGuide()" style="cursor:pointer"><div class="flex-between"><div><div class="card-title">🔑 获取免费 Key 引导</div><div class="card-body">Gemini（AI Studio 免费·需VPN）/ 智谱·硅基流动 国内免费<br><span style="font-size:11px;color:var(--text-tertiary)">用于情报/市场机会等模块，Key 仅存本机不上云</span></div></div><div style="color:var(--text-secondary)">→</div></div></div>' +
     '<div class="section-title"><span class="emoji">💾</span> 数据管理</div>' +
     '<div class="card" onclick="exportData()" style="cursor:pointer"><div class="flex-between"><div class="card-title">📤 导出完整备份（含图片）</div><div style="color:var(--text-secondary)">→</div></div><div class="card-body">导出完整JSON文件，包含所有数据+图片<br><span style="font-size:11px;color:var(--text-tertiary)">数据已实时同步云端，导出用于额外备份</span></div></div>' +
+    '<div class="card" onclick="location.href=\'./migrate.html\'" style="cursor:pointer;border:1px solid #bfdbfe;background:#eff6ff"><div class="flex-between"><div><div class="card-title">📦 旧站数据迁移工具</div><div class="card-body">从 CloudStudio 旧域名全量搬迁到本 EdgeOne 域名<br><span style="font-size:11px;color:var(--text-tertiary)">含 localStorage + 图片库（收藏/AI Key/想法等），跨域无损迁移</span></div></div><div style="color:var(--text-secondary);font-size:20px">→</div></div>' +
     '<div class="card" onclick="confirmReset()" style="cursor:pointer"><div class="flex-between"><div class="card-title" style="color:var(--accent-red)">🗑️ 重置数据</div><div style="color:var(--text-secondary)">→</div></div><div class="card-body">恢复到初始示例数据（有30秒撤销机会）</div></div>' +
 
     '<div class="section-title"><span class="emoji">🗄️</span> 本地历史备份恢复</div>' +

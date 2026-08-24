@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PM工作台 · 数据迁移工具</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+         background: #f5f7fa; color: #1f2937; line-height: 1.6; padding: 24px; }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { color: #6b7280; font-size: 13px; margin-bottom: 20px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px; }
+  .card h2 { font-size: 16px; margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+  .tag-old { background: #fef3c7; color: #92400e; }
+  .tag-new { background: #dbeafe; color: #1e40af; }
+  ol { margin: 8px 0; padding-left: 20px; font-size: 14px; }
+  li { margin-bottom: 6px; }
+  pre { background: #0f172a; color: #e2e8f0; padding: 12px; border-radius: 8px; overflow-x: auto;
+        font-size: 12px; line-height: 1.5; white-space: pre-wrap; word-break: break-all; }
+  .copy-btn { margin-top: 8px; background: #1f2937; color: #fff; border: 0; padding: 8px 14px;
+              border-radius: 8px; cursor: pointer; font-size: 13px; }
+  .copy-btn:hover { background: #374151; }
+  .import-area { border: 2px dashed #cbd5e1; border-radius: 10px; padding: 24px; text-align: center;
+                margin-top: 10px; cursor: pointer; transition: .2s; }
+  .import-area.drag { background: #eff6ff; border-color: #3b82f6; }
+  #fileInput { display: none; }
+  .btn-primary { background: #2563eb; color: #fff; border: 0; padding: 10px 18px; border-radius: 8px;
+                 cursor: pointer; font-size: 14px; margin-top: 12px; }
+  .btn-primary:disabled { background: #94a3b8; cursor: not-allowed; }
+  #log { margin-top: 14px; font-size: 13px; max-height: 220px; overflow-y: auto;
+         background: #f8fafc; border-radius: 8px; padding: 10px; display: none; }
+  #log div { padding: 2px 0; border-bottom: 1px solid #eef2f7; }
+  .ok { color: #16a34a; } .warn { color: #d97706; } .err { color: #dc2626; }
+  .note { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 10px 12px;
+          font-size: 12.5px; color: #78350f; margin-top: 12px; }
+  .back { display: inline-block; margin-top: 18px; color: #2563eb; text-decoration: none; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📦 PM工作台 · 数据迁移工具</h1>
+  <div class="sub">把<b>旧站</b>（CloudStudio 旧域名）的全部数据迁移到<b>本域名</b>（EdgeOne 新站）。支持 localStorage + IndexedDB（含图片）全量搬迁。</div>
+
+  <div class="grid">
+    <!-- 导出：旧站 -->
+    <div class="card">
+      <h2>① 在<b>旧站</b>导出 <span class="tag tag-old">旧域名操作</span></h2>
+      <ol>
+        <li>打开旧站：<code>7daa4a87bbcd4a23854a29487d540255.gz3.agentos-app.net</code></li>
+        <li>按 <b>F12</b> 打开开发者工具 → 切到 <b>Console（控制台）</b> 标签</li>
+        <li>把下方代码<b>整段复制</b>粘贴进去，按回车</li>
+        <li>会自动下载一个 <code>pm-workbench-export-日期.json</code> 文件，保存好</li>
+      </ol>
+      <pre id="exportSnippet">(async () =&gt; {
+  const dumpIDB = (name) =&gt; new Promise((res) =&gt; {
+    const req = indexedDB.open(name);
+    req.onsuccess = (e) =&gt; {
+      const db = e.target.result, stores = {}, names = Array.from(db.objectStoreNames);
+      let n = names.length;
+      if (!n) return res({ dbName: name, stores: {} });
+      names.forEach((s) =&gt; {
+        const tx = db.transaction(s, "readonly"), r = tx.objectStore(s).getAll();
+        r.onsuccess = () =&gt; { stores[s] = r.result; if (--n === 0) res({ dbName: name, stores }); };
+      });
+    };
+    req.onerror = () =&gt; res({ dbName: name, stores: {} });
+  });
+  const ls = {};
+  for (let i = 0; i &lt; localStorage.length; i++) { const k = localStorage.key(i); ls[k] = localStorage.getItem(k); }
+  const idb = await dumpIDB("pm_workbench_images_v2");
+  const payload = { __migration: "pm-workbench", v: 1, at: new Date().toISOString(), localStorage: ls, indexedDB: idb };
+  const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "pm-workbench-export-" + new Date().toISOString().slice(0, 10) + ".json";
+  a.click();
+  console.log("✅ 导出完成：", Object.keys(ls).length, "个 localStorage 键，", (idb.stores?.images?.length) || 0, "张图片");
+})();</pre>
+      <button class="copy-btn" onclick="copySnippet()">📋 复制导出代码</button>
+    </div>
+
+    <!-- 导入：本域名 -->
+    <div class="card">
+      <h2>② 在<b>本域名</b>导入 <span class="tag tag-new">新站操作</span></h2>
+      <ol>
+        <li>确保你正打开的是<b>新站</b>（本页面地址含 <code>edgeone.cool</code>）</li>
+        <li>点击下方区域，选择刚才下载的 <code>.json</code> 备份文件</li>
+        <li>等待导入完成（localStorage + 图片库全部写回）</li>
+        <li>导入后点底部「返回工作台」并<b>刷新一次</b>即可看到旧数据</li>
+      </ol>
+      <label class="import-area" id="dropArea" for="fileInput">
+        <div style="font-size: 38px">📂</div>
+        <div style="margin-top:6px;font-size:14px;color:#475569">点击选择 / 拖拽 JSON 备份文件到此处</div>
+        <div style="font-size:12px;color:#94a3b8;margin-top:4px">仅支持本工具导出的 pm-workbench-export-*.json</div>
+      </label>
+      <input type="file" id="fileInput" accept=".json,application/json">
+      <button class="btn-primary" id="importBtn" disabled onclick="doImport()">⏳ 请先选择文件</button>
+      <div id="log"></div>
+    </div>
+  </div>
+
+  <div class="note">
+    ⚠️ <b>重要提示</b>：<br>
+    1. 如果你在新站登录了<b>云端同步账号</b>，导入的本地数据可能在下次自动同步时被云端旧副本覆盖。建议导入后确认数据完整，或迁移期间先退出云端账号。<br>
+    2. 导出代码只读取你浏览器里旧站的数据，不会上传任何内容；导入也仅写回你当前浏览器的新站域名。<br>
+    3. 操作前可先在旧站「设置 → 下载完整备份」额外留一份 JSON 兜底。
+  </div>
+
+  <a class="back" href="./index.html">← 返回工作台</a>
+</div>
+
+<script>
+function copySnippet() {
+  const t = document.getElementById("exportSnippet").innerText;
+  navigator.clipboard.writeText(t).then(() => {
+    const b = document.querySelector(".copy-btn"); b.textContent = "✅ 已复制，去旧站控制台粘贴";
+    setTimeout(() => b.textContent = "📋 复制导出代码", 2500);
+  }).catch(() => alert("复制失败，请手动框选代码复制"));
+}
+
+let pendingFile = null;
+const fileInput = document.getElementById("fileInput");
+const dropArea = document.getElementById("dropArea");
+const importBtn = document.getElementById("importBtn");
+
+fileInput.addEventListener("change", (e) => { if (e.target.files[0]) setFile(e.target.files[0]); });
+["dragenter","dragover"].forEach(ev => dropArea.addEventListener(ev, (e) => { e.preventDefault(); dropArea.classList.add("drag"); }));
+["dragleave","drop"].forEach(ev => dropArea.addEventListener(ev, (e) => { e.preventDefault(); dropArea.classList.remove("drag"); }));
+dropArea.addEventListener("drop", (e) => { if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]); });
+
+function setFile(f) {
+  pendingFile = f;
+  importBtn.disabled = false;
+  importBtn.textContent = "🚀 开始导入：" + f.name;
+}
+
+function log(msg, cls) {
+  const el = document.getElementById("log");
+  el.style.display = "block";
+  const d = document.createElement("div");
+  if (cls) d.className = cls;
+  d.textContent = msg;
+  el.appendChild(d);
+  el.scrollTop = el.scrollHeight;
+}
+
+async function doImport() {
+  if (!pendingFile) return;
+  importBtn.disabled = true;
+  log("📖 读取备份文件…");
+  let payload;
+  try {
+    payload = JSON.parse(await pendingFile.text());
+  } catch (e) { log("❌ JSON 解析失败：" + e.message, "err"); importBtn.disabled = false; return; }
+  if (payload.__migration !== "pm-workbench" || !payload.localStorage) {
+    log("❌ 不是本工具导出的迁移文件（缺少 __migration 标记）", "err"); importBtn.disabled = false; return;
+  }
+
+  // 1. localStorage
+  let lsCount = 0;
+  for (const [k, v] of Object.entries(payload.localStorage || {})) {
+    try { localStorage.setItem(k, v); lsCount++; } catch (e) { log("⚠️ localStorage 写入失败：" + k, "warn"); }
+  }
+  log("✅ localStorage 写入 " + lsCount + " 个键", "ok");
+
+  // 2. IndexedDB
+  const idb = payload.indexedDB;
+  if (idb && idb.dbName) {
+    try {
+      await new Promise((resolve) => {
+        const openReq = indexedDB.open(idb.dbName, 2);
+        openReq.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          Object.keys(idb.stores || {}).forEach(s => { if (!db.objectStoreNames.contains(s)) db.createObjectStore(s, { keyPath: "id" }); });
+        };
+        openReq.onsuccess = async (e) => {
+          const db = e.target.result;
+          for (const [store, rows] of Object.entries(idb.stores || {})) {
+            if (!db.objectStoreNames.contains(store)) continue;
+            const tx = db.transaction(store, "readwrite");
+            const os = tx.objectStore(store);
+            (rows || []).forEach(r => { try { os.put(r); } catch (err) {} });
+            await new Promise(r => tx.oncomplete = r);
+          }
+          resolve();
+        };
+        openReq.onerror = () => resolve();
+      });
+      const imgN = (idb.stores?.images?.length) || 0;
+      log("✅ IndexedDB 写入（图片 " + imgN + " 张 / 含 latest·backups）", "ok");
+    } catch (e) { log("⚠️ IndexedDB 写入异常：" + e.message, "warn"); }
+  } else {
+    log("ℹ️ 备份中无 IndexedDB 数据，已跳过", "warn");
+  }
+
+  log("🎉 导入完成！请点底部「返回工作台」并刷新一次浏览器。", "ok");
+  importBtn.textContent = "✅ 导入完成";
+}
+</script>
+</body>
+</html>
