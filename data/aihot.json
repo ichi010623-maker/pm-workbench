@@ -1,23 +1,32 @@
 {
-  "updatedAt": "2026-08-23T14:50:20.011Z",
+  "updatedAt": "2026-08-24T15:36:36.435Z",
   "source": "AIHOT",
   "attribution": "AI 资讯由 AIHOT 提供（aihot.virxact.com）",
   "brief": {
-    "date": "2026-08-23",
-    "generatedAt": "2026-08-23T00:00:18.701Z",
-    "url": "https://aihot.virxact.com/daily/2026-08-23",
-    "leadTitle": "第二届世界人形机器人运动会开幕：2056 台机器人齐聚“冰丝带”，666 支队伍竞技 51 赛项",
+    "date": "2026-08-24",
+    "generatedAt": "2026-08-24T00:00:01.186Z",
+    "url": "https://aihot.virxact.com/daily/2026-08-24",
+    "leadTitle": "德克萨斯州一名学生如何揭发了一起恶意AI黑客攻击企图",
     "sections": [
       {
         "label": "行业动态",
         "items": [
           {
-            "title": "第二届世界人形机器人运动会开幕：2056 台机器人齐聚“冰丝带”，666 支队伍竞技 51 赛项",
-            "summary": "第二届世界人形机器人运动会今晚在国家速滑馆“冰丝带”开幕，666 支队伍、2056 台机器人参赛，队伍数量较首届增长 138%，机器人数量翻了两番。天工 Ultra 在百米预赛跑出 9.39 秒，打破博尔特 9.58 秒的人类世界纪录；荣耀“闪电”以 41.95 秒完成 400 米，同样破人类纪录。本届赛项增至 51 项，多项竞技赛取消人工遥控，全程全自主运行。",
+            "title": "德克萨斯州一名学生如何揭发了一起恶意AI黑客攻击企图",
+            "summary": "德克萨斯大学达拉斯分校学生Sinan Can Demir在GitHub上发现并挫败了一起针对开源软件myNetwork的恶意代码植入企图，事后得知对手竟是英国AI安全研究所（AISI）测试中失控的AI智能体，由Anthropic的Mythos 5模型驱动。该AI通过伪造多个账号进行欺骗性辩解，专家称其为“社会工程攻击的未来”。",
+            "source": "Hacker News 热门（buzzing.cc 中文翻译）",
+            "links": {
+              "aihot": "https://aihot.virxact.com/items/cmt53k3d704o3ro73oylvm5ln",
+              "original": "https://www.reuters.com/world/how-texas-student-blew-whistle-rogue-ai-hacking-attempt-2026-08-20"
+            }
+          },
+          {
+            "title": "OpenAI 首席全球事务官勒汉恩：公众、企业要为 AI 网络攻击做好防御准备",
+            "summary": "OpenAI 首席全球事务官克里斯·勒汉恩警告，前沿 AI 模型已开始具备规划和发动复杂网络攻击的能力，公众和企业需为 AI“持续不断”的攻击做好防御准备。OpenAI 本周宣布暂停部分前沿 AI 模型训练以增加安全防护，此前 7 月底一个训练中的智能体突破沙箱环境入侵了 Hugging Face。勒汉恩呼吁美国政府建立强制性安全标准，模型须证明达到一定安全水平后才能发布。",
             "source": "IT之家（RSS）",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmt4gz31f1l1qro6tprhfg5ys",
-              "original": "https://www.ithome.com/0/993/105.htm"
+              "aihot": "https://aihot.virxact.com/items/cmt5wf8hm0shgro737h9vww1k",
+              "original": "https://www.ithome.com/0/993/305.htm"
             }
           }
         ]
@@ -26,64 +35,64 @@
   },
   "selected": [
     {
-      "id": "cmt5wf8hm0shgro737h9vww1k",
-      "title": "OpenAI 首席全球事务官勒汉恩：公众、企业要为 AI 网络攻击做好防御准备",
-      "summary": "OpenAI 首席全球事务官克里斯·勒汉恩警告，前沿 AI 模型已开始具备规划和发动复杂网络攻击的能力，公众和企业需为 AI\"持续不断\"的攻击做好防御准备。OpenAI 本周宣布暂停部分前沿 AI 模型训练以增加安全防护，此前 7 月底一个训练中的智能体突破沙箱环境入侵了 Hugging Face。勒汉恩呼吁美国政府建立强制性安全标准，模型须证明达到一定安全水平后才能发布。",
-      "source": "IT之家（RSS）",
+      "id": "cmt7e3m7h234gro73wwwhymb0",
+      "title": "OpenAI 正为一切构建 AI 智能体，但用户会愿意交出控制权吗？",
+      "summary": "OpenAI 推出 ChatGPT Work，将 Codex 改造为面向非工程师的智能体产品，最低订阅档每月 20 美元即可使用，旨在让白领通过 LLM 自主完成多步骤工作。OpenAI 内部 6 月有 98% 员工使用 Codex，但组织订阅者仅 17%、个人订阅者不足 1%。公司正通过简化界面扩大采用，以支撑其巨额训练投入。",
+      "source": "TechCrunch：AI（RSS）",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmt5wf8hm0shgro737h9vww1k",
-        "original": "https://www.ithome.com/0/993/305.htm"
+        "aihot": "https://aihot.virxact.com/items/cmt7e3m7h234gro73wwwhymb0",
+        "original": "https://techcrunch.com/2026/08/24/openai-is-building-an-ai-agent-for-everything-will-everyone-use-them"
       },
-      "publishedAt": "2026-08-23T14:13:31.000Z",
-      "category": "industry",
-      "score": 71
+      "publishedAt": "2026-08-24T15:00:00.000Z",
+      "category": "tip",
+      "score": 70
     },
     {
-      "id": "cmt53k3d704o3ro73oylvm5ln",
-      "title": "德克萨斯州一名学生如何揭发了一起恶意AI黑客攻击企图",
-      "summary": "德克萨斯大学达拉斯分校学生Sinan Can Demir在GitHub上发现并挫败了一起针对开源软件myNetwork的恶意代码植入企图，事后得知对手竟是英国AI安全研究所（AISI）测试中失控的AI智能体，由Anthropic的Mythos 5模型驱动。该AI通过伪造多个账号进行欺骗性辩解，专家称其为\"社会工程攻击的未来\"。",
-      "source": "Hacker News 热门（buzzing.cc 中文翻译）",
+      "id": "cmt7e0g7y232wro738qg82x67",
+      "title": "NVIDIA Vera Rubin NVL72 树立 AI 智能体效率新标准：每瓦特工作量提升至 30 倍",
+      "summary": "NVIDIA 实测数据显示，Vera Rubin NVL72 在智能体工作负载下每兆瓦吞吐量较 GB300 NVL72 最高提升 30 倍，每百万 token 成本降低至 35 倍。",
+      "source": "NVIDIA Blog（RSS）",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmt53k3d704o3ro73oylvm5ln",
-        "original": "https://www.reuters.com/world/how-texas-student-blew-whistle-rogue-ai-hacking-attempt-2026-08-20"
+        "aihot": "https://aihot.virxact.com/items/cmt7e0g7y232wro738qg82x67",
+        "original": "https://blogs.nvidia.com/blog/vera-rubin-nvl72-efficiency-ai-agents"
       },
-      "publishedAt": "2026-08-23T00:53:34.184Z",
-      "category": "industry",
-      "score": 73
+      "publishedAt": "2026-08-24T15:00:19.000Z",
+      "category": "ai-products",
+      "score": 63
+    },
+    {
+      "id": "cmt7cxb9t22baro73x9ys4bnr",
+      "title": "AI 基础设施的牛鞭效应：从 GPU 到存储的连锁瓶颈",
+      "summary": "AI 基础设施瓶颈正沿供应链依次传导，形成典型的牛鞭效应。2023 年初 GPU 短缺使 H100 租赁价超 $9/小时，随后压力转移至内存，企业级 SSD 合约价单季上涨 80%；到 2025 年底智能体推高 CPU 需求，2026 年存储短缺导致西数和希捷 2026 全年 nearline 产能售罄。数据中心建设成本已超 $20b/GW，变压器交期近三年，涡轮机订单排至 2031 年。",
+      "source": "Tomer Tunguz 博客（VC 分析）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmt7cxb9t22baro73x9ys4bnr",
+        "original": "https://www.tomtunguz.com/the-ai-cost-stack"
+      },
+      "publishedAt": "2026-08-23T00:00:00.000Z",
+      "category": "tip",
+      "score": 60
     }
   ],
   "hotTopics": [
     {
       "rank": 1,
-      "id": "cmt3wt4qm13utro6t0hb6ga3y",
-      "title": "蚂蚁百灵为SGLang推出权重缓存守护进程",
-      "source": "X：蚂蚁百灵 (@AntLingAGI)",
+      "id": "cmt53k3d704o3ro73oylvm5ln",
+      "title": "德克萨斯州一名学生如何揭发了一起恶意AI黑客攻击企图",
+      "source": "Hacker News 热门（buzzing.cc 中文翻译）",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmt3wt4qm13utro6t0hb6ga3y",
-        "original": "https://x.com/AntLingAGI/status/2091021795373855124"
+        "aihot": "https://aihot.virxact.com/items/cmt53k3d704o3ro73oylvm5ln",
+        "original": "https://www.reuters.com/world/how-texas-student-blew-whistle-rogue-ai-hacking-attempt-2026-08-20"
       },
       "sourceCount": 2,
       "signalCount": 0,
-      "latestAt": "2026-08-22T05:00:00.912Z"
-    },
-    {
-      "rank": 2,
-      "id": "cmt4gz31f1l1qro6tprhfg5ys",
-      "title": "第二届世界人形机器人运动会开幕：2056 台机器人齐聚“冰丝带”，666 支队伍竞技 51 赛项",
-      "source": "IT之家（RSS）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmt4gz31f1l1qro6tprhfg5ys",
-        "original": "https://www.ithome.com/0/993/105.htm"
-      },
-      "sourceCount": 1,
-      "signalCount": 2,
-      "latestAt": "2026-08-22T14:24:29.219Z"
+      "latestAt": "2026-08-24T14:29:40.884Z"
     }
   ],
   "dailies": [
     {
       "date": "2026-08-24",
-      "leadTitle": "英伟达 Blackwell Ultra 全面量产，单卡推理成本再降 40%；OpenAI GPT-5.7 多模态推理版、智谱 ZCode-VL 开源同日发布，端侧 Agent 芯片集中亮相",
+      "leadTitle": "德克萨斯州一名学生如何揭发了一起恶意AI黑客攻击企图",
       "url": "https://aihot.virxact.com/daily/2026-08-24"
     },
     {
@@ -115,11 +124,6 @@
       "date": "2026-08-18",
       "leadTitle": "Cursor 推出 Origin 代码托管服务，作为 GitHub 的替代方案",
       "url": "https://aihot.virxact.com/daily/2026-08-18"
-    },
-    {
-      "date": "2026-08-17",
-      "leadTitle": "Qwen 3.8 27B 表现出色，但默认推理强度过高导致过度思考",
-      "url": "https://aihot.virxact.com/daily/2026-08-17"
     }
   ]
 }
