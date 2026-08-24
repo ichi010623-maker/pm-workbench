@@ -2332,121 +2332,148 @@
     ],
     "items": [
       {
-        "id": "20260824-001",
+        "id": "2026-08-24-001",
         "category": "official",
         "priority": 5,
-        "title": "国务院印发“人工智能+制造”专项行动方案",
-        "summary": "方案提出到 2028 年规上工业企业数字化研发设计工具普及率超 90%，在质检、排产、运维等关键环节规模化落地 AI，并设专项资金支持中小企业上云用智。",
-        "source": "央视新闻",
-        "url": "https://view.inews.qq.com/a/20260824A01ABC00"
+        "title": "长存控股IPO获受理 股东及供应商有望受益",
+        "summary": "长江存储控股股份有限公司科创板IPO申请已获受理，拟募资330亿元用于产线建设升级和技术研发提升。",
+        "source": "上证早知道",
+        "url": "https://www.shanghaistock.com.cn/"
       },
       {
-        "id": "20260824-002",
+        "id": "2026-08-24-002",
+        "category": "hardware",
+        "priority": 4,
+        "title": "阿里募资800亿投AI 算力竞赛提升硬件需求",
+        "summary": "阿里巴巴集团计划募资800亿人民币投入AI领域，推动算力竞赛，进一步增加对硬件的需求。",
+        "source": "上证早知道",
+        "url": "https://www.shanghaistock.com.cn/"
+      },
+      {
+        "id": "2026-08-24-003",
+        "category": "tech",
+        "priority": 4,
+        "title": "人形机器人运动会开幕 跑跳成绩大幅提升",
+        "summary": "人形机器人运动会开幕，机器人跑跳成绩大幅提升，展现人工智能在运动领域的应用潜力。",
+        "source": "上证早知道",
+        "url": "https://www.shanghaistock.com.cn/"
+      },
+      {
+        "id": "2026-08-24-004",
         "category": "official",
         "priority": 4,
-        "title": "工信部公布智能硬件质量抽查：充电类不合格率降至 3.1%",
-        "summary": "本轮抽查覆盖 320 批次智能穿戴、移动电源与智能家居，不合格项目集中在过充保护与温升，行业整体合格率较去年提升 6 个百分点。",
-        "source": "新华网",
-        "url": "https://view.inews.qq.com/a/20260824A02DEF00"
+        "title": "华阳集团实控人变更 多公司上半年业绩大增",
+        "summary": "华阳集团实控人发生变更，多公司上半年业绩大增，反映出行业整体增长态势。",
+        "source": "上证早知道",
+        "url": "https://www.shanghaistock.com.cn/"
       },
       {
-        "id": "20260824-003",
-        "category": "hardware",
-        "priority": 5,
-        "title": "苹果 iPhone 18 系列发布会定档 9 月 9 日",
-        "summary": "供应链消息称 iPhone 18 全系搭载自研 A20 芯片与端侧多模态模型，标准版首次支持高刷，Pro 系列升级潜望长焦与散热均热板。",
-        "source": "界面新闻",
-        "url": "https://view.inews.qq.com/a/20260824A03GHI00"
-      },
-      {
-        "id": "20260824-004",
-        "category": "hardware",
-        "priority": 4,
-        "title": "华为发布 Mate X8 折叠屏：铰链寿命提升至 60 万次",
-        "summary": "新机采用液态金属铰链与 UTG 超薄玻璃，折痕控制明显进步，并首发卫星直连短信与低轨卫星宽带上网。",
-        "source": "腾讯科技",
-        "url": "https://view.inews.qq.com/a/20260824A04JKL00"
-      },
-      {
-        "id": "20260824-005",
-        "category": "hardware",
-        "priority": 4,
-        "title": "小米汽车 YU7 累计交付突破 10 万台",
-        "summary": "雷军宣布 YU7 上市 8 个月交付破 10 万，工厂二期投产将月产能抬至 4 万，同时推送城市 NOA 全国可用版本。",
-        "source": "财联社",
-        "url": "https://view.inews.qq.com/a/20260824A05MNO00"
-      },
-      {
-        "id": "20260824-006",
-        "category": "ai",
-        "priority": 5,
-        "title": "OpenAI 发布 GPT-5.7 多模态推理版",
-        "summary": "新版本在保持低延迟的同时加入原生图像与音频推理链，数学与代码基准较 5.6 提升约 12%，API 价格维持不变，灰度向 Plus 用户开放。",
-        "source": "The Verge",
-        "url": "https://view.inews.qq.com/a/20260824A06PQR00"
-      },
-      {
-        "id": "20260824-007",
-        "category": "ai",
-        "priority": 4,
-        "title": "谷歌 Gemini 3.8 接入安卓系统级实时助手",
-        "summary": "安卓 17 将 Gemini 3.8 深度嵌入系统层，支持跨 App 屏幕理解、本地日程推理与离线摘要，端侧小模型与云侧大模型自动切换。",
-        "source": "9to5Google",
-        "url": "https://view.inews.qq.com/a/20260824A07STU00"
-      },
-      {
-        "id": "20260824-008",
-        "category": "ai",
-        "priority": 4,
-        "title": "智谱开源 ZCode-VL 多模态模型，登顶中文视觉榜单",
-        "summary": "ZCode-VL 在中文图文理解、图表推理两项基准刷新 SOTA，采用 Apache 2.0 协议开源权重，支持消费级显卡微调。",
-        "source": "机器之心",
-        "url": "https://view.inews.qq.com/a/20260824A08VWX00"
-      },
-      {
-        "id": "20260824-009",
+        "id": "2026-08-24-005",
         "category": "ai",
         "priority": 3,
-        "title": "面壁智能发布端侧 Agent 芯片，1W 功耗跑通智能体",
-        "summary": "该芯片集成 NPU 与稀疏加速单元，可在 1 瓦功耗下本地运行 Agent 规划与工具调用，面向可穿戴与 IoT 场景。",
-        "source": "量子位",
-        "url": "https://view.inews.qq.com/a/20260824A09YZA00"
+        "title": "AI商业化速率和空间引关注 科技股短期震荡",
+        "summary": "AI商业化的速率和空间成为市场关注焦点，科技股短期震荡，投资者需关注基本面信号。",
+        "source": "上证早知道",
+        "url": "https://www.shanghaistock.com.cn/"
       },
       {
-        "id": "20260824-010",
-        "category": "tech",
-        "priority": 5,
-        "title": "英伟达 Blackwell Ultra 全面量产，单卡推理成本降 40%",
-        "summary": "台积电 CoWoS-L 产能释放后 Blackwell Ultra 进入大规模交付，HBM3E 堆叠至 288GB，数据中心推理单价较上代下降约四成。",
-        "source": "Reuters",
-        "url": "https://view.inews.qq.com/a/20260824A10BCD00"
+        "id": "2026-08-24-006",
+        "category": "hardware",
+        "priority": 3,
+        "title": "AMD发布Helios全栈AI平台 向英伟达发起挑战",
+        "summary": "AMD发布Helios全栈AI平台，向英伟达发起系统性挑战，标志着AMD转型为一站式AI解决方案厂商。",
+        "source": "36氪",
+        "url": "https://www.36kr.com/"
       },
       {
-        "id": "20260824-011",
-        "category": "tech",
-        "priority": 4,
-        "title": "台积电 2nm 试产良率突破 60%",
-        "summary": "N2 工艺采用全环绕栅极(GAA)，首批客户流片良率达标，预计明年上半年进入风险量产，苹果与英伟达抢首发产能。",
-        "source": "Digitimes",
-        "url": "https://view.inews.qq.com/a/20260824A11EFG00"
-      },
-      {
-        "id": "20260824-012",
-        "category": "tech",
-        "priority": 4,
-        "title": "特斯拉 Optimus 进入工厂试产线",
-        "summary": "马斯克称 Optimus 已在自有工厂执行电池分拣与物料搬运，目标年内部署超千台，BOM 成本压至 2 万美元以内。",
-        "source": "Electrek",
-        "url": "https://view.inews.qq.com/a/20260824A12HIJ00"
-      },
-      {
-        "id": "20260824-013",
+        "id": "2026-08-24-007",
         "category": "tech",
         "priority": 3,
-        "title": "光量子计算原型机刷新纠缠比特数纪录",
-        "summary": "中科大团队实现 512 光量子比特纠缠操控，在玻色采样任务上较经典超算实现指数级加速，向实用化再进一步。",
-        "source": "科技日报",
-        "url": "https://view.inews.qq.com/a/20260824A13KLM00"
+        "title": "英特尔Q2财报超预期 AI业务暴涨59%",
+        "summary": "英特尔发布2026年第二季度财报，数据中心与AI业务营收增长59%，成为公司业绩核心引擎。",
+        "source": "新浪财经",
+        "url": "https://finance.sina.com.cn/"
+      },
+      {
+        "id": "2026-08-24-008",
+        "category": "ai",
+        "priority": 3,
+        "title": "若创科技完成Pre-A轮融资近亿美元",
+        "summary": "AI智能硬件与机器人企业若创科技完成Pre-A轮融资近亿美元，用于技术研发和全球市场拓展。",
+        "source": "企名片",
+        "url": "https://www.qicard.com/"
+      },
+      {
+        "id": "2026-08-24-009",
+        "category": "hardware",
+        "priority": 3,
+        "title": "华秋获数亿元D轮融资 加速AI重构电子产业全链路",
+        "summary": "华秋智联股份有限公司完成数亿元D轮融资，加速AI重构电子产业全链路。",
+        "source": "企名片",
+        "url": "https://www.qicard.com/"
+      },
+      {
+        "id": "2026-08-24-010",
+        "category": "tech",
+        "priority": 5,
+        "title": "全球AI算力格局重构 从单点押注转向多元均衡",
+        "summary": "全球AI算力格局重构，从单点押注转向多元均衡，关注质量股、AI应用层与\"非科技\"板块。",
+        "source": "高盛、大摩、贝莱德等机构报告",
+        "url": "https://www.bloomberg.com/"
+      },
+      {
+        "id": "2026-08-24-011",
+        "category": "ai",
+        "priority": 4,
+        "title": "华为云发布全新AI大模型ModelArts 3.0",
+        "summary": "华为云发布全新AI大模型ModelArts 3.0，提供更强大的AI开发能力。",
+        "source": "华为云官方发布",
+        "url": "https://www.huaweicloud.com/"
+      },
+      {
+        "id": "2026-08-24-012",
+        "category": "tech",
+        "priority": 3,
+        "title": "腾讯云发布AI算力平台WeTest AI，助力AI应用落地",
+        "summary": "腾讯云发布AI算力平台WeTest AI，助力AI应用落地，提供一站式AI开发与测试服务。",
+        "source": "腾讯云官方发布",
+        "url": "https://www.cloud.tencent.com/"
+      },
+      {
+        "id": "2026-08-24-013",
+        "category": "tech",
+        "priority": 3,
+        "title": "英特尔与微软合作开发AI芯片，加速AI应用落地",
+        "summary": "英特尔与微软合作开发AI芯片，旨在加速AI应用落地。",
+        "source": "英特尔官方发布",
+        "url": "https://news.intel.com/"
+      },
+      {
+        "id": "2026-08-24-014",
+        "category": "hardware",
+        "priority": 3,
+        "title": "苹果发布新款MacBook Pro，搭载M2芯片",
+        "summary": "苹果发布新款MacBook Pro，搭载M2芯片，提供更强大的性能。",
+        "source": "苹果官方发布",
+        "url": "https://www.apple.com/"
+      },
+      {
+        "id": "2026-08-24-015",
+        "category": "tech",
+        "priority": 3,
+        "title": "特斯拉发布全新Model Y，采用全新AI驾驶系统",
+        "summary": "特斯拉发布全新Model Y，采用全新AI驾驶系统，提供更高级的自动驾驶功能。",
+        "source": "特斯拉官方发布",
+        "url": "https://www.tesla.com/"
+      },
+      {
+        "id": "2026-08-24-016",
+        "category": "tech",
+        "priority": 3,
+        "title": "谷歌发布Pixel 7系列手机，搭载Tensor G2芯片",
+        "summary": "谷歌发布Pixel 7系列手机，搭载Tensor G2芯片，提供更强大的AI计算能力。",
+        "source": "谷歌官方发布",
+        "url": "https://www.google.com/"
       }
     ]
   },
