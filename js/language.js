@@ -973,30 +973,64 @@ function lgPhonCard(p, region) {
     (p.combos && p.combos.length ? '<div class="lg-phon-sec">常见字母组合</div><div class="lg-phon-combos">' + lgPhonCombosHtml(p.combos, region) + '</div>' : '') +
   '</div>';
 }
+function lgPhonAll() {
+  var d = __lgPhonetics || { vowels: [], consonants: [] };
+  return d.vowels.concat(d.consonants);
+}
+function lgPhonFind(sym) {
+  var all = lgPhonAll();
+  for (var i = 0; i < all.length; i++) if (all[i].symbol === sym) return { p: all[i], idx: i };
+  return null;
+}
+function lgPhonSummaryCell(p, region) {
+  return '<div class="lg-phon-cell" onclick="lgPhonSel=\'' + lgEscapeJs(p.symbol) + '\';render()">' +
+    '<div class="lg-phon-cell-sym">' + escapeHtml(p.symbol) + '</div>' +
+    '<div class="lg-phon-cell-type">' + escapeHtml(p.type || "") + '</div>' +
+    '<div class="lg-phon-cell-audio" onclick="event.stopPropagation();lgPhonSpeak(\'' + lgEscapeJs((p.examples && p.examples[0] && p.examples[0][0]) || "a") + '\',\'' + region + '\')">🔊</div>' +
+  '</div>';
+}
 function lgRenderPhonics(cur) {
   if (cur !== "en") {
     return '<div class="lg-card"><div class="lg-card-h">🔤 音标</div>' +
       '<div class="empty-state"><div class="empty-text">音标板块当前提供英语（English），请切换语种到 🇬🇧 英语查看。</div></div></div>';
   }
-  var head = '<div class="lg-card"><div class="lg-card-h">🔤 英语国际音标（IPA）<span class="lg-sub">美式 / 英式对照 · 点击 🔊 听读音</span></div>' +
+  var region = lgPhonRegion || "US";
+  var head = '<div class="lg-card"><div class="lg-card-h">🔤 英语国际音标（IPA）<span class="lg-sub">美式 / 英式对照 · 点击任意音标查看详情</span></div>' +
     '<div class="lg-phon-toolbar">' +
       '<button class="lg-btn' + (lgPhonRegion === "US" ? " primary" : "") + '" onclick="lgPhonRegion=\'US\';render()">🇺🇸 美式发音</button>' +
       '<button class="lg-btn' + (lgPhonRegion === "UK" ? " primary" : "") + '" onclick="lgPhonRegion=\'UK\';render()">🇬🇧 英式发音</button>' +
     '</div>' +
-    '<div class="lg-hint">共 ' + (__lgPhonetics ? __lgPhonetics.vowels.length + ' 个元音 + ' + __lgPhonetics.consonants.length + ' 个辅音' : '…') + '。发音方式含中英文对照，例词至少 5 个，含常见字母组合。</div>' +
+    '<div class="lg-hint">共 ' + (__lgPhonetics ? __lgPhonetics.vowels.length + ' 个元音 + ' + __lgPhonetics.consonants.length + ' 个辅音' : '…') + '。点击任意音标进入详情：发音方式（中英对照）、英美写法、≥5 个例词、常见字母组合，均可点 🔊 听读音。</div>' +
   '</div>';
   if (!__lgPhonetics) {
     lgPhoneticsLoad(function () { render(); });
     return head + '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载音标数据中…</div></div></div>';
   }
-  var region = lgPhonRegion || "US";
-  var vows = '<div class="lg-card"><div class="lg-card-h">🔠 元音（Vowels）<span class="lg-sub">' + __lgPhonetics.vowels.length + ' 个</span></div>' +
-    __lgPhonetics.vowels.map(function (p) { return lgPhonCard(p, region); }).join("") + '</div>';
-  var cons = '<div class="lg-card"><div class="lg-card-h">🔤 辅音（Consonants）<span class="lg-sub">' + __lgPhonetics.consonants.length + ' 个</span></div>' +
-    __lgPhonetics.consonants.map(function (p) { return lgPhonCard(p, region); }).join("") + '</div>';
-  return head + vows + cons;
+  // 详情页：选中某个音标
+  if (lgPhonSel) {
+    var f = lgPhonFind(lgPhonSel);
+    if (f) {
+      var all = lgPhonAll();
+      var prev = all[(f.idx - 1 + all.length) % all.length];
+      var next = all[(f.idx + 1) % all.length];
+      var nav = '<div class="lg-row" style="gap:8px;margin-bottom:10px">' +
+        '<button class="lg-btn ghost" onclick="lgPhonSel=null;render()">← 返回总览</button>' +
+        '<button class="lg-btn ghost" onclick="lgPhonSel=\'' + lgEscapeJs(prev.symbol) + '\';render()">‹ 上一个</button>' +
+        '<button class="lg-btn ghost" onclick="lgPhonSel=\'' + lgEscapeJs(next.symbol) + '\';render()">下一个 ›</button>' +
+      '</div>';
+      return head + nav + lgPhonCard(f.p, region);
+    }
+    lgPhonSel = null;
+  }
+  // 汇总页：元音 / 辅音 网格，点击进入详情
+  var vGrid = '<div class="lg-card"><div class="lg-card-h">🔠 元音汇总（Vowels）<span class="lg-sub">' + __lgPhonetics.vowels.length + ' 个 · 点击查看详情</span></div>' +
+    '<div class="lg-phon-grid">' + __lgPhonetics.vowels.map(function (p) { return lgPhonSummaryCell(p, region); }).join("") + '</div></div>';
+  var cGrid = '<div class="lg-card"><div class="lg-card-h">🔤 辅音汇总（Consonants）<span class="lg-sub">' + __lgPhonetics.consonants.length + ' 个 · 点击查看详情</span></div>' +
+    '<div class="lg-phon-grid">' + __lgPhonetics.consonants.map(function (p) { return lgPhonSummaryCell(p, region); }).join("") + '</div></div>';
+  return head + vGrid + cGrid;
 }
 var lgPhonRegion = "US";
+var lgPhonSel = null; // 当前查看的音标详情
 
 /* =============================================================
  * 通用微信式月历（各板块「历史」共用）

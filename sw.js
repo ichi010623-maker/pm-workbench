@@ -1,9 +1,9 @@
 /* ============================================
-   硬件PM工作台 v5.9.65 - Service Worker
+   硬件PM工作台 v5.9.67 - Service Worker
    离线缓存 + 自动更新 + 隐私保护
    ============================================ */
 
-const CACHE_VERSION = "v5.9.66";
+const CACHE_VERSION = "v5.9.67";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const APP_SHELL_ASSETS = [];
 

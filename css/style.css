@@ -6454,3 +6454,12 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 .lg-phon-combo b{color:#b45309}
 /* 历史日历卡片通用 */
 .lg-card-h .lg-btn.ghost{margin-left:auto}
+/* 音标汇总网格 */
+.lg-phon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:8px}
+.lg-phon-cell{position:relative;border:1px solid var(--card-border,#e5e7eb);border-radius:10px;padding:10px 6px 6px;text-align:center;cursor:pointer;background:var(--card,#fff);transition:.15s}
+.lg-phon-cell:hover{background:#f5f3ff;border-color:#c4b5fd}
+.lg-phon-cell:active{transform:scale(.96)}
+.lg-phon-cell-sym{font-size:20px;font-weight:800;color:#1d4ed8;font-family:Georgia,'Times New Roman',serif;line-height:1.2}
+.lg-phon-cell-type{font-size:10px;color:var(--text-tertiary,#94a3b8);margin-top:2px;min-height:13px}
+.lg-phon-cell-audio{position:absolute;top:2px;right:4px;font-size:11px;opacity:.75}
+.lg-phon-cell-audio:hover{opacity:1}
