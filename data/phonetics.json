@@ -1,0 +1,272 @@
+{
+  "updatedAt": "2026-08-25",
+  "intro": "英语国际音标（IPA）完整表。美式(US)与英式(UK)发音如有差异分别标注；发音方式为中英对照通俗说明；每个音标含≥5个例词（含中文释义）与常见字母组合；例词可点 🔊 朗读。",
+  "vowels": [
+    {
+      "symbol": "/iː/", "us": "/iː/", "uk": "/iː/", "type": "长元音",
+      "how": "嘴唇向两侧微展如微笑，舌前部抬高，发音长而紧张（long, tense front vowel）。",
+      "examples": [["see", "看见"], ["green", "绿色"], ["three", "三"], ["eat", "吃"], ["tree", "树"]],
+      "combos": [{"letters": "ee", "words": [["see", "看见"], ["green", "绿色"]]}, {"letters": "ea", "words": [["eat", "吃"], ["tea", "茶"]]}, {"letters": "e", "words": [["he", "他"], ["be", "是"]]}]
+    },
+    {
+      "symbol": "/ɪ/", "us": "/ɪ/", "uk": "/ɪ/", "type": "短元音",
+      "how": "嘴微张，舌前部略低，发音短促放松，像中文「一」但更短（short lax front vowel）。",
+      "examples": [["sit", "坐"], ["big", "大的"], ["fish", "鱼"], ["six", "六"], ["milk", "牛奶"]],
+      "combos": [{"letters": "i", "words": [["sit", "坐"], ["fish", "鱼"]]}, {"letters": "y", "words": [["city", "城市"], ["happy", "快乐的"]]}]
+    },
+    {
+      "symbol": "/e/", "us": "/ɛ/", "uk": "/e/", "type": "短元音",
+      "how": "嘴微张，舌位介于 /æ/ 与 /ɪ/ 之间，短促放松（short mid front vowel）。",
+      "examples": [["bed", "床"], ["red", "红色的"], ["ten", "十"], ["pen", "钢笔"], ["egg", "鸡蛋"]],
+      "combos": [{"letters": "e", "words": [["bed", "床"], ["red", "红色的"]]}, {"letters": "ea", "words": [["head", "头"], ["bread", "面包"]]}]
+    },
+    {
+      "symbol": "/æ/", "us": "/æ/", "uk": "/æ/", "type": "短元音",
+      "how": "嘴张大，舌前部放低，像发「唉」但更开口（short front vowel, mouth wide open）。",
+      "examples": [["cat", "猫"], ["bag", "包"], ["apple", "苹果"], ["hat", "帽子"], ["map", "地图"]],
+      "combos": [{"letters": "a", "words": [["cat", "猫"], ["bag", "包"]]}, {"letters": "a…e", "words": [["have", "有"], ["glad", "高兴的"]]}]
+    },
+    {
+      "symbol": "/ʌ/", "us": "/ʌ/", "uk": "/ʌ/", "type": "短元音",
+      "how": "嘴半张，舌中部略抬，短促放松，像中文「啊」稍收（short central vowel）。",
+      "examples": [["cup", "杯子"], ["bus", "公交车"], ["sun", "太阳"], ["run", "跑"], ["love", "爱"]],
+      "combos": [{"letters": "u", "words": [["cup", "杯子"], ["bus", "公交车"]]}, {"letters": "o", "words": [["love", "爱"], ["come", "来"]]}]
+    },
+    {
+      "symbol": "/ɑː/", "us": "/ɑː/", "uk": "/ɑː/", "type": "长元音",
+      "how": "嘴张大，舌后部放低，发音长而放松（long back vowel, mouth open）。",
+      "examples": [["car", "汽车"], ["father", "父亲"], ["arm", "手臂"], ["far", "远"], ["park", "公园"]],
+      "combos": [{"letters": "ar", "words": [["car", "汽车"], ["park", "公园"]]}, {"letters": "a", "words": [["father", "父亲"], ["after", "之后"]]}]
+    },
+    {
+      "symbol": "/ɒ/", "us": "/ɑː/", "uk": "/ɒ/", "type": "短元音（英式）",
+      "how": "英式短元音，嘴略圆；美式读作 /ɑː/（短）（short rounded back vowel UK; US usually /ɑː/）。",
+      "examples": [["hot", "热的"], ["dog", "狗"], ["box", "盒子"], ["stop", "停止"], ["clock", "时钟"]],
+      "combos": [{"letters": "o", "words": [["hot", "热的"], ["dog", "狗"]]}, {"letters": "a", "words": [["watch", "手表"], ["what", "什么"]]}]
+    },
+    {
+      "symbol": "/ɔː/", "us": "/ɔː/", "uk": "/ɔː/", "type": "长元音",
+      "how": "嘴唇收圆，舌后部抬起，发音长（long rounded back vowel）。",
+      "examples": [["law", "法律"], ["four", "四"], ["door", "门"], ["more", "更多"], ["talk", "说话"]],
+      "combos": [{"letters": "or", "words": [["four", "四"], ["door", "门"]]}, {"letters": "aw", "words": [["law", "法律"], ["saw", "看见(过去)"]]}, {"letters": "al", "words": [["talk", "说话"], ["walk", "走路"]]}]
+    },
+    {
+      "symbol": "/ʊ/", "us": "/ʊ/", "uk": "/ʊ/", "type": "短元音",
+      "how": "嘴唇微圆，舌后部略抬，短促放松（short rounded back vowel）。",
+      "examples": [["book", "书"], ["good", "好的"], ["look", "看"], ["foot", "脚"], ["wood", "木头"]],
+      "combos": [{"letters": "oo", "words": [["book", "书"], ["good", "好的"]]}, {"letters": "ou", "words": [["could", "可以(过去)"], ["should", "应该"]]}]
+    },
+    {
+      "symbol": "/uː/", "us": "/uː/", "uk": "/uː/", "type": "长元音",
+      "how": "嘴唇收圆前突，舌后部抬高，发音长（long rounded back vowel）。",
+      "examples": [["blue", "蓝色"], ["food", "食物"], ["moon", "月亮"], ["school", "学校"], ["true", "真实的"]],
+      "combos": [{"letters": "oo", "words": [["food", "食物"], ["moon", "月亮"]]}, {"letters": "ue", "words": [["blue", "蓝色"], ["true", "真实的"]]}, {"letters": "u…e", "words": [["use", "使用"], ["music", "音乐"]]}]
+    },
+    {
+      "symbol": "/ɜː/", "us": "/ɝː/", "uk": "/ɜː/", "type": "长元音（卷舌）",
+      "how": "舌中部抬高，英式不卷舌、美式卷舌，发音长（long central vowel; US rhotic）。",
+      "examples": [["bird", "鸟"], ["girl", "女孩"], ["work", "工作"], ["first", "第一"], ["learn", "学习"]],
+      "combos": [{"letters": "ir", "words": [["bird", "鸟"], ["girl", "女孩"]]}, {"letters": "er", "words": [["her", "她(宾)"], ["person", "人"]]}, {"letters": "or", "words": [["work", "工作"], ["world", "世界"]]}]
+    },
+    {
+      "symbol": "/ə/", "us": "/ə/", "uk": "/ə/", "type": "中央元音（弱读）",
+      "how": "嘴放松，舌居中，发音最弱最短，常见于非重读音节（schwa, the most common weak vowel）。",
+      "examples": [["about", "关于"], ["banana", "香蕉"], ["teacher", "老师"], ["again", "再次"], ["computer", "电脑"]],
+      "combos": [{"letters": "a", "words": [["about", "关于"], ["banana", "香蕉"]]}, {"letters": "er", "words": [["teacher", "老师"], ["water", "水"]]}]
+    },
+    {
+      "symbol": "/eɪ/", "us": "/eɪ/", "uk": "/eɪ/", "type": "双元音",
+      "how": "由 /e/ 滑向 /ɪ/，口型由开到合（diphthong, glide from /e/ to /ɪ/）。",
+      "examples": [["day", "天"], ["name", "名字"], ["rain", "雨"], ["cake", "蛋糕"], ["eight", "八"]],
+      "combos": [{"letters": "ay", "words": [["day", "天"], ["play", "玩"]]}, {"letters": "ai", "words": [["rain", "雨"], ["wait", "等待"]]}, {"letters": "a…e", "words": [["name", "名字"], ["cake", "蛋糕"]]}]
+    },
+    {
+      "symbol": "/aɪ/", "us": "/aɪ/", "uk": "/aɪ/", "type": "双元音",
+      "how": "由 /a/ 滑向 /ɪ/，口型由大到小（diphthong, glide from open to close）。",
+      "examples": [["my", "我的"], ["time", "时间"], ["white", "白色"], ["eye", "眼睛"], ["light", "光"]],
+      "combos": [{"letters": "i…e", "words": [["time", "时间"], ["white", "白色"]]}, {"letters": "y", "words": [["my", "我的"], ["fly", "飞"]]}, {"letters": "igh", "words": [["light", "光"], ["night", "夜晚"]]}]
+    },
+    {
+      "symbol": "/ɔɪ/", "us": "/ɔɪ/", "uk": "/ɔɪ/", "type": "双元音",
+      "how": "由 /ɔː/ 滑向 /ɪ/，嘴唇先圆后展（diphthong, glide from rounded to spread）。",
+      "examples": [["boy", "男孩"], ["toy", "玩具"], ["voice", "声音"], ["coin", "硬币"], ["oil", "油"]],
+      "combos": [{"letters": "oy", "words": [["boy", "男孩"], ["toy", "玩具"]]}, {"letters": "oi", "words": [["voice", "声音"], ["coin", "硬币"]]}]
+    },
+    {
+      "symbol": "/əʊ/", "us": "/oʊ/", "uk": "/əʊ/", "type": "双元音",
+      "how": "由 /ə/（美式 /o/）滑向 /ʊ/，口型由中到圆（diphthong, glide to rounded）。",
+      "examples": [["go", "去"], ["home", "家"], ["no", "不"], ["cold", "冷"], ["phone", "电话"]],
+      "combos": [{"letters": "o…e", "words": [["home", "家"], ["phone", "电话"]]}, {"letters": "o", "words": [["go", "去"], ["no", "不"]]}, {"letters": "oa", "words": [["boat", "船"], ["road", "路"]]}]
+    },
+    {
+      "symbol": "/aʊ/", "us": "/aʊ/", "uk": "/aʊ/", "type": "双元音",
+      "how": "由 /a/ 滑向 /ʊ/，口型由大到圆（diphthong, glide to rounded）。",
+      "examples": [["now", "现在"], ["house", "房子"], ["out", "外面"], ["brown", "棕色"], ["mouth", "嘴"]],
+      "combos": [{"letters": "ou", "words": [["house", "房子"], ["out", "外面"]]}, {"letters": "ow", "words": [["now", "现在"], ["brown", "棕色"]]}]
+    },
+    {
+      "symbol": "/ɪə/", "us": "/ɪr/", "uk": "/ɪə/", "type": "双元音",
+      "how": "由 /ɪ/ 滑向 /ə/，美式卷舌读 /ɪr/（diphthong, US rhotic /ɪr/）。",
+      "examples": [["near", "近"], ["here", "这里"], ["ear", "耳朵"], ["year", "年"], ["dear", "亲爱的"]],
+      "combos": [{"letters": "ear", "words": [["near", "近"], ["ear", "耳朵"]]}, {"letters": "ere", "words": [["here", "这里"], ["there", "那里"]]}]
+    },
+    {
+      "symbol": "/eə/", "us": "/er/", "uk": "/eə/", "type": "双元音",
+      "how": "由 /e/ 滑向 /ə/，美式卷舌读 /er/（diphthong, US rhotic /er/）。",
+      "examples": [["air", "空气"], ["hair", "头发"], ["chair", "椅子"], ["care", "关心"], ["square", "广场"]],
+      "combos": [{"letters": "air", "words": [["air", "空气"], ["hair", "头发"]]}, {"letters": "are", "words": [["care", "关心"], ["square", "广场"]]}]
+    },
+    {
+      "symbol": "/ʊə/", "us": "/ʊr/", "uk": "/ʊə/", "type": "双元音",
+      "how": "由 /ʊ/ 滑向 /ə/，美式卷舌读 /ʊr/（diphthong, US rhotic /ʊr/）。",
+      "examples": [["tour", "旅行"], ["sure", "确定"], ["poor", "贫穷的"], ["cure", "治愈"], ["pure", "纯净的"]],
+      "combos": [{"letters": "our", "words": [["tour", "旅行"], ["your", "你的"]]}, {"letters": "ure", "words": [["sure", "确定"], ["cure", "治愈"]]}]
+    }
+  ],
+  "consonants": [
+    {
+      "symbol": "/p/", "us": "/p/", "uk": "/p/", "type": "清爆破音",
+      "how": "双唇紧闭后突然放开，声带不振动（voiceless bilabial plosive）。",
+      "examples": [["pen", "钢笔"], ["apple", "苹果"], ["pig", "猪"], ["map", "地图"], ["open", "打开"]],
+      "combos": [{"letters": "p", "words": [["pen", "钢笔"], ["pig", "猪"]]}, {"letters": "pp", "words": [["apple", "苹果"], ["happy", "快乐的"]]}]
+    },
+    {
+      "symbol": "/b/", "us": "/b/", "uk": "/b/", "type": "浊爆破音",
+      "how": "双唇紧闭后放开，声带振动（voiced bilabial plosive）。",
+      "examples": [["book", "书"], ["big", "大的"], ["boy", "男孩"], ["baby", "婴儿"], ["ball", "球"]],
+      "combos": [{"letters": "b", "words": [["book", "书"], ["big", "大的"]]}, {"letters": "bb", "words": [["rabbit", "兔子"], ["rubber", "橡皮"]]}]
+    },
+    {
+      "symbol": "/t/", "us": "/t/", "uk": "/t/", "type": "清爆破音",
+      "how": "舌尖抵上齿龈后放开，声带不振动（voiceless alveolar plosive）。",
+      "examples": [["tea", "茶"], ["ten", "十"], ["table", "桌子"], ["time", "时间"], ["letter", "信"]],
+      "combos": [{"letters": "t", "words": [["tea", "茶"], ["ten", "十"]]}, {"letters": "tt", "words": [["letter", "信"], ["little", "小的"]]}]
+    },
+    {
+      "symbol": "/d/", "us": "/d/", "uk": "/d/", "type": "浊爆破音",
+      "how": "舌尖抵上齿龈后放开，声带振动（voiced alveolar plosive）。",
+      "examples": [["dog", "狗"], ["day", "天"], ["door", "门"], ["red", "红色"], ["ladder", "梯子"]],
+      "combos": [{"letters": "d", "words": [["dog", "狗"], ["day", "天"]]}, {"letters": "dd", "words": [["ladder", "梯子"], ["middle", "中间"]]}]
+    },
+    {
+      "symbol": "/k/", "us": "/k/", "uk": "/k/", "type": "清爆破音",
+      "how": "舌后部抵软腭后放开，声带不振动（voiceless velar plosive）。",
+      "examples": [["cat", "猫"], ["key", "钥匙"], ["book", "书"], ["school", "学校"], ["cake", "蛋糕"]],
+      "combos": [{"letters": "c", "words": [["cat", "猫"], ["cake", "蛋糕"]]}, {"letters": "k", "words": [["key", "钥匙"], ["kite", "风筝"]]}, {"letters": "ck", "words": [["book", "书"], ["black", "黑色"]]}]
+    },
+    {
+      "symbol": "/ɡ/", "us": "/ɡ/", "uk": "/ɡ/", "type": "浊爆破音",
+      "how": "舌后部抵软腭后放开，声带振动（voiced velar plosive）。",
+      "examples": [["go", "去"], ["girl", "女孩"], ["green", "绿色"], ["dog", "狗"], ["egg", "鸡蛋"]],
+      "combos": [{"letters": "g", "words": [["go", "去"], ["girl", "女孩"]]}, {"letters": "gg", "words": [["egg", "鸡蛋"], ["bigger", "更大的"]]}]
+    },
+    {
+      "symbol": "/f/", "us": "/f/", "uk": "/f/", "type": "清摩擦音",
+      "how": "下唇轻触上齿，气流摩擦而出，声带不振动（voiceless labiodental fricative）。",
+      "examples": [["fish", "鱼"], ["five", "五"], ["food", "食物"], ["foot", "脚"], ["coffee", "咖啡"]],
+      "combos": [{"letters": "f", "words": [["fish", "鱼"], ["five", "五"]]}, {"letters": "ph", "words": [["phone", "电话"], ["photo", "照片"]]}]
+    },
+    {
+      "symbol": "/v/", "us": "/v/", "uk": "/v/", "type": "浊摩擦音",
+      "how": "下唇轻触上齿，气流摩擦，声带振动（voiced labiodental fricative）。",
+      "examples": [["very", "非常"], ["video", "视频"], ["voice", "声音"], ["love", "爱"], ["five", "五"]],
+      "combos": [{"letters": "v", "words": [["very", "非常"], ["voice", "声音"]]}, {"letters": "ve", "words": [["love", "爱"], ["five", "五"]]}]
+    },
+    {
+      "symbol": "/θ/", "us": "/θ/", "uk": "/θ/", "type": "清摩擦音",
+      "how": "舌尖轻触上齿间，气流摩擦，声带不振动（voiceless dental fricative）。",
+      "examples": [["three", "三"], ["think", "想"], ["thank", "感谢"], ["mouth", "嘴"], ["teeth", "牙齿"]],
+      "combos": [{"letters": "th", "words": [["three", "三"], ["think", "想"]]}]
+    },
+    {
+      "symbol": "/ð/", "us": "/ð/", "uk": "/ð/", "type": "浊摩擦音",
+      "how": "舌尖轻触上齿间，气流摩擦，声带振动（voiced dental fricative）。",
+      "examples": [["this", "这个"], ["that", "那个"], ["mother", "母亲"], ["father", "父亲"], ["weather", "天气"]],
+      "combos": [{"letters": "th", "words": [["this", "这个"], ["that", "那个"]]}]
+    },
+    {
+      "symbol": "/s/", "us": "/s/", "uk": "/s/", "type": "清摩擦音",
+      "how": "舌尖靠近上齿龈，气流从缝隙摩擦，声带不振动（voiceless alveolar fricative）。",
+      "examples": [["see", "看见"], ["six", "六"], ["sun", "太阳"], ["school", "学校"], ["bus", "公交车"]],
+      "combos": [{"letters": "s", "words": [["see", "看见"], ["six", "六"]]}, {"letters": "ss", "words": [["class", "班级"], ["glass", "玻璃"]]}, {"letters": "c", "words": [["city", "城市"], ["face", "脸"]]}]
+    },
+    {
+      "symbol": "/z/", "us": "/z/", "uk": "/z/", "type": "浊摩擦音",
+      "how": "舌尖靠近上齿龈，气流摩擦，声带振动（voiced alveolar fricative）。",
+      "examples": [["zoo", "动物园"], ["zero", "零"], ["busy", "忙的"], ["easy", "容易的"], ["nose", "鼻子"]],
+      "combos": [{"letters": "z", "words": [["zoo", "动物园"], ["zero", "零"]]}, {"letters": "s", "words": [["busy", "忙的"], ["easy", "容易的"]]}, {"letters": "se", "words": [["nose", "鼻子"], ["rose", "玫瑰"]]}]
+    },
+    {
+      "symbol": "/ʃ/", "us": "/ʃ/", "uk": "/ʃ/", "type": "清摩擦音",
+      "how": "舌面抬起靠近上颚，嘴唇略圆，气流摩擦（voiceless palato-alveolar fricative）。",
+      "examples": [["she", "她"], ["ship", "船"], ["shoe", "鞋"], ["fish", "鱼"], ["wash", "洗"]],
+      "combos": [{"letters": "sh", "words": [["she", "她"], ["ship", "船"]]}, {"letters": "ti", "words": [["nation", "国家"], ["station", "车站"]]}]
+    },
+    {
+      "symbol": "/ʒ/", "us": "/ʒ/", "uk": "/ʒ/", "type": "浊摩擦音",
+      "how": "与 /ʃ/ 相同舌位，但声带振动（voiced palato-alveolar fricative）。",
+      "examples": [["television", "电视"], ["usually", "通常"], ["pleasure", "愉快"], ["measure", "测量"], ["vision", "视力"]],
+      "combos": [{"letters": "s", "words": [["usually", "通常"], ["pleasure", "愉快"]]}, {"letters": "ge", "words": [["garage", "车库"], ["massage", "按摩"]]}]
+    },
+    {
+      "symbol": "/h/", "us": "/h/", "uk": "/h/", "type": "清摩擦音",
+      "how": "气流从喉部摩擦而出，声带不振动（voiceless glottal fricative）。",
+      "examples": [["he", "他"], ["hat", "帽子"], ["house", "房子"], ["hot", "热的"], ["hello", "你好"]],
+      "combos": [{"letters": "h", "words": [["he", "他"], ["hat", "帽子"]]}, {"letters": "wh", "words": [["who", "谁"], ["whole", "整个"]]}]
+    },
+    {
+      "symbol": "/tʃ/", "us": "/tʃ/", "uk": "/tʃ/", "type": "清破擦音",
+      "how": "舌尖先抵上齿龈再滑开，声带不振动（voiceless affricate）。",
+      "examples": [["chair", "椅子"], ["child", "孩子"], ["china", "瓷器"], ["teach", "教"], ["lunch", "午餐"]],
+      "combos": [{"letters": "ch", "words": [["chair", "椅子"], ["child", "孩子"]]}, {"letters": "tch", "words": [["watch", "手表"], ["catch", "抓住"]]}]
+    },
+    {
+      "symbol": "/dʒ/", "us": "/dʒ/", "uk": "/dʒ/", "type": "浊破擦音",
+      "how": "与 /tʃ/ 同舌位，但声带振动（voiced affricate）。",
+      "examples": [["juice", "果汁"], ["job", "工作"], ["jump", "跳"], ["page", "页"], ["orange", "橙子"]],
+      "combos": [{"letters": "j", "words": [["juice", "果汁"], ["job", "工作"]]}, {"letters": "ge", "words": [["page", "页"], ["orange", "橙子"]]}, {"letters": "dge", "words": [["bridge", "桥"], ["fridge", "冰箱"]]}]
+    },
+    {
+      "symbol": "/m/", "us": "/m/", "uk": "/m/", "type": "鼻音",
+      "how": "双唇闭合，气流从鼻腔而出，声带振动（voiced bilabial nasal）。",
+      "examples": [["man", "男人"], ["mother", "母亲"], ["milk", "牛奶"], ["home", "家"], ["summer", "夏天"]],
+      "combos": [{"letters": "m", "words": [["man", "男人"], ["milk", "牛奶"]]}, {"letters": "mm", "words": [["summer", "夏天"], ["common", "常见"]]}]
+    },
+    {
+      "symbol": "/n/", "us": "/n/", "uk": "/n/", "type": "鼻音",
+      "how": "舌尖抵上齿龈，气流从鼻腔而出，声带振动（voiced alveolar nasal）。",
+      "examples": [["no", "不"], ["name", "名字"], ["night", "夜晚"], ["ten", "十"], ["sun", "太阳"]],
+      "combos": [{"letters": "n", "words": [["no", "不"], ["name", "名字"]]}, {"letters": "nn", "words": [["dinner", "晚餐"], ["sunny", "晴朗的"]]}, {"letters": "kn", "words": [["knife", "刀"], ["know", "知道"]]}]
+    },
+    {
+      "symbol": "/ŋ/", "us": "/ŋ/", "uk": "/ŋ/", "type": "鼻音",
+      "how": "舌后部抵软腭，气流从鼻腔而出，声带振动（voiced velar nasal）。",
+      "examples": [["sing", "唱歌"], ["long", "长的"], ["thing", "东西"], ["morning", "早晨"], ["English", "英语"]],
+      "combos": [{"letters": "ng", "words": [["sing", "唱歌"], ["long", "长的"]]}, {"letters": "nk", "words": [["think", "想"], ["bank", "银行"]]}]
+    },
+    {
+      "symbol": "/l/", "us": "/l/", "uk": "/l/", "type": "边音",
+      "how": "舌尖抵上齿龈，气流从舌两侧通过，声带振动（voiced lateral approximant）。",
+      "examples": [["love", "爱"], ["light", "光"], ["look", "看"], ["long", "长的"], ["yellow", "黄色"]],
+      "combos": [{"letters": "l", "words": [["love", "爱"], ["light", "光"]]}, {"letters": "ll", "words": [["yellow", "黄色"], ["hello", "你好"]]}]
+    },
+    {
+      "symbol": "/r/", "us": "/r/", "uk": "/r/", "type": "卷舌近音",
+      "how": "舌尖卷向上齿龈后部（美式卷舌明显），声带振动（voiced approximant）。",
+      "examples": [["red", "红色"], ["run", "跑"], ["right", "右边"], ["rain", "雨"], ["car", "汽车"]],
+      "combos": [{"letters": "r", "words": [["red", "红色"], ["run", "跑"]]}, {"letters": "rr", "words": [["sorry", "对不起"], ["carry", "携带"]]}]
+    },
+    {
+      "symbol": "/j/", "us": "/j/", "uk": "/j/", "type": "半元音",
+      "how": "舌面向硬腭抬起，像中文「耶」的开头，声带振动（voiced palatal approximant）。",
+      "examples": [["yes", "是"], ["you", "你"], ["yellow", "黄色"], ["year", "年"], ["young", "年轻的"]],
+      "combos": [{"letters": "y", "words": [["yes", "是"], ["you", "你"]]}, {"letters": "u", "words": [["music", "音乐"], ["cute", "可爱的"]]}]
+    },
+    {
+      "symbol": "/w/", "us": "/w/", "uk": "/w/", "type": "半元音",
+      "how": "双唇收圆前突后滑开，像中文「我」的开头，声带振动（voiced labio-velar approximant）。",
+      "examples": [["we", "我们"], ["water", "水"], ["week", "周"], ["white", "白色"], ["window", "窗户"]],
+      "combos": [{"letters": "w", "words": [["we", "我们"], ["water", "水"]]}, {"letters": "wh", "words": [["white", "白色"], ["when", "什么时候"]]}]
+    }
+  ]
+}

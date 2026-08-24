@@ -112,6 +112,15 @@ def create_triggers(cli):
     t2.Enable = "OPEN"
     try: cli.CreateTrigger(t2); print("[trigger] patrol 已建")
     except Exception as e: print("[trigger] patrol 跳过:", e)
+    # 资讯午间/晚间刷新（scf_handler 按北京 12/18 点自动走 JOB=news）
+    for name, cron in [("news-1200", "0 0 12 * * * *"), ("news-1800", "0 0 18 * * * *")]:
+        t3 = models.CreateTriggerRequest()
+        t3.FunctionName = FUNC; t3.Namespace = NS; t3.Type = "timer"
+        t3.TriggerName = name
+        t3.TriggerDesc = cron
+        t3.Enable = "OPEN"
+        try: cli.CreateTrigger(t3); print(f"[trigger] {name} 已建")
+        except Exception as e: print(f"[trigger] {name} 跳过:", e)
 
 if __name__ == "__main__":
     main()

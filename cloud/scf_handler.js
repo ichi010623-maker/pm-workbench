@@ -10,7 +10,7 @@ const gitee = require("./lib_gitee");
 
 const SYNC_FILES = [
   "data/knowledge.json", "data/news.json", "data/news-archive.json",
-  "data/aihot.json", "index.html", "js/app.js", "sw.js"
+  "data/aihot.json", "data/lang_reading.json", "index.html", "js/app.js", "sw.js"
 ];
 
 // 把打包进函数的仓库快照复制到 /tmp 工作区，并从 Gitee 拉取最新版本（覆盖快照，保证基于最新数据）
@@ -36,13 +36,22 @@ async function prepareWorkdir() {
 }
 
 async function main(event = {}, context = {}) {
-  const job = process.env.JOB || (event && event.job) || "daily";
-  console.log("[scf] JOB=" + job);
+  // 任务分派：显式 JOB 优先；否则按北京时间——7 点=daily(全量)，12/18 点=news(资讯刷新)，其余=patrol
+  const bjHour = new Date(Date.now() + 8 * 3600 * 1000).getUTCHours();
+  const auto = bjHour === 7 ? "daily" : (bjHour === 12 || bjHour === 18 ? "news" : "patrol");
+  const job = process.env.JOB || (event && event.job) || auto;
+  console.log("[scf] JOB=" + job + " (bjHour=" + bjHour + ")");
 
   if (job === "patrol") {
     const work = await prepareWorkdir();
     const patrol = require("./patrol");
     return await patrol.main(work);
+  }
+
+  if (job === "news") {
+    const work = await prepareWorkdir();
+    const runDaily = require("./run_daily");
+    return await runDaily.mainNews(work, new Date().toISOString().slice(0, 10));
   }
 
   // daily

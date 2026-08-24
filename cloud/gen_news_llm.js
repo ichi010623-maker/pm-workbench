@@ -15,15 +15,16 @@ function parseDateArg(argv) {
 }
 function argv_dir(argv) { return argv[3] || path.join(__dirname, ".."); }
 
-async function main(dateArg, dirArg) {
+async function main(dateArg, dirArg, opts) {
   const DATE = dateArg || process.argv[2] || new Date().toISOString().slice(0, 10);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
   const DIR = dirArg || argv_dir(process.argv);
+  const REFRESH = opts && opts.refresh; // 12/18 点重跑：允许覆盖当日旧资讯
   const nfile = path.join(DIR, "data", "news.json");
   const afile = path.join(DIR, "data", "news-archive.json");
 
   const n = JSON.parse(fs.readFileSync(nfile, "utf8"));
-  if ((n.items || []).some((it) => String(it.id).startsWith(DATE + "-"))) {
+  if (!REFRESH && (n.items || []).some((it) => String(it.id).startsWith(DATE + "-"))) {
     console.log(`[news] ${DATE} 已存在，跳过（幂等）`);
     return { skipped: true, date: DATE };
   }
@@ -55,7 +56,13 @@ async function main(dateArg, dirArg) {
   // news.json：去重当日后前置
   n.items = n.items.filter((it) => !String(it.id).startsWith(DATE + "-"));
   n.items = out.concat(n.items);
-  n.generatedAt = DATE + "T07:00:00+08:00";
+  // generatedAt：07:00 定时用 T07:00:00；12/18 点刷新用实际时间（北京时间）
+  if (REFRESH) {
+    const now = new Date(Date.now() + 8 * 3600 * 1000);
+    n.generatedAt = now.toISOString().replace("T", " ").slice(0, 16) + "+08:00";
+  } else {
+    n.generatedAt = DATE + "T07:00:00+08:00";
+  }
   n.categories = n.categories || CATS;
   fs.writeFileSync(nfile, JSON.stringify(n, null, 2));
 

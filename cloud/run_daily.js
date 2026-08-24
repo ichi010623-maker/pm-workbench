@@ -7,6 +7,7 @@ const path = require("path");
 const { execSync, spawnSync } = require("child_process");
 const knowGen = require("./gen_knowledge_llm");
 const newsGen = require("./gen_news_llm");
+const readingGen = require("./gen_reading_llm");
 const gitee = require("./lib_gitee");
 const netlify = require("./deploy_netlify");
 
@@ -57,10 +58,14 @@ function runTests(BASE) {
 }
 
 async function syncToGitee(BASE, changedFiles, msg) {
-  const files = changedFiles.map((f) => ({
-    path: f,
-    content: fs.readFileSync(path.join(BASE, f), "utf8")
-  }));
+  const files = changedFiles
+    .map((f) => {
+      const p = path.join(BASE, f);
+      if (!fs.existsSync(p)) return null; // 该任务未生成的文件跳过（如 news 任务无 lang_reading.json）
+      return { path: f, content: fs.readFileSync(p, "utf8") };
+    })
+    .filter(Boolean);
+  if (files.length === 0) { console.warn("[gitee] 无文件可同步"); return; }
   await gitee.commitFiles(files, msg);
   console.log("[gitee] 已同步", files.length, "个文件");
 }
@@ -129,32 +134,12 @@ async function deployEdgeOne(BASE) {
   else console.log("[deploy] EdgeOne CLI 部署完成");
 }
 
-async function main(baseArg, dateArg) {
-  const BASE = baseArg || process.argv[2] || path.join(__dirname, "..");
-  const DATE = dateArg || process.argv[3] || todayStr();
-  const CLOUD = process.env.CLOUD === "1";
-
-  console.log(`[run_daily] BASE=${BASE} DATE=${DATE} CLOUD=${CLOUD}`);
-
-  // 1. 生成
-  const k = await knowGen.main(DATE, BASE);
-  const nw = await newsGen.main(DATE, BASE);
-  // AIHOT 抓取（已有脚本，免费 API）
-  try {
-    spawnSync("node", [path.join(BASE, "scripts", "fetch_aihot_daily.js")], { cwd: BASE, stdio: "inherit" });
-    console.log("[aihot] 抓取完成");
-  } catch (e) { console.warn("[aihot] 抓取失败(非致命):", e.message); }
-
-  // 2. 升版本
-  const nv = bumpVersion(BASE);
-
-  // 3. 测试
+// 收尾：升版本→测试→Gitee 同步→部署（daily 与 news 共用）
+async function finish(BASE, DATE, nv, CLOUD) {
   if (!runTests(BASE)) throw new Error("测试未通过，已中止");
-
-  // 4. 同步
   const changed = [
     "data/knowledge.json", "data/news.json", "data/news-archive.json", "data/aihot.json",
-    "index.html", "js/app.js", "sw.js"
+    "data/lang_reading.json", "index.html", "js/app.js", "sw.js"
   ];
   const msg = `云端自动更新 v${nv} (${DATE})`;
   if (CLOUD && process.env.GITEE_TOKEN) {
@@ -162,14 +147,45 @@ async function main(baseArg, dateArg) {
   } else {
     gitPush(BASE, msg);
   }
-
-  // 5. 部署
   await deployEdgeOne(BASE);
+}
 
+async function main(baseArg, dateArg) {
+  const BASE = baseArg || process.argv[2] || path.join(__dirname, "..");
+  const DATE = dateArg || process.argv[3] || todayStr();
+  const CLOUD = process.env.CLOUD === "1";
+
+  console.log(`[run_daily] BASE=${BASE} DATE=${DATE} CLOUD=${CLOUD}`);
+
+  // 1. 生成（知识卡 / 资讯 / 精读 10 篇 / AIHOT）
+  const k = await knowGen.main(DATE, BASE);
+  const nw = await newsGen.main(DATE, BASE);
+  try { await readingGen.main(DATE, BASE); } catch (e) { console.warn("[reading] 生成失败(非致命):", e.message); }
+  try {
+    spawnSync("node", [path.join(BASE, "scripts", "fetch_aihot_daily.js")], { cwd: BASE, stdio: "inherit" });
+    console.log("[aihot] 抓取完成");
+  } catch (e) { console.warn("[aihot] 抓取失败(非致命):", e.message); }
+
+  // 2. 升版本 → 3/4/5. 测试+同步+部署
+  const nv = bumpVersion(BASE);
+  await finish(BASE, DATE, nv, CLOUD);
   console.log(`[run_daily] 完成 ${DATE} → v${nv}`);
+}
+
+// 12:00 / 18:00 资讯刷新：仅重抓当日资讯（覆盖旧资讯），再升版本部署
+async function mainNews(baseArg, dateArg) {
+  const BASE = baseArg || process.argv[2] || path.join(__dirname, "..");
+  const DATE = dateArg || process.argv[3] || todayStr();
+  const CLOUD = process.env.CLOUD === "1";
+
+  console.log(`[run_news] BASE=${BASE} DATE=${DATE} CLOUD=${CLOUD}（当日资讯刷新）`);
+  const nw = await newsGen.main(DATE, BASE, { refresh: true });
+  const nv = bumpVersion(BASE);
+  await finish(BASE, DATE, nv, CLOUD);
+  console.log(`[run_news] 完成 ${DATE} 资讯刷新 → v${nv}`);
 }
 
 if (require.main === module) {
   main().catch((e) => { console.error("ERR", e.message); process.exit(1); });
 }
-module.exports = { main, bumpVersion };
+module.exports = { main, mainNews, bumpVersion };

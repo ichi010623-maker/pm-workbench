@@ -664,9 +664,10 @@ function lgNormalizeLang(e) {
     readingPlan: {}, listenPlan: {}, spokenPlan: {},
     wordbank: lgWordbankDefault(),
     videoCourses: [], videoProgress: {}, videoNotes: {},
-    videoSeeded: false
+    videoSeeded: false,
+    activity: {}
   };
-  ["words", "notes", "materials", "listening", "wrongList", "favorites", "packLoaded", "bank", "plan", "stats", "settings", "readingPlan", "listenPlan", "spokenPlan", "wordbank", "videoCourses", "videoProgress", "videoNotes", "videoSeeded"].forEach(function (k) {
+  ["words", "notes", "materials", "listening", "wrongList", "favorites", "packLoaded", "bank", "plan", "stats", "settings", "readingPlan", "listenPlan", "spokenPlan", "wordbank", "videoCourses", "videoProgress", "videoNotes", "videoSeeded", "activity"].forEach(function (k) {
     if (!e[k]) e[k] = def[k];
   });
   if (!e.stats.studyLog) e.stats.studyLog = {};
@@ -780,11 +781,19 @@ function renderLanguage() {
       (lgWordbankUnknownCount(code) > 0 ? '<span class="lg-lang-due">' + lgWordbankUnknownCount(code) + '</span>' : '') +
       '</div>';
   }).join("") + '</div>';
-  var tabBar = '<div class="lg-tabs">' + LG_TABS.map(function (t) {
+  // tab 栏：英语在「单词库」前插入「🔤 音标」板块
+  var lgTabs = LG_TABS.slice();
+  if (cur === "en" && !lgTabs.some(function (x) { return x.k === "phonics"; })) {
+    var ins = 0;
+    for (var ti = 0; ti < lgTabs.length; ti++) { if (lgTabs[ti].k === "words") { ins = ti; break; } }
+    lgTabs.splice(ins, 0, { k: "phonics", t: "🔤 音标" });
+  }
+  var tabBar = '<div class="lg-tabs">' + lgTabs.map(function (t) {
     return '<div class="lg-tab' + (lgTab === t.k ? " active" : "") + '" onclick="lgSetTab(\'' + t.k + '\')">' + t.t + '</div>';
   }).join("") + '</div>';
   var body = "";
   switch (lgTab) {
+    case "phonics": body = lgRenderPhonics(cur); break;
     case "words": body = lgRenderWords(cur); break;
     case "video": body = lgRenderVideo(cur); break;
     case "test": body = lgRenderTest(cur); break;
@@ -905,6 +914,175 @@ function lgSetFont(f) { var e = langGet(langCur()); e.settings.fontSize = f; DB.
 function lgFontSize() { var e = langGet(langCur()); return (e.settings && e.settings.fontSize) || 15; }
 
 /* =============================================================
+ * 音标板块（英语）：data/phonetics.json（英美对照 + 发音方式 + 元辅分类 + 例词 + 字母组合）
+ * ============================================================= */
+var __lgPhonetics = null;
+function lgPhoneticsLoad(cb) {
+  if (__lgPhonetics) { cb && cb(); return; }
+  var t = (typeof today === "function") ? today() : new Date().toISOString().slice(0, 10);
+  var ver = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "";
+  fetch("data/phonetics.json?v=" + ver + "&d=" + t).then(function (r) { return r.json(); }).then(function (j) {
+    __lgPhonetics = j; cb && cb();
+  }).catch(function () { cb && cb(); });
+}
+function lgPhonSpeak(word, region) {
+  if (!window.speechSynthesis) { showToast("当前环境不支持语音", "error"); return; }
+  window.speechSynthesis.cancel();
+  var tag = region === "UK" ? "en-GB" : "en-US";
+  var u = new SpeechSynthesisUtterance(String(word));
+  var v = null;
+  try {
+    var vs = window.speechSynthesis.getVoices();
+    for (var i = 0; i < vs.length; i++) { if (vs[i].lang && vs[i].lang.toLowerCase().indexOf(tag.toLowerCase()) === 0) { v = vs[i]; break; } }
+  } catch (e) {}
+  if (v) u.voice = v;
+  u.lang = tag;
+  u.rate = 0.85;
+  window.speechSynthesis.speak(u);
+}
+function lgPhonExamplesHtml(exs, region) {
+  return (exs || []).map(function (x) {
+    return '<span class="lg-phon-ex">' + escapeHtml(x[0]) +
+      '<button class="lg-phon-sound" onclick="lgPhonSpeak(\'' + lgEscapeJs(x[0]) + '\',\'' + region + '\')">🔊</button>' +
+      '<span class="lg-phon-cn">' + escapeHtml(x[1]) + '</span></span>';
+  }).join("");
+}
+function lgPhonCombosHtml(combos, region) {
+  if (!combos || !combos.length) return "";
+  return combos.map(function (c) {
+    return '<span class="lg-phon-combo"><b>' + escapeHtml(c.letters) + '</b> → ' +
+      (c.words || []).map(function (w) {
+        return '<span class="lg-phon-ex">' + escapeHtml(w[0]) +
+          '<button class="lg-phon-sound" onclick="lgPhonSpeak(\'' + lgEscapeJs(w[0]) + '\',\'' + region + '\')">🔊</button>' +
+          '<span class="lg-phon-cn">' + escapeHtml(w[1]) + '</span></span>';
+      }).join("") + '</span>';
+  }).join("");
+}
+function lgPhonCard(p, region) {
+  return '<div class="lg-card lg-phon-card">' +
+    '<div class="lg-phon-head">' +
+      '<span class="lg-phon-sym">' + escapeHtml(p.symbol) + '</span>' +
+      '<span class="lg-phon-tag">' + escapeHtml(p.type || "") + '</span>' +
+      '<button class="lg-phon-listen" onclick="lgPhonSpeak(\'' + lgEscapeJs((p.examples && p.examples[0] && p.examples[0][0]) || "a") + '\',\'' + region + '\')">🔊 听读音</button>' +
+    '</div>' +
+    '<div class="lg-phon-usuk">' +
+      (p.us !== p.uk ? '美式 <b>' + escapeHtml(p.us) + '</b> · 英式 <b>' + escapeHtml(p.uk) + '</b>' : '美/英 <b>' + escapeHtml(p.us) + '</b>') +
+    '</div>' +
+    '<div class="lg-phon-how">🗣 ' + escapeHtml(p.how || "") + '</div>' +
+    '<div class="lg-phon-sec">例词（' + region + '）</div><div class="lg-phon-exs">' + lgPhonExamplesHtml(p.examples, region) + '</div>' +
+    (p.combos && p.combos.length ? '<div class="lg-phon-sec">常见字母组合</div><div class="lg-phon-combos">' + lgPhonCombosHtml(p.combos, region) + '</div>' : '') +
+  '</div>';
+}
+function lgRenderPhonics(cur) {
+  if (cur !== "en") {
+    return '<div class="lg-card"><div class="lg-card-h">🔤 音标</div>' +
+      '<div class="empty-state"><div class="empty-text">音标板块当前提供英语（English），请切换语种到 🇬🇧 英语查看。</div></div></div>';
+  }
+  var head = '<div class="lg-card"><div class="lg-card-h">🔤 英语国际音标（IPA）<span class="lg-sub">美式 / 英式对照 · 点击 🔊 听读音</span></div>' +
+    '<div class="lg-phon-toolbar">' +
+      '<button class="lg-btn' + (lgPhonRegion === "US" ? " primary" : "") + '" onclick="lgPhonRegion=\'US\';render()">🇺🇸 美式发音</button>' +
+      '<button class="lg-btn' + (lgPhonRegion === "UK" ? " primary" : "") + '" onclick="lgPhonRegion=\'UK\';render()">🇬🇧 英式发音</button>' +
+    '</div>' +
+    '<div class="lg-hint">共 ' + (__lgPhonetics ? __lgPhonetics.vowels.length + ' 个元音 + ' + __lgPhonetics.consonants.length + ' 个辅音' : '…') + '。发音方式含中英文对照，例词至少 5 个，含常见字母组合。</div>' +
+  '</div>';
+  if (!__lgPhonetics) {
+    lgPhoneticsLoad(function () { render(); });
+    return head + '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载音标数据中…</div></div></div>';
+  }
+  var region = lgPhonRegion || "US";
+  var vows = '<div class="lg-card"><div class="lg-card-h">🔠 元音（Vowels）<span class="lg-sub">' + __lgPhonetics.vowels.length + ' 个</span></div>' +
+    __lgPhonetics.vowels.map(function (p) { return lgPhonCard(p, region); }).join("") + '</div>';
+  var cons = '<div class="lg-card"><div class="lg-card-h">🔤 辅音（Consonants）<span class="lg-sub">' + __lgPhonetics.consonants.length + ' 个</span></div>' +
+    __lgPhonetics.consonants.map(function (p) { return lgPhonCard(p, region); }).join("") + '</div>';
+  return head + vows + cons;
+}
+var lgPhonRegion = "US";
+
+/* =============================================================
+ * 通用微信式月历（各板块「历史」共用）
+ * ============================================================= */
+var lgCalState = {}; // { ctx: {y,m,sel} }
+function lgCalGo(ctx, d) {
+  var s = lgCalState[ctx] || (lgCalState[ctx] = { y: new Date().getFullYear(), m: new Date().getMonth() + 1, sel: null });
+  if (d === "prev") { s.m--; if (s.m < 1) { s.m = 12; s.y--; } }
+  else if (d === "next") { s.m++; if (s.m > 12) { s.m = 1; s.y++; } }
+  else s.sel = d;
+  render();
+}
+function lgCalDotMap(map) {
+  var m = {}; for (var k in (map || {})) m[k] = 1; return m;
+}
+function lgCalHtml(ctx, map, selHtml) {
+  var s = lgCalState[ctx] || (lgCalState[ctx] = { y: new Date().getFullYear(), m: new Date().getMonth() + 1, sel: null });
+  var y = s.y, m = s.m;
+  var first = new Date(y, m - 1, 1);
+  var startDow = first.getDay();
+  var daysInMonth = new Date(y, m, 0).getDate();
+  var dots = lgCalDotMap(map);
+  var weekNames = ["日", "一", "二", "三", "四", "五", "六"];
+  var head = '<div class="learn-cal-week">' + weekNames.map(function (w) { return '<span>' + w + '</span>'; }).join("") + '</div>';
+  var cells = "";
+  for (var i = 0; i < startDow; i++) cells += '<div class="learn-cal-cell empty"></div>';
+  for (var dd = 1; dd <= daysInMonth; dd++) {
+    var ds = y + "-" + String(m).padStart(2, "0") + "-" + String(dd).padStart(2, "0");
+    var has = !!dots[ds];
+    var cls = "learn-cal-cell";
+    if (ds === s.sel) cls += " selected";
+    if (ds === (typeof today === "function" ? today() : "")) cls += " today";
+    cells += '<div class="' + cls + '"' + (has ? ' onclick="lgCalGo(\'' + ctx + '\',\'' + ds + '\')"' : '') + '>' +
+      '<span class="learn-cal-num">' + dd + '</span>' +
+      (has ? '<span class="learn-cal-dot"></span>' : '') +
+    '</div>';
+  }
+  return '<div class="learn-cal">' +
+    '<div class="learn-cal-bar">' +
+      '<button class="learn-cal-nav" onclick="lgCalGo(\'' + ctx + '\',\'prev\')">‹</button>' +
+      '<span class="learn-cal-title">' + y + ' 年 ' + m + ' 月</span>' +
+      '<button class="learn-cal-nav" onclick="lgCalGo(\'' + ctx + '\',\'next\')">›</button>' +
+    '</div>' + head + '<div class="learn-cal-grid">' + cells + '</div>' +
+  '</div>' + selHtml;
+}
+function lgHistoryBtn(ctx, label) {
+  return '<button class="lg-btn ghost" onclick="lgHist=\'' + ctx + '\';render()">📅 历史</button>';
+}
+var lgHist = null; // 当前展开的历史日历 context
+
+/* 轻量活动日志：听力/口语/写作等板块记录「哪天练了几次」 */
+function lgLogActivity(section) {
+  var e = langGet(langCur());
+  if (!e.activity) e.activity = {};
+  if (!e.activity[section]) e.activity[section] = {};
+  var d = today();
+  e.activity[section][d] = (e.activity[section][d] || 0) + 1;
+  DB.save();
+}
+function lgActMap(cur, section) {
+  var a = (langGet(cur).activity || {})[section] || {};
+  var m = {}; for (var k in a) m[k] = 1; return m;
+}
+function lgActSelHtml(cur, section, label) {
+  var e = langGet(cur);
+  var s = lgCalState[section] || {};
+  var sel = s.sel || today();
+  var n = ((e.activity || {})[section] || {})[sel] || 0;
+  return '<div class="aihot-archive-day"><div class="aihot-archive-day-h">📅 ' + sel + ' ' + label + '</div>' +
+    (n ? '<div class="lg-hint">当天练习 ' + n + ' 次，坚持就是胜利 💪</div>' : '<div class="brief-empty" style="margin:0">该日期没有记录</div>') + '</div>';
+}
+
+/* =============================================================
+ * 精读每日推送数据（data/lang_reading.json，云端每日 10 篇）
+ * ============================================================= */
+var __lgReading = null;
+function lgReadingLoad(cb) {
+  if (__lgReading) { cb && cb(); return; }
+  var t = (typeof today === "function") ? today() : new Date().toISOString().slice(0, 10);
+  var ver = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "";
+  fetch("data/lang_reading.json?v=" + ver + "&d=" + t).then(function (r) { return r.json(); }).then(function (j) {
+    __lgReading = j; cb && cb();
+  }).catch(function () { __lgReading = {}; cb && cb(); });
+}
+
+/* =============================================================
  * 模块二：智能生词库
  * ============================================================= */
 function lgRenderWords(cur) {
@@ -927,7 +1105,7 @@ function lgRenderWords(cur) {
   var results = daily.results || {};
   var marked = ids.filter(function (id) { return results[id]; }).length;
 
-  var dailyHtml = '<div class="lg-card"><div class="lg-card-h">📅 今日单词 <span class="lg-sub">雅思+外贸 · 已学 ' + marked + '/' + ids.length + ' · 每日 ' + wb.dailyCount + ' 个</span></div>';
+  var dailyHtml = '<div class="lg-card"><div class="lg-card-h">📅 今日单词 <span class="lg-sub">雅思+外贸 · 已学 ' + marked + '/' + ids.length + ' · 每日 ' + wb.dailyCount + ' 个</span>' + lgHistoryBtn("wb") + '</div>';
   if (!ids.length) {
     dailyHtml += '<div class="empty-state"><div class="empty-icon">🎉</div><div class="empty-text">今天没有待学单词<br>明天会按重点（不会的）自动推送新一批。</div></div>';
   } else {
@@ -994,7 +1172,9 @@ function lgRenderWords(cur) {
   if (lgWordReview && lgWordReview.idx < lgWordReview.queue.length) {
     return libBar + lgWordReviewCard();
   }
-  return libBar + dailyHtml + revHtml + browseHtml;
+  return libBar + dailyHtml +
+    (lgHist === "wb" ? lgCalHtml("wb", lgWbHistMap(cur), lgWbHistSelHtml(cur)) : "") +
+    revHtml + browseHtml;
 }
 function lgSearchNow() { render(); }
 function lgWbSearchNow() { render(); }
@@ -1004,11 +1184,51 @@ function lgSetWordLib(lib) { var e = langGet(langCur()); e.wordbank.lib = lib; D
 function lgSetDailyCount(n) { var e = langGet(langCur()); e.wordbank.dailyCount = n; DB.save(); render(); }
 function lgEnsureDailyWordbank(cur) {
   var e = langGet(cur); var wb = e.wordbank;
+  if (!wb.history) wb.history = {}; // 微信式历史：{ date: {ids, results, count} }
   if (!wb.daily || wb.daily.date !== today()) {
+    // 归档昨日（未归档时），保证历史可回看
+    if (wb.daily && wb.daily.date && !wb.history[wb.daily.date]) {
+      wb.history[wb.daily.date] = { ids: wb.daily.ids || [], results: wb.daily.results || {}, count: (wb.daily.ids || []).length };
+    }
     wb.daily = { date: today(), ids: lgPickDailyWords(lgWordPools(), wb.enabled, wb.dailyCount, wb.progress, today()), results: {} };
     DB.save();
   }
   return wb.daily;
+}
+// 单词库历史：有记录的日期映射 + 选中日期详情
+function lgWbHistMap(cur) {
+  var wb = langGet(cur).wordbank;
+  var map = {};
+  Object.keys(wb.history || {}).forEach(function (d) { map[d] = 1; });
+  if (wb.daily && wb.daily.date) map[wb.daily.date] = 1;
+  return map;
+}
+function lgWbHistSelHtml(cur) {
+  var wb = langGet(cur).wordbank;
+  var s = lgCalState["wb"] || {};
+  var sel = s.sel || (wb.daily && wb.daily.date) || today();
+  var rec = wb.history && wb.history[sel];
+  var pools = lgWordPools(), wmap = {};
+  pools.ielts.concat(pools.trade).forEach(function (w) { wmap[w.id] = w; });
+  var ids = rec ? rec.ids : ((wb.daily && wb.daily.date === sel) ? wb.daily.ids : []);
+  var results = rec ? rec.results : ((wb.daily && wb.daily.date === sel) ? wb.daily.results : {});
+  var html = '<div class="aihot-archive-day"><div class="aihot-archive-day-h">📅 ' + sel + ' 单词</div>';
+  if (!ids || !ids.length) { html += '<div class="brief-empty" style="margin:0">该日期没有单词记录</div>'; }
+  else {
+    var marked = ids.filter(function (id) { return results[id]; }).length;
+    html += '<div class="lg-hint" style="margin-bottom:8px">共 ' + ids.length + ' 词，已标记 ' + marked + ' 个</div>';
+    html += '<div class="lg-wb-list">' + ids.map(function (id) {
+      var w = wmap[id]; if (!w) return "";
+      var st = results[id];
+      var stTxt = st ? ({ unknown: "😵 不会", vague: "🤔 模糊", known: "😎 认识" }[st]) : "—";
+      return '<div class="lg-wb-row"><span class="lg-wb-en">' + escapeHtml(w.en) + '</span>' +
+        '<span class="lg-wb-ph">' + escapeHtml(w.phonetic || "") + '</span>' +
+        '<span class="lg-wb-cn">' + escapeHtml(w.cn) + '</span>' +
+        '<span class="lg-wb-st">' + stTxt + '</span>' +
+        '<button class="lg-wb-sound" onclick="lgSpeak(\'' + lgEscapeJs(w.en) + '\',\'' + cur + '\',0.9)">🔊</button></div>';
+    }).join("") + '</div>';
+  }
+  return html + '</div>';
 }
 function lgMarkWord(cur, id, status) {
   var e = langGet(cur); lgMarkWordInWb(e.wordbank, id, status, today()); DB.save();
@@ -1536,39 +1756,93 @@ function lgTestExit() { lgTest = null; render(); }
 /* =============================================================
  * 模块三：精读阅读
  * ============================================================= */
-var lgReadingId = null;   // 当前打开的素材
+var lgReadingId = null;        // 当前打开的素材 id
+var lgReadingDaily = null;     // 当前打开的每日推送 {date, idx}
+function lgOpenDailyArt(date, idx) { lgReadingDaily = { date: date, idx: idx }; lgReadingId = null; render(); }
+function lgReadingArticleHtml(art, cur, e, backHtml) {
+  var words = lgTokenize(art.content);
+  var marked = art.marks || [];
+  var txt = words.map(function (tk) {
+    if (/^\s+$/.test(tk) || /^[.,!?;:、。，！？…「」『』()（）]+$/.test(tk)) return escapeHtml(tk);
+    var clean = tk.replace(/[.,!?;:、。，！？…「」『』()（）]$/g, "");
+    var isM = marked.indexOf(clean) !== -1;
+    return '<span class="lg-art-word' + (isM ? " marked" : "") + '" onclick="lgArtWord(\'' + lgEscapeJs(clean) + '\')">' + escapeHtml(tk) + '</span>';
+  }).join("");
+  return '<div class="lg-card"><div class="lg-card-h">📰 ' + escapeHtml(art.title) + '</div>' +
+    '<div class="lg-row" style="gap:8px;margin-bottom:10px">' +
+      '<button class="lg-btn" onclick="lgSpeak(\'' + lgEscapeJs(art.content) + '\',\'' + cur + '\',' + (e.settings.rate || 0.9) + ')">🔊 朗读全文</button>' +
+      '<button class="lg-btn ghost" onclick="lgSetRate(' + (e.settings.rate || 0.9) + ')">语速 ' + (e.settings.rate || 0.9) + 'x</button>' +
+      (art.translation ? '<button class="lg-btn ghost' + (lgReadingShowTrans ? " on" : "") + '" onclick="lgReadingShowTrans=!lgReadingShowTrans;render()">🌐 翻译</button>' : '') +
+      backHtml +
+    '</div>' +
+    '<div class="lg-art-text" style="font-size:' + lgFontSize() + 'px">' + txt + '</div>' +
+    (lgReadingShowTrans && art.translation ? '<div class="lg-trans"><div class="lg-trans-h">🌐 译文</div>' + escapeHtml(art.translation) + '</div>' : '') +
+    '<div class="lg-hint">👆 点击单词可朗读 / 加入单词；长按或选中文字可高亮批注。</div>' +
+    (marked.length ? '<div class="lg-marked-list">📌 已标注 ' + marked.length + ' 词：' + marked.map(function (w) { return '<span class="lg-marked">' + escapeHtml(w) + '</span>'; }).join("") + '</div>' : '') +
+    '</div>';
+}
 function lgRenderReading(cur) {
   var e = langGet(cur);
   var mats = e.materials || [];
+  // 打开素材文章
   if (lgReadingId) {
     var art = null;
     for (var i = 0; i < mats.length; i++) if (mats[i].id === lgReadingId) { art = mats[i]; break; }
-    if (art) {
-      var words = lgTokenize(art.content);
-      var marked = art.marks || [];
-      var txt = words.map(function (tk) {
-        if (/^\s+$/.test(tk) || /^[.,!?;:、。，！？…「」『』()（）]+$/.test(tk)) return escapeHtml(tk);
-        var clean = tk.replace(/[.,!?;:、。，！？…「」『』()（）]$/g, "");
-        var isM = marked.indexOf(clean) !== -1;
-        return '<span class="lg-art-word' + (isM ? " marked" : "") + '" onclick="lgArtWord(\'' + lgEscapeJs(clean) + '\')">' + escapeHtml(tk) + '</span>';
-      }).join("");
-      return '<div class="lg-card"><div class="lg-card-h">📰 ' + escapeHtml(art.title) + '</div>' +
-        '<div class="lg-row" style="gap:8px;margin-bottom:10px">' +
-          '<button class="lg-btn" onclick="lgSpeak(\'' + lgEscapeJs(art.content) + '\',\'' + cur + '\',' + (e.settings.rate || 0.9) + ')">🔊 朗读全文</button>' +
-          '<button class="lg-btn ghost" onclick="lgSetRate(' + (e.settings.rate || 0.9) + ')">语速 ' + (e.settings.rate || 0.9) + 'x</button>' +
-          (art.translation ? '<button class="lg-btn ghost' + (lgReadingShowTrans ? " on" : "") + '" onclick="lgReadingShowTrans=!lgReadingShowTrans;render()">🌐 翻译</button>' : '') +
-          '<button class="lg-btn ghost" onclick="lgReadingId=null;render()">← 返回列表</button>' +
-        '</div>' +
-        '<div class="lg-art-text" style="font-size:' + lgFontSize() + 'px">' + txt + '</div>' +
-        (lgReadingShowTrans && art.translation ? '<div class="lg-trans"><div class="lg-trans-h">🌐 译文</div>' + escapeHtml(art.translation) + '</div>' : '') +
-        '<div class="lg-hint">👆 点击单词可朗读 / 加入单词；长按或选中文字可高亮批注。</div>' +
-        (marked.length ? '<div class="lg-marked-list">📌 已标注 ' + marked.length + ' 词：' + marked.map(function (w) { return '<span class="lg-marked">' + escapeHtml(w) + '</span>'; }).join("") + '</div>' : '') +
-        '</div>';
-    }
+    if (art) return lgReadingArticleHtml(art, cur, e, '<button class="lg-btn ghost" onclick="lgReadingId=null;render()">← 返回列表</button>');
     lgReadingId = null;
   }
+  // 打开每日推送文章
+  if (lgReadingDaily) {
+    lgReadingLoad(function () { render(); });
+    var darts = (__lgReading && __lgReading.days && __lgReading.days[lgReadingDaily.date]) || [];
+    var dart = darts[lgReadingDaily.idx];
+    if (dart) {
+      return lgReadingArticleHtml({ title: "📅 " + lgReadingDaily.date + " · " + dart.title, content: dart.content, translation: dart.translation, marks: [] }, cur, e,
+        '<button class="lg-btn ghost" onclick="lgReadingDaily=null;render()">← 返回每日推送</button>');
+    }
+    lgReadingDaily = null;
+  }
+  // 每日推送（云端 10 篇）
+  var dailyHtml = "";
+  lgReadingLoad(function () { render(); });
+  var todayArts = (__lgReading && __lgReading.days && __lgReading.days[today()]) || [];
+  dailyHtml = '<div class="lg-card"><div class="lg-card-h">📅 每日精读推送 <span class="lg-sub">' + (todayArts.length ? today() + ' · ' + todayArts.length + ' 篇' : '每日 10 篇') + '</span>' + lgHistoryBtn("rd") + '</div>';
+  if (todayArts.length) {
+    dailyHtml += '<div class="lg-mat-list">' + todayArts.map(function (a, i) {
+      return '<div class="lg-mat" onclick="lgOpenDailyArt(\'' + today() + '\',' + i + ')">' +
+        '<div class="lg-mat-tag">' + escapeHtml(a.level || "进阶") + '</div>' +
+        '<div class="lg-mat-title">' + escapeHtml(a.title) + '</div>' +
+        '<div class="lg-mat-meta">' + (a.content || "").length + ' 词 · 含中文翻译</div></div>';
+    }).join("") + '</div>';
+  } else {
+    dailyHtml += '<div class="empty-state"><div class="empty-text">' +
+      (__lgReading ? '今日精读尚未推送，每天 07:10 云端自动更新 10 篇。' : '正在加载每日推送…') +
+      '</div></div>';
+  }
+  dailyHtml += '</div>';
+  // 历史日历（每日推送记录）
+  var rdMap = {};
+  Object.keys(__lgReading && __lgReading.days || {}).forEach(function (d) { rdMap[d] = 1; });
+  var rdSel = "";
+  if (lgHist === "rd") {
+    var s = lgCalState["rd"] || {};
+    var sel = s.sel || today();
+    var selArts = (__lgReading && __lgReading.days && __lgReading.days[sel]) || [];
+    rdSel = '<div class="aihot-archive-day"><div class="aihot-archive-day-h">📅 ' + sel + ' 精读推送</div>' +
+      (selArts.length
+        ? '<div class="lg-mat-list">' + selArts.map(function (a, i) {
+            return '<div class="lg-mat" onclick="lgOpenDailyArt(\'' + sel + '\',' + i + ')">' +
+              '<div class="lg-mat-tag">' + escapeHtml(a.level || "") + '</div>' +
+              '<div class="lg-mat-title">' + escapeHtml(a.title) + '</div></div>';
+          }).join("") + '</div>'
+        : '<div class="brief-empty" style="margin:0">该日期没有精读推送</div>') +
+      '</div>';
+  }
+  var histHtml = lgHist === "rd" ? lgCalHtml("rd", rdMap, rdSel) : "";
+
   // 素材列表 + 导入
-  return '<div class="lg-card"><div class="lg-card-h">📰 精读阅读 <span class="lg-sub">' + m1(cur) + ' · ' + mats.length + ' 篇</span></div>' +
+  return dailyHtml + histHtml +
+    '<div class="lg-card"><div class="lg-card-h">📰 我的精读素材 <span class="lg-sub">' + m1(cur) + ' · ' + mats.length + ' 篇</span></div>' +
     '<div class="lg-row" style="gap:8px">' +
       '<button class="lg-btn" onclick="lgAddMaterial()">＋ 粘贴导入文本</button>' +
       '<button class="lg-btn ghost" onclick="lgImportReading()">📚 内置精选（' + (LG_READINGS[cur] || []).length + ' 篇）</button>' +
@@ -1714,7 +1988,7 @@ function lgRenderListening(cur) {
     }
     lgListenId = null;
   }
-  return '<div class="lg-card"><div class="lg-card-h">🎧 听力训练 <span class="lg-sub">' + m1(cur) + ' · ' + list.length + ' 组</span></div>' +
+  return '<div class="lg-card"><div class="lg-card-h">🎧 听力训练 <span class="lg-sub">' + m1(cur) + ' · ' + list.length + ' 组</span>' + lgHistoryBtn("listen") + '</div>' +
     '<div class="lg-row" style="gap:8px">' +
       '<button class="lg-btn" onclick="lgAddListening()">＋ 添加听力素材</button>' +
       '<button class="lg-btn ghost" onclick="lgImportListen()">🎧 内置听力（' + (LG_LISTEN_BUILTIN[cur] || []).length + ' 组）</button>' +
@@ -1725,7 +1999,8 @@ function lgRenderListening(cur) {
           '<div class="lg-mat-title">🎧 ' + escapeHtml(it.title) + '</div>' +
           '<div class="lg-mat-meta">' + (it.sentences || []).length + ' 句 · ' + formatDateShort(it.date) + '</div></div>';
       }).join("") + '</div>') +
-    '</div>';
+    '</div>' +
+    (lgHist === "listen" ? lgCalHtml("listen", lgActMap(cur, "听力"), lgActSelHtml(cur, "听力", "听力练习")) : "");
 }
 function lgAddListening() {
   showModal(
@@ -1767,6 +2042,7 @@ function lgListenOne(id, i) {
 function lgListenPlay(id) {
   var cur = langCur();
   var e = langGet(cur);
+  lgLogActivity("听力"); // 记录练习历史
   for (var k = 0; k < e.listening.length; k++) if (e.listening[k].id === id) {
     var sents = e.listening[k].sentences;
     var rate = e.settings.rate || 0.9;
@@ -1817,7 +2093,7 @@ function lgRenderSpeaking(cur) {
   var e = langGet(cur);
   var rate = e.settings.rate || 0.9;
   var hasRec = typeof window.SpeechRecognition !== "undefined" || typeof window.webkitSpeechRecognition !== "undefined";
-  var h = '<div class="lg-card"><div class="lg-card-h">🗣 AI 口语练习 <span class="lg-sub">' + m.name + ' · 影子跟读 · 无压力开口</span></div>' +
+  var h = '<div class="lg-card"><div class="lg-card-h">🗣 AI 口语练习 <span class="lg-sub">' + m.name + ' · 影子跟读 · 无压力开口</span>' + lgHistoryBtn("speak") + '</div>' +
     '<div class="lg-scene-row">' + (LG_SCENE_KEYS.length ? LG_SCENE_KEYS.map(function (k) {
       var s = scenes[k];
       return '<button class="lg-scene' + (lgScene === k ? " on" : "") + '" onclick="lgScene=\'' + k + '\';render()">' + s.t + '</button>';
@@ -1854,11 +2130,13 @@ function lgRenderSpeaking(cur) {
         return '<div class="lg-fav" onclick="lgSpeak(\'' + lgEscapeJs(f) + '\',\'' + cur + '\',' + rate + ')">🔊 ' + escapeHtml(f) + '</div>';
       }).join("") + '</div></div>';
   }
+  h += (lgHist === "speak" ? lgCalHtml("speak", lgActMap(cur, "口语"), lgActSelHtml(cur, "口语", "口语练习")) : "");
   return h;
 }
 /* 口语跟读：点「开始录音」→ 录音 + 识别并行；点「结束录音」→ 停止 → 打分 + 回放自己的录音 */
 function lgRecToggle(idx) {
   if (lgRec && lgRec.idx === idx && lgRec.recording) { lgRecStop(); return; }
+  lgLogActivity("口语"); // 记录练习历史
   var cur = langCur();
   var scenes = LG_SCENES[cur] || {};
   var scene = scenes[lgScene] || scenes[LG_SCENE_KEYS[0]];
@@ -2019,7 +2297,7 @@ function lgRenderNotes(cur) {
     if (!q) return true;
     return (n.title + " " + n.content + " " + (n.tags || []).join(" ")).toLowerCase().indexOf(q) !== -1;
   });
-  var h = '<div class="lg-card"><div class="lg-card-h">✍️ 写作 & 笔记中心 <span class="lg-sub">' + m1(cur) + '</span></div>' +
+  var h = '<div class="lg-card"><div class="lg-card-h">✍️ 写作 & 笔记中心 <span class="lg-sub">' + m1(cur) + '</span>' + lgHistoryBtn("note") + '</div>' +
     '<div class="lg-row" style="gap:8px">' +
       '<button class="lg-btn" onclick="lgWritingTool()">🖊 短句批改</button>' +
       '<button class="lg-btn ghost" onclick="lgNoteForm()">＋ 笔记</button>' +
@@ -2046,6 +2324,26 @@ function lgRenderNotes(cur) {
         '<div class="lg-note-meta">' + formatDateShort(n.date) + (n.tags && n.tags.length ? ' · ' + n.tags.map(function (t) { return '<span class="lg-mini-tag">' + escapeHtml(t) + '</span>'; }).join("") : '') + '</div></div>';
     }).join("") + '</div>';
   }
+  // 笔记历史日历：按笔记日期打点
+  var ntMap = {};
+  notes.forEach(function (n) {
+    var d = String(n.date || "").slice(0, 10);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) ntMap[d] = 1;
+  });
+  var ntSel = "";
+  if (lgHist === "note") {
+    var ns = lgCalState["note"] || {};
+    var sel = ns.sel || today();
+    var dayNotes = notes.filter(function (n) { return String(n.date || "").slice(0, 10) === sel; });
+    ntSel = '<div class="aihot-archive-day"><div class="aihot-archive-day-h">📅 ' + sel + ' 笔记</div>' +
+      (dayNotes.length
+        ? '<div class="lg-note-list">' + dayNotes.map(function (n) {
+            return '<div class="lg-note"><div class="lg-note-head"><span class="lg-note-title" onclick="lgNoteView(\'' + n.id + '\')">' + escapeHtml(n.title) + '</span></div>' +
+              '<div class="lg-note-body">' + escapeHtml((n.content || "").slice(0, 60)) + '</div></div>';
+          }).join("") + '</div>'
+        : '<div class="brief-empty" style="margin:0">该日期没有笔记</div>') + '</div>';
+  }
+  h += (lgHist === "note" ? lgCalHtml("note", ntMap, ntSel) : "");
   return h;
 }
 /* 全局跨模块检索 */
@@ -2145,6 +2443,7 @@ function lgNoteSave(id) {
     showToast("已保存", "success");
   } else {
     e.notes.push({ id: lgUid(), title: title, content: body, tags: tags, date: new Date().toISOString() });
+    lgLogActivity("写作"); // 记录笔记历史
     showToast("笔记已保存", "success");
   }
   closeModal(); DB.save(); render();
@@ -2182,7 +2481,7 @@ function lgRenderPlan(cur) {
   var tmpl = LG_PLAN_TEMPLATES[p.template] || LG_PLAN_TEMPLATES.commute;
   var doneCount = todayTasks ? todayTasks.filter(function (t) { return t.done; }).length : 0;
   var total = todayTasks ? todayTasks.length : tmpl.tasks.length;
-  var h = '<div class="lg-card"><div class="lg-card-h">🗓 学习计划中心 <span class="lg-sub">' + m1(cur) + ' · 低压力 · 可顺延</span></div>' +
+  var h = '<div class="lg-card"><div class="lg-card-h">🗓 学习计划中心 <span class="lg-sub">' + m1(cur) + ' · 低压力 · 可顺延</span>' + lgHistoryBtn("pl") + '</div>' +
     '<div class="lg-plan-tmpl">' + Object.keys(LG_PLAN_TEMPLATES).map(function (k) {
       var t = LG_PLAN_TEMPLATES[k];
       return '<div class="lg-tmpl' + (p.template === k ? " on" : "") + '" onclick="lgSetPlanTemplate(\'' + k + '\')">' +
@@ -2200,6 +2499,21 @@ function lgRenderPlan(cur) {
         '<span class="lg-plan-t">' + escapeHtml(task.t) + '</span></div>';
     }).join("") + '</div>' +
     '<div class="lg-hint">💡 加班/没时间？点「一键顺延」，今日未完成自动并入明天，绝不强制打卡。</div></div>';
+  // 历史日历：有计划的日期
+  var plMap = {}; Object.keys(p.days || {}).forEach(function (d) { plMap[d] = 1; });
+  var plSel = "";
+  if (lgHist === "pl") {
+    var ps = lgCalState["pl"] || {};
+    var sel = ps.sel || today();
+    var tasks = p.days[sel] || [];
+    var dc = tasks.filter(function (t) { return t.done; }).length;
+    plSel = '<div class="aihot-archive-day"><div class="aihot-archive-day-h">📅 ' + sel + ' 学习计划</div>' +
+      (tasks.length
+        ? '<div class="lg-hint" style="margin-bottom:8px">完成 ' + dc + '/' + tasks.length + '</div><div class="lg-plan-list">' +
+          tasks.map(function (task, i) { return '<div class="lg-plan-item' + (task.done ? " done" : "") + '"><span class="lg-plan-check">' + (task.done ? "✅" : "⬜") + '</span><span class="lg-plan-t">' + escapeHtml(task.t) + '</span></div>'; }).join("") + '</div>'
+        : '<div class="brief-empty" style="margin:0">该日期没有计划记录</div>') + '</div>';
+  }
+  h += (lgHist === "pl" ? lgCalHtml("pl", plMap, plSel) : "");
   return h;
 }
 function lgSetPlanTemplate(k) { var e = langGet(langCur()); e.plan.template = k; if (!e.plan.days[today()]) e.plan.days[today()] = LG_PLAN_TEMPLATES[k].tasks.map(function (t) { return { t: t, done: false }; }); DB.save(); render(); }
@@ -2238,7 +2552,7 @@ function lgRenderStats(cur) {
   var days = Object.keys(e.stats.studyLog);
   var totalSec = 0; days.forEach(function (d) { totalSec += (e.stats.studyLog[d].seconds || 0); });
   var wts = Object.keys(e.stats.wrongTypes || {});
-  var h = '<div class="lg-card"><div class="lg-card-h">📊 数据复盘 <span class="lg-sub">' + m.name + ' · 贴合你的数据分析习惯</span></div>' +
+  var h = '<div class="lg-card"><div class="lg-card-h">📊 数据复盘 <span class="lg-sub">' + m.name + ' · 贴合你的数据分析习惯</span>' + lgHistoryBtn("st") + '</div>' +
     '<div class="lg-stat-row">' +
       '<div class="lg-stat"><div class="lg-stat-v">' + Math.round(totalSec / 60) + 'm</div><div class="lg-stat-l">累计时长</div></div>' +
       '<div class="lg-stat"><div class="lg-stat-v">' + days.length + '</div><div class="lg-stat-l">学习天数</div></div>' +
@@ -2268,6 +2582,22 @@ function lgRenderStats(cur) {
         '<div class="lg-quick" onclick="lgSetTab(\'words\')">📖 复习生词</div>' +
       '</div></div>' : '') +
     '';
+  // 学习历史日历：有学习记录的日期（点击查看当日时长）
+  var stMap = {}; Object.keys(e.stats.studyLog || {}).forEach(function (d) { stMap[d] = 1; });
+  var stSel = "";
+  if (lgHist === "st") {
+    var ss = lgCalState["st"] || {};
+    var sel = ss.sel || today();
+    var rec = e.stats.studyLog[sel] || {};
+    var sec = rec.seconds || 0;
+    stSel = '<div class="aihot-archive-day"><div class="aihot-archive-day-h">📅 ' + sel + ' 学习记录</div>' +
+      (sec > 0
+        ? '<div class="lg-stat-row"><div class="lg-stat"><div class="lg-stat-v">' + Math.round(sec / 60) + 'm</div><div class="lg-stat-l">当日学习时长</div></div>' +
+          '<div class="lg-stat"><div class="lg-stat-v">' + (rec.learnedCount || 0) + '</div><div class="lg-stat-l">掌握单词</div></div>' +
+          '<div class="lg-stat"><div class="lg-stat-v">' + (rec.reviewCount || 0) + '</div><div class="lg-stat-l">复习单词</div></div></div>'
+        : '<div class="brief-empty" style="margin:0">该日期没有学习记录</div>') + '</div>';
+  }
+  h += (lgHist === "st" ? lgCalHtml("st", stMap, stSel) : "");
   return h;
 }
 function lgRenderStatsCharts(cur) {

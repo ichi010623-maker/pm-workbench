@@ -1,0 +1,67 @@
+{
+  "days": {
+    "2026-08-25": [
+      {
+        "level": "入门",
+        "title": "Tech Trends",
+        "content": "Today's technology trends are fascinating. From AI to 5G, we're on the brink of a new era.",
+        "translation": "今天的科技趋势非常吸引人。从人工智能到5G，我们正站在新时代的门槛上。"
+      },
+      {
+        "level": "进阶",
+        "title": "Green Living",
+        "content": "Living green doesn't mean giving up comfort. Simple changes can make a big difference.",
+        "translation": "绿色生活并不意味着放弃舒适。简单的改变可以带来很大的不同。"
+      },
+      {
+        "level": "挑战",
+        "title": "Career Success",
+        "content": "To succeed in your career, focus on your strengths and never stop learning.",
+        "translation": "要在职业生涯中成功，专注于你的优势，永远不要停止学习。"
+      },
+      {
+        "level": "入门",
+        "title": "Cultural Festivals",
+        "content": "Festivals are a great way to learn about different cultures. They bring people together.",
+        "translation": "节日是了解不同文化的好方法。它们将人们聚集在一起。"
+      },
+      {
+        "level": "进阶",
+        "title": "Healthy Eating",
+        "content": "Eating healthy is easier than you think. Start with small changes and see the benefits.",
+        "translation": "健康饮食比你想象的要容易。从小改变开始，看看效果。"
+      },
+      {
+        "level": "挑战",
+        "title": "Environmental Challenges",
+        "content": "The environment faces many challenges. It's up to us to find sustainable solutions.",
+        "translation": "环境面临着许多挑战。找到可持续解决方案的责任在我们身上。"
+      },
+      {
+        "level": "入门",
+        "title": "Mindfulness Meditation",
+        "content": "Mindfulness meditation can reduce stress and improve concentration. It's simple to practice.",
+        "translation": "正念冥想可以减少压力并提高专注力。练习起来很简单。"
+      },
+      {
+        "level": "进阶",
+        "title": "World Cuisine",
+        "content": "Exploring world cuisine is a delicious adventure. Each dish tells a story.",
+        "translation": "探索世界美食是一次美味的冒险。每道菜都有一个故事。"
+      },
+      {
+        "level": "挑战",
+        "title": "Travel Tips",
+        "content": "Traveling can be challenging. Planning ahead and being flexible can make your trip smoother.",
+        "translation": "旅行可能会很具挑战性。提前计划和灵活变通可以使你的旅行更加顺畅。"
+      },
+      {
+        "level": "入门",
+        "title": "Sports Benefits",
+        "content": "Regular exercise is good for your body and mind. Sports can be fun and rewarding.",
+        "translation": "定期锻炼对你的身体和心灵都有好处。运动可以是乐趣和回报。"
+      }
+    ]
+  },
+  "updatedAt": "2026-08-25T02:31:00+08:00"
+}
