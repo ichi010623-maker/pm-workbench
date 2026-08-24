@@ -2449,5 +2449,140 @@
         "url": "https://view.inews.qq.com/a/20260824A13KLM00"
       }
     ]
+  },
+  "2026-08-25": {
+    "generatedAt": "2026-08-25T07:00:00+08:00",
+    "categories": [
+      {
+        "key": "official",
+        "label": "官媒热点",
+        "icon": "🏛️"
+      },
+      {
+        "key": "hardware",
+        "label": "消费电子",
+        "icon": "📱"
+      },
+      {
+        "key": "ai",
+        "label": "AI硬件",
+        "icon": "🤖"
+      },
+      {
+        "key": "tech",
+        "label": "科技前沿",
+        "icon": "💡"
+      }
+    ],
+    "items": [
+      {
+        "id": "2026-08-25-001",
+        "category": "official",
+        "priority": 5,
+        "title": "欧盟发布AI法案草案，旨在规范AI发展和应用",
+        "summary": "欧盟委员会发布AI法案草案，旨在规范AI技术的发展和应用，确保AI系统的透明度和安全性。",
+        "source": "欧盟委员会",
+        "url": "https://ec.europa.eu/commission/presscorner/detail/en/ip_2608252"
+      },
+      {
+        "id": "2026-08-25-002",
+        "category": "hardware",
+        "priority": 4,
+        "title": "英伟达发布新一代GPU，GeForce RTX 4090显卡正式上市",
+        "summary": "英伟达发布新一代GPU，GeForce RTX 4090显卡正式上市，提供更高的性能和更低的功耗。",
+        "source": "英伟达",
+        "url": "https://www.nvidia.com/en-us/geforce/rtx-4090/"
+      },
+      {
+        "id": "2026-08-25-003",
+        "category": "ai",
+        "priority": 5,
+        "title": "谷歌推出大型语言模型LaMDA，挑战OpenAI的GPT-3",
+        "summary": "谷歌推出大型语言模型LaMDA，与OpenAI的GPT-3竞争，旨在提供更自然、更流畅的语言交互体验。",
+        "source": "谷歌",
+        "url": "https://ai.googleblog.com/2026/08/introducing-lama.html"
+      },
+      {
+        "id": "2026-08-25-004",
+        "category": "tech",
+        "priority": 4,
+        "title": "量子计算公司IonQ完成1.5亿美元C轮融资，推动量子技术发展",
+        "summary": "量子计算公司IonQ完成1.5亿美元C轮融资，资金将用于推动量子技术的发展和应用。",
+        "source": "IonQ",
+        "url": "https://www.ionq.com/news/2026/08/ionq-raises-150m-series-c-funding/"
+      },
+      {
+        "id": "2026-08-25-005",
+        "category": "hardware",
+        "priority": 4,
+        "title": "苹果发布新款MacBook Pro，搭载M2芯片",
+        "summary": "苹果发布新款MacBook Pro，搭载自家设计的M2芯片，提供更好的性能和能效。",
+        "source": "苹果",
+        "url": "https://www.apple.com/macbook-pro/"
+      },
+      {
+        "id": "2026-08-25-006",
+        "category": "ai",
+        "priority": 4,
+        "title": "微软与OpenAI合作，推出大型语言模型GPT-4",
+        "summary": "微软与OpenAI合作，推出大型语言模型GPT-4，提供更强大的语言理解和生成能力。",
+        "source": "微软",
+        "url": "https://blogs.microsoft.com/ai/2026/08/25/introducing-gpt-4/"
+      },
+      {
+        "id": "2026-08-25-007",
+        "category": "tech",
+        "priority": 4,
+        "title": "IBM推出量子计算云服务，开放量子计算资源",
+        "summary": "IBM推出量子计算云服务，向研究人员和企业开放量子计算资源，推动量子技术的发展。",
+        "source": "IBM",
+        "url": "https://www.ibm.com/press/us/en/presskit/81206"
+      },
+      {
+        "id": "2026-08-25-008",
+        "category": "hardware",
+        "priority": 3,
+        "title": "三星发布Galaxy Z Fold 4折叠手机，采用新型材料",
+        "summary": "三星发布Galaxy Z Fold 4折叠手机，采用新型材料，提供更好的折叠体验。",
+        "source": "三星",
+        "url": "https://www.samsung.com/global/galaxy/z-fold4/"
+      },
+      {
+        "id": "2026-08-25-009",
+        "category": "ai",
+        "priority": 3,
+        "title": "亚马逊推出大型语言模型GPT-3，挑战OpenAI",
+        "summary": "亚马逊推出大型语言模型GPT-3，旨在提供更强大的语言理解和生成能力。",
+        "source": "亚马逊",
+        "url": "https://aws.amazon.com/blogs/ai/introducing-gpt-3/"
+      },
+      {
+        "id": "2026-08-25-010",
+        "category": "tech",
+        "priority": 3,
+        "title": "英特尔发布新一代数据中心芯片，提供更高的性能和能效",
+        "summary": "英特尔发布新一代数据中心芯片，提供更高的性能和能效，满足数据中心的需求。",
+        "source": "英特尔",
+        "url": "https://newsroom.intel.com/news/intel-announces-next-generation-data-center-processors/"
+      },
+      {
+        "id": "2026-08-25-011",
+        "category": "hardware",
+        "priority": 3,
+        "title": "华为发布Mate 50系列手机，搭载麒麟9000芯片",
+        "summary": "华为发布Mate 50系列手机，搭载麒麟9000芯片，提供更好的性能和拍照体验。",
+        "source": "华为",
+        "url": "https://www.huawei.com/cn/press-release/2026/08/2520260825155"
+      },
+      {
+        "id": "2026-08-25-012",
+        "category": "ai",
+        "priority": 3,
+        "title": "谷歌推出AI绘画工具，让用户轻松创作艺术作品",
+        "summary": "谷歌推出AI绘画工具，利用AI技术让用户轻松创作艺术作品。",
+        "source": "谷歌",
+        "url": "https://www.google.com/ai/draw/"
+      }
+    ]
   }
 }
