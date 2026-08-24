@@ -121,6 +121,14 @@ def create_triggers(cli):
         t3.Enable = "OPEN"
         try: cli.CreateTrigger(t3); print(f"[trigger] {name} 已建")
         except Exception as e: print(f"[trigger] {name} 跳过:", e)
+    # 每日精读刷新（北京时间 00:05，scf_handler 按 TriggerName=reading-0005 走 JOB=reading）
+    t4 = models.CreateTriggerRequest()
+    t4.FunctionName = FUNC; t4.Namespace = NS; t4.Type = "timer"
+    t4.TriggerName = "reading-0005"
+    t4.TriggerDesc = "0 5 0 * * * *"
+    t4.Enable = "OPEN"
+    try: cli.CreateTrigger(t4); print("[trigger] reading-0005 已建")
+    except Exception as e: print("[trigger] reading-0005 跳过:", e)
 
 if __name__ == "__main__":
     main()

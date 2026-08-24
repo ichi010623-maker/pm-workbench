@@ -12,6 +12,7 @@ const gitee = require("./lib_gitee");
 const netlify = require("./deploy_netlify");
 
 function todayStr() { return new Date().toISOString().slice(0, 10); }
+function bjTodayStr() { return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10); }
 
 function bumpVersion(BASE) {
   const verFiles = {
@@ -158,9 +159,10 @@ async function main(baseArg, dateArg) {
   console.log(`[run_daily] BASE=${BASE} DATE=${DATE} CLOUD=${CLOUD}`);
 
   // 1. 生成（知识卡 / 资讯 / 精读 10 篇 / AIHOT）
+  // 精读按北京时间切日（App 端 lgBjToday 同口径），知识卡/资讯仍按 UTC 日期
   const k = await knowGen.main(DATE, BASE);
   const nw = await newsGen.main(DATE, BASE);
-  try { await readingGen.main(DATE, BASE); } catch (e) { console.warn("[reading] 生成失败(非致命):", e.message); }
+  try { await readingGen.main(bjTodayStr(), BASE); } catch (e) { console.warn("[reading] 生成失败(非致命):", e.message); }
   try {
     spawnSync("node", [path.join(BASE, "scripts", "fetch_aihot_daily.js")], { cwd: BASE, stdio: "inherit" });
     console.log("[aihot] 抓取完成");
@@ -185,7 +187,20 @@ async function mainNews(baseArg, dateArg) {
   console.log(`[run_news] 完成 ${DATE} 资讯刷新 → v${nv}`);
 }
 
+// 北京时间 0 点后精读刷新：仅生成当日精读（北京时间切日），再升版本部署
+async function mainReading(baseArg, dateArg) {
+  const BASE = baseArg || process.argv[2] || path.join(__dirname, "..");
+  const DATE = dateArg || process.argv[3] || bjTodayStr();
+  const CLOUD = process.env.CLOUD === "1";
+
+  console.log(`[run_reading] BASE=${BASE} DATE=${DATE} CLOUD=${CLOUD}（北京时间精读刷新）`);
+  const rd = await readingGen.main(DATE, BASE);
+  const nv = bumpVersion(BASE);
+  await finish(BASE, DATE, nv, CLOUD);
+  console.log(`[run_reading] 完成 ${DATE} 精读刷新 → v${nv}`);
+}
+
 if (require.main === module) {
   main().catch((e) => { console.error("ERR", e.message); process.exit(1); });
 }
-module.exports = { main, mainNews, bumpVersion };
+module.exports = { main, mainNews, mainReading, bumpVersion };

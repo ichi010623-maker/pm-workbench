@@ -1046,13 +1046,14 @@ function lgCalGo(ctx, d) {
 function lgCalDotMap(map) {
   var m = {}; for (var k in (map || {})) m[k] = 1; return m;
 }
-function lgCalHtml(ctx, map, selHtml) {
+function lgCalHtml(ctx, map, selHtml, todayStrOverride) {
   var s = lgCalState[ctx] || (lgCalState[ctx] = { y: new Date().getFullYear(), m: new Date().getMonth() + 1, sel: null });
   var y = s.y, m = s.m;
   var first = new Date(y, m - 1, 1);
   var startDow = first.getDay();
   var daysInMonth = new Date(y, m, 0).getDate();
   var dots = lgCalDotMap(map);
+  var todayRef = todayStrOverride || (typeof today === "function" ? today() : "");
   var weekNames = ["日", "一", "二", "三", "四", "五", "六"];
   var head = '<div class="learn-cal-week">' + weekNames.map(function (w) { return '<span>' + w + '</span>'; }).join("") + '</div>';
   var cells = "";
@@ -1062,7 +1063,7 @@ function lgCalHtml(ctx, map, selHtml) {
     var has = !!dots[ds];
     var cls = "learn-cal-cell";
     if (ds === s.sel) cls += " selected";
-    if (ds === (typeof today === "function" ? today() : "")) cls += " today";
+    if (ds === todayRef) cls += " today";
     cells += '<div class="' + cls + '"' + (has ? ' onclick="lgCalGo(\'' + ctx + '\',\'' + ds + '\')"' : '') + '>' +
       '<span class="learn-cal-num">' + dd + '</span>' +
       (has ? '<span class="learn-cal-dot"></span>' : '') +
@@ -1107,9 +1108,10 @@ function lgActSelHtml(cur, section, label) {
  * 精读每日推送数据（data/lang_reading.json，云端每日 10 篇）
  * ============================================================= */
 var __lgReading = null;
+function lgBjToday() { return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10); }
 function lgReadingLoad(cb) {
   if (__lgReading) { cb && cb(); return; }
-  var t = (typeof today === "function") ? today() : new Date().toISOString().slice(0, 10);
+  var t = lgBjToday();
   var ver = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "";
   fetch("data/lang_reading.json?v=" + ver + "&d=" + t).then(function (r) { return r.json(); }).then(function (j) {
     __lgReading = j; cb && cb();
@@ -1836,21 +1838,22 @@ function lgRenderReading(cur) {
     }
     lgReadingDaily = null;
   }
-  // 每日推送（云端 10 篇）
+  // 每日推送（云端 10 篇，按北京时间切日）
   var dailyHtml = "";
   lgReadingLoad(function () { render(); });
-  var todayArts = (__lgReading && __lgReading.days && __lgReading.days[today()]) || [];
-  dailyHtml = '<div class="lg-card"><div class="lg-card-h">📅 每日精读推送 <span class="lg-sub">' + (todayArts.length ? today() + ' · ' + todayArts.length + ' 篇' : '每日 10 篇') + '</span>' + lgHistoryBtn("rd") + '</div>';
+  var bjd = lgBjToday();
+  var todayArts = (__lgReading && __lgReading.days && __lgReading.days[bjd]) || [];
+  dailyHtml = '<div class="lg-card"><div class="lg-card-h">📅 每日精读推送 <span class="lg-sub">' + (todayArts.length ? bjd + ' · ' + todayArts.length + ' 篇' : '每日 10 篇') + '</span>' + lgHistoryBtn("rd") + '</div>';
   if (todayArts.length) {
     dailyHtml += '<div class="lg-mat-list">' + todayArts.map(function (a, i) {
-      return '<div class="lg-mat" onclick="lgOpenDailyArt(\'' + today() + '\',' + i + ')">' +
+      return '<div class="lg-mat" onclick="lgOpenDailyArt(\'' + bjd + '\',' + i + ')">' +
         '<div class="lg-mat-tag">' + escapeHtml(a.level || "进阶") + '</div>' +
         '<div class="lg-mat-title">' + escapeHtml(a.title) + '</div>' +
         '<div class="lg-mat-meta">' + (a.content || "").length + ' 词 · 含中文翻译</div></div>';
     }).join("") + '</div>';
   } else {
     dailyHtml += '<div class="empty-state"><div class="empty-text">' +
-      (__lgReading ? '今日精读尚未推送，每天 07:10 云端自动更新 10 篇。' : '正在加载每日推送…') +
+      (__lgReading ? '今日精读尚未推送，每天北京时间 00:05 云端自动更新 10 篇。' : '正在加载每日推送…') +
       '</div></div>';
   }
   dailyHtml += '</div>';
@@ -1860,7 +1863,7 @@ function lgRenderReading(cur) {
   var rdSel = "";
   if (lgHist === "rd") {
     var s = lgCalState["rd"] || {};
-    var sel = s.sel || today();
+    var sel = s.sel || lgBjToday();
     var selArts = (__lgReading && __lgReading.days && __lgReading.days[sel]) || [];
     rdSel = '<div class="aihot-archive-day"><div class="aihot-archive-day-h">📅 ' + sel + ' 精读推送</div>' +
       (selArts.length
@@ -1872,7 +1875,7 @@ function lgRenderReading(cur) {
         : '<div class="brief-empty" style="margin:0">该日期没有精读推送</div>') +
       '</div>';
   }
-  var histHtml = lgHist === "rd" ? lgCalHtml("rd", rdMap, rdSel) : "";
+  var histHtml = lgHist === "rd" ? lgCalHtml("rd", rdMap, rdSel, lgBjToday()) : "";
 
   // 素材列表 + 导入
   return dailyHtml + histHtml +

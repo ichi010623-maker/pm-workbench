@@ -7,8 +7,11 @@ const fs = require("fs");
 const path = require("path");
 const { chatJSON } = require("./lib_llm");
 
+function bjTodayStr() { return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10); }
+
 async function main(dateArg, dirArg, opts) {
-  const DATE = dateArg || process.argv[2] || new Date().toISOString().slice(0, 10);
+  // 精读按「北京时间」切日（App 端 lgReadingToday 同口径），默认取北京时间今日
+  const DATE = dateArg || process.argv[2] || bjTodayStr();
   if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
   const DIR = dirArg || (process.argv[3] || path.join(__dirname, ".."));
   const force = opts && opts.force;

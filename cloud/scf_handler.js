@@ -38,11 +38,20 @@ async function prepareWorkdir() {
 }
 
 async function main(event = {}, context = {}) {
-  // 任务分派：显式 JOB 优先；否则按北京时间——7 点=daily(全量)，12/18 点=news(资讯刷新)，其余=patrol
+  // 任务分派：显式 JOB 优先；其次按定时器名精确识别（TriggerName）；
+  // 兜底按北京时间——7 点=daily(全量)，12/18 点=news(资讯刷新)，其余=patrol
+  const tn = (event && event.TriggerName) || "";
   const bjHour = new Date(Date.now() + 8 * 3600 * 1000).getUTCHours();
-  const auto = bjHour === 7 ? "daily" : (bjHour === 12 || bjHour === 18 ? "news" : "patrol");
-  const job = process.env.JOB || (event && event.job) || auto;
-  console.log("[scf] JOB=" + job + " (bjHour=" + bjHour + ")");
+  const fallback = bjHour === 7 ? "daily" : (bjHour === 12 || bjHour === 18 ? "news" : "patrol");
+  let job = process.env.JOB || (event && event.job);
+  if (!job) {
+    if (tn === "reading-0005") job = "reading";
+    else if (tn === "daily-0710") job = "daily";
+    else if (tn === "news-1200" || tn === "news-1800") job = "news";
+    else if (tn === "patrol-6h") job = "patrol";
+    else job = fallback;
+  }
+  console.log("[scf] JOB=" + job + " (trigger=" + tn + " bjHour=" + bjHour + ")");
 
   if (job === "patrol") {
     const work = await prepareWorkdir();
@@ -54,6 +63,14 @@ async function main(event = {}, context = {}) {
     const work = await prepareWorkdir();
     const runDaily = require("./run_daily");
     return await runDaily.mainNews(work, new Date().toISOString().slice(0, 10));
+  }
+
+  if (job === "reading") {
+    const work = await prepareWorkdir();
+    const runDaily = require("./run_daily");
+    // 精读按北京时间切日
+    const bjDate = new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+    return await runDaily.mainReading(work, bjDate);
   }
 
   // daily
