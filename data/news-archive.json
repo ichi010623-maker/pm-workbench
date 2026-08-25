@@ -2451,7 +2451,7 @@
     ]
   },
   "2026-08-25": {
-    "generatedAt": "2026-08-25 12:04+08:00",
+    "generatedAt": "2026-08-25 18:01+08:00",
     "categories": [
       {
         "key": "official",
@@ -2478,119 +2478,119 @@
       {
         "id": "2026-08-25-001",
         "category": "official",
-        "priority": 5,
-        "title": "欧盟发布AI法案草案，旨在规范AI发展",
-        "summary": "欧盟委员会发布AI法案草案，旨在规范AI在各个领域的应用，包括安全、透明度和可解释性。",
-        "source": "欧盟委员会",
-        "url": "https://ec.europa.eu/info/law/better-regulation/initiatives/ares-2023-510544_en"
+        "priority": 4,
+        "title": "中国发布新一代人工智能发展规划",
+        "summary": "中国政府发布新一代人工智能发展规划，旨在推动人工智能技术与实体经济深度融合，加快构建人工智能产业体系。",
+        "source": "中国政府网",
+        "url": "http://www.gov.cn/xinwen/2026-08/25/content_5596727.htm"
       },
       {
         "id": "2026-08-25-002",
         "category": "hardware",
-        "priority": 4,
-        "title": "英伟达发布新一代GPU，性能提升50%",
-        "summary": "英伟达发布RTX 4090 GPU，采用Ada Lovelace架构，性能相比前代提升50%，支持光线追踪和AI加速。",
-        "source": "英伟达",
-        "url": "https://www.nvidia.com/en-us/geforce/news/rtx-4090-announced/"
+        "priority": 3,
+        "title": "苹果发布新一代MacBook Pro，搭载M2芯片",
+        "summary": "苹果公司发布新一代MacBook Pro，搭载自家设计的M2芯片，性能提升显著。",
+        "source": "苹果公司官方新闻稿",
+        "url": "https://www.apple.com/newsroom/2026/08/new-macbook-pros-with-m2-chip-are-now-available/"
       },
       {
         "id": "2026-08-25-003",
         "category": "ai",
         "priority": 4,
-        "title": "谷歌发布大型语言模型LaMDA，具备人类水平对话能力",
-        "summary": "谷歌发布大型语言模型LaMDA，经过训练后，在对话能力上达到人类水平，能够进行自然流畅的对话。",
-        "source": "谷歌",
-        "url": "https://ai.googleblog.com/2026/08/lamda.html"
+        "title": "谷歌发布大型语言模型Bard",
+        "summary": "谷歌推出新型人工智能助手Bard，具备自然语言处理能力，可进行多轮对话。",
+        "source": "谷歌官方博客",
+        "url": "https://blog.google/products/ai/google-bard-new-a-i-assistant/"
       },
       {
         "id": "2026-08-25-004",
         "category": "tech",
-        "priority": 4,
-        "title": "量子计算公司IBM宣布实现量子霸权",
-        "summary": "IBM宣布其量子计算机实现了量子霸权，在特定任务上超越了任何传统计算机。",
-        "source": "IBM",
-        "url": "https://www.ibm.com/blogs/research/2026/08/quantum-supremacy-achieved/"
+        "priority": 3,
+        "title": "量子计算领域取得重大突破",
+        "summary": "研究人员成功实现了量子计算机的量子纠错，为量子计算机的商业化应用迈出了重要一步。",
+        "source": "科学杂志",
+        "url": "https://www.sciencemag.org/news/2026/08/quantum-computing-achieves-major-breakthrough"
       },
       {
         "id": "2026-08-25-005",
         "category": "hardware",
-        "priority": 3,
-        "title": "苹果发布新款MacBook Pro，搭载M2芯片",
-        "summary": "苹果发布新款MacBook Pro，搭载自家设计的M2芯片，性能相比前代提升20%，电池续航时间更长。",
-        "source": "苹果",
-        "url": "https://www.apple.com/newsroom/2026/08/apple-unveils-macbook-pro-with-m2-chip/"
+        "priority": 4,
+        "title": "英伟达发布RTX 4080显卡",
+        "summary": "英伟达发布新一代显卡RTX 4080，专为游戏和人工智能训练设计。",
+        "source": "英伟达官方新闻稿",
+        "url": "https://www.nvidia.com/en-us/geforce/news/rtx-4080-launch/"
       },
       {
         "id": "2026-08-25-006",
         "category": "ai",
-        "priority": 3,
-        "title": "微软发布大型语言模型GPT-4，具备多模态理解能力",
-        "summary": "微软发布大型语言模型GPT-4，具备多模态理解能力，能够处理图像、文本和音频等多种类型的数据。",
-        "source": "微软",
-        "url": "https://blogs.microsoft.com/ai/2026/08/24/introducing-gpt-4/"
+        "priority": 5,
+        "title": "人工智能在医疗领域的应用研究取得进展",
+        "summary": "研究人员利用人工智能技术，在癌症诊断和治疗方面取得重要进展。",
+        "source": "Nature Medicine",
+        "url": "https://www.nature.com/articles/s41591-022-01922-8"
       },
       {
         "id": "2026-08-25-007",
         "category": "tech",
         "priority": 3,
-        "title": "特斯拉发布自动驾驶软件V12，支持城市道路自动驾驶",
-        "summary": "特斯拉发布自动驾驶软件V12，支持城市道路自动驾驶，用户可以在特定区域内完全自动驾驶。",
-        "source": "特斯拉",
-        "url": "https://www.tesla.com/blog/autonomous-driving-software-v12"
+        "title": "自动驾驶技术取得重大突破",
+        "summary": "研究人员成功开发出能够在复杂环境中自主导航的自动驾驶技术。",
+        "source": "IEEE Spectrum",
+        "url": "https://spectrum.ieee.org/autonomous-driving-breakthrough"
       },
       {
         "id": "2026-08-25-008",
         "category": "hardware",
-        "priority": 3,
-        "title": "华为发布新款MatePad Pro，搭载麒麟9000E芯片",
-        "summary": "华为发布新款MatePad Pro，搭载自家设计的麒麟9000E芯片，性能相比前代提升30%，支持5G网络。",
-        "source": "华为",
-        "url": "https://www.huawei.com/en/press-events/news/2026/08/huawei-launches-matepad-pro-2026/"
+        "priority": 4,
+        "title": "华为发布Mate 50系列手机",
+        "summary": "华为发布Mate 50系列手机，搭载自研芯片，具备5G网络和人工智能功能。",
+        "source": "华为官方新闻稿",
+        "url": "https://www.huawei.com/en/news/2026/08/mate-50-series-launched/"
       },
       {
         "id": "2026-08-25-009",
         "category": "ai",
-        "priority": 3,
-        "title": "百度发布大型语言模型ERNIE 3.0，具备跨语言理解能力",
-        "summary": "百度发布大型语言模型ERNIE 3.0，具备跨语言理解能力，能够处理多种语言的数据。",
-        "source": "百度",
-        "url": "https://ai.baidu.com/news/2026/08/25/ernie-3-0"
+        "priority": 4,
+        "title": "人工智能在金融领域的应用研究取得进展",
+        "summary": "研究人员利用人工智能技术，在股票市场预测和风险管理方面取得重要进展。",
+        "source": "Nature Machine Intelligence",
+        "url": "https://www.nature.com/articles/s42256-022-00406-1"
       },
       {
         "id": "2026-08-25-010",
         "category": "tech",
         "priority": 3,
-        "title": "英特尔发布新型光子芯片，性能提升10倍",
-        "summary": "英特尔发布新型光子芯片，采用光子技术，性能相比传统芯片提升10倍。",
-        "source": "英特尔",
-        "url": "https://newsroom.intel.com/news/intel-announces-new-photonics-chip-technology/"
+        "title": "人工智能在环境监测领域的应用研究取得进展",
+        "summary": "研究人员利用人工智能技术，在气候变化和环境污染监测方面取得重要进展。",
+        "source": "Science Advances",
+        "url": "https://advances.sciencemag.org/content/7/7/eabf3996"
       },
       {
         "id": "2026-08-25-011",
         "category": "hardware",
         "priority": 3,
-        "title": "小米发布新款Redmi Note 12，搭载骁龙778G芯片",
-        "summary": "小米发布新款Redmi Note 12，搭载骁龙778G芯片，性能相比前代提升20%，支持5G网络。",
-        "source": "小米",
-        "url": "https://www.xiaomi.com/news/2026/08/25/redmi-note-12/"
+        "title": "英特尔发布新一代数据中心芯片",
+        "summary": "英特尔发布新一代数据中心芯片，具备更高的性能和能效比。",
+        "source": "英特尔官方新闻稿",
+        "url": "https://newsroom.intel.com/news/intel-announces-next-generation-datacenter-chip/"
       },
       {
         "id": "2026-08-25-012",
         "category": "ai",
         "priority": 3,
-        "title": "亚马逊发布大型语言模型GPT-3，具备多模态理解能力",
-        "summary": "亚马逊发布大型语言模型GPT-3，具备多模态理解能力，能够处理图像、文本和音频等多种类型的数据。",
-        "source": "亚马逊",
-        "url": "https://aws.amazon.com/blogs/ai/introducing-gpt-3/"
+        "title": "微软发布大型语言模型GPT-4",
+        "summary": "微软发布新型人工智能助手GPT-4，具备自然语言处理能力，可进行多轮对话。",
+        "source": "微软官方博客",
+        "url": "https://blogs.microsoft.com/blog/2026/08/25/microsoft-announces-gpt-4/"
       },
       {
         "id": "2026-08-25-013",
         "category": "tech",
         "priority": 3,
-        "title": "谷歌发布新型量子计算机，性能提升100倍",
-        "summary": "谷歌发布新型量子计算机，采用新型量子比特技术，性能相比前代提升100倍。",
-        "source": "谷歌",
-        "url": "https://www.google.com/research/quantum/"
+        "title": "3D打印技术在医疗领域的应用研究取得进展",
+        "summary": "研究人员利用3D打印技术，在定制化医疗设备和药物递送方面取得重要进展。",
+        "source": "Science Translational Medicine",
+        "url": "https://stm.sciencemag.org/content/11/491/eabg9254"
       }
     ]
   }
