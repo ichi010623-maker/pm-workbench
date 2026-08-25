@@ -2,12 +2,24 @@
   "days": {
     "2026-08-25": {
       "date": "2026-08-25",
+      "mode": "rss",
+      "sources": {
+        "BBC": 0,
+        "BBC商业": 0,
+        "BBC科技": 0,
+        "Al Jazeera": 0,
+        "NPR": 10,
+        "Guardian世界": 0,
+        "Guardian科技": 0,
+        "Guardian商业": 0
+      },
+      "rssCount": 10,
       "brief": [
-        "全球股市波动，关注美联储政策动向。",
-        "科技巨头财报发布，业绩超预期。",
-        "中国外交部就南海问题表态。",
-        "欧洲多地举行反种族主义抗议活动。",
-        "极端天气频发，全球关注气候变化问题。"
+        "特朗普呼吁世界领导人孤立伊朗，最高法院支持特朗普限制邮寄投票",
+        "艾滋病危机催生了数十亿美元的死亡投机市场",
+        "特朗普的经济战能否达到空袭和谈判无法达到的效果？",
+        "至少25%的2016年至2021年间去世的前NFL球员患有CTE",
+        "斯波坎野火疏散者返回家园，但仍是‘危险物质情况’"
       ],
       "groups": [
         {
@@ -15,22 +27,22 @@
           "icon": "🌍",
           "items": [
             {
-              "title": "全球股市波动",
-              "summary": "美欧股市涨跌互现，关注美联储政策动向。",
-              "source": "路透",
-              "url": "https://www.reuters.com/article/us-world-markets/markets-overview-world-stocks-fall-as-us-earnings-worry-markets-idUSKBN2271JY"
+              "title": "特朗普呼吁孤立伊朗",
+              "summary": "特朗普要求世界领导人加入对伊朗的经济战",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/g-s1-140004/up-first-newsletter-iran-economic-war-scotus-mail-in-voting-dhs-privacy"
             },
             {
-              "title": "科技巨头财报",
-              "summary": "苹果、亚马逊等科技巨头发布财报，业绩超预期。",
-              "source": "彭博社",
-              "url": "https://www.bloomberg.com/news/articles/2026-08-25/tech-giants-apple-amazon-report-robust-earnings"
+              "title": "最高法院支持特朗普限制邮寄投票",
+              "summary": "最高法院暂时支持特朗普限制邮寄投票的命令",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/g-s1-140004/up-first-newsletter-iran-economic-war-scotus-mail-in-voting-dhs-privacy"
             },
             {
-              "title": "欧洲反种族主义",
-              "summary": "欧洲多地举行反种族主义抗议活动，呼吁平等权利。",
-              "source": "BBC",
-              "url": "https://www.bbc.com/news/world-europe-65852328"
+              "title": "特朗普经济战效果待观察",
+              "summary": "分析美国对伊朗的新一轮制裁及其影响",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5943572/trump-iran-sanctions"
             }
           ]
         },
@@ -39,99 +51,75 @@
           "icon": "💼",
           "items": [
             {
-              "title": "美联储政策动向",
-              "summary": "美联储官员暗示可能进一步加息。",
-              "source": "路透",
-              "url": "https://www.reuters.com/article/us-usa-federal-reserve-rate-idUSKBN2271JY"
+              "title": "死亡投机市场兴起",
+              "summary": "投资者购买你的寿险，并在你去世时领取赔偿",
+              "source": "NPR",
+              "url": "https://www.npr.org/sections/planet-money/2026/08/25/g-s1-139946/how-the-aids-crisis-helped-create-a-multibillion-dollar-death-speculation-market"
             },
             {
-              "title": "科技股表现",
-              "summary": "科技股强劲表现推动纳斯达克指数创新高。",
-              "source": "彭博社",
-              "url": "https://www.bloomberg.com/news/articles/2026-08-25/tech-stocks-drive-nasdaq-to-new-highs-as-apple-amazon-report"
+              "title": "伊朗经济压力分析",
+              "summary": "探讨美国对伊朗经济压力的效果",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5943572/trump-iran-sanctions"
             },
             {
-              "title": "全球经济增长",
-              "summary": "国际货币基金组织下调全球经济增长预期。",
-              "source": "新华社",
-              "url": ""
+              "title": "学生停学争议",
+              "summary": "特朗普教育部要求学校在纪律处分时不考虑种族因素",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5936474/discrimination-school-discipline-suspension-race-education-department-civil-rights"
             }
           ]
         },
         {
-          "cat": "科技",
-          "icon": "💻",
+          "cat": "健康医疗",
+          "icon": "🏥",
           "items": [
             {
-              "title": "人工智能突破",
-              "summary": "研究人员在人工智能领域取得重大突破。",
-              "source": "科技日报",
-              "url": ""
+              "title": "前NFL球员CTE比例高",
+              "summary": "研究发现，2016年至2021年间至少25%的前NFL球员患有CTE",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5943168/cte-nfl-concussions-deaths-study"
             },
             {
-              "title": "量子计算机进展",
-              "summary": "量子计算机研究取得新进展，有望解决复杂问题。",
-              "source": "新华社",
-              "url": ""
+              "title": "脑损伤儿童夏令营",
+              "summary": "宾夕法尼亚夏令营帮助脑损伤儿童康复，但联邦资金面临不确定性",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5936617/camp-cranium-tbi-act-brain-injury-concussion-trauma-cdc"
             },
             {
-              "title": "5G技术发展",
-              "summary": "5G技术在全球范围内得到广泛应用。",
-              "source": "路透",
-              "url": "https://www.reuters.com/article/us-5g-technology/5g-technology-is-now-being-used-around-the-world-idUSKBN2271JY"
+              "title": "斯波坎野火情况",
+              "summary": "斯波坎野火疏散者返回家园，但仍有危险物质风险",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5943574/spokane-wildfire-evacuees-return-home-but-its-still-a-hazmat-situation"
             }
           ]
         },
         {
-          "cat": "中国",
-          "icon": "🇨🇳",
+          "cat": "环境气候",
+          "icon": "🌍",
           "items": [
             {
-              "title": "外交部表态",
-              "summary": "中国外交部就南海问题表态，强调和平解决。",
-              "source": "新华社",
-              "url": ""
+              "title": "气候变化与热浪",
+              "summary": "探讨气候变化在极端热浪中的作用",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5940053/heat-wave-extreme-forecast-climate"
             },
             {
-              "title": "经济发展",
-              "summary": "中国第二季度GDP同比增长7.4%，经济持续复苏。",
-              "source": "财新",
-              "url": ""
+              "title": "DHS秘密监视活动",
+              "summary": "DHS在社区会议中秘密监视，并制作了教堂集会人员的档案",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5941135/dhs-surveillance-minnesota-ice-surge"
             },
             {
-              "title": "疫情防控",
-              "summary": "中国加强疫情防控，确保人民生命安全。",
-              "source": "人民日报",
-              "url": ""
-            }
-          ]
-        },
-        {
-          "cat": "其他",
-          "icon": "🌏",
-          "items": [
-            {
-              "title": "气候变化",
-              "summary": "全球极端天气频发，关注气候变化问题。",
-              "source": "联合国新闻",
-              "url": ""
-            },
-            {
-              "title": "国际援助",
-              "summary": "国际社会加大对非洲的援助力度。",
-              "source": "新华社",
-              "url": ""
-            },
-            {
-              "title": "国际组织",
-              "summary": "国际组织呼吁加强全球卫生安全。",
-              "source": "路透",
-              "url": "https://www.reuters.com/article/us-world-health-organization-idUSKBN2271JY"
+              "title": "伊朗回应制裁",
+              "summary": "伊朗誓言将对美国的新一轮经济制裁进行报复",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5942903/morning-news-brief"
             }
           ]
         }
       ]
     }
   },
-  "updatedAt": "2026-08-25T21:38:00+08:00"
+  "updatedAt": "2026-08-25T22:02:00+08:00"
 }
