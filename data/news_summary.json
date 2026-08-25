@@ -1,0 +1,137 @@
+{
+  "days": {
+    "2026-08-25": {
+      "date": "2026-08-25",
+      "brief": [
+        "全球股市波动，关注美联储政策动向。",
+        "科技巨头财报发布，业绩超预期。",
+        "中国外交部就南海问题表态。",
+        "欧洲多地举行反种族主义抗议活动。",
+        "极端天气频发，全球关注气候变化问题。"
+      ],
+      "groups": [
+        {
+          "cat": "国际",
+          "icon": "🌍",
+          "items": [
+            {
+              "title": "全球股市波动",
+              "summary": "美欧股市涨跌互现，关注美联储政策动向。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-world-markets/markets-overview-world-stocks-fall-as-us-earnings-worry-markets-idUSKBN2271JY"
+            },
+            {
+              "title": "科技巨头财报",
+              "summary": "苹果、亚马逊等科技巨头发布财报，业绩超预期。",
+              "source": "彭博社",
+              "url": "https://www.bloomberg.com/news/articles/2026-08-25/tech-giants-apple-amazon-report-robust-earnings"
+            },
+            {
+              "title": "欧洲反种族主义",
+              "summary": "欧洲多地举行反种族主义抗议活动，呼吁平等权利。",
+              "source": "BBC",
+              "url": "https://www.bbc.com/news/world-europe-65852328"
+            }
+          ]
+        },
+        {
+          "cat": "商业财经",
+          "icon": "💼",
+          "items": [
+            {
+              "title": "美联储政策动向",
+              "summary": "美联储官员暗示可能进一步加息。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-usa-federal-reserve-rate-idUSKBN2271JY"
+            },
+            {
+              "title": "科技股表现",
+              "summary": "科技股强劲表现推动纳斯达克指数创新高。",
+              "source": "彭博社",
+              "url": "https://www.bloomberg.com/news/articles/2026-08-25/tech-stocks-drive-nasdaq-to-new-highs-as-apple-amazon-report"
+            },
+            {
+              "title": "全球经济增长",
+              "summary": "国际货币基金组织下调全球经济增长预期。",
+              "source": "新华社",
+              "url": ""
+            }
+          ]
+        },
+        {
+          "cat": "科技",
+          "icon": "💻",
+          "items": [
+            {
+              "title": "人工智能突破",
+              "summary": "研究人员在人工智能领域取得重大突破。",
+              "source": "科技日报",
+              "url": ""
+            },
+            {
+              "title": "量子计算机进展",
+              "summary": "量子计算机研究取得新进展，有望解决复杂问题。",
+              "source": "新华社",
+              "url": ""
+            },
+            {
+              "title": "5G技术发展",
+              "summary": "5G技术在全球范围内得到广泛应用。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-5g-technology/5g-technology-is-now-being-used-around-the-world-idUSKBN2271JY"
+            }
+          ]
+        },
+        {
+          "cat": "中国",
+          "icon": "🇨🇳",
+          "items": [
+            {
+              "title": "外交部表态",
+              "summary": "中国外交部就南海问题表态，强调和平解决。",
+              "source": "新华社",
+              "url": ""
+            },
+            {
+              "title": "经济发展",
+              "summary": "中国第二季度GDP同比增长7.4%，经济持续复苏。",
+              "source": "财新",
+              "url": ""
+            },
+            {
+              "title": "疫情防控",
+              "summary": "中国加强疫情防控，确保人民生命安全。",
+              "source": "人民日报",
+              "url": ""
+            }
+          ]
+        },
+        {
+          "cat": "其他",
+          "icon": "🌏",
+          "items": [
+            {
+              "title": "气候变化",
+              "summary": "全球极端天气频发，关注气候变化问题。",
+              "source": "联合国新闻",
+              "url": ""
+            },
+            {
+              "title": "国际援助",
+              "summary": "国际社会加大对非洲的援助力度。",
+              "source": "新华社",
+              "url": ""
+            },
+            {
+              "title": "国际组织",
+              "summary": "国际组织呼吁加强全球卫生安全。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-world-health-organization-idUSKBN2271JY"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "updatedAt": "2026-08-25T21:38:00+08:00"
+}
