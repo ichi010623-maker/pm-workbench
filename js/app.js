@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.75";
+var APP_VERSION = "5.9.76";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -2252,7 +2252,9 @@ var __nsHist = 0;
 function nsLoad(cb) {
   if (__newsSummary) { cb && cb(); return; }
   var ver = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "";
-  fetch("data/news_summary.json?v=" + ver).then(function (r) { return r.json(); }).then(function (j) {
+  var bjd = new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+  // 缓存键加入北京时间日期，确保每日新数据即时生效（数据单文件更新不升版本号）
+  fetch("data/news_summary.json?v=" + ver + "&d=" + bjd).then(function (r) { return r.json(); }).then(function (j) {
     __newsSummary = j; cb && cb();
   }).catch(function () { __newsSummary = {}; cb && cb(); });
 }
