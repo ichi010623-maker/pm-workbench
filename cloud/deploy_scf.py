@@ -80,7 +80,6 @@ def main():
         cli.CreateFunction(req)
         print("[deploy] 创建完成，等待就绪...")
         import time; time.sleep(8)
-        create_triggers(cli)
     else:
         print("[deploy] 函数已存在，更新代码+配置")
         up = models.UpdateFunctionCodeRequest()
@@ -92,6 +91,8 @@ def main():
         cf.Environment._deserialize({"Variables": [{"Key":k,"Value":v} for k,v in env.items()]})
         cli.UpdateFunctionConfiguration(cf)
         print("[deploy] 代码+配置已更新")
+    # 幂等确保触发器存在：新增触发器在已有函数重部署时也能补建（CreateTrigger 已存在则跳过）
+    create_triggers(cli)
 
     print("[deploy] DONE")
 
@@ -129,6 +130,14 @@ def create_triggers(cli):
     t4.Enable = "OPEN"
     try: cli.CreateTrigger(t4); print("[trigger] reading-0005 已建")
     except Exception as e: print("[trigger] reading-0005 跳过:", e)
+    # 每日新闻摘要（北京时间 08:00 = UTC 00:00，scf_handler 按 TriggerName=summary-0800 走 JOB=newssum）
+    t5 = models.CreateTriggerRequest()
+    t5.FunctionName = FUNC; t5.Namespace = NS; t5.Type = "timer"
+    t5.TriggerName = "summary-0800"
+    t5.TriggerDesc = "0 0 0 * * * *"
+    t5.Enable = "OPEN"
+    try: cli.CreateTrigger(t5); print("[trigger] summary-0800 已建")
+    except Exception as e: print("[trigger] summary-0800 跳过:", e)
 
 if __name__ == "__main__":
     main()
