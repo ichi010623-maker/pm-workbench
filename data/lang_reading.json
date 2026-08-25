@@ -123,7 +123,69 @@
         "content": "Reading is a great way to learn and relax. It improves your vocabulary and understanding. Find a book that interests you and start reading.",
         "translation": "阅读是学习和放松的好方法。它提高你的词汇量和理解力。找到一本你感兴趣的书并开始阅读。"
       }
+    ],
+    "2026-08-26": [
+      {
+        "level": "入门",
+        "title": "Daily Routines",
+        "content": "Establishing a daily routine can improve your productivity and well-being. Start with small changes and gradually build up your schedule.",
+        "translation": "建立日常规律可以提高你的效率和幸福感。从小改变开始，逐渐建立你的日程。"
+      },
+      {
+        "level": "进阶",
+        "title": "Smartphone Habits",
+        "content": "Limiting your smartphone use can reduce stress and improve your sleep quality. Set specific times to check your phone and stick to them.",
+        "translation": "限制你的手机使用可以减少压力并改善你的睡眠质量。设定特定的检查手机时间并坚持。"
+      },
+      {
+        "level": "挑战",
+        "title": "Interstellar Travel",
+        "content": "Interstellar travel may become a reality in the future. It will require overcoming many technical and scientific challenges.",
+        "translation": "星际旅行可能在将来成为现实。它需要克服许多技术和科学挑战。"
+      },
+      {
+        "level": "入门",
+        "title": "Gardening Basics",
+        "content": "Gardening is a great way to relax and connect with nature. Start with easy-to-grow plants and learn as you go.",
+        "translation": "园艺是一种放松并与自然联系的好方法。从容易生长的植物开始，边学边做。"
+      },
+      {
+        "level": "进阶",
+        "title": "Work-Life Balance",
+        "content": "Maintaining a healthy work-life balance is crucial for long-term success. Set boundaries and prioritize your personal time.",
+        "translation": "保持健康的工作与生活平衡对于长期成功至关重要。设定界限并优先考虑个人时间。"
+      },
+      {
+        "level": "挑战",
+        "title": "Quantum Computing",
+        "content": "Quantum computing has the potential to revolutionize many fields. It uses quantum bits to process information much faster than traditional computers.",
+        "translation": "量子计算有潜力改变许多领域。它使用量子位来处理信息，比传统计算机快得多。"
+      },
+      {
+        "level": "入门",
+        "title": "Healthy Snacks",
+        "content": "Choosing healthy snacks can help you maintain a balanced diet. Opt for fruits, nuts, or yogurt instead of chips or candy.",
+        "translation": "选择健康的零食可以帮助你保持均衡的饮食。选择水果、坚果或酸奶而不是薯片或糖果。"
+      },
+      {
+        "level": "进阶",
+        "title": "Cultural Exchange",
+        "content": "Participating in cultural exchange programs can broaden your horizons and deepen your understanding of other cultures.",
+        "translation": "参与文化交流项目可以拓宽你的视野并加深你对其他文化的理解。"
+      },
+      {
+        "level": "挑战",
+        "title": "Ocean Conservation",
+        "content": "Protecting our oceans is essential for preserving marine life and maintaining a healthy planet. Join efforts to reduce plastic pollution.",
+        "translation": "保护我们的海洋对于保护海洋生物和维护一个健康的地球至关重要。加入减少塑料污染的努力。"
+      },
+      {
+        "level": "入门",
+        "title": "Meditation Techniques",
+        "content": "Meditation can help reduce stress and improve focus. Start with just a few minutes a day and gradually increase your practice.",
+        "translation": "冥想可以帮助减少压力并提高专注力。每天开始只需几分钟，并逐渐增加你的练习。"
+      }
     ]
   },
-  "updatedAt": "2026-08-24T02:34:00+08:00"
+  "updatedAt": "2026-08-26T00:05:00+08:00"
 }
