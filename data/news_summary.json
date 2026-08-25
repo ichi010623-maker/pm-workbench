@@ -119,7 +119,121 @@
           ]
         }
       ]
+    },
+    "2026-08-26": {
+      "date": "2026-08-26",
+      "mode": "rss",
+      "sources": {
+        "BBC": 0,
+        "BBC商业": 0,
+        "BBC科技": 0,
+        "Al Jazeera": 0,
+        "NPR": 10,
+        "Guardian世界": 0,
+        "Guardian科技": 0,
+        "Guardian商业": 0
+      },
+      "rssCount": 10,
+      "brief": [
+        "加拿大对美国实施报复性关税，贸易战升级。",
+        "罗兴亚难民危机持续，援助减少，难民生活无望。",
+        "美国多州将决定是否实施选民身份验证措施。",
+        "特朗普呼吁孤立伊朗，最高法院支持其邮寄投票限制令。",
+        "AIDS危机催生数十亿美元死亡投机市场。"
+      ],
+      "groups": [
+        {
+          "cat": "国际",
+          "icon": "🌍",
+          "items": [
+            {
+              "title": "加拿大对美国实施报复性关税",
+              "summary": "加拿大对美国实施报复性关税，以回应美国对加拿大商品加征关税。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5944240/canada-us-tariffs"
+            },
+            {
+              "title": "罗兴亚难民危机持续",
+              "summary": "罗兴亚难民危机持续，援助减少，难民生活无望。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/g-s1-140007/forget-about-going-back-9-years-on-rohingya-crisis-enters-dangerous-phase"
+            },
+            {
+              "title": "多州决定选民身份验证措施",
+              "summary": "美国多州将决定是否实施选民身份验证措施。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5940004/voter-id-citizenship-ballot-measures"
+            }
+          ]
+        },
+        {
+          "cat": "商业财经",
+          "icon": "💼",
+          "items": [
+            {
+              "title": "特朗普呼吁孤立伊朗",
+              "summary": "特朗普呼吁世界领导人加入其经济战，对抗伊朗。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/g-s1-140004/up-first-newsletter-iran-economic-war-scotus-mail-in-voting-dhs-privacy"
+            },
+            {
+              "title": "特朗普限制邮寄投票",
+              "summary": "最高法院支持特朗普限制邮寄投票的命令。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/g-s1-140004/up-first-newsletter-iran-economic-war-scotus-mail-in-voting-dhs-privacy"
+            },
+            {
+              "title": "AIDS危机催生死亡投机市场",
+              "summary": "投资者购买你的寿险，并在你去世时领取赔偿。",
+              "source": "NPR",
+              "url": "https://www.npr.org/sections/planet-money/2026/08/25/g-s1-139946/how-the-aids-crisis-helped-create-a-multibillion-dollar-death-speculation-market"
+            }
+          ]
+        },
+        {
+          "cat": "其他",
+          "icon": "🌏",
+          "items": [
+            {
+              "title": "特朗普经济战对伊朗影响",
+              "summary": "美国对伊朗的新一轮制裁可能意味着什么。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5943572/trump-iran-sanctions"
+            },
+            {
+              "title": "脑损伤儿童夏令营",
+              "summary": "宾夕法尼亚夏令营帮助脑损伤儿童，但联邦研究资金不稳定。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5936617/camp-cranium-tbi-act-brain-injury-concussion-trauma-cdc"
+            },
+            {
+              "title": "斯波坎野火疏散者回家",
+              "summary": "斯波坎野火疏散者被允许返回家园，但仍有化学物质残留。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5943574/spokane-wildfire-evacuees-return-home-but-its-still-a-hazmat-situation"
+            }
+          ]
+        },
+        {
+          "cat": "科技",
+          "icon": "💻",
+          "items": [
+            {
+              "title": "气候变化与热浪",
+              "summary": "气候变化可能是这次热浪的原因。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5940053/heat-wave-extreme-forecast-climate"
+            },
+            {
+              "title": "教育部门反对考虑种族",
+              "summary": "特朗普教育部门要求学校在纪律处分时不考虑种族。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/25/nx-s1-5936474/discrimination-school-discipline-suspension-race-education-department-civil-rights"
+            }
+          ]
+        }
+      ]
     }
   },
-  "updatedAt": "2026-08-25T22:02:00+08:00"
+  "updatedAt": "2026-08-26T00:01:00+08:00"
 }
