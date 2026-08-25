@@ -10,7 +10,7 @@ const gitee = require("./lib_gitee");
 
 const SYNC_FILES = [
   "data/knowledge.json", "data/news.json", "data/news-archive.json",
-  "data/aihot.json", "data/lang_reading.json", "data/phonetics.json",
+  "data/aihot.json", "data/lang_reading.json", "data/news_summary.json", "data/phonetics.json",
   "js/language.js", "css/style.css",
   "index.html", "js/app.js", "sw.js"
 ];
@@ -48,6 +48,7 @@ async function main(event = {}, context = {}) {
     if (tn === "reading-0005") job = "reading";
     else if (tn === "daily-0710") job = "daily";
     else if (tn === "news-1200" || tn === "news-1800") job = "news";
+    else if (tn === "summary-0800") job = "newssum";
     else if (tn === "patrol-6h") job = "patrol";
     else job = fallback;
   }
@@ -71,6 +72,14 @@ async function main(event = {}, context = {}) {
     // 精读按北京时间切日
     const bjDate = new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
     return await runDaily.mainReading(work, bjDate);
+  }
+
+  if (job === "newssum") {
+    const work = await prepareWorkdir();
+    const runDaily = require("./run_daily");
+    // 新闻摘要按北京时间切日
+    const bjDate = new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+    return await runDaily.mainNewsSummary(work, bjDate);
   }
 
   // daily
