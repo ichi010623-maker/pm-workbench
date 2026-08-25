@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.74";
+var APP_VERSION = "5.9.75";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -1673,6 +1673,7 @@ function render() {
     case "fitness": renderFitness(); break;
     case "checkin": renderCheckin(); break;
     case "growth": renderGrowthHome(); break;
+    case "newssum": renderNewsSummaryPage(); break;
     case "reading": renderReading(); break;
     case "rsync": renderReadingSync(); break;
     case "xhsfav": renderXhsFav(); break;
@@ -1707,6 +1708,7 @@ function renderHeader() {
     checkin: ["每日打卡", "英语 · 饮食 · 运动 · 阶段奖励"],
     growth: ["个人成长", "投资理财 · 健身 · 语言学习 · 阅读"],
     aihot: ["AI 资讯", "AIHOT 每日简报 · 精选 · 热点"],
+    newssum: ["新闻摘要", "每日 8 点全球要闻 · 历史回顾"],
     learn: ["知识学习", "AI 小知识 · 金融小知识 · 卡片速学"],
     xhsfav: ["收藏知识库", "小红书收藏 · 分类汇总 · 关键词检索"],
     reading: ["阅读", "书 / 电子书 / 播客 / 演讲 + AI 探讨"],
@@ -2214,6 +2216,7 @@ function renderGrowthHome() {
     { id: "language", icon: "🌐", title: "语言学习", color: "rgba(10,132,255,0.12)", count: studyDays, desc: "英 / 日 / 韩 · 八大模块" },
     { id: "reading", icon: "📖", title: "阅读", color: "rgba(191,90,242,0.13)", count: rdCnt, desc: "书 / 电子书 / 播客 / 演讲 + AI 探讨" },
     { id: "aihot", icon: "🤖", title: "AI 资讯", color: "rgba(10,132,255,0.13)", count: 0, desc: "AIHOT 每日简报 · 精选 · 热点" },
+    { id: "newssum", icon: "📰", title: "新闻摘要", color: "rgba(100,210,255,0.13)", count: 0, desc: "每日 8 点全球要闻 · 历史回顾" },
     { id: "learn", icon: "🧠", title: "知识学习", color: "rgba(191,90,242,0.14)", count: (typeof learnCount === "function") ? learnCount() : 0, desc: "AI 小知识 · 金融小知识 · 卡片速学" },
     { id: "xhsfav", icon: "📌", title: "收藏知识库", color: "rgba(255,45,85,0.13)", count: (typeof xfCount === "function") ? xfCount() : 0, desc: "小红书收藏 · 分类汇总 · 关键词检索" }
   ];
@@ -2240,6 +2243,67 @@ function renderGrowthHome() {
       }).join("") +
     '</div>';
   writeBriefSnapshot();
+}
+
+// ===== 新闻摘要（个人成长）=====
+// 数据: data/news_summary.json（云端每日北京时间 08:00 生成，按日期键 days{}）
+var __newsSummary = null;
+var __nsHist = 0;
+function nsLoad(cb) {
+  if (__newsSummary) { cb && cb(); return; }
+  var ver = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "";
+  fetch("data/news_summary.json?v=" + ver).then(function (r) { return r.json(); }).then(function (j) {
+    __newsSummary = j; cb && cb();
+  }).catch(function () { __newsSummary = {}; cb && cb(); });
+}
+function nsDayHtml(entry) {
+  if (!entry || !entry.groups || !entry.groups.length) return '<div class="brief-empty" style="margin:0">该日期没有新闻摘要</div>';
+  var h = (entry.brief && entry.brief.length)
+    ? '<div class="ns-brief">' + entry.brief.map(function (b) { return '<span class="ns-brief-item">• ' + escapeHtml(b) + "</span>"; }).join("") + "</div>"
+    : "";
+  h += entry.groups.map(function (g) {
+    return '<div class="ns-group"><div class="ns-group-h">' + escapeHtml(g.icon || "📌") + " " + escapeHtml(g.cat) + "</div>" +
+      (g.items || []).map(function (it) {
+        return '<div class="ns-item"><div class="ns-item-title">' + escapeHtml(it.title) + "</div>" +
+          (it.summary ? '<div class="ns-item-sum">' + escapeHtml(it.summary) + "</div>" : "") +
+          ((it.source || it.url) ? '<div class="ns-item-meta">' + escapeHtml(it.source || "") +
+            (it.url ? ' · <a class="ns-link" href="' + encodeURI(it.url) + '" target="_blank" rel="noopener">原文↗</a>' : "") + "</div>" : "") +
+          "</div>";
+      }).join("") + "</div>";
+  }).join("");
+  return h;
+}
+function renderNewsSummaryPage() {
+  var c = document.getElementById("app-content");
+  if (!c) return;
+  nsLoad(function () { render(); });
+  var data = __newsSummary || {};
+  var days = data.days || {};
+  var bjd = new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+  var todayEntry = days[bjd] || null;
+
+  var headBtn = '<button class="lg-btn ghost" onclick="__nsHist = __nsHist ? 0 : 1; render()">📅 历史</button>';
+  var todayHtml = '<div class="lg-card"><div class="lg-card-h">📰 今日新闻摘要 <span class="lg-sub">' + (todayEntry ? bjd : "每日 08:00 自动更新") + "</span>" + headBtn + "</div>";
+  if (todayEntry && todayEntry.groups && todayEntry.groups.length) {
+    todayHtml += nsDayHtml(todayEntry);
+  } else {
+    todayHtml += '<div class="empty-state"><div class="empty-text">' + (__newsSummary ? "今日摘要尚未生成，每日北京时间 08:00 云端自动更新。" : "正在加载…") + "</div></div>";
+  }
+  todayHtml += "</div>";
+
+  // 历史日历（微信式，按有数据的日期回看往期）
+  var nsMap = {};
+  Object.keys(days).forEach(function (d) { nsMap[d] = 1; });
+  var nsSel = "";
+  if (__nsHist === 1) {
+    var s = lgCalState["ns"] || {};
+    var sel = s.sel || bjd;
+    var e = days[sel];
+    nsSel = '<div class="aihot-archive-day"><div class="aihot-archive-day-h">📅 ' + sel + " 新闻摘要</div>" + nsDayHtml(e) + "</div>";
+  }
+  var histHtml = __nsHist === 1 ? lgCalHtml("ns", nsMap, nsSel, bjd) : "";
+
+  c.innerHTML = '<div class="enm-hint" style="margin-bottom:6px">📰 新闻摘要 · 每日北京时间 08:00 云端生成（全球要闻 + 一句话摘要 + 原文链接）· 点击「📅 历史」回看往期</div>' + todayHtml + histHtml;
 }
 
 // ===== Workbench =====
