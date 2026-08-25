@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.73";
+var APP_VERSION = "5.9.74";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -2357,7 +2357,7 @@ function renderIndustry() {
   var c = document.getElementById("app-content");
   var t = function (id, label) { return '<div class="chip' + (industrySub === id ? " active" : "") + '" onclick="setIndustrySub(\'' + id + '\')">' + label + '</div>'; };
   var tabBar = '<div class="filter-bar" style="margin-bottom:10px">' +
-    t("news", "🌐 资讯情报") + t("history", "📅 历史回顾") + t("fav", "⭐ 收藏") + t("custom", "🤖 自定义情报") + t("opportunity", "📈 市场机会") + t("mine", "📋 我的情报") + t("outputs", "🤖 我的产出") +
+    t("news", "🌐 资讯情报") + t("summary", "📝 新闻摘要") + t("history", "📅 历史回顾") + t("fav", "⭐ 收藏") + t("custom", "🤖 自定义情报") + t("opportunity", "📈 市场机会") + t("mine", "📋 我的情报") + t("outputs", "🤖 我的产出") +
     '</div>';
   if (industrySub === "history") c.innerHTML = tabBar + renderIntelHistory();
   else if (industrySub === "fav") c.innerHTML = tabBar + renderIntelFav();
@@ -2365,6 +2365,7 @@ function renderIndustry() {
   else if (industrySub === "opportunity") c.innerHTML = tabBar + renderIntelOpportunity();
   else if (industrySub === "mine") c.innerHTML = tabBar + renderMyIntel();
   else if (industrySub === "outputs") { c.innerHTML = tabBar + '<div id="aio-body"></div>'; if (typeof renderAiOutputs === "function") renderAiOutputs(); }
+  else if (industrySub === "summary") c.innerHTML = tabBar + renderNewsSummary();
   else c.innerHTML = tabBar + renderLiveNews();
 }
 
@@ -2417,6 +2418,54 @@ function renderLiveNews() {
 
   var fresh = (nd.generatedAt && nd.generatedAt.slice(0, 10) === today()) ? '<span class="badge badge-green" style="margin-left:6px">今日已更新</span>' : '';
   return '<div class="enm-hint" style="margin-bottom:6px">每日 7:00 自动抓取官媒与科技热点' + fresh + ' · 点 ☆ 收藏</div>' + catHtml + list;
+}
+
+// —— 新闻摘要（按领域聚合当日资讯要点，客户端汇总，无需后端）——
+function renderNewsSummary() {
+  var nd = (typeof LiveData !== "undefined" && LiveData.news) ? LiveData.news : null;
+  if (!nd || !nd.items || !nd.items.length) {
+    return '<div class="empty-state"><div class="empty-icon">📝</div><div class="empty-text">今日资讯尚未生成<br>每日 7:00 自动抓取官媒与科技热点</div></div>';
+  }
+  var catMap = {}; (nd.categories || []).forEach(function (c) { catMap[c.key] = c; });
+  var groups = {};
+  nd.items.forEach(function (n) { var k = n.category || "other"; (groups[k] = groups[k] || []).push(n); });
+  var catKeys = Object.keys(groups);
+  var total = nd.items.length;
+  var overview = '今日共 <b>' + total + '</b> 条资讯，覆盖 <b>' + catKeys.length + '</b> 个领域：' +
+    catKeys.map(function (k) { return (catMap[k] ? catMap[k].label : k) + ' ' + groups[k].length; }).join(' · ');
+  var html = '<div class="enm-hint" style="margin-bottom:8px">📝 新闻摘要 · 按领域聚合的当日要点（生成于 ' + escapeHtml((nd.generatedAt || "").slice(0, 10)) + '）</div>';
+  html += '<div class="card" style="margin-bottom:10px"><div class="card-body">' + overview + '</div></div>';
+  html += catKeys.map(function (k) {
+    var items = groups[k].slice().sort(function (a, b) { return (a.priority || 5) - (b.priority || 5); });
+    var label = catMap[k] ? ((catMap[k].icon || "") + " " + catMap[k].label) : k;
+    return '<div class="lg-card"><div class="lg-card-h">' + escapeHtml(label) + ' <span class="lg-sub">' + items.length + ' 条</span></div>' +
+      items.map(function (n) {
+        var sum = n.summary || "";
+        return '<div style="padding:8px 0;border-bottom:1px solid var(--border)">' +
+          '<div style="font-weight:600;margin-bottom:2px">' + escapeHtml(n.title) + '</div>' +
+          (sum ? '<div class="text-sm text-secondary">' + escapeHtml(sum) + '</div>' : '') +
+          (n.url ? ' <a href="' + encodeURI(n.url) + '" target="_blank" rel="noopener" class="source-link" style="margin-top:4px;display:inline-block">🔗 原文 ↗</a>' : '') +
+          '</div>';
+      }).join("") + '</div>';
+  }).join("");
+  return html;
+}
+
+// —— 想法库：专利检索工具（全球专利 / 图片相似专利）——
+function openPatentModal(type) {
+  var isImg = type === "image";
+  var def = (DB.data.ideas && DB.data.ideas.length) ? (DB.data.ideas[0].title || "") : "";
+  var body = isImg
+    ? '<div class="detail-body" style="margin-bottom:10px">上传产品图 / 设计图，在 Google Lens 中做视觉相似比对，快速发现相近的外观设计专利与竞品。</div>'
+    : '<div class="form-group"><div class="form-label">检索关键词（可用想法标题）</div><input id="patentQ" class="input" value="' + escapeHtml(def) + '" placeholder="如：折叠支架 磁吸 无线充电"></div>';
+  var action = isImg
+    ? '<button class="btn btn-primary" onclick="window.open(\'https://lens.google.com/\',\'_blank\');closeModal()">🚀 打开 Google Lens 上传图片</button>'
+    : '<button class="btn btn-primary" onclick="var q=(document.getElementById(\'patentQ\').value.trim())||' + JSON.stringify(def) + ';window.open(\'https://patents.google.com/?q=\'+encodeURIComponent(q),\'_blank\');closeModal()">🔍 在 Google Patents 检索</button>';
+  showModal(
+    '<div class="modal-title">' + (isImg ? "🖼 图片相似专利检索" : "🌐 全球专利检索") + '</div>' +
+    body +
+    '<div class="btn-row">' + action + '<button class="btn btn-secondary" onclick="closeModal()">取消</button></div>'
+  );
 }
 
 // —— 我的情报（手动粘贴录入）——
@@ -3963,7 +4012,13 @@ function renderIdeas() {
   var statusMap = { new: { label: "新想法", badge: "badge-blue" }, developing: { label: "孵化中", badge: "badge-orange" }, archived: { label: "已归档", badge: "badge-gray" } };
   var statusTabs = [["all", "全部"], ["new", "新想法"], ["developing", "孵化中"], ["archived", "已归档"]];
 
-  c.innerHTML =
+  var patentTools = '<div class="lg-card" style="margin-bottom:10px"><div class="lg-card-h">🔍 专利检索工具 <span class="lg-sub">想法落地前先查专利壁垒</span></div>' +
+    '<div class="lg-btn-row">' +
+    '<button class="lg-btn" onclick="openPatentModal(\'global\')">🌐 全球专利检索</button>' +
+    '<button class="lg-btn" onclick="openPatentModal(\'image\')">🖼 图片相似专利检索</button>' +
+    '</div></div>';
+
+  c.innerHTML = patentTools +
     '<div class="filter-bar">' + statusTabs.map(function(st) { return '<div class="chip' + (window.__ideaStatusFilter === st[0] ? ' active' : '') + '" onclick="setIdeaStatusFilter(\'' + st[0] + '\')">' + st[1] + '</div>'; }).join("") + '</div>' +
     '<div class="filter-bar">' + categories.map(function(cat) { return '<div class="chip' + (currentFilter === cat ? ' active' : '') + '" onclick="setFilter(\'' + cat + '\')">' + (cat === "all" ? "全部" : cat) + '</div>'; }).join("") + '</div>' +
     '<div class="idea-grid">' +
