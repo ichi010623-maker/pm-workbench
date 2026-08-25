@@ -8,6 +8,7 @@ const { execSync, spawnSync } = require("child_process");
 const knowGen = require("./gen_knowledge_llm");
 const newsGen = require("./gen_news_llm");
 const readingGen = require("./gen_reading_llm");
+const summaryGen = require("./gen_news_summary_llm");
 const gitee = require("./lib_gitee");
 const netlify = require("./deploy_netlify");
 
@@ -140,7 +141,7 @@ async function finish(BASE, DATE, nv, CLOUD) {
   if (!runTests(BASE)) throw new Error("测试未通过，已中止");
   const changed = [
     "data/knowledge.json", "data/news.json", "data/news-archive.json", "data/aihot.json",
-    "data/lang_reading.json", "index.html", "js/app.js", "sw.js"
+    "data/lang_reading.json", "data/news_summary.json", "index.html", "js/app.js", "sw.js"
   ];
   const msg = `云端自动更新 v${nv} (${DATE})`;
   if (CLOUD && process.env.GITEE_TOKEN) {
@@ -200,7 +201,20 @@ async function mainReading(baseArg, dateArg) {
   console.log(`[run_reading] 完成 ${DATE} 精读刷新 → v${nv}`);
 }
 
+// 北京时间 08:00 新闻摘要：仅生成当日新闻摘要（北京时间切日），再升版本部署
+async function mainNewsSummary(baseArg, dateArg) {
+  const BASE = baseArg || process.argv[2] || path.join(__dirname, "..");
+  const DATE = dateArg || process.argv[3] || bjTodayStr();
+  const CLOUD = process.env.CLOUD === "1";
+
+  console.log(`[run_newssum] BASE=${BASE} DATE=${DATE} CLOUD=${CLOUD}（北京时间新闻摘要）`);
+  const r = await summaryGen.main(DATE, BASE);
+  const nv = bumpVersion(BASE);
+  await finish(BASE, DATE, nv, CLOUD);
+  console.log(`[run_newssum] 完成 ${DATE} 新闻摘要 → v${nv}`);
+}
+
 if (require.main === module) {
   main().catch((e) => { console.error("ERR", e.message); process.exit(1); });
 }
-module.exports = { main, mainNews, mainReading, bumpVersion };
+module.exports = { main, mainNews, mainReading, mainNewsSummary, bumpVersion };
