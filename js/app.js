@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.79";
+var APP_VERSION = "5.9.80";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -1955,7 +1955,8 @@ function renderHome() {
         var colors = { idea: "rgba(191,90,242,0.15)", competitor: "rgba(255,159,10,0.15)", industry: "rgba(100,210,255,0.15)", insight: "rgba(255,214,10,0.15)", task: "rgba(10,132,255,0.15)", product: "rgba(94,92,230,0.15)", planning: "rgba(48,209,88,0.15)" };
         return '<div class="activity-item"><div class="activity-icon" style="background:' + (colors[a.type] || "rgba(142,142,147,0.15)") + '">' + (icons[a.type] || "📝") + '</div><div><div class="activity-text">' + escapeHtml(a.text) + '</div><div class="activity-time">' + formatDateShort(a.date) + '</div></div></div>';
       }).join("") +
-    '</div>';
+    '</div>' +
+    '<div class="app-version-foot" onclick="copyAppVersion()" title="点按复制当前版本号">硬件PM工作台 v' + APP_VERSION + ' · 点按复制</div>';
   writeBriefSnapshot();
 }
 
@@ -4505,8 +4506,22 @@ async function renderSettings() {
 
 
     '<div class="section-title"><span class="emoji">ℹ️</span> 关于</div>' +
-    '<div class="card"><div class="card-title">硬件PM工作台 v5.0</div><div class="card-body">专为硬件产品经理打造的每日中枢工作台<br><br>💼 工作区: 7大模块 · 🌱 个人成长: 6大模块<br><br>✨ v5.0 新增:<br>• PWA 自动更新 + 主屏幕缓存修复<br>• 英语学习双Tab：单词例句 + 文章朗读<br>• 阅读文章支持TTS播放 + 生词标注<br>• 设置页可从个人成长区直接访问<br><br>v4.x: 饮食 / 视频拆解 / 新闻 / 复盘 / 账户 / 英语 / 云端备份</div></div>';
+    '<div class="card"><div class="card-title">硬件PM工作台 v' + APP_VERSION + '</div>' +
+    '<div class="card-body">专为硬件产品经理打造的每日中枢工作台<br><br>💼 工作区 · 🌱 个人成长 多模块一体化<br>每日云端自动更新数据与功能</div>' +
+    '<div style="margin-top:10px"><button class="btn btn-secondary" onclick="copyAppVersion()">📋 复制版本号</button></div>' +
+    '</div>';
   setTimeout(loadLocalBackupList, 60);
+}
+
+// 复制当前 App 版本号（设置→关于 / 首页脚注共用）
+function copyAppVersion() {
+  var v = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "unknown";
+  var text = "硬件PM工作台 v" + v;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () { showToast("已复制：" + text, "success"); }, function () { showToast(text, "info"); });
+  } else {
+    showToast(text, "info");
+  }
 }
 
 // ===== 账号操作：退出 / 切换 / 添加（均先登出当前账号，回到登录门）=====
