@@ -3,7 +3,7 @@
 # 用法: python3 cloud/deploy_scf.py
 # 依赖环境变量(从 shell 传入，不硬编码):
 #   TENCENT_SECRET_ID, TENCENT_SECRET_KEY  (CAM 密钥)
-#   ZHIPU_API_KEY, EDGEONE_TOKEN, GITEE_TOKEN
+#   ZHIPU_API_KEY, EDGEONE_TOKEN, GITEE_TOKEN, GH_TOKEN, GH_REPO
 #   FUNCTION_ZIP  (可选，默认 ../scf_bundle.zip)
 import os, sys, base64, zipfile, io
 
@@ -40,9 +40,9 @@ def env_map():
         "GITEE_TOKEN": os.environ.get("GITEE_TOKEN",""),
         "GITEE_OWNER": "ichi0623",
         "GITEE_REPO": "pm-workbench",
-        "NETLIFY_TOKEN": os.environ.get("NETLIFY_TOKEN",""),
-        "NETLIFY_SITE_ID": os.environ.get("NETLIFY_SITE_ID",""),
-        "SITE_URL": os.environ.get("SITE_URL","https://pm-workbench.netlify.app"),
+        "GH_TOKEN": os.environ.get("GH_TOKEN",""),
+        "GH_REPO": os.environ.get("GH_REPO","ichi010623-maker/pm-workbench-site"),
+        "SITE_URL": os.environ.get("SITE_URL","https://ichi010623-maker.github.io/pm-workbench-site/"),
     }
 
 def exists(cli):
