@@ -7,6 +7,9 @@ const crypto = require("crypto");
 
 const API = "https://api.github.com";
 const UA = "pm-workbench-deploy";
+
+// 网络抖动/限流重试：Node fetch 直连 api.github.com（不走系统代理），偶发超时/403/429，重试可自愈
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const INCLUDE = new Set([
   "index.html", "migrate.html", "manifest.json", "sw.js",
   "css", "js", "data"
@@ -50,19 +53,37 @@ async function putFile(owner, repo, token, absPath, baseDir) {
   const buf = fs.readFileSync(absPath);
   const content = buf.toString("base64");
   const localSha = blobSha(buf);
-  let remoteSha = null;
-  try {
-    const r = await fetch(url, { headers: authHeaders(token) });
-    if (r.ok) { const j = await r.json(); remoteSha = j.sha; }
-  } catch {}
+
+  // 获取远端 sha（带重试）：失败返回 null，后续 PUT 会按“新建”处理并自动补 sha 重试
+  const getRemoteSha = async () => {
+    for (let i = 0; i < 4; i++) {
+      try {
+        const r = await fetch(url, { headers: authHeaders(token) });
+        if (r.ok) { const j = await r.json(); if (j && j.sha) return j.sha; }
+        if (r.status === 403 || r.status === 429) { await sleep(1200 * (i + 1)); continue; }
+      } catch (e) { /* 网络抖动，重试 */ }
+      await sleep(400 * (i + 1));
+    }
+    console.warn(`[gh-pages] ${rel} 远端 sha 获取失败，将按新建处理`);
+    return null;
+  };
+
+  let remoteSha = await getRemoteSha();
   if (remoteSha && remoteSha === localSha) return "skip";
-  const body = { message: "deploy: " + rel, content, branch: "main" };
-  if (remoteSha) body.sha = remoteSha;
-  const res = await fetch(url, {
-    method: "PUT",
-    headers: authHeaders(token),
-    body: JSON.stringify(body)
-  });
+
+  const putOnce = async (sha) => {
+    const body = { message: "deploy: " + rel, content, branch: "main" };
+    if (sha) body.sha = sha;
+    return fetch(url, { method: "PUT", headers: authHeaders(token), body: JSON.stringify(body) });
+  };
+
+  let res = await putOnce(remoteSha);
+  // 422 且因缺 sha（GET 失败导致）→ 重取 sha 再试一次
+  if (!res.ok && res.status === 422 && !remoteSha) {
+    await sleep(800);
+    remoteSha = await getRemoteSha();
+    if (remoteSha) res = await putOnce(remoteSha);
+  }
   if (!res.ok) {
     const t = await res.text();
     throw new Error(`GitHub 上传失败 ${rel}: ${res.status} ${t.slice(0, 200)}`);
@@ -132,6 +153,7 @@ async function deploy(baseDir, repo, token) {
     if (r === "create") created++;
     else if (r === "update") updated++;
     else skipped++;
+    await sleep(150); // 轻微限速，避免突发限流
   }
   console.log(`[gh-pages] 完成 新建=${created} 更新=${updated} 跳过=${skipped}`);
   const p = await ensurePages(owner, name, token);
