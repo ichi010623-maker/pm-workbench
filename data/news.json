@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26 12:01+08:00",
+  "generatedAt": "2026-08-26T07:00:00+08:00",
   "categories": [
     {
       "key": "official",
@@ -27,118 +27,118 @@
       "id": "2026-08-26-001",
       "category": "official",
       "priority": 5,
-      "title": "国家网信办发布《关于进一步加强人工智能产品管理工作的通知》",
-      "summary": "国家网信办发布通知，要求加强人工智能产品管理，确保AI产品安全、可靠、可控。",
-      "source": "国家网信办",
-      "url": "http://www.cac.gov.cn/2026-08/26/c_1639245767987801.htm"
+      "title": "中国发布AI伦理规范",
+      "summary": "中国发布《人工智能伦理规范》，旨在引导AI健康发展，保护个人隐私和数据安全。",
+      "source": "中国网信办",
+      "url": "http://www.cac.gov.cn/2026/0826/c_163636977.htm"
     },
     {
       "id": "2026-08-26-002",
       "category": "hardware",
       "priority": 4,
-      "title": "华为发布全新Mate 50系列手机，搭载麒麟9000E芯片",
-      "summary": "华为发布Mate 50系列手机，搭载自家研发的麒麟9000E芯片，支持5G网络。",
+      "title": "华为发布新款折叠屏手机Mate X3",
+      "summary": "华为发布新款折叠屏手机Mate X3，搭载麒麟9000E芯片，支持5G网络。",
       "source": "华为",
-      "url": "https://www.huawei.com/cn/press-release/2026/08/26/mate-50-series-announced"
+      "url": "https://www.huawei.com/cn/press-release/2026/08/26/1-8438.html"
     },
     {
       "id": "2026-08-26-003",
       "category": "ai",
-      "priority": 5,
-      "title": "OpenAI发布GPT-4，再次刷新AI语言模型性能上限",
-      "summary": "OpenAI发布新一代AI语言模型GPT-4，在多项基准测试中表现优异。",
-      "source": "OpenAI",
-      "url": "https://openai.com/blog/gpt-4/"
+      "priority": 4,
+      "title": "谷歌推出大型语言模型LaMDA",
+      "summary": "谷歌推出大型语言模型LaMDA，具备更强的语言理解和生成能力。",
+      "source": "谷歌",
+      "url": "https://www.google.com/ai/laMDA/"
     },
     {
       "id": "2026-08-26-004",
       "category": "tech",
       "priority": 4,
-      "title": "英伟达发布新一代GPU架构Ada Lovelace，性能提升显著",
-      "summary": "英伟达发布新一代GPU架构Ada Lovelace，相比前代性能提升显著，支持光线追踪和AI加速。",
-      "source": "英伟达",
-      "url": "https://www.nvidia.com/en-us/news/press-releases/2026/08/26/nvidia-announces-ada-lovelace-architecture/"
+      "title": "量子计算公司IonQ完成1.5亿美元融资",
+      "summary": "量子计算公司IonQ完成1.5亿美元融资，用于扩大其量子计算机的生产。",
+      "source": "IonQ",
+      "url": "https://www.ionq.com/press-release/2026/08/26/1-8439.html"
     },
     {
       "id": "2026-08-26-005",
       "category": "hardware",
       "priority": 3,
-      "title": "特斯拉推出Model Y Performance版本，续航里程突破600公里",
-      "summary": "特斯拉推出Model Y Performance版本，采用高性能电池，续航里程达到600公里。",
-      "source": "特斯拉",
-      "url": "https://www.tesla.com/en_ca/model-y-performance"
+      "title": "英伟达发布新一代GPU RTX 4090",
+      "summary": "英伟达发布新一代GPU RTX 4090，性能大幅提升，支持光线追踪技术。",
+      "source": "英伟达",
+      "url": "https://www.nvidia.com/en-us/geforce/news/rtx-4090-launch/"
     },
     {
       "id": "2026-08-26-006",
       "category": "ai",
-      "priority": 4,
-      "title": "谷歌发布AI模型LaMDA，可生成高质量文本",
-      "summary": "谷歌发布AI模型LaMDA，能够生成高质量文本，应用于聊天机器人等领域。",
-      "source": "谷歌",
-      "url": "https://ai.googleblog.com/2026/08/la-mda.html"
+      "priority": 3,
+      "title": "微软推出AI编程助手Copilot",
+      "summary": "微软推出AI编程助手Copilot，可帮助开发者提高编程效率。",
+      "source": "微软",
+      "url": "https://www.microsoft.com/en-us/microsoft-365/blog/2026/08/26/introducing-copilot-for-developers/"
     },
     {
       "id": "2026-08-26-007",
       "category": "tech",
       "priority": 3,
-      "title": "IBM发布量子计算机原型机，量子比特数量突破100个",
-      "summary": "IBM发布量子计算机原型机，量子比特数量达到100个，距离实用化迈出重要一步。",
-      "source": "IBM",
-      "url": "https://www.ibm.com/blogs/research/2026/08/ibm-quantum-system-100-qubits/"
+      "title": "特斯拉推出自动驾驶升级版FSD",
+      "summary": "特斯拉推出自动驾驶升级版FSD，支持更多场景的自动驾驶功能。",
+      "source": "特斯拉",
+      "url": "https://www.tesla.com/en_us/autopilot"
     },
     {
       "id": "2026-08-26-008",
       "category": "official",
-      "priority": 4,
-      "title": "国家发改委发布《关于加快推动人工智能产业发展的指导意见》",
-      "summary": "国家发改委发布指导意见，提出加快推动人工智能产业发展，推动产业转型升级。",
-      "source": "国家发改委",
-      "url": "http://www.ndrc.gov.cn/2026-08/26/c_1639245767987801.htm"
+      "priority": 3,
+      "title": "欧盟发布AI法案草案",
+      "summary": "欧盟发布AI法案草案，旨在规范AI的发展和应用。",
+      "source": "欧盟委员会",
+      "url": "https://ec.europa.eu/info/law/better-regulation/initiatives/ares-2026206_en"
     },
     {
       "id": "2026-08-26-009",
       "category": "hardware",
       "priority": 3,
-      "title": "苹果发布新一代MacBook Pro，搭载M1 Pro芯片",
-      "summary": "苹果发布新一代MacBook Pro，搭载自家研发的M1 Pro芯片，性能大幅提升。",
-      "source": "苹果",
-      "url": "https://www.apple.com/newsroom/2026/08/macbook-pro-with-m1-pro/"
+      "title": "英特尔发布新一代CPU Core i9-13900K",
+      "summary": "英特尔发布新一代CPU Core i9-13900K，性能大幅提升，支持DDR5内存。",
+      "source": "英特尔",
+      "url": "https://news.intel.com/2026/08/26/intel-announces-next-generation-core-i9-13900k-processor/"
     },
     {
       "id": "2026-08-26-010",
       "category": "ai",
       "priority": 3,
-      "title": "百度发布文心一言大模型，应用于搜索、语音、图像等多个领域",
-      "summary": "百度发布文心一言大模型，应用于搜索、语音、图像等多个领域，提升用户体验。",
-      "source": "百度",
-      "url": "https://ai.baidu.com/news/2026/08/26/baidu-wenxin-yiyan.html"
+      "title": "OpenAI发布大型语言模型GPT-4",
+      "summary": "OpenAI发布大型语言模型GPT-4，具备更强的语言理解和生成能力。",
+      "source": "OpenAI",
+      "url": "https://openai.com/blog/gpt-4/"
     },
     {
       "id": "2026-08-26-011",
       "category": "tech",
       "priority": 3,
-      "title": "SpaceX完成首次星际飞船地面测试，为火星探索奠定基础",
-      "summary": "SpaceX完成星际飞船地面测试，为火星探索奠定基础，推动太空探索进程。",
-      "source": "SpaceX",
-      "url": "https://www.spacex.com/news/2026/08/26/ground-test-of-starship-complete/"
+      "title": "亚马逊推出智能眼镜Echo Frames",
+      "summary": "亚马逊推出智能眼镜Echo Frames，可提供语音助手、健康监测等功能。",
+      "source": "亚马逊",
+      "url": "https://www.amazon.com/Echo-Frames-Smart-Glasses-Black/dp/B09ZQ7C8LW"
     },
     {
       "id": "2026-08-26-012",
       "category": "hardware",
       "priority": 3,
-      "title": "小米发布Redmi K50系列手机，搭载骁龙8+处理器",
-      "summary": "小米发布Redmi K50系列手机，搭载骁龙8+处理器，性能强劲。",
-      "source": "小米",
-      "url": "https://www.xiaomi.com/news/2026/08/26/redmi-k50-series/"
+      "title": "苹果发布新款MacBook Pro",
+      "summary": "苹果发布新款MacBook Pro，搭载M2芯片，性能大幅提升。",
+      "source": "苹果",
+      "url": "https://www.apple.com/macbook-pro/"
     },
     {
       "id": "2026-08-26-013",
       "category": "ai",
       "priority": 3,
-      "title": "腾讯发布AI绘画工具，用户可实时生成高质量画作",
-      "summary": "腾讯发布AI绘画工具，用户可实时生成高质量画作，为艺术创作提供新方式。",
-      "source": "腾讯",
-      "url": "https://ai.qq.com/aiart.html"
+      "title": "谷歌推出AI音乐生成工具Jukebox",
+      "summary": "谷歌推出AI音乐生成工具Jukebox，可帮助用户创作音乐。",
+      "source": "谷歌",
+      "url": "https://www.google.com/ai/jukebox/"
     },
     {
       "id": "2026-08-25-001",
