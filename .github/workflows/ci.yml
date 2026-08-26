@@ -1,0 +1,91 @@
+name: PM Workbench 云端自动更新
+
+# 替代腾讯云 SCF：由 GitHub Actions 定时触发，在 ubuntu  runner 上运行 cloud/ci_run.js
+# 流程：checkout 主库 → 生成(智谱 GLM-4-Flash) → 升版本 → 测试 → git push 回主库 → 部署 GitHub Pages(pm-workbench-site)
+# 说明：
+#   - 主库(本仓库)即真值，runner 每次 checkout 最新，生成内容再 push 回主库，保证次日基于最新数据
+#   - 部署目标 pm-workbench-site 通过 GH_TOKEN(fine-grained, 仅该库 Contents/Pages RW) 写入
+#   - 北京时区 → UTC（GitHub cron 为 UTC）
+
+on:
+  workflow_dispatch:
+    inputs:
+      job:
+        description: 手动触发的任务类型
+        required: true
+        default: daily
+        type: choice
+        options:
+          - daily
+          - news
+          - reading
+          - newssum
+          - patrol
+  schedule:
+    - cron: "10 23 * * *"   # 北京 07:10 每日全量（知识卡/资讯/精读/AIHOT）
+    - cron: "0 4 * * *"     # 北京 12:00 资讯刷新
+    - cron: "0 10 * * *"    # 北京 18:00 资讯刷新
+    - cron: "5 16 * * *"    # 北京 00:05 精读切日
+    - cron: "0 0 * * *"     # 北京 08:00 新闻摘要
+    - cron: "0 */6 * * *"   # 每 6 小时巡逻自愈
+
+# 回写主库需要 push 权限
+permissions:
+  contents: write
+
+# 串行执行，避免并发 push 冲突
+concurrency:
+  group: pmwb-ci
+  cancel-in-progress: false
+
+env:
+  CLOUD: "1"
+  GH_REPO: "ichi010623-maker/pm-workbench-site"
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+  SITE_URL: "https://ichi010623-maker.github.io/pm-workbench-site/"
+  TZ: "Asia/Shanghai"
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout 主库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 配置 git 身份
+        run: |
+          git config --global user.email "ci@pm-workbench.local"
+          git config --global user.name "PM Workbench CI"
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 确定任务
+        id: job
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "job=${{ github.event.inputs.job }}" >> "$GITHUB_OUTPUT"
+          else
+            case "${{ github.event.schedule }}" in
+              "10 23 * * *") echo "job=daily"   >> "$GITHUB_OUTPUT" ;;
+              "0 4 * * *")   echo "job=news"    >> "$GITHUB_OUTPUT" ;;
+              "0 10 * * *")  echo "job=news"    >> "$GITHUB_OUTPUT" ;;
+              "5 16 * * *")  echo "job=reading" >> "$GITHUB_OUTPUT" ;;
+              "0 0 * * *")   echo "job=newssum" >> "$GITHUB_OUTPUT" ;;
+              "0 */6 * * *") echo "job=patrol"  >> "$GITHUB_OUTPUT" ;;
+              *)             echo "job=daily"   >> "$GITHUB_OUTPUT" ;;
+            esac
+          fi
+
+      - name: 运行云端任务
+        run: node cloud/ci_run.js ${{ steps.job.outputs.job }}
+
+      - name: 任务
+        if: always()
+        run: echo "本次执行任务: ${{ steps.job.outputs.job }}"

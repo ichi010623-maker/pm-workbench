@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// 云端每日编排器：生成知识卡+资讯+AIHOT → 升版本 → 跑测试 → 同步 Gitee → GitHub Pages 部署
+// 云端每日编排器：生成知识卡+资讯+AIHOT → 升版本 → 跑测试 → 回写主库(GitHub) → GitHub Pages 部署
 // 用法: node cloud/run_daily.js [repoDir] [YYYY-MM-DD]
-// 环境变量: GH_TOKEN/GH_REPO(部署GitHub Pages必), GITEE_TOKEN/CLOUD=1 走 API 同步
+// 环境变量: CLOUD=1(云端/CI), GH_TOKEN/GH_REPO(部署 GitHub Pages 必), ZHIPU_API_KEY(生成必)
 const fs = require("fs");
 const path = require("path");
 const { execSync, spawnSync } = require("child_process");
@@ -9,7 +9,6 @@ const knowGen = require("./gen_knowledge_llm");
 const newsGen = require("./gen_news_llm");
 const readingGen = require("./gen_reading_llm");
 const summaryGen = require("./gen_news_summary_llm");
-const gitee = require("./lib_gitee");
 const netlify = require("./deploy_netlify");
 const githubPages = require("./deploy_github_pages");
 
@@ -60,26 +59,18 @@ function runTests(BASE) {
   }
 }
 
-async function syncToGitee(BASE, changedFiles, msg) {
-  const files = changedFiles
-    .map((f) => {
-      const p = path.join(BASE, f);
-      if (!fs.existsSync(p)) return null; // 该任务未生成的文件跳过（如 news 任务无 lang_reading.json）
-      return { path: f, content: fs.readFileSync(p, "utf8") };
-    })
-    .filter(Boolean);
-  if (files.length === 0) { console.warn("[gitee] 无文件可同步"); return; }
-  await gitee.commitFiles(files, msg);
-  console.log("[gitee] 已同步", files.length, "个文件");
-}
-
-function gitPush(BASE, msg) {
+// 把生成的内容提交回主库（GitHub）。Actions 通过 actions/checkout 的 GITHUB_TOKEN 获得 push 权限。
+async function gitPush(BASE, msg, files) {
   try {
-    execSync("git add -A && git commit -q -m '" + msg + "'", { cwd: BASE, stdio: "inherit" });
+    const spec = (files && files.length) ? files.map((f) => JSON.stringify(f)).join(" ") : "-A";
+    execSync("git add " + spec, { cwd: BASE, stdio: "inherit" });
+    execSync("git commit -q -m '" + msg + "'", { cwd: BASE, stdio: "inherit" });
     execSync("git push -q origin main", { cwd: BASE, stdio: "inherit" });
-    console.log("[git] 已推送");
+    console.log("[git] 已推送主库");
   } catch (e) {
-    console.error("[git] 推送失败(可能无凭据)，继续部署本地:", e.message);
+    // 云端/CI 模式下回写主库是必需的（次日 checkout 需要最新数据），失败即报错中止
+    console.error("[git] 推送主库失败:", e.message);
+    throw e;
   }
 }
 
@@ -107,7 +98,7 @@ function ensureEdgeone(BASE) {
 
 async function deployGitHubPages(BASE) {
   if (!process.env.GH_TOKEN || !process.env.GH_REPO) {
-    console.warn("[deploy] 云端模式：缺少 GH_TOKEN/GH_REPO，跳过 GitHub 部署（内容已同步 Gitee 主库）");
+    console.warn("[deploy] 云端模式：缺少 GH_TOKEN/GH_REPO，跳过 GitHub 部署（内容已回写主库）");
     return false;
   }
   try {
@@ -125,7 +116,7 @@ async function deployEdgeOne(BASE) {
   if (process.env.CLOUD === "1") {
     const ok = await deployGitHubPages(BASE);
     if (!ok) {
-      console.warn("[deploy] 主部署失败——内容已同步至 Gitee 主库，可在本地手动补救（node cloud/deploy_github_pages.js）。");
+      console.warn("[deploy] 主部署失败——内容已回写主库，可在本地手动补救（node cloud/deploy_github_pages.js）。");
     }
     return;
   }
@@ -146,18 +137,17 @@ async function deployEdgeOne(BASE) {
   else console.log("[deploy] EdgeOne CLI 部署完成");
 }
 
-// 收尾：升版本→测试→Gitee 同步→部署（daily 与 news 共用）
+// 收尾：升版本→测试→回写主库(GitHub)→部署（daily 与 news 共用）
 async function finish(BASE, DATE, nv, CLOUD) {
   if (!runTests(BASE)) throw new Error("测试未通过，已中止");
   const changed = [
     "data/knowledge.json", "data/news.json", "data/news-archive.json", "data/aihot.json",
     "data/lang_reading.json", "data/news_summary.json", "index.html", "js/app.js", "sw.js"
   ];
-  const msg = `云端自动更新 v${nv} (${DATE})`;
-  if (CLOUD && process.env.GITEE_TOKEN) {
-    await syncToGitee(BASE, changed, msg);
-  } else {
-    gitPush(BASE, msg);
+  const msg = `auto: v${nv} (${DATE})`;
+  // 云端/CI 模式：把生成内容回写主库（GitHub），保证次日 checkout 基于最新数据
+  if (CLOUD) {
+    await gitPush(BASE, msg, changed);
   }
   await deployEdgeOne(BASE);
 }
