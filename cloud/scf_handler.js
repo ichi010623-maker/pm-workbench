@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // 腾讯云 SCF 入口（Node.js 运行时）
 // 定时器触发：通过环境变量 JOB=daily|patrol 区分任务。
-// 云端模式(CLOUD=1)：从 Gitee 拉最新数据 → 本地生成 → 写回 Gitee → EdgeOne 部署。
+// 云端模式(CLOUD=1)：从 Gitee 拉最新数据 → 本地生成 → 写回 Gitee → GitHub Pages 部署。
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
