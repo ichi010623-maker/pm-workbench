@@ -6476,3 +6476,7 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 .ns-item-meta{font-size:12px;color:var(--text-tertiary,#94a3b8);margin-top:4px}
 .ns-link{color:var(--accent-blue,#0a84ff);text-decoration:none;font-weight:600}
 .ns-link:hover{text-decoration:underline}
+
+/* ===== 首页版本脚注（常驻可见·点按复制版本号）===== */
+.app-version-foot{margin:18px 0 10px;text-align:center;font-size:11px;color:var(--text-tertiary,#94a3b8);cursor:pointer;user-select:none;letter-spacing:.3px;opacity:.8}
+.app-version-foot:active{opacity:.5}
