@@ -2595,7 +2595,7 @@
     ]
   },
   "2026-08-26": {
-    "generatedAt": "2026-08-26T07:00:00+08:00",
+    "generatedAt": "2026-08-26 18:01+08:00",
     "categories": [
       {
         "key": "official",
@@ -2623,118 +2623,118 @@
         "id": "2026-08-26-001",
         "category": "official",
         "priority": 5,
-        "title": "中国发布AI伦理规范",
-        "summary": "中国发布《人工智能伦理规范》，旨在引导AI健康发展，保护个人隐私和数据安全。",
-        "source": "中国网信办",
-        "url": "http://www.cac.gov.cn/2026/0826/c_163636977.htm"
+        "title": "中国发布AI产业发展规划，推动AI与实体经济深度融合",
+        "summary": "中国政府发布《关于促进人工智能与实体经济深度融合发展的指导意见》，旨在推动AI技术在各行业的应用，提升产业智能化水平。",
+        "source": "中国政府网",
+        "url": "http://www.gov.cn/xinwen/2026-08/26/content_5649255.htm"
       },
       {
         "id": "2026-08-26-002",
         "category": "hardware",
         "priority": 4,
-        "title": "华为发布新款折叠屏手机Mate X3",
-        "summary": "华为发布新款折叠屏手机Mate X3，搭载麒麟9000E芯片，支持5G网络。",
-        "source": "华为",
-        "url": "https://www.huawei.com/cn/press-release/2026/08/26/1-8438.html"
+        "title": "华为发布Mate 50系列手机，搭载麒麟9000E芯片",
+        "summary": "华为推出新一代旗舰手机Mate 50系列，搭载自研麒麟9000E芯片，支持5G网络和多种AI功能。",
+        "source": "华为官网",
+        "url": "https://www.huawei.com/cn/press-release/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-003",
         "category": "ai",
         "priority": 4,
-        "title": "谷歌推出大型语言模型LaMDA",
-        "summary": "谷歌推出大型语言模型LaMDA，具备更强的语言理解和生成能力。",
-        "source": "谷歌",
-        "url": "https://www.google.com/ai/laMDA/"
+        "title": "百度发布文心一言大模型，支持多语言、多模态交互",
+        "summary": "百度推出全新大模型文心一言，支持多语言、多模态交互，旨在提供更智能的AI服务。",
+        "source": "百度官网",
+        "url": "https://ai.baidu.com/news/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-004",
         "category": "tech",
         "priority": 4,
-        "title": "量子计算公司IonQ完成1.5亿美元融资",
-        "summary": "量子计算公司IonQ完成1.5亿美元融资，用于扩大其量子计算机的生产。",
-        "source": "IonQ",
-        "url": "https://www.ionq.com/press-release/2026/08/26/1-8439.html"
+        "title": "英伟达发布新一代GPU，性能提升50%",
+        "summary": "英伟达发布新一代GPU产品，性能相比前代提升50%，支持更高效的AI计算和图形渲染。",
+        "source": "英伟达官网",
+        "url": "https://www.nvidia.com/en-us/news/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-005",
         "category": "hardware",
         "priority": 3,
-        "title": "英伟达发布新一代GPU RTX 4090",
-        "summary": "英伟达发布新一代GPU RTX 4090，性能大幅提升，支持光线追踪技术。",
-        "source": "英伟达",
-        "url": "https://www.nvidia.com/en-us/geforce/news/rtx-4090-launch/"
+        "title": "苹果发布新一代MacBook Pro，搭载M2芯片",
+        "summary": "苹果发布新一代MacBook Pro，搭载自研M2芯片，提供更好的性能和更长的电池续航。",
+        "source": "苹果官网",
+        "url": "https://www.apple.com/newsroom/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-006",
         "category": "ai",
         "priority": 3,
-        "title": "微软推出AI编程助手Copilot",
-        "summary": "微软推出AI编程助手Copilot，可帮助开发者提高编程效率。",
-        "source": "微软",
-        "url": "https://www.microsoft.com/en-us/microsoft-365/blog/2026/08/26/introducing-copilot-for-developers/"
+        "title": "谷歌推出AI艺术创作工具，用户可生成个性化艺术作品",
+        "summary": "谷歌推出AI艺术创作工具，用户可以通过简单的操作生成个性化的艺术作品。",
+        "source": "谷歌官网",
+        "url": "https://www.google.com/ai/artist-tool/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-007",
         "category": "tech",
         "priority": 3,
-        "title": "特斯拉推出自动驾驶升级版FSD",
-        "summary": "特斯拉推出自动驾驶升级版FSD，支持更多场景的自动驾驶功能。",
-        "source": "特斯拉",
-        "url": "https://www.tesla.com/en_us/autopilot"
+        "title": "IBM推出量子计算服务，为企业提供量子解决方案",
+        "summary": "IBM推出量子计算服务，帮助企业解决复杂计算问题，加速创新。",
+        "source": "IBM官网",
+        "url": "https://www.ibm.com/press-release/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-008",
         "category": "official",
         "priority": 3,
-        "title": "欧盟发布AI法案草案",
-        "summary": "欧盟发布AI法案草案，旨在规范AI的发展和应用。",
-        "source": "欧盟委员会",
-        "url": "https://ec.europa.eu/info/law/better-regulation/initiatives/ares-2026206_en"
+        "title": "欧盟发布AI伦理指南，推动AI安全发展",
+        "summary": "欧盟发布《人工智能伦理指南》，旨在确保AI技术的安全、可靠和公平应用。",
+        "source": "欧盟官网",
+        "url": "https://ec.europa.eu/news/ai/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-009",
         "category": "hardware",
         "priority": 3,
-        "title": "英特尔发布新一代CPU Core i9-13900K",
-        "summary": "英特尔发布新一代CPU Core i9-13900K，性能大幅提升，支持DDR5内存。",
-        "source": "英特尔",
-        "url": "https://news.intel.com/2026/08/26/intel-announces-next-generation-core-i9-13900k-processor/"
+        "title": "索尼发布新一代PlayStation 5，支持4K/8K分辨率",
+        "summary": "索尼发布新一代PlayStation 5，支持4K/8K分辨率，提供更沉浸的游戏体验。",
+        "source": "索尼官网",
+        "url": "https://www.playstation.com/en-us/news/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-010",
         "category": "ai",
         "priority": 3,
-        "title": "OpenAI发布大型语言模型GPT-4",
-        "summary": "OpenAI发布大型语言模型GPT-4，具备更强的语言理解和生成能力。",
-        "source": "OpenAI",
-        "url": "https://openai.com/blog/gpt-4/"
+        "title": "微软推出AI翻译工具，支持实时翻译",
+        "summary": "微软推出AI翻译工具，支持实时翻译，方便用户进行跨语言沟通。",
+        "source": "微软官网",
+        "url": "https://www.microsoft.com/en-us/news/press/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-011",
         "category": "tech",
         "priority": 3,
-        "title": "亚马逊推出智能眼镜Echo Frames",
-        "summary": "亚马逊推出智能眼镜Echo Frames，可提供语音助手、健康监测等功能。",
-        "source": "亚马逊",
-        "url": "https://www.amazon.com/Echo-Frames-Smart-Glasses-Black/dp/B09ZQ7C8LW"
+        "title": "SpaceX完成星际飞船首次轨道飞行测试",
+        "summary": "SpaceX成功完成星际飞船的首次轨道飞行测试，为未来的火星探索奠定基础。",
+        "source": "SpaceX官网",
+        "url": "https://www.spacex.com/news/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-012",
         "category": "hardware",
         "priority": 3,
-        "title": "苹果发布新款MacBook Pro",
-        "summary": "苹果发布新款MacBook Pro，搭载M2芯片，性能大幅提升。",
-        "source": "苹果",
-        "url": "https://www.apple.com/macbook-pro/"
+        "title": "小米发布Redmi K50系列手机，主打性价比",
+        "summary": "小米发布Redmi K50系列手机，主打性价比，提供高性能和优质体验。",
+        "source": "小米官网",
+        "url": "https://www.xiaomi.com/news/2026-08/517868.html"
       },
       {
         "id": "2026-08-26-013",
-        "category": "ai",
+        "category": "tech",
         "priority": 3,
-        "title": "谷歌推出AI音乐生成工具Jukebox",
-        "summary": "谷歌推出AI音乐生成工具Jukebox，可帮助用户创作音乐。",
-        "source": "谷歌",
-        "url": "https://www.google.com/ai/jukebox/"
+        "title": "华为发布MatePad Pro平板电脑，搭载鸿蒙操作系统",
+        "summary": "华为发布MatePad Pro平板电脑，搭载自研鸿蒙操作系统，提供流畅的多任务处理体验。",
+        "source": "华为官网",
+        "url": "https://www.huawei.com/cn/press-release/2026-08/517868.html"
       }
     ]
   }
