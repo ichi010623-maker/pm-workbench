@@ -2249,15 +2249,17 @@ function renderGrowthHome() {
 // ===== 新闻摘要（个人成长）=====
 // 数据: data/news_summary.json（云端每日北京时间 08:00 生成，按日期键 days{}）
 var __newsSummary = null;
+var __newsSummaryDate = null;
 var __nsHist = 0;
 function nsLoad(cb) {
-  if (__newsSummary) { cb && cb(); return; }
   var ver = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "";
   var bjd = new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
-  // 缓存键加入北京时间日期，确保每日新数据即时生效（数据单文件更新不升版本号）
-  fetch("data/news_summary.json?v=" + ver + "&d=" + bjd).then(function (r) { return r.json(); }).then(function (j) {
+  // 同日已加载则不重复请求（避免刷新抖动）；跨过 08:00 后 bjd 变化即自动重新拉取当日数据
+  if (__newsSummary && __newsSummaryDate === bjd) { cb && cb(); return; }
+  __newsSummaryDate = bjd;
+  fetch("data/news_summary.json?v=" + ver + "&d=" + bjd + "&_=" + Date.now()).then(function (r) { return r.json(); }).then(function (j) {
     __newsSummary = j; cb && cb();
-  }).catch(function () { __newsSummary = {}; cb && cb(); });
+  }).catch(function () { if (!__newsSummary) __newsSummary = {}; cb && cb(); });
 }
 function nsDayHtml(entry) {
   if (!entry || !entry.groups || !entry.groups.length) return '<div class="brief-empty" style="margin:0">该日期没有新闻摘要</div>';
@@ -2283,6 +2285,7 @@ function renderNewsSummaryPage() {
   var data = __newsSummary || {};
   var days = data.days || {};
   var bjd = new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+  var loadedToday = __newsSummary && __newsSummaryDate === bjd;
   var todayEntry = days[bjd] || null;
 
   var headBtn = '<button class="lg-btn ghost" onclick="__nsHist = __nsHist ? 0 : 1; render()">📅 历史</button>';
@@ -2290,7 +2293,7 @@ function renderNewsSummaryPage() {
   if (todayEntry && todayEntry.groups && todayEntry.groups.length) {
     todayHtml += nsDayHtml(todayEntry);
   } else {
-    todayHtml += '<div class="empty-state"><div class="empty-text">' + (__newsSummary ? "今日摘要尚未生成，每日北京时间 08:00 云端自动更新。" : "正在加载…") + "</div></div>";
+    todayHtml += '<div class="empty-state"><div class="empty-text">' + (loadedToday ? "今日摘要尚未生成，每日北京时间 08:00 云端自动更新。" : "正在加载…") + "</div></div>";
   }
   todayHtml += "</div>";
 
