@@ -925,19 +925,40 @@ function lgPhoneticsLoad(cb) {
     __lgPhonetics = j; cb && cb();
   }).catch(function () { cb && cb(); });
 }
-function lgPhonSpeak(word, region) {
-  if (!window.speechSynthesis) { showToast("当前环境不支持语音", "error"); return; }
-  window.speechSynthesis.cancel();
-  var code = region === "UK" ? "en-GB" : "en-US";
-  var u = new SpeechSynthesisUtterance(String(word));
-  var vs = []; try { vs = window.speechSynthesis.getVoices() || []; } catch (e) {}
+function applyPhonVoice(u, vs, code) {
+  if (!vs || !vs.length) return;
   // 优先精确匹配语种（en-US / en-GB），否则退回任意英文嗓音，避免中文设备用中文嗓音读英文导致发音错误
   var best = null;
   for (var i = 0; i < vs.length; i++) { if (vs[i].lang && vs[i].lang.toLowerCase() === code.toLowerCase()) { best = vs[i]; break; } }
   if (!best) { for (var j = 0; j < vs.length; j++) { if (vs[j].lang && vs[j].lang.toLowerCase().indexOf("en") === 0) { best = vs[j]; break; } } }
   if (best) u.voice = best;
+}
+function lgPhonSpeak(word, region) {
+  if (!window.speechSynthesis) { showToast("当前环境不支持语音", "error"); return; }
+  window.speechSynthesis.cancel();
+  var code = region === "UK" ? "en-GB" : "en-US";
+  var u = new SpeechSynthesisUtterance(String(word));
   u.lang = code;
   u.rate = 0.85;
+  var vs = []; try { vs = window.speechSynthesis.getVoices() || []; } catch (e) {}
+  // 中文设备首次点击时常因语音列表尚未就绪（getVoices 为空）而被迫用默认（中文）嗓音，导致发音错误；
+  // 此时等待 onvoiceschanged 就绪后再播，确保选中英文嗓音。
+  if (!vs.length) {
+    var fired = false;
+    var retry = function () {
+      if (fired) return;
+      var v2 = []; try { v2 = window.speechSynthesis.getVoices() || []; } catch (e2) {}
+      if (!v2.length) return;
+      fired = true;
+      window.speechSynthesis.cancel();
+      applyPhonVoice(u, v2, code);
+      window.speechSynthesis.speak(u);
+    };
+    try { window.speechSynthesis.onvoiceschanged = retry; } catch (e3) {}
+    setTimeout(retry, 350);
+    return;
+  }
+  applyPhonVoice(u, vs, code);
   window.speechSynthesis.speak(u);
 }
 // 预热 TTS 语音列表：中文设备首次点击常因 voices 尚未加载而被迫用默认（中文）嗓音，导致发音错误
@@ -972,7 +993,6 @@ function lgPhonCard(p, region) {
     '<div class="lg-phon-head">' +
       '<span class="lg-phon-sym">' + escapeHtml(p.symbol) + '</span>' +
       '<span class="lg-phon-tag">' + escapeHtml(p.type || "") + '</span>' +
-      '<button class="lg-phon-listen" onclick="lgPhonSpeak(\'' + lgEscapeJs((p.examples && p.examples[0] && p.examples[0][0]) || "a") + '\',\'' + region + '\')">🔊 听读音</button>' +
     '</div>' +
     '<div class="lg-phon-usuk">' +
       (p.us !== p.uk ? '美式 <b>' + escapeHtml(p.us) + '</b> · 英式 <b>' + escapeHtml(p.uk) + '</b>' : '美/英 <b>' + escapeHtml(p.us) + '</b>') +
