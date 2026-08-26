@@ -928,18 +928,27 @@ function lgPhoneticsLoad(cb) {
 function lgPhonSpeak(word, region) {
   if (!window.speechSynthesis) { showToast("当前环境不支持语音", "error"); return; }
   window.speechSynthesis.cancel();
-  var tag = region === "UK" ? "en-GB" : "en-US";
+  var code = region === "UK" ? "en-GB" : "en-US";
   var u = new SpeechSynthesisUtterance(String(word));
-  var v = null;
-  try {
-    var vs = window.speechSynthesis.getVoices();
-    for (var i = 0; i < vs.length; i++) { if (vs[i].lang && vs[i].lang.toLowerCase().indexOf(tag.toLowerCase()) === 0) { v = vs[i]; break; } }
-  } catch (e) {}
-  if (v) u.voice = v;
-  u.lang = tag;
+  var vs = []; try { vs = window.speechSynthesis.getVoices() || []; } catch (e) {}
+  // 优先精确匹配语种（en-US / en-GB），否则退回任意英文嗓音，避免中文设备用中文嗓音读英文导致发音错误
+  var best = null;
+  for (var i = 0; i < vs.length; i++) { if (vs[i].lang && vs[i].lang.toLowerCase() === code.toLowerCase()) { best = vs[i]; break; } }
+  if (!best) { for (var j = 0; j < vs.length; j++) { if (vs[j].lang && vs[j].lang.toLowerCase().indexOf("en") === 0) { best = vs[j]; break; } } }
+  if (best) u.voice = best;
+  u.lang = code;
   u.rate = 0.85;
   window.speechSynthesis.speak(u);
 }
+// 预热 TTS 语音列表：中文设备首次点击常因 voices 尚未加载而被迫用默认（中文）嗓音，导致发音错误
+(function () {
+  try {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = function () { window.speechSynthesis.getVoices(); };
+    }
+  } catch (e) {}
+})();
 function lgPhonExamplesHtml(exs, region) {
   return (exs || []).map(function (x) {
     return '<span class="lg-phon-ex">' + escapeHtml(x[0]) +
