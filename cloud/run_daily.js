@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// 云端每日编排器：生成知识卡+资讯+AIHOT → 升版本 → 跑测试 → 同步 Gitee → EdgeOne 部署
+// 云端每日编排器：生成知识卡+资讯+AIHOT → 升版本 → 跑测试 → 同步 Gitee → GitHub Pages 部署
 // 用法: node cloud/run_daily.js [repoDir] [YYYY-MM-DD]
-// 环境变量: EDGEONE_TOKEN(必), TENCENTCLOUD_SECRET_ID/KEY(部署用COS), GITEE_TOKEN/CLOUD=1 走 API 同步
+// 环境变量: GH_TOKEN/GH_REPO(部署GitHub Pages必), GITEE_TOKEN/CLOUD=1 走 API 同步
 const fs = require("fs");
 const path = require("path");
 const { execSync, spawnSync } = require("child_process");
@@ -11,6 +11,7 @@ const readingGen = require("./gen_reading_llm");
 const summaryGen = require("./gen_news_summary_llm");
 const gitee = require("./lib_gitee");
 const netlify = require("./deploy_netlify");
+const githubPages = require("./deploy_github_pages");
 
 function todayStr() { return new Date().toISOString().slice(0, 10); }
 function bjTodayStr() { return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10); }
@@ -104,22 +105,31 @@ function ensureEdgeone(BASE) {
   return bin;
 }
 
+async function deployGitHubPages(BASE) {
+  if (!process.env.GH_TOKEN || !process.env.GH_REPO) {
+    console.warn("[deploy] 云端模式：缺少 GH_TOKEN/GH_REPO，跳过 GitHub 部署（内容已同步 Gitee 主库）");
+    return false;
+  }
+  try {
+    const url = await githubPages.deploy(BASE, process.env.GH_REPO, process.env.GH_TOKEN);
+    if (url) console.log("[deploy] GitHub Pages 已上线: " + url);
+    return true;
+  } catch (e) {
+    console.warn("[deploy] GitHub Pages 部署失败:", e.message);
+    return false;
+  }
+}
+
 async function deployEdgeOne(BASE) {
-  // 云端模式：部署主通道 = Netlify（境外免费托管，免备案，HTTP 直传无需 CLI）
+  // 云端模式：主部署通道 = GitHub Pages（免费托管、无额度限制、可访问）
   if (process.env.CLOUD === "1") {
-    if (!process.env.NETLIFY_TOKEN) {
-      console.warn("[deploy] 云端模式：无 NETLIFY_TOKEN，跳过部署（内容已同步 Gitee）");
-      return;
-    }
-    try {
-      const url = await netlify.deploy(BASE, process.env.NETLIFY_TOKEN, process.env.NETLIFY_SITE_ID || "");
-      if (url) console.log("[deploy] Netlify 已上线: " + url);
-    } catch (e) {
-      console.warn("[deploy] Netlify 部署失败(不影响 Gitee 同步):", e.message);
+    const ok = await deployGitHubPages(BASE);
+    if (!ok) {
+      console.warn("[deploy] 主部署失败——内容已同步至 Gitee 主库，可在本地手动补救（node cloud/deploy_github_pages.js）。");
     }
     return;
   }
-  // 本地/手动模式：尽力而为，失败仅告警
+  // 本地/手动模式：EdgeOne CLI 兜底（失败仅告警）
   const token = process.env.EDGEONE_TOKEN;
   if (!token) { console.warn("[deploy] 无 EDGEONE_TOKEN，跳过 CLI 部署"); return; }
   let cmd;
