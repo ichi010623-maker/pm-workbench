@@ -9,20 +9,18 @@ const { chatJSON } = require("./lib_llm");
 
 function bjTodayStr() { return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10); }
 
-async function main(dateArg, dirArg, opts) {
-  // 精读按「北京时间」切日（App 端 lgReadingToday 同口径），默认取北京时间今日
-  const DATE = dateArg || process.argv[2] || bjTodayStr();
+/**
+ * 无文件系统生成入口（供 Cloudflare Worker 使用）：
+ * 传入 lang_reading 数据对象，原地更新并返回。opts.llm 可注入自定义 LLM 实现。
+ */
+async function generate(rd, DATE, opts = {}) {
+  const llm = opts.llm || null;
+  const force = opts.force;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
-  const DIR = dirArg || (process.argv[3] || path.join(__dirname, ".."));
-  const force = opts && opts.force;
-  const rfile = path.join(DIR, "data", "lang_reading.json");
-
-  let rd = {};
-  try { rd = JSON.parse(fs.readFileSync(rfile, "utf8")); } catch { rd = { days: {} }; }
   if (!rd.days) rd.days = {};
   if (!force && rd.days[DATE] && rd.days[DATE].length >= 10) {
     console.log(`[reading] ${DATE} 已存在，跳过（幂等）`);
-    return { skipped: true, date: DATE };
+    return { skipped: true, date: DATE, data: rd };
   }
 
   // 已用标题（防重复主题）
@@ -41,8 +39,9 @@ async function main(dateArg, dirArg, opts) {
 - 避免与以下已用标题重复：${used.slice(0, 40).join(" / ") || "（无）"}
 返回严格 JSON：{"articles":[{"level":"...","title":"...","content":"...","translation":"..."} ×10]}`;
 
+  const chat = llm || chatJSON;
   // 10 篇英文正文 + 中文全文翻译，token 需求大；过小会截断导致篇数不足（曾出现只出 9 篇）
-  const data = await chatJSON(system, user, { temperature: 0.8, maxTokens: 12000 });
+  const data = await chat(system, user, { temperature: 0.8, maxTokens: 12000 });
   let arts = data.articles;
   if (!Array.isArray(arts) || arts.length === 0) throw new Error("LLM 返回精读文章异常");
 
@@ -55,10 +54,26 @@ async function main(dateArg, dirArg, opts) {
 
   rd.days[DATE] = out;
   rd.updatedAt = DATE + "T" + new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(11, 16) + ":00+08:00";
-  fs.writeFileSync(rfile, JSON.stringify(rd, null, 2));
 
   console.log(`[reading] ${DATE} 生成 ${out.length} 篇精读文章`);
-  return { date: DATE, count: out.length };
+  return { date: DATE, count: out.length, data: rd };
+}
+
+async function main(dateArg, dirArg, opts) {
+  // 精读按「北京时间」切日（App 端 lgReadingToday 同口径），默认取北京时间今日
+  const DATE = dateArg || process.argv[2] || bjTodayStr();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
+  const DIR = dirArg || (process.argv[3] || path.join(__dirname, ".."));
+  const force = opts && opts.force;
+  const rfile = path.join(DIR, "data", "lang_reading.json");
+
+  let rd = {};
+  try { rd = JSON.parse(fs.readFileSync(rfile, "utf8")); } catch { rd = { days: {} }; }
+
+  const r = await generate(rd, DATE, { force });
+  if (r.data && r.data !== rd) fs.writeFileSync(rfile, JSON.stringify(r.data, null, 2));
+  else if (r.count !== undefined && !r.skipped) fs.writeFileSync(rfile, JSON.stringify(rd, null, 2));
+  return r;
 }
 
 if (require.main === module) {
@@ -66,4 +81,4 @@ if (require.main === module) {
     console.error("ERR", e.message); process.exit(1);
   });
 }
-module.exports = { main };
+module.exports = { main, generate };

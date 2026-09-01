@@ -126,19 +126,19 @@ const WEBSEARCH_USER = `请基于今天(${bjTodayStr()})的真实全球要闻，
 返回严格 JSON：
 {"brief":["...","..."],"groups":[{"cat":"国际","icon":"🌍","items":[{"title":"...","summary":"...","source":"BBC","url":"https://..."}]}]}`;
 
-async function main(dateArg, dirArg, opts) {
-  const DATE = dateArg || process.argv[2] || bjTodayStr();
+/**
+ * 无文件系统生成入口（供 Cloudflare Worker 使用）：
+ * 传入 news_summary 数据对象，原地更新并返回。opts.llm 注入 LLM；opts.webSearch 标识 LLM 是否支持联网检索。
+ */
+async function generate(ns, DATE, opts = {}) {
+  const llm = opts.llm || null;
+  const force = opts.force;
+  const webSearch = opts.webSearch !== false; // Worker（Workers AI）无联网 → 传 false
   if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
-  const DIR = dirArg || (process.argv[3] || path.join(__dirname, ".."));
-  const force = opts && opts.force;
-  const rfile = path.join(DIR, "data", "news_summary.json");
-
-  let ns = {};
-  try { ns = JSON.parse(fs.readFileSync(rfile, "utf8")); } catch { ns = { days: {} }; }
   if (!ns.days) ns.days = {};
   if (!force && ns.days[DATE] && ns.days[DATE].groups && ns.days[DATE].groups.length) {
     console.log(`[newssum] ${DATE} 已存在，跳过（幂等）`);
-    return { skipped: true, date: DATE };
+    return { skipped: true, date: DATE, data: ns };
   }
 
   // 1) 独立抓取真实 RSS
@@ -155,16 +155,21 @@ async function main(dateArg, dirArg, opts) {
     ).join("\n");
     sysOpts = { webSearch: false, temperature: 0.3, maxTokens: 6000 };
     user = `以下是今天通过 RSS 独立抓取的全球真实新闻素材（已标注来源与原文链接，共 ${raw.length} 条）：\n${material}\n` + RSS_PROMPT_TAIL;
-  } else {
+  } else if (webSearch) {
     // 降级：RSS 不可用，退回 LLM 联网检索（不中断每日产出）
     mode = "websearch-fallback";
     console.log(`[newssum] RSS 素材不足(${raw.length})，降级为 LLM 联网检索`);
     sysOpts = { webSearch: true, temperature: 0.5, maxTokens: 6000 };
     user = WEBSEARCH_USER;
+  } else {
+    // Worker 无联网且 RSS 不足：跳过当日，避免编造
+    console.log(`[newssum] RSS 素材不足(${raw.length})且 LLM 无联网，跳过（防编造）`);
+    return { date: DATE, skippedNoSource: true, data: ns };
   }
 
   const system = "你是资深国际新闻编辑，擅长把真实新闻整理成简洁、客观、有信息量的每日摘要。输出严格 JSON，不得编造新闻。";
-  const data = await chatJSON(system, user, sysOpts);
+  const chat = llm || chatJSON;
+  const data = await chat(system, user, sysOpts);
   let groups = Array.isArray(data.groups) ? data.groups : [];
   let brief = Array.isArray(data.brief) ? data.brief : [];
   if (groups.length === 0) throw new Error("LLM 返回新闻摘要为空");
@@ -195,11 +200,26 @@ async function main(dateArg, dirArg, opts) {
 
   ns.days[DATE] = out;
   ns.updatedAt = DATE + "T" + new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(11, 16) + ":00+08:00";
-  fs.writeFileSync(rfile, JSON.stringify(ns, null, 2));
 
   const itemCnt = out.groups.reduce(function (a, g) { return a + g.items.length; }, 0);
   console.log(`[newssum] ${DATE} 生成 ${out.groups.length} 组 / ${itemCnt} 条 (mode=${mode})`);
-  return { date: DATE, groups: out.groups.length, items: itemCnt, mode: mode, sources: counts };
+  return { date: DATE, groups: out.groups.length, items: itemCnt, mode: mode, sources: counts, data: ns };
+}
+
+async function main(dateArg, dirArg, opts) {
+  const DATE = dateArg || process.argv[2] || bjTodayStr();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
+  const DIR = dirArg || (process.argv[3] || path.join(__dirname, ".."));
+  const force = opts && opts.force;
+  const rfile = path.join(DIR, "data", "news_summary.json");
+
+  let ns = {};
+  try { ns = JSON.parse(fs.readFileSync(rfile, "utf8")); } catch { ns = { days: {} }; }
+
+  const r = await generate(ns, DATE, { force, webSearch: true });
+  if (r.data && r.data !== ns) fs.writeFileSync(rfile, JSON.stringify(r.data, null, 2));
+  else if (r.days === undefined && !r.skipped && !r.skippedNoSource && r.groups !== undefined) fs.writeFileSync(rfile, JSON.stringify(ns, null, 2));
+  return r;
 }
 
 if (require.main === module) {
@@ -207,4 +227,4 @@ if (require.main === module) {
     console.error("ERR", e.message); process.exit(1);
   });
 }
-module.exports = { main };
+module.exports = { main, generate };

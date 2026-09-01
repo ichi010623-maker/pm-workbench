@@ -1,0 +1,14 @@
+{
+  "name": "pmwb-auto-worker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "bash build.sh",
+    "deploy": "bash build.sh && wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.12",
+    "wrangler": "^4.0.0"
+  }
+}

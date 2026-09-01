@@ -15,18 +15,20 @@ function parseDateArg(argv) {
 }
 function argv_dir(argv) { return argv[3] || path.join(__dirname, ".."); }
 
-async function main(dateArg, dirArg, opts) {
-  const DATE = dateArg || process.argv[2] || new Date().toISOString().slice(0, 10);
+/**
+ * 无文件系统生成入口（供 Cloudflare Worker 使用）：
+ * 传入 news 数据对象（opts.archive 可选传 news-archive 对象），原地更新并返回。
+ * opts.llm 可注入自定义 LLM 实现；opts.refresh 允许覆盖当日旧资讯。
+ */
+async function generate(n, DATE, opts = {}) {
+  const llm = opts.llm || null;
+  const REFRESH = opts.refresh;
+  const arc = opts.archive || null;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
-  const DIR = dirArg || argv_dir(process.argv);
-  const REFRESH = opts && opts.refresh; // 12/18 点重跑：允许覆盖当日旧资讯
-  const nfile = path.join(DIR, "data", "news.json");
-  const afile = path.join(DIR, "data", "news-archive.json");
 
-  const n = JSON.parse(fs.readFileSync(nfile, "utf8"));
   if (!REFRESH && (n.items || []).some((it) => String(it.id).startsWith(DATE + "-"))) {
     console.log(`[news] ${DATE} 已存在，跳过（幂等）`);
-    return { skipped: true, date: DATE };
+    return { skipped: true, date: DATE, data: n, archive: arc };
   }
 
   const system = `你是科技/硬件/AI 行业资讯编辑。必须基于真实发生的新闻，禁止编造。输出严格 JSON。`;
@@ -37,7 +39,9 @@ async function main(dateArg, dirArg, opts) {
 额外返回字段：leadTitle（一句话概括今日最大热点，≤60字）。
 要求：返回 {"items":[...13条], "leadTitle":"..."}。只写真实新闻，不确定则降低 priority 或省略。`;
 
-  const data = await chatJSON(system, user, { temperature: 0.5, maxTokens: 6000, webSearch: true });
+  const chat = llm || chatJSON;
+  // 联网检索仅智谱通道支持；Worker（Workers AI）无联网时关闭，靠模型训练知识兜底
+  const data = await chat(system, user, { temperature: 0.5, maxTokens: 6000, webSearch: !!llm ? false : true });
   let items = data.items;
   if (!Array.isArray(items) || items.length === 0) throw new Error("LLM 返回资讯异常");
 
@@ -64,20 +68,38 @@ async function main(dateArg, dirArg, opts) {
     n.generatedAt = DATE + "T07:00:00+08:00";
   }
   n.categories = n.categories || CATS;
-  fs.writeFileSync(nfile, JSON.stringify(n, null, 2));
 
-  // news-archive.json
-  const arc = JSON.parse(fs.readFileSync(afile, "utf8"));
-  arc[DATE] = { generatedAt: n.generatedAt, categories: n.categories, items: out };
-  fs.writeFileSync(afile, JSON.stringify(arc, null, 2));
-
+  const res = { date: DATE, count: out.length, leadTitle, data: n };
+  if (arc) {
+    arc[DATE] = { generatedAt: n.generatedAt, categories: n.categories, items: out };
+    res.archive = arc;
+  }
   console.log(`[news] ${DATE} 生成 ${out.length} 条；archive 已更新（aihot 由 fetch_aihot_daily.js 管理）`);
-  return { date: DATE, count: out.length, leadTitle };
+  return res;
 }
+
+async function main(dateArg, dirArg, opts) {
+  const DATE = dateArg || process.argv[2] || new Date().toISOString().slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
+  const DIR = dirArg || argv_dir(process.argv);
+  const REFRESH = opts && opts.refresh; // 12/18 点重跑：允许覆盖当日旧资讯
+  const nfile = path.join(DIR, "data", "news.json");
+  const afile = path.join(DIR, "data", "news-archive.json");
+
+  const n = JSON.parse(fs.readFileSync(nfile, "utf8"));
+  const arc = JSON.parse(fs.readFileSync(afile, "utf8"));
+
+  const r = await generate(n, DATE, { refresh: REFRESH, archive: arc });
+  if (r.data) fs.writeFileSync(nfile, JSON.stringify(r.data, null, 2));
+  if (r.archive) fs.writeFileSync(afile, JSON.stringify(r.archive, null, 2));
+  return r;
+}
+
+function argv_dir(argv) { return argv[3] || path.join(__dirname, ".."); }
 
 if (require.main === module) {
   main().then((r) => console.log(JSON.stringify(r))).catch((e) => {
     console.error("ERR", e.message); process.exit(1);
   });
 }
-module.exports = { main };
+module.exports = { main, generate };

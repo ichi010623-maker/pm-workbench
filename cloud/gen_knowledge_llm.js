@@ -50,7 +50,8 @@ function salvage(c, cat, existingTitles) {
   };
 }
 
-async function genCategory(cat, DATE, existingTitles) {
+async function genCategory(cat, DATE, existingTitles, llm) {
+  const chat = llm || chatJSON;
   const catName = { ai: "AI/大模型", finance: "金融投资", think: "认知思维", hwpm: "硬件产品经理", mkt: "市场营销" }[cat];
   const system = `你是${catName}领域的知识卡片作者。基于真实准确的知识创作，避免虚构。只输出严格 JSON。`;
   const user = `为日期 ${DATE} 创作 ${PER_CAT} 张「${catName}」知识卡片。每张结构：
@@ -61,7 +62,7 @@ async function genCategory(cat, DATE, existingTitles) {
   for (let attempt = 0; attempt < 3 && out.length < PER_CAT; attempt++) {
     try {
       // maxTokens 需容纳 10 张完整卡片（content/points/tip 全字段），过小会截断 JSON 导致卡片数不足
-      const data = await chatJSON(system, user, { temperature: 0.85, maxTokens: 8000 });
+      const data = await chat(system, user, { temperature: 0.85, maxTokens: 8000 });
       let cards = Array.isArray(data) ? data : data.cards;
       if (!Array.isArray(cards)) continue;
       for (const c of cards.filter(Boolean)) {
@@ -76,25 +77,26 @@ async function genCategory(cat, DATE, existingTitles) {
   return out;
 }
 
-async function main(dateArg, dirArg) {
-  const DATE = dateArg || process.argv[2] || new Date().toISOString().slice(0, 10);
+/**
+ * 无文件系统生成入口（供 Cloudflare Worker 使用）：
+ * 传入 knowledge 数据对象，原地更新并返回。opts.llm 可注入自定义 LLM 实现。
+ */
+async function generate(k, DATE, opts = {}) {
+  const llm = opts.llm || null;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
-  const DIR = dirArg || argv_dir(process.argv);
-  const kfile = path.join(DIR, "data", "knowledge.json");
-  const k = JSON.parse(fs.readFileSync(kfile, "utf8"));
 
   // 幂等检查
   if (k.history && k.history.some((h) => h.date === DATE)) {
     console.log(`[knowledge] ${DATE} 已存在，跳过生成（幂等）`);
-    return { skipped: true, date: DATE };
+    return { skipped: true, date: DATE, data: k };
   }
 
-  const existingTitles = new Set(k.pool.map((p) => p.title));
+  const existingTitles = new Set((k.pool || []).map((p) => p.title));
   const out = [];
   for (const cat of CATS) {
-    const part = await genCategory(cat, DATE, existingTitles);
+    const part = await genCategory(cat, DATE, existingTitles, llm);
     out.push(...part);
-    for (const o of part) o.id = nextId(k.pool.concat(out), cat);
+    for (const o of part) o.id = nextId((k.pool || []).concat(out), cat);
     console.log(`[knowledge] ${cat}: ${part.length}/${PER_CAT} 张`);
   }
 
@@ -107,17 +109,30 @@ async function main(dateArg, dirArg) {
   // 幂等检查会认为「该日已生成」而永久跳过，导致这一天再也补不上
   if (!out.length) {
     console.error(`[knowledge] ${DATE} 有效卡为 0，放弃写入（不产生空 history 条目）`);
-    return { date: DATE, count: 0, skippedWrite: true };
+    return { date: DATE, count: 0, skippedWrite: true, data: k };
   }
 
-  // 写入 pool + history
-  k.pool = k.pool.concat(out);
+  // 写入 pool + history（原地修改传入对象）
+  k.pool = (k.pool || []).concat(out);
   k.history = (k.history || []).concat({ date: DATE, itemIds: out.map((o) => o.id) });
   k.dailyCount = total;
-  fs.writeFileSync(kfile, JSON.stringify(k, null, 2));
 
   console.log(`[knowledge] ${DATE} 生成 ${out.length} 张，pool=${k.pool.length}`);
-  return { date: DATE, count: out.length, pool: k.pool.length };
+  return { date: DATE, count: out.length, pool: k.pool.length, data: k, changed: true };
+}
+
+async function main(dateArg, dirArg) {
+  const DATE = dateArg || process.argv[2] || new Date().toISOString().slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(DATE)) throw new Error("日期格式错误: " + DATE);
+  const DIR = dirArg || argv_dir(process.argv);
+  const kfile = path.join(DIR, "data", "knowledge.json");
+  const k = JSON.parse(fs.readFileSync(kfile, "utf8"));
+
+  const r = await generate(k, DATE, {});
+  if (r.changed || r.skippedWrite) {
+    fs.writeFileSync(kfile, JSON.stringify(r.data || k, null, 2));
+  }
+  return r;
 }
 
 function argv_dir(argv) {
@@ -129,4 +144,4 @@ if (require.main === module) {
     console.error("ERR", e.message); process.exit(1);
   });
 }
-module.exports = { main };
+module.exports = { main, generate };

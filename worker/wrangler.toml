@@ -1,0 +1,31 @@
+name = "pmwb-auto"
+main = "dist/index.mjs"
+compatibility_date = "2026-08-19"
+
+# Workers AI 绑定：Workflow 内用 env.AI.run("glm-4.7-flash")（免费额度 10k neurons/天）
+[[ai]]
+binding = "AI"
+
+[observability]
+enabled = true
+
+# 云端自动更新 Workflow：cron 直接挂在 binding 上（UTC 时间）
+#   daily    = 北京 07:10 = 23:10 UTC
+#   news     = 北京 12:00 / 18:00 = 04:00 / 10:00 UTC
+#   reading  = 北京 00:05 = 16:05 UTC
+#   newssum  = 北京 08:00 = 00:00 UTC
+#   patrol   = 每 6 小时（自愈兜底）
+[[workflows]]
+name = "pmwb-auto-workflow"
+binding = "PMWB_WORKFLOW"
+class_name = "PmwbWorkflow"
+schedules = [
+  "10 23 * * *",
+  "0 4 * * *",
+  "0 10 * * *",
+  "5 16 * * *",
+  "0 0 * * *",
+  "0 */6 * * *",
+]
+
+# GH_TOKEN 由 wrangler secret put GH_TOKEN 注入（不写进配置）
