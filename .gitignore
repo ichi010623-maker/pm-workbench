@@ -10,3 +10,4 @@ scf_bundle.zip
 
 # 本机凭据
 cloud/local.env
+.local_run.lock
