@@ -2737,5 +2737,158 @@
         "url": "https://www.huawei.com/cn/press-release/2026-08/517868.html"
       }
     ]
+  },
+  "2026-09-01": {
+    "generatedAt": "2026-09-01T07:00:00+08:00",
+    "categories": [
+      {
+        "key": "official",
+        "label": "官媒热点",
+        "icon": "🏛️"
+      },
+      {
+        "key": "hardware",
+        "label": "消费电子",
+        "icon": "📱"
+      },
+      {
+        "key": "ai",
+        "label": "AI硬件",
+        "icon": "🤖"
+      },
+      {
+        "key": "tech",
+        "label": "科技前沿",
+        "icon": "💡"
+      }
+    ],
+    "items": [
+      {
+        "id": "2026-09-01-001",
+        "category": "official",
+        "priority": 5,
+        "title": "中国发布新一代人工智能发展规划”，“summary\":\"国家发改委发布《新一代人工智能发展规划》，旨在推动人工智能与实体经济深度融合，提升国家竞争力。",
+        "summary": "",
+        "source": "国家发改委",
+        "url": "http://www.ndrc.gov.cn/xwzx/202609/t20260901_1296803.htm"
+      },
+      {
+        "id": "2026-09-01-002",
+        "category": "hardware",
+        "priority": 4,
+        "title": "华为发布全新Mate 50系列手机”，“summary\":\"华为发布新一代Mate 50系列手机，搭载自主研发的麒麟9000E芯片，支持5G网络。",
+        "summary": "",
+        "source": "华为",
+        "url": "https://www.huawei.com/cn/"
+      },
+      {
+        "id": "2026-09-01-003",
+        "category": "ai",
+        "priority": 4,
+        "title": "百度发布文心一言大模型”，“summary\":\"百度发布文心一言大模型，具备自然语言处理能力，支持多语言、多模态交互。",
+        "summary": "",
+        "source": "百度",
+        "url": "https://ai.baidu.com/"
+      },
+      {
+        "id": "2026-09-01-004",
+        "category": "tech",
+        "priority": 4,
+        "title": "我国成功发射嫦娥五号探测器”，“summary\":\"我国成功发射嫦娥五号探测器，标志着我国月球探测工程进入新阶段。",
+        "summary": "",
+        "source": "国家航天局",
+        "url": "http://www.cnsa.gov.cn/"
+      },
+      {
+        "id": "2026-09-01-005",
+        "category": "hardware",
+        "priority": 3,
+        "title": "苹果发布新款MacBook Pro笔记本电脑”，“summary\":\"苹果发布新款MacBook Pro笔记本电脑，搭载M1芯片，提供更强大的性能。",
+        "summary": "",
+        "source": "苹果",
+        "url": "https://www.apple.com/"
+      },
+      {
+        "id": "2026-09-01-006",
+        "category": "ai",
+        "priority": 3,
+        "title": "谷歌发布TensorFlow 2.5版本”，“summary\":\"谷歌发布TensorFlow 2.5版本，新增对边缘计算和物联网的支持。",
+        "summary": "",
+        "source": "谷歌",
+        "url": "https://www.tensorflow.org/"
+      },
+      {
+        "id": "2026-09-01-007",
+        "category": "tech",
+        "priority": 3,
+        "title": "我国首条量子通信卫星地面站建成”，“summary\":\"我国首条量子通信卫星地面站建成，标志着我国量子通信网络建设迈出重要一步。",
+        "summary": "",
+        "source": "中国科学院",
+        "url": "http://www.cas.cn/"
+      },
+      {
+        "id": "2026-09-01-008",
+        "category": "hardware",
+        "priority": 3,
+        "title": "高通发布骁龙8 Gen 1芯片”，“summary\":\"高通发布骁龙8 Gen 1芯片，支持5G网络，性能大幅提升。",
+        "summary": "",
+        "source": "高通",
+        "url": "https://www.qualcomm.com/"
+      },
+      {
+        "id": "2026-09-01-009",
+        "category": "ai",
+        "priority": 3,
+        "title": "亚马逊推出新型语音识别技术”，“summary\":\"亚马逊推出新型语音识别技术，准确率达到历史新高。",
+        "summary": "",
+        "source": "亚马逊",
+        "url": "https://www.amazon.com/"
+      },
+      {
+        "id": "2026-09-01-010",
+        "category": "tech",
+        "priority": 3,
+        "title": "我国成功研发出新型光电子芯片”，“summary\":\"我国成功研发出新型光电子芯片，性能达到国际先进水平。",
+        "summary": "",
+        "source": "中国科学院",
+        "url": "http://www.cas.cn/"
+      },
+      {
+        "id": "2026-09-01-011",
+        "category": "hardware",
+        "priority": 3,
+        "title": "三星发布新一代Galaxy Z Fold 3折叠屏手机”，“summary\":\"三星发布新一代Galaxy Z Fold 3折叠屏手机，支持5G网络，提供更好的折叠体验。",
+        "summary": "",
+        "source": "三星",
+        "url": "https://www.samsung.com/"
+      },
+      {
+        "id": "2026-09-01-012",
+        "category": "ai",
+        "priority": 3,
+        "title": "微软发布全新AI工具包”，“summary\":\"微软发布全新AI工具包，支持开发者快速构建AI应用。",
+        "summary": "",
+        "source": "微软",
+        "url": "https://www.microsoft.com/"
+      },
+      {
+        "id": "2026-09-01-013",
+        "category": "tech",
+        "priority": 3,
+        "title": "我国成功研发出新型无人机”，“summary\":\"我国成功研发出新型无人机，具备自主飞行、避障等功能。",
+        "summary": "",
+        "source": "中国科学院",
+        "url": "http://www.cas.cn/"
+      },
+      {
+        "id": "2026-09-01-014",
+        "category": "official",
+        "priority": 5,
+        "title": "国家发布《关于加快人工智能与实体经济深度融合的政策措施》”，“summary\":\"国家发布《关于加快人工智能与实体经济深度融合的政策措施》，旨在推动人工智能产业发展。",
+        "summary": "",
+        "source": "国家发改委",
+        "url": "http://www.ndrc.gov.cn/xwzx/202609/t20260901_1296803.htm"
+      }
+    ]
   }
 }

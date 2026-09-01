@@ -309,7 +309,63 @@
         "content": "Healthy snacks provide energy without unhealthy fats. Options include nuts, fruits, and yogurt. They are great for on-the-go snacking.",
         "translation": "健康零食提供能量而不含不健康的脂肪。选择包括坚果、水果和酸奶。它们是即食零食的绝佳选择。"
       }
+    ],
+    "2026-09-01": [
+      {
+        "level": "入门",
+        "title": "Smart Cities",
+        "content": "Smart cities use technology to improve life. Sensors and apps help manage traffic and energy use. They make cities safer and more efficient.",
+        "translation": "智能城市利用科技改善生活。传感器和应用程序帮助管理交通和能源使用。它们使城市更安全、更高效。"
+      },
+      {
+        "level": "进阶",
+        "title": "Morning Routines",
+        "content": "A good morning routine sets the tone for the day. Activities like meditation and exercise boost mood and productivity.",
+        "translation": "良好的早晨例行程序为一天定下基调。如冥想和锻炼等活动能提升情绪和生产力。"
+      },
+      {
+        "level": "挑战",
+        "title": "Ancient Inventions",
+        "content": "Ancient inventions changed the world. The wheel, printing press, and internet are examples. They show how innovation can transform society.",
+        "translation": "古代发明改变了世界。轮子、印刷机和互联网是例子。它们展示了创新如何改变社会。"
+      },
+      {
+        "level": "入门",
+        "title": "Seasonal Foods",
+        "content": "Eating seasonal foods is healthier. They are fresher and have more nutrients. Plus, they support local farmers.",
+        "translation": "食用季节性食物更健康。它们更新鲜，营养更丰富。此外，它们支持当地农民。"
+      },
+      {
+        "level": "进阶",
+        "title": "Art Therapy",
+        "content": "Art therapy helps people express emotions. It's used in mental health treatment and can improve well-being.",
+        "translation": "艺术治疗帮助人们表达情感。它在心理健康治疗中使用，并可以提高幸福感。"
+      },
+      {
+        "level": "挑战",
+        "title": "Solar Energy",
+        "content": "Solar energy is a renewable resource. It's clean and reduces carbon emissions. Many homes and businesses use solar panels.",
+        "translation": "太阳能是一种可再生能源。它清洁且减少碳排放。许多家庭和企业使用太阳能板。"
+      },
+      {
+        "level": "入门",
+        "title": "Public Transport",
+        "content": "Public transport is an eco-friendly option. It reduces traffic and pollution. It's also more affordable than driving a car.",
+        "translation": "公共交通是一种环保的选择。它减少交通和污染。而且比开车更经济实惠。"
+      },
+      {
+        "level": "进阶",
+        "title": "Memory Techniques",
+        "content": "Memory techniques can improve learning. Mnemonics and visualization help remember information more effectively.",
+        "translation": "记忆技巧可以提高学习效果。记忆术和可视化有助于更有效地记住信息。"
+      },
+      {
+        "level": "挑战",
+        "title": "Space Missions",
+        "content": "Space missions explore the unknown. They help us understand the universe and its mysteries. They inspire future generations.",
+        "translation": "太空任务探索未知。它们帮助我们理解宇宙及其奥秘。它们激励着未来一代。"
+      }
     ]
   },
-  "updatedAt": "2026-08-28T07:10:00+08:00"
+  "updatedAt": "2026-09-01T12:51:00+08:00"
 }

@@ -27,6 +27,12 @@ const { aihotFmt, aihotItemCard, aihotBriefHtml, aihotSelectedHtml, aihotHotHtml
 let pass = 0, fail = 0;
 function ok(c, m) { if (c) { pass++; } else { fail++; console.log("✗ " + m); } }
 
+// 归档是「月历视图」，只渲染当前真实月份 → mock 必须用当月日期，否则断言必然失败
+var __now = new Date();
+var __ym = __now.getFullYear() + "-" + String(__now.getMonth() + 1).padStart(2, "0");
+var __arcD1 = __ym + "-01";
+var __arcD2 = __ym + "-02";
+
 const d = {
   brief: {
     date: "2026-08-10", leadTitle: "Seedance 2.5 上线", url: "https://aihot.virxact.com/daily/2026-08-10",
@@ -34,7 +40,7 @@ const d = {
   },
   selected: [{ title: "精选标题", summary: "s", source: "LMSYS", links: { aihot: "a", original: "o" }, publishedAt: "2026-08-10T11:51:38Z", category: "ai", score: 72 }],
   hotTopics: [{ rank: 1, title: "热点标题", source: "X", links: { aihot: "a", original: "o" }, sourceCount: 9, signalCount: 2, latestAt: "2026-08-10T11:44:29Z" }],
-  dailies: [{ date: "2026-08-10", leadTitle: "今日日报", url: "u" }, { date: "2026-08-09", leadTitle: "昨日日报", url: "u2" }]
+  dailies: [{ date: __arcD1, leadTitle: "本月日报", url: "u" }, { date: __arcD2, leadTitle: "次日日报", url: "u2" }]
 };
 
 (function () {
@@ -45,7 +51,8 @@ const d = {
   ok(aihotBriefHtml(d).indexOf("每日简报") >= 0 && aihotBriefHtml(d).indexOf("Seedance 2.5 上线") >= 0, "brief 含简报与头条");
   ok(aihotSelectedHtml(d).indexOf("精选标题") >= 0, "selected 含标题");
   ok(aihotHotHtml(d).indexOf("#1") >= 0 && aihotHotHtml(d).indexOf("9 信源") >= 0, "hot 含排名与信源数");
-  ok(aihotArchiveHtml(d).indexOf("2026-08-09") >= 0 && aihotArchiveHtml(d).indexOf("aihotOpenDaily") >= 0, "archive 含日期与点击");
+  ok(aihotArchiveHtml(d).indexOf(__arcD2) >= 0 && aihotArchiveHtml(d).indexOf("aihotOpenDaily") >= 0, "archive 含日期与点击");
+  ok(aihotArchiveHtml(d).indexOf("learn-cal-grid") >= 0, "archive 渲染月历网格");
 })();
 
 console.log("\n========== aihot.test.js: " + pass + " passed, " + fail + " failed ==========");

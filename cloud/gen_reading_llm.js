@@ -41,7 +41,8 @@ async function main(dateArg, dirArg, opts) {
 - 避免与以下已用标题重复：${used.slice(0, 40).join(" / ") || "（无）"}
 返回严格 JSON：{"articles":[{"level":"...","title":"...","content":"...","translation":"..."} ×10]}`;
 
-  const data = await chatJSON(system, user, { temperature: 0.8, maxTokens: 6000 });
+  // 10 篇英文正文 + 中文全文翻译，token 需求大；过小会截断导致篇数不足（曾出现只出 9 篇）
+  const data = await chatJSON(system, user, { temperature: 0.8, maxTokens: 12000 });
   let arts = data.articles;
   if (!Array.isArray(arts) || arts.length === 0) throw new Error("LLM 返回精读文章异常");
 

@@ -60,7 +60,8 @@ async function genCategory(cat, DATE, existingTitles) {
   const out = [];
   for (let attempt = 0; attempt < 3 && out.length < PER_CAT; attempt++) {
     try {
-      const data = await chatJSON(system, user, { temperature: 0.85, maxTokens: 1600 });
+      // maxTokens 需容纳 10 张完整卡片（content/points/tip 全字段），过小会截断 JSON 导致卡片数不足
+      const data = await chatJSON(system, user, { temperature: 0.85, maxTokens: 8000 });
       let cards = Array.isArray(data) ? data : data.cards;
       if (!Array.isArray(cards)) continue;
       for (const c of cards.filter(Boolean)) {

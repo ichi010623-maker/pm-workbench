@@ -50,6 +50,8 @@ function main() {
   loadEnv(path.join(__dirname, "local.env"));
   process.env.CLOUD = "1"; // 启用 run_daily.finish() 的 push + 部署
   process.env.TZ = process.env.TZ || "Asia/Shanghai";
+  // 定时任务环境的 PATH 常不含 node，这里把当前 node 所在目录前置，保证内部 spawnSync("node", ...) 可用
+  process.env.PATH = path.dirname(process.execPath) + path.delimiter + process.env.PATH;
 
   console.log(`[local_run] JOB=${JOB} 时间=${new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" })}`);
 
