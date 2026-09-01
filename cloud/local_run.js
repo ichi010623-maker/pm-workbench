@@ -79,6 +79,9 @@ function acquireLock() {
 
 function main() {
   if (!acquireLock()) process.exit(0);
+  // 本机所有网络操作直连（智谱/百度国内直连，GitHub 直连已验证可用）；
+  // 沙箱代理(50066)时好时坏，带代理反而 git push 502，故统一移除代理环境变量
+  ["HTTPS_PROXY", "HTTP_PROXY", "https_proxy", "http_proxy", "ALL_PROXY", "all_proxy"].forEach((k) => delete process.env[k]);
   loadEnv(path.join(__dirname, "local.env"));
   process.env.CLOUD = "1"; // 启用 run_daily.finish() 的 push + 部署
   process.env.TZ = process.env.TZ || "Asia/Shanghai";
