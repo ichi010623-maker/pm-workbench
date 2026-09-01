@@ -22,6 +22,8 @@ const KIND = (process.argv[4] || "all").toLowerCase();
 
 // 读取凭据
 (function loadEnv() {
+  // 直连（与 local_run 一致）：移除沙箱代理，避免 git/RSS 挂起或 502
+  ["HTTPS_PROXY", "HTTP_PROXY", "https_proxy", "http_proxy", "ALL_PROXY", "all_proxy"].forEach((k) => delete process.env[k]);
   const f = path.join(__dirname, "local.env");
   if (!fs.existsSync(f)) return;
   for (const line of fs.readFileSync(f, "utf8").split("\n")) {
