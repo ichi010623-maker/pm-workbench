@@ -46,7 +46,39 @@ function gitOut(cmd) {
   return execSync(cmd, { cwd: BASE, encoding: "utf8" }).trim();
 }
 
+/**
+ * 单实例锁：多个 local_run 并发时，git pull --rebase 会 reset 工作区，
+ * 把另一个进程正在生成的内容回滚。这里用 lockfile + 存活检测强制串行。
+ */
+const LOCK_FILE = path.join(BASE, ".local_run.lock");
+function releaseLock() {
+  try { fs.unlinkSync(LOCK_FILE); } catch (_) {}
+}
+function acquireLock() {
+  try {
+    const fd = fs.openSync(LOCK_FILE, "wx");
+    fs.writeSync(fd, String(process.pid) + " " + new Date().toISOString());
+    fs.closeSync(fd);
+    process.on("exit", releaseLock);
+    process.on("SIGINT", () => { releaseLock(); process.exit(130); });
+    process.on("SIGTERM", () => { releaseLock(); process.exit(143); });
+    return true;
+  } catch (e) {
+    if (e.code !== "EEXIST") throw e;
+    try {
+      const pid = parseInt(fs.readFileSync(LOCK_FILE, "utf8").trim().split(/\s+/)[0], 10);
+      process.kill(pid, 0); // 持有者仍存活 → 放弃本次执行
+      console.error(`[local_run] 另一个实例正在运行 (pid ${pid})，本次跳过以避免并发污染`);
+      return false;
+    } catch (_) {
+      try { fs.unlinkSync(LOCK_FILE); } catch (__) {}
+      return acquireLock(); // 僵死锁：清理后重试
+    }
+  }
+}
+
 function main() {
+  if (!acquireLock()) process.exit(0);
   loadEnv(path.join(__dirname, "local.env"));
   process.env.CLOUD = "1"; // 启用 run_daily.finish() 的 push + 部署
   process.env.TZ = process.env.TZ || "Asia/Shanghai";

@@ -103,6 +103,13 @@ async function main(dateArg, dirArg) {
     console.warn(`[knowledge] 有效卡 ${out.length}/${total}，缺失 ${total - out.length} 张`);
   }
 
+  // 空结果不落盘：否则会写入 itemIds 为空的 history 条目，
+  // 幂等检查会认为「该日已生成」而永久跳过，导致这一天再也补不上
+  if (!out.length) {
+    console.error(`[knowledge] ${DATE} 有效卡为 0，放弃写入（不产生空 history 条目）`);
+    return { date: DATE, count: 0, skippedWrite: true };
+  }
+
   // 写入 pool + history
   k.pool = k.pool.concat(out);
   k.history = (k.history || []).concat({ date: DATE, itemIds: out.map((o) => o.id) });
