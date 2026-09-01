@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26 18:01+08:00",
+  "generatedAt": "2026-08-27 18:01+08:00",
   "categories": [
     {
       "key": "official",
@@ -23,6 +23,114 @@
     }
   ],
   "items": [
+    {
+      "id": "2026-08-27-001",
+      "category": "official",
+      "priority": 4,
+      "title": "中国发布《新一代人工智能发展规划2.0》",
+      "summary": "中国政府发布《新一代人工智能发展规划2.0》，旨在推动人工智能产业高质量发展。",
+      "source": "中国政府网",
+      "url": "http://www.gov.cn/xinwen/2026-08/27/content_5645400.htm"
+    },
+    {
+      "id": "2026-08-27-002",
+      "category": "hardware",
+      "priority": 3,
+      "title": "英伟达发布新一代GPU架构——Ada Lovelace",
+      "summary": "英伟达发布新一代GPU架构Ada Lovelace，预计将大幅提升AI计算能力。",
+      "source": "英伟达官网",
+      "url": "https://www.nvidia.com/en-us/news/press-releases/2026-08-26-nvidia-announces-ada-lovelace-architecture/"
+    },
+    {
+      "id": "2026-08-27-003",
+      "category": "ai",
+      "priority": 5,
+      "title": "百度发布新一代大模型——ERNIE 3.0",
+      "summary": "百度发布新一代大模型ERNIE 3.0，在多个任务上实现超越人类水平。",
+      "source": "百度AI",
+      "url": "https://ai.baidu.com/news/2026/08/26/ernie-3-0.html"
+    },
+    {
+      "id": "2026-08-27-004",
+      "category": "tech",
+      "priority": 4,
+      "title": "量子计算领域取得重大突破，实现量子纠错",
+      "summary": "量子计算领域取得重大突破，实现了量子纠错，为量子计算机的商业化应用迈出重要一步。",
+      "source": "科技日报",
+      "url": "http://www.stdaily.com/kjwb/2026-08/27/content_11474844.htm"
+    },
+    {
+      "id": "2026-08-27-005",
+      "category": "hardware",
+      "priority": 3,
+      "title": "华为发布全新折叠屏手机——Mate X3",
+      "summary": "华为发布全新折叠屏手机Mate X3，采用全新设计，提供更佳的折叠体验。",
+      "source": "华为官网",
+      "url": "https://www.huawei.com/cn/press-release/2026-08/01/mate-x3-foldable-smartphone/"
+    },
+    {
+      "id": "2026-08-27-006",
+      "category": "ai",
+      "priority": 4,
+      "title": "谷歌发布AI绘画工具——Dreams",
+      "summary": "谷歌发布AI绘画工具Dreams，用户可以通过AI生成个性化艺术作品。",
+      "source": "谷歌AI",
+      "url": "https://ai.googleblog.com/2026/08/dreams.html"
+    },
+    {
+      "id": "2026-08-27-007",
+      "category": "tech",
+      "priority": 3,
+      "title": "微软发布新一代云计算平台——Azure Arc",
+      "summary": "微软发布新一代云计算平台Azure Arc，提供更灵活的云服务。",
+      "source": "微软官网",
+      "url": "https://azure.microsoft.com/en-us/blog/azure-arc-announced/"
+    },
+    {
+      "id": "2026-08-27-008",
+      "category": "hardware",
+      "priority": 3,
+      "title": "苹果发布新一代MacBook Pro",
+      "summary": "苹果发布新一代MacBook Pro，搭载M2芯片，性能大幅提升。",
+      "source": "苹果官网",
+      "url": "https://www.apple.com/newsroom/2026/08/apple-unveils-the-new-macbook-pro/"
+    },
+    {
+      "id": "2026-08-27-009",
+      "category": "ai",
+      "priority": 4,
+      "title": "IBM发布新一代认知计算平台——Watsonx",
+      "summary": "IBM发布新一代认知计算平台Watsonx，提供更强大的AI分析能力。",
+      "source": "IBM官网",
+      "url": "https://www.ibm.com/news/2026/08/26/ibm-launches-watsonx-a-new-platform-for-ai-powered-insights/"
+    },
+    {
+      "id": "2026-08-27-010",
+      "category": "tech",
+      "priority": 3,
+      "title": "特斯拉发布全新自动驾驶系统——FSD 3.0",
+      "summary": "特斯拉发布全新自动驾驶系统FSD 3.0，提供更高级别的自动驾驶功能。",
+      "source": "特斯拉官网",
+      "url": "https://www.tesla.com/press-release/tesla-fsd-3-0/"
+    },
+    {
+      "id": "2026-08-27-011",
+      "category": "hardware",
+      "priority": 3,
+      "title": "三星发布新一代折叠屏手机——Galaxy Z Fold4",
+      "summary": "三星发布新一代折叠屏手机Galaxy Z Fold4，提供更轻薄的设计。",
+      "source": "三星官网",
+      "url": "https://news.samsung.com/kr/2026/08/26/samsung-unveils-galaxy-z-fold4/"
+    },
+    {
+      "id": "2026-08-27-012",
+      "category": "ai",
+      "priority": 3,
+      "title": "亚马逊发布AI语音助手——Echo Show 15",
+      "summary": "亚马逊发布AI语音助手Echo Show 15，提供更大的屏幕和更丰富的功能。",
+      "source": "亚马逊官网",
+      "url": "https://www.amazon.com/Amazon-Echo-Show-15-Display-Speaker/dp/B09VQYV3QH"
+    },
     {
       "id": "2026-08-26-001",
       "category": "official",

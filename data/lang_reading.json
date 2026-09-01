@@ -185,7 +185,131 @@
         "content": "Meditation can help reduce stress and improve focus. Start with just a few minutes a day and gradually increase your practice.",
         "translation": "冥想可以帮助减少压力并提高专注力。每天开始只需几分钟，并逐渐增加你的练习。"
       }
+    ],
+    "2026-08-27": [
+      {
+        "level": "入门",
+        "title": "Smart Tech",
+        "content": "Smartphones make life easier with apps and features like GPS and cameras.",
+        "translation": "智能手机通过应用程序和功能如GPS和相机使生活更加便捷。"
+      },
+      {
+        "level": "进阶",
+        "title": "City Life",
+        "content": "Living in a city means being close to public transport and a variety of shops.",
+        "translation": "在城市生活意味着靠近公共交通和各种商店。"
+      },
+      {
+        "level": "挑战",
+        "title": "Entrepreneurship",
+        "content": "Starting a business requires creativity, research, and a good business plan.",
+        "translation": "创业需要创造力、研究和一个好的商业计划。"
+      },
+      {
+        "level": "入门",
+        "title": "Cultural Customs",
+        "content": "Understanding local customs can help you fit in during your travels.",
+        "translation": "了解当地习俗可以帮助你在旅行中融入。"
+      },
+      {
+        "level": "进阶",
+        "title": "Healthy Habits",
+        "content": "Drinking plenty of water and exercising regularly are good for your health.",
+        "translation": "多喝水和定期锻炼对你的健康有益。"
+      },
+      {
+        "level": "挑战",
+        "title": "Global Warming",
+        "content": "Reducing carbon emissions is crucial to fight climate change.",
+        "translation": "减少碳排放是应对气候变化的至关重要的措施。"
+      },
+      {
+        "level": "入门",
+        "title": "Mind Games",
+        "content": "Puzzles and brain teasers improve cognitive abilities.",
+        "translation": "谜题和脑筋急转弯可以提高认知能力。"
+      },
+      {
+        "level": "进阶",
+        "title": "World Cuisine",
+        "content": "Trying different foods can be a delightful experience.",
+        "translation": "尝试不同的食物可以是一次愉快的体验。"
+      },
+      {
+        "level": "挑战",
+        "title": "Space Exploration",
+        "content": "Sending humans to Mars could be possible within our lifetime.",
+        "translation": "在人类有生之年将人类送往火星是可能的。"
+      },
+      {
+        "level": "入门",
+        "title": "Art Appreciation",
+        "content": "Looking closely at paintings can reveal hidden meanings.",
+        "translation": "仔细观察画作可以揭示隐藏的含义。"
+      }
+    ],
+    "2026-08-28": [
+      {
+        "level": "入门",
+        "title": "Smart Cities",
+        "content": "Smart cities use technology to improve living standards. Sensors monitor traffic and energy use. Citizens enjoy better services and a cleaner environment.",
+        "translation": "智慧城市利用科技来改善生活标准。传感器监控交通和能源使用。市民享受更好的服务和更清洁的环境。"
+      },
+      {
+        "level": "进阶",
+        "title": "Cooking with Spices",
+        "content": "Spices add flavor to food and have health benefits. Cinnamon can lower blood sugar, and turmeric may reduce inflammation.",
+        "translation": "香料可以为食物增添风味，并且具有健康益处。肉桂可以降低血糖，姜黄可能减少炎症。"
+      },
+      {
+        "level": "挑战",
+        "title": "Ocean Conservation",
+        "content": "Ocean conservation is crucial. Plastic pollution affects marine life. Recycling and reducing plastic use can help protect our oceans.",
+        "translation": "海洋保护至关重要。塑料污染影响海洋生物。回收和减少塑料使用可以帮助保护我们的海洋。"
+      },
+      {
+        "level": "入门",
+        "title": "Daily Routines",
+        "content": "Having a daily routine helps manage time. It can include exercise, meals, and relaxation. Consistency is key to a balanced life.",
+        "translation": "拥有日常例行程序有助于管理时间。它可以包括锻炼、饮食和放松。一致性是实现平衡生活的关键。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Science of Sleep",
+        "content": "Sleep is essential for health. It helps the brain process information and strengthens the immune system. Lack of sleep can lead to health problems.",
+        "translation": "睡眠对健康至关重要。它有助于大脑处理信息并增强免疫系统。缺乏睡眠可能导致健康问题。"
+      },
+      {
+        "level": "挑战",
+        "title": "Art Appreciation",
+        "content": "Art appreciation involves understanding and enjoying art. It can be found in paintings, sculptures, and music. It reflects human creativity and emotions.",
+        "translation": "艺术欣赏涉及理解和欣赏艺术。它可以在绘画、雕塑和音乐中找到。它反映了人类的创造力和情感。"
+      },
+      {
+        "level": "入门",
+        "title": "Travel Apps",
+        "content": "Travel apps make planning easier. They offer information on flights, accommodations, and attractions. They can also provide language translations.",
+        "translation": "旅行应用使规划变得更简单。它们提供有关航班、住宿和景点的信息。它们还可以提供语言翻译。"
+      },
+      {
+        "level": "进阶",
+        "title": "Smartphone Habits",
+        "content": "Smartphone habits affect our lives. Too much screen time can lead to eye strain and sleep issues. Balancing smartphone use is important.",
+        "translation": "智能手机习惯影响我们的生活。过多的屏幕时间可能导致眼睛疲劳和睡眠问题。平衡智能手机使用很重要。"
+      },
+      {
+        "level": "挑战",
+        "title": "Cultural Exchange",
+        "content": "Cultural exchange broadens perspectives. It involves learning about different cultures and sharing experiences. It fosters understanding and respect.",
+        "translation": "文化交流拓宽了视野。它涉及了解不同的文化和分享经验。它促进了理解和尊重。"
+      },
+      {
+        "level": "入门",
+        "title": "Healthy Snacks",
+        "content": "Healthy snacks provide energy without unhealthy fats. Options include nuts, fruits, and yogurt. They are great for on-the-go snacking.",
+        "translation": "健康零食提供能量而不含不健康的脂肪。选择包括坚果、水果和酸奶。它们是即食零食的绝佳选择。"
+      }
     ]
   },
-  "updatedAt": "2026-08-26T00:05:00+08:00"
+  "updatedAt": "2026-08-28T07:10:00+08:00"
 }

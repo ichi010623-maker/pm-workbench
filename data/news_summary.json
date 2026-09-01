@@ -233,7 +233,217 @@
           ]
         }
       ]
+    },
+    "2026-08-27": {
+      "date": "2026-08-27",
+      "mode": "rss",
+      "sources": {
+        "BBC": 0,
+        "BBC商业": 0,
+        "BBC科技": 0,
+        "Al Jazeera": 0,
+        "NPR": 10,
+        "Guardian世界": 0,
+        "Guardian科技": 0,
+        "Guardian商业": 0
+      },
+      "rssCount": 10,
+      "brief": [
+        "特朗普牛肉计划对汉堡价格影响有限",
+        "美国社交巨头Meta同意17亿美元和解",
+        "尼泊尔和中国遭遇洪水，至少75人死亡",
+        "加拿大对美国实施报复性关税",
+        "巴基斯坦医院新生儿室火灾致14死"
+      ],
+      "groups": [
+        {
+          "cat": "国际",
+          "icon": "🌍",
+          "items": [
+            {
+              "title": "特朗普牛肉计划影响有限",
+              "summary": "专家称特朗普牛肉计划对降低汉堡价格影响不大。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/26/nx-s1-5944265/ground-beef-trump-tariffs"
+            },
+            {
+              "title": "Meta同意17亿美元和解",
+              "summary": "Meta同意支付17亿美元解决儿童安全诉讼。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/26/nx-s1-5944781/meta-settlement-child-safety-lawsuit"
+            },
+            {
+              "title": "尼泊尔中国洪水致75死",
+              "summary": "尼泊尔和中国遭遇洪水，至少75人死亡，数百人失踪。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/26/g-s1-140211/nepal-china-floods"
+            }
+          ]
+        },
+        {
+          "cat": "商业财经",
+          "icon": "💼",
+          "items": [
+            {
+              "title": "加拿大对美实施报复性关税",
+              "summary": "加拿大宣布将对美国实施报复性关税。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/26/g-s1-140207/up-first-newsletter-canada-tariffs-visa-revocations-dolly-parton-nevada-voters"
+            },
+            {
+              "title": "电费飙升，电力被切断",
+              "summary": "夏天气温高，电费飙升，许多家庭因无力支付而被切断电力。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/26/nx-s1-5943289/electric-bills-summer-heat-oklahoma-power"
+            },
+            {
+              "title": "好莱坞票房增长，但存在隐忧",
+              "summary": "好莱坞夏季票房增长，但观众人数、电影数量和银幕数量均低于疫情前。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/26/nx-s1-5923629/movie-summer-box-office"
+            }
+          ]
+        },
+        {
+          "cat": "其他",
+          "icon": "🌏",
+          "items": [
+            {
+              "title": "Dolly Parton逝世",
+              "summary": "美国乡村音乐传奇人物Dolly Parton逝世，享年80岁。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/26/nx-s1-5944468/dolly-parton-legacy-songwriting"
+            },
+            {
+              "title": "巴基斯坦医院火灾",
+              "summary": "巴基斯坦首都一家政府医院新生儿室发生火灾，造成14名婴儿死亡。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/26/nx-s1-5944808/hospital-nursery-fire-kills-14-newborns-pakistan"
+            },
+            {
+              "title": "全球经济知识测试",
+              "summary": "测试你对全球经济的了解，完成这个快速的经济知识问答。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/26/g-s1-138847/planet-money-summer-school-quiz-2026"
+            }
+          ]
+        }
+      ]
+    },
+    "2026-08-28": {
+      "date": "2026-08-28",
+      "mode": "rss",
+      "sources": {
+        "BBC": 0,
+        "BBC商业": 0,
+        "BBC科技": 0,
+        "Al Jazeera": 0,
+        "NPR": 10,
+        "Guardian世界": 0,
+        "Guardian科技": 0,
+        "Guardian商业": 0
+      },
+      "rssCount": 10,
+      "brief": [
+        "前波黑塞族战犯Mladic去世",
+        "Meta达成170亿美元和解",
+        "尼泊尔-西藏洪水造成至少1500人失踪",
+        "学校面临柴油价格上涨难题",
+        "Andrew Tate寻求保释"
+      ],
+      "groups": [
+        {
+          "cat": "国际",
+          "icon": "🌍",
+          "items": [
+            {
+              "title": "Mladic去世",
+              "summary": "前波黑塞族战犯Ratko Mladic去世，享年84岁。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/nx-s1-5946375/ratko-mladic-dead"
+            },
+            {
+              "title": "尼泊尔-西藏洪水",
+              "summary": "尼泊尔-西藏边境洪水造成至少1500人失踪。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/nx-s1-5946309/nepal-tibet-deadly-floods"
+            },
+            {
+              "title": "学校柴油价格上涨",
+              "summary": "伊朗战争导致柴油价格上涨，影响学校开学。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/nx-s1-5944429/school-buses-fuel-diesel-prices"
+            }
+          ]
+        },
+        {
+          "cat": "商业财经",
+          "icon": "💼",
+          "items": [
+            {
+              "title": "Meta和解",
+              "summary": "Meta与起诉其的各州达成170亿美元和解。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/g-s1-140414/up-first-newsletter-meta-settlement-mail-in-voting-nrc-regulations-nepal-tibet-flooding"
+            },
+            {
+              "title": "核监管机构放弃规则",
+              "summary": "核监管机构准备放弃一项数十年的辐射安全规则。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/g-s1-140414/up-first-newsletter-meta-settlement-mail-in-voting-nrc-regulations-nepal-tibet-flooding"
+            },
+            {
+              "title": "Andrew Tate保释",
+              "summary": "Andrew Tate在引渡斗争中寻求保释，可能性不大。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/nx-s1-5918058/andrew-tate-extradition"
+            }
+          ]
+        },
+        {
+          "cat": "科技",
+          "icon": "💻",
+          "items": [
+            {
+              "title": "数据中心保密协议",
+              "summary": "保密协议掩盖了数据中心交易，引起当地居民和立法者的不满。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/nx-s1-5879528/data-center-nda-disclosure-louisiana"
+            },
+            {
+              "title": "核辐射安全规则",
+              "summary": "总统特朗普的推动可能导致一项旨在将辐射暴露保持在最低限度的安全标准的取消。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/nx-s1-5920368/nrc-nuclear-radiation-safety-rules-alara-update"
+            },
+            {
+              "title": "Jon Ossoff受欢迎",
+              "summary": "乔治亚州的民主党参议员Jon Ossoff在民调中领先，被视为2028年的潜在候选人。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/nx-s1-5935282/jon-ossoff-georgia-senate-race"
+            }
+          ]
+        },
+        {
+          "cat": "其他",
+          "icon": "🌏",
+          "items": [
+            {
+              "title": "Rwandan牛奶吧",
+              "summary": "在卢旺达，每天喝几杯牛奶是常见的。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/g-s1-139914/milk-rwanda-milk-bar"
+            },
+            {
+              "title": "肯尼迪中心威胁拆除",
+              "summary": "一场诉讼试图阻止特朗普的名字重新出现在肯尼迪中心。如果翻新计划不进行，董事会警告说可能会拆除。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/08/27/nx-s1-5945238/emergency-hearing-kennedy-center-demolish-threat"
+            }
+          ]
+        }
+      ]
     }
   },
-  "updatedAt": "2026-08-26T00:01:00+08:00"
+  "updatedAt": "2026-08-28T00:01:00+08:00"
 }
