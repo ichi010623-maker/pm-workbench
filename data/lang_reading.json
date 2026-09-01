@@ -313,59 +313,65 @@
     "2026-09-01": [
       {
         "level": "入门",
-        "title": "Smart Cities",
-        "content": "Smart cities use technology to improve life. Sensors and apps help manage traffic and energy use. They make cities safer and more efficient.",
-        "translation": "智能城市利用科技改善生活。传感器和应用程序帮助管理交通和能源使用。它们使城市更安全、更高效。"
+        "title": "Robotics Basics",
+        "content": "Robots are machines that can perform tasks automatically. They are used in factories, homes, and even in space. Today, we explore the basics of robotics.",
+        "translation": "机器人是能够自动执行任务的机器。它们被用于工厂、家庭，甚至太空中。今天，我们来探索机器人的基础知识。"
       },
       {
         "level": "进阶",
-        "title": "Morning Routines",
-        "content": "A good morning routine sets the tone for the day. Activities like meditation and exercise boost mood and productivity.",
-        "translation": "良好的早晨例行程序为一天定下基调。如冥想和锻炼等活动能提升情绪和生产力。"
+        "title": "Sustainable Cities",
+        "content": "Sustainable cities focus on reducing waste and pollution. They use renewable energy and green spaces. Learn how cities are becoming more eco-friendly.",
+        "translation": "可持续城市专注于减少废料和污染。它们使用可再生能源和绿色空间。了解城市如何变得更加环保。"
       },
       {
         "level": "挑战",
-        "title": "Ancient Inventions",
-        "content": "Ancient inventions changed the world. The wheel, printing press, and internet are examples. They show how innovation can transform society.",
-        "translation": "古代发明改变了世界。轮子、印刷机和互联网是例子。它们展示了创新如何改变社会。"
+        "title": "Artistic Expression",
+        "content": "Artistic expression is a way to communicate emotions and ideas. It can be through painting, music, or dance. Discover the power of art.",
+        "translation": "艺术表达是一种传达情感和思想的方式。它可以通过绘画、音乐或舞蹈来实现。发现艺术的力量。"
       },
       {
         "level": "入门",
-        "title": "Seasonal Foods",
-        "content": "Eating seasonal foods is healthier. They are fresher and have more nutrients. Plus, they support local farmers.",
-        "translation": "食用季节性食物更健康。它们更新鲜，营养更丰富。此外，它们支持当地农民。"
+        "title": "Healthy Habits",
+        "content": "Healthy habits include regular exercise, a balanced diet, and enough sleep. These habits can improve your health and well-being.",
+        "translation": "健康习惯包括定期锻炼、均衡饮食和充足的睡眠。这些习惯可以提高你的健康和福祉。"
       },
       {
         "level": "进阶",
-        "title": "Art Therapy",
-        "content": "Art therapy helps people express emotions. It's used in mental health treatment and can improve well-being.",
-        "translation": "艺术治疗帮助人们表达情感。它在心理健康治疗中使用，并可以提高幸福感。"
+        "title": "Global Communication",
+        "content": "Global communication is essential in today's interconnected world. It involves language skills and cultural understanding. Learn how to communicate effectively across cultures.",
+        "translation": "在全球互联的世界中，全球沟通至关重要。它涉及语言技能和文化理解。了解如何跨文化有效沟通。"
       },
       {
         "level": "挑战",
-        "title": "Solar Energy",
-        "content": "Solar energy is a renewable resource. It's clean and reduces carbon emissions. Many homes and businesses use solar panels.",
-        "translation": "太阳能是一种可再生能源。它清洁且减少碳排放。许多家庭和企业使用太阳能板。"
+        "title": "Innovative Design",
+        "content": "Innovative design is about creating something new and useful. It requires creativity and problem-solving skills. Explore the world of innovative design.",
+        "translation": "创新设计是创造新颖且有用的东西。它需要创造力和解决问题的技能。探索创新设计的世界。"
       },
       {
         "level": "入门",
-        "title": "Public Transport",
-        "content": "Public transport is an eco-friendly option. It reduces traffic and pollution. It's also more affordable than driving a car.",
-        "translation": "公共交通是一种环保的选择。它减少交通和污染。而且比开车更经济实惠。"
+        "title": "Cultural Customs",
+        "content": "Cultural customs vary from one place to another. Understanding these customs can help avoid misunderstandings. Learn about different cultural customs.",
+        "translation": "文化习俗因地区而异。了解这些习俗可以帮助避免误解。了解不同的文化习俗。"
       },
       {
         "level": "进阶",
-        "title": "Memory Techniques",
-        "content": "Memory techniques can improve learning. Mnemonics and visualization help remember information more effectively.",
-        "translation": "记忆技巧可以提高学习效果。记忆术和可视化有助于更有效地记住信息。"
+        "title": "Healthy Snacks",
+        "content": "Healthy snacks are a great way to fuel your body. They provide energy and nutrients without adding too many calories. Discover the best healthy snacks.",
+        "translation": "健康零食是给身体补充能量的好方法。它们提供能量和营养，而不增加过多的卡路里。发现最好的健康零食。"
       },
       {
         "level": "挑战",
-        "title": "Space Missions",
-        "content": "Space missions explore the unknown. They help us understand the universe and its mysteries. They inspire future generations.",
-        "translation": "太空任务探索未知。它们帮助我们理解宇宙及其奥秘。它们激励着未来一代。"
+        "title": "The Mind-Body Connection",
+        "content": "The mind-body connection is the relationship between physical health and mental well-being. Understanding this connection can improve your life. Learn more about the mind-body connection.",
+        "translation": "身心联系是身体健康和精神福祉之间的关系。了解这种联系可以改善你的生活。了解更多关于身心联系的知识。"
+      },
+      {
+        "level": "入门",
+        "title": "Travel Spots",
+        "content": "Traveling to new places can be exciting. It allows you to learn about different cultures and experiences. Discover the best travel spots around the world.",
+        "translation": "去新的地方旅行可以很兴奋。它让你了解不同的文化和经历。发现世界上最好的旅游地点。"
       }
     ]
   },
-  "updatedAt": "2026-09-01T12:51:00+08:00"
+  "updatedAt": "2026-09-01T14:16:00+08:00"
 }
