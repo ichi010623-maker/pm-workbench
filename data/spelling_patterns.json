@@ -1,0 +1,142 @@
+{
+  "updatedAt": "2026-09-02",
+  "intro": "Phase 4 · 自然拼读（Phonics × Spelling）：从拼写反推发音。每个单词按「字母 → 发音」拆开拼读，记住常见字母组合（Pattern）的读音规律，就能见词能读。",
+  "howTo": "🔍 点击一个 Pattern（如 a_e）→ 看规律说明 → 逐个词拆解拼读：每个字母色块上标它的发音，∅ 表示不发音。点 🔊 听整词。",
+  "cats": [
+    { "id": "magic_e", "num": "A", "name": "Magic E · 魔法 e", "zh": "词尾不发音的 e 让前面的元音发「字母本音」（A→/eɪ/ I→/aɪ/ O→/əʊ/ U→/juː/）", "color": "#2563eb" },
+    { "id": "vowel_team", "num": "B", "name": "元音字母组合", "zh": "两个元音一起发长音（ee/ea→/iː/ · ai/ay→/eɪ/ · oa→/əʊ/ · igh→/aɪ/）", "color": "#7c3aed" },
+    { "id": "cons_team", "num": "C", "name": "辅音字母组合", "zh": "两个辅音合体发一个新音（sh→/ʃ/ · ch→/tʃ/ · th→/θ/ · ck→/k/）", "color": "#b45309" }
+  ],
+  "patterns": [
+    {
+      "id": "a_e", "cat": "magic_e", "pattern": "a_e", "sound": "/eɪ/", "speak": "ay",
+      "rule": "元音 a + 辅音 + 结尾 e：结尾 e 不发音，让 a 发字母本音 /eɪ/。cake → 结尾 e 是个「魔法开关」。",
+      "words": [
+        { "w": "cake", "ipa": "/keɪk/", "zh": "蛋糕", "parts": [ ["c", "/k/"], ["a", "/eɪ/"], ["k", "/k/"], ["e", "∅"] ] },
+        { "w": "make", "ipa": "/meɪk/", "zh": "制作", "parts": [ ["m", "/m/"], ["a", "/eɪ/"], ["k", "/k/"], ["e", "∅"] ] },
+        { "w": "name", "ipa": "/neɪm/", "zh": "名字", "parts": [ ["n", "/n/"], ["a", "/eɪ/"], ["m", "/m/"], ["e", "∅"] ] },
+        { "w": "game", "ipa": "/geɪm/", "zh": "游戏", "parts": [ ["g", "/g/"], ["a", "/eɪ/"], ["m", "/m/"], ["e", "∅"] ] }
+      ]
+    },
+    {
+      "id": "i_e", "cat": "magic_e", "pattern": "i_e", "sound": "/aɪ/", "speak": "eye",
+      "rule": "i + 辅音 + 结尾 e：结尾 e 让 i 发字母本音 /aɪ/。like / time 都是这个规律。",
+      "words": [
+        { "w": "like", "ipa": "/laɪk/", "zh": "喜欢", "parts": [ ["l", "/l/"], ["i", "/aɪ/"], ["k", "/k/"], ["e", "∅"] ] },
+        { "w": "time", "ipa": "/taɪm/", "zh": "时间", "parts": [ ["t", "/t/"], ["i", "/aɪ/"], ["m", "/m/"], ["e", "∅"] ] },
+        { "w": "five", "ipa": "/faɪv/", "zh": "五", "parts": [ ["f", "/f/"], ["i", "/aɪ/"], ["v", "/v/"], ["e", "∅"] ] },
+        { "w": "kite", "ipa": "/kaɪt/", "zh": "风筝", "parts": [ ["k", "/k/"], ["i", "/aɪ/"], ["t", "/t/"], ["e", "∅"] ] }
+      ]
+    },
+    {
+      "id": "o_e", "cat": "magic_e", "pattern": "o_e", "sound": "/əʊ/", "speak": "oh",
+      "rule": "o + 辅音 + 结尾 e：结尾 e 让 o 发字母本音 /əʊ/。home / nose 都是这个规律。",
+      "words": [
+        { "w": "home", "ipa": "/həʊm/", "zh": "家", "parts": [ ["h", "/h/"], ["o", "/əʊ/"], ["m", "/m/"], ["e", "∅"] ] },
+        { "w": "nose", "ipa": "/nəʊz/", "zh": "鼻子", "parts": [ ["n", "/n/"], ["o", "/əʊ/"], ["s", "/z/"], ["e", "∅"] ] },
+        { "w": "note", "ipa": "/nəʊt/", "zh": "笔记/音符", "parts": [ ["n", "/n/"], ["o", "/əʊ/"], ["t", "/t/"], ["e", "∅"] ] },
+        { "w": "stone", "ipa": "/stəʊn/", "zh": "石头", "parts": [ ["s", "/s/"], ["t", "/t/"], ["o", "/əʊ/"], ["n", "/n/"], ["e", "∅"] ] }
+      ]
+    },
+    {
+      "id": "u_e", "cat": "magic_e", "pattern": "u_e", "sound": "/juː/", "speak": "you",
+      "rule": "u + 辅音 + 结尾 e：结尾 e 让 u 发字母本音 /juː/。注意：前面有 r/l 时常弱化为 /uː/（如 rule）。",
+      "words": [
+        { "w": "cube", "ipa": "/kjuːb/", "zh": "立方体", "parts": [ ["c", "/k/"], ["u", "/juː/"], ["b", "/b/"], ["e", "∅"] ] },
+        { "w": "cute", "ipa": "/kjuːt/", "zh": "可爱的", "parts": [ ["c", "/k/"], ["u", "/juː/"], ["t", "/t/"], ["e", "∅"] ] },
+        { "w": "use", "ipa": "/juːz/", "zh": "使用", "parts": [ ["u", "/juː/"], ["s", "/z/"], ["e", "∅"] ] },
+        { "w": "tube", "ipa": "/tjuːb/", "zh": "管子", "parts": [ ["t", "/t/"], ["u", "/juː/"], ["b", "/b/"], ["e", "∅"] ] }
+      ]
+    },
+    {
+      "id": "ee", "cat": "vowel_team", "pattern": "ee", "sound": "/iː/", "speak": "ee",
+      "rule": "双写 e → 长音 /iː/。see = s + ee，字母组合 ee 当作一个整体发 /iː/。",
+      "words": [
+        { "w": "see", "ipa": "/siː/", "zh": "看见", "parts": [ ["s", "/s/"], ["ee", "/iː/"] ] },
+        { "w": "tree", "ipa": "/triː/", "zh": "树", "parts": [ ["t", "/t/"], ["r", "/r/"], ["ee", "/iː/"] ] },
+        { "w": "green", "ipa": "/griːn/", "zh": "绿色", "parts": [ ["g", "/g/"], ["r", "/r/"], ["ee", "/iː/"], ["n", "/n/"] ] },
+        { "w": "three", "ipa": "/θriː/", "zh": "三", "parts": [ ["th", "/θ/"], ["r", "/r/"], ["ee", "/iː/"] ] }
+      ]
+    },
+    {
+      "id": "ea", "cat": "vowel_team", "pattern": "ea", "sound": "/iː/", "speak": "ee",
+      "rule": "ea 组合大多发长音 /iː/（eat/tea/sea）。注意少数词发 /e/（bread 面包）、/eɪ/（great 伟大）——先记最常见读音。",
+      "words": [
+        { "w": "eat", "ipa": "/iːt/", "zh": "吃", "parts": [ ["ea", "/iː/"], ["t", "/t/"] ] },
+        { "w": "tea", "ipa": "/tiː/", "zh": "茶", "parts": [ ["t", "/t/"], ["ea", "/iː/"] ] },
+        { "w": "sea", "ipa": "/siː/", "zh": "大海", "parts": [ ["s", "/s/"], ["ea", "/iː/"] ] },
+        { "w": "team", "ipa": "/tiːm/", "zh": "队伍", "parts": [ ["t", "/t/"], ["ea", "/iː/"], ["m", "/m/"] ] }
+      ]
+    },
+    {
+      "id": "ai", "cat": "vowel_team", "pattern": "ai", "sound": "/eɪ/", "speak": "ay",
+      "rule": "ai 组合发 /eɪ/，多出现在词首/词中（rain/train）。",
+      "words": [
+        { "w": "rain", "ipa": "/reɪn/", "zh": "雨", "parts": [ ["r", "/r/"], ["ai", "/eɪ/"], ["n", "/n/"] ] },
+        { "w": "train", "ipa": "/treɪn/", "zh": "火车", "parts": [ ["t", "/t/"], ["r", "/r/"], ["ai", "/eɪ/"], ["n", "/n/"] ] },
+        { "w": "wait", "ipa": "/weɪt/", "zh": "等待", "parts": [ ["w", "/w/"], ["ai", "/eɪ/"], ["t", "/t/"] ] },
+        { "w": "pain", "ipa": "/peɪn/", "zh": "疼痛", "parts": [ ["p", "/p/"], ["ai", "/eɪ/"], ["n", "/n/"] ] }
+      ]
+    },
+    {
+      "id": "ay", "cat": "vowel_team", "pattern": "ay", "sound": "/eɪ/", "speak": "ay",
+      "rule": "ay 组合发 /eɪ/，几乎总出现在词尾（day/play/say）。ai 与 ay 发音相同，位置不同。",
+      "words": [
+        { "w": "day", "ipa": "/deɪ/", "zh": "一天", "parts": [ ["d", "/d/"], ["ay", "/eɪ/"] ] },
+        { "w": "play", "ipa": "/pleɪ/", "zh": "玩", "parts": [ ["p", "/p/"], ["l", "/l/"], ["ay", "/eɪ/"] ] },
+        { "w": "say", "ipa": "/seɪ/", "zh": "说", "parts": [ ["s", "/s/"], ["ay", "/eɪ/"] ] },
+        { "w": "stay", "ipa": "/steɪ/", "zh": "停留", "parts": [ ["s", "/s/"], ["t", "/t/"], ["ay", "/eɪ/"] ] }
+      ]
+    },
+    {
+      "id": "igh", "cat": "vowel_team", "pattern": "igh", "sound": "/aɪ/", "speak": "eye",
+      "rule": "igh 三字母组合发 /aɪ/，gh 不发音，i 发字母本音。light = l + igh + t。",
+      "words": [
+        { "w": "light", "ipa": "/laɪt/", "zh": "光", "parts": [ ["l", "/l/"], ["igh", "/aɪ/"], ["t", "/t/"] ] },
+        { "w": "night", "ipa": "/naɪt/", "zh": "夜晚", "parts": [ ["n", "/n/"], ["igh", "/aɪ/"], ["t", "/t/"] ] },
+        { "w": "high", "ipa": "/haɪ/", "zh": "高的", "parts": [ ["h", "/h/"], ["igh", "/aɪ/"] ] },
+        { "w": "right", "ipa": "/raɪt/", "zh": "正确的/右边", "parts": [ ["r", "/r/"], ["igh", "/aɪ/"], ["t", "/t/"] ] }
+      ]
+    },
+    {
+      "id": "sh", "cat": "cons_team", "pattern": "sh", "sound": "/ʃ/", "speak": "sh",
+      "rule": "sh 组合发 /ʃ/（类似拼音 x 但舌位更靠后）。ship = sh + i + p。",
+      "words": [
+        { "w": "ship", "ipa": "/ʃɪp/", "zh": "船", "parts": [ ["sh", "/ʃ/"], ["i", "/ɪ/"], ["p", "/p/"] ] },
+        { "w": "shop", "ipa": "/ʃɒp/", "zh": "商店", "parts": [ ["sh", "/ʃ/"], ["o", "/ɒ/"], ["p", "/p/"] ] },
+        { "w": "fish", "ipa": "/fɪʃ/", "zh": "鱼", "parts": [ ["f", "/f/"], ["i", "/ɪ/"], ["sh", "/ʃ/"] ] },
+        { "w": "wish", "ipa": "/wɪʃ/", "zh": "希望", "parts": [ ["w", "/w/"], ["i", "/ɪ/"], ["sh", "/ʃ/"] ] }
+      ]
+    },
+    {
+      "id": "ch", "cat": "cons_team", "pattern": "ch", "sound": "/tʃ/", "speak": "ch",
+      "rule": "ch 组合发 /tʃ/（类似拼音 ch）。chair / chip 都是这个音。注意少数词发 /k/（school 学校）。",
+      "words": [
+        { "w": "chair", "ipa": "/tʃeə/", "zh": "椅子", "parts": [ ["ch", "/tʃ/"], ["ai", "/eə/"], ["r", "/r/"] ] },
+        { "w": "chip", "ipa": "/tʃɪp/", "zh": "薯片/芯片", "parts": [ ["ch", "/tʃ/"], ["i", "/ɪ/"], ["p", "/p/"] ] },
+        { "w": "lunch", "ipa": "/lʌntʃ/", "zh": "午餐", "parts": [ ["l", "/l/"], ["u", "/ʌ/"], ["n", "/n/"], ["ch", "/tʃ/"] ] },
+        { "w": "much", "ipa": "/mʌtʃ/", "zh": "许多", "parts": [ ["m", "/m/"], ["u", "/ʌ/"], ["ch", "/tʃ/"] ] }
+      ]
+    },
+    {
+      "id": "th", "cat": "cons_team", "pattern": "th", "sound": "/θ/ /ð/", "speak": "th",
+      "rule": "th 有两种读音：清音 /θ/（think/three 舌尖伸齿间送气）与浊音 /ð/（this/that 声带震动）。发音动作相同，区别在声带。",
+      "words": [
+        { "w": "think", "ipa": "/θɪŋk/", "zh": "思考(清音)", "parts": [ ["th", "/θ/"], ["i", "/ɪ/"], ["n", "/ŋ/"], ["k", "/k/"] ] },
+        { "w": "three", "ipa": "/θriː/", "zh": "三(清音)", "parts": [ ["th", "/θ/"], ["r", "/r/"], ["ee", "/iː/"] ] },
+        { "w": "this", "ipa": "/ðɪs/", "zh": "这个(浊音)", "parts": [ ["th", "/ð/"], ["i", "/ɪ/"], ["s", "/s/"] ] },
+        { "w": "that", "ipa": "/ðæt/", "zh": "那个(浊音)", "parts": [ ["th", "/ð/"], ["a", "/æ/"], ["t", "/t/"] ] }
+      ]
+    },
+    {
+      "id": "ck", "cat": "cons_team", "pattern": "ck", "sound": "/k/", "speak": "k",
+      "rule": "ck 组合发 /k/，出现在短元音后（back/duck）。它不会出现在词首。",
+      "words": [
+        { "w": "back", "ipa": "/bæk/", "zh": "背部", "parts": [ ["b", "/b/"], ["a", "/æ/"], ["ck", "/k/"] ] },
+        { "w": "duck", "ipa": "/dʌk/", "zh": "鸭子", "parts": [ ["d", "/d/"], ["u", "/ʌ/"], ["ck", "/k/"] ] },
+        { "w": "pick", "ipa": "/pɪk/", "zh": "挑选", "parts": [ ["p", "/p/"], ["i", "/ɪ/"], ["ck", "/k/"] ] },
+        { "w": "sock", "ipa": "/sɒk/", "zh": "袜子", "parts": [ ["s", "/s/"], ["o", "/ɒ/"], ["ck", "/k/"] ] }
+      ]
+    }
+  ]
+}
