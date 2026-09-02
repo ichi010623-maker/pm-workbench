@@ -6537,3 +6537,35 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 .phon-fb.ok{background:rgba(48,209,88,0.12);color:#15803d}
 .phon-fb.bad{background:rgba(255,69,58,0.12);color:#b91c1c}
 .phon-train-stat{font-size:13px;color:var(--text-secondary);text-align:center;padding:6px 0}
+
+/* === Phase 3 · Consonants by Mechanism === */
+.phon-throat-card{border:1px solid var(--card-border,#e5e7eb);border-radius:14px;padding:14px;margin:8px 0;background:linear-gradient(135deg,#fff7ed 0%,#fffbeb 100%)}
+.phon-throat-h{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-bottom:10px}
+.phon-throat-h .emoji{font-size:24px}
+.phon-throat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.phon-throat-side{border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:600;border:1px solid var(--card-border,#e5e7eb);background:var(--card,#fff)}
+.phon-throat-side .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;margin-bottom:6px;font-weight:700}
+.phon-throat-side.voice-0 .badge{background:rgba(127,127,127,0.15);color:#475569}
+.phon-throat-side.voice-1 .badge{background:rgba(255,69,58,0.18);color:#b91c1c}
+.phon-throat-side .ipa-big{font-size:22px;font-weight:800;font-family:Georgia,serif;margin:4px 0}
+.phon-throat-side .vib{display:inline-block;margin-top:4px;font-size:11px;color:var(--text-muted)}
+.phon-throat-side.voice-1 .vib{color:#b91c1c;font-weight:700}
+.phon-cons-mech{border:1px solid var(--card-border,#e5e7eb);border-radius:12px;padding:12px;margin:8px 0;background:var(--card,#fff)}
+.phon-cons-mech-h{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.phon-cons-mech-n{font-size:11px;font-weight:800;color:#6b7280;background:rgba(127,127,127,0.12);border-radius:99px;padding:2px 8px}
+.phon-cons-mech-name{font-weight:700;font-size:15px}
+.phon-cons-mech-zh{font-size:12px;color:var(--text-secondary);margin-top:2px;margin-bottom:8px}
+.phon-cons-pair{display:flex;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--card-border,#e5e7eb);border-radius:10px;padding:8px 10px;margin:6px 0;background:var(--card,#fff);cursor:pointer;transition:.15s}
+.phon-cons-pair:hover{background:#f5f3ff;border-color:#c4b5fd}
+.phon-cons-pair:active{transform:scale(.98)}
+.phon-cons-pair-l{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.phon-cons-pair-syms{font-size:16px;font-weight:800;font-family:Georgia,serif;white-space:nowrap}
+.phon-cons-pair-syms .vs{font-size:10px;color:var(--text-muted);font-weight:400;font-family:sans-serif;margin:0 4px}
+.phon-cons-pair-words{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.phon-cons-pair-tags{display:flex;flex-direction:column;align-items:flex-end;gap:3px;min-width:64px}
+.phon-voice-tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:99px;white-space:nowrap}
+.phon-voice-tag.voiceless{background:rgba(127,127,127,0.15);color:#475569}
+.phon-voice-tag.voiced{background:rgba(255,69,58,0.18);color:#b91c1c}
+.phon-voice-tag.both{background:rgba(127,127,127,0.08);color:#64748b}
+.phon-cons-pair-acc{font-size:11px;color:var(--accent-green);font-weight:700}
+.phon-cons-pair-tip{font-size:12px;color:var(--text-secondary);background:#f8fafc;border-radius:8px;padding:8px 10px;margin:6px 0;line-height:1.6}

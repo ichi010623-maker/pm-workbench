@@ -56,15 +56,46 @@
     }
   ],
   "consIntro": "Phase 3 · 辅音按发音机制分组 + 清浊对比（把手放喉咙感受声带震动）",
+  "consTip": "✋ 把手放在喉咙：发 /p/（送气无声）vs /b/（声带震动有声音）——这是清浊辅音的核心区别。",
+  "consGroups": [
+    {
+      "id": "plosive",
+      "num": "①",
+      "name": "爆破音 Plosives",
+      "zh": "完全阻塞气流后突然释放",
+      "pairs": ["p_b", "t_d", "k_g"]
+    },
+    {
+      "id": "fricative",
+      "num": "②",
+      "name": "摩擦音 Fricatives",
+      "zh": "气流从缝隙摩擦而过（持续音）",
+      "pairs": ["f_v", "s_z", "θ_ð", "ʃ_ʒ"]
+    },
+    {
+      "id": "affricate",
+      "num": "③",
+      "name": "破擦音 Affricates",
+      "zh": "先爆破再摩擦的两段动作",
+      "pairs": ["tʃ_dʒ"]
+    },
+    {
+      "id": "nasal",
+      "num": "④",
+      "name": "鼻音 Nasals",
+      "zh": "气流从鼻腔通过（嘴闭上）",
+      "pairs": ["m_n"]
+    }
+  ],
   "consPairs": [
-    { "id": "p_b", "group": "① 爆破音", "a": "/p/", "b": "/b/", "aWord": "pat", "bWord": "bat", "aSpeak": "puh", "bSpeak": "buh", "pairs": [ ["pat", "bat", "轻拍", "球拍/蝙蝠"], ["cap", "cab", "帽子", "出租车"], ["pea", "bee", "豌豆", "蜜蜂"], ["pack", "back", "打包", "背部"] ] },
-    { "id": "t_d", "group": "① 爆破音", "a": "/t/", "b": "/d/", "aWord": "tip", "bWord": "dip", "aSpeak": "tuh", "bSpeak": "duh", "pairs": [ ["tip", "dip", "小费/尖端", "蘸"], ["write", "ride", "写", "骑"], ["bet", "bed", "打赌", "床"], ["late", "laid", "迟到", "放置(lay过去)"] ] },
-    { "id": "k_g", "group": "① 爆破音", "a": "/k/", "b": "/g/", "aWord": "coat", "bWord": "goat", "aSpeak": "kuh", "bSpeak": "guh", "pairs": [ ["coat", "goat", "外套", "山羊"], ["back", "bag", "背部", "包"], ["cold", "gold", "冷", "金子"], ["class", "glass", "班级", "玻璃杯"] ] },
-    { "id": "f_v", "group": "② 摩擦音", "a": "/f/", "b": "/v/", "aWord": "fan", "bWord": "van", "aSpeak": "fuh", "bSpeak": "vuh", "pairs": [ ["fan", "van", "风扇", "货车"], ["safe", "save", "安全", "拯救"], ["leaf", "leave", "叶子", "离开"], ["few", "view", "少数", "景色"] ] },
-    { "id": "s_z", "group": "② 摩擦音", "a": "/s/", "b": "/z/", "aWord": "sip", "bWord": "zip", "aSpeak": "s", "bSpeak": "zz", "pairs": [ ["sip", "zip", "小口喝", "拉链"], ["bus", "buzz", "公交车", "嗡嗡声"], ["ice", "eyes", "冰", "眼睛"], ["price", "prize", "价格", "奖品"] ] },
-    { "id": "θ_ð", "group": "② 摩擦音", "a": "/θ/", "b": "/ð/", "aWord": "thin", "bWord": "this", "aSpeak": "th", "bSpeak": "th", "pairs": [ ["thin", "then", "瘦的", "那时"], ["mouth", "mouth(动词)", "嘴巴", "做口型"], ["think", "this", "思考", "这个"], ["three", "the", "三", "这个(定冠词)"] ] },
-    { "id": "ʃ_ʒ", "group": "② 摩擦音", "a": "/ʃ/", "b": "/ʒ/", "aWord": "ship", "bWord": "vision 的 s", "aSpeak": "sh", "bSpeak": "zh", "pairs": [ ["ship", "sheep", "船", "羊"], ["shy", "vision的si", "害羞", "视觉"], ["sure", "measure的su", "确定", "测量"] ] },
-    { "id": "tʃ_dʒ", "group": "③ 破擦音", "a": "/tʃ/", "b": "/dʒ/", "aWord": "cheap", "bWord": "jeep", "aSpeak": "ch", "bSpeak": "j", "pairs": [ ["cheap", "jeep", "便宜", "吉普车"], ["chain", "Jane", "链条", "简(人名)"], ["choke", "joke", "噎住", "笑话"], ["chin", "gin", "下巴", "金酒"] ] },
-    { "id": "m_n", "group": "④ 鼻音", "a": "/m/", "b": "/n/", "aWord": "map", "bWord": "nap", "aSpeak": "m", "bSpeak": "n", "pairs": [ ["map", "nap", "地图", "小睡"], ["met", "net", "遇见", "网"], ["some", "sun", "一些", "太阳"] ] }
+    { "id": "p_b", "group": "① 爆破音", "mechanism": "plosive", "a": "/p/", "b": "/b/", "aWord": "pat", "bWord": "bat", "aSpeak": "puh", "bSpeak": "buh", "aVoice": false, "bVoice": true, "tip": "p 用力送气无声；b 声带震动有声音。中文里没有这组对比（拼音 p/b 是清音/浊音），所以听起来都像 'b'。", "pairs": [ ["pat", "bat", "轻拍", "球拍/蝙蝠"], ["cap", "cab", "帽子", "出租车"], ["pea", "bee", "豌豆", "蜜蜂"], ["pack", "back", "打包", "背部"] ] },
+    { "id": "t_d", "group": "① 爆破音", "mechanism": "plosive", "a": "/t/", "b": "/d/", "aWord": "tip", "bWord": "dip", "aSpeak": "tuh", "bSpeak": "duh", "aVoice": false, "bVoice": true, "tip": "t 舌尖顶住上齿龈后弹开（无声）；d 同样的位置但有声。", "pairs": [ ["tip", "dip", "小费/尖端", "蘸"], ["write", "ride", "写", "骑"], ["bet", "bed", "打赌", "床"], ["late", "laid", "迟到", "放置(lay过去)"] ] },
+    { "id": "k_g", "group": "① 爆破音", "mechanism": "plosive", "a": "/k/", "b": "/g/", "aWord": "coat", "bWord": "goat", "aSpeak": "kuh", "bSpeak": "guh", "aVoice": false, "bVoice": true, "tip": "k 舌根抵住软腭后释放；g 同位置但有声带震动。", "pairs": [ ["coat", "goat", "外套", "山羊"], ["back", "bag", "背部", "包"], ["cold", "gold", "冷", "金子"], ["class", "glass", "班级", "玻璃杯"] ] },
+    { "id": "f_v", "group": "② 摩擦音", "mechanism": "fricative", "a": "/f/", "b": "/v/", "aWord": "fan", "bWord": "van", "aSpeak": "fuh", "bSpeak": "vuh", "aVoice": false, "bVoice": true, "tip": "f 上齿轻咬下唇送气；v 同位置但震动声带（中文里 v 极少出现）。", "pairs": [ ["fan", "van", "风扇", "货车"], ["safe", "save", "安全", "拯救"], ["leaf", "leave", "叶子", "离开"], ["few", "view", "少数", "景色"] ] },
+    { "id": "s_z", "group": "② 摩擦音", "mechanism": "fricative", "a": "/s/", "b": "/z/", "aWord": "sip", "bWord": "zip", "aSpeak": "s", "bSpeak": "zz", "aVoice": false, "bVoice": true, "tip": "s 舌尖接近上齿龈送气；z 同位置但有声（很像拼音 s/z）。", "pairs": [ ["sip", "zip", "小口喝", "拉链"], ["bus", "buzz", "公交车", "嗡嗡声"], ["ice", "eyes", "冰", "眼睛"], ["price", "prize", "价格", "奖品"] ] },
+    { "id": "θ_ð", "group": "② 摩擦音", "mechanism": "fricative", "a": "/θ/", "b": "/ð/", "aWord": "thin", "bWord": "this", "aSpeak": "th", "bSpeak": "th", "aVoice": false, "bVoice": true, "tip": "th 舌尖伸到上下齿之间（舌头伸出来！）；θ 无声（如 think），ð 有声（如 this）。", "pairs": [ ["thin", "then", "瘦的", "那时"], ["mouth(名)", "mouth(动)", "嘴巴", "做口型"], ["think", "this", "思考", "这个"], ["three", "the", "三", "这个(定冠词)"] ] },
+    { "id": "ʃ_ʒ", "group": "② 摩擦音", "mechanism": "fricative", "a": "/ʃ/", "b": "/ʒ/", "aWord": "ship", "bWord": "vision", "aSpeak": "sh", "bSpeak": "zh", "aVoice": false, "bVoice": true, "tip": "sh 嘴唇圆突送气；zh 同位置但有声（vision/me 乐）。中文 sh 没有浊音对应音。", "pairs": [ ["ship", "sheep", "船", "羊"], ["shy", "vision 的 si", "害羞", "视觉"], ["sure", "measure 的 su", "确定", "测量"] ] },
+    { "id": "tʃ_dʒ", "group": "③ 破擦音", "mechanism": "affricate", "a": "/tʃ/", "b": "/dʒ/", "aWord": "cheap", "bWord": "jeep", "aSpeak": "ch", "bSpeak": "j", "aVoice": false, "bVoice": true, "tip": "ch = /t/ + /ʃ/ 的快速连读；j = /d/ + /ʒ/ 的快速连读（就像拼音 ch/j）。", "pairs": [ ["cheap", "jeep", "便宜", "吉普车"], ["chain", "Jane", "链条", "简(人名)"], ["choke", "joke", "噎住", "笑话"], ["chin", "gin", "下巴", "金酒"] ] },
+    { "id": "m_n", "group": "④ 鼻音", "mechanism": "nasal", "a": "/m/", "b": "/n/", "aWord": "map", "bWord": "nap", "aSpeak": "m", "bSpeak": "n", "aVoice": true, "bVoice": true, "tip": "都是浊音（声带震动）。区别只在气流通过的腔体：m 双唇闭合（唇鼻），n 舌头顶上齿龈（舌鼻）。", "pairs": [ ["map", "nap", "地图", "小睡"], ["met", "net", "遇见", "网"], ["some", "sun", "一些", "太阳"] ] }
   ]
 }

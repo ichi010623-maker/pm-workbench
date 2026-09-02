@@ -1039,12 +1039,13 @@ function lgRenderPhonics(cur) {
     lgPhoneticsLoad(function () { render(); });
     return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载音标数据中…</div></div></div>';
   }
-  // 学习路径分发：path(主页) / letters(字母) / letter:CH / pairs / pair:ID / lib(图书馆 原视图)
+  // 学习路径分发：path(主页) / letters(字母) / letter:CH / pairs / pair:ID / cons(辅音) / lib(图书馆 原视图)
   var v = lgPhonView || "path";
   if (v === "letters") return lgPhonLettersPage();
   if (v.indexOf("letter:") === 0) return lgPhonLetterDetail(v.slice(7));
   if (v === "pairs") return lgPhonPairsPage();
   if (v.indexOf("pair:") === 0) return lgPhonPairTrain(v.slice(5));
+  if (v === "cons") return lgPhonConsPage();
   if (v === "lib") return lgRenderPhonLib(cur);
   return lgPhonPathPage();
 }
@@ -1127,6 +1128,10 @@ function lgPhonPathPage() {
     ? Math.round(done.length / lgLetters.letters.length * 100) : 0;
   var p1 = pct1 >= 100 ? '<div style="color:var(--accent-green)">100% ✓</div>' : pct1 + "%";
   var bar1 = '<div class="phon-progress"><div class="phon-progress-fill" style="width:' + pct1 + '%"></div></div>';
+  // Phase 3 进度
+  var cp = lgConsProgress();
+  var p3 = cp.pct >= 100 ? '<div style="color:var(--accent-green)">100% ✓</div>' : cp.done + '/' + cp.total;
+  var bar3 = '<div class="phon-progress"><div class="phon-progress-fill" style="width:' + cp.pct + '%"></div></div>';
 
   function phaseCard(n, title, desc, state, pctHtml, barHtml, onClick, locked) {
     return '<div class="phon-phase' + (locked ? " locked" : "") + '"' + (locked ? '' : ' onclick="' + onClick + '"') + '>' +
@@ -1143,7 +1148,7 @@ function lgPhonPathPage() {
     '<div class="lg-hint">' + (lgLetters && lgLetters.intro ? lgLetters.intro : "") + '</div>' +
     phaseCard(1, "字母与声音基础", "26 Letters · Letter Name ≠ Letter Sound", null, p1, bar1, "lgPhonView='letters';render()") +
     phaseCard(2, "元音系统 + 听辨训练", "单元音 / 双元音 · Minimal Pairs 辨音", null, "", "", "lgPhonView='pairs';render()") +
-    phaseCard(3, "辅音系统", "清浊对比 · 发音机制分组", null, "", "", "lgPhonView='lib';render()") +
+    phaseCard(3, "辅音系统", "清浊对比 · 发音机制分组 · 4 大组", null, p3, bar3, "lgPhonView='cons';render()") +
     phaseCard(4, "自然拼读", "Pattern → Sound → Word", null, "", "", "", true) +
     phaseCard(5, "拼读实战", "4 种训练模式", null, "", "", "", true) +
     '</div>';
@@ -1152,6 +1157,8 @@ function lgPhonPathPage() {
   var rec = "";
   if (pct1 < 100) {
     rec = '💡 下一步：' + (lgLetters && lgLetters.tip || "学习字母 A");
+  } else if (cp.pct < 100) {
+    rec = '💡 下一步：继续 Phase 3 辅音系统（' + cp.done + '/' + cp.total + ' 已练过）';
   } else {
     rec = '💡 下一步：开始 Phase 2 听辨训练（' + (lgPairs && lgPairs.vowelPairs && lgPairs.vowelPairs[0] ? lgPairs.vowelPairs[0].a + " vs " + lgPairs.vowelPairs[0].b : "") + '）';
   }
@@ -1282,6 +1289,94 @@ function lgPhonPairsPage() {
     cHtml = '<div class="lg-card"><div class="lg-card-h">🔤 辅音清浊对比 <span class="lg-sub">' + (lgPairs.consIntro || "") + '</span></div>' + cCards + '</div>';
   }
   return head + lvHtml + cHtml;
+}
+
+/* ============================================================
+ * Phase 3 · 辅音系统（按发音机制分组 + 清浊对比）
+ * ============================================================ */
+// 进度：完成 = lgPairState[id].total >= 2
+function lgConsProgress() {
+  if (!lgPairs || !lgPairs.consPairs) return { done: 0, total: 0, pct: 0 };
+  var total = lgPairs.consPairs.length;
+  var done = 0;
+  for (var i = 0; i < total; i++) {
+    var s = lgPairState[lgPairs.consPairs[i].id];
+    if (s && s.total >= 2) done++;
+  }
+  return { done: done, total: total, pct: total ? Math.round(done / total * 100) : 0 };
+}
+
+function lgPhonConsPage() {
+  if (!lgPairs) { lgPairsLoad(function () { render(); }); return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载中…</div></div></div>'; }
+  var region = lgPhonRegion || "US";
+  var consPairsById = {};
+  (lgPairs.consPairs || []).forEach(function (p) { consPairsById[p.id] = p; });
+
+  // 头部
+  var head = '<div class="lg-card"><div class="lg-card-h">🗣 Phase 3 · 辅音系统 <span class="lg-sub">发音机制 + 清浊对比</span></div>' +
+    '<div class="lg-hint">' + (lgPairs.consIntro || "") + '</div>' +
+    '<div class="lg-row" style="gap:8px;margin:6px 0"><button class="lg-btn ghost" onclick="lgPhonView=null;render()">← 🗺 路径</button>' +
+    '<button class="lg-btn ghost" onclick="lgPhonView=\'lib\';render()">📚 音素图书馆</button></div></div>';
+
+  // ✋ 把手放在喉咙（教学卡 + 清浊对比 demo）
+  var throatCard = '<div class="phon-throat-card">' +
+    '<div class="phon-throat-h"><span class="emoji">✋</span>' + (lgPairs.consTip || "把手放在喉咙感受声带震动") + '</div>' +
+    '<div class="phon-throat-grid">' +
+      '<div class="phon-throat-side voice-0">' +
+        '<span class="badge">清音 Voiceless</span>' +
+        '<div class="ipa-big">/p/</div>' +
+        '<div>送气无声</div>' +
+        '<button class="phon-speak-btn" onclick="lgPhonSpeak(\'puh\',\'' + region + '\')">🔊 听</button>' +
+        '<div class="vib">— 无震动 —</div>' +
+      '</div>' +
+      '<div class="phon-throat-side voice-1">' +
+        '<span class="badge">浊音 Voiced</span>' +
+        '<div class="ipa-big">/b/</div>' +
+        '<div>声带震动</div>' +
+        '<button class="phon-speak-btn" onclick="lgPhonSpeak(\'buh\',\'' + region + '\')">🔊 听</button>' +
+        '<div class="vib">📳 喉部震动</div>' +
+      '</div>' +
+    '</div>' +
+    '<div style="font-size:12px;color:var(--text-secondary);margin-top:10px;line-height:1.6">' +
+      '👉 练习方法：交替发 <b>/p/ /b/ /p/ /b/</b>，注意 /p/ 时喉咙无震动，/b/ 时喉部能感到明显振动。<br>' +
+      '大部分清浊辅音对（爆破音、摩擦音、破擦音）都遵循这个规律。' +
+    '</div>' +
+    '</div>';
+
+  // 按发音机制分组（lgPairs.consGroups）渲染卡片
+  var groups = lgPairs.consGroups || [];
+  var mechHtml = groups.map(function (g) {
+    var pairsHtml = (g.pairs || []).map(function (id) {
+      var p = consPairsById[id];
+      if (!p) return "";
+      var s = lgPairGet(id);
+      var acc = s.total > 0 ? Math.round(s.correct / s.total * 100) : null;
+      var bothVoiced = p.aVoice === true && p.bVoice === true;
+      var tagText = bothVoiced ? "双浊音" : (p.aVoice === false ? "清 / 浊" : (p.aVoice === true ? "浊 / 清" : "清 / 浊"));
+      var tagCls = bothVoiced ? "both" : (p.aVoice === false ? "voiceless" : "voiced");
+      return '<div class="phon-cons-pair" onclick="lgPhonView=\'pair:' + id + '\';render()">' +
+        '<div class="phon-cons-pair-l">' +
+          '<div><div class="phon-cons-pair-syms">' + p.a + ' <span class="vs">VS</span> ' + p.b + '</div>' +
+          '<div class="phon-cons-pair-words">' + p.aWord + ' / ' + p.bWord + '</div></div>' +
+        '</div>' +
+        '<div class="phon-cons-pair-tags">' +
+          '<span class="phon-voice-tag ' + tagCls + '">' + tagText + '</span>' +
+          (acc !== null ? '<span class="phon-cons-pair-acc">' + acc + '%</span>' : '') +
+        '</div>' +
+      '</div>' +
+      (p.tip ? '<div class="phon-cons-pair-tip">💡 ' + p.tip + '</div>' : '');
+    }).join("");
+    return '<div class="phon-cons-mech">' +
+      '<div class="phon-cons-mech-h">' +
+        '<span class="phon-cons-mech-n">' + g.num + '</span>' +
+        '<span class="phon-cons-mech-name">' + g.name + '</span>' +
+      '</div>' +
+      '<div class="phon-cons-mech-zh">' + g.zh + '</div>' +
+      pairsHtml +
+      '</div>';
+  }).join("");
+
+  return head + throatCard + mechHtml;
 }
 
 // 训练器：读一个词 → 判断 A 还是 B
