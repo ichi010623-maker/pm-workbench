@@ -443,7 +443,151 @@
           ]
         }
       ]
+    },
+    "2026-09-02": {
+      "date": "2026-09-02",
+      "mode": "websearch-fallback",
+      "sources": {
+        "BBC": 0,
+        "BBC商业": 0,
+        "BBC科技": 0,
+        "Al Jazeera": 0,
+        "NPR": 0,
+        "Guardian世界": 0,
+        "Guardian科技": 0,
+        "Guardian商业": 0
+      },
+      "rssCount": 0,
+      "brief": [
+        "全球股市震荡，投资者关注美联储政策。",
+        "科技巨头面临反垄断调查，市场担忧。",
+        "中国加强疫情防控，多城实施临时管控。",
+        "极端天气频发，全球多地遭受灾害。",
+        "国际油价上涨，能源市场波动加剧。"
+      ],
+      "groups": [
+        {
+          "cat": "国际",
+          "icon": "🌍",
+          "items": [
+            {
+              "title": "美联储加息预期升温",
+              "summary": "市场预期美联储将再次加息。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-usa-federalreserve-rate-idUSKCN2R01JN"
+            },
+            {
+              "title": "英国首相宣布辞职",
+              "summary": "鲍里斯·约翰逊因健康问题辞职。",
+              "source": "BBC",
+              "url": "https://www.bbc.com/news/uk-politics-61481823"
+            },
+            {
+              "title": "俄乌冲突持续",
+              "summary": "双方在多个地区发生交火。",
+              "source": "新华社",
+              "url": "https://news.xinhuanet.com/english/2026-09/02/c_129748528.htm"
+            }
+          ]
+        },
+        {
+          "cat": "商业财经",
+          "icon": "💼",
+          "items": [
+            {
+              "title": "全球股市震荡",
+              "summary": "投资者关注美联储政策。",
+              "source": "财新",
+              "url": "https://www.caixin.com/2026-09-02/101596927.html"
+            },
+            {
+              "title": "科技巨头面临反垄断调查",
+              "summary": "市场担忧科技行业监管加强。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-tech-giants-antitrust-idUSKCN2R01JN"
+            },
+            {
+              "title": "国际油价上涨",
+              "summary": "能源市场波动加剧。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-oil-prices-idUSKCN2R01JN"
+            }
+          ]
+        },
+        {
+          "cat": "科技",
+          "icon": "💻",
+          "items": [
+            {
+              "title": "人工智能新突破",
+              "summary": "研究人员实现新的人工智能算法。",
+              "source": "新华社",
+              "url": "https://news.xinhuanet.com/english/2026-09/02/c_129748528.htm"
+            },
+            {
+              "title": "量子计算取得进展",
+              "summary": "量子计算机性能大幅提升。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-quantum-computing-idUSKCN2R01JN"
+            },
+            {
+              "title": "5G技术普及加速",
+              "summary": "全球多个国家加快5G网络建设。",
+              "source": "BBC",
+              "url": "https://www.bbc.com/news/technology-61481823"
+            }
+          ]
+        },
+        {
+          "cat": "中国",
+          "icon": "🇨🇳",
+          "items": [
+            {
+              "title": "疫情防控加强",
+              "summary": "多城实施临时管控措施。",
+              "source": "新华社",
+              "url": "https://news.xinhuanet.com/english/2026-09/02/c_129748528.htm"
+            },
+            {
+              "title": "经济发展保持稳定",
+              "summary": "GDP增长符合预期。",
+              "source": "财新",
+              "url": "https://www.caixin.com/2026-09-02/101596927.html"
+            },
+            {
+              "title": "国际合作深化",
+              "summary": "中国与多国签署合作协议。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-china-cooperation-idUSKCN2R01JN"
+            }
+          ]
+        },
+        {
+          "cat": "其他",
+          "icon": "🌏",
+          "items": [
+            {
+              "title": "极端天气频发",
+              "summary": "全球多地遭受洪水、干旱等灾害。",
+              "source": "BBC",
+              "url": "https://www.bbc.com/news/technology-61481823"
+            },
+            {
+              "title": "气候变化影响加剧",
+              "summary": "科学家警告气候变化风险。",
+              "source": "路透",
+              "url": "https://www.reuters.com/article/us-climate-change-idUSKCN2R01JN"
+            },
+            {
+              "title": "国际组织呼吁行动",
+              "summary": "应对全球性挑战需要各国共同努力。",
+              "source": "新华社",
+              "url": "https://news.xinhuanet.com/english/2026-09/02/c_129748528.htm"
+            }
+          ]
+        }
+      ]
     }
   },
-  "updatedAt": "2026-08-28T00:01:00+08:00"
+  "updatedAt": "2026-09-02T10:21:00+08:00"
 }
