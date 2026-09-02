@@ -811,6 +811,11 @@ function renderLanguage() {
     default: body = lgRenderHome(cur);
   }
   c.innerHTML = langBar + tabBar + body;
+  // 顶部仪表盘：所有语言学习 tab（音标/单词库/精读/视频课/口语/笔记/计划/统计）共用
+  // 已挂全局 click/keydown/touchstart 捕获阶段代理 + lgPhonSpeak 收尾挂钩，
+  // 任意模块任意点击 / TTS 朗读 / 键盘 / 触摸都触发 lgTouchActive；闲置 90 秒或切后台自动暂停
+  var dashHtml = (typeof lgLT_dashboardHtml === "function") ? lgLT_dashboardHtml() : "";
+  c.innerHTML = langBar + tabBar + dashHtml + body;
   if (lgTab === "home") lgRenderHomeCharts(cur);
   if (lgTab === "stats") lgRenderStatsCharts(cur);
 }
@@ -1296,8 +1301,7 @@ function lgPhonPathPage() {
   if (!lgLetters) lgLettersLoad(function () { render(); });
   if (!lgPairs) lgPairsLoad(function () { render(); });
   if (!lgSpell) lgSpellLoad(function () { render(); });
-  // 学习时长仪表盘（v5.9.101 起）
-  var dashHtml = lgLT_dashboardHtml();
+  // 学习时长仪表盘已由 renderLanguage() 统一挂载（v5.9.103 起所有语言 tab 共用）
   var done = lgLettersDone();
   var pct1 = lgLetters && lgLetters.letters && lgLetters.letters.length
     ? Math.round(done.length / lgLetters.letters.length * 100) : 0;
@@ -1362,7 +1366,7 @@ function lgPhonPathPage() {
       '<button class="lg-btn" onclick="lgPhonView=\'lib\';render()">🔠 元音 / 辅音总览</button>' +
       '<button class="lg-btn ghost" onclick="lgPhonRegion=lgPhonRegion===\'US\'?\'UK\':\'US\';render()">🌐 切到' + (lgPhonRegion === "US" ? "英式" : "美式") + '</button>' +
     '</div></div>';
-  return dashHtml + pathCard + recCard + libCard;
+  return pathCard + recCard + libCard;
 }
 
 /* ============================================================

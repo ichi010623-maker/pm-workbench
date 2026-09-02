@@ -13,10 +13,16 @@ function mkSandbox(opts) {
   opts = opts || {};
   const m = {};
   const fakeEl = { innerHTML: "", querySelector: () => null, querySelectorAll: () => [], style: {}, value: "", classList: { add() {}, remove() {}, contains: () => false } };
+  // 各 ID 容器独立，避免 stats charts 把 chart 写到 app-content 同容器
+  const containers = {
+    "app-content": fakeEl,
+    "lg-bar-chart": { innerHTML: "", querySelector: () => null, querySelectorAll: () => [], style: {}, value: "", classList: { add() {}, remove() {}, contains: () => false }, clientWidth: 300 },
+    "lg-radar-chart": { innerHTML: "", querySelector: () => null, querySelectorAll: () => [], style: {}, value: "", classList: { add() {}, remove() {}, contains: () => false }, clientWidth: 300 }
+  };
   const sb = {
     console,
     document: {
-      getElementById: () => fakeEl,
+      getElementById: id => containers[id] || fakeEl,
       querySelector: () => null,
       querySelectorAll: () => [],
       addEventListener: (n, fn) => { m[n] = m[n] || []; m[n].push(fn); },
@@ -36,11 +42,12 @@ function mkSandbox(opts) {
       return dt.toISOString().slice(0, 10);
     },
     uid: () => "id1",
-    DB: { data: {}, save() {}, logActivity() {} },
+    DB: { data: { growth: { language: { en: {}, ja: {}, ko: {} }, english: { studyLog: {}, wordBanks: {} }, vocab: {}, words: {}, video: { courses: [], logs: [] }, reading: { items: [], logs: [] }, notes: {}, plan: {} } }, save() {}, logActivity() {} },
     speechSynthesis: { cancel() {}, getVoices() { return [{ lang: "en-US" }]; }, speak() {}, onvoiceschanged: null },
     SpeechSynthesisUtterance: function (text) { this.text = text; this.lang = ""; this.rate = 1; this.voice = null; },
     lgEscapeJs: s => String(s).replace(/'/g, "\\'"),
     lgPhonSpeak() {},
+    lgRenderWords(){return '<div>words-stub</div>';}, lgRenderVideo(){return '<div>video-stub</div>';}, lgRenderTest(){return '<div>test-stub</div>';}, lgRenderReading(){return '<div>reading-stub</div>';}, lgRenderListening(){return '<div>listening-stub</div>';}, lgRenderSpeaking(){return '<div>speaking-stub</div>';}, lgRenderNotes(){return '<div>notes-stub</div>';}, lgRenderPlan(){return '<div>plan-stub</div>';}, lgRenderStats(){return '<div>stats-stub</div>';}, lgRenderHome(){return '<div>home-stub</div>';}, lgRenderHomeCharts(){}, lgRenderStatsCharts(){}, lgEnsureAll(){}, langCur(){return 'en';}, langGet(){return {};}, lgDueCount(){return 0;}, lgLevelDist(){return {};}, lgWordbankUnknownCount(){return 0;}, LG_LANGS: ['en'], LG_TABS: [{k:'home',t:'首页'},{k:'words',t:'词库'},{k:'video',t:'视频'},{k:'test',t:'测试'},{k:'reading',t:'精读'},{k:'listening',t:'熏听'},{k:'speaking',t:'口语'},{k:'notes',t:'笔记'},{k:'plan',t:'计划'},{k:'stats',t:'统计'}], LG_META: {en:{flag:'🇺🇸',name:'EN'}}, setLang(){},
     Math, Date, JSON, Object, Array, String, Number, parseInt, parseFloat, isNaN, encodeURIComponent, decodeURIComponent, setInterval, clearInterval, setTimeout, clearTimeout,
     addEventListener() {}, removeEventListener() {},
     fetch: () => Promise.resolve({ json: () => Promise.resolve({}) }),
@@ -176,18 +183,34 @@ section("F. UI 仪表盘");
   ok(html.indexOf("lg-learn-card") >= 0, "用 lg-learn-card 类");
 }
 
-// ============ G. 路径主页注入仪表盘 ============
-section("G. 路径主页顶部出现仪表盘");
+// ============ G. 仪表盘覆盖所有语言学习 tab（v5.9.103 起） ============
+section("G. 仪表盘挂在 renderLanguage 顶层，所有语言 tab 共用");
 {
+  // 7 个 tab 全部断言：仪表盘出现在每个 tab body 顶部
+  const tabs = ["phonics", "words", "video", "reading", "listening", "speaking", "notes", "plan", "stats"];
+  let allOk = true;
+  const detail = [];
+  tabs.forEach(t => {
+    const sb = mkSandbox();
+    setup(sb);
+    vm.runInContext("__lgLT = { today: { date: '2026-09-02', sec: 600 }, streak: { lastDate: '2026-09-02', streak: 3 }, lastActiveTs: Date.now(), paused: false, intervalId: null }; lgLT_load()", sb);
+    vm.runInContext("lgTab = '" + t + "'; lgPhonView=null; __lgPhonetics = { updatedAt: 'x', vowels: [], consonants: [] }; __lgLetters = { letters: [] }; __lgPairs = { vowelPairs: [], consPairs: [], consGroups: [] }; __lgSpell = { patterns: [] }", sb);
+    const html = vm.runInContext("(function(){ var c=document.getElementById('app-content'); c.innerHTML=''; try{ renderLanguage() }catch(e){return 'ERR:'+e.message} return c.innerHTML; })()", sb);
+    const ok1 = html.indexOf("lg-learn-card") >= 0;
+    const ok2 = html.indexOf("今日已学") >= 0;
+    const ok3 = html.indexOf("连续") >= 0;
+    if (!(ok1 && ok2 && ok3)) { allOk = false; detail.push(t + ":card=" + ok1 + " title=" + ok2 + " streak=" + ok3 + " html=" + html.slice(0,80).replace(/\s+/g, ' ').slice(0,70)); }
+  });
+  ok(allOk, "9 个语言学习 tab（音标/单词库/视频课/精读/熏听/口语/笔记/计划/统计）全部显示仪表盘" + (detail.length ? " · 失败: " + detail.join(", ") : ""));
+  // 仪表盘应在 langBar/tabBar 之后、tab body 之前（粘顶位置）
   const sb = mkSandbox();
   setup(sb);
-  vm.runInContext("__lgLT = { today: { date: '2026-09-02', sec: 120 }, streak: { lastDate: '2026-09-02', streak: 1 }, lastActiveTs: Date.now(), paused: false, intervalId: null }; lgLT_load()", sb);
-  vm.runInContext("lgPhonView=null; __lgPhonetics = { updatedAt: 'x', vowels: [], consonants: [] }", sb);
-  const html = vm.runInContext("lgRenderPhonics('en')", sb);
-  ok(html.indexOf("lg-learn-card") >= 0, "主页路径含学习仪表盘卡");
-  const dashIdx = html.indexOf("lg-learn-card");
-  const pathIdx = html.indexOf("phon-phase");
-  ok(dashIdx < pathIdx && dashIdx >= 0, "仪表盘卡在 Phase 卡之前（顶部）");
+  vm.runInContext("__lgLT = { today: { date: '2026-09-02', sec: 0 }, streak: { lastDate: null, streak: 0 }, lastActiveTs: Date.now(), paused: false, intervalId: null }; lgLT_load()", sb);
+  vm.runInContext("lgTab='words'; __lgPhonetics = { updatedAt: 'x', vowels: [], consonants: [] }", sb);
+  const html2 = vm.runInContext("(function(){ var c={}; c.innerHTML=''; document.getElementById=function(){return c}; try{ renderLanguage() }catch(e){return 'ERR:'+e.message} return c.innerHTML; })()", sb);
+  const tabsIdx = html2.indexOf("lg-tabs");
+  const dashIdx = html2.indexOf("lg-learn-card");
+  ok(tabsIdx >= 0 && dashIdx > tabsIdx, "仪表盘在 tab 栏之下（dashIdx=" + dashIdx + " tabsIdx=" + tabsIdx + "）");
 }
 
 // ============ H. lgPhonSpeak 末尾触发 lgTouchActive ============
