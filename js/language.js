@@ -1039,7 +1039,7 @@ function lgRenderPhonics(cur) {
     lgPhoneticsLoad(function () { render(); });
     return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载音标数据中…</div></div></div>';
   }
-  // 学习路径分发：path(主页) / letters(字母) / letter:CH / pairs / pair:ID / cons(辅音) / spell(拼读) / lib(图书馆 原视图)
+  // 学习路径分发：path(主页) / letters / letter:CH / pairs / pair:ID / cons(辅音) / spell(拼读) / prac(实战) / lib(图书馆)
   var v = lgPhonView || "path";
   if (v === "letters") return lgPhonLettersPage();
   if (v.indexOf("letter:") === 0) return lgPhonLetterDetail(v.slice(7));
@@ -1048,6 +1048,8 @@ function lgRenderPhonics(cur) {
   if (v === "cons") return lgPhonConsPage();
   if (v === "spell") return lgPhonSpellPage();
   if (v.indexOf("spell:") === 0) return lgPhonSpellDetail(v.slice(6));
+  if (v === "prac") return lgPhonPracHome();
+  if (v.indexOf("prac:") === 0) return lgPhonPracPlay(v.slice(5));
   if (v === "lib") return lgRenderPhonLib(cur);
   return lgPhonPathPage();
 }
@@ -1088,7 +1090,7 @@ function lgRenderPhonLib(cur) {
 var lgPhonRegion = "US";
 var lgPhonSel = null; // 图书馆：当前查看的音标详情
 // —— Sprint 语言升级 · Pronunciation 学习路径状态 ——
-var lgPhonView = null;     // path/letters/letter:CH/pairs/pair:ID/cons/spell/spell:ID/lib
+var lgPhonView = null;     // path/letters/letter:CH/pairs/pair:ID/cons/spell/spell:ID/prac/prac:ID/lib
 var lgPhonLetterIdx = 0;   // Phase1 字母学习游标
 var lgLetters = null;      // data/letters.json
 var lgPairs = null;        // data/phoneme_pairs.json
@@ -1140,6 +1142,15 @@ function lgPhonPathPage() {
   var sp = lgSpellProgress();
   var p4 = sp.pct >= 100 ? '<div style="color:var(--accent-green)">100% ✓</div>' : sp.done + '/' + sp.total;
   var bar4 = '<div class="phon-progress"><div class="phon-progress-fill" style="width:' + sp.pct + '%"></div></div>';
+  // Phase 5 进度（四模式完成度：任一模式做过 ≥1 组算 25%）
+  lgPracLoadStats();
+  var pracDone = 0;
+  for (var pi = 0; pi < LG_PRAC_MODES.length; pi++) {
+    var ps = lgPracStats[LG_PRAC_MODES[pi].id];
+    if (ps && ps.n >= 1) pracDone++;
+  }
+  var p5 = pracDone >= 4 ? '<div style="color:var(--accent-green)">4/4 ✓</div>' : pracDone + '/4 模式';
+  var bar5 = '<div class="phon-progress"><div class="phon-progress-fill" style="width:' + Math.round(pracDone / 4 * 100) + '%"></div></div>';
 
   function phaseCard(n, title, desc, state, pctHtml, barHtml, onClick, locked) {
     return '<div class="phon-phase' + (locked ? " locked" : "") + '"' + (locked ? '' : ' onclick="' + onClick + '"') + '>' +
@@ -1158,7 +1169,7 @@ function lgPhonPathPage() {
     phaseCard(2, "元音系统 + 听辨训练", "单元音 / 双元音 · Minimal Pairs 辨音", null, "", "", "lgPhonView='pairs';render()") +
     phaseCard(3, "辅音系统", "清浊对比 · 发音机制分组 · 4 大组", null, p3, bar3, "lgPhonView='cons';render()") +
     phaseCard(4, "自然拼读", "13 Patterns · 逐词拆解拼读", null, p4, bar4, "lgPhonView='spell';render()") +
-    phaseCard(5, "拼读实战", "4 种训练模式", null, "", "", "", true) +
+    phaseCard(5, "拼读实战", "4 种训练模式 · 词库随机出题", null, p5, bar5, "lgPhonView='prac';render()") +
     '</div>';
 
   // 今日建议（根据进度智能推荐下一步）
@@ -1169,8 +1180,10 @@ function lgPhonPathPage() {
     rec = '💡 下一步：继续 Phase 3 辅音系统（' + cp.done + '/' + cp.total + ' 已练过）';
   } else if (sp.pct < 100) {
     rec = '💡 下一步：继续 Phase 4 自然拼读（已学 ' + sp.done + '/' + sp.total + ' 个 Pattern）';
+  } else if (pracDone < 4) {
+    rec = '💡 下一步：完成 Phase 5 拼读实战，解锁全部 4 种训练模式（已做 ' + pracDone + '/4）';
   } else {
-    rec = '💡 下一步：开始 Phase 2 听辨训练（' + (lgPairs && lgPairs.vowelPairs && lgPairs.vowelPairs[0] ? lgPairs.vowelPairs[0].a + " vs " + lgPairs.vowelPairs[0].b : "") + '）';
+    rec = '💡 下一步：四模式都练过啦！保持手感——再各来一组，或回 Phase 2 复习听辨。';
   }
   var recCard = '<div class="lg-card"><div class="lg-card-h">📋 今日任务</div>' +
     '<div class="phon-recs">' + rec + '</div></div>';
@@ -1505,6 +1518,270 @@ function lgPhonSpellDetail(id) {
   navBtn += '</div>';
   return head + '<div class="lg-card"><div class="lg-card-h">逐词拆解拼读</div>' +
     '<div class="lg-hint">每个色块 = 一个字母或字母组合，色块上方标发音，∅ = 不发音。依次读出即整词发音。</div>' + words + '</div>' + navBtn;
+}
+
+/* ============================================================
+ * Phase 5 · 拼读实战（4 种训练模式）
+ *   ① ipa2word 看音标选单词  ② word2ipa 看单词选音标
+ *   ③ sound2word 听音选单词  ④ dictation 听音写音标（智能比对反馈）
+ * ============================================================ */
+var lgPrac = null; // { mode, qIdx, total, correct, round[] }
+var lgPracStats = {}; // 持久化: { modeId: {n, c} }
+var __lgPracStatsLoaded = false;
+function lgPracLoadStats() {
+  if (__lgPracStatsLoaded) return lgPracStats;
+  try { lgPracStats = JSON.parse(localStorage.getItem("lgPhonPracStats") || "{}") || {}; }
+  catch (e) { lgPracStats = {}; }
+  __lgPracStatsLoaded = true;
+  return lgPracStats;
+}
+function lgPracSaveStats() {
+  try { localStorage.setItem("lgPhonPracStats", JSON.stringify(lgPracStats)); } catch (e) {}
+}
+// 训练词库：只取拼读 Pattern 词（整词 IPA 最准，保证 word2ipa/听写有唯一正确答案）
+function lgPracBank() {
+  var bank = [];
+  var seen = {};
+  if (lgSpell && lgSpell.patterns) {
+    lgSpell.patterns.forEach(function (p) {
+      (p.words || []).forEach(function (w) {
+        if (!w.w || seen[w.w]) return;
+        seen[w.w] = 1;
+        bank.push({ w: w.w, ipa: w.ipa || "", zh: w.zh || "", src: "pattern:" + (p.pattern || p.id) });
+      });
+    });
+  }
+  return bank;
+}
+// 取训练词库（有整词音标的优先），随机洗牌
+function lgPracRound(n) {
+  var full = lgPracBank();
+  var good = full.filter(function (x) { return x.ipa && x.ipa.indexOf("/") === 0 && x.ipa.length > 3; });
+  var pool = good.length >= 8 ? good : full;
+  var arr = pool.slice();
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+  }
+  return arr.slice(0, Math.min(n || 10, arr.length));
+}
+function lgPracGet(modeId) {
+  return lgPracStats[modeId] || (lgPracStats[modeId] = { n: 0, c: 0 });
+}
+function lgPracRecord(modeId, right) {
+  var s = lgPracGet(modeId);
+  s.n++;
+  if (right) s.c++;
+  lgPracSaveStats();
+}
+function lgPracAcc(modeId) {
+  var s = lgPracGet(modeId);
+  return s.n ? Math.round(s.c / s.n * 100) : null;
+}
+
+var LG_PRAC_MODES = [
+  { id: "ipa2word", icon: "🔡", name: "音标 → 单词", desc: "看音标，选出对应的单词", hint: "看到 /keɪk/ → 选出 cake", type: "choice" },
+  { id: "word2ipa", icon: "🔤", name: "单词 → 音标", desc: "看单词，选出它的音标", hint: "看到 cake → 选出 /keɪk/", type: "choice" },
+  { id: "sound2word", icon: "👂", name: "听音 → 单词", desc: "听发音，选出听到的单词", hint: "听 🔊 cake → 选出 cake", type: "choice" },
+  { id: "dictation", icon: "✍️", name: "听音 → 写音标", desc: "听发音，输入完整音标（含长音符号）", hint: "听 🔊 cake → 输入 keɪk", type: "typing" }
+];
+
+// 模式主页
+function lgPhonPracHome() {
+  lgPracLoadStats();
+  var head = '<div class="lg-card"><div class="lg-card-h">🎯 Phase 5 · 拼读实战 <span class="lg-sub">4 种训练模式</span></div>' +
+    '<div class="lg-hint">四种模式循环练习 Phase 4 拼读词库（13 个 Pattern · 52 词）。建议每天每模式各做一组 10 题。</div>' +
+    '<div class="lg-row" style="gap:8px;margin:6px 0"><button class="lg-btn ghost" onclick="lgPhonView=null;render()">← 🗺 路径</button></div></div>';
+  var cards = LG_PRAC_MODES.map(function (m) {
+    var acc = lgPracAcc(m.id);
+    var s = lgPracGet(m.id);
+    return '<div class="phon-prac-card" onclick="lgPracStart(\'' + m.id + '\')">' +
+      '<div class="phon-prac-ic">' + m.icon + '</div>' +
+      '<div class="phon-prac-body"><div class="phon-prac-t">' + m.name + '</div>' +
+      '<div class="phon-prac-d">' + m.desc + '</div>' +
+      '<div class="phon-prac-hint">' + m.hint + '</div></div>' +
+      '<div class="phon-prac-stat">' + (acc !== null ? acc + '%<div class="sub">' + s.c + '/' + s.n + '</div>' : '<div class="new">新</div>') + '</div>' +
+      '</div>';
+  }).join("");
+  return head + '<div class="lg-card">' + cards + '</div>';
+}
+function lgPracStart(modeId) {
+  lgPracLoadStats();
+  lgPrac = { mode: modeId, idx: 0, correct: 0, answered: false, wrongs: [], round: lgPracRound(10) };
+  lgPhonView = "prac:" + modeId;
+  render();
+}
+function lgPracFindMode(id) {
+  for (var i = 0; i < LG_PRAC_MODES.length; i++) { if (LG_PRAC_MODES[i].id === id) return LG_PRAC_MODES[i]; }
+  return null;
+}
+// 训练页
+function lgPhonPracPlay(modeId) {
+  if (!lgPrac || lgPrac.mode !== modeId) { lgPracStart(modeId); return ""; }
+  var m = lgPracFindMode(modeId);
+  if (!m) { lgPhonView = "prac"; render(); return ""; }
+  var region = lgPhonRegion || "US";
+  var q = lgPrac.round[Math.min(lgPrac.idx, lgPrac.round.length - 1)];
+  if (!q) { lgPhonView = "prac"; render(); return ""; }
+  var stat = lgPracGet(modeId);
+  var head = '<div class="lg-card"><div class="lg-card-h">' + m.icon + ' ' + m.name + ' <span class="lg-sub">' + m.desc + '</span></div>' +
+    '<div class="lg-row" style="gap:8px"><button class="lg-btn ghost" onclick="lgPhonView=\'prac\';render()">← 模式</button>' +
+    '<button class="lg-btn ghost" onclick="lgPhonView=null;render()">🗺 路径</button></div>' +
+    '<div class="phon-prac-prog">第 ' + Math.min(lgPrac.idx + 1, lgPrac.round.length) + '/' + lgPrac.round.length + ' 题 · 本次 ' + lgPrac.correct + ' 对 · 历史 ' + stat.c + '/' + stat.n + '</div></div>';
+
+  var body = "";
+  if (modeId === "ipa2word") {
+    // 音标 + 朗读按钮；不显示中文释义（会剧透答案）
+    body = '<div class="lg-card phon-prac-probe"><div class="phon-prac-q">这个音标读什么？</div>' +
+      '<div class="phon-prac-ipa">' + q.ipa + ' <button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(lgPhonIpaSpeak(q.ipa)) + '\',\'' + region + '\')">🔊</button></div></div>';
+    body += lgPracChoiceHtml(modeId, q, "w");
+  } else if (modeId === "word2ipa") {
+    body = '<div class="lg-card phon-prac-probe"><div class="phon-prac-q">下面单词的音标是？</div>' +
+      '<div class="phon-prac-word">' + q.w + ' <button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(q.w) + '\',\'' + region + '\')">🔊</button></div></div>';
+    body += lgPracChoiceHtml(modeId, q, "ipa");
+  } else if (modeId === "sound2word") {
+    body = '<div class="lg-card phon-prac-probe"><div class="phon-prac-q">你听到的是哪个单词？</div>' +
+      '<button class="phon-big-speak" onclick="lgPhonSpeak(\'' + lgEscapeJs(q.w) + '\',\'' + region + '\')">🔊 听发音</button></div>';
+    body += lgPracChoiceHtml(modeId, q, "w");
+  } else if (modeId === "dictation") {
+    body = '<div class="lg-card phon-prac-probe"><div class="phon-prac-q">听发音，写下完整音标（含长音 ː 等符号）</div>' +
+      '<button class="phon-big-speak" onclick="lgPhonSpeak(\'' + lgEscapeJs(q.w) + '\',\'' + region + '\')">🔊 再听一次</button></div>';
+    body += lgPracTypeHtml(modeId, q, region);
+  }
+  return head + body;
+}
+// 音标朗读时去除 / /，保留符号转 speak 文本（长音等交给 TTS 尝试）
+function lgPhonIpaSpeak(ipa) {
+  return String(ipa || "").replace(/\//g, "");
+}
+// 干扰项生成：随机取同词库里与正确答案不同的 w/ipa
+function lgPracDistract(q, field, n) {
+  var bank = lgPracBank();
+  var out = [];
+  var tried = {};
+  tried[q[field]] = 1;
+  var guard = 0;
+  while (out.length < n && guard < 80) {
+    guard++;
+    var c = bank[Math.floor(Math.random() * bank.length)];
+    if (!c || !c[field] || tried[c[field]]) continue;
+    if (field === "ipa" && c[field] === q.ipa) continue;
+    if (field === "w" && c.w === q.w) continue;
+    tried[c[field]] = 1;
+    out.push(c[field]);
+  }
+  return out;
+}
+function lgPracChoiceHtml(modeId, q, field) {
+  var distract = lgPracDistract(q, field, 3);
+  var opts = [q[field]].concat(distract);
+  // 洗牌选项
+  for (var i = opts.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = opts[i]; opts[i] = opts[j]; opts[j] = t;
+  }
+  lgPrac._opts = opts;
+  lgPrac._rightVal = q[field];
+  var shown = opts.map(function (v) {
+    var isRight = lgPrac.answered && v === q[field];
+    var isWrongPick = lgPrac.answered && lgPrac.lastPick === v && v !== q[field];
+    var cls = "phon-train-opt";
+    if (lgPrac.answered) { if (isRight) cls += " right"; else if (isWrongPick) cls += " wrong"; }
+    return '<button class="' + cls + '"' + (lgPrac.answered ? " disabled" : "") + ' onclick="lgPracAnswer(\'' + modeId + '\',\'' + lgEscapeJs(String(v)) + '\')">' + v + '</button>';
+  }).join("");
+  var fb = "";
+  if (lgPrac.answered) {
+    var qq = q.zh ? q.w + " · " + q.zh : (modeId === "ipa2word" ? q.ipa : q.w);
+    fb = '<div class="phon-fb ' + (lgPrac.lastOk ? "ok" : "bad") + '">' +
+      (lgPrac.lastOk ? "✅ 正确！" : "❌ 选错啦") +
+      '<div>正确答案：<b>' + qq + '</b></div>' +
+      (lgPrac.lastOk ? "" : '<div style="font-size:12px;margin-top:4px">🔊 <button class="phon-speak-btn sm" onclick="lgPhonSpeak(\'' + lgEscapeJs(q.w) + '\',\'' + (lgPhonRegion || "US") + '\')">听读音</button></div>') +
+      '</div>';
+  }
+  var nextBtn = lgPrac.answered ? '<button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="lgPracNext(\'' + modeId + '\')">' +
+    (lgPrac.idx + 1 >= lgPrac.round.length ? '🔁 完成本轮' : '下一题 →') + '</button>' : '';
+  return '<div class="lg-card"><div class="lg-card-h">选择答案</div>' +
+    '<div class="phon-prac-opts">' + shown + '</div>' + fb + nextBtn + '</div>';
+}
+function lgPracTypeHtml(modeId, q, region) {
+  var fb = "";
+  if (lgPrac.answered) {
+    var ok = lgPrac.lastOk;
+    fb = '<div class="phon-fb ' + (ok ? "ok" : "bad") + '">' +
+      (ok ? "✅ 完全正确！" : "❌ 音标不完整或有误") +
+      '<div>标准答案：<b>' + q.ipa + '</b></div>' +
+      (ok ? "" : '<div style="font-size:12px;margin-top:6px">💡 提示：先写元音（含长音 ː），再补辅音；点 🔊 对照发音逐个核对。</div>') +
+      '</div>';
+  }
+  var nextBtn = lgPrac.answered ? '<button class="btn btn-primary" style="width:100%" onclick="lgPracNext(\'' + modeId + '\')">' +
+    (lgPrac.idx + 1 >= lgPrac.round.length ? '🔁 完成本轮' : '下一题 →') + '</button>' : '';
+  // IPA 符号面板（移动端键盘输不了 θ/ð/ʃ/ŋ 等特殊字符）
+  var pad = '<div class="phon-prac-pad">' +
+    ["iː","ɪ","e","æ","ɑː","ɒ","ɔː","ʊ","uː","ʌ","ɜː","ə","eɪ","aɪ","ɔɪ","əʊ","aʊ","ɪə","eə","ʊə",
+     "p","b","t","d","k","g","f","v","θ","ð","s","z","ʃ","ʒ","h","tʃ","dʒ","m","n","ŋ","l","r","j","w"].map(function (c) {
+      return '<button class="phon-prac-key" onclick="lgPracIns(\'' + lgEscapeJs(c) + '\')">' + c + '</button>';
+    }).join("") + '</div>';
+  return '<div class="lg-card"><div class="lg-card-h">输入音标</div>' +
+    '<input id="phonPracIn" class="phon-prac-in" placeholder="例：/keɪk/ 或 keɪk" autocomplete="off" autocapitalize="off" spellcheck="false" value="' + (lgPrac.answered ? lgPrac.lastTyped || "" : "") + '"' + (lgPrac.answered ? " disabled" : "") + '>' +
+    (lgPrac.answered ? "" : pad) +
+    (lgPrac.answered ? "" : '<button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="lgPracType(\'' + modeId + '\')">✍️ 检查</button>') +
+    fb +
+    (nextBtn ? '<div style="margin-top:8px">' + nextBtn + '</div>' : "") +
+    '</div>';
+}
+function lgPracIns(sym) {
+  if (lgPrac && lgPrac.answered) return;
+  var el = document.getElementById("phonPracIn");
+  if (!el) return;
+  el.value = (el.value || "") + sym;
+  el.focus();
+}
+// 四选一判题：val 为选中选项的值（已转义还原）
+function lgPracAnswer(modeId, val) {
+  if (!lgPrac || lgPrac.mode !== modeId || lgPrac.answered) return;
+  var q = lgPrac.round[Math.min(lgPrac.idx, lgPrac.round.length - 1)];
+  if (!q) return;
+  // 答案域：ipa2word/sound2word 判 word，word2ipa 判 ipa
+  var field = modeId === "word2ipa" ? "ipa" : "w";
+  var right = val === String(q[field]);
+  lgPrac.answered = true;
+  lgPrac.lastOk = right;
+  lgPrac.lastPick = val;
+  if (right) lgPrac.correct++;
+  lgPracRecord(modeId, right);
+  if (!right) lgPrac.wrongs.push(q.w + " → " + q.ipa);
+  render();
+}
+// 打字判题
+function lgPracType(modeId) {
+  if (!lgPrac || lgPrac.mode !== modeId || lgPrac.answered) return;
+  var q = lgPrac.round[Math.min(lgPrac.idx, lgPrac.round.length - 1)];
+  if (!q) return;
+  var el = document.getElementById("phonPracIn");
+  var typed = el ? (el.value || "") : "";
+  var clean = function (s) { return String(s || "").replace(/[\/\s]/g, "").toLowerCase(); };
+  var right = clean(typed) === clean(q.ipa);
+  lgPrac.answered = true;
+  lgPrac.lastOk = right;
+  lgPrac.lastTyped = typed;
+  if (right) lgPrac.correct++;
+  lgPracRecord(modeId, right);
+  if (!right) lgPrac.wrongs.push(q.w + " → " + q.ipa);
+  render();
+}
+function lgPracNext(modeId) {
+  if (!lgPrac || lgPrac.mode !== modeId) return;
+  if (lgPrac.idx + 1 >= lgPrac.round.length) {
+    // 本轮完成
+    var m = lgPracFindMode(modeId);
+    lgPhonView = "prac";
+    render();
+    if (typeof showToast === "function") showToast("🎉 本轮完成 · 答对 " + lgPrac.correct + "/" + lgPrac.round.length);
+    return;
+  }
+  lgPrac.idx++;
+  lgPrac.answered = false;
+  render();
 }
 
 // 训练器：读一个词 → 判断 A 还是 B

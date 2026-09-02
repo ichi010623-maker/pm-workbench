@@ -126,9 +126,9 @@ section("D. 路径主页 Phase 4 解锁 + 进度");
   vm.runInContext("lgPhonView=null;", sb);
   const html = vm.runInContext("lgRenderPhonics('en')", sb);
   ok(html.indexOf("lgPhonView='spell'") >= 0, "Phase 4 卡 onClick 路由到 spell");
-  // Phase 5 仍锁定
-  ok(html.indexOf("拼读实战") >= 0, "Phase 5 标题仍在");
-  ok(html.indexOf("🔒") >= 0, "Phase 5 显示锁定");
+  // Phase 5 也已实现解锁（v5.9.100 起 5 Phase 全开）
+  ok(html.indexOf("拼读实战") >= 0, "Phase 5 标题展示");
+  ok(html.indexOf("lgPhonView='prac'") >= 0, "Phase 5 卡路由到 prac");
 }
 
 // ============ E. 进度持久化 ============

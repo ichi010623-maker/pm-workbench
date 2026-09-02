@@ -83,7 +83,9 @@ section("C. 视图分发与渲染");
   ok(pathHtml.indexOf("Pronunciation") >= 0, "主页含 Pronunciation 标题");
   ok(pathHtml.indexOf("字母与声音基础") >= 0, "主页含 Phase 1 卡");
   ok(pathHtml.indexOf("Minimal Pairs") >= 0 || pathHtml.indexOf("最小对立对") >= 0, "主页含 Phase 2 听辨卡");
-  ok(pathHtml.indexOf("🔒") >= 0, "Phase 4/5 显示锁定");
+  // Phase 1-5 逐步解锁（Phase 3/4/5 实现后不再有 🔒）
+  //（该断言在 v5.9.98/99/100 阶段移除此锁定检查，改为验证各 Phase 卡存在）
+  ok(pathHtml.indexOf("辅音系统") >= 0 && pathHtml.indexOf("自然拼读") >= 0 && pathHtml.indexOf("拼读实战") >= 0, "主页含 Phase 3/4/5 卡");
 
   // 2) 字母页
   const ltrHtml = vm.runInContext("lgPhonView='letters';lgRenderPhonics('en')", sb);

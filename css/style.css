@@ -6596,3 +6596,29 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 .phon-spell-eq{font-size:18px;font-weight:700;color:var(--text-muted)}
 .phon-spell-ipa{font-size:20px;font-weight:800;font-family:Georgia,serif}
 .phon-spell-zh{font-size:13px;color:var(--text-secondary)}
+
+/* === Phase 5 · 拼读实战 === */
+.phon-prac-card{display:flex;gap:12px;align-items:center;border:1px solid var(--card-border,#e5e7eb);border-radius:12px;padding:12px;margin:8px 0;cursor:pointer;background:var(--card,#fff);transition:.15s}
+.phon-prac-card:hover{background:#fdf2f8;border-color:#f9a8d4}
+.phon-prac-ic{font-size:26px}
+.phon-prac-body{flex:1;min-width:0}
+.phon-prac-t{font-weight:700;font-size:15px}
+.phon-prac-d{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.phon-prac-hint{font-size:11.5px;color:var(--text-muted);background:#f8fafc;border-radius:6px;padding:3px 7px;margin-top:5px;display:inline-block}
+.phon-prac-stat{text-align:center;font-weight:800;font-size:15px;color:var(--accent-green);min-width:44px}
+.phon-prac-stat .sub{font-size:10px;color:var(--text-muted);font-weight:400}
+.phon-prac-stat .new{font-size:12px;color:var(--text-muted)}
+.phon-prac-prog{font-size:12px;color:var(--text-secondary);margin-top:6px;text-align:center}
+.phon-prac-probe{text-align:center;padding:18px 12px}
+.phon-prac-q{font-size:15px;font-weight:700;margin-bottom:12px}
+.phon-prac-ipa{font-size:34px;font-weight:800;font-family:Georgia,serif;color:#7c3aed}
+.phon-prac-word{font-size:30px;font-weight:800;font-family:Georgia,serif;color:#1d4ed8}
+.phon-prac-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.phon-prac-opts .phon-train-opt{font-size:19px}
+.phon-prac-opts .phon-train-opt.right{border-color:var(--accent-green);background:rgba(48,209,88,0.12);color:#15803d}
+.phon-prac-opts .phon-train-opt.wrong{border-color:var(--accent-red);background:rgba(255,69,58,0.1);color:#b91c1c}
+.phon-prac-in{width:100%;box-sizing:border-box;padding:12px 14px;font-size:24px;font-family:Georgia,serif;font-weight:700;text-align:center;border:2px solid #c7d2fe;border-radius:12px;outline:none;background:var(--card,#fff);color:inherit}
+.phon-prac-in:focus{border-color:#6366f1}
+.phon-prac-pad{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;justify-content:center}
+.phon-prac-key{font-family:Georgia,serif;font-size:15px;padding:5px 9px;border:1px solid var(--card-border,#e5e7eb);border-radius:7px;background:#f8fafc;cursor:pointer;color:inherit}
+.phon-prac-key:active{background:#e0e7ff;border-color:#6366f1}
