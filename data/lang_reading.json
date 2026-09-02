@@ -371,7 +371,69 @@
         "content": "Traveling to new places can be exciting. It allows you to learn about different cultures and experiences. Discover the best travel spots around the world.",
         "translation": "去新的地方旅行可以很兴奋。它让你了解不同的文化和经历。发现世界上最好的旅游地点。"
       }
+    ],
+    "2026-09-02": [
+      {
+        "level": "入门",
+        "title": "Smart Cities",
+        "content": "Smart cities use technology to improve daily life. Sensors and apps help manage traffic and energy use.",
+        "translation": "智慧城市利用科技改善日常生活。传感器和应用程序帮助管理交通和能源使用。"
+      },
+      {
+        "level": "进阶",
+        "title": "Cooking with Herbs",
+        "content": "Herbs add flavor without extra calories. They are also rich in nutrients and can be grown at home.",
+        "translation": "香草可以增加风味而不增加额外的卡路里。它们还富含营养，可以在家中种植。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Art of Yoga",
+        "content": "Yoga combines physical postures, breathing exercises, and meditation. It promotes flexibility and mental clarity.",
+        "translation": "瑜伽结合了身体姿势、呼吸练习和冥想。它促进了灵活性和精神清晰度。"
+      },
+      {
+        "level": "入门",
+        "title": "Eco-Friendly Travel",
+        "content": "Eco-friendly travel reduces carbon footprint. Choose sustainable accommodations and public transportation.",
+        "translation": "环保旅行减少碳足迹。选择可持续的住宿和公共交通。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Science of Dreams",
+        "content": "Dreams are a way for our minds to process emotions. They can also reveal hidden memories and thoughts.",
+        "translation": "梦境是我们大脑处理情绪的一种方式。它们还可以揭示隐藏的记忆和想法。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Power of Music",
+        "content": "Music has the power to heal and inspire. It can improve mood, reduce stress, and enhance learning.",
+        "translation": "音乐有治愈和激励的力量。它可以改善情绪，减少压力，并提高学习效率。"
+      },
+      {
+        "level": "入门",
+        "title": "Healthy Snacks",
+        "content": "Healthy snacks provide energy without adding extra calories. Examples include nuts, fruits, and yogurt.",
+        "translation": "健康零食提供能量而不增加额外的卡路里。例如坚果、水果和酸奶。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Art of Painting",
+        "content": "Painting is a form of self-expression. It allows us to explore emotions and share our perspectives.",
+        "translation": "绘画是一种自我表达的形式。它允许我们探索情感并分享我们的观点。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Psychology of Memory",
+        "content": "Memory is a complex process. It involves encoding, storing, and retrieving information. Understanding memory can improve learning.",
+        "translation": "记忆是一个复杂的过程。它包括编码、存储和检索信息。理解记忆可以提高学习效率。"
+      },
+      {
+        "level": "入门",
+        "title": "The Joy of Gardening",
+        "content": "Gardening is a relaxing hobby. It can improve mental health and provide fresh produce for your table.",
+        "translation": "园艺是一种放松的爱好。它可以改善心理健康并为你的餐桌提供新鲜食材。"
+      }
     ]
   },
-  "updatedAt": "2026-09-01T14:16:00+08:00"
+  "updatedAt": "2026-09-02T13:13:00+08:00"
 }
