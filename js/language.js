@@ -581,7 +581,12 @@ var LG_LISTEN_BUILTIN = {
   en: [
     { title: "👋 打招呼问候", sents: [["Hello! How are you?", "你好！你好吗？"], ["I'm good, thank you. And you?", "我很好，谢谢。你呢？"], ["Pretty good. Nice to see you.", "还不错。很高兴见到你。"], ["Nice to see you too.", "我也很高兴见到你。"]] },
     { title: "☕ 咖啡店点单", sents: [["What can I get for you?", "请问要喝点什么？"], ["A latte, please.", "一杯拿铁。"], ["Large or small?", "大杯还是小杯？"], ["Large, please.", "大杯，谢谢。"]] },
-    { title: "🗺 问路", sents: [["Excuse me, where is the station?", "请问车站在哪里？"], ["Go straight and turn right.", "直走然后右转。"], ["Is it far from here?", "离这里远吗？"], ["About five minutes on foot.", "步行大约五分钟。"]] }
+    { title: "🗺 问路", sents: [["Excuse me, where is the station?", "请问车站在哪里？"], ["Go straight and turn right.", "直走然后右转。"], ["Is it far from here?", "离这里远吗？"], ["About five minutes on foot.", "步行大约五分钟。"]] },
+    { title: "🎙 BBC 6 Minute English · Coffee culture", sents: [["I can't start my day without coffee.", "没有咖啡我一天都过不了。"], ["How do you take your coffee?", "你的咖啡怎么喝？"], ["I prefer a flat white, no sugar.", "我喜欢馥芮白，不加糖。"], ["Specialty coffee is becoming a trend.", "精品咖啡正在成为一种潮流。"]] },
+    { title: "🎙 BBC 6 Minute English · Work-life balance", sents: [["How do you balance work and life?", "你如何平衡工作与生活？"], ["I try to leave work on time.", "我尽量按时下班。"], ["It's all about setting boundaries.", "关键在于设定边界。"], ["Remote work gives me more flexibility.", "远程工作给我更多灵活性。"]] },
+    { title: "📘 新概念 1 · L1 Excuse me!", sents: [["Excuse me!", "对不起！"], ["Yes?", "什么事？"], ["Is this your handbag?", "这是您的手提包吗？"], ["Pardon?", "您说什么？"]] },
+    { title: "📘 新概念 1 · L2 Is this your...?", sents: [["Is this your umbrella?", "这是您的雨伞吗？"], ["Is this your pen?", "这是您的钢笔吗？"], ["Is this your coat?", "这是您的大衣吗？"], ["Yes, it is. Thank you very much.", "是的，谢谢您。"]] },
+    { title: "📘 新概念 2 · L1 A private conversation", sents: [["Last week I went to the theatre.", "上星期我去了剧院。"], ["I had a very good seat.", "我的座位很好。"], ["The play was very interesting.", "话剧很有意思。"], ["I did not enjoy it.", "我并不喜欢。"]] }
   ],
   ja: [
     { title: "👋 あいさつ", sents: [["おはようございます。", "早上好。"], ["今日はいい天気ですね。", "今天天气真好呢。"], ["そうですね。", "是啊。"], ["また明日。", "明天见。"]] },
@@ -2066,6 +2071,11 @@ function lgRenderListening(cur) {
       '<button class="lg-btn" onclick="lgAddListening()">＋ 添加听力素材</button>' +
       '<button class="lg-btn ghost" onclick="lgImportListen()">🎧 内置听力（' + (LG_LISTEN_BUILTIN[cur] || []).length + ' 组）</button>' +
     '</div>' +
+    (cur === "en" ? '<div class="lg-row" style="gap:8px;margin-top:8px;flex-wrap:wrap">' +
+      '<a class="lg-btn ghost" href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank" rel="noopener" style="text-decoration:none">🎙 BBC 6 Minute English（官方）↗</a>' +
+      '<a class="lg-btn ghost" href="https://www.bbc.co.uk/sounds/series/p02nq0gn" target="_blank" rel="noopener" style="text-decoration:none">📻 BBC Sounds（直接收听）↗</a>' +
+      '<a class="lg-btn ghost" href="https://zh.wikipedia.org/wiki/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD" target="_blank" rel="noopener" style="text-decoration:none">📘 新概念英语（资源索引）↗</a>' +
+    '</div>' : '') +
     (list.length === 0 ? '<div class="empty-state"><div class="empty-text">还没有听力素材。点「＋ 添加听力素材」粘贴一组对话（每行一句，可带翻译），也可从精读素材一键转听力。</div></div>' :
       '<div class="lg-mat-list">' + list.map(function (it) {
         return '<div class="lg-mat" onclick="lgListenId=\'' + it.id + '\';render()">' +
