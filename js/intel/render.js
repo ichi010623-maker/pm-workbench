@@ -20,9 +20,28 @@ function setNewsCat(f) { intelState.newsCatFilter = f; render(); }
 function renderIndustry() {
   var c = document.getElementById("app-content");
   var t = function (id, label) { return '<div class="chip' + (industrySub === id ? " active" : "") + '" onclick="setIndustrySub(\'' + id + '\')">' + label + '</div>'; };
+  // v2.0 sections（Sprint 2 起）：由 js/intel/sections/*.js 注册、index.js 收集，导航自动并入最前
+  var sections = (typeof collectIntelSections === "function") ? collectIntelSections() : {};
+  var secBar = Object.keys(sections).filter(function (id) { return sections[id] && sections[id].nav !== false; })
+    .map(function (id) { return t(id, sections[id].label); }).join("");
   var tabBar = '<div class="filter-bar" style="margin-bottom:10px">' +
+    secBar +
     t("news", "🌐 资讯情报") + t("summary", "📝 新闻摘要") + t("history", "📅 历史回顾") + t("fav", "⭐ 收藏") + t("custom", "🤖 自定义情报") + t("opportunity", "📈 市场机会") + t("mine", "📋 我的情报") + t("outputs", "🤖 我的产出") +
     '</div>';
+  // v2.0 section 渲染优先（init 首次进入调用一次；render 返回空时统一空态；异常不炸整页）
+  if (sections[industrySub]) {
+    var sec = sections[industrySub];
+    try {
+      var ctx = { rerender: function () { if (typeof render === "function") render(); } };
+      if (typeof sec.init === "function") sec.init(ctx);
+      var secHtml = sec.render(ctx);
+      c.innerHTML = tabBar + (secHtml || '<div class="empty-state"><div class="empty-icon">📡</div><div class="empty-text">' + (sec.label || industrySub) + ' 暂无内容</div></div>');
+      return;
+    } catch (e) {
+      c.innerHTML = tabBar + '<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-text">该板块渲染失败<br><span style="opacity:.7;font-size:12px">' + ((e && e.message) ? String(e.message).slice(0, 120) : "") + '</span></div></div>';
+      return;
+    }
+  }
   if (industrySub === "history") c.innerHTML = tabBar + renderIntelHistory();
   else if (industrySub === "fav") c.innerHTML = tabBar + renderIntelFav();
   else if (industrySub === "custom") c.innerHTML = tabBar + renderIntelCustom();
