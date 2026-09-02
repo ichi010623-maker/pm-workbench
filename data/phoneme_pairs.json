@@ -1,0 +1,70 @@
+{
+  "updatedAt": "2026-09-02",
+  "intro": "Phase 2 · 最小对立对（Minimal Pairs）：音标学习的核心不是认识符号，而是听得出两个相近音的差别。每对词只有一个音不同——训练耳朵分辨。",
+  "howTo": "👂 听辨训练：点击 🔊 听 TTS 读词 → 判断你听到的是左边音还是右边音 → 答对累积 Accuracy。",
+  "levels": [
+    { "id": "L1", "name": "Level 1 · 前元音基础", "desc": "iː/ɪ · e/æ · ɑː/ʌ 三组入门" },
+    { "id": "L2", "name": "Level 2 · 后元音", "desc": "ɔː/ɒ · uː/ʊ" },
+    { "id": "L3", "name": "Level 3 · 中央元音", "desc": "ɜː/ə" },
+    { "id": "L4", "name": "Level 4 · 双元音", "desc": "8 个双元音两两辨析" }
+  ],
+  "vowelPairs": [
+    {
+      "id": "i_ɪ", "level": "L1", "a": "/iː/", "b": "/ɪ/", "aWord": "sheep", "bWord": "ship",
+      "aSpeak": "ee", "bSpeak": "ih",
+      "pairs": [ ["sheep", "ship", "羊", "船"], ["seat", "sit", "座位", "坐"], ["leave", "live", "离开", "居住"], ["green", "grin", "绿色", "咧嘴笑"] ]
+    },
+    {
+      "id": "e_æ", "level": "L1", "a": "/e/", "b": "/æ/", "aWord": "bed", "bWord": "bad",
+      "aSpeak": "eh", "bSpeak": "a",
+      "pairs": [ ["bed", "bad", "床", "坏的"], ["pen", "pan", "钢笔", "平底锅"], ["men", "man", "男人们", "男人"], ["head", "had", "头", "有(have过去)"] ]
+    },
+    {
+      "id": "ɑ_ʌ", "level": "L1", "a": "/ɑː/", "b": "/ʌ/", "aWord": "cart", "bWord": "cut",
+      "aSpeak": "ah", "bSpeak": "uh",
+      "pairs": [ ["cart", "cut", "购物车", "切"], ["heart", "hut", "心脏", "小屋"], ["dark", "duck", "黑暗", "鸭子"], ["farm", "fun", "农场", "乐趣"] ]
+    },
+    {
+      "id": "ɔ_ɒ", "level": "L2", "a": "/ɔː/", "b": "/ɒ/", "aWord": "caught", "bWord": "cot",
+      "aSpeak": "aw", "bSpeak": "o",
+      "pairs": [ ["caught", "cot", "抓住(catch过去)", "婴儿床"], ["law", "lot", "法律", "许多"], ["walk", "wok", "走路", "炒锅"], ["saw", "sock", "锯/看见", "袜子"] ]
+    },
+    {
+      "id": "u_ʊ", "level": "L2", "a": "/uː/", "b": "/ʊ/", "aWord": "food", "bWord": "foot",
+      "aSpeak": "oo", "bSpeak": "oo",
+      "pairs": [ ["food", "foot", "食物", "脚"], ["pool", "pull", "游泳池", "拉"], ["fool", "full", "傻瓜", "满的"], ["goose", "good", "鹅", "好"] ]
+    },
+    {
+      "id": "ɜ_ə", "level": "L3", "a": "/ɜː/", "b": "/ə/", "aWord": "bird", "bWord": "about(ə)",
+      "aSpeak": "er", "bSpeak": "uh",
+      "pairs": [ ["bird", "better 的 er", "鸟", "更好(的弱读er)"], ["turn", "letter 的 er", "转动", "字母(的弱读er)"], ["work", "doctor 的 or", "工作", "医生(的弱读or)"] ]
+    },
+    {
+      "id": "eɪ_aɪ", "level": "L4", "a": "/eɪ/", "b": "/aɪ/", "aWord": "lake", "bWord": "like",
+      "aSpeak": "ay", "bSpeak": "eye",
+      "pairs": [ ["lake", "like", "湖", "喜欢"], ["wait", "white", "等待", "白色"], ["late", "light", "迟到", "光/轻的"], ["main", "mine", "主要的", "我的"] ]
+    },
+    {
+      "id": "eə_ɪə", "level": "L4", "a": "/eə/", "b": "/ɪə/", "aWord": "hair", "bWord": "hear",
+      "aSpeak": "air", "bSpeak": "ear",
+      "pairs": [ ["hair", "hear", "头发", "听见"], ["bear", "beer", "熊", "啤酒"], ["pear", "peer", "梨", "凝视"], ["fair", "fear", "公平的", "害怕"] ]
+    },
+    {
+      "id": "əʊ_aʊ", "level": "L4", "a": "/əʊ/", "b": "/aʊ/", "aWord": "boat", "bWord": "bout",
+      "aSpeak": "oh", "bSpeak": "ow",
+      "pairs": [ ["boat", "bout", "船", "一阵/回合"], ["low", "loud", "低", "大声的"], ["no", "now", "不", "现在"], ["goat", "gout", "山羊", "痛风"] ]
+    }
+  ],
+  "consIntro": "Phase 3 · 辅音按发音机制分组 + 清浊对比（把手放喉咙感受声带震动）",
+  "consPairs": [
+    { "id": "p_b", "group": "① 爆破音", "a": "/p/", "b": "/b/", "aWord": "pat", "bWord": "bat", "aSpeak": "puh", "bSpeak": "buh", "pairs": [ ["pat", "bat", "轻拍", "球拍/蝙蝠"], ["cap", "cab", "帽子", "出租车"], ["pea", "bee", "豌豆", "蜜蜂"], ["pack", "back", "打包", "背部"] ] },
+    { "id": "t_d", "group": "① 爆破音", "a": "/t/", "b": "/d/", "aWord": "tip", "bWord": "dip", "aSpeak": "tuh", "bSpeak": "duh", "pairs": [ ["tip", "dip", "小费/尖端", "蘸"], ["write", "ride", "写", "骑"], ["bet", "bed", "打赌", "床"], ["late", "laid", "迟到", "放置(lay过去)"] ] },
+    { "id": "k_g", "group": "① 爆破音", "a": "/k/", "b": "/g/", "aWord": "coat", "bWord": "goat", "aSpeak": "kuh", "bSpeak": "guh", "pairs": [ ["coat", "goat", "外套", "山羊"], ["back", "bag", "背部", "包"], ["cold", "gold", "冷", "金子"], ["class", "glass", "班级", "玻璃杯"] ] },
+    { "id": "f_v", "group": "② 摩擦音", "a": "/f/", "b": "/v/", "aWord": "fan", "bWord": "van", "aSpeak": "fuh", "bSpeak": "vuh", "pairs": [ ["fan", "van", "风扇", "货车"], ["safe", "save", "安全", "拯救"], ["leaf", "leave", "叶子", "离开"], ["few", "view", "少数", "景色"] ] },
+    { "id": "s_z", "group": "② 摩擦音", "a": "/s/", "b": "/z/", "aWord": "sip", "bWord": "zip", "aSpeak": "s", "bSpeak": "zz", "pairs": [ ["sip", "zip", "小口喝", "拉链"], ["bus", "buzz", "公交车", "嗡嗡声"], ["ice", "eyes", "冰", "眼睛"], ["price", "prize", "价格", "奖品"] ] },
+    { "id": "θ_ð", "group": "② 摩擦音", "a": "/θ/", "b": "/ð/", "aWord": "thin", "bWord": "this", "aSpeak": "th", "bSpeak": "th", "pairs": [ ["thin", "then", "瘦的", "那时"], ["mouth", "mouth(动词)", "嘴巴", "做口型"], ["think", "this", "思考", "这个"], ["three", "the", "三", "这个(定冠词)"] ] },
+    { "id": "ʃ_ʒ", "group": "② 摩擦音", "a": "/ʃ/", "b": "/ʒ/", "aWord": "ship", "bWord": "vision 的 s", "aSpeak": "sh", "bSpeak": "zh", "pairs": [ ["ship", "sheep", "船", "羊"], ["shy", "vision的si", "害羞", "视觉"], ["sure", "measure的su", "确定", "测量"] ] },
+    { "id": "tʃ_dʒ", "group": "③ 破擦音", "a": "/tʃ/", "b": "/dʒ/", "aWord": "cheap", "bWord": "jeep", "aSpeak": "ch", "bSpeak": "j", "pairs": [ ["cheap", "jeep", "便宜", "吉普车"], ["chain", "Jane", "链条", "简(人名)"], ["choke", "joke", "噎住", "笑话"], ["chin", "gin", "下巴", "金酒"] ] },
+    { "id": "m_n", "group": "④ 鼻音", "a": "/m/", "b": "/n/", "aWord": "map", "bWord": "nap", "aSpeak": "m", "bSpeak": "n", "pairs": [ ["map", "nap", "地图", "小睡"], ["met", "net", "遇见", "网"], ["some", "sun", "一些", "太阳"] ] }
+  ]
+}

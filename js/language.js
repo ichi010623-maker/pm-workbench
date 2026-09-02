@@ -1035,18 +1035,30 @@ function lgRenderPhonics(cur) {
     return '<div class="lg-card"><div class="lg-card-h">🔤 音标</div>' +
       '<div class="empty-state"><div class="empty-text">音标板块当前提供英语（English），请切换语种到 🇬🇧 英语查看。</div></div></div>';
   }
+  if (!__lgPhonetics) {
+    lgPhoneticsLoad(function () { render(); });
+    return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载音标数据中…</div></div></div>';
+  }
+  // 学习路径分发：path(主页) / letters(字母) / letter:CH / pairs / pair:ID / lib(图书馆 原视图)
+  var v = lgPhonView || "path";
+  if (v === "letters") return lgPhonLettersPage();
+  if (v.indexOf("letter:") === 0) return lgPhonLetterDetail(v.slice(7));
+  if (v === "pairs") return lgPhonPairsPage();
+  if (v.indexOf("pair:") === 0) return lgPhonPairTrain(v.slice(5));
+  if (v === "lib") return lgRenderPhonLib(cur);
+  return lgPhonPathPage();
+}
+// —— 原「图书馆」视图（Phase 2/3 的音素总览与详情，从路径主页进入）——
+function lgRenderPhonLib(cur) {
   var region = lgPhonRegion || "US";
-  var head = '<div class="lg-card"><div class="lg-card-h">🔤 英语国际音标（IPA）<span class="lg-sub">美式 / 英式对照 · 点击任意音标查看详情</span></div>' +
+  var backBtn = '<div class="lg-row" style="gap:8px;margin-bottom:6px"><button class="lg-btn ghost" onclick="lgPhonView=null;lgPhonSel=null;render()">← 🗺 学习路径</button></div>';
+  var head = backBtn + '<div class="lg-card"><div class="lg-card-h">📚 音素图书馆 <span class="lg-sub">44 个音标 · 点击查看详情</span></div>' +
     '<div class="lg-phon-toolbar">' +
       '<button class="lg-btn' + (lgPhonRegion === "US" ? " primary" : "") + '" onclick="lgPhonRegion=\'US\';render()">🇺🇸 美式发音</button>' +
       '<button class="lg-btn' + (lgPhonRegion === "UK" ? " primary" : "") + '" onclick="lgPhonRegion=\'UK\';render()">🇬🇧 英式发音</button>' +
     '</div>' +
-    '<div class="lg-hint">共 ' + (__lgPhonetics ? __lgPhonetics.vowels.length + ' 个元音 + ' + __lgPhonetics.consonants.length + ' 个辅音' : '…') + '。点击任意音标进入详情：发音方式（中英对照）、英美写法、≥5 个例词、常见字母组合，均可点 🔊 听读音。</div>' +
+    '<div class="lg-hint">共 ' + __lgPhonetics.vowels.length + ' 个元音 + ' + __lgPhonetics.consonants.length + ' 个辅音。点击任意音标进入详情：发音方式（中英对照）、英美写法、≥5 个例词、常见字母组合，均可点 🔊 听读音。</div>' +
   '</div>';
-  if (!__lgPhonetics) {
-    lgPhoneticsLoad(function () { render(); });
-    return head + '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载音标数据中…</div></div></div>';
-  }
   // 详情页：选中某个音标
   if (lgPhonSel) {
     var f = lgPhonFind(lgPhonSel);
@@ -1071,7 +1083,285 @@ function lgRenderPhonics(cur) {
   return head + vGrid + cGrid;
 }
 var lgPhonRegion = "US";
-var lgPhonSel = null; // 当前查看的音标详情
+var lgPhonSel = null; // 图书馆：当前查看的音标详情
+// —— Sprint 语言升级 · Pronunciation 学习路径状态 ——
+var lgPhonView = null;     // path/letters/letter:CH/pairs/pair:ID/lib
+var lgPhonLetterIdx = 0;   // Phase1 字母学习游标
+var lgLetters = null;      // data/letters.json
+var lgPairs = null;        // data/phoneme_pairs.json
+var __lgLettersDone = null; // localStorage: 已学字母 key（进度）
+function lgLettersDone() {
+  if (__lgLettersDone) return __lgLettersDone;
+  try { __lgLettersDone = JSON.parse(localStorage.getItem("lgPhonLettersDone") || "[]"); } catch (e) { __lgLettersDone = []; }
+  return __lgLettersDone;
+}
+function lgMarkLetterDone(ch) {
+  var a = lgLettersDone();
+  if (a.indexOf(ch) < 0) a.push(ch);
+  try { localStorage.setItem("lgPhonLettersDone", JSON.stringify(a)); } catch (e) {}
+  __lgLettersDone = a;
+}
+function lgLettersLoad(cb) {
+  if (lgLetters) { cb && cb(); return; }
+  var ver = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "";
+  fetch("data/letters.json?v=" + ver).then(function (r) { return r.json(); }).then(function (j) {
+    lgLetters = j; cb && cb();
+  }).catch(function () { lgLetters = { letters: [] }; cb && cb(); });
+}
+function lgPairsLoad(cb) {
+  if (lgPairs) { cb && cb(); return; }
+  var ver = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "";
+  fetch("data/phoneme_pairs.json?v=" + ver).then(function (r) { return r.json(); }).then(function (j) {
+    lgPairs = j; cb && cb();
+  }).catch(function () { lgPairs = { vowelPairs: [], consPairs: [] }; cb && cb(); });
+}
+
+/* ============================================================
+ * 🗺 学习路径主页（5 Phase 进度）
+ * ============================================================ */
+function lgPhonPathPage() {
+  if (!lgLetters) lgLettersLoad(function () { render(); });
+  if (!lgPairs) lgPairsLoad(function () { render(); });
+  var done = lgLettersDone();
+  var pct1 = lgLetters && lgLetters.letters && lgLetters.letters.length
+    ? Math.round(done.length / lgLetters.letters.length * 100) : 0;
+  var p1 = pct1 >= 100 ? '<div style="color:var(--accent-green)">100% ✓</div>' : pct1 + "%";
+  var bar1 = '<div class="phon-progress"><div class="phon-progress-fill" style="width:' + pct1 + '%"></div></div>';
+
+  function phaseCard(n, title, desc, state, pctHtml, barHtml, onClick, locked) {
+    return '<div class="phon-phase' + (locked ? " locked" : "") + '"' + (locked ? '' : ' onclick="' + onClick + '"') + '>' +
+      '<div class="phon-phase-n">' + (locked ? "🔒" : "● " + n) + '</div>' +
+      '<div class="phon-phase-body"><div class="phon-phase-t">' + title + '</div>' +
+      '<div class="phon-phase-d">' + desc + '</div>' +
+      (barHtml || '') +
+      (state ? '<div class="phon-phase-state">' + state + '</div>' : '') +
+      (pctHtml ? '<div class="phon-phase-pct">' + pctHtml + '</div>' : '') +
+      (locked ? '' : '<div class="phon-phase-enter">继续学习 →</div>') +
+      '</div></div>';
+  }
+  var pathCard = '<div class="lg-card"><div class="lg-card-h">🎯 Pronunciation <span class="lg-sub">英语发音学习路径</span></div>' +
+    '<div class="lg-hint">' + (lgLetters && lgLetters.intro ? lgLetters.intro : "") + '</div>' +
+    phaseCard(1, "字母与声音基础", "26 Letters · Letter Name ≠ Letter Sound", null, p1, bar1, "lgPhonView='letters';render()") +
+    phaseCard(2, "元音系统 + 听辨训练", "单元音 / 双元音 · Minimal Pairs 辨音", null, "", "", "lgPhonView='pairs';render()") +
+    phaseCard(3, "辅音系统", "清浊对比 · 发音机制分组", null, "", "", "lgPhonView='lib';render()") +
+    phaseCard(4, "自然拼读", "Pattern → Sound → Word", null, "", "", "", true) +
+    phaseCard(5, "拼读实战", "4 种训练模式", null, "", "", "", true) +
+    '</div>';
+
+  // 今日建议（根据进度智能推荐下一步）
+  var rec = "";
+  if (pct1 < 100) {
+    rec = '💡 下一步：' + (lgLetters && lgLetters.tip || "学习字母 A");
+  } else {
+    rec = '💡 下一步：开始 Phase 2 听辨训练（' + (lgPairs && lgPairs.vowelPairs && lgPairs.vowelPairs[0] ? lgPairs.vowelPairs[0].a + " vs " + lgPairs.vowelPairs[0].b : "") + '）';
+  }
+  var recCard = '<div class="lg-card"><div class="lg-card-h">📋 今日任务</div>' +
+    '<div class="phon-recs">' + rec + '</div></div>';
+
+  var libCard = '<div class="lg-card"><div class="lg-card-h">📚 音素图书馆 <span class="lg-sub">完整 44 音标</span></div>' +
+    '<div class="lg-row" style="gap:8px;flex-wrap:wrap">' +
+      '<button class="lg-btn" onclick="lgPhonView=\'lib\';render()">🔠 元音 / 辅音总览</button>' +
+      '<button class="lg-btn ghost" onclick="lgPhonRegion=lgPhonRegion===\'US\'?\'UK\':\'US\';render()">🌐 切到' + (lgPhonRegion === "US" ? "英式" : "美式") + '</button>' +
+    '</div></div>';
+  return pathCard + recCard + libCard;
+}
+
+/* ============================================================
+ * Phase 1 · 字母与声音（26 Letters）
+ * ============================================================ */
+function lgPhonLettersPage() {
+  var head = '<div class="lg-card"><div class="lg-card-h">🔤 Phase 1 · 字母与声音 <span class="lg-sub">26 Letters</span></div>' +
+    '<div class="lg-hint">' + (lgLetters && lgLetters.tip || "") + '</div>' +
+    '<div class="lg-row" style="gap:8px;margin:6px 0"><button class="lg-btn ghost" onclick="lgPhonView=null;render()">← 🗺 路径</button>' +
+    '<button class="lg-btn" onclick="lgPhonView=\'letter:' + (lgLetters && lgLetters.letters && lgLetters.letters.length ? lgLetters.letters[0].ch : "A") + '\';render()">🚀 开始学习</button></div></div>';
+  if (!lgLetters || !lgLetters.letters || !lgLetters.letters.length) return head + '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载中…</div></div></div>';
+  var done = lgLettersDone();
+  var grid = '<div class="lg-card"><div class="lg-card-h">26 个字母 <span class="lg-sub">已学 ' + done.length + '/26</span></div>' +
+    '<div class="phon-letter-grid">' + lgLetters.letters.map(function (l) {
+      var isDone = done.indexOf(l.ch) >= 0;
+      return '<div class="phon-letter-cell' + (isDone ? " done" : "") + '" onclick="lgPhonView=\'letter:' + l.ch + '\';render()">' +
+        '<div class="phon-letter-ch">' + l.ch + '</div>' +
+        '<div class="phon-letter-ipa">' + l.name + '</div>' +
+        (isDone ? '<div class="phon-letter-ok">✓</div>' : '') +
+        '</div>';
+    }).join("") + '</div></div>';
+  return head + grid;
+}
+
+// 字母详情卡（大字母 + 字母名 🔊 + 常见发音 + Letter Name≠Sound 提示）
+function lgPhonLetterDetail(ch) {
+  if (!lgLetters) { lgLettersLoad(function () { render(); }); return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载中…</div></div></div>'; }
+  var ls = lgLetters.letters || [];
+  var i = -1;
+  for (var k = 0; k < ls.length; k++) { if (ls[k].ch === ch) { i = k; break; } }
+  if (i < 0) { lgPhonView = "letters"; render(); return ""; }
+  var l = ls[i];
+  lgPhonLetterIdx = i;
+  lgMarkLetterDone(ch);
+  var region = lgPhonRegion || "US";
+  var prev = ls[(i - 1 + ls.length) % ls.length].ch;
+  var next = ls[(i + 1) % ls.length].ch;
+
+  // Letter Name 卡
+  var nameCard = '<div class="lg-card phon-letter-hero">' +
+    '<div class="phon-hero-ch">' + l.ch + '</div>' +
+    '<div class="phon-hero-name">字母名（Letter Name）</div>' +
+    '<div class="phon-hero-ipa">' + l.name + ' <button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(l.ch) + '\',\'' + region + '\')">🔊</button></div>' +
+    '<div class="phon-hero-note">念 <b>ABC 字母表</b> 时的读音</div></div>';
+  // 常见发音卡
+  var sndHtml = (l.sounds || []).map(function (s) {
+    return '<div class="phon-snd-row">' +
+      '<div class="phon-snd-ipa">' + s.ipa + ' <button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(s.ipa.replace(/\//g, "")) + '\',\'' + region + '\')">🔊</button></div>' +
+      '<div class="phon-snd-word"><b>' + s.word + '</b> ' + s.zh + '</div>' +
+      '<button class="phon-speak-btn sm" onclick="event.stopPropagation();lgPhonSpeak(\'' + lgEscapeJs(s.word) + '\',\'' + region + '\')">🔊 读词</button>' +
+      '<div class="phon-snd-hint">' + s.hint + '</div>' +
+      '</div>';
+  }).join("");
+  var sndCard = '<div class="lg-card"><div class="lg-card-h">常见字母音（Letter Sounds）</div>' +
+    '<div class="lg-hint">字母在单词里真正发出的声音（可能与字母名完全不同）</div>' + sndHtml + '</div>';
+
+  // Letter Name ≠ Letter Sound 提示（核心知识点）
+  var tipCard = '<div class="lg-card phon-tip"><div class="lg-card-h">💡 关键认知</div>' +
+    '<div class="phon-tip-main">Letter Name <b style="color:var(--accent-red)">≠</b> Letter Sound</div>' +
+    '<div class="phon-tip-sub">字母 <b>' + l.ch + '</b> 的名字是 <b>' + l.name + '</b>，但在单词里常发别的音。' +
+    '例：<b>' + l.ch + '</b> 在 <b>' + ((l.sounds && l.sounds[0]) ? l.sounds[0].word : "") + '</b> 里读 <b>' + ((l.sounds && l.sounds[0]) ? l.sounds[0].ipa : "") + '</b>，而不是 ' + l.name + '。</div></div>';
+
+  var navBtn = '<div class="lg-row" style="gap:8px;margin-top:10px">' +
+    '<button class="lg-btn ghost" onclick="lgPhonView=\'letters\';render()">🗺 26 字母</button>' +
+    '<button class="lg-btn ghost" onclick="lgPhonView=\'letter:' + prev + '\';render()">‹ 上一个</button>' +
+    '<button class="lg-btn primary" style="flex:1" onclick="lgPhonView=\'letter:' + next + '\';render()">下一个 ' + next + ' →</button>' +
+    '</div>';
+  return nameCard + sndCard + tipCard + navBtn;
+}
+
+/* ============================================================
+ * Phase 2 · Sound Pairs 听辨训练（Minimal Pairs —— 核心学习单元）
+ * ============================================================ */
+var lgPairState = {}; // { id: { idx, correct, total, done[] } } 训练会话状态（内存）
+function lgPairGet(id) {
+  return lgPairState[id] || (lgPairState[id] = { idx: 0, correct: 0, total: 0, answered: false, lastRight: null, lastPair: null });
+}
+function lgPhonPairsPage() {
+  if (!lgPairs) { lgPairsLoad(function () { render(); }); return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载中…</div></div></div>'; }
+  var head = '<div class="lg-card"><div class="lg-card-h">👂 Phase 2 · 最小对立对 <span class="lg-sub">听辨训练</span></div>' +
+    '<div class="lg-hint">' + (lgPairs && lgPairs.howTo || "") + '</div>' +
+    '<div class="lg-row" style="gap:8px;margin:6px 0"><button class="lg-btn ghost" onclick="lgPhonView=null;render()">← 🗺 路径</button>' +
+    '<button class="lg-btn ghost" onclick="lgPhonView=\'lib\';render()">📚 音素图书馆</button></div></div>';
+
+  // 元音 Pairs 按 Level 分组
+  var lvMap = {};
+  (lgPairs.vowelPairs || []).forEach(function (p) { (lvMap[p.level] = lvMap[p.level] || []).push(p); });
+  var lvHtml = (lgPairs.levels || []).map(function (lv) {
+    var ps = lvMap[lv.id] || [];
+    var cards = ps.map(function (p) {
+      var s = lgPairGet(p.id);
+      var acc = s.total > 0 ? Math.round(s.correct / s.total * 100) : null;
+      return '<div class="phon-pair-card" onclick="lgPhonView=\'pair:' + p.id + '\';render()">' +
+        '<div class="phon-pair-syms">' + p.a + ' <span class="vs">VS</span> ' + p.b + '</div>' +
+        '<div class="phon-pair-words">' + p.aWord + ' / ' + p.bWord + '</div>' +
+        (acc !== null ? '<div class="phon-pair-acc">Accuracy ' + acc + '% · ' + s.correct + '/' + s.total + '</div>' : '<div class="phon-pair-start">▶ 开始听辨</div>') +
+        '</div>';
+    }).join("");
+    return '<div class="lg-card"><div class="lg-card-h">' + lv.name + ' <span class="lg-sub">' + lv.desc + '</span></div>' + cards + '</div>';
+  }).join("");
+
+  // 辅音清浊 Pairs（Phase 3 预告，直接可听辨）
+  var cHtml = "";
+  var cps = lgPairs.consPairs || [];
+  if (cps.length) {
+    var cCards = cps.map(function (p) {
+      var s = lgPairGet(p.id);
+      var acc = s.total > 0 ? Math.round(s.correct / s.total * 100) : null;
+      return '<div class="phon-pair-card" onclick="lgPhonView=\'pair:' + p.id + '\';render()">' +
+        '<div class="phon-pair-syms">' + p.a + ' <span class="vs">VS</span> ' + p.b + '</div>' +
+        '<div class="phon-pair-words">' + p.aWord + ' / ' + p.bWord + '</div>' +
+        '<div class="phon-pair-grp">' + (p.group || "") + '</div>' +
+        (acc !== null ? '<div class="phon-pair-acc">Accuracy ' + acc + '%</div>' : '<div class="phon-pair-start">▶ 听辨</div>') +
+        '</div>';
+    }).join("");
+    cHtml = '<div class="lg-card"><div class="lg-card-h">🔤 辅音清浊对比 <span class="lg-sub">' + (lgPairs.consIntro || "") + '</span></div>' + cCards + '</div>';
+  }
+  return head + lvHtml + cHtml;
+}
+
+// 训练器：读一个词 → 判断 A 还是 B
+function lgPhonPairTrain(id) {
+  if (!lgPairs) { lgPairsLoad(function () { render(); }); return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载中…</div></div></div>'; }
+  var all = (lgPairs.vowelPairs || []).concat(lgPairs.consPairs || []);
+  var p = null;
+  for (var i = 0; i < all.length; i++) { if (all[i].id === id) { p = all[i]; break; } }
+  if (!p) { lgPhonView = "pairs"; render(); return ""; }
+  var s = lgPairGet(id);
+  var region = lgPhonRegion || "US";
+  var pairs = p.pairs || [];
+  // 出题：当前词对 = pairs[s.idx % pairs.length]；随机左右
+  var cur = pairs[s.idx % pairs.length];
+  var rightIsA = Math.random() < 0.5; // 标准答案是 A(左) 还是 B(右)
+  var rightWord = rightIsA ? cur[0] : cur[1];
+  var rightZh = rightIsA ? cur[2] : cur[3];
+  var head = '<div class="lg-card"><div class="lg-card-h">👂 听辨训练 <span class="lg-sub">' + p.a + ' vs ' + p.b + '</span></div>' +
+    '<div class="lg-row" style="gap:8px"><button class="lg-btn ghost" onclick="lgPhonView=\'pairs\';render()">← 返回</button>' +
+    '<button class="lg-btn ghost" onclick="lgPhonView=\'lib\';render()">📚 音标详情</button></div>' +
+    '<div class="lg-hint">点 🔊 听发音，判断是 ' + p.a + '（如 ' + p.aWord + '）还是 ' + p.b + '（如 ' + p.bWord + '）。</div></div>';
+
+  // 隐藏标准答案（存到 state 供判题，不渲染出来）
+  s._rightIsA = rightIsA;
+  s._rightWord = rightWord;
+
+  var probe = '<div class="lg-card phon-train-probe">' +
+    '<div class="phon-train-q">你听到的是？</div>' +
+    '<button class="phon-big-speak" onclick="lgPhonSpeak(\'' + lgEscapeJs(rightWord) + '\',\'' + region + '\')">🔊 听发音</button>' +
+    '<div class="phon-train-zh">（' + rightZh + '）</div>' + // 中文释义提供线索但不暴露单词拼写
+    '</div>';
+
+  var opts = '<div class="lg-card"><div class="lg-card-h">选择你听到的音</div>' +
+    '<div class="phon-train-opts">' +
+      '<button class="phon-train-opt" onclick="lgPairAnswer(\'' + id + '\',\'A\')">' + p.a + '<div class="phon-opt-word">' + p.aWord + '</div></button>' +
+      '<button class="phon-train-opt" onclick="lgPairAnswer(\'' + id + '\',\'B\')">' + p.b + '<div class="phon-opt-word">' + p.bWord + '</div></button>' +
+    '</div></div>';
+
+  // 反馈区
+  var fb = "";
+  if (s.answered) {
+    var right = s.lastRight;
+    fb = '<div class="phon-fb ' + (right ? "ok" : "bad") + '">' +
+      (right ? "✅ 正确！" : "❌ 听错啦") +
+      ' 正确答案：<b>' + (s._rightIsA ? p.a + " " + s._rightWord : p.b + " " + s._rightWord) + '</b>' +
+      ' · 听一遍答案：<button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(s._rightWord) + '\',\'' + region + '\')">🔊</button>' +
+      '</div>';
+  }
+  var acc = s.total > 0 ? Math.round(s.correct / s.total * 100) : 0;
+  var stat = '<div class="phon-train-stat">本轮 Accuracy <b>' + acc + '%</b> · ' + s.correct + '/' + s.total +
+    ' · 第 ' + Math.min(s.idx + 1, pairs.length) + '/' + pairs.length + ' 组</div>';
+
+  var nextBtn = s.answered ? '<button class="btn btn-primary" style="width:100%" onclick="lgPairNext(\'' + id + '\')">' +
+    (s.idx + 1 >= pairs.length ? '🔁 再来一轮' : '下一个 🔊') + '</button>' : '';
+
+  return head + stat + probe + opts + fb + (s.answered ? '<div class="lg-card">' + nextBtn + '</div>' : "");
+}
+function lgPairAnswer(id, side) {
+  var s = lgPairGet(id);
+  if (s.answered) return;
+  var right = side === (s._rightIsA ? "A" : "B");
+  s.total++;
+  if (right) s.correct++;
+  s.answered = true;
+  s.lastRight = right;
+  if (right && typeof DB !== "undefined" && DB.logActivity) DB.logActivity("language", "听辨正确 " + id);
+  render();
+}
+function lgPairNext(id) {
+  var s = lgPairGet(id);
+  var all = (lgPairs && lgPairs.vowelPairs || []).concat(lgPairs && lgPairs.consPairs || []);
+  var p = null;
+  for (var i = 0; i < all.length; i++) { if (all[i].id === id) { p = all[i]; break; } }
+  var n = p ? (p.pairs || []).length : 1;
+  s.idx = (s.idx + 1) % n;
+  s.answered = false;
+  s._rightIsA = null;
+  s._rightWord = null;
+  render();
+}
 
 /* =============================================================
  * 通用微信式月历（各板块「历史」共用）

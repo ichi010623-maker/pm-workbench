@@ -6480,3 +6480,60 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 /* ===== 首页版本脚注（常驻可见·点按复制版本号）===== */
 .app-version-foot{margin:18px 0 10px;text-align:center;font-size:11px;color:var(--text-tertiary,#94a3b8);cursor:pointer;user-select:none;letter-spacing:.3px;opacity:.8}
 .app-version-foot:active{opacity:.5}
+
+/* ===== Pronunciation 学习路径（Phase 1-5 升级）===== */
+.phon-progress{height:8px;background:rgba(127,127,127,0.15);border-radius:99px;overflow:hidden;margin:8px 0 4px}
+.phon-progress-fill{height:100%;background:linear-gradient(90deg,#0a84ff,#30d158);border-radius:99px;transition:width .4s}
+.phon-phase{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--card-border,#e5e7eb);border-radius:12px;padding:12px;margin:8px 0;cursor:pointer;background:var(--card,#fff);transition:.15s}
+.phon-phase:active{transform:scale(.98)}
+.phon-phase.locked{opacity:.55;cursor:not-allowed}
+.phon-phase-n{font-size:11px;font-weight:800;color:#6b7280;background:rgba(127,127,127,0.12);border-radius:99px;padding:3px 9px;white-space:nowrap;margin-top:2px}
+.phon-phase.locked .phon-phase-n{background:rgba(127,127,127,0.08)}
+.phon-phase-t{font-weight:700;font-size:15px}
+.phon-phase-d{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.phon-phase-pct{font-size:12px;color:var(--accent-green);font-weight:700}
+.phon-phase-enter{margin-top:6px;font-size:13px;color:var(--accent-blue);font-weight:600}
+.phon-phase-state{font-size:12px;color:var(--accent-blue)}
+.phon-recs{font-size:13px;padding:4px 2px}
+.phon-letter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:8px}
+.phon-letter-cell{position:relative;border:1px solid var(--card-border,#e5e7eb);border-radius:10px;padding:10px 4px 8px;text-align:center;cursor:pointer;background:var(--card,#fff);transition:.15s}
+.phon-letter-cell:hover{background:#f0f7ff;border-color:#93c5fd}
+.phon-letter-cell.done{border-color:#86efac;background:#f0fdf4}
+.phon-letter-ch{font-size:22px;font-weight:800;color:#1d4ed8;font-family:Georgia,serif}
+.phon-letter-ipa{font-size:11px;color:var(--text-secondary);margin-top:2px;font-family:Georgia,serif}
+.phon-letter-ok{position:absolute;top:4px;right:6px;color:var(--accent-green);font-weight:800;font-size:12px}
+.phon-letter-hero{text-align:center;padding:18px 12px}
+.phon-hero-ch{font-size:64px;font-weight:800;color:#1d4ed8;font-family:Georgia,serif;line-height:1.1}
+.phon-hero-name{font-size:13px;color:var(--text-secondary);margin-top:6px}
+.phon-hero-ipa{font-size:26px;font-weight:800;margin-top:6px;font-family:Georgia,serif}
+.phon-hero-note{font-size:12px;color:var(--text-muted);margin-top:4px}
+.phon-speak-btn{background:rgba(10,132,255,0.1);border:none;border-radius:8px;padding:2px 8px;font-size:14px;cursor:pointer}
+.phon-speak-btn.sm{font-size:12px;padding:1px 6px;margin-left:6px}
+.phon-snd-row{border:1px solid var(--card-border,#e5e7eb);border-radius:10px;padding:10px;margin:8px 0}
+.phon-snd-ipa{font-size:20px;font-weight:800;font-family:Georgia,serif;color:#7c3aed}
+.phon-snd-word{font-size:15px;font-weight:600;margin-top:4px}
+.phon-snd-hint{font-size:12px;color:var(--text-secondary);margin-top:4px}
+.phon-tip{border-left:3px solid var(--accent-red)!important}
+.phon-tip-main{font-size:15px;font-weight:800;color:#b91c1c}
+.phon-tip-sub{font-size:13px;color:var(--text-secondary);margin-top:6px;line-height:1.6}
+.phon-pair-card{border:1px solid var(--card-border,#e5e7eb);border-radius:12px;padding:12px;margin:8px 0;cursor:pointer;background:var(--card,#fff);transition:.15s}
+.phon-pair-card:hover{background:#f5f3ff;border-color:#c4b5fd}
+.phon-pair-syms{font-size:19px;font-weight:800;font-family:Georgia,serif}
+.phon-pair-syms .vs{font-size:11px;color:var(--text-muted);font-weight:400;font-family:sans-serif;margin:0 6px}
+.phon-pair-words{font-size:14px;color:var(--text-secondary);margin-top:4px}
+.phon-pair-grp{font-size:11px;color:var(--text-muted);margin-top:2px}
+.phon-pair-start{font-size:13px;color:var(--accent-blue);font-weight:600;margin-top:6px}
+.phon-pair-acc{font-size:12px;color:var(--accent-green);font-weight:700;margin-top:6px}
+.phon-train-probe{text-align:center;padding:20px 12px}
+.phon-train-q{font-size:16px;font-weight:700;margin-bottom:14px}
+.phon-big-speak{border:none;background:linear-gradient(135deg,#0a84ff,#5856d6);color:#fff;font-size:20px;border-radius:99px;padding:16px 28px;cursor:pointer;box-shadow:0 4px 14px rgba(10,132,255,0.35)}
+.phon-big-speak:active{transform:scale(.95)}
+.phon-train-zh{font-size:12px;color:var(--text-muted);margin-top:10px}
+.phon-train-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.phon-train-opt{border:1.5px solid var(--card-border,#e5e7eb);border-radius:14px;padding:16px 8px;background:var(--card,#fff);cursor:pointer;font-size:22px;font-weight:800;font-family:Georgia,serif;transition:.15s}
+.phon-train-opt:active{transform:scale(.95);border-color:#0a84ff}
+.phon-opt-word{font-size:13px;color:var(--text-secondary);font-weight:400;font-family:sans-serif;margin-top:4px}
+.phon-fb{border-radius:10px;padding:12px;margin:10px 0;font-size:14px;text-align:center}
+.phon-fb.ok{background:rgba(48,209,88,0.12);color:#15803d}
+.phon-fb.bad{background:rgba(255,69,58,0.12);color:#b91c1c}
+.phon-train-stat{font-size:13px;color:var(--text-secondary);text-align:center;padding:6px 0}

@@ -1,0 +1,33 @@
+{
+  "updatedAt": "2026-09-02",
+  "intro": "Phase 1 · 字母与声音基础：先分清 Letter Name（字母名）与 Letter Sound（字母在单词里的声音）——这是中国学习者最易混淆的起点。",
+  "tip": "⚠️ Letter Name ≠ Letter Sound。字母名是念 ABC 时的读音；字母音是它在单词里发出的声音。例：字母 A 的名字是 /eɪ/，但在 apple 里发 /æ/。",
+  "letters": [
+    { "ch": "A", "name": "/eɪ/", "sounds": [ { "ipa": "/æ/", "word": "apple", "zh": "苹果", "hint": "字母 A 最常见的发音" }, { "ipa": "/eɪ/", "word": "cake", "zh": "蛋糕", "hint": "a_e / ai 组合发字母名" } ] },
+    { "ch": "B", "name": "/biː/", "sounds": [ { "ipa": "/b/", "word": "ball", "zh": "球", "hint": "清浊对比：/p/ 不震动，/b/ 震动" } ] },
+    { "ch": "C", "name": "/siː/", "sounds": [ { "ipa": "/k/", "word": "cat", "zh": "猫", "hint": "C 后接 a/o/u 常发 /k/" }, { "ipa": "/s/", "word": "city", "zh": "城市", "hint": "C 后接 e/i/y 常发 /s/" } ] },
+    { "ch": "D", "name": "/diː/", "sounds": [ { "ipa": "/d/", "word": "dog", "zh": "狗", "hint": "清浊对比：/t/ 不震动，/d/ 震动" } ] },
+    { "ch": "E", "name": "/iː/", "sounds": [ { "ipa": "/e/", "word": "egg", "zh": "鸡蛋", "hint": "字母 E 最常见的发音是 /e/ 而非字母名 /iː/" }, { "ipa": "/iː/", "word": "he", "zh": "他", "hint": "ee / e_e 组合发字母名" } ] },
+    { "ch": "F", "name": "/ef/", "sounds": [ { "ipa": "/f/", "word": "fish", "zh": "鱼", "hint": "上齿轻咬下唇送气" } ] },
+    { "ch": "G", "name": "/dʒiː/", "sounds": [ { "ipa": "/g/", "word": "go", "zh": "去", "hint": "G 后接 a/o/u 常发 /g/" }, { "ipa": "/dʒ/", "word": "giraffe", "zh": "长颈鹿", "hint": "G 后接 e/i/y 常发 /dʒ/" } ] },
+    { "ch": "H", "name": "/eɪtʃ/", "sounds": [ { "ipa": "/h/", "word": "hat", "zh": "帽子", "hint": "喉咙呼气，类似哈气" } ] },
+    { "ch": "I", "name": "/aɪ/", "sounds": [ { "ipa": "/ɪ/", "word": "sit", "zh": "坐", "hint": "字母 I 最常见的发音是 /ɪ/ 而非字母名 /aɪ/" }, { "ipa": "/aɪ/", "word": "kite", "zh": "风筝", "hint": "i_e 组合发字母名" } ] },
+    { "ch": "J", "name": "/dʒeɪ/", "sounds": [ { "ipa": "/dʒ/", "word": "jump", "zh": "跳", "hint": "J 通常只发 /dʒ/" } ] },
+    { "ch": "K", "name": "/keɪ/", "sounds": [ { "ipa": "/k/", "word": "kite", "zh": "风筝", "hint": "K 通常发 /k/（kn 开头时 K 不发音）" } ] },
+    { "ch": "L", "name": "/el/", "sounds": [ { "ipa": "/l/", "word": "lion", "zh": "狮子", "hint": "舌尖抵上齿龈" } ] },
+    { "ch": "M", "name": "/em/", "sounds": [ { "ipa": "/m/", "word": "moon", "zh": "月亮", "hint": "闭唇鼻音" } ] },
+    { "ch": "N", "name": "/en/", "sounds": [ { "ipa": "/n/", "word": "nose", "zh": "鼻子", "hint": "舌尖抵上齿龈鼻音" } ] },
+    { "ch": "O", "name": "/əʊ/", "sounds": [ { "ipa": "/ɒ/", "word": "hot", "zh": "热", "hint": "美式常发 /ɑː/，英式 /ɒ/" }, { "ipa": "/əʊ/", "word": "no", "zh": "不", "hint": "o_e 组合发字母名" } ] },
+    { "ch": "P", "name": "/piː/", "sounds": [ { "ipa": "/p/", "word": "pig", "zh": "猪", "hint": "清音：声带不震动" } ] },
+    { "ch": "Q", "name": "/kjuː/", "sounds": [ { "ipa": "/kw/", "word": "queen", "zh": "女王", "hint": "Q 几乎总是与 U 连用发 /kw/" } ] },
+    { "ch": "R", "name": "/ɑːr/", "sounds": [ { "ipa": "/r/", "word": "red", "zh": "红色", "hint": "卷舌音，舌尖卷向上颚" } ] },
+    { "ch": "S", "name": "/es/", "sounds": [ { "ipa": "/s/", "word": "sun", "zh": "太阳", "hint": "清音" }, { "ipa": "/z/", "word": "is", "zh": "是", "hint": "词尾 s 在浊音后常发 /z/" } ] },
+    { "ch": "T", "name": "/tiː/", "sounds": [ { "ipa": "/t/", "word": "tiger", "zh": "老虎", "hint": "清音" } ] },
+    { "ch": "U", "name": "/juː/", "sounds": [ { "ipa": "/ʌ/", "word": "cup", "zh": "杯子", "hint": "字母 U 最常见的发音是 /ʌ/ 而非字母名 /juː/" }, { "ipa": "/juː/", "word": "use", "zh": "使用", "hint": "u_e 组合发字母名" } ] },
+    { "ch": "V", "name": "/viː/", "sounds": [ { "ipa": "/v/", "word": "van", "zh": "货车", "hint": "浊音：上齿咬下唇 + 声带震动" } ] },
+    { "ch": "W", "name": "/ˈdʌbəljuː/", "sounds": [ { "ipa": "/w/", "word": "water", "zh": "水", "hint": "圆唇滑音" } ] },
+    { "ch": "X", "name": "/eks/", "sounds": [ { "ipa": "/ks/", "word": "box", "zh": "盒子", "hint": "X 通常发 /ks/" } ] },
+    { "ch": "Y", "name": "/waɪ/", "sounds": [ { "ipa": "/j/", "word": "yes", "zh": "是", "hint": "词首 Y 发 /j/" }, { "ipa": "/aɪ/", "word": "my", "zh": "我的", "hint": "词尾 Y 常发 /aɪ/ 或 /i/" } ] },
+    { "ch": "Z", "name": "/ziː/", "sounds": [ { "ipa": "/z/", "word": "zoo", "zh": "动物园", "hint": "浊音，声带震动" } ] }
+  ]
+}
