@@ -12,13 +12,14 @@
     var list = [];
     // —— Sprint 2 起逐个放开（顺序 = 顶部导航顺序）——
     if (typeof root.registerIntelSection_today === "function") list.push(root.registerIntelSection_today);
-    // if (typeof root.registerIntelSection_world === "function") list.push(root.registerIntelSection_world);
-    // if (typeof root.registerIntelSection_finance === "function") list.push(root.registerIntelSection_finance);
-    // if (typeof root.registerIntelSection_tech === "function") list.push(root.registerIntelSection_tech);
-    // if (typeof root.registerIntelSection_ai === "function") list.push(root.registerIntelSection_ai);
-    // if (typeof root.registerIntelSection_industry === "function") list.push(root.registerIntelSection_industry);
-    // if (typeof root.registerIntelSection_product === "function") list.push(root.registerIntelSection_product);
-    // if (typeof root.registerIntelSection_saved === "function") list.push(root.registerIntelSection_saved);
+    // Sprint 4 · PM Insight（AI 解读）
+    if (typeof root.registerIntelSection_pm === "function") list.push(root.registerIntelSection_pm);
+    // Sprint 6 · 主题流（SectionShell 关键词分流）
+    if (typeof root.registerIntelSection_world === "function") list.push(root.registerIntelSection_world);
+    if (typeof root.registerIntelSection_finance === "function") list.push(root.registerIntelSection_finance);
+    if (typeof root.registerIntelSection_ai === "function") list.push(root.registerIntelSection_ai);
+    if (typeof root.registerIntelSection_tech === "function") list.push(root.registerIntelSection_tech);
+    if (typeof root.registerIntelSection_industry === "function") list.push(root.registerIntelSection_industry);
     return list;
   }
 

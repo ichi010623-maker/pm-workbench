@@ -36,7 +36,14 @@
     cmtTitle: undefined,      // 评论面板标题
     cmtEditing: undefined,    // 正在编辑的评论 id
     // —— v2.0 sections 新增键从此处向下登记 ——
-    // worldCat: "tech",
+    // Sprint 6 主题 section 的分类 chip（SectionShell 用）
+    shellCat_world: "all",
+    shellCat_finance: "all",
+    shellCat_ai: "all",
+    shellCat_tech: "all",
+    shellCat_industry: "all",
+    // Sprint 4 PM Insight：AI 解读结果缓存（按日）
+    pmInsight: undefined
   };
 
   // 存储本体：键直接作为属性（引用语义，无深拷贝 → favPick.catId 原地修改有效）
