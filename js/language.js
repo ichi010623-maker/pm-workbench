@@ -942,10 +942,15 @@ function lgPhonSpeak(word, region) {
   if (!window.speechSynthesis) { showToast("当前环境不支持语音", "error"); return; }
   window.speechSynthesis.cancel();
   var code = region === "UK" ? "en-GB" : "en-US";
-  var u = new SpeechSynthesisUtterance(String(word));
+  var w = String(word || "");
+  var u = new SpeechSynthesisUtterance(w);
   u.lang = code;
-  // 音素/单词朗读都希望字字清晰：单词稍慢（0.8），音节提示词（"ee"/"puh"）更慢（0.6）以保留元音时长
-  u.rate = (String(word).length <= 3) ? 0.6 : 0.8;
+  // 朗读速率：根据文本类型自适应——
+  //   - 骨架音节（≤3 字符如 "ee"/"ay"/"puh"）：0.55 让 TTS 保留元音时长，听清长/短音差
+  //   - 单词（4-8 字符）：0.7 让 Minimal Pairs（sheep/ship、seat/sit）元音时长听得出
+  //   - 较长单词/句子：0.85
+  var wl = w.length;
+  u.rate = wl <= 3 ? 0.55 : (wl <= 8 ? 0.7 : 0.85);
   var vs = []; try { vs = window.speechSynthesis.getVoices() || []; } catch (e) {}
   // 中文设备首次点击时常因语音列表尚未就绪（getVoices 为空）而被迫用默认（中文）嗓音，导致发音错误；
   // 此时等待 onvoiceschanged 就绪后再播，确保选中英文嗓音。
@@ -965,7 +970,15 @@ function lgPhonSpeak(word, region) {
     return;
   }
   applyPhonVoice(u, vs, code);
+  // 双重保险：若 applyPhonVoice 未匹配到 en-US/en-GB，强制再用 voices[].lang 前缀匹配
+  if (!u.voice) {
+    for (var i = 0; i < vs.length; i++) {
+      if (vs[i].lang && vs[i].lang.toLowerCase().indexOf("en") === 0) { u.voice = vs[i]; break; }
+    }
+  }
   window.speechSynthesis.speak(u);
+  // 发音 = 学习动作，喂给 lgLearnTimer
+  try { lgTouchActive("tts:" + w); } catch (e) {}
 }
 // 预热 TTS 语音列表：中文设备首次点击常因 voices 尚未加载而被迫用默认（中文）嗓音，导致发音错误
 (function () {
@@ -976,6 +989,160 @@ function lgPhonSpeak(word, region) {
     }
   } catch (e) {}
 })();
+
+/* ============================================================
+ * 🕒 全局学习计时器（v5.9.101 起）
+ *   - 触发条件：lgTouchActive()（发音按钮/任意点击/键盘/进入模块）
+ *   - 5 秒滚动累计活跃秒数（仅「页面前台 + 90 秒内有活动」时累加）
+ *   - 闲置 90s 自动暂停 / 页面切后台自动暂停 / 切回自动恢复
+ *   - 跨日自动续接连续天数（streak）
+ *   - 数据：localStorage["lgLearnToday"] = { date, sec, lastTs }
+ *           localStorage["lgLearnStreak"] = { lastDate, streak }
+ * ============================================================ */
+var __lgLT = {
+  today: null,         // { date:"YYYY-MM-DD", sec:123, lastTs:1700000000 }
+  streak: null,         // { lastDate:"YYYY-MM-DD", streak:5 }
+  lastActiveTs: 0,      // 上次活动毫秒时间戳（用于 90s 闲置判定）
+  paused: false,        // 暂停标记
+  intervalId: null
+};
+function lgLT_load() {
+  var t = today();
+  try {
+    var raw = localStorage.getItem("lgLearnToday");
+    var stored = raw ? JSON.parse(raw) : null;
+    if (stored && stored.date === t) {
+      __lgLT.today = stored;
+    } else {
+      __lgLT.today = { date: t, sec: 0, lastTs: Date.now() };
+    }
+  } catch (e) {
+    __lgLT.today = { date: t, sec: 0, lastTs: Date.now() };
+  }
+  try {
+    var raw2 = localStorage.getItem("lgLearnStreak");
+    var s2 = raw2 ? JSON.parse(raw2) : null;
+    __lgLT.streak = s2 || { lastDate: null, streak: 0 };
+  } catch (e) {
+    __lgLT.streak = { lastDate: null, streak: 0 };
+  }
+  // 若跨日但今天还没动作，仅重置 today；streak 由首次 lgTouchActive 当天触发更新
+  if (__lgLT.today.date !== t) __lgLT.today = { date: t, sec: 0, lastTs: Date.now() };
+  lgLT_saveToday();
+}
+function lgLT_saveToday() {
+  try { localStorage.setItem("lgLearnToday", JSON.stringify(__lgLT.today)); } catch (e) {}
+}
+function lgLT_saveStreak() {
+  try { localStorage.setItem("lgLearnStreak", JSON.stringify(__lgLT.streak)); } catch (e) {}
+}
+// 跨日续接 streak：今天首次 lgTouchActive 时调用
+function lgLT_markStudyDay() {
+  var t = today();
+  var s = __lgLT.streak || { lastDate: null, streak: 0 };
+  if (s.lastDate === t) return; // 今天已记过
+  var y = lgAddDays(t, -1);
+  if (s.lastDate === y) s.streak = (s.streak || 0) + 1;
+  else s.streak = 1;
+  s.lastDate = t;
+  __lgLT.streak = s;
+  lgLT_saveStreak();
+}
+function lgLT_getTodayMin() {
+  var t = today();
+  if (!__lgLT.today || __lgLT.today.date !== t) return 0;
+  return Math.floor((__lgLT.today.sec || 0) / 60);
+}
+function lgLT_getStreak() {
+  return (__lgLT.streak && __lgLT.streak.streak) || 0;
+}
+// 用户学习动作：任意点击/键盘/TTS 触发
+function lgTouchActive(src) {
+  __lgLT.lastActiveTs = Date.now();
+  // 今天日期对齐
+  var t = today();
+  if (!__lgLT.today || __lgLT.today.date !== t) {
+    __lgLT.today = { date: t, sec: 0, lastTs: Date.now() };
+  }
+  lgLT_markStudyDay();
+  // 第一次活动：若之前 paused（切后台回来），取消暂停
+  if (__lgLT.paused) {
+    __lgLT.paused = false;
+    __lgLT.today.lastTs = Date.now();
+  }
+}
+// 后台 tick：每 5 秒检查一次，仅当「前台 + 90s 内有活动」时 +5s
+function lgLT_tick() {
+  var now = Date.now();
+  // 跨日滚动
+  var t = today();
+  if (!__lgLT.today || __lgLT.today.date !== t) {
+    // 切日：归档昨天（仅记录），今天从 0 开始
+    __lgLT.today = { date: t, sec: 0, lastTs: now };
+    lgLT_saveToday();
+    return;
+  }
+  if (__lgLT.paused) return;
+  if (document && document.hidden) return;
+  if (!__lgLT.lastActiveTs) return;
+  var idleMs = now - __lgLT.lastActiveTs;
+  if (idleMs > 90000) {
+    // 闲置超过 90s，标记暂停
+    __lgLT.paused = true;
+    return;
+  }
+  // 累加（5s 步长）
+  __lgLT.today.sec = (__lgLT.today.sec || 0) + 5;
+  __lgLT.today.lastTs = now;
+  lgLT_saveToday();
+}
+function lgLT_start() {
+  if (__lgLT.intervalId) return;
+  lgLT_load();
+  __lgLT.lastActiveTs = Date.now();
+  try {
+    if (typeof setInterval === "function") {
+      __lgLT.intervalId = setInterval(lgLT_tick, 5000);
+    }
+  } catch (e) {}
+  // 页面可见性变化：后台暂停，回到前台不自动恢复（等用户活动触发）
+  try {
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) { __lgLT.paused = true; }
+      else { __lgLT.lastActiveTs = Date.now(); __lgLT.paused = false; }
+    });
+    // 全局活动信号：点击/键盘/触摸（捕获阶段，比应用逻辑早）
+    document.addEventListener("click", function () { lgTouchActive("click"); }, true);
+    document.addEventListener("keydown", function () { lgTouchActive("keydown"); }, true);
+    document.addEventListener("touchstart", function () { lgTouchActive("touchstart"); }, true);
+    // 页面关闭前 flush
+    if (typeof window !== "undefined" && window && window.addEventListener) {
+      window.addEventListener("beforeunload", function () {
+        lgLT_tick(); lgLT_saveToday();
+      });
+    }
+  } catch (e) {}
+}
+// 顶部小卡（粘顶）UI HTML
+function lgLT_dashboardHtml() {
+  var min = lgLT_getTodayMin();
+  var sec = (__lgLT.today && __lgLT.today.sec) || 0;
+  var live = __lgLT.intervalId && !__lgLT.paused ? "学习中" : "已暂停";
+  var liveColor = !__lgLT.intervalId ? "#94a3b8" : (__lgLT.paused ? "#f59e0b" : "#15803d");
+  var streak = lgLT_getStreak();
+  // 进度条：目标 30 分钟
+  var pct = Math.min(100, Math.round(sec / 1800 * 100));
+  return '<div class="lg-card lg-learn-card">' +
+    '<div class="lg-learn-h">' +
+      '<span class="lg-learn-emoji">📚</span>' +
+      '<span class="lg-learn-t">今日已学 <b>' + min + '</b> 分钟 · 连续 <b>' + streak + '</b> 天</span>' +
+      '<span class="lg-learn-status" style="color:' + liveColor + '">' + live + '</span>' +
+    '</div>' +
+    '<div class="phon-progress"><div class="phon-progress-fill" style="width:' + pct + '%"></div></div>' +
+    '<div class="lg-learn-sub">目标 30 分钟 · 自动按学习动作累计，闲置 90 秒自动暂停</div>' +
+    '</div>';
+}
+
 function lgPhonExamplesHtml(exs, region) {
   return (exs || []).map(function (x) {
     return '<span class="lg-phon-ex">' + escapeHtml(x[0]) +
@@ -1129,6 +1296,8 @@ function lgPhonPathPage() {
   if (!lgLetters) lgLettersLoad(function () { render(); });
   if (!lgPairs) lgPairsLoad(function () { render(); });
   if (!lgSpell) lgSpellLoad(function () { render(); });
+  // 学习时长仪表盘（v5.9.101 起）
+  var dashHtml = lgLT_dashboardHtml();
   var done = lgLettersDone();
   var pct1 = lgLetters && lgLetters.letters && lgLetters.letters.length
     ? Math.round(done.length / lgLetters.letters.length * 100) : 0;
@@ -1193,7 +1362,7 @@ function lgPhonPathPage() {
       '<button class="lg-btn" onclick="lgPhonView=\'lib\';render()">🔠 元音 / 辅音总览</button>' +
       '<button class="lg-btn ghost" onclick="lgPhonRegion=lgPhonRegion===\'US\'?\'UK\':\'US\';render()">🌐 切到' + (lgPhonRegion === "US" ? "英式" : "美式") + '</button>' +
     '</div></div>';
-  return pathCard + recCard + libCard;
+  return dashHtml + pathCard + recCard + libCard;
 }
 
 /* ============================================================
@@ -3921,3 +4090,18 @@ function lgVidAddCourse(c) {
   render();
   if (typeof showToast === "function") showToast("已导入《" + c.title.slice(0, 14) + "》· " + (c.episodes || []).length + " 集", "success");
 }
+
+// 自启学习计时器（页面打开后立即接管，无须用户点开始）
+(function () {
+  try {
+    function boot() {
+      if (typeof lgLT_start === "function") lgLT_start();
+    }
+    if (typeof document === "undefined") return;
+    if (document.readyState === "loading" && document.addEventListener) {
+      document.addEventListener("DOMContentLoaded", boot);
+    } else {
+      boot();
+    }
+  } catch (e) {}
+})();

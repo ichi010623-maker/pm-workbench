@@ -6622,3 +6622,12 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 .phon-prac-pad{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;justify-content:center}
 .phon-prac-key{font-family:Georgia,serif;font-size:15px;padding:5px 9px;border:1px solid var(--card-border,#e5e7eb);border-radius:7px;background:#f8fafc;cursor:pointer;color:inherit}
 .phon-prac-key:active{background:#e0e7ff;border-color:#6366f1}
+
+/* === v5.9.101 全局学习时长仪表盘 === */
+.lg-learn-card{border-left:3px solid var(--accent-blue,#0a84ff)!important;background:linear-gradient(135deg,#eff6ff 0%,#f0fdf4 100%)}
+.lg-learn-h{display:flex;align-items:center;gap:8px;font-size:14px}
+.lg-learn-emoji{font-size:22px}
+.lg-learn-t{flex:1;font-weight:600}
+.lg-learn-t b{color:var(--accent-blue,#0a84ff);font-size:18px;font-weight:800;margin:0 2px}
+.lg-learn-status{font-size:11px;font-weight:700;background:#fff;border-radius:99px;padding:2px 9px;border:1px solid currentColor}
+.lg-learn-sub{font-size:11px;color:var(--text-muted);margin-top:4px}
