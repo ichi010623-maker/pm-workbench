@@ -939,7 +939,8 @@ function lgPhonSpeak(word, region) {
   var code = region === "UK" ? "en-GB" : "en-US";
   var u = new SpeechSynthesisUtterance(String(word));
   u.lang = code;
-  u.rate = 0.85;
+  // 音素/单词朗读都希望字字清晰：单词稍慢（0.8），音节提示词（"ee"/"puh"）更慢（0.6）以保留元音时长
+  u.rate = (String(word).length <= 3) ? 0.6 : 0.8;
   var vs = []; try { vs = window.speechSynthesis.getVoices() || []; } catch (e) {}
   // 中文设备首次点击时常因语音列表尚未就绪（getVoices 为空）而被迫用默认（中文）嗓音，导致发音错误；
   // 此时等待 onvoiceschanged 就绪后再播，确保选中英文嗓音。
@@ -1012,10 +1013,16 @@ function lgPhonFind(sym) {
   return null;
 }
 function lgPhonSummaryCell(p, region) {
+  // 汇总页的 🔊 应朗读"音标本身"而非"含此音标的例词"（之前传 examples[0][0] 会让 /iː/ 朗读 "see"、/e/ 朗读 "bed" 等，
+  // 用户听到的是带辅音污染的单词，并非该音素的近似发音）。改用 phonetics.json 里新增的 speakText：
+  //   - 元音：用 "ee"/"ih"/"eh"/"oo" 等骨架音节，TTS 会发出对应长/短元音
+  //   - 辅音：用 "puh"/"buh"/"th"/"sh" 等短骨架，TTS 接近目标辅音
+  //   - 兜底：去掉斜杠的 symbol（让 TTS 朗读字面 IPA 字符）
+  var speak = p.speakText || p.symbol.replace(/\//g, "");
   return '<div class="lg-phon-cell" onclick="lgPhonSel=\'' + lgEscapeJs(p.symbol) + '\';render()">' +
     '<div class="lg-phon-cell-sym">' + escapeHtml(p.symbol) + '</div>' +
     '<div class="lg-phon-cell-type">' + escapeHtml(p.type || "") + '</div>' +
-    '<div class="lg-phon-cell-audio" onclick="event.stopPropagation();lgPhonSpeak(\'' + lgEscapeJs((p.examples && p.examples[0] && p.examples[0][0]) || "a") + '\',\'' + region + '\')">🔊</div>' +
+    '<div class="lg-phon-cell-audio" onclick="event.stopPropagation();lgPhonSpeak(\'' + lgEscapeJs(speak) + '\',\'' + region + '\')" title="点击听音标发音">🔊</div>' +
   '</div>';
 }
 function lgRenderPhonics(cur) {
