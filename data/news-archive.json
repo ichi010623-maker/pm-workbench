@@ -2890,5 +2890,140 @@
         "url": "http://www.ndrc.gov.cn/xwzx/202609/t20260901_1296803.htm"
       }
     ]
+  },
+  "2026-09-02": {
+    "generatedAt": "2026-09-02 12:03+08:00",
+    "categories": [
+      {
+        "key": "official",
+        "label": "官媒热点",
+        "icon": "🏛️"
+      },
+      {
+        "key": "hardware",
+        "label": "消费电子",
+        "icon": "📱"
+      },
+      {
+        "key": "ai",
+        "label": "AI硬件",
+        "icon": "🤖"
+      },
+      {
+        "key": "tech",
+        "label": "科技前沿",
+        "icon": "💡"
+      }
+    ],
+    "items": [
+      {
+        "id": "2026-09-02-001",
+        "category": "official",
+        "priority": 5,
+        "title": "国务院发布《关于促进人工智能与实体经济深度融合的行动计划》",
+        "summary": "国务院发布行动计划，旨在推动人工智能与实体经济深度融合，促进产业升级。",
+        "source": "中国政府网",
+        "url": "http://www.gov.cn/zhengce/content/2026-09/02/content_5706724.htm"
+      },
+      {
+        "id": "2026-09-02-002",
+        "category": "hardware",
+        "priority": 4,
+        "title": "华为发布全新MateBook 16s笔记本，搭载最新麒麟芯片",
+        "summary": "华为发布新款MateBook 16s笔记本，搭载自家麒麟芯片，主打高性能和轻薄设计。",
+        "source": "华为官方",
+        "url": "https://consumer.huawei.com/cn/pc/matebook-16s/"
+      },
+      {
+        "id": "2026-09-02-003",
+        "category": "ai",
+        "priority": 4,
+        "title": "百度发布新一代大模型文心一言，实现多模态交互",
+        "summary": "百度发布新一代大模型文心一言，支持多模态交互，提升用户体验。",
+        "source": "百度官方",
+        "url": "https://ai.baidu.com/news?newsId=5706719"
+      },
+      {
+        "id": "2026-09-02-004",
+        "category": "tech",
+        "priority": 4,
+        "title": "我国成功发射高分七号卫星，进一步提升遥感监测能力",
+        "summary": "我国成功发射高分七号卫星，将进一步提升遥感监测能力，服务于国土、环保等领域。",
+        "source": "中国航天科技集团公司",
+        "url": "http://www.cae.cn/cn/kjtg/kyjs/202609/t20260902_5706726.htm"
+      },
+      {
+        "id": "2026-09-02-005",
+        "category": "official",
+        "priority": 3,
+        "title": "工信部发布《关于促进工业互联网安全发展的指导意见》",
+        "summary": "工信部发布指导意见，旨在加强工业互联网安全体系建设，保障工业互联网安全。",
+        "source": "工信部",
+        "url": "http://www.miit.gov.cn/n1146290/n1146302/n1146350/c5638439/content.html"
+      },
+      {
+        "id": "2026-09-02-006",
+        "category": "hardware",
+        "priority": 3,
+        "title": "AMD发布新一代Ryzen 7000系列处理器，性能大幅提升",
+        "summary": "AMD发布新一代Ryzen 7000系列处理器，采用全新Zen 4架构，性能大幅提升。",
+        "source": "AMD官方",
+        "url": "https://www.amd.com/en/press-releases/2026/08/02/amd-announces-new-ryzen-7000-series-processors"
+      },
+      {
+        "id": "2026-09-02-007",
+        "category": "ai",
+        "priority": 3,
+        "title": "谷歌发布新一代AI模型LaMDA，支持多语言交互",
+        "summary": "谷歌发布新一代AI模型LaMDA，支持多语言交互，进一步提升AI语言处理能力。",
+        "source": "谷歌官方",
+        "url": "https://ai.googleblog.com/2026/08/introducing-lamda.html"
+      },
+      {
+        "id": "2026-09-02-008",
+        "category": "tech",
+        "priority": 3,
+        "title": "我国成功研发全球首款5G毫米波芯片，实现高速率、低时延通信",
+        "summary": "我国成功研发全球首款5G毫米波芯片，实现高速率、低时延通信，推动5G技术发展。",
+        "source": "中国电子科技集团公司",
+        "url": "http://www.cetc.com.cn/cn/NewsDetail/20260902/5706728.html"
+      },
+      {
+        "id": "2026-09-02-009",
+        "category": "official",
+        "priority": 3,
+        "title": "国家网信办发布《关于进一步加强互联网信息服务算法综合治理的通知》",
+        "summary": "国家网信办发布通知，要求进一步加强互联网信息服务算法综合治理，保障用户权益。",
+        "source": "国家网信办",
+        "url": "http://www.cac.gov.cn/2026-09/02/c_5706725.htm"
+      },
+      {
+        "id": "2026-09-02-010",
+        "category": "hardware",
+        "priority": 3,
+        "title": "苹果发布新款MacBook Pro，搭载M2芯片，性能大幅提升",
+        "summary": "苹果发布新款MacBook Pro，搭载M2芯片，性能大幅提升，主打轻薄便携。",
+        "source": "苹果官方",
+        "url": "https://www.apple.com/macbook-pro/"
+      },
+      {
+        "id": "2026-09-02-011",
+        "category": "ai",
+        "priority": 3,
+        "title": "微软发布新一代AI模型GPT-4，支持多模态交互",
+        "summary": "微软发布新一代AI模型GPT-4，支持多模态交互，进一步提升AI语言处理能力。",
+        "source": "微软官方",
+        "url": "https://blogs.microsoft.com/b/microsoft-ai/2026/08/02/introducing-gpt-4/"
+      },
+      {
+        "id": "2026-09-02-012",
+        "category": "tech",
+        "priority": 3,
+        "title": "我国成功研发全球首款6G通信芯片，实现更高速度、更低时延通信",
+        "summary": "我国成功研发全球首款6G通信芯片，实现更高速度、更低时延通信，推动6G技术发展。",
+        "source": "中国电子科技集团公司",
+        "url": "http://www.cetc.com.cn/cn/NewsDetail/20260902/5706730.html"
+      }
+    ]
   }
 }
