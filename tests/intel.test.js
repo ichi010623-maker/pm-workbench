@@ -1,11 +1,22 @@
-// 行业情报增强模块自动化测试（Node vm 加载 js/intel.js，stub DOM/DB/fetch）
+// 行业情报增强模块自动化测试（Node vm 按顺序加载 js/intel/*.js 子模块，stub DOM/DB/fetch）
+// Sprint 1 重构：原单文件 js/intel.js（809 行）拆分为 8 个子模块
 // 运行：node tests/intel.test.js
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
 const ROOT = path.resolve(__dirname, "..");
-const src = fs.readFileSync(path.join(ROOT, "js", "intel.js"), "utf8");
+// 按依赖顺序加载子模块（core → history/fav/comments → llm/prompts → providers → parser → client）
+const SUBMODULES = [
+  "js/intel/core.js",
+  "js/intel/history.js",
+  "js/intel/fav.js",
+  "js/intel/comments.js",
+  "js/intel/llm/prompts.js",
+  "js/intel/llm/providers.js",
+  "js/intel/llm/parser.js",
+  "js/intel/llm/client.js"
+];
 
 // ---- 沙箱（模拟浏览器环境，仅满足函数可调用） ----
 const fakeEl = { innerHTML: "", querySelector: () => null, querySelectorAll: () => [], classList: { add() {}, remove() {}, contains: () => false } };
@@ -21,7 +32,10 @@ const sandbox = {
   localStorage: (function () { var m = {}; return { getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); }, removeItem: k => { delete m[k]; } }; })()
 };
 vm.createContext(sandbox);
-vm.runInContext(src, sandbox);
+SUBMODULES.forEach(function (f) {
+  const src = fs.readFileSync(path.join(ROOT, f), "utf8");
+  vm.runInContext(src, sandbox, { filename: f });
+});
 
 const {
   snapshotNewsForDate, intelHistoryDates, intelHistoryByDate,
