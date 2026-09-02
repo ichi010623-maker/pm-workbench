@@ -333,7 +333,20 @@ function renderIntelFav() {
   var cats = DB.data.industryFavCats || [];
   if (intelState.intelFavFilter == null) intelState.intelFavFilter = "all";
   if (intelState.intelFavSearch == null) intelState.intelFavSearch = "";
+  if (intelState.intelFavOrigin == null) intelState.intelFavOrigin = "all"; // Sprint 3 来源筛选
   intelState.intelFavBase = fav; // 供搜索局部刷新
+  // Sprint 3：来源统计 + 来源筛选条（全部/资讯/我的情报/自定义情报）
+  var cnt = { news: 0, mine: 0, custom: 0 };
+  fav.forEach(function (f) { var o = (f.origin === "mine" || f.origin === "custom") ? f.origin : "news"; cnt[o]++; });
+  var srcChips = [
+    { id: "all", name: "全部 " + fav.length },
+    { id: "news", name: "🌐 资讯 " + cnt.news },
+    { id: "mine", name: "📋 我的情报 " + cnt.mine },
+    { id: "custom", name: "🤖 自定义 " + cnt.custom }
+  ];
+  var srcBar = '<div class="filter-bar" style="margin:4px 0 2px">' +
+    srcChips.map(function (s) { return '<div class="chip' + (intelState.intelFavOrigin === s.id ? " active" : "") + '" onclick="setIntelFavOrigin(\'' + s.id + '\')">' + s.name + '</div>'; }).join("") +
+    '</div>';
   var hint = '<div class="intel-fav-hint"><div class="intel-fav-hint-l">已收藏 <b>' + fav.length + '</b> 条 · ' + cats.length + ' 个分类</div>' +
     '<button class="intel-export-btn" onclick="downloadIntelFavExport()">📤 导出</button></div>';
   var searchBox = '<div class="intel-search-row">' +
@@ -344,15 +357,22 @@ function renderIntelFav() {
     '<div class="chip' + (intelState.intelFavFilter === "all" ? " active" : "") + '" onclick="setIntelFavFilter(\'all\')">全部</div>' +
     cats.map(function (c) { return '<div class="chip' + (intelState.intelFavFilter === c.id ? " active" : "") + '" onclick="setIntelFavFilter(\'' + c.id + '\')">' + escapeHtml(c.name) + '</div>'; }).join("") +
     '</div>';
-  return hint + searchBox + filterBar + '<div id="intel-fav-body">' + intelFavBodyHtml() + '</div>';
+  return hint + srcBar + searchBox + filterBar + '<div id="intel-fav-body">' + intelFavBodyHtml() + '</div>';
 }
 
-// 收藏分组 HTML（依据当前 搜索词 + 分类筛选 计算）；卡片索引指向原始收藏数组
+// Sprint 3：收藏来源筛选（全部 / 资讯 / 我的情报 / 自定义）
+function setIntelFavOrigin(o) { intelState.intelFavOrigin = o; render(); }
+
+// 收藏分组 HTML（依据当前 搜索词 + 来源 + 分类筛选 计算）；卡片索引指向原始收藏数组
 function intelFavBodyHtml() {
   var fav = intelState.intelFavBase || [];
   var cats = DB.data.industryFavCats || [];
   var searched = intelSearchFav(fav, intelState.intelFavSearch, DB.data.industryComments);
-  var visible = (intelState.intelFavFilter === "all") ? searched : searched.filter(function (f) { return (f.catId || "") === intelState.intelFavFilter; });
+  // Sprint 3：先按来源过滤（存量无 origin 的历史收藏归为 news）
+  var byOrigin = (intelState.intelFavOrigin && intelState.intelFavOrigin !== "all")
+    ? searched.filter(function (f) { var o = (f.origin === "mine" || f.origin === "custom") ? f.origin : "news"; return o === intelState.intelFavOrigin; })
+    : searched;
+  var visible = (intelState.intelFavFilter === "all") ? byOrigin : byOrigin.filter(function (f) { return (f.catId || "") === intelState.intelFavFilter; });
   if (!visible.length) return '<div class="empty-state" style="padding:18px 0"><div class="empty-icon">🔍</div><div class="empty-text">没有匹配的收藏</div></div>';
   var groups = [];
   cats.forEach(function (c) { groups.push({ cat: c, items: visible.filter(function (f) { return (f.catId || "") === c.id; }) }); });
@@ -714,6 +734,9 @@ function resolveIntelItem(scope, idx) {
   else if (scope === "custom") { item = (intelState.customIntelItems || [])[idx]; }
   else if (scope === "fav") { item = (intelState.favItems || [])[idx]; }
   if (!item) return null;
+  // Sprint 3：来源（origin）判定 —— fav 页保留既有；custom 条目自带 origin:"custom"；mine→mine；其余(资讯/历史)→news
+  var origin = (item.origin) ? String(item.origin) : (scope === "mine" ? "mine" : (scope === "custom" ? "custom" : "news"));
+  if (origin !== "mine" && origin !== "custom") origin = "news";
   var key = item.key || intelFavKey(item, dateStr);
   var isFav = intelIsFav(DB.data.industryFav, key);
   var catId = null;
@@ -721,8 +744,9 @@ function resolveIntelItem(scope, idx) {
     var f = null;
     for (var i = 0; i < DB.data.industryFav.length; i++) { if (DB.data.industryFav[i].key === key) { f = DB.data.industryFav[i]; break; } }
     catId = f ? f.catId : null;
+    if (f && f.origin) origin = String(f.origin); // 已收藏：以记录里的 origin 为准（可能用户改过来源）
   }
-  return { item: item, dateStr: dateStr, key: key, isFav: isFav, catId: catId, title: item.title || "" };
+  return { item: item, dateStr: dateStr, key: key, isFav: isFav, catId: catId, origin: origin, title: item.title || "" };
 }
 
 // —— 收藏分类选择器 ——
@@ -780,7 +804,12 @@ function confirmIntelFav() {
   if (p.isFav) {
     DB.data.industryFav = DB.data.industryFav.map(function (f) { if (f.key === p.key) f.catId = p.catId; return f; });
   } else {
-    DB.data.industryFav = intelAddFav(DB.data.industryFav, r.item, r.dateStr, p.catId);
+    // Sprint 3：写入时带来源 origin（mine/custom/news），浅拷贝避免污染原条目
+    var favItem = r.item;
+    if (r.origin && !favItem.origin) {
+      try { favItem = Object.assign({}, r.item, { origin: r.origin }); } catch (e) { favItem = r.item; }
+    }
+    DB.data.industryFav = intelAddFav(DB.data.industryFav, favItem, r.dateStr, p.catId);
   }
   DB.save();
   if (typeof DB.logActivity === "function") DB.logActivity("industry", (p.isFav ? "更新收藏分类" : "收藏") + "情报：" + (r.title || ""));

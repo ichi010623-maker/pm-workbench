@@ -24,6 +24,7 @@
     favItems: undefined,      // 收藏过滤结果
     intelFavBase: undefined,  // 收藏全量（供搜索局部刷新）
     intelFavFilter: "all",    // 收藏分类筛选
+    intelFavOrigin: "all",    // Sprint 3：收藏来源筛选（all/news/mine/custom）
     intelFavSearch: "",       // 收藏搜索词
     intelCalMonth: undefined, // 历史月历当前月 YYYY-MM
     intelSelDate: undefined,  // 历史选中日期
