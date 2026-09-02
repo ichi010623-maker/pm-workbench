@@ -1039,13 +1039,15 @@ function lgRenderPhonics(cur) {
     lgPhoneticsLoad(function () { render(); });
     return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载音标数据中…</div></div></div>';
   }
-  // 学习路径分发：path(主页) / letters(字母) / letter:CH / pairs / pair:ID / cons(辅音) / lib(图书馆 原视图)
+  // 学习路径分发：path(主页) / letters(字母) / letter:CH / pairs / pair:ID / cons(辅音) / spell(拼读) / lib(图书馆 原视图)
   var v = lgPhonView || "path";
   if (v === "letters") return lgPhonLettersPage();
   if (v.indexOf("letter:") === 0) return lgPhonLetterDetail(v.slice(7));
   if (v === "pairs") return lgPhonPairsPage();
   if (v.indexOf("pair:") === 0) return lgPhonPairTrain(v.slice(5));
   if (v === "cons") return lgPhonConsPage();
+  if (v === "spell") return lgPhonSpellPage();
+  if (v.indexOf("spell:") === 0) return lgPhonSpellDetail(v.slice(6));
   if (v === "lib") return lgRenderPhonLib(cur);
   return lgPhonPathPage();
 }
@@ -1086,10 +1088,11 @@ function lgRenderPhonLib(cur) {
 var lgPhonRegion = "US";
 var lgPhonSel = null; // 图书馆：当前查看的音标详情
 // —— Sprint 语言升级 · Pronunciation 学习路径状态 ——
-var lgPhonView = null;     // path/letters/letter:CH/pairs/pair:ID/lib
+var lgPhonView = null;     // path/letters/letter:CH/pairs/pair:ID/cons/spell/spell:ID/lib
 var lgPhonLetterIdx = 0;   // Phase1 字母学习游标
 var lgLetters = null;      // data/letters.json
 var lgPairs = null;        // data/phoneme_pairs.json
+var lgSpell = null;        // data/spelling_patterns.json（Phase 4）
 var __lgLettersDone = null; // localStorage: 已学字母 key（进度）
 function lgLettersDone() {
   if (__lgLettersDone) return __lgLettersDone;
@@ -1123,6 +1126,7 @@ function lgPairsLoad(cb) {
 function lgPhonPathPage() {
   if (!lgLetters) lgLettersLoad(function () { render(); });
   if (!lgPairs) lgPairsLoad(function () { render(); });
+  if (!lgSpell) lgSpellLoad(function () { render(); });
   var done = lgLettersDone();
   var pct1 = lgLetters && lgLetters.letters && lgLetters.letters.length
     ? Math.round(done.length / lgLetters.letters.length * 100) : 0;
@@ -1132,6 +1136,10 @@ function lgPhonPathPage() {
   var cp = lgConsProgress();
   var p3 = cp.pct >= 100 ? '<div style="color:var(--accent-green)">100% ✓</div>' : cp.done + '/' + cp.total;
   var bar3 = '<div class="phon-progress"><div class="phon-progress-fill" style="width:' + cp.pct + '%"></div></div>';
+  // Phase 4 进度
+  var sp = lgSpellProgress();
+  var p4 = sp.pct >= 100 ? '<div style="color:var(--accent-green)">100% ✓</div>' : sp.done + '/' + sp.total;
+  var bar4 = '<div class="phon-progress"><div class="phon-progress-fill" style="width:' + sp.pct + '%"></div></div>';
 
   function phaseCard(n, title, desc, state, pctHtml, barHtml, onClick, locked) {
     return '<div class="phon-phase' + (locked ? " locked" : "") + '"' + (locked ? '' : ' onclick="' + onClick + '"') + '>' +
@@ -1149,7 +1157,7 @@ function lgPhonPathPage() {
     phaseCard(1, "字母与声音基础", "26 Letters · Letter Name ≠ Letter Sound", null, p1, bar1, "lgPhonView='letters';render()") +
     phaseCard(2, "元音系统 + 听辨训练", "单元音 / 双元音 · Minimal Pairs 辨音", null, "", "", "lgPhonView='pairs';render()") +
     phaseCard(3, "辅音系统", "清浊对比 · 发音机制分组 · 4 大组", null, p3, bar3, "lgPhonView='cons';render()") +
-    phaseCard(4, "自然拼读", "Pattern → Sound → Word", null, "", "", "", true) +
+    phaseCard(4, "自然拼读", "13 Patterns · 逐词拆解拼读", null, p4, bar4, "lgPhonView='spell';render()") +
     phaseCard(5, "拼读实战", "4 种训练模式", null, "", "", "", true) +
     '</div>';
 
@@ -1159,6 +1167,8 @@ function lgPhonPathPage() {
     rec = '💡 下一步：' + (lgLetters && lgLetters.tip || "学习字母 A");
   } else if (cp.pct < 100) {
     rec = '💡 下一步：继续 Phase 3 辅音系统（' + cp.done + '/' + cp.total + ' 已练过）';
+  } else if (sp.pct < 100) {
+    rec = '💡 下一步：继续 Phase 4 自然拼读（已学 ' + sp.done + '/' + sp.total + ' 个 Pattern）';
   } else {
     rec = '💡 下一步：开始 Phase 2 听辨训练（' + (lgPairs && lgPairs.vowelPairs && lgPairs.vowelPairs[0] ? lgPairs.vowelPairs[0].a + " vs " + lgPairs.vowelPairs[0].b : "") + '）';
   }
@@ -1377,6 +1387,124 @@ function lgPhonConsPage() {
   }).join("");
 
   return head + throatCard + mechHtml;
+}
+
+/* ============================================================
+ * Phase 4 · 自然拼读 Phonics × Spelling（Pattern → Sound → Word）
+ * ============================================================ */
+var lgSpell = null;
+var lgSpellState = {}; // { patternId: {wIdx} } 会话进度
+var __lgSpellDone = null;
+function lgSpellDone() {
+  if (__lgSpellDone) return __lgSpellDone;
+  try { __lgSpellDone = JSON.parse(localStorage.getItem("lgPhonSpellDone") || "[]"); }
+  catch (e) { __lgSpellDone = []; }
+  return __lgSpellDone;
+}
+function lgSpellMarkDone(id) {
+  var d = lgSpellDone();
+  if (d.indexOf(id) < 0) { d.push(id); __lgSpellDone = d; localStorage.setItem("lgPhonSpellDone", JSON.stringify(d)); }
+}
+function lgSpellReset() { __lgSpellDone = null; }
+function lgSpellLoad(cb) {
+  fetch("data/spelling_patterns.json?v=" + (typeof APP_VERSION !== "undefined" ? APP_VERSION : "")).then(function (r) { return r.json(); }).then(function (d) {
+    lgSpell = d;
+    if (typeof DB !== "undefined" && DB && DB.cache) DB.cache("spelling_patterns", d);
+    if (cb) cb();
+  }).catch(function () { if (cb) cb(); });
+}
+function lgSpellProgress() {
+  if (!lgSpell || !lgSpell.patterns) return { done: 0, total: 0, pct: 0 };
+  var done = lgSpellDone();
+  var total = lgSpell.patterns.length;
+  var d = 0;
+  for (var i = 0; i < total; i++) { if (done.indexOf(lgSpell.patterns[i].id) >= 0) d++; }
+  return { done: d, total: total, pct: total ? Math.round(d / total * 100) : 0 };
+}
+
+// 词拆解渲染：字母色块 + 发音标注 + 整词 TTS
+function lgSpellWordRow(w, region, accent) {
+  var chips = (w.parts || []).map(function (pt) {
+    var silent = pt[1] === "∅";
+    return '<span class="phon-chip' + (silent ? " silent" : "") + '">' +
+      '<span class="phon-chip-l">' + pt[0] + '</span>' +
+      '<span class="phon-chip-s">' + pt[1] + '</span></span>';
+  }).join("");
+  return '<div class="phon-spell-word">' +
+    '<div class="phon-spell-chips">' + chips + '</div>' +
+    '<div class="phon-spell-rt">' +
+      '<span class="phon-spell-eq">=</span>' +
+      '<span class="phon-spell-ipa">' + w.ipa + '</span>' +
+      '<button class="phon-speak-btn" onclick="event.stopPropagation();lgPhonSpeak(\'' + lgEscapeJs(w.w) + '\',\'' + region + '\')">🔊</button>' +
+      '<span class="phon-spell-zh">' + w.w + ' · ' + w.zh + '</span>' +
+    '</div></div>';
+}
+
+// Pattern 列表页（按 cat 分组）
+function lgPhonSpellPage() {
+  if (!lgSpell) { lgSpellLoad(function () { render(); }); return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载中…</div></div></div>'; }
+  var region = lgPhonRegion || "US";
+  var head = '<div class="lg-card"><div class="lg-card-h">🔠 Phase 4 · 自然拼读 <span class="lg-sub">Pattern → Sound → Word</span></div>' +
+    '<div class="lg-hint">' + (lgSpell.intro || "") + '</div>' +
+    '<div class="lg-row" style="gap:8px;margin:6px 0"><button class="lg-btn ghost" onclick="lgPhonView=null;render()">← 🗺 路径</button></div></div>';
+  var done = lgSpellDone();
+  var catMap = {};
+  (lgSpell.patterns || []).forEach(function (p) { (catMap[p.cat] = catMap[p.cat] || []).push(p); });
+  var body = (lgSpell.cats || []).map(function (c) {
+    var ps = catMap[c.id] || [];
+    var cards = ps.map(function (p) {
+      var isDone = done.indexOf(p.id) >= 0;
+      return '<div class="phon-spell-pat' + (isDone ? " done" : "") + '" onclick="lgPhonView=\'spell:' + p.id + '\';render()">' +
+        '<div class="phon-spell-pat-p">' + p.pattern + '</div>' +
+        '<div class="phon-spell-pat-body"><div class="phon-spell-pat-s">' + p.sound +
+          ' <button class="phon-speak-btn" onclick="event.stopPropagation();lgPhonSpeak(\'' + lgEscapeJs(p.speak) + '\',\'' + region + '\')">🔊</button></div>' +
+          '<div class="phon-spell-pat-w">' + (p.words || []).map(function (w) { return w.w; }).join(" · ") + '</div></div>' +
+        (isDone ? '<div class="phon-spell-ok">✓</div>' : '') +
+        '</div>';
+    }).join("");
+    return '<div class="lg-card"><div class="lg-card-h">' + c.num + ' · ' + c.name + ' <span class="lg-sub">' + c.zh + '</span></div>' + cards + '</div>';
+  }).join("");
+  return head + body;
+}
+
+// Pattern 详情页：规律说明 + 逐词拆解拼读
+function lgPhonSpellDetail(id) {
+  if (!lgSpell) { lgSpellLoad(function () { render(); }); return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载中…</div></div></div>'; }
+  var p = null;
+  for (var i = 0; i < (lgSpell.patterns || []).length; i++) { if (lgSpell.patterns[i].id === id) { p = lgSpell.patterns[i]; break; } }
+  if (!p) { lgPhonView = "spell"; render(); return ""; }
+  lgSpellMarkDone(id);
+  var region = lgPhonRegion || "US";
+  var done = lgSpellDone();
+  var total = lgSpell.patterns.length;
+  var head = '<div class="lg-card phon-spell-hero">' +
+    '<div class="lg-row" style="gap:8px"><button class="lg-btn ghost" onclick="lgPhonView=\'spell\';render()">← Pattern 列表</button></div>' +
+    '<div class="phon-spell-hero-p">' + p.pattern + ' <span class="phon-spell-arrow">→</span> <span class="phon-spell-hero-s">' + p.sound + '</span>' +
+      ' <button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(p.speak) + '\',\'' + region + '\')">🔊</button></div>' +
+    '<div class="lg-hint">' + p.rule + '</div>' +
+    '<div class="phon-spell-prog">已学 ' + done.length + '/' + total + ' 个 Pattern</div></div>';
+  var words = (p.words || []).map(function (w) { return lgSpellWordRow(w, region); }).join("");
+  var navBtn = '<div class="lg-row" style="gap:8px;margin-top:10px">' +
+    '<button class="lg-btn ghost" onclick="lgPhonView=\'spell\';render()">🗺 全部 Pattern</button>';
+  // 找到下一个未学 pattern
+  var nextPat = null;
+  for (var j = 0; j < (lgSpell.patterns || []).length; j++) {
+    if (lgSpell.patterns[j].id === id) {
+      for (var k = j + 1; k < lgSpell.patterns.length + j; k++) {
+        var idx = k % lgSpell.patterns.length;
+        if (done.indexOf(lgSpell.patterns[idx].id) < 0) { nextPat = lgSpell.patterns[idx]; break; }
+      }
+      break;
+    }
+  }
+  if (nextPat) {
+    navBtn += '<button class="lg-btn primary" style="flex:1" onclick="lgPhonView=\'spell:' + nextPat.id + '\';render()">下一个 ' + nextPat.pattern + ' →</button>';
+  } else {
+    navBtn += '<button class="lg-btn primary" style="flex:1" onclick="lgPhonView=null;render()">🎉 全部学完 · 返回路径</button>';
+  }
+  navBtn += '</div>';
+  return head + '<div class="lg-card"><div class="lg-card-h">逐词拆解拼读</div>' +
+    '<div class="lg-hint">每个色块 = 一个字母或字母组合，色块上方标发音，∅ = 不发音。依次读出即整词发音。</div>' + words + '</div>' + navBtn;
 }
 
 // 训练器：读一个词 → 判断 A 还是 B
