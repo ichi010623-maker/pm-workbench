@@ -3,7 +3,7 @@
    离线缓存 + 自动更新 + 隐私保护
    ============================================ */
 
-const CACHE_VERSION = "v5.9.94";
+const CACHE_VERSION = "v5.9.95";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const APP_SHELL_ASSETS = [];
 
