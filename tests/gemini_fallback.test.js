@@ -1,27 +1,11 @@
-// Gemini 模型 404 自动降级测试（Node vm 加载 js/intel.js，stub fetch）
+// Gemini 模型 404 自动降级测试（Node vm 加载 js/intel/* 子模块，stub fetch）
 // 验证：当首选模型 gemini-2.5-flash 返回 404「模型不存在」时，自动尝试候选列表中的下一个模型。
 // 运行：node tests/gemini_fallback.test.js
-const fs = require("fs");
 const path = require("path");
-const vm = require("vm");
+const { loadIntel, makeIntelSandbox } = require("./lib/intel_load");
 
-const ROOT = path.resolve(__dirname, "..");
-const src = fs.readFileSync(path.join(ROOT, "js", "intel.js"), "utf8");
-
-const fakeEl = { innerHTML: "", querySelector: () => null, querySelectorAll: () => [], classList: { add() {}, remove() {}, contains: () => false } };
-const sandbox = {
-  DB: { data: { industryHistory: {}, industryFav: [], industryCustom: [] }, save() {}, logActivity() {} },
-  document: { getElementById: () => fakeEl, querySelector: () => null, querySelectorAll: () => [] },
-  window: {},
-  escapeHtml: s => (s == null ? "" : String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")),
-  showModal() {}, closeModal() {}, showToast() {}, navigate() {}, render() {},
-  today: () => "2026-08-06",
-  uid: () => "id" + Math.random().toString(36).slice(2, 9),
-  console, encodeURIComponent, decodeURIComponent, Math, Date, JSON, Object, Array, String, Number, parseInt, parseFloat, isNaN,
-  localStorage: (function () { var m = {}; return { getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); }, removeItem: k => { delete m[k]; } }; })()
-};
-vm.createContext(sandbox);
-vm.runInContext(src, sandbox);
+const sandbox = makeIntelSandbox();
+loadIntel(sandbox);
 
 const { INTEL_PROVIDERS, callLLMForPrompt } = sandbox;
 

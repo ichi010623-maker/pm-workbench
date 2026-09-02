@@ -1,12 +1,8 @@
 // 测试：OpenAI ChatGPT 联网搜索 provider + 🌐 下拉标记 + Gemini 候选模型清单净化
-const fs = require("fs");
-const vm = require("vm");
-const path = require("path");
+const { loadIntel, makeIntelSandbox } = require("./lib/intel_load");
 
-const code = fs.readFileSync(path.join(__dirname, "..", "js", "intel.js"), "utf8");
-const sandbox = { console, setTimeout, fetch: undefined, module: {}, exports: {} };
-vm.createContext(sandbox);
-vm.runInContext(code, sandbox);
+const sandbox = makeIntelSandbox();
+loadIntel(sandbox);
 
 const INTEL_PROVIDERS = sandbox.INTEL_PROVIDERS;
 const intelProvBadge = sandbox.intelProvBadge;

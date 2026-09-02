@@ -1,27 +1,10 @@
-// 速率限制（HTTP 429）处理测试（Node vm 加载 js/intel.js，stub fetch）
+// 速率限制（HTTP 429）处理测试（Node vm 加载 js/intel/* 子模块，stub fetch）
 // 验证：① 429 时做退避重试，瞬时突发可恢复；② 持续 429 抛出含绕开建议的专属报错。
 // 运行：node tests/ratelimit.test.js
-const fs = require("fs");
-const path = require("path");
-const vm = require("vm");
+const { loadIntel, makeIntelSandbox } = require("./lib/intel_load");
 
-const ROOT = path.resolve(__dirname, "..");
-const src = fs.readFileSync(path.join(ROOT, "js", "intel.js"), "utf8");
-
-const fakeEl = { innerHTML: "", querySelector: () => null, querySelectorAll: () => [], classList: { add() {}, remove() {}, contains: () => false } };
-const sandbox = {
-  DB: { data: { industryHistory: {}, industryFav: [], industryCustom: [] }, save() {}, logActivity() {} },
-  document: { getElementById: () => fakeEl, querySelector: () => null, querySelectorAll: () => [] },
-  window: {},
-  escapeHtml: s => (s == null ? "" : String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")),
-  showModal() {}, closeModal() {}, showToast() {}, navigate() {}, render() {},
-  today: () => "2026-08-06",
-  uid: () => "id" + Math.random().toString(36).slice(2, 9),
-  console, encodeURIComponent, decodeURIComponent, Math, Date, JSON, Object, Array, String, Number, parseInt, parseFloat, isNaN, setTimeout,
-  localStorage: (function () { var m = {}; return { getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); }, removeItem: k => { delete m[k]; } }; })()
-};
-vm.createContext(sandbox);
-vm.runInContext(src, sandbox);
+const sandbox = makeIntelSandbox({ setTimeout });
+loadIntel(sandbox);
 
 const { INTEL_PROVIDERS, callLLMForPrompt } = sandbox;
 

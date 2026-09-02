@@ -2,10 +2,18 @@
 // 行业情报 · llm/providers（AI Provider 注册表）
 // 仅负责：8 个 provider 的 buildUrl/buildHeaders/buildBody/buildBodyForPrompt/parse
 // 不修改 Provider 行为。
-// 依赖：core（loadAiConfig），prompts（intelSystemPrompt）— buildBody 内部通过 globalThis 引用
+// 依赖：core（loadAiConfig），prompts（intelSystemPrompt）
+//   依赖收敛（Sprint 1.5）：prompts.js 先于本文件加载（index.html 顺序固定），
+//   故此处加载期一次性捕获 intelSystemPrompt 为局部 sysPrompt，
+//   buildBody 内部不再每次运行时从 root 拉取（grep root.intelSystemPrompt = 0）。
 // ============================================================
 (function (root) {
   "use strict";
+
+  // 加载期捕获 prompts.intelSystemPrompt（防御：若加载顺序异常则回退 need 原文）
+  var sysPrompt = (typeof root.intelSystemPrompt === "function")
+    ? root.intelSystemPrompt
+    : function (need) { return need; };
 
   // OpenAI 兼容 provider 构造器（Groq / DeepSeek / OpenRouter）
   function openAiIntelProvider(endpoint, model, name) {
@@ -18,7 +26,7 @@
           model: model,
           messages: [
             { role: "system", content: "你是硬件产品情报分析师，基于你的知识作答，输出严谨简体中文。" },
-            { role: "user", content: (typeof root.intelSystemPrompt === "function" ? root.intelSystemPrompt(need, dateStr) : need) }
+            { role: "user", content: sysPrompt(need, dateStr) }
           ]
         };
       },
@@ -84,7 +92,7 @@
       buildHeaders: function () { return { "Content-Type": "application/json" }; },
       buildBody: function (need, dateStr) {
         return {
-          contents: [{ parts: [{ text: (typeof root.intelSystemPrompt === "function" ? root.intelSystemPrompt(need, dateStr) : need) }] }],
+          contents: [{ parts: [{ text: sysPrompt(need, dateStr) }] }],
           tools: [{ google_search: {} }]
         };
       },
@@ -125,7 +133,7 @@
           model: "sonar",
           messages: [
             { role: "system", content: "你是硬件产品情报分析师，使用联网检索给出带引用的简报。" },
-            { role: "user", content: (typeof root.intelSystemPrompt === "function" ? root.intelSystemPrompt(need, dateStr) : need) }
+            { role: "user", content: sysPrompt(need, dateStr) }
           ]
         };
       },
@@ -157,7 +165,7 @@
           model: "gpt-5-search-api",
           messages: [
             { role: "system", content: "你是硬件产品情报分析师，使用联网检索给出带引用的严谨简体中文简报。" },
-            { role: "user", content: (typeof root.intelSystemPrompt === "function" ? root.intelSystemPrompt(need, dateStr) : need) }
+            { role: "user", content: sysPrompt(need, dateStr) }
           ]
         };
       },
@@ -209,7 +217,7 @@
   INTEL_PROVIDERS.zhipu.buildBody = function (need, dateStr) {
     return zhipuBodyWithSearch([
       { role: "system", content: "你是硬件产品情报分析师，使用联网检索作答，输出严谨简体中文；关键数据尽量给出可点击的来源网页链接。" },
-      { role: "user", content: (typeof root.intelSystemPrompt === "function" ? root.intelSystemPrompt(need, dateStr) : need) }
+      { role: "user", content: sysPrompt(need, dateStr) }
     ]);
   };
   INTEL_PROVIDERS.zhipu.buildBodyForPrompt = function (prompt, dateStr) {
