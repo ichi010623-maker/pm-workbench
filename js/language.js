@@ -1236,12 +1236,12 @@ function lgPhonLetterDetail(ch) {
   var nameCard = '<div class="lg-card phon-letter-hero">' +
     '<div class="phon-hero-ch">' + l.ch + '</div>' +
     '<div class="phon-hero-name">字母名（Letter Name）</div>' +
-    '<div class="phon-hero-ipa">' + l.name + ' <button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(l.ch) + '\',\'' + region + '\')">🔊</button></div>' +
+    '<div class="phon-hero-ipa">' + l.name + ' <button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(l.nameSpeak || l.name.replace(/[\/ː]/g, "")) + '\',\'' + region + '\')">🔊</button></div>' +
     '<div class="phon-hero-note">念 <b>ABC 字母表</b> 时的读音</div></div>';
   // 常见发音卡
   var sndHtml = (l.sounds || []).map(function (s) {
     return '<div class="phon-snd-row">' +
-      '<div class="phon-snd-ipa">' + s.ipa + ' <button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(s.ipa.replace(/\//g, "")) + '\',\'' + region + '\')">🔊</button></div>' +
+      '<div class="phon-snd-ipa">' + s.ipa + ' <button class="phon-speak-btn" onclick="lgPhonSpeak(\'' + lgEscapeJs(s.speakText || s.ipa.replace(/[\/]/g, "")) + '\',\'' + region + '\')">🔊</button></div>' +
       '<div class="phon-snd-word"><b>' + s.word + '</b> ' + s.zh + '</div>' +
       '<button class="phon-speak-btn sm" onclick="event.stopPropagation();lgPhonSpeak(\'' + lgEscapeJs(s.word) + '\',\'' + region + '\')">🔊 读词</button>' +
       '<div class="phon-snd-hint">' + s.hint + '</div>' +
