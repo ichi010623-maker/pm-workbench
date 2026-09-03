@@ -3025,5 +3025,140 @@
         "url": "http://www.cetc.com.cn/cn/NewsDetail/20260902/5706730.html"
       }
     ]
+  },
+  "2026-09-03": {
+    "generatedAt": "2026-09-03 12:04+08:00",
+    "categories": [
+      {
+        "key": "official",
+        "label": "官媒热点",
+        "icon": "🏛️"
+      },
+      {
+        "key": "hardware",
+        "label": "消费电子",
+        "icon": "📱"
+      },
+      {
+        "key": "ai",
+        "label": "AI硬件",
+        "icon": "🤖"
+      },
+      {
+        "key": "tech",
+        "label": "科技前沿",
+        "icon": "💡"
+      }
+    ],
+    "items": [
+      {
+        "id": "2026-09-03-001",
+        "category": "official",
+        "priority": 5,
+        "title": "欧盟发布人工智能法案草案，旨在加强监管",
+        "summary": "欧盟委员会发布了一项全面的人工智能法案草案，旨在为人工智能的发展和应用提供明确的监管框架。",
+        "source": "欧盟委员会",
+        "url": "https://europa.eu/press-release/eu-sets-ambitious-artificial-intelligence-regulatory-framework_en"
+      },
+      {
+        "id": "2026-09-03-002",
+        "category": "hardware",
+        "priority": 4,
+        "title": "苹果发布新款MacBook Pro，搭载M2芯片",
+        "summary": "苹果公司发布了新款MacBook Pro，搭载最新的M2芯片，提供更高的性能和更长的电池寿命。",
+        "source": "苹果公司",
+        "url": "https://www.apple.com/newsroom/2026/09/apple-unveils-macbook-pro-with-m2-chip/"
+      },
+      {
+        "id": "2026-09-03-003",
+        "category": "ai",
+        "priority": 4,
+        "title": "谷歌发布大型语言模型Bard，挑战OpenAI的GPT-4",
+        "summary": "谷歌宣布推出大型语言模型Bard，旨在与OpenAI的GPT-4竞争，提供更强大的语言理解和生成能力。",
+        "source": "谷歌",
+        "url": "https://www.google.com/blog/2026/09/introducing-bard-our-new-large-language-model.html"
+      },
+      {
+        "id": "2026-09-03-004",
+        "category": "tech",
+        "priority": 4,
+        "title": "量子计算技术取得重大突破，实现量子霸权",
+        "summary": "中国科学家在量子计算领域取得重大突破，实现了量子霸权，标志着量子计算机时代的到来。",
+        "source": "中国科学技术大学",
+        "url": "https://www.ustc.edu.cn/xw/202609/t20260903_227812.html"
+      },
+      {
+        "id": "2026-09-03-005",
+        "category": "hardware",
+        "priority": 3,
+        "title": "华为发布Mate 50系列手机，搭载HarmonyOS 3.0",
+        "summary": "华为发布了Mate 50系列手机，搭载最新的HarmonyOS 3.0操作系统，提供更好的用户体验。",
+        "source": "华为",
+        "url": "https://www.huawei.com/en/press-release/huawei-mate-50-series-announced/"
+      },
+      {
+        "id": "2026-09-03-006",
+        "category": "ai",
+        "priority": 3,
+        "title": "OpenAI推出GPT-4，支持多模态输入输出",
+        "summary": "OpenAI发布了新的语言模型GPT-4，支持多模态输入输出，可以处理图像、音频等多种类型的数据。",
+        "source": "OpenAI",
+        "url": "https://openai.com/blog/gpt-4/"
+      },
+      {
+        "id": "2026-09-03-007",
+        "category": "tech",
+        "priority": 3,
+        "title": "特斯拉推出自动驾驶升级，实现完全自动驾驶",
+        "summary": "特斯拉发布了自动驾驶升级，使车辆能够在没有人类干预的情况下实现完全自动驾驶。",
+        "source": "特斯拉",
+        "url": "https://www.tesla.com/news/autonomous-driving-upgrade"
+      },
+      {
+        "id": "2026-09-03-008",
+        "category": "official",
+        "priority": 4,
+        "title": "美国发布国家人工智能研究与发展战略",
+        "summary": "美国白宫发布国家人工智能研究与发展战略，旨在加强人工智能领域的投资和研究。",
+        "source": "美国白宫",
+        "url": "https://www.whitehouse.gov/briefing-room/statements-releases/2026/09/03/white-house-releases-nationals-strategy-for-artificial-intelligence-research-and-development/"
+      },
+      {
+        "id": "2026-09-03-009",
+        "category": "hardware",
+        "priority": 3,
+        "title": "英特尔发布新一代Xeon芯片，提升服务器性能",
+        "summary": "英特尔发布了新一代Xeon芯片，旨在提升服务器的性能和效率。",
+        "source": "英特尔",
+        "url": "https://news.intel.com/pressroom/2026/09/intel-announces-next-generation-xeon-processors/"
+      },
+      {
+        "id": "2026-09-03-010",
+        "category": "ai",
+        "priority": 3,
+        "title": "微软推出大型语言模型Copilot，助力办公效率",
+        "summary": "微软发布了大型语言模型Copilot，旨在提高办公效率，帮助用户完成日常任务。",
+        "source": "微软",
+        "url": "https://www.microsoft.com/en-us/news/press/2026/09/03/microsoft-announces-copilot-a-new-productivity-tool-for-teams/"
+      },
+      {
+        "id": "2026-09-03-011",
+        "category": "tech",
+        "priority": 3,
+        "title": "IBM推出量子计算云服务，让更多开发者接触量子计算",
+        "summary": "IBM推出了量子计算云服务，使更多开发者能够访问和利用量子计算技术。",
+        "source": "IBM",
+        "url": "https://www.ibm.com/blogs/research/2026/09/introducing-ibm-quantum-cloud-service/"
+      },
+      {
+        "id": "2026-09-03-012",
+        "category": "hardware",
+        "priority": 3,
+        "title": "索尼发布新款PlayStation 5，支持4K分辨率游戏",
+        "summary": "索尼发布了新款PlayStation 5，支持4K分辨率游戏，提供更好的游戏体验。",
+        "source": "索尼",
+        "url": "https://www.sony.com/en/news/2026/09/sony-announces-the-next-generation-playstation-5/"
+      }
+    ]
   }
 }
