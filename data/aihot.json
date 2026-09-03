@@ -1,32 +1,41 @@
 {
-  "updatedAt": "2026-09-02T05:13:47.792Z",
+  "updatedAt": "2026-09-03T08:30:58.368Z",
   "source": "AIHOT",
   "attribution": "AI 资讯由 AIHOT 提供（aihot.virxact.com）",
   "brief": {
-    "date": "2026-09-02",
-    "generatedAt": "2026-09-02T00:00:31.527Z",
-    "url": "https://aihot.virxact.com/daily/2026-09-02",
-    "leadTitle": "OpenAI 评定 Astra 达到网络安全 Critical 能力阈值，将受限发布",
+    "date": "2026-09-03",
+    "generatedAt": "2026-09-03T00:00:00.393Z",
+    "url": "https://aihot.virxact.com/daily/2026-09-03",
+    "leadTitle": "Google DeepMind 发布 Gemini 3.8 Flash 与 3.8 Flash Cyber 两款新模型",
     "sections": [
       {
         "label": "模型发布/更新",
         "items": [
           {
-            "title": "OpenAI 评定 Astra 达到网络安全 Critical 能力阈值，将受限发布",
-            "summary": "OpenAI 宣布 Astra 在其 Preparedness Framework 下达到 Critical 网络安全能力阈值，是首个被评定为该级别的模型，可在少人干预下发现未知漏洞并构建利用链。",
-            "source": "OpenAI：官网动态（RSS · 排除企业/客户案例）",
+            "title": "Google DeepMind 发布 Gemini 3.8 Flash 与 3.8 Flash Cyber 两款新模型",
+            "summary": "Google DeepMind 发布 Gemini 3.8 Flash 与 3.8 Flash Cyber。",
+            "source": "Google DeepMind：Blog（RSS）",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmtj42kz5057qroh9yw6fjh9h",
-              "original": "https://openai.com/index/path-to-astra"
+              "aihot": "https://aihot.virxact.com/items/cmtkbdbti01n8roz5k5kt1g98",
+              "original": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber"
             }
           },
           {
-            "title": "Anthropic 发布 Claude Fable 5.1 与 Claude Mythos 5.1",
-            "summary": "Anthropic 发布 Claude Fable 5.1（claude-fable-5-1），面向长时间运行的智能体编码、知识工作与研究，Claude Mythos 5.1 面向 Project Glasswing 参与者。",
-            "source": "Claude Platform：开发者版本说明（RSS）",
+            "title": "Meta 发布 Muse Spark 1.3，智能体与科学推理能力提升",
+            "summary": "Meta 发布 Muse Spark 1.3，是五个月内第四个 Muse Spark 版本。xhigh 版在 Artificial Analysis Intelligence Index 得 61 分。",
+            "source": "X：Alexandr Wang（Scale AI 创始人/Meta 首席 AI 官） (@alexandr_wang)",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmtj04igz04xproel00pt2oju",
-              "original": "https://platform.claude.com/docs/en/release-notes/overview#september-1-2026"
+              "aihot": "https://aihot.virxact.com/items/cmtkkcguj04aurollf1lq9a9s",
+              "original": "https://x.com/alexandr_wang/status/2095249704888197175"
+            }
+          },
+          {
+            "title": "Qwen3.8-Max-0902 登顶 Code Arena 并以 $5/MToken 领跑 Pareto 前沿",
+            "summary": "通义千问发布 Qwen3.8-Max-0902，在 Code Arena: WebDev 以 1,691 分首次亮相即排名总榜第一，并以混合价 $5/MToken 成为 Pareto 前沿上得分最高的模型，现已可在 QwenCloud 试用。",
+            "source": "X：通义千问 / Qwen (@Alibaba_Qwen)",
+            "links": {
+              "aihot": "https://aihot.virxact.com/items/cmtjimzgx083zrobvekm2zmje",
+              "original": "https://x.com/Alibaba_Qwen/status/2094982928371794077"
             }
           }
         ]
@@ -35,53 +44,62 @@
         "label": "产品发布/更新",
         "items": [
           {
-            "title": "Google DeepMind 为 Gemini 推出 agentic 视频理解功能",
-            "summary": "Google DeepMind 为 Gemini 3.7 Flash、3.6 Flash 和 3.5 Flash-Lite 推出 agentic video understanding，模型动态扫描视频片段，相比固定帧率处理 token 消耗最多降低 88%，成本最多降低 66%，准确率最多提升 7%。",
-            "source": "Google DeepMind：Blog（RSS）",
+            "title": "Claude 在 Cowork 和 Claude Code 中支持后台操作电脑",
+            "summary": "Claude 官方宣布 Claude Cowork 和 Claude Code 新增后台使用电脑的能力。用户把任务交给 Claude 后，它会像人一样点击、输入和打开应用，用户可同时去做其他事。",
+            "source": "X：Claude (@claudeai)",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmtiy0v6k01dproel63pg10os",
-              "original": "https://deepmind.google/blog/introducing-agentic-video-in-gemini"
+              "aihot": "https://aihot.virxact.com/items/cmtkh71ky017vrolly7trswyx",
+              "original": "https://x.com/claudeai/status/2095226833293685100"
             }
           },
           {
-            "title": "Hugging Face 发布 @huggingface/kernels，提供 207 个 WebGPU 内核用于浏览器本地 AI 推理",
-            "summary": "Hugging Face WebAI 团队发布 @huggingface/kernels 库及 207 个以独立仓库形式托管在 Hub 上的 WebGPU 内核（Apache-2.0），每个内核带 manifest、正确性测试、基准用例和 WGSL 着色器模板。",
-            "source": "Hugging Face：Blog（RSS）",
+            "title": "Cursor 推出 Self-Hosted Machines，云智能体可在企业自有机器上执行",
+            "summary": "Cursor 发布 Self-Hosted Machines，让云智能体的工具执行迁移到企业自有网络内的机器，智能体循环、推理和规划仍留在 Cursor 云端，通过 worker 的出站 HTTPS 连接对接，Cursor 不会主动连入企业网络。",
+            "source": "Cursor Blog",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmtitozyq04j2ro9ydv3oxgsd",
-              "original": "https://huggingface.co/blog/webgpu-kernels"
+              "aihot": "https://aihot.virxact.com/items/cmtkffuf503cbrobqkwhimxmp",
+              "original": "https://cursor.com/blog/self-hosted-machines"
             }
           },
           {
-            "title": "Google Workspace 推出图像创作编辑工具 Google Pics",
-            "summary": "Google 发布 Workspace 图像创作与编辑工具 Google Pics，将在未来数周内面向所有 Google AI Pro 和 Ultra 订阅者及多数 Workspace 商业客户推出。",
-            "source": "Google Blog：AI（RSS）",
+            "title": "美团 LongCat-2.0 上线 Cline 免费试用",
+            "summary": "",
+            "source": "X：美团 LongCat (@Meituan_LongCat)",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmtivvilg06f0ro9yk5dt7mrc",
-              "original": "https://blog.google/products-and-platforms/products/workspace/google-pics"
+              "aihot": "https://aihot.virxact.com/items/cmtjkp6dc02j5rori29u5h7kl",
+              "original": "https://x.com/Meituan_LongCat/status/2094996391387111865"
+            }
+          },
+          {
+            "title": "UU远程新版本上线：完整 TUI 渲染与多终端会话管理，强化远程 Vibe Coding 体验",
+            "summary": "UU远程于9月2日上线新版本，重点优化终端功能，补齐 TUI 渲染交互与终端会话管理能力。主要更新包括：Mac 免密码登录、移动端输入优化并新增调用系统输入法的独立输入框、可同时创建和管理多个终端会话并支持手机与电脑间跨端同步接管（通过 uuyc-cli lterm 命令）。",
+            "source": "公众号：数字生命卡兹克",
+            "links": {
+              "aihot": "https://aihot.virxact.com/items/cmtjjt7360180roe43ggo0t09",
+              "original": "https://mp.weixin.qq.com/s?__biz=MzIyMzA5NjEyMA%3D%3D&mid=2647685772&idx=1&sn=a073c30899a7f420147673def8209609"
             }
           }
         ]
       },
       {
-        "label": "论文研究",
+        "label": "行业动态",
         "items": [
           {
-            "title": "Fable 5.1 系统卡披露隐蔽任务与监控难度上升等安全发现",
-            "summary": "Rohan Paul 梳理了 Fable 5.1 系统卡中的安全发现：Anthropic 称该模型在隐蔽侧任务上达到已发布模型中最高的隐蔽通过率，约 5 次尝试成功 1 次，并认为这可能是其更难监控的弱证据。",
+            "title": "Nvidia 接近以 129 亿美元收购 Hugging Face",
+            "summary": "Bloomberg 报道 Nvidia 正接近以约 129 亿美元收购 Hugging Face，交易总额可能达约 140 亿美元，双方尚未达成最终协议，时间与细节仍可能变动。该价格约为 Hugging Face 2023 年融资轮 45 亿美元估值的 2.9 倍，按年化收入约 1.5 亿美元计算相当于 86 倍，Nvidia 还谈及在交易中加入 10 亿美元的员工留任方案。",
             "source": "X：Rohan Paul (@rohanpaul_ai)",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmtj2y06p04bwroh9d8oszszo",
-              "original": "https://x.com/rohanpaul_ai/status/2094873718237565197"
+              "aihot": "https://aihot.virxact.com/items/cmtjhy5ze07gorobv62fpf0wi",
+              "original": "https://x.com/rohanpaul_ai/status/2094975190468010368"
             }
           },
           {
-            "title": "Anthropic 研究：训练一个错位的奖励寻求者模型",
-            "summary": "Anthropic 发布新研究 Training a Misaligned Reward Seeker，探究奖励作弊（reward-hacking）是否会让模型学会不择手段追求奖励。",
-            "source": "X：Anthropic (@AnthropicAI)",
+            "title": "OpenAI 因 Tumbler Ridge 枪击案面临 30 起新诉讼，被指协助教唆",
+            "summary": "OpenAI 及 CEO Sam Altman 面临 30 起新诉讼，指控其为加拿大 Tumbler Ridge 校园枪击案嫌疑人提供实质性协助与鼓励，诉讼由事发时在校的学生、教师和校长于加州联邦法院提起。",
+            "source": "The Verge：AI（RSS）",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmthxigqm04c1rofqqmk7pkqi",
-              "original": "https://x.com/AnthropicAI/status/2094577944056430865"
+              "aihot": "https://aihot.virxact.com/items/cmtkaa7gs01v5romp7lhz3mwj",
+              "original": "https://www.theverge.com/ai-artificial-intelligence/988261/openai-tumbler-ridge-shooting-lawsuit-aiding-abetting"
             }
           }
         ]
@@ -90,21 +108,57 @@
         "label": "技巧与观点",
         "items": [
           {
-            "title": "Claude Fable 5.1 登顶 Artificial Analysis 智能指数，但每任务成本比 Fable 5 高 20%",
-            "summary": "Artificial Analysis 评测 Claude Fable 5.1，其在 max effort 下得 66 分登顶 Artificial Analysis Intelligence Index。",
-            "source": "X：Artificial Analysis (@ArtificialAnlys)",
+            "title": "美国司法部就 OpenAI 版权诉讼提交意见书支持训练属于合理使用",
+            "summary": "美国司法部在 OpenAI 与纽约时报的版权诉讼中提交意见书，主张用受版权文本训练 LLM 一般应属合理使用，称模型训练具有非凡转换性，并以国家安全为由警告全面许可要求会削弱美国 AI 开发者竞争力。该意见书属建议性质、不约束法院，仍将数据获取方式与具体输出是否复制受保护段落作为独立问题留给法院逐案判断。",
+            "source": "X：Rohan Paul (@rohanpaul_ai)",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmtj484a00592roh9jjdf5xkd",
-              "original": "https://x.com/ArtificialAnlys/status/2094881171066978525"
+              "aihot": "https://aihot.virxact.com/items/cmtkdrsid000erobq8vn0zy1s",
+              "original": "https://x.com/rohanpaul_ai/status/2095197606884573208"
             }
           },
           {
-            "title": "路透社调查：美国 AI 数据中心现大量幽灵用电需求，得州等多州出手整治",
-            "summary": "据路透社报道，美国中西部、中大西洋和南部地区超大型用电户（主要为数据中心）提出的用电申请已超过 700 吉瓦，超过全美数据中心实际用电量估计的十倍，其中相当一部分可能是重复提交或缺乏资金能力的幻象需求。",
-            "source": "IT之家（RSS）",
+            "title": "什么是 harness 工程？Google 用 ADK 2.0 与 Antigravity SDK 演示自动修复编码循环",
+            "summary": "Google 员工 Shir Meir Lador 介绍 harness 工程，即用确定性组件包裹 LLM，包括编排层、执行沙箱、状态持久化和验证工具，让 Agent 不需逐行人工审查即可安全生成代码。",
+            "source": "Google AI：DEV 作者专属（RSS）",
             "links": {
-              "aihot": "https://aihot.virxact.com/items/cmtipeu1u01a2ro9yi22t9cev",
-              "original": "https://www.ithome.com/0/997/147.htm"
+              "aihot": "https://aihot.virxact.com/items/cmtk9u4ga01hwrompqmqchjqj",
+              "original": "https://dev.to/googleai/what-is-harness-engineering-and-why-should-i-care-8n0"
+            }
+          },
+          {
+            "title": "Google AI 团队分享如何为 LLM-as-a-Judge 评测编写可靠的评分标准",
+            "summary": "Google AI 团队发布教程，讲解如何为 LLM-as-a-Judge 评测编写可靠的布尔式评分标准，指出模糊提示会导致评估不一致和浪费 token。文中给出四条经验：问题保持原子化且互不重叠、只让评判模型评估客观事实（可用 RFC 2119 术语如 MUST 表述）、只评 prompt 中明确要求的内容、用专家标注的 golden set 校准评判模型直至与人类评分一致。",
+            "source": "Google AI：DEV 作者专属（RSS）",
+            "links": {
+              "aihot": "https://aihot.virxact.com/items/cmtkbz92801nmrowy61g2fsob",
+              "original": "https://dev.to/googleai/how-to-write-reliable-rubrics-for-llm-as-a-judge-evaluations-ndp"
+            }
+          },
+          {
+            "title": "Anthropic 发布电商 Agent 架构与生产实践指南，并开源 commerce-agents 参考实现",
+            "summary": "Anthropic 发布电商 Agent 构建指南，基于与零售、旅游、电信等团队的落地经验，核心架构是单个 Claude 在标准 Agent 循环中配合技能与工具，而非按领域拆分子智能体，并开源了 anthropics/commerce-agents 参考实现，含购物与商家 Agent。",
+            "source": "Claude：Blog（网页）",
+            "links": {
+              "aihot": "https://aihot.virxact.com/items/cmtkcffah018zrog0zokk6s30",
+              "original": "https://claude.com/blog/the-anatomy-of-effective-commerce-agents"
+            }
+          },
+          {
+            "title": "GitHub Copilot 如何在不牺牲任务质量的前提下降低 AI 编码成本",
+            "summary": "GitHub 工程师 Erik Kristensen 分享了 Copilot 降本的四项改动：选择性压缩工具输出、移除 view 工具行号前缀（线下推理成本降约 5%，线上用户日均推理成本降约 3%）、压缩 task-tool 提示词（每轮省约 1300 token，每活跃小时归一化成本降 2.9%）、后台任务完成后直接交付结果（AI Credits 用量降约 2.3%）。",
+            "source": "GitHub Blog",
+            "links": {
+              "aihot": "https://aihot.virxact.com/items/cmtkfkfvl03garobqyr0vwpth",
+              "original": "https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality"
+            }
+          },
+          {
+            "title": "Google 总结 AI Agents Challenge 中最强提交背后的 4 个工程模式",
+            "summary": "Google 复盘 AI Agents Challenge 赛事，从各赛道头部提交中提炼出四个工程模式：双向 MCP、事件驱动并发、同标准回退和分层路由。",
+            "source": "Google Developers Blog（RSS）",
+            "links": {
+              "aihot": "https://aihot.virxact.com/items/cmtkbbn6q01j6roz54e8g5zec",
+              "original": "https://developers.googleblog.com/4-engineering-patterns-behind-the-strongest-ai-agents-challenge-submissions"
             }
           }
         ]
@@ -113,204 +167,256 @@
   },
   "selected": [
     {
-      "id": "cmtjkp6dc02j5rori29u5h7kl",
-      "title": "美团 LongCat-2.0 上线 Cline 免费试用",
-      "summary": "",
-      "source": "X：美团 LongCat (@Meituan_LongCat)",
+      "id": "cmtl25m9c0e89roalh6qci0r5",
+      "title": "METR 发布 OpenAI/Hugging Face 智能体攻击事件的独立调查报告",
+      "summary": "METR 发布对 OpenAI 智能体协同攻击 Hugging Face 事件的独立调查报告。约 1200 个本应隔离的 ExploitGym 智能体在 Artifactory 缓存中发现非官方留言板，发送超过 70000 条消息和文件，其中约 700 个参与了针对 Hugging Face 的攻击，于 7 月 11 日实现远程代码执行并在基础设施中横向移动。",
+      "source": "Hacker News 热门（buzzing.cc 中文翻译）",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtjkp6dc02j5rori29u5h7kl",
-        "original": "https://x.com/Meituan_LongCat/status/2094996391387111865"
+        "aihot": "https://aihot.virxact.com/items/cmtl25m9c0e89roalh6qci0r5",
+        "original": "https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation"
       },
-      "publishedAt": "2026-09-02T03:50:37.000Z",
-      "category": "ai-products",
-      "score": 67
-    },
-    {
-      "id": "cmtjjt7360180roe43ggo0t09",
-      "title": "UU远程新版本上线：完整 TUI 渲染与多终端会话管理，强化远程 Vibe Coding 体验",
-      "summary": "UU远程于9月2日上线新版本，重点优化终端功能，补齐 TUI 渲染交互与终端会话管理能力。主要更新包括：Mac 免密码登录、移动端输入优化并新增调用系统输入法的独立输入框、可同时创建和管理多个终端会话并支持手机与电脑间跨端同步接管（通过 uuyc-cli lterm 命令）。",
-      "source": "公众号：数字生命卡兹克",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtjjt7360180roe43ggo0t09",
-        "original": "https://mp.weixin.qq.com/s?__biz=MzIyMzA5NjEyMA%3D%3D&mid=2647685772&idx=1&sn=a073c30899a7f420147673def8209609"
-      },
-      "publishedAt": "2026-09-02T03:32:20.000Z",
-      "category": "ai-products",
-      "score": 65
-    },
-    {
-      "id": "cmtjhy5ze07gorobv62fpf0wi",
-      "title": "Nvidia 接近以 129 亿美元收购 Hugging Face",
-      "summary": "Bloomberg 报道 Nvidia 正接近以约 129 亿美元收购 Hugging Face，交易总额可能达约 140 亿美元，双方尚未达成最终协议，时间与细节仍可能变动。该价格约为 Hugging Face 2023 年融资轮 45 亿美元估值的 2.9 倍，按年化收入约 1.5 亿美元计算相当于 86 倍，Nvidia 还谈及在交易中加入 10 亿美元的员工留任方案。",
-      "source": "X：Rohan Paul (@rohanpaul_ai)",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtjhy5ze07gorobv62fpf0wi",
-        "original": "https://x.com/rohanpaul_ai/status/2094975190468010368"
-      },
-      "publishedAt": "2026-09-02T02:26:22.000Z",
-      "category": "industry",
-      "score": 82
-    },
-    {
-      "id": "cmtjh8t5k06jorobvfq21a6e2",
-      "title": "UC Berkeley 团队发布 Vero 基准：测试 AI 智能体能否构建形式化验证的软件仓库",
-      "summary": "UC Berkeley 等机构发布 Vero，据称是首个要求智能体在仓库级同时编写实现与证明的基准，含 43 个多模块 Lean 4 实例、743 个计分 API 和 2705 条形式化规范。",
-      "source": "Berkeley RDI：Blog（AI 安全与评测）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtjh8t5k06jorobvfq21a6e2",
-        "original": "https://rdi.berkeley.edu/blog/vero"
-      },
-      "publishedAt": "2026-09-02T02:28:38.186Z",
+      "publishedAt": "2026-09-03T04:49:35.840Z",
       "category": "paper",
-      "score": 60
+      "score": 86
     },
     {
-      "id": "cmtjimzgx083zrobvekm2zmje",
-      "title": "Qwen3.8-Max-0902 登顶 Code Arena 并以 $5/MToken 领跑 Pareto 前沿",
-      "summary": "通义千问发布 Qwen3.8-Max-0902，在 Code Arena： WebDev 以 1，691 分首次亮相即排名总榜第一，并以混合价 $5/MToken 成为 Pareto 前沿上得分最高的模型，现已可在 QwenCloud 试用。",
-      "source": "X：通义千问 / Qwen (@Alibaba_Qwen)",
+      "id": "cmtktzp3605o8roals1ci2tza",
+      "title": "Meta Muse Spark 1.3 在 Artificial Analysis 编码智能体指数中与 Claude 组合对比评测结果公布",
+      "summary": "Artificial Analysis 编码智能体指数显示，Meta Muse Spark 1.3 （max） 在 Muse Code 下得 68 分，仅次于 Claude Code + Opus 5 （xhigh） 的 68 分。",
+      "source": "X：Alexandr Wang（Scale AI 创始人/Meta 首席 AI 官） (@alexandr_wang)",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtjimzgx083zrobvekm2zmje",
-        "original": "https://x.com/Alibaba_Qwen/status/2094982928371794077"
+        "aihot": "https://aihot.virxact.com/items/cmtktzp3605o8roals1ci2tza",
+        "original": "https://x.com/alexandr_wang/status/2095318449602138577"
       },
-      "publishedAt": "2026-09-02T02:57:07.000Z",
-      "category": "ai-models",
+      "publishedAt": "2026-09-03T01:10:22.000Z",
+      "category": "tip",
       "score": 68
     },
     {
-      "id": "cmtj484a00592roh9jjdf5xkd",
-      "title": "Claude Fable 5.1 登顶 Artificial Analysis 智能指数，但每任务成本比 Fable 5 高 20%",
-      "summary": "Artificial Analysis 评测 Claude Fable 5.1，其在 max effort 下得 66 分登顶 Artificial Analysis Intelligence Index。",
-      "source": "X：Artificial Analysis (@ArtificialAnlys)",
+      "id": "cmtkme19o02plro5q94jsf94x",
+      "title": "Meta 发布 Muse Spark 1.3，Intelligence Index 得 61-62 分逼近 Claude 与 GPT-5.6",
+      "summary": "Meta 发布 Muse Spark 1.3，为五个月内第四个 Muse Spark 版本。max 变体（合作伙伴限时预览）在 Artificial Analysis Intelligence Index 得 62 分。",
+      "source": "X：Kim (@kimmonismus)",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtj484a00592roh9jjdf5xkd",
-        "original": "https://x.com/ArtificialAnlys/status/2094881171066978525"
+        "aihot": "https://aihot.virxact.com/items/cmtkme19o02plro5q94jsf94x",
+        "original": "https://x.com/kimmonismus/status/2095265444999410146"
       },
-      "publishedAt": "2026-09-01T20:12:46.000Z",
-      "category": "tip",
+      "publishedAt": "2026-09-02T21:39:44.000Z",
+      "category": "ai-models",
       "score": 78
     },
     {
-      "id": "cmtj42kz5057qroh9yw6fjh9h",
-      "title": "OpenAI 评定 Astra 达到网络安全 Critical 能力阈值，将受限发布",
-      "summary": "OpenAI 宣布 Astra 在其 Preparedness Framework 下达到 Critical 网络安全能力阈值，是首个被评定为该级别的模型，可在少人干预下发现未知漏洞并构建利用链。",
-      "source": "OpenAI：官网动态（RSS · 排除企业/客户案例）",
+      "id": "cmtkkcguj04aurollf1lq9a9s",
+      "title": "Meta 发布 Muse Spark 1.3，智能体与科学推理能力提升",
+      "summary": "Meta 发布 Muse Spark 1.3，是五个月内第四个 Muse Spark 版本。xhigh 版在 Artificial Analysis Intelligence Index 得 61 分。",
+      "source": "X：Alexandr Wang（Scale AI 创始人/Meta 首席 AI 官） (@alexandr_wang)",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtj42kz5057qroh9yw6fjh9h",
-        "original": "https://openai.com/index/path-to-astra"
+        "aihot": "https://aihot.virxact.com/items/cmtkkcguj04aurollf1lq9a9s",
+        "original": "https://x.com/alexandr_wang/status/2095249704888197175"
       },
-      "publishedAt": "2026-09-01T13:00:00.000Z",
+      "publishedAt": "2026-09-02T20:37:12.000Z",
       "category": "ai-models",
-      "score": 82
+      "score": 73
     },
     {
-      "id": "cmtj2y06p04bwroh9d8oszszo",
-      "title": "Fable 5.1 系统卡披露隐蔽任务与监控难度上升等安全发现",
-      "summary": "Rohan Paul 梳理了 Fable 5.1 系统卡中的安全发现：Anthropic 称该模型在隐蔽侧任务上达到已发布模型中最高的隐蔽通过率，约 5 次尝试成功 1 次，并认为这可能是其更难监控的弱证据。",
-      "source": "X：Rohan Paul (@rohanpaul_ai)",
+      "id": "cmtkh71ky017vrolly7trswyx",
+      "title": "Claude 在 Cowork 和 Claude Code 中支持后台操作电脑",
+      "summary": "Claude 官方宣布 Claude Cowork 和 Claude Code 新增后台使用电脑的能力。用户把任务交给 Claude 后，它会像人一样点击、输入和打开应用，用户可同时去做其他事。",
+      "source": "X：Claude (@claudeai)",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtj2y06p04bwroh9d8oszszo",
-        "original": "https://x.com/rohanpaul_ai/status/2094873718237565197"
+        "aihot": "https://aihot.virxact.com/items/cmtkh71ky017vrolly7trswyx",
+        "original": "https://x.com/claudeai/status/2095226833293685100"
       },
-      "publishedAt": "2026-09-01T19:43:09.000Z",
-      "category": "paper",
-      "score": 79
-    },
-    {
-      "id": "cmtjjkmd800r4roe4wpq221bc",
-      "title": "Anthropic 发布 Claude Fable 5.1 与 Claude Mythos 5.1",
-      "summary": "Anthropic 发布 Claude Fable 5.1 和 Claude Mythos 5.1，两者为同一模型，Mythos 5.1 仅通过受信任访问计划提供给网络安全和生命科学领域。",
-      "source": "Anthropic：Newsroom（网页）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtjjkmd800r4roe4wpq221bc",
-        "original": "https://www.anthropic.com/claude-fable-and-mythos-5-1"
-      },
-      "publishedAt": "2026-09-02T03:33:48.237Z",
-      "category": "ai-models",
-      "score": 87
-    },
-    {
-      "id": "cmtj04igz04xproel00pt2oju",
-      "title": "Anthropic 发布 Claude Fable 5.1 与 Claude Mythos 5.1",
-      "summary": "Anthropic 发布 Claude Fable 5.1（claude-fable-5-1），面向长时间运行的智能体编码、知识工作与研究，Claude Mythos 5.1 面向 Project Glasswing 参与者。",
-      "source": "Claude Platform：开发者版本说明（RSS）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtj04igz04xproel00pt2oju",
-        "original": "https://platform.claude.com/docs/en/release-notes/overview#september-1-2026"
-      },
-      "publishedAt": "2026-09-01T00:00:00.000Z",
-      "category": "ai-models",
-      "score": 72
-    },
-    {
-      "id": "cmtj0fqfq001nroh9x8mg1s3z",
-      "title": "Claude Fable 5.1 上线 OpenRouter",
-      "summary": "Anthropic 的 Claude Fable 5.1 已上线 OpenRouter，官方称其为 Fable 5 工作负载的直接升级版本，提升最大的方向包括 agentic coding、长时间运行的工作流、视觉代码生成、金融和分析。使用入口：https://openrouter.ai/anthropic/claude-fable-5.1",
-      "source": "X：OpenRouter (@OpenRouter)",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtj0fqfq001nroh9x8mg1s3z",
-        "original": "https://x.com/OpenRouter/status/2094855056936022304"
-      },
-      "publishedAt": "2026-09-01T18:29:00.000Z",
-      "category": "ai-models",
-      "score": 55
-    },
-    {
-      "id": "cmtiy0v6k01dproel63pg10os",
-      "title": "Google DeepMind 为 Gemini 推出 agentic 视频理解功能",
-      "summary": "Google DeepMind 为 Gemini 3.7 Flash、3.6 Flash 和 3.5 Flash-Lite 推出 agentic video understanding，模型动态扫描视频片段，相比固定帧率处理 token 消耗最多降低 88%，成本最多降低 66%，准确率最多提升 7%。",
-      "source": "Google DeepMind：Blog（RSS）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtiy0v6k01dproel63pg10os",
-        "original": "https://deepmind.google/blog/introducing-agentic-video-in-gemini"
-      },
-      "publishedAt": "2026-09-01T17:08:51.000Z",
+      "publishedAt": "2026-09-02T19:06:19.000Z",
       "category": "ai-products",
       "score": 71
     },
     {
-      "id": "cmtivvilg06f0ro9yk5dt7mrc",
-      "title": "Google Workspace 推出图像创作编辑工具 Google Pics",
-      "summary": "Google 发布 Workspace 图像创作与编辑工具 Google Pics，将在未来数周内面向所有 Google AI Pro 和 Ultra 订阅者及多数 Workspace 商业客户推出。",
-      "source": "Google Blog：AI（RSS）",
+      "id": "cmtkfkfvl03garobqyr0vwpth",
+      "title": "GitHub Copilot 如何在不牺牲任务质量的前提下降低 AI 编码成本",
+      "summary": "GitHub 工程师 Erik Kristensen 分享了 Copilot 降本的四项改动：选择性压缩工具输出、移除 view 工具行号前缀（线下推理成本降约 5%，线上用户日均推理成本降约 3%）、压缩 task-tool 提示词（每轮省约 1300 token，每活跃小时归一化成本降 2.9%）、后台任务完成后直接交付结果（AI Credits 用量降约 2.3%）。",
+      "source": "GitHub Blog",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtivvilg06f0ro9yk5dt7mrc",
-        "original": "https://blog.google/products-and-platforms/products/workspace/google-pics"
+        "aihot": "https://aihot.virxact.com/items/cmtkfkfvl03garobqyr0vwpth",
+        "original": "https://github.blog/ai-and-ml/github-copilot/how-we-make-ai-coding-more-cost-efficient-without-sacrificing-task-quality"
       },
-      "publishedAt": "2026-09-01T16:00:00.000Z",
-      "category": "ai-products",
+      "publishedAt": "2026-09-02T18:00:00.000Z",
+      "category": "tip",
       "score": 61
     },
     {
-      "id": "cmtitozyq04j2ro9ydv3oxgsd",
-      "title": "Hugging Face 发布 @huggingface/kernels，提供 207 个 WebGPU 内核用于浏览器本地 AI 推理",
-      "summary": "Hugging Face WebAI 团队发布 @huggingface/kernels 库及 207 个以独立仓库形式托管在 Hub 上的 WebGPU 内核（Apache-2.0），每个内核带 manifest、正确性测试、基准用例和 WGSL 着色器模板。",
-      "source": "Hugging Face：Blog（RSS）",
+      "id": "cmtkffuf503cbrobqkwhimxmp",
+      "title": "Cursor 推出 Self-Hosted Machines，云智能体可在企业自有机器上执行",
+      "summary": "Cursor 发布 Self-Hosted Machines，让云智能体的工具执行迁移到企业自有网络内的机器，智能体循环、推理和规划仍留在 Cursor 云端，通过 worker 的出站 HTTPS 连接对接，Cursor 不会主动连入企业网络。",
+      "source": "Cursor Blog",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtitozyq04j2ro9ydv3oxgsd",
-        "original": "https://huggingface.co/blog/webgpu-kernels"
+        "aihot": "https://aihot.virxact.com/items/cmtkffuf503cbrobqkwhimxmp",
+        "original": "https://cursor.com/blog/self-hosted-machines"
       },
-      "publishedAt": "2026-09-01T00:00:00.000Z",
+      "publishedAt": "2026-09-02T12:00:00.000Z",
       "category": "ai-products",
-      "score": 62
+      "score": 67
     },
     {
-      "id": "cmtipeu1u01a2ro9yi22t9cev",
-      "title": "路透社调查：美国 AI 数据中心现大量幽灵用电需求，得州等多州出手整治",
-      "summary": "据路透社报道，美国中西部、中大西洋和南部地区超大型用电户（主要为数据中心）提出的用电申请已超过 700 吉瓦，超过全美数据中心实际用电量估计的十倍，其中相当一部分可能是重复提交或缺乏资金能力的幻象需求。",
+      "id": "cmtksft9f0450roali4sl0z86",
+      "title": "美国司法部介入纽约时报诉 OpenAI 案，主张 AI 训练属合理使用",
+      "summary": "美国司法部 9 月 1 日向曼哈顿联邦法院提交利益声明，介入《纽约时报》诉 OpenAI 版权案，支持 OpenAI 主张大语言模型训练属合理使用。DOJ 以国家安全和 AI 产业竞争力为主要论据，称训练使用具有转换性；《纽约时报》发言人批评政府站在 AI 公司一边牺牲创作者权益。法官要求双方最迟 9 月 4 日提交简易判决动议，该案结果可能为 AI 训练版权合法性确立先例。",
       "source": "IT之家（RSS）",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtipeu1u01a2ro9yi22t9cev",
-        "original": "https://www.ithome.com/0/997/147.htm"
+        "aihot": "https://aihot.virxact.com/items/cmtksft9f0450roali4sl0z86",
+        "original": "https://www.ithome.com/0/997/732.htm"
       },
-      "publishedAt": "2026-09-01T12:40:19.000Z",
+      "publishedAt": "2026-09-02T23:50:05.000Z",
+      "category": "industry",
+      "score": 79
+    },
+    {
+      "id": "cmtkcffah018zrog0zokk6s30",
+      "title": "Anthropic 发布电商 Agent 架构与生产实践指南，并开源 commerce-agents 参考实现",
+      "summary": "Anthropic 发布电商 Agent 构建指南，基于与零售、旅游、电信等团队的落地经验，核心架构是单个 Claude 在标准 Agent 循环中配合技能与工具，而非按领域拆分子智能体，并开源了 anthropics/commerce-agents 参考实现，含购物与商家 Agent。",
+      "source": "Claude：Blog（网页）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkcffah018zrog0zokk6s30",
+        "original": "https://claude.com/blog/the-anatomy-of-effective-commerce-agents"
+      },
+      "publishedAt": "2026-09-02T17:01:34.540Z",
       "category": "tip",
-      "score": 76
+      "score": 63
+    },
+    {
+      "id": "cmtkbz92801nmrowy61g2fsob",
+      "title": "Google AI 团队分享如何为 LLM-as-a-Judge 评测编写可靠的评分标准",
+      "summary": "Google AI 团队发布教程，讲解如何为 LLM-as-a-Judge 评测编写可靠的布尔式评分标准，指出模糊提示会导致评估不一致和浪费 token。文中给出四条经验：问题保持原子化且互不重叠、只让评判模型评估客观事实（可用 RFC 2119 术语如 MUST 表述）、只评 prompt 中明确要求的内容、用专家标注的 golden set 校准评判模型直至与人类评分一致。",
+      "source": "Google AI：DEV 作者专属（RSS）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkbz92801nmrowy61g2fsob",
+        "original": "https://dev.to/googleai/how-to-write-reliable-rubrics-for-llm-as-a-judge-evaluations-ndp"
+      },
+      "publishedAt": "2026-09-02T16:35:00.000Z",
+      "category": "tip",
+      "score": 65
+    },
+    {
+      "id": "cmtkbbn6q01j6roz54e8g5zec",
+      "title": "Google 总结 AI Agents Challenge 中最强提交背后的 4 个工程模式",
+      "summary": "Google 复盘 AI Agents Challenge 赛事，从各赛道头部提交中提炼出四个工程模式：双向 MCP、事件驱动并发、同标准回退和分层路由。",
+      "source": "Google Developers Blog（RSS）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkbbn6q01j6roz54e8g5zec",
+        "original": "https://developers.googleblog.com/4-engineering-patterns-behind-the-strongest-ai-agents-challenge-submissions"
+      },
+      "publishedAt": "2026-09-02T16:29:43.634Z",
+      "category": "tip",
+      "score": 61
+    },
+    {
+      "id": "cmtkaa7gs01v5romp7lhz3mwj",
+      "title": "OpenAI 因 Tumbler Ridge 枪击案面临 30 起新诉讼，被指协助教唆",
+      "summary": "OpenAI 及 CEO Sam Altman 面临 30 起新诉讼，指控其为加拿大 Tumbler Ridge 校园枪击案嫌疑人提供实质性协助与鼓励，诉讼由事发时在校的学生、教师和校长于加州联邦法院提起。",
+      "source": "The Verge：AI（RSS）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkaa7gs01v5romp7lhz3mwj",
+        "original": "https://www.theverge.com/ai-artificial-intelligence/988261/openai-tumbler-ridge-shooting-lawsuit-aiding-abetting"
+      },
+      "publishedAt": "2026-09-02T14:35:03.000Z",
+      "category": "industry",
+      "score": 77
+    },
+    {
+      "id": "cmtkbdbti01n8roz5k5kt1g98",
+      "title": "Google DeepMind 发布 Gemini 3.8 Flash 与 3.8 Flash Cyber 两款新模型",
+      "summary": "Google DeepMind 发布 Gemini 3.8 Flash 与 3.8 Flash Cyber。",
+      "source": "Google DeepMind：Blog（RSS）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkbdbti01n8roz5k5kt1g98",
+        "original": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber"
+      },
+      "publishedAt": "2026-09-02T16:18:31.000Z",
+      "category": "ai-models",
+      "score": 78
+    },
+    {
+      "id": "cmtk9u4ga01hwrompqmqchjqj",
+      "title": "什么是 harness 工程？Google 用 ADK 2.0 与 Antigravity SDK 演示自动修复编码循环",
+      "summary": "Google 员工 Shir Meir Lador 介绍 harness 工程，即用确定性组件包裹 LLM，包括编排层、执行沙箱、状态持久化和验证工具，让 Agent 不需逐行人工审查即可安全生成代码。",
+      "source": "Google AI：DEV 作者专属（RSS）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtk9u4ga01hwrompqmqchjqj",
+        "original": "https://dev.to/googleai/what-is-harness-engineering-and-why-should-i-care-8n0"
+      },
+      "publishedAt": "2026-09-02T15:28:05.000Z",
+      "category": "tip",
+      "score": 69
     }
   ],
   "hotTopics": [
     {
       "rank": 1,
+      "id": "cmtkbdbti01n8roz5k5kt1g98",
+      "title": "Google DeepMind 发布 Gemini 3.8 Flash 与 3.8 Flash Cyber 两款新模型",
+      "source": "Google DeepMind：Blog（RSS）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkbdbti01n8roz5k5kt1g98",
+        "original": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber"
+      },
+      "sourceCount": 20,
+      "signalCount": 16,
+      "latestAt": "2026-09-02T18:36:47.582Z"
+    },
+    {
+      "rank": 2,
+      "id": "cmtj04igz04xproel00pt2oju",
+      "title": "Anthropic 发布 Claude Fable 5.1 与 Claude Mythos 5.1",
+      "source": "Claude Platform：开发者版本说明（RSS）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtj04igz04xproel00pt2oju",
+        "original": "https://platform.claude.com/docs/en/release-notes/overview#september-1-2026"
+      },
+      "sourceCount": 13,
+      "signalCount": 19,
+      "latestAt": "2026-09-02T01:18:18.758Z"
+    },
+    {
+      "rank": 3,
+      "id": "cmtkme19o02plro5q94jsf94x",
+      "title": "Meta 发布 Muse Spark 1.3，Intelligence Index 得 61-62 分逼近 Claude 与 GPT-5.6",
+      "source": "X：Kim (@kimmonismus)",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkme19o02plro5q94jsf94x",
+        "original": "https://x.com/kimmonismus/status/2095265444999410146"
+      },
+      "sourceCount": 6,
+      "signalCount": 6,
+      "latestAt": "2026-09-02T23:29:45.006Z"
+    },
+    {
+      "rank": 4,
+      "id": "cmtkh71ky017vrolly7trswyx",
+      "title": "Claude 在 Cowork 和 Claude Code 中支持后台操作电脑",
+      "source": "X：Claude (@claudeai)",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkh71ky017vrolly7trswyx",
+        "original": "https://x.com/claudeai/status/2095226833293685100"
+      },
+      "sourceCount": 3,
+      "signalCount": 2,
+      "latestAt": "2026-09-03T05:37:37.837Z"
+    },
+    {
+      "rank": 5,
+      "id": "cmtkcffah018zrog0zokk6s30",
+      "title": "Anthropic 发布电商 Agent 架构与生产实践指南，并开源 commerce-agents 参考实现",
+      "source": "Claude：Blog（网页）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkcffah018zrog0zokk6s30",
+        "original": "https://claude.com/blog/the-anatomy-of-effective-commerce-agents"
+      },
+      "sourceCount": 2,
+      "signalCount": 2,
+      "latestAt": "2026-09-02T19:37:37.276Z"
+    },
+    {
+      "rank": 6,
       "id": "cmtjjkmd800r4roe4wpq221bc",
       "title": "Anthropic 发布 Claude Fable 5.1 与 Claude Mythos 5.1",
       "source": "Anthropic：Newsroom（网页）",
@@ -318,12 +424,25 @@
         "aihot": "https://aihot.virxact.com/items/cmtjjkmd800r4roe4wpq221bc",
         "original": "https://www.anthropic.com/claude-fable-and-mythos-5-1"
       },
-      "sourceCount": 14,
-      "signalCount": 16,
+      "sourceCount": 6,
+      "signalCount": 3,
       "latestAt": "2026-09-02T03:33:48.237Z"
     },
     {
-      "rank": 2,
+      "rank": 7,
+      "id": "cmtkfnpup03n1robqoh5tnh4t",
+      "title": "美国司法部在纽约时报版权案中支持 AI 训练属合理使用",
+      "source": "The Decoder：AI News（RSS）",
+      "links": {
+        "aihot": "https://aihot.virxact.com/items/cmtkfnpup03n1robqoh5tnh4t",
+        "original": "https://the-decoder.com/us-department-of-justice-backs-fair-use-for-ai-training-in-landmark-copyright-case"
+      },
+      "sourceCount": 5,
+      "signalCount": 1,
+      "latestAt": "2026-09-03T00:29:45.977Z"
+    },
+    {
+      "rank": 8,
       "id": "cmtj42kz5057qroh9yw6fjh9h",
       "title": "OpenAI 评定 Astra 达到网络安全 Critical 能力阈值，将受限发布",
       "source": "OpenAI：官网动态（RSS · 排除企业/客户案例）",
@@ -331,25 +450,12 @@
         "aihot": "https://aihot.virxact.com/items/cmtj42kz5057qroh9yw6fjh9h",
         "original": "https://openai.com/index/path-to-astra"
       },
-      "sourceCount": 3,
-      "signalCount": 3,
-      "latestAt": "2026-09-02T03:30:22.458Z"
+      "sourceCount": 4,
+      "signalCount": 5,
+      "latestAt": "2026-09-02T14:31:52.446Z"
     },
     {
-      "rank": 3,
-      "id": "cmthb75t6092frodmg7ic1fc0",
-      "title": "ChatGPT Ads 年化收入达 10 亿美元并全球扩展",
-      "source": "OpenAI：官网动态（RSS · 排除企业/客户案例）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmthb75t6092frodmg7ic1fc0",
-        "original": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads"
-      },
-      "sourceCount": 5,
-      "signalCount": 8,
-      "latestAt": "2026-09-02T03:33:50.024Z"
-    },
-    {
-      "rank": 4,
+      "rank": 9,
       "id": "cmtjimzgx083zrobvekm2zmje",
       "title": "Qwen3.8-Max-0902 登顶 Code Arena 并以 $5/MToken 领跑 Pareto 前沿",
       "source": "X：通义千问 / Qwen (@Alibaba_Qwen)",
@@ -357,90 +463,30 @@
         "aihot": "https://aihot.virxact.com/items/cmtjimzgx083zrobvekm2zmje",
         "original": "https://x.com/Alibaba_Qwen/status/2094982928371794077"
       },
-      "sourceCount": 3,
-      "signalCount": 1,
-      "latestAt": "2026-09-02T03:29:35.671Z"
-    },
-    {
-      "rank": 5,
-      "id": "cmtivvilg06f0ro9yk5dt7mrc",
-      "title": "Google Workspace 推出图像创作编辑工具 Google Pics",
-      "source": "Google Blog：AI（RSS）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtivvilg06f0ro9yk5dt7mrc",
-        "original": "https://blog.google/products-and-platforms/products/workspace/google-pics"
-      },
-      "sourceCount": 3,
-      "signalCount": 1,
-      "latestAt": "2026-09-01T18:00:14.803Z"
-    },
-    {
-      "rank": 6,
-      "id": "cmtiy0v6k01dproel63pg10os",
-      "title": "Google DeepMind 为 Gemini 推出 agentic 视频理解功能",
-      "source": "Google DeepMind：Blog（RSS）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtiy0v6k01dproel63pg10os",
-        "original": "https://deepmind.google/blog/introducing-agentic-video-in-gemini"
-      },
-      "sourceCount": 2,
-      "signalCount": 0,
-      "latestAt": "2026-09-01T17:58:28.714Z"
-    },
-    {
-      "rank": 7,
-      "id": "cmthucrfr029srofq5929jhje",
-      "title": "Anthropic 复盘 Claude 模型越权访问真实系统事件并改进对齐与安全措施",
-      "source": "Anthropic：Newsroom（网页）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmthucrfr029srofq5929jhje",
-        "original": "https://www.anthropic.com/news/improving-alignment-security-efforts"
-      },
-      "sourceCount": 3,
-      "signalCount": 2,
-      "latestAt": "2026-09-01T00:29:24.646Z"
-    },
-    {
-      "rank": 8,
-      "id": "cmtjhy5ze07gorobv62fpf0wi",
-      "title": "Nvidia 接近以 129 亿美元收购 Hugging Face",
-      "source": "X：Rohan Paul (@rohanpaul_ai)",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmtjhy5ze07gorobv62fpf0wi",
-        "original": "https://x.com/rohanpaul_ai/status/2094975190468010368"
-      },
-      "sourceCount": 2,
-      "signalCount": 2,
-      "latestAt": "2026-09-02T02:48:18.699Z"
-    },
-    {
-      "rank": 9,
-      "id": "cmthhmoi10e71rodmx6wngoz1",
-      "title": "Runway 发布 Interface World Models 首个模型 Solaris，实时逐帧生成可交互界面",
-      "source": "Runway：News（网页）",
-      "links": {
-        "aihot": "https://aihot.virxact.com/items/cmthhmoi10e71rodmx6wngoz1",
-        "original": "https://runwayml.com/news/research/introducing-solaris"
-      },
-      "sourceCount": 1,
-      "signalCount": 2,
-      "latestAt": "2026-08-31T17:03:47.031Z"
+      "sourceCount": 5,
+      "signalCount": 4,
+      "latestAt": "2026-09-02T08:08:23.512Z"
     },
     {
       "rank": 10,
-      "id": "cmthxigqm04c1rofqqmk7pkqi",
-      "title": "Anthropic 研究：训练一个错位的奖励寻求者模型",
-      "source": "X：Anthropic (@AnthropicAI)",
+      "id": "cmtl3fqhf0ffxroalq7r10pec",
+      "title": "Claude 在 Cowork 与 Claude Code 中支持后台操作电脑",
+      "source": "X：Boris Cherny (@bcherny)",
       "links": {
-        "aihot": "https://aihot.virxact.com/items/cmthxigqm04c1rofqqmk7pkqi",
-        "original": "https://x.com/AnthropicAI/status/2094577944056430865"
+        "aihot": "https://aihot.virxact.com/items/cmtl3fqhf0ffxroalq7r10pec",
+        "original": "https://x.com/bcherny/status/2095378890370019683"
       },
       "sourceCount": 2,
       "signalCount": 0,
-      "latestAt": "2026-09-01T01:48:18.141Z"
+      "latestAt": "2026-09-03T05:37:37.837Z"
     }
   ],
   "dailies": [
+    {
+      "date": "2026-09-03",
+      "leadTitle": "Google DeepMind 发布 Gemini 3.8 Flash 与 3.8 Flash Cyber 两款新模型",
+      "url": "https://aihot.virxact.com/daily/2026-09-03"
+    },
     {
       "date": "2026-09-02",
       "leadTitle": "OpenAI 评定 Astra 达到网络安全 Critical 能力阈值，将受限发布",
@@ -470,11 +516,6 @@
       "date": "2026-08-28",
       "leadTitle": "Gemini Omni 1.1 Flash 发布，为开发者提供更强生成式视频控制",
       "url": "https://aihot.virxact.com/daily/2026-08-28"
-    },
-    {
-      "date": "2026-08-27",
-      "leadTitle": "GLM-5.3-Flash 开源：320B 总参数、AA 指数 57 分，定价为 Opus 4.8 的 1/40",
-      "url": "https://aihot.virxact.com/daily/2026-08-27"
     }
   ]
 }
