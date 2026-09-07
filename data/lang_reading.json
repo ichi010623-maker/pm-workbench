@@ -489,7 +489,63 @@
         "content": "Sports teach us about determination and perseverance. Participating in sports builds teamwork and discipline.",
         "translation": "体育运动教会我们关于决心和毅力。参加体育运动可以建立团队合作和纪律。"
       }
+    ],
+    "2026-09-08": [
+      {
+        "level": "入门",
+        "title": "Robotics Basics",
+        "content": "Robots are machines that can perform tasks automatically. They are used in various fields like manufacturing and healthcare. Today, they are becoming more advanced and helpful.",
+        "translation": "机器人是能够自动执行任务的机器。它们被用于各种领域，如制造业和医疗保健。如今，它们正变得更加先进和有用。"
+      },
+      {
+        "level": "进阶",
+        "title": "Cooking with Herbs",
+        "content": "Herbs add flavor to dishes without adding many calories. They are rich in nutrients and can be grown at home. Learn how to use them in your cooking.",
+        "translation": "香草可以增加菜肴的风味而不增加很多卡路里。它们富含营养，可以在家中种植。学习如何在烹饪中使用它们。"
+      },
+      {
+        "level": "挑战",
+        "title": "Art of Meditation",
+        "content": "Meditation is a practice that helps you relax and focus. It has been used for centuries to improve mental and physical health. Learn the basics of meditation.",
+        "translation": "冥想是一种帮助你放松和专注的实践。它已被使用数百年以改善精神和身体健康。学习冥想的基本知识。"
+      },
+      {
+        "level": "入门",
+        "title": "Smartphone Apps",
+        "content": "Smartphone apps can help you in many ways. They can be used for learning, entertainment, and even managing your health. Explore the world of apps!",
+        "translation": "智能手机应用可以帮助你在许多方面。它们可以用于学习、娱乐，甚至管理你的健康。探索应用的世界！"
+      },
+      {
+        "level": "进阶",
+        "title": "Healthy Habits",
+        "content": "Developing healthy habits is important for a good life. Regular exercise, a balanced diet, and enough sleep can improve your well-being.",
+        "translation": "培养健康习惯对于过上好生活很重要。定期锻炼、均衡饮食和充足的睡眠可以提高你的幸福感。"
+      },
+      {
+        "level": "挑战",
+        "title": "Space Exploration",
+        "content": "Space exploration has led to many discoveries. It helps us understand the universe better and may one day lead to new habitats for humans.",
+        "translation": "太空探索导致了许多发现。它帮助我们更好地理解宇宙，并且有一天可能会为人类带来新的栖息地。"
+      },
+      {
+        "level": "入门",
+        "title": "World Cuisine",
+        "content": "World cuisine offers a variety of flavors and ingredients. Exploring different cuisines can be an exciting culinary adventure.",
+        "translation": "世界美食提供了各种风味和成分。探索不同的美食可以是一次令人兴奋的烹饪冒险。"
+      },
+      {
+        "level": "进阶",
+        "title": "Work-Life Balance",
+        "content": "Maintaining a good work-life balance is crucial for happiness and productivity. Learn tips to achieve a healthier balance.",
+        "translation": "保持良好的工作与生活平衡对于幸福和生产力至关重要。学习实现更健康平衡的技巧。"
+      },
+      {
+        "level": "挑战",
+        "title": "Psychology of Happiness",
+        "content": "Understanding the psychology of happiness can help us live a more fulfilling life. Learn about the factors that contribute to happiness.",
+        "translation": "理解幸福心理学可以帮助我们过上更充实的生活。了解影响幸福的因素。"
+      }
     ]
   },
-  "updatedAt": "2026-09-03T16:30:00+08:00"
+  "updatedAt": "2026-09-08T00:06:00+08:00"
 }
