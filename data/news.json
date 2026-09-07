@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03 18:01+08:00",
+  "generatedAt": "2026-09-07 18:32+08:00",
   "categories": [
     {
       "key": "official",
@@ -23,6 +23,123 @@
     }
   ],
   "items": [
+    {
+      "id": "2026-09-07-001",
+      "category": "official",
+      "priority": 4,
+      "title": "内蒙古启动食品安全宣传周",
+      "summary": "内蒙古推出三年专项整治行动，强化源头管控，依托智慧追溯系统筑牢食品安全防线。",
+      "source": "内蒙古新闻",
+      "url": "http://example.com/news/food-safety-week"
+    },
+    {
+      "id": "2026-09-07-002",
+      "category": "official",
+      "priority": 3,
+      "title": "鄂尔多斯购房配套补贴开启申报",
+      "summary": "鄂尔多斯市推出购房惠民补贴，购房者可选择汽车补贴或家电数码券包。",
+      "source": "鄂尔多斯新闻",
+      "url": "http://example.com/news/housing-subsidy"
+    },
+    {
+      "id": "2026-09-07-003",
+      "category": "hardware",
+      "priority": 4,
+      "title": "全球首款AI智能体手机努比亚NaviX Ultra获入网许可",
+      "summary": "努比亚NaviX Ultra完成合规流程，计划于9月上市，搭载豆包手机助手。",
+      "source": "全球首款AI智能体手机努比亚NaviX Ultra获入网许可",
+      "url": "http://example.com/news/avi-navix-ultra"
+    },
+    {
+      "id": "2026-09-07-004",
+      "category": "tech",
+      "priority": 3,
+      "title": "中国据报摸底储能产能",
+      "summary": "针对储能行业产能过剩风险，相关部门开展摸排，暂缓新建储能电芯项目审批。",
+      "source": "中国新闻",
+      "url": "http://example.com/news/storing-energy-capacity"
+    },
+    {
+      "id": "2026-09-07-005",
+      "category": "tech",
+      "priority": 3,
+      "title": "中国空军派多型军机参加埃及航展",
+      "summary": "中国空军将派战斗机、预警机等多型军机参加埃及航展。",
+      "source": "中国国防部网站",
+      "url": "http://example.com/news/chinese-air-force-exhibition"
+    },
+    {
+      "id": "2026-09-07-006",
+      "category": "ai",
+      "priority": 4,
+      "title": "南山机器人在香港兰桂坊上岗",
+      "summary": "南山机器人公司爱宝机器人（AlphaBot 2）在香港兰桂坊酒吧提供鸡尾酒调制与互动服务。",
+      "source": "南山机器人在香港兰桂坊上岗",
+      "url": "http://example.com/news/robot-hong-kong"
+    },
+    {
+      "id": "2026-09-07-007",
+      "category": "tech",
+      "priority": 3,
+      "title": "内蒙古口岸进出境交通运输工具突破200万辆",
+      "summary": "内蒙古口岸年内进出境交通运输工具突破200万辆次，通关进度提前近两月。",
+      "source": "内蒙古新闻",
+      "url": "http://example.com/news/transportation-tools"
+    },
+    {
+      "id": "2026-09-07-008",
+      "category": "official",
+      "priority": 3,
+      "title": "内蒙古下拨约66亿元助力高水平对外开放",
+      "summary": "内蒙古今年统筹约66亿元财政资金，支持自贸试验区、重点口岸基础设施与智慧化改造。",
+      "source": "内蒙古新闻",
+      "url": "http://example.com/news/opening-up-funding"
+    },
+    {
+      "id": "2026-09-07-009",
+      "category": "tech",
+      "priority": 3,
+      "title": "江西遂川县扬芬村发生山体滑坡",
+      "summary": "江西遂川县左安镇扬芬村发生山体滑坡，2人失联。",
+      "source": "江西新闻",
+      "url": "http://example.com/news/landslide"
+    },
+    {
+      "id": "2026-09-07-010",
+      "category": "ai",
+      "priority": 3,
+      "title": "中国具身智能Tier 1产业联盟成立",
+      "summary": "由多家产业链核心企业组成的中国具身智能Tier 1产业联盟正式成立。",
+      "source": "中国具身智能Tier 1产业联盟成立",
+      "url": "http://example.com/news/embodied-intelligence-alliance"
+    },
+    {
+      "id": "2026-09-07-011",
+      "category": "tech",
+      "priority": 3,
+      "title": "杭州市经济和信息化局关于开展2026年杭州市AI工厂评定工作的通知",
+      "summary": "杭州市经信局发布关于开展2026年杭州市AI工厂评定工作的通知。",
+      "source": "杭州市经济和信息化局",
+      "url": "http://example.com/news/hangzhou-ai-factory"
+    },
+    {
+      "id": "2026-09-07-012",
+      "category": "tech",
+      "priority": 3,
+      "title": "AI短剧成本\"膝盖斩\"新规落地",
+      "summary": "AI短剧迎来\"持证上岗\"时代，单分钟制作成本大幅降低。",
+      "source": "AI短剧成本\"膝盖斩\"新规落地",
+      "url": "http://example.com/news/ai-short-video"
+    },
+    {
+      "id": "2026-09-07-013",
+      "category": "ai",
+      "priority": 3,
+      "title": "AI再火，养活的是少数人",
+      "summary": "AI和高科技产业虽然增长迅速，但无法替代传统领域，且无法养活所有人。",
+      "source": "AI再火，养活的是少数人",
+      "url": "http://example.com/news/ai-impact"
+    },
     {
       "id": "2026-09-03-001",
       "category": "official",
