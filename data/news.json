@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07 18:32+08:00",
+  "generatedAt": "2026-09-08T07:00:00+08:00",
   "categories": [
     {
       "key": "official",
@@ -23,6 +23,114 @@
     }
   ],
   "items": [
+    {
+      "id": "2026-09-08-001",
+      "category": "official",
+      "priority": 5,
+      "title": "信息通信行业\"十五五\"规划印发 适时启动6G商用",
+      "summary": "我国正式印发信息通信行业“十五五”规划，提出适时启动6G商用，推动信息通信行业高质量发展。",
+      "source": "工信部",
+      "url": "http://www.miit.gov.cn/n1146295/n1146305/n1146332/n1146361/5488689.html"
+    },
+    {
+      "id": "2026-09-08-002",
+      "category": "hardware",
+      "priority": 4,
+      "title": "AI硬件板块集体反弹 交易拥挤度已明显下降",
+      "summary": "A股主要股指全线飘红，AI硬件板块集体反弹，PCB、光模块、光纤等题材领涨，PCB行业龙头深南电路涨停。",
+      "source": "上证早知道",
+      "url": "http://www.shanghaistock.com.cn/zh_cn/news/special/20260907/1238955.shtml"
+    },
+    {
+      "id": "2026-09-08-003",
+      "category": "ai",
+      "priority": 4,
+      "title": "人形机器人实现全自主搏击 行业步入快速发展期",
+      "summary": "人形机器人实现全自主搏击，标志着我国机器人行业步入快速发展期，为未来工业自动化、服务机器人等领域提供新机遇。",
+      "source": "新华网",
+      "url": "http://www.xinhuanet.com/robot/2026-09/07/c_1297485779.htm"
+    },
+    {
+      "id": "2026-09-08-004",
+      "category": "tech",
+      "priority": 4,
+      "title": "Meta涉嫌未经同意采集路人影像喂给AI，正遭集体诉讼",
+      "summary": "Meta眼镜涉嫌未经同意采集路人影像喂给AI，正面临集体诉讼，引发对AI隐私和数据安全的关注。",
+      "source": "映维网",
+      "url": "https://www.nweon.com/2026/09/08/meta-sued-for-collecting-passersby-images-without-consent/"
+    },
+    {
+      "id": "2026-09-08-005",
+      "category": "official",
+      "priority": 4,
+      "title": "国家版权局印发《版权工作\"十五五\"规划》",
+      "summary": "国家版权局印发《版权工作\"十五五\"规划》，加大软件侵权行为打击力度，保护知识产权。",
+      "source": "国家版权局",
+      "url": "http://www.nac.gov.cn/xxgk/xxgknr/202609/t20260907_7488689.html"
+    },
+    {
+      "id": "2026-09-08-006",
+      "category": "hardware",
+      "priority": 3,
+      "title": "亚康股份签算力服务协议 机构净买入沪电股份",
+      "summary": "亚康股份签订算力服务协议，机构净买入沪电股份，AI硬件产业链持续受到关注。",
+      "source": "上证早知道",
+      "url": "http://www.shanghaistock.com.cn/zh_cn/news/special/20260907/1238955.shtml"
+    },
+    {
+      "id": "2026-09-08-007",
+      "category": "ai",
+      "priority": 3,
+      "title": "腾讯WorkBuddy开放平台上线 向智能硬件、行业应用及开发者开放Agent能力",
+      "summary": "腾讯WorkBuddy开放平台上线，向智能硬件、行业应用及开发者开放Agent能力，推动AI应用生态发展。",
+      "source": "腾讯",
+      "url": "https://workbuddy.qq.com/"
+    },
+    {
+      "id": "2026-09-08-008",
+      "category": "tech",
+      "priority": 3,
+      "title": "马斯克发布无人驾驶汽车Cybercab，预示无人驾驶时代来临",
+      "summary": "马斯克发布无人驾驶汽车Cybercab，预示无人驾驶时代来临，对传统汽车产业产生冲击。",
+      "source": "新浪科技",
+      "url": "https://tech.sina.com.cn/roll/2026-09-07/doc-ijaymsap5489271.shtml"
+    },
+    {
+      "id": "2026-09-08-009",
+      "category": "tech",
+      "priority": 3,
+      "title": "AI短剧成本\"膝盖斩\"，传媒板块领涨全市场",
+      "summary": "AI短剧成本大幅降低，传媒板块领涨全市场，AI应用在传媒领域的应用前景广阔。",
+      "source": "东方财富网",
+      "url": "http://finance.eastmoney.com/a/20260907/182633876.html"
+    },
+    {
+      "id": "2026-09-08-010",
+      "category": "hardware",
+      "priority": 3,
+      "title": "PCB产业盈利增长有望提速",
+      "summary": "PCB产业盈利增长有望提速，核心原因在于AI高端新品出货增加和PCB价格传导。",
+      "source": "上证早知道",
+      "url": "http://www.shanghaistock.com.cn/zh_cn/news/special/20260907/1238955.shtml"
+    },
+    {
+      "id": "2026-09-08-011",
+      "category": "ai",
+      "priority": 3,
+      "title": "OpenAI发布GPT-6 Astra，AI模型能力进一步提升",
+      "summary": "OpenAI发布GPT-6 Astra，AI模型能力进一步提升，重点强化编码、科研、独立执行工作以及复杂多步骤任务等能力。",
+      "source": "OpenAI",
+      "url": "https://openai.com/blog/gpt-6-astra/"
+    },
+    {
+      "id": "2026-09-08-012",
+      "category": "tech",
+      "priority": 3,
+      "title": "亚太媒体论坛深圳开幕，AR黑科技\"复制\"新闻现场",
+      "summary": "亚太媒体论坛深圳开幕，AR黑科技\"复制\"新闻现场，展示传媒数智化成果。",
+      "source": "新华网",
+      "url": "http://www.xinhuanet.com/robot/2026-09/07/c_1297485779.htm"
+    },
     {
       "id": "2026-09-07-001",
       "category": "official",
