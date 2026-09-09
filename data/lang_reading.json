@@ -545,7 +545,63 @@
         "content": "Taking care of our mental health is crucial. It affects our physical and emotional well-being.",
         "translation": "照顾我们的心理健康至关重要。它影响我们的身体和情感健康。"
       }
+    ],
+    "2026-09-09": [
+      {
+        "level": "入门",
+        "title": "Tech Marvels",
+        "content": "New technology makes daily tasks easier. Imagine robots helping with housework! Innovations keep life simple and fun.",
+        "translation": "新技术让日常任务变得更简单。想象一下机器人帮忙做家务！创新让生活简单又有趣。"
+      },
+      {
+        "level": "进阶",
+        "title": "Home Comforts",
+        "content": "A cozy home is a happy home. Soft lighting, comfortable furniture, and a warm atmosphere create a peaceful space.",
+        "translation": "舒适的家是幸福的家。柔和的灯光、舒适的家具和温暖的氛围营造了一个平和的空间。"
+      },
+      {
+        "level": "挑战",
+        "title": "Career Growth",
+        "content": "To grow in your career, set clear goals. Continuous learning and networking with professionals are key.",
+        "translation": "为了在职业上成长，设定明确的目标。持续学习和与专业人士 networking 是关键。"
+      },
+      {
+        "level": "入门",
+        "title": "Art Appreciation",
+        "content": "Art can inspire us. A painting or sculpture can express emotions and ideas that words cannot.",
+        "translation": "艺术可以启发我们。一幅画或雕塑可以表达言语无法表达的情感和思想。"
+      },
+      {
+        "level": "进阶",
+        "title": "Nature's Gifts",
+        "content": "Nature offers us so much. Fresh air, clean water, and beautiful landscapes are treasures we must protect.",
+        "translation": "大自然给予我们很多东西。新鲜空气、干净的水和美丽的风景是我们必须保护的宝藏。"
+      },
+      {
+        "level": "挑战",
+        "title": "Mindset Matters",
+        "content": "Our mindset shapes our life. A positive outlook can overcome any challenge.",
+        "translation": "我们的心态塑造我们的生活。积极的态度可以克服任何挑战。"
+      },
+      {
+        "level": "入门",
+        "title": "Flavors of the World",
+        "content": "Cuisines from around the world are a delicious adventure. Try new flavors and expand your palate.",
+        "translation": "世界各地的美食是一场美味的冒险。尝试新的风味，扩展你的味蕾。"
+      },
+      {
+        "level": "进阶",
+        "title": "Healthy Habits",
+        "content": "Maintain a healthy lifestyle. Regular exercise, balanced diet, and enough sleep are crucial.",
+        "translation": "保持健康的生活方式。规律的锻炼、均衡的饮食和足够的睡眠至关重要。"
+      },
+      {
+        "level": "挑战",
+        "title": "Sports Spirit",
+        "content": "Sports teach us discipline and teamwork. Winning is not everything; effort and sportsmanship count too.",
+        "translation": "体育教会我们纪律和团队合作。胜利不是一切；努力和体育精神也很重要。"
+      }
     ]
   },
-  "updatedAt": "2026-09-08T13:11:00+08:00"
+  "updatedAt": "2026-09-09T14:21:00+08:00"
 }
