@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.115";
+var APP_VERSION = "5.9.116";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -1898,11 +1898,13 @@ function renderHome() {
   var ckHome = (gHome.checkin && gHome.checkin.streak) ? gHome.checkin.streak : 0;
   var gReading = (gHome.reading && gHome.reading.items) || [];
   var growthCount = investCnt + studyDays + (sportDays + (typeof ftHomeCount === "function" ? ftHomeCount() : 0)) + gReading.length;
+  var ciCount = (DB.data.consumerIntel && DB.data.consumerIntel.researches) ? DB.data.consumerIntel.researches.length : 0;
   var sections = [
     { id: "industry", icon: "📰", title: "行业情报", color: "rgba(100,210,255,0.12)", count: industry },
     { id: "brief", icon: "📋", title: "每日简报", color: "rgba(94,92,230,0.12)", count: 0 },
     { id: "competitors", icon: "🔍", title: "竞品研判", color: "rgba(255,159,10,0.12)", count: competitors },
     { id: "insights", icon: "💡", title: "需求洞察", color: "rgba(255,214,10,0.12)", count: DB.data.insights.length },
+    { id: "consumer", icon: "🧠", title: "消费者洞察", color: "rgba(94,92,230,0.13)", count: ciCount, sub: "证据 → 洞察 → 机会" },
     { id: "ideas", icon: "💭", title: "想法库", color: "rgba(191,90,242,0.12)", count: ideas },
     { id: "outfit", icon: "👗", title: "穿搭管理", color: "rgba(255,105,180,0.12)", count: outfitItems },
     { id: "fridge", icon: "📦", title: "物品管理", color: "rgba(90,200,250,0.14)", count: fridgeItems },
@@ -2221,8 +2223,7 @@ function renderGrowthHome() {
     { id: "aihot", icon: "🤖", title: "AI 资讯", color: "rgba(10,132,255,0.13)", count: 0, desc: "AIHOT 每日简报 · 精选 · 热点" },
     { id: "newssum", icon: "📰", title: "新闻摘要", color: "rgba(100,210,255,0.13)", count: 0, desc: "每日 8 点全球要闻 · 历史回顾" },
     { id: "learn", icon: "🧠", title: "知识学习", color: "rgba(191,90,242,0.14)", count: (typeof learnCount === "function") ? learnCount() : 0, desc: "AI 小知识 · 金融小知识 · 卡片速学" },
-    { id: "xhsfav", icon: "📌", title: "收藏知识库", color: "rgba(255,45,85,0.13)", count: (typeof xfCount === "function") ? xfCount() : 0, desc: "小红书收藏 · 分类汇总 · 关键词检索" },
-    { id: "consumer", icon: "🧠", title: "Consumer Intelligence", color: "rgba(94,92,230,0.13)", count: 0, desc: "消费者洞察引擎 · 证据→洞察→机会" }
+    { id: "xhsfav", icon: "📌", title: "收藏知识库", color: "rgba(255,45,85,0.13)", count: (typeof xfCount === "function") ? xfCount() : 0, desc: "小红书收藏 · 分类汇总 · 关键词检索" }
   ];
 
   c.innerHTML =
