@@ -66,8 +66,9 @@
       localStorage.setItem("ci_seed_loaded", "1");
       return;
     }
-    // 首次进入：异步加载 seed JSON
-    fetch("data/consumer_intel.json?v=5.9.104").then(function (r) {
+    // 首次进入：异步加载 seed JSON（版本号跟随 APP_VERSION，避免缓存陈旧）
+    var ver = (typeof APP_VERSION !== "undefined") ? APP_VERSION : "0";
+    fetch("data/consumer_intel.json?v=" + ver).then(function (r) {
       if (!r.ok) return null;
       return r.json();
     }).then(function (j) {
