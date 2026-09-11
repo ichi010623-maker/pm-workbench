@@ -1,0 +1,306 @@
+{
+  "_meta": {
+    "description": "Mock 预测数据，用于模拟 LLM 输出。确定性、不可联网。设计意图：~70% 字段正确，以验证 harness 既能识别正确预测也能捕获常见 LLM 错误。",
+    "version": "v1",
+    "created": "2026-09-11"
+  },
+  "predictions": {
+    "T01": {
+      "persona": { "segment_hints": [], "experience_with_product": "unknown", "role_hint": "unknown" },
+      "scene": { "time": "unknown", "place": "unknown", "activity": "拍视频", "trigger": "拍视频时", "frequency": "once" },
+      "problem": { "core": "手机发热", "symptoms": ["有点热"] },
+      "pain": { "status": "experienced", "basis_quote": "拍视频的时候手机有点热" },
+      "impact": { "task_blocked": "unknown", "abandoned_activity": "unknown", "behavior_change": "unknown", "basis_quote": "unknown" },
+      "solution": { "solution_adopted": "unknown", "solution_desc": "unknown", "purchase_signal": "unknown", "solved_status": "unknown", "satisfaction": "unknown" },
+      "emotion": { "labels": [], "intensity": "low" },
+      "evidence": { "level": "E2", "reason": "明确问题描述（发热）" },
+      "unknowns": ["scene.time", "scene.place", "persona.*"],
+      "quotes": ["拍视频的时候手机有点热"]
+    },
+
+    "T02": {
+      "persona": { "segment_hints": [], "experience_with_product": "unknown", "role_hint": "unknown" },
+      "scene": { "time": "unknown", "place": "unknown", "activity": "拍视频", "trigger": "拍十几分钟", "frequency": "recurring" },
+      "problem": { "core": "手机发热", "symptoms": ["烫"] },
+      "pain": { "status": "recurring", "basis_quote": "我每次拍十几分钟手机就开始烫" },
+      "impact": { "task_blocked": "unknown", "abandoned_activity": "unknown", "behavior_change": "unknown", "basis_quote": "unknown" },
+      "solution": { "solution_adopted": "unknown", "solution_desc": "unknown", "purchase_signal": "unknown", "solved_status": "unknown", "satisfaction": "unknown" },
+      "emotion": { "labels": [], "intensity": "medium" },
+      "evidence": { "level": "E3", "reason": "反复措辞「每次」+ 场景（拍十几分钟）" },
+      "unknowns": ["scene.time", "scene.place", "persona.*", "impact.*"],
+      "quotes": ["我每次拍十几分钟手机就开始烫"]
+    },
+
+    "T03": {
+      "persona": { "segment_hints": [], "experience_with_product": "unknown", "role_hint": "unknown" },
+      "scene": { "time": "夏天", "place": "户外", "activity": "拍视频", "trigger": "夏天+户外", "frequency": "recurring" },
+      "problem": { "core": "手机发热", "symptoms": ["容易发烫"] },
+      "pain": { "status": "recurring", "basis_quote": "手机特别容易发烫" },
+      "impact": { "task_blocked": "unknown", "abandoned_activity": "unknown", "behavior_change": "unknown", "basis_quote": "unknown" },
+      "solution": { "solution_adopted": "unknown", "solution_desc": "unknown", "purchase_signal": "unknown", "solved_status": "unknown", "satisfaction": "unknown" },
+      "emotion": { "labels": [], "intensity": "medium" },
+      "evidence": { "level": "E3", "reason": "场景+问题+反复措辞「特别容易」" },
+      "unknowns": ["persona.*", "impact.*"],
+      "quotes": ["夏天在外面拍视频，手机特别容易发烫"]
+    },
+
+    "T04": {
+      "persona": { "segment_hints": [], "experience_with_product": "unknown", "role_hint": "unknown" },
+      "scene": { "time": "unknown", "place": "unknown", "activity": "拍视频", "trigger": "持续拍摄", "frequency": "recurring" },
+      "problem": { "core": "手机过热导致掉帧", "symptoms": ["发烫", "掉帧"] },
+      "pain": { "status": "impacted", "basis_quote": "拍一会儿手机发烫，然后画面开始掉帧" },
+      "impact": { "task_blocked": "true", "abandoned_activity": "unknown", "behavior_change": "unknown", "basis_quote": "画面开始掉帧" },
+      "solution": { "solution_adopted": "unknown", "solution_desc": "unknown", "purchase_signal": "unknown", "solved_status": "unknown", "satisfaction": "unknown" },
+      "emotion": { "labels": [], "intensity": "medium" },
+      "evidence": { "level": "E4", "reason": "问题+后果" },
+      "unknowns": ["scene.time", "scene.place", "persona.*", "impact.abandoned_activity", "impact.behavior_change"],
+      "quotes": ["拍一会儿手机发烫", "然后画面开始掉帧"]
+    },
+
+    "T05": {
+      "persona": { "segment_hints": [], "experience_with_product": "owned", "role_hint": "unknown" },
+      "scene": { "time": "unknown", "place": "unknown", "activity": "拍视频", "trigger": "手机过热", "frequency": "recurring" },
+      "problem": { "core": "手机发热", "symptoms": ["太热"] },
+      "pain": { "status": "solution_adopted", "basis_quote": "我后来买了个散热器" },
+      "impact": { "task_blocked": "unknown", "abandoned_activity": "unknown", "behavior_change": "unknown", "basis_quote": "unknown" },
+      "solution": { "solution_adopted": "true", "solution_desc": "散热器", "purchase_signal": "true", "solved_status": "unknown", "satisfaction": "unknown" },
+      "emotion": { "labels": ["无奈"], "intensity": "medium" },
+      "evidence": { "level": "E5", "reason": "问题+主动解决" },
+      "unknowns": ["scene.*", "persona.*", "impact.*", "solution.satisfaction"],
+      "quotes": ["拍视频手机太热了", "我后来买了个散热器"]
+    },
+
+    "T06": {
+      "persona": { "segment_hints": [], "experience_with_product": "owned", "role_hint": "unknown" },
+      "scene": { "time": "unknown", "place": "unknown", "activity": "连续拍摄", "trigger": "用散热器后", "frequency": "unknown" },
+      "problem": { "core": "不能连续拍", "symptoms": [] },
+      "pain": { "status": "solved", "basis_quote": "终于可以连续拍半小时了" },
+      "impact": { "task_blocked": "false", "abandoned_activity": "false", "behavior_change": "false", "basis_quote": "终于可以连续拍半小时了" },
+      "solution": { "solution_adopted": "true", "solution_desc": "散热器", "purchase_signal": "true", "solved_status": "solved", "satisfaction": "satisfied" },
+      "emotion": { "labels": ["释然"], "intensity": "medium" },
+      "evidence": { "level": "E6", "reason": "问题+方案+明确满意" },
+      "unknowns": ["scene.time", "scene.place", "persona.*"],
+      "quotes": ["买了散热器以后终于可以连续拍半小时了"]
+    },
+
+    "T07": {
+      "persona": { "segment_hints": [], "experience_with_product": "owned", "role_hint": "unknown" },
+      "scene": { "time": "unknown", "place": "unknown", "activity": "录视频", "trigger": "散热器运转", "frequency": "recurring" },
+      "problem": { "core": "散热器噪音", "symptoms": ["声音太大", "很烦"] },
+      "pain": { "status": "dissatisfied", "basis_quote": "录视频的时候很烦" },
+      "impact": { "task_blocked": "unknown", "abandoned_activity": "unknown", "behavior_change": "unknown", "basis_quote": "unknown" },
+      "solution": { "solution_adopted": "true", "solution_desc": "散热器", "purchase_signal": "true", "solved_status": "not_solved", "satisfaction": "dissatisfied" },
+      "emotion": { "labels": ["烦躁"], "intensity": "medium" },
+      "evidence": { "level": "E6", "reason": "问题+方案+明确不满意" },
+      "unknowns": ["scene.*", "persona.*", "impact.*"],
+      "quotes": ["我买的散热器声音太大", "录视频的时候很烦"]
+    },
+
+    "T08": {
+      "persona": { "segment_hints": [], "experience_with_product": "owned", "role_hint": "unknown" },
+      "scene": { "time": "现在", "place": "unknown", "activity": "未知", "trigger": "使用散热器", "frequency": "unknown" },
+      "problem": { "core": "原问题已不再出现", "symptoms": [] },
+      "pain": { "status": "solved", "basis_quote": "现在用散热器已经没什么问题了" },
+      "impact": { "task_blocked": "false", "abandoned_activity": "false", "behavior_change": "false", "basis_quote": "现在用散热器已经没什么问题了" },
+      "solution": { "solution_adopted": "true", "solution_desc": "散热器", "purchase_signal": "unknown", "solved_status": "solved", "satisfaction": "satisfied" },
+      "emotion": { "labels": [], "intensity": "low" },
+      "evidence": { "level": "E6", "reason": "方案+明确满意" },
+      "unknowns": ["scene.place", "scene.activity", "scene.trigger", "scene.frequency", "persona.*", "solution.purchase_signal"],
+      "quotes": ["现在用散热器已经没什么问题了"]
+    },
+
+    "T09": {
+      "persona": { "segment_hints": [], "experience_with_product": "unknown", "role_hint": "unknown" },
+      "scene": { "time": "unknown", "place": "unknown", "activity": "边充电边拍", "trigger": "边充边拍", "frequency": "recurring" },
+      "problem": { "core": "手机发热", "symptoms": ["手机热"] },
+      "pain": { "status": "impacted", "basis_quote": "手机热得我都不敢边充边拍" },
+      "impact": { "task_blocked": "unknown", "abandoned_activity": "true", "behavior_change": "true", "basis_quote": "我都不敢边充边拍" },
+      "solution": { "solution_adopted": "true", "solution_desc": "规避：避免边充边拍", "purchase_signal": "unknown", "solved_status": "not_solved", "satisfaction": "unknown" },
+      "emotion": { "labels": ["担忧"], "intensity": "medium" },
+      "evidence": { "level": "E4", "reason": "问题+行为改变" },
+      "unknowns": ["scene.time", "scene.place", "persona.*", "impact.task_blocked", "solution.purchase_signal", "solution.satisfaction"],
+      "quotes": ["手机热得我都不敢边充边拍"]
+    },
+
+    "T10": {
+      "persona": { "segment_hints": ["主播"], "experience_with_product": "used", "role_hint": "unknown" },
+      "scene": { "time": "unknown", "place": "unknown", "activity": "直播", "trigger": "直播十分钟左右", "frequency": "recurring" },
+      "problem": { "core": "直播卡顿", "symptoms": ["手机卡", "发热"] },
+      "pain": { "status": "recurring", "basis_quote": "每次直播十分钟左右手机就开始卡" },
+      "impact": { "task_blocked": "true", "abandoned_activity": "unknown", "behavior_change": "unknown", "basis_quote": "手机就开始卡" },
+      "solution": { "solution_adopted": "unknown", "solution_desc": "unknown", "purchase_signal": "unknown", "solved_status": "unknown", "satisfaction": "unknown" },
+      "emotion": { "labels": [], "intensity": "medium" },
+      "evidence": { "level": "E4", "reason": "场景+问题+反复+后果" },
+      "unknowns": ["scene.time", "scene.place", "persona.role_hint", "impact.abandoned_activity", "impact.behavior_change"],
+      "quotes": ["每次直播十分钟左右手机就开始卡"]
+    },
+
+    "T11": {
+      "_note": "陷阱样本：mock 模拟 LLM 错误——把强情绪误判为高频痛点（E12 + E06）",
+      "pain": { "status": "impacted", "basis_quote": "烫得要命！不过我一年也就拍一次长视频。" },
+      "scene": { "activity": "长视频拍摄", "frequency": "recurring" }
+    },
+    "T12": {
+      "_note": "陷阱样本：mock 误判为已使用（E13）",
+      "pain": { "status": "experienced", "basis_quote": "听说这个散热器挺好用的，但我没用过。" },
+      "solution": { "solution_adopted": "true", "solution_desc": "散热器", "purchase_signal": "unknown", "solved_status": "unknown" }
+    },
+    "T13": {
+      "_note": "陷阱样本：mock 误判购买=解决（E11）",
+      "pain": { "status": "mentioned", "basis_quote": "我买了个 MagSafe 磁吸支架。" },
+      "solution": { "solution_adopted": "true", "solution_desc": "磁吸支架", "purchase_signal": "true", "solved_status": "solved", "satisfaction": "satisfied" }
+    },
+    "T14": {
+      "_note": "陷阱样本：mock 误判一次性为反复（E06）",
+      "pain": { "status": "recurring", "basis_quote": "今天拍视频手机有点烫。" },
+      "scene": { "activity": "拍视频", "frequency": "recurring" }
+    },
+    "T15": {
+      "_note": "陷阱样本：mock 错误低估（E05）",
+      "pain": { "status": "experienced", "basis_quote": "烫到我根本拍不下去，只能放弃。" },
+      "solution": { "solved_status": "unknown" }
+    },
+
+    "T20": { "pain": { "status": "seeking_solution", "basis_quote": "想找个办法让手机不烫，看了一圈没合适的。" },
+             "scene": { "activity": "寻找方案", "frequency": "unknown" } },
+
+    "T21": { "_note": "E10 陷阱：声称切换但未实操",
+             "pain": { "status": "experienced", "basis_quote": "再也不想用磁吸了" },
+             "solution": { "solution_adopted": "true", "solution_desc": "放弃磁吸", "solved_status": "solved" } },
+
+    "T22": { "_note": "正确判定",
+             "pain": { "status": "dissatisfied", "basis_quote": "买了散热器但没多大用。" },
+             "solution": { "solution_adopted": "true", "solution_desc": "散热器", "solved_status": "not_solved", "satisfaction": "dissatisfied" } },
+
+    "T23": { "pain": { "status": "solved", "basis_quote": "终于换了台新手机" },
+             "solution": { "solution_adopted": "true", "solution_desc": "换新手机", "solved_status": "solved", "satisfaction": "satisfied" } },
+
+    "T25": { "_note": "E15 陷阱：忽略反向证据",
+             "pain": { "status": "impacted", "basis_quote": "没遇到发热" },
+             "scene": { "frequency": "recurring" } },
+
+    "T27": { "pain": { "status": "solution_adopted", "basis_quote": "散热背夹用了三个月才觉得有点效果。" },
+             "solution": { "solution_adopted": "true", "solution_desc": "散热背夹", "solved_status": "partial", "satisfaction": "neutral" } },
+
+    "T28": { "_note": "E14 陷阱：转述当用户",
+             "pain": { "status": "experienced", "basis_quote": "我同事的手机也这样" },
+             "problem": { "core": "同事手机发热" } },
+
+    "T29": { "_note": "E17 陷阱：引用当痛点",
+             "pain": { "status": "impacted", "basis_quote": "苹果官方都说..." },
+             "problem": { "core": "手机过热降亮度" } },
+
+    "T30": { "pain": { "status": "experienced", "basis_quote": "拍视频手机烫+电池掉电特别快。" },
+             "problem": { "core": "拍视频手机发热+电池耗电快" },
+             "scene": { "activity": "拍视频", "frequency": "unknown" } },
+
+    "T33": { "_note": "陷阱：相关但不痛",
+             "pain": { "status": "experienced", "basis_quote": "上了一节手机摄影课..." },
+             "problem": { "core": "发热" } },
+
+    "T34": { "pain": { "status": "impacted", "basis_quote": "录视频二十分钟后烫到我只能关机" },
+             "impact": { "task_blocked": "true", "abandoned_activity": "true", "behavior_change": "true", "basis_quote": "只能关机让它降温" },
+             "solution": { "solved_status": "not_solved" } },
+
+    "T35": { "pain": { "status": "solved", "basis_quote": "买了磁吸散热器后拍一小时都 ok" },
+             "solution": { "solution_adopted": "true", "solution_desc": "磁吸散热器", "solved_status": "solved", "satisfaction": "satisfied" } },
+
+    "T36": { "_note": "陷阱：E07 杜撰时长",
+             "pain": { "status": "recurring", "basis_quote": "我的手机是去年买的..." },
+             "scene": { "frequency": "recurring" } },
+
+    "T38": { "_note": "E09 陷阱：看到≠买",
+             "pain": { "status": "seeking_solution", "basis_quote": "看到好多人推荐..." },
+             "solution": { "solution_adopted": "true", "solution_desc": "黑鲨散热器", "purchase_signal": "true" } },
+
+    "T40": { "pain": { "status": "seeking_solution", "basis_quote": "想买一个好用的 MagSafe 散热器" },
+             "solution": { "solution_adopted": "false", "solution_desc": "MagSafe 散热器", "purchase_signal": "true", "solved_status": "unknown" } },
+
+    "T43": { "pain": { "status": "impacted", "basis_quote": "为了不发热我已经不开 4K 了" },
+             "solution": { "solution_adopted": "true", "solution_desc": "不开 4K", "solved_status": "not_solved" } },
+
+    "T46": { "pain": { "status": "seeking_solution", "basis_quote": "推荐一下不发热的手机呗～预算 5000" },
+             "solution": { "solution_adopted": "unknown", "purchase_signal": "unknown" } },
+
+    "T47": { "pain": { "status": "recurring", "basis_quote": "用 iPhone 拍视频 5 年了，每代都烫" },
+             "scene": { "activity": "拍视频", "frequency": "recurring" } },
+
+    "T48": { "pain": { "status": "experienced", "basis_quote": "苹果快充时手机烫得像烤炉" },
+             "scene": { "activity": "快充" } },
+
+    "T49": { "pain": { "status": "dissatisfied", "basis_quote": "确实没那么烫，但也没完全解决" },
+             "solution": { "solution_adopted": "true", "solution_desc": "散热器", "solved_status": "partial", "satisfaction": "neutral" } },
+
+    "T16": { "pain": { "status": "recurring", "basis_quote": "每次开直播手机都会发烫，要疯。" },
+             "problem": { "core": "直播时手机发热" },
+             "scene": { "activity": "直播" },
+             "evidence": { "level": "E3" } },
+
+    "T17": { "pain": { "status": "recurring", "basis_quote": "发热问题从买来到现在一直都在。" },
+             "problem": { "core": "手机持续发热" },
+             "evidence": { "level": "E3" } },
+
+    "T18": { "pain": { "status": "experienced", "basis_quote": "不动用手机拍视频就不会发烫。" },
+             "problem": { "core": "使用即发热" },
+             "scene": { "activity": "拍视频" },
+             "evidence": { "level": "E2" } },
+
+    "T19": { "pain": { "status": "solved", "basis_quote": "换了 Pro Max 以后再也没卡过。" },
+             "problem": { "core": "卡顿" },
+             "solution": { "solution_adopted": "true", "solution_desc": "换 Pro Max", "solved_status": "solved" },
+             "evidence": { "level": "E6" } },
+
+    "T24": { "pain": { "status": "mentioned", "basis_quote": "如果夏天能在空调房拍就没事。" },
+             "problem": { "core": "户外发热" },
+             "scene": { "activity": "户外拍摄" },
+             "evidence": { "level": "E2" } },
+
+    "T26": { "pain": { "status": "experienced", "basis_quote": "磁吸充电+看视频+打游戏，三样一起来手机直接烫得吓人。" },
+             "problem": { "core": "多任务并发过热" },
+             "scene": { "activity": "多任务" },
+             "evidence": { "level": "E2" } },
+
+    "T31": { "pain": { "status": "recurring", "basis_quote": "天天拍视频手机都烫的" },
+             "problem": { "core": "手机发热" },
+             "scene": { "activity": "拍视频" },
+             "evidence": { "level": "E3" } },
+
+    "T32": { "pain": { "status": "recurring", "basis_quote": "几乎每拍一次就会卡" },
+             "problem": { "core": "拍视频卡顿" },
+             "scene": { "activity": "拍视频" },
+             "evidence": { "level": "E3" } },
+
+    "T37": { "pain": { "status": "experienced", "basis_quote": "主要是信号差。" },
+             "problem": { "core": "信号差" },
+             "evidence": { "level": "E2" } },
+
+    "T39": { "pain": { "status": "solution_adopted", "basis_quote": "现在换了散热风扇，比之前好多了。" },
+             "problem": { "core": "发热" },
+             "solution": { "solution_adopted": "true", "solution_desc": "散热风扇", "solved_status": "partial" },
+             "evidence": { "level": "E6" } },
+
+    "T41": { "pain": { "status": "mentioned", "basis_quote": "MacBook 剪辑视频也会发热。" },
+             "problem": { "core": "设备发热" },
+             "scene": { "activity": "视频剪辑" },
+             "evidence": { "level": "E2" } },
+
+    "T42": { "pain": { "status": "mentioned", "basis_quote": "今天拍 vlog 一切正常，没什么想吐槽的。" },
+             "problem": { "core": "未知" },
+             "scene": { "activity": "vlog 拍摄" },
+             "evidence": { "level": "E1" } },
+
+    "T44": { "pain": { "status": "solution_adopted", "basis_quote": "自从贴了散热贴，手机没那么烫了。" },
+             "problem": { "core": "发热" },
+             "solution": { "solution_adopted": "true", "solution_desc": "散热贴", "solved_status": "partial" },
+             "evidence": { "level": "E6" } },
+
+    "T45": { "pain": { "status": "mentioned", "basis_quote": "看到 iPhone 17 散热设计改了" },
+             "problem": { "core": "未知" },
+             "evidence": { "level": "E1" } },
+
+    "T50": { "pain": { "status": "experienced", "basis_quote": "这台机器除了发烫什么都好。" },
+             "problem": { "core": "机器发烫" },
+             "scene": { "activity": "日常使用" },
+             "evidence": { "level": "E2" } }
+  }
+}

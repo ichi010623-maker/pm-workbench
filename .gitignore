@@ -12,3 +12,6 @@ scf_bundle.zip
 cloud/local.env
 .local_run.lock
 worker/node_modules/
+
+# Eval harness 运行时输出
+evaluation/reports/

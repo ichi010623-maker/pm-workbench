@@ -1,0 +1,16 @@
+{
+  "name": "pm-workbench",
+  "version": "5.9.118",
+  "private": true,
+  "description": "硬件 PM 工作台 — PWA + 自动化 + 评估 harness",
+  "scripts": {
+    "eval:consumer-insight": "node evaluation/run.js",
+    "eval:consumer-insight:mock": "node evaluation/run.js --mock",
+    "test": "node tests/consumer_intel.test.js"
+  },
+  "scripts-notes": {
+    "eval:consumer-insight": "默认 mock。如需真实评估，请显式传 --provider=zhipu 或 --provider=openai",
+    "eval:consumer-insight:mock": "强制 mock，无网络、确定性。CI 与本地回归必用",
+    "test": "运行 Consumer Intelligence 单元测试（v5.9.117 提取层 + v5.9.118 回归）"
+  }
+}
