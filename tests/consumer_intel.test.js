@@ -362,7 +362,246 @@ section("J. 分层边界");
   ok(SRC.prompt.indexOf("不要输出任何用户数量") >= 0, "prompt 明示禁止计数");
 }
 
+// ============ K. 真实句级 gold fixtures（用户原始反馈 · 10 条） ============
+// 覆盖常见模式：轻微 experienced / 反复 recurring / 后果 impacted / 已采用 / 已解决 / 不满意 / 规避型采用
+// 每条都跑 Schema + audit 双重验证；任何回归将立即失败。
+section("K. Gold Fixtures · 真实句级");
+{
+  const sb = mkSandbox();
+  const GOLD = [
+    { id: "T01", text: "拍视频的时候手机有点热。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "拍视频", trigger: "拍视频时", frequency: "once" },
+        problem: { core: "手机发热", symptoms: ["有点热"] },
+        pain: { status: "experienced", basis_quote: "拍视频的时候手机有点热" },
+        impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
+        solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
+        emotion: { labels: [], intensity: "low" },
+        evidence: { level: "E2", reason: "明确问题描述（发热），并有轻微情绪修饰「有点」" },
+        unknowns: ["scene.time", "scene.place", "persona.role_hint", "persona.segment_hints",
+                   "impact.task_blocked", "impact.abandoned_activity", "impact.behavior_change",
+                   "solution.*"],
+        quotes: ["拍视频的时候手机有点热"]
+      }
+    },
+    { id: "T02", text: "我每次拍十几分钟手机就开始烫。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "连续拍摄", trigger: "连续拍摄十几分钟", frequency: "recurring" },
+        problem: { core: "手机发热", symptoms: ["烫手"] },
+        pain: { status: "recurring", basis_quote: "我每次拍十几分钟手机就开始烫" },
+        impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
+        solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
+        emotion: { labels: [], intensity: "medium" },
+        evidence: { level: "E3", reason: "场景（拍十几分钟）+ 问题（手机烫）+ 反复措辞「每次」" },
+        unknowns: ["scene.time", "scene.place", "persona.role_hint", "persona.segment_hints",
+                   "impact.*", "solution.*"],
+        quotes: ["我每次拍十几分钟手机就开始烫"]
+      }
+    },
+    { id: "T03", text: "夏天在外面拍视频，手机特别容易发烫。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
+        scene: { time: "夏天", place: "户外", activity: "拍视频", trigger: "夏天+户外拍摄", frequency: "recurring" },
+        problem: { core: "手机发热", symptoms: ["特别容易发烫"] },
+        pain: { status: "recurring", basis_quote: "手机特别容易发烫" },
+        impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
+        solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
+        emotion: { labels: [], intensity: "medium" },
+        evidence: { level: "E3", reason: "明确场景（夏天/户外/拍视频）+ 问题（发烫）+ 反复措辞「特别容易」" },
+        unknowns: ["persona.role_hint", "persona.segment_hints", "impact.*", "solution.*"],
+        quotes: ["夏天在外面拍视频，手机特别容易发烫"]
+      }
+    },
+    { id: "T04", text: "拍一会儿手机发烫，然后画面开始掉帧。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "拍视频", trigger: "持续拍摄", frequency: "unknown" },
+        problem: { core: "手机发热导致画面掉帧", symptoms: ["发烫", "画面掉帧"] },
+        pain: { status: "impacted", basis_quote: "拍一会儿手机发烫，然后画面开始掉帧" },
+        impact: { task_blocked: "true", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "画面开始掉帧" },
+        solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
+        emotion: { labels: [], intensity: "medium" },
+        evidence: { level: "E4", reason: "问题（发烫）+ 实际后果（画面掉帧=任务受影响）" },
+        unknowns: ["scene.time", "scene.place", "persona.role_hint", "persona.segment_hints",
+                   "impact.abandoned_activity", "impact.behavior_change", "solution.*"],
+        quotes: ["拍一会儿手机发烫", "然后画面开始掉帧"]
+      }
+    },
+    { id: "T05", text: "拍视频手机太热了，我后来买了个散热器。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "拍视频", trigger: "拍视频时手机过热", frequency: "unknown" },
+        problem: { core: "手机发热", symptoms: ["太热"] },
+        pain: { status: "solution_adopted", basis_quote: "我后来买了个散热器" },
+        impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
+        solution: { solution_adopted: "true", solution_desc: "买了个散热器", purchase_signal: "true", solved_status: "unknown", satisfaction: "unknown" },
+        emotion: { labels: ["无奈"], intensity: "medium" },
+        evidence: { level: "E5", reason: "问题（发热）+ 主动采取解决行动（买散热器）" },
+        unknowns: ["scene.time", "scene.place", "persona.role_hint", "persona.segment_hints",
+                   "impact.*", "scene.frequency", "solution.satisfaction"],
+        quotes: ["拍视频手机太热了", "我后来买了个散热器"]
+      }
+    },
+    { id: "T06", text: "买了散热器以后终于可以连续拍半小时了。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "连续拍摄", trigger: "使用散热器后", frequency: "unknown" },
+        problem: { core: "之前无法连续长时间拍摄", symptoms: ["不能连续拍"] },
+        pain: { status: "solved", basis_quote: "买了散热器以后终于可以连续拍半小时了" },
+        impact: { task_blocked: "false", abandoned_activity: "false", behavior_change: "false", basis_quote: "现在可以连续拍半小时了" },
+        solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "true", solved_status: "solved", satisfaction: "satisfied" },
+        emotion: { labels: ["释然"], intensity: "medium" },
+        evidence: { level: "E6", reason: "问题 + 方案（散热器）+ 明确满意结果「终于可以连续拍半小时」" },
+        unknowns: ["scene.time", "scene.place", "persona.role_hint", "persona.segment_hints",
+                   "impact.basis_quote" /* 该路径在原文无直接支撑 */],
+        quotes: ["买了散热器以后终于可以连续拍半小时了"]
+      }
+    },
+    { id: "T07", text: "我买的散热器声音太大，录视频的时候很烦。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "录视频", trigger: "录视频时散热器运转", frequency: "unknown" },
+        problem: { core: "散热器噪音", symptoms: ["声音太大", "很烦"] },
+        pain: { status: "experienced", basis_quote: "录视频的时候很烦" },
+        impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
+        solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "true", solved_status: "not_solved", satisfaction: "dissatisfied" },
+        emotion: { labels: ["烦躁"], intensity: "medium" },
+        evidence: { level: "E6", reason: "问题（噪音）+ 方案（散热器）+ 明确不满意（声音太大、很烦）" },
+        unknowns: ["scene.time", "scene.place", "persona.role_hint", "persona.segment_hints", "impact.*"],
+        quotes: ["我买的散热器声音太大", "录视频的时候很烦"]
+      }
+    },
+    { id: "T08", text: "现在用散热器已经没什么问题了。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
+        scene: { time: "现在", place: "unknown", activity: "未知（上下文隐含为原场景）", trigger: "使用散热器", frequency: "unknown" },
+        problem: { core: "原问题已不再出现", symptoms: [] },
+        pain: { status: "solved", basis_quote: "现在用散热器已经没什么问题了" },
+        impact: { task_blocked: "false", abandoned_activity: "false", behavior_change: "false", basis_quote: "现在用散热器已经没什么问题了" },
+        solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "unknown", solved_status: "solved", satisfaction: "satisfied" },
+        emotion: { labels: [], intensity: "low" },
+        evidence: { level: "E6", reason: "方案（散热器）+ 明确满意结果「没什么问题了」" },
+        unknowns: ["scene.place", "scene.activity", "scene.trigger", "scene.frequency",
+                   "persona.role_hint", "persona.segment_hints", "solution.purchase_signal"],
+        quotes: ["现在用散热器已经没什么问题了"]
+      }
+    },
+    { id: "T09", text: "手机热得我都不敢边充边拍。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "边充电边拍摄", trigger: "边充边拍", frequency: "unknown" },
+        problem: { core: "手机发热导致不敢边充边拍", symptoms: ["手机热"] },
+        pain: { status: "impacted", basis_quote: "手机热得我都不敢边充边拍" },
+        impact: { task_blocked: "unknown", abandoned_activity: "true", behavior_change: "true", basis_quote: "我都不敢边充边拍" },
+        solution: { solution_adopted: "true", solution_desc: "规避：避免边充电边拍", purchase_signal: "unknown", solved_status: "not_solved", satisfaction: "unknown" },
+        emotion: { labels: ["担忧"], intensity: "medium" },
+        evidence: { level: "E4", reason: "问题（发热）+ 实际后果（被迫改变行为：不敢边充边拍）" },
+        unknowns: ["scene.time", "scene.place", "persona.role_hint", "persona.segment_hints",
+                   "impact.task_blocked", "solution.purchase_signal", "solution.satisfaction"],
+        quotes: ["手机热得我都不敢边充边拍"]
+      }
+    },
+    { id: "T10", text: "每次直播十分钟左右手机就开始卡。",
+      extracted: {
+        persona: { segment_hints: ["主播"], experience_with_product: "used", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "直播", trigger: "直播十分钟左右", frequency: "recurring" },
+        problem: { core: "直播时手机卡顿", symptoms: ["手机卡", "发热（隐含）"] },
+        pain: { status: "recurring", basis_quote: "每次直播十分钟左右手机就开始卡" },
+        impact: { task_blocked: "true", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "手机就开始卡" },
+        solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
+        emotion: { labels: [], intensity: "medium" },
+        evidence: { level: "E4", reason: "场景（直播）+ 问题（卡顿）+ 反复「每次」+ 后果（任务受影响）" },
+        unknowns: ["scene.time", "scene.place", "persona.role_hint",
+                   "impact.abandoned_activity", "impact.behavior_change", "solution.*"],
+        quotes: ["每次直播十分钟左右手机就开始卡"]
+      }
+    },
+  ];
+
+  ok(GOLD.length === 10, "Gold fixtures 10 条全部就位");
+
+  GOLD.forEach(function (g) {
+    const v = sb.ciValidateExtraction(g.extracted);
+    ok(v.ok, g.id + " · Schema 通过（无禁字段/枚举合法/required 齐全）");
+    if (!v.ok) {
+      v.errors.forEach(function (e) { console.log("      → " + e); });
+    }
+    const a = sb.ciAudit({ rawText: g.text, extracted: g.extracted });
+    ok(a.ok, g.id + " · audit 通过（所有判断在原文有措辞支撑）");
+    if (!a.ok) {
+      a.warnings.forEach(function (w) {
+        console.log("      → ⚠ " + w.rule + " [" + w.field + "] " + w.message);
+      });
+    }
+  });
+
+  // 关键场景反向断言：常见误判必须被拦截
+  // 1) 提及 ≠ 使用：原文「听说 X」时不得判 solution_adopted=true
+  {
+    const r = sb.ciAudit({
+      rawText: "听说这个散热器挺好用的，但我没用过。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "unknown", trigger: "unknown", frequency: "unknown" },
+        problem: { core: "unknown", symptoms: [] },
+        pain: { status: "mentioned", basis_quote: "听说这个散热器挺好用的" },
+        impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
+        solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
+        emotion: { labels: [], intensity: "unknown" },
+        evidence: { level: "E1", reason: "仅为转述" },
+        unknowns: ["problem.*", "scene.*", "persona.*"],
+        quotes: ["听说这个散热器挺好用的"]
+      }
+    });
+    const flagged = a => a.warnings.some(w => w.rule === "规则7");
+    ok(r.warnings.some(w => w.rule === "规则7"),
+       "反例 · 「听说/没用过」被判 adopted=true 必须被规则 7 拦截");
+  }
+  // 2) 购买 ≠ 解决：原文只说买了，但没说解决了
+  {
+    const r = sb.ciAudit({
+      rawText: "我买了个散热器。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
+        scene: { time: "unknown", place: "unknown", activity: "unknown", trigger: "unknown", frequency: "unknown" },
+        problem: { core: "发热", symptoms: [] },
+        pain: { status: "solution_adopted", basis_quote: "我买了个散热器" },
+        impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
+        solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "true", solved_status: "solved", satisfaction: "unknown" },
+        emotion: { labels: [], intensity: "unknown" },
+        evidence: { level: "E5", reason: "已购买" },
+        unknowns: ["scene.*", "persona.*"],
+        quotes: ["我买了个散热器"]
+      }
+    });
+    ok(r.warnings.some(w => w.rule === "规则6"),
+       "反例 · 仅「买了」被判 solved 必须被规则 6 拦截");
+  }
+  // 3) 一次性抱怨 ≠ 反复：原文无反复措辞，不得判 recurring
+  {
+    const r = sb.ciAudit({
+      rawText: "今天拍视频手机有点烫。",
+      extracted: {
+        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
+        scene: { time: "今天", place: "unknown", activity: "拍视频", trigger: "unknown", frequency: "recurring" },
+        problem: { core: "发热", symptoms: ["有点烫"] },
+        pain: { status: "experienced", basis_quote: "今天拍视频手机有点烫" },
+        impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
+        solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
+        emotion: { labels: [], intensity: "low" },
+        evidence: { level: "E3", reason: "场景+问题" },
+        unknowns: ["persona.*", "impact.*", "solution.*"],
+        quotes: ["今天拍视频手机有点烫"]
+      }
+    });
+    ok(r.warnings.some(w => w.rule === "规则5"),
+       "反例 · 一次抱怨被判 recurring 必须被规则 5 拦截");
+  }
+}
+
 console.log("\n=========================================");
-console.log("v5.9.117 Consumer Intelligence 提取层测试：通过 " + pass + " / 失败 " + fail);
+console.log("v5.9.118 Consumer Intelligence 提取层测试：通过 " + pass + " / 失败 " + fail);
 console.log("=========================================");
 process.exit(fail > 0 ? 1 : 0);
