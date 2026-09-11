@@ -21,1249 +21,2680 @@
       },
       "createdAt": "2026-09-11",
       "status": "active",
-      "stats": {
-        "totalRaw": 36,
-        "uniqueUsers": 28,
-        "relevantUsers": 25,
-        "painConfirmed": 8,
-        "solutionSeeking": 5,
-        "switched": 13
-      },
-      "insights": [
-        {
-          "id": "ins_01",
-          "rank": 1,
-          "title": "夏季户外连续拍摄时的手机过热",
-          "statement": "对经常在户外连续拍摄 15-30 分钟的女性用户而言，手机发热不只是「温度高」，而是会直接导致掉帧、降频甚至中断拍摄。",
-          "sceneIds": [
-            "sc_outdoor_video",
-            "sc_summer_outdoor",
-            "sc_long_shoot"
-          ],
-          "painLevel": "high",
-          "scenes": [
-            {
-              "rank": 1,
-              "name": "户外短视频/ Vlog 拍摄",
-              "count": 11
-            },
-            {
-              "rank": 2,
-              "name": "夏季高温下拍摄",
-              "count": 8
-            },
-            {
-              "rank": 3,
-              "name": "长时间连续录影",
-              "count": 7
-            },
-            {
-              "rank": 4,
-              "name": "室内直播",
-              "count": 4
-            },
-            {
-              "rank": 5,
-              "name": "边充边拍",
-              "count": 3
-            }
-          ],
-          "pain": {
-            "core": "手机持续发热 → 性能下降",
-            "consequences": [
-              "发热",
-              "降频",
-              "掉帧",
-              "强制停录",
-              "杀后台"
-            ],
-            "realImpact": "用户无法完成「连续拍摄」任务，被迫中途暂停散热"
-          },
-          "lifecycle": {
-            "persistence": 5,
-            "stage": "C-D",
-            "signals": [
-              "「每次……」",
-              "「夏天……」",
-              "「拍久了……」",
-              "「一拍视频就……」"
-            ],
-            "explanation": "多用户用「每次」「夏天」类持续性词汇反复描述，说明痛点重复发生而非一次性抱怨。"
-          },
-          "currentSolutions": [
-            {
-              "solution": "拆掉手机壳",
-              "feedback": "有效但麻烦，且保护性下降"
-            },
-            {
-              "solution": "用普通小风扇吹",
-              "feedback": "降温但携带不便，无法边走边拍"
-            },
-            {
-              "solution": "冰袋/ 退热贴贴背面",
-              "feedback": "临时方案，融化了就失效"
-            },
-            {
-              "solution": "手机散热器 (本次研究对象)",
-              "feedback": "相对有效，仍有重量/噪音/磁吸兼容问题"
-            },
-            {
-              "solution": "放弃连续拍摄分次录制",
-              "feedback": "用户放弃需求，创作质量下降"
-            }
-          ],
-          "opportunity": "用户真正想要的不是「更冷的散热器」，而是「不改变我拍摄方式的散热方案」——需要安静、轻量、磁吸即贴即用、不挡镜头。",
-          "evidenceIds": [
-            "ev_001",
-            "ev_002",
-            "ev_003",
-            "ev_007",
-            "ev_012",
-            "ev_018",
-            "ev_024"
-          ]
-        },
-        {
-          "id": "ins_02",
-          "rank": 2,
-          "title": "笨重 / 噪音 / 阻挡镜头的现有产品缺陷",
-          "statement": "即便购买了散热器的用户，仍普遍反馈「太重」「风扇太吵」「挡住广角镜头」「充电时遮挡镜头」等次生痛点，导致二次购买或弃用。",
-          "sceneIds": [
-            "sc_after_buy"
-          ],
-          "painLevel": "high",
-          "scenes": [
-            {
-              "rank": 1,
-              "name": "日常通勤携带",
-              "count": 6
-            },
-            {
-              "rank": 2,
-              "name": "边充电边拍摄",
-              "count": 5
-            },
-            {
-              "rank": 3,
-              "name": "广角/前置镜头拍摄",
-              "count": 4
-            },
-            {
-              "rank": 4,
-              "name": "安静环境 (咖啡店/书店)",
-              "count": 3
-            }
-          ],
-          "pain": {
-            "core": "现有产品副作用大于散热效果",
-            "consequences": [
-              "二次弃用",
-              "退货",
-              "改回裸机 + 冰袋",
-              "改边充边拍卡顿"
-            ],
-            "realImpact": "用户不愿在公开场合使用散热器，散热方案从「公开配件」退化为「私下忍受」"
-          },
-          "lifecycle": {
-            "persistence": 4,
-            "stage": "E-D",
-            "signals": [
-              "「买了一个但太重所以退了」",
-              "「太响了不敢在咖啡店开」",
-              "「挡我广角镜头」"
-            ],
-            "explanation": "已进入「购买后」阶段但体验未达预期，痛点从「无产品」转移到「产品副作用」。"
-          },
-          "currentSolutions": [
-            {
-              "solution": "退货换更小的",
-              "feedback": "效果更差"
-            },
-            {
-              "solution": "仅在家里用",
-              "feedback": "场景受限"
-            },
-            {
-              "solution": "改用夹背式",
-              "feedback": "夹不稳易脱落"
-            }
-          ],
-          "opportunity": "在「重量 < 80g」「噪音 < 25dB」「不挡镜头」「兼容 MagSafe 充电」四项指标同时达成，即可拿下这批对产品敏感的女性用户。",
-          "evidenceIds": [
-            "ev_004",
-            "ev_008",
-            "ev_013",
-            "ev_019",
-            "ev_022",
-            "ev_028"
-          ]
-        },
-        {
-          "id": "ins_03",
-          "rank": 3,
-          "title": "女性用户对「颜值/可出镜」有明确需求",
-          "statement": "小红书与抖音上大量用户明确反馈「希望散热器好看」「能带出门不尴尬」「要拍 vlog 不能太丑」，颜值与「是否能出镜」是隐性决策门槛。",
-          "sceneIds": [
-            "sc_aesthetic"
-          ],
-          "painLevel": "medium",
-          "scenes": [
-            {
-              "rank": 1,
-              "name": "拍摄视频时入镜",
-              "count": 7
-            },
-            {
-              "rank": 2,
-              "name": "咖啡店/ 公开场合使用",
-              "count": 5
-            },
-            {
-              "rank": 3,
-              "name": "携带出门",
-              "count": 4
-            }
-          ],
-          "pain": {
-            "core": "功能达标但颜值不达标",
-            "consequences": [
-              "买了不敢用",
-              "等更美观的款",
-              "优先选白色/ 粉色"
-            ],
-            "realImpact": "用户宁可忍受发热也不愿在公开场合用「丑陋」的散热器"
-          },
-          "lifecycle": {
-            "persistence": 3,
-            "stage": "C",
-            "signals": [
-              "「希望好看一点」」",
-              "「颜值即正义」",
-              "「白色好看但功能差」"
-            ],
-            "explanation": "尚未购买者在意颜值，是「决策期」的隐形门槛。"
-          },
-          "currentSolutions": [
-            {
-              "solution": "选有品牌感的款",
-              "feedback": "价格偏高"
-            },
-            {
-              "solution": "买保护套遮掩",
-              "feedback": "散热效果打折"
-            }
-          ],
-          "opportunity": "颜值=入门券。配色（白/粉/薄荷绿）+ 圆润造型 + 极简 logo 可显著提升女性用户首次购买率。",
-          "evidenceIds": [
-            "ev_005",
-            "ev_011",
-            "ev_015",
-            "ev_021",
-            "ev_026"
-          ]
-        },
-        {
-          "id": "ins_04",
-          "rank": 4,
-          "title": "边充电边拍摄的特殊场景需求",
-          "statement": "「边充边拍」是直播与长时间录影用户的核心场景，但 MagSafe 充电与散热器磁吸位冲突，导致用户被迫二选一。",
-          "sceneIds": [
-            "sc_charging_shoot"
-          ],
-          "painLevel": "medium",
-          "scenes": [
-            {
-              "rank": 1,
-              "name": "直播",
-              "count": 4
-            },
-            {
-              "rank": 2,
-              "name": "长时间录影",
-              "count": 3
-            },
-            {
-              "rank": 3,
-              "name": "外出无补电场景",
-              "count": 2
-            }
-          ],
-          "pain": {
-            "core": "磁吸位冲突，无法同时散热和充电",
-            "consequences": [
-              "边拍边没电",
-              "边充边发热更严重",
-              "被迫中断"
-            ],
-            "realImpact": "无法满足直播与超长录影场景"
-          },
-          "lifecycle": {
-            "persistence": 3,
-            "stage": "C-E",
-            "signals": [
-              "「充电和磁吸位抢一个地方」",
-              "「边充边拍根本不行」"
-            ],
-            "explanation": "结构冲突是设计层面的硬约束。"
-          },
-          "currentSolutions": [
-            {
-              "solution": "用有线充电 + 散热器",
-              "feedback": "线材影响拍摄"
-            },
-            {
-              "solution": "改用夹背式 + 有线",
-              "feedback": "兼容但不便携"
-            }
-          ],
-          "opportunity": "双磁吸位（顶部 MagSafe 充电 + 背部 MagSafe 散热）或 一体化 Qi2 散热器 + 充电是结构性突破点。",
-          "evidenceIds": [
-            "ev_009",
-            "ev_014",
-            "ev_020",
-            "ev_029"
-          ]
-        },
-        {
-          "id": "ins_05",
-          "rank": 5,
-          "title": "噪音影响使用场景",
-          "statement": "风扇类散热器的噪音（30dB+）在咖啡店/ 卧室/ 录音场景被用户明确指出「太吵」「不敢开」。",
-          "sceneIds": [
-            "sc_noise"
-          ],
-          "painLevel": "medium",
-          "scenes": [
-            {
-              "rank": 1,
-              "name": "咖啡店拍摄",
-              "count": 4
-            },
-            {
-              "rank": 2,
-              "name": "卧室录 vlog",
-              "count": 3
-            },
-            {
-              "rank": 3,
-              "name": "会议/ 通话录音",
-              "count": 2
-            }
-          ],
-          "pain": {
-            "core": "风扇噪音干扰拍摄/ 通话",
-            "consequences": [
-              "不敢在安静场合开",
-              "被迫换无风扇方案",
-              "声音需后期降噪"
-            ],
-            "realImpact": "使用场景被静音门槛卡住"
-          },
-          "lifecycle": {
-            "persistence": 3,
-            "stage": "C-D",
-            "signals": [
-              "「风扇一开就嗡嗡的」",
-              "「不敢在咖啡店开」"
-            ],
-            "explanation": "声学指标是体验的硬伤。"
-          },
-          "currentSolutions": [
-            {
-              "solution": "选无风扇 (半导体制冷)",
-              "feedback": "易结露、冷热不均"
-            },
-            {
-              "solution": "降档使用",
-              "feedback": "降温效果打折"
-            }
-          ],
-          "opportunity": "≤ 22dB（接近环境噪声）或 无风扇方案（半导体制冷 + 防结露算法）是体验升级关键。",
-          "evidenceIds": [
-            "ev_010",
-            "ev_017",
-            "ev_023",
-            "ev_030"
-          ]
-        },
-        {
-          "id": "ins_06",
-          "rank": 6,
-          "title": "「已是过去时」痛点：发热问题或被环境降温/ 待机方案缓解",
-          "statement": "约 15% 用户已通过「在空调房拍」「分次录影」「等手机凉下来再拍」等方式回避，对散热器需求减弱。",
-          "sceneIds": [
-            "sc_resolved"
-          ],
-          "painLevel": "low",
-          "scenes": [
-            {
-              "rank": 1,
-              "name": "室内空调环境",
-              "count": 3
-            },
-            {
-              "rank": 2,
-              "name": "分次录制工作流",
-              "count": 2
-            },
-            {
-              "rank": 3,
-              "name": "放弃室外长时间拍摄",
-              "count": 2
-            }
-          ],
-          "pain": {
-            "core": "用户已自创回避方案",
-            "consequences": [
-              "对散热器无迫切需求"
-            ],
-            "realImpact": "这部分人群不属于潜在用户群"
-          },
-          "lifecycle": {
-            "persistence": 5,
-            "stage": "F",
-            "signals": [
-              "「换了室内拍就没问题」",
-              "「我现在分两次录」"
-            ],
-            "explanation": "已从「痛点」迁移到「放弃需求」。"
-          },
-          "currentSolutions": [
-            {
-              "solution": "仅在室内拍摄",
-              "feedback": "局限场景"
-            },
-            {
-              "solution": "分次录制",
-              "feedback": "工作流变复杂"
-            }
-          ],
-          "opportunity": "已解决人群不是营销对象；潜在用户聚焦在「想保留室外连续拍摄习惯」的女性创作者。",
-          "evidenceIds": [
-            "ev_006",
-            "ev_016",
-            "ev_027",
-            "ev_031"
-          ]
-        },
-        {
-          "id": "ins_07",
-          "rank": 7,
-          "title": "小白用户的「不知道散热器存在」与「选购困难」",
-          "statement": "非数码爱好者的女性用户大量反馈「才知道有这种产品」「不知道选哪款」「怕踩雷」，市场教育与导购仍是空白。",
-          "sceneIds": [
-            "sc_awareness"
-          ],
-          "painLevel": "low",
-          "scenes": [
-            {
-              "rank": 1,
-              "name": "刚接触短视频的小白",
-              "count": 4
-            },
-            {
-              "rank": 2,
-              "name": "在朋友推荐下才知道",
-              "count": 3
-            },
-            {
-              "rank": 3,
-              "name": "电商评论里被种草",
-              "count": 2
-            }
-          ],
-          "pain": {
-            "core": "认知门槛",
-            "consequences": [
-              "搜索关键词不精准",
-              "买错品类",
-              "高价低配"
-            ],
-            "realImpact": "从认知到购买的转化率被严重抑制"
-          },
-          "lifecycle": {
-            "persistence": 2,
-            "stage": "B",
-            "signals": [
-              "「第一次听说这种产品」",
-              "「不知道买哪个」"
-            ],
-            "explanation": "尚未进入痛点评估期。"
-          },
-          "currentSolutions": [
-            {
-              "solution": "问朋友",
-              "feedback": "主观性强"
-            },
-            {
-              "solution": "看 B站测评",
-              "feedback": "内容质量参差"
-            }
-          ],
-          "opportunity": "短视频场景化种草（拍摄 vlog 时演示「边拍边用」）比参数对比更易打动小白用户。",
-          "evidenceIds": [
-            "ev_025",
-            "ev_032",
-            "ev_033"
-          ]
-        }
-      ],
       "evidence": [
         {
           "id": "ev_001",
-          "rawText": "夏天出去拍照真的烫得不敢拿，拍十几分钟就开始掉帧。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-07-13",
           "user": "小红薯 6B2A",
-          "scene": "夏季户外拍摄",
-          "behavior": "连续拍摄",
-          "trigger": "高温+长时间拍摄",
-          "problem": "手机发热、掉帧",
-          "painLevel": "high",
-          "duration": "拍摄过程中持续",
-          "frequency": "高频",
-          "emotion": "烦躁/无奈",
-          "currentSolution": "未提及",
-          "switched": "未知",
-          "userState": "正在受困扰",
-          "evidenceLevel": "E3",
-          "painStatus": "C",
-          "sceneTag": "sc_outdoor_video"
+          "rawText": "夏天出去拍照真的烫得不敢拿，拍十几分钟就开始掉帧。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "夏季/高温",
+              "place": "户外",
+              "activity": "手机拍摄/录制",
+              "trigger": "高温+长时间拍摄",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "手机发热、掉帧",
+              "symptoms": [
+                "掉帧",
+                "烫"
+              ]
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "夏天出去拍照真的烫得不敢拿，拍十几分钟就开始掉帧。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "烦躁/无奈"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "夏天出去拍照真的烫得不敢拿，拍十几分钟就开始掉帧。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.099Z"
+          }
         },
         {
           "id": "ev_002",
-          "rawText": "我每次出去玩拍 vlog，半小时手机就烫得要关后台，求推荐。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-06-22",
           "user": "蜜桃气泡",
-          "scene": "户外 vlog",
-          "behavior": "半小时连续拍摄",
-          "trigger": "夏季+长时间",
-          "problem": "发热+卡后台",
-          "painLevel": "high",
-          "duration": "半小时左右",
-          "frequency": "每次",
-          "emotion": "求助",
-          "currentSolution": "未解决",
-          "switched": "未购买",
-          "userState": "主动寻找方案",
-          "evidenceLevel": "E3",
-          "painStatus": "D",
-          "sceneTag": "sc_outdoor_video"
+          "rawText": "我每次出去玩拍 vlog，半小时手机就烫得要关后台，求推荐。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "户外",
+              "activity": "手机拍摄/录制",
+              "trigger": "夏季+长时间",
+              "frequency": "recurring"
+            },
+            "problem": {
+              "core": "发热+卡后台",
+              "symptoms": [
+                "烫"
+              ]
+            },
+            "pain": {
+              "status": "seeking_solution",
+              "basis_quote": "我每次出去玩拍 vlog，半小时手机就烫得要关后台，求推荐。"
+            },
+            "impact": {
+              "task_blocked": "true",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "我每次出去玩拍 vlog，半小时手机就烫得要关后台，求推荐。"
+            },
+            "solution": {
+              "solution_adopted": "false",
+              "solution_desc": "unknown",
+              "purchase_signal": "false",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "求助"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E4",
+              "reason": "问题 + 实际后果"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "我每次出去玩拍 vlog，半小时手机就烫得要关后台，求推荐。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_003",
-          "rawText": "真的夏天拍视频受不了，拍一会手机就开始卡。",
+          "schema_version": 2,
           "source": "douyin",
           "publishDate": "2026-07-28",
           "user": "摄影师小鹿",
-          "scene": "夏季拍摄",
-          "behavior": "短时间多次拍摄",
-          "trigger": "高温",
-          "problem": "卡顿",
-          "painLevel": "high",
-          "duration": "拍一会",
-          "frequency": "高频",
-          "emotion": "烦躁",
-          "currentSolution": "未提及",
-          "switched": "未知",
-          "userState": "持续困扰",
-          "evidenceLevel": "E2",
-          "painStatus": "C",
-          "sceneTag": "sc_summer_outdoor"
+          "rawText": "真的夏天拍视频受不了，拍一会手机就开始卡。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "摄影师"
+            },
+            "scene": {
+              "time": "夏季/高温",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "高温",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "卡顿",
+              "symptoms": [
+                "卡"
+              ]
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "真的夏天拍视频受不了，拍一会手机就开始卡。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "烦躁"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "scene.place",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "真的夏天拍视频受不了，拍一会手机就开始卡。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_004",
-          "rawText": "买了一个某品牌的，半边摄像头挡住了我广角镜头，真的服了。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-05-30",
           "user": "设计师 Zoe",
-          "scene": "广角拍摄",
-          "behavior": "横向拍摄",
-          "trigger": "散热器和镜头位冲突",
-          "problem": "遮挡镜头",
-          "painLevel": "high",
-          "duration": "每次拍",
-          "frequency": "每次",
-          "emotion": "不满",
-          "currentSolution": "退货",
-          "switched": "退货",
-          "userState": "已采取行动/不满意",
-          "evidenceLevel": "E6",
-          "painStatus": "E",
-          "sceneTag": "sc_after_buy"
+          "rawText": "买了一个某品牌的，半边摄像头挡住了我广角镜头，真的服了。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "owned",
+              "role_hint": "设计师"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "散热器和镜头位冲突",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "遮挡镜头",
+              "symptoms": [
+                "挡住"
+              ]
+            },
+            "pain": {
+              "status": "dissatisfied",
+              "basis_quote": "买了一个某品牌的，半边摄像头挡住了我广角镜头，真的服了。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "true",
+              "solution_desc": "退货",
+              "purchase_signal": "true",
+              "solved_status": "unknown",
+              "satisfaction": "dissatisfied"
+            },
+            "emotion": {
+              "labels": [
+                "不满"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E6",
+              "reason": "问题 + 解决方案 + 明确满意/不满意结果"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "买了一个某品牌的，半边摄像头挡住了我广角镜头，真的服了。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_005",
-          "rawText": "希望散热器能好看一点，目前市面上的都太理工男了，不适合女生。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-04-18",
           "user": "Anna 摄影",
-          "scene": "日常拍摄",
-          "behavior": "在意颜值",
-          "trigger": "无",
-          "problem": "颜值不匹配",
-          "painLevel": "medium",
-          "duration": "持续",
-          "frequency": "持续",
-          "emotion": "期待",
-          "currentSolution": "未购买",
-          "switched": "未购买",
-          "userState": "决策期",
-          "evidenceLevel": "E3",
-          "painStatus": "C",
-          "sceneTag": "sc_aesthetic"
+          "rawText": "希望散热器能好看一点，目前市面上的都太理工男了，不适合女生。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [
+                "女生"
+              ],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "无",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "颜值不匹配",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "希望散热器能好看一点，目前市面上的都太理工男了，不适合女生。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "期待"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "希望散热器能好看一点，目前市面上的都太理工男了，不适合女生。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_006",
-          "rawText": "后来我就只在空调房里拍了，手机也不会太烫。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-03-12",
           "user": "Lulu_life",
-          "scene": "室内拍摄",
-          "behavior": "仅在空调房拍",
-          "trigger": "已回避",
-          "problem": "已回避",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "已避免",
-          "emotion": "接受",
-          "currentSolution": "室内拍摄",
-          "switched": "已解决",
-          "userState": "已解决",
-          "evidenceLevel": "E6",
-          "painStatus": "F",
-          "sceneTag": "sc_resolved"
+          "rawText": "后来我就只在空调房里拍了，手机也不会太烫。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "owned",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "室内",
+              "activity": "手机拍摄/录制",
+              "trigger": "已回避",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "已回避",
+              "symptoms": [
+                "烫"
+              ]
+            },
+            "pain": {
+              "status": "solved",
+              "basis_quote": "后来我就只在空调房里拍了，手机也不会太烫。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "true",
+              "basis_quote": "后来我就只在空调房里拍了，手机也不会太烫。"
+            },
+            "solution": {
+              "solution_adopted": "true",
+              "solution_desc": "室内拍摄",
+              "purchase_signal": "unknown",
+              "solved_status": "solved",
+              "satisfaction": "satisfied"
+            },
+            "emotion": {
+              "labels": [
+                "接受"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E6",
+              "reason": "问题 + 解决方案 + 明确满意/不满意结果"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.role_hint",
+              "scene.time",
+              "scene.frequency"
+            ],
+            "quotes": [
+              "后来我就只在空调房里拍了，手机也不会太烫。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_007",
-          "rawText": "拍 vlog 真的卡到爆炸，手机又热又慢，只能一段一段录。",
+          "schema_version": 2,
           "source": "douyin",
           "publishDate": "2026-08-04",
           "user": "豆豆日记",
-          "scene": "户外 vlog",
-          "behavior": "分次录",
-          "trigger": "过热",
-          "problem": "卡顿+过热",
-          "painLevel": "high",
-          "duration": "持续",
-          "frequency": "每次",
-          "emotion": "崩溃",
-          "currentSolution": "分次录",
-          "switched": "未购买散热器",
-          "userState": "持续困扰",
-          "evidenceLevel": "E4",
-          "painStatus": "D",
-          "sceneTag": "sc_long_shoot"
+          "rawText": "拍 vlog 真的卡到爆炸，手机又热又慢，只能一段一段录。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "owned",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "过热",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "卡顿+过热",
+              "symptoms": [
+                "卡"
+              ]
+            },
+            "pain": {
+              "status": "solution_adopted",
+              "basis_quote": "拍 vlog 真的卡到爆炸，手机又热又慢，只能一段一段录。"
+            },
+            "impact": {
+              "task_blocked": "true",
+              "abandoned_activity": "unknown",
+              "behavior_change": "true",
+              "basis_quote": "拍 vlog 真的卡到爆炸，手机又热又慢，只能一段一段录。"
+            },
+            "solution": {
+              "solution_adopted": "true",
+              "solution_desc": "分次录",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "崩溃"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E5",
+              "reason": "问题 + 主动采取解决行动"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "拍 vlog 真的卡到爆炸，手机又热又慢，只能一段一段录。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_008",
-          "rawText": "我买的那个太重了，挂手机上一会儿手就酸。",
+          "schema_version": 2,
           "source": "taobao",
           "publishDate": "2026-07-19",
           "user": "tb_买家",
-          "scene": "日常携带",
-          "behavior": "挂手机使用",
-          "trigger": "重量",
-          "problem": "手酸",
-          "painLevel": "medium",
-          "duration": "每次使用",
-          "frequency": "每次",
-          "emotion": "不满",
-          "currentSolution": "退货",
-          "switched": "退货",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E6",
-          "painStatus": "E",
-          "sceneTag": "sc_after_buy"
+          "rawText": "我买的那个太重了，挂手机上一会儿手就酸。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "owned",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "重量",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "手酸",
+              "symptoms": [
+                "重",
+                "酸"
+              ]
+            },
+            "pain": {
+              "status": "dissatisfied",
+              "basis_quote": "我买的那个太重了，挂手机上一会儿手就酸。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "true",
+              "solution_desc": "退货",
+              "purchase_signal": "true",
+              "solved_status": "unknown",
+              "satisfaction": "dissatisfied"
+            },
+            "emotion": {
+              "labels": [
+                "不满"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E6",
+              "reason": "问题 + 解决方案 + 明确满意/不满意结果"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "我买的那个太重了，挂手机上一会儿手就酸。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_009",
-          "rawText": "想边充电边拍，散热器和充电只能选一个，气死了。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-06-08",
           "user": "摄影师小 K",
-          "scene": "边充边拍",
-          "behavior": "直播/长录",
-          "trigger": "磁吸位冲突",
-          "problem": "无法同时散热+充电",
-          "painLevel": "high",
-          "duration": "持续",
-          "frequency": "每次",
-          "emotion": "愤怒",
-          "currentSolution": "二选一",
-          "switched": "未购买",
-          "userState": "持续困扰",
-          "evidenceLevel": "E4",
-          "painStatus": "D",
-          "sceneTag": "sc_charging_shoot"
+          "rawText": "想边充电边拍，散热器和充电只能选一个，气死了。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "摄影师"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "磁吸位冲突",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "无法同时散热+充电",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "impacted",
+              "basis_quote": "想边充电边拍，散热器和充电只能选一个，气死了。"
+            },
+            "impact": {
+              "task_blocked": "true",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "想边充电边拍，散热器和充电只能选一个，气死了。"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "愤怒"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E4",
+              "reason": "问题 + 实际后果"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "想边充电边拍，散热器和充电只能选一个，气死了。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_010",
-          "rawText": "风扇一开就嗡嗡的，咖啡店完全不敢拿出来用。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-05-15",
           "user": "Cassie_",
-          "scene": "咖啡店",
-          "behavior": "在咖啡店使用",
-          "trigger": "安静环境",
-          "problem": "噪音",
-          "painLevel": "medium",
-          "duration": "每次",
-          "frequency": "每次",
-          "emotion": "尴尬",
-          "currentSolution": "不敢用",
-          "switched": "已购买但不用",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E6",
-          "painStatus": "E",
-          "sceneTag": "sc_noise"
+          "rawText": "风扇一开就嗡嗡的，咖啡店完全不敢拿出来用。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "咖啡店",
+              "activity": "unknown",
+              "trigger": "安静环境",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "噪音",
+              "symptoms": [
+                "嗡嗡"
+              ]
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "风扇一开就嗡嗡的，咖啡店完全不敢拿出来用。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "尴尬"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "风扇一开就嗡嗡的，咖啡店完全不敢拿出来用。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_011",
-          "rawText": "颜值即正义！为什么散热器的配色都是黑色啊，要白色粉色！",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-04-02",
           "user": "桃子酱",
-          "scene": "选品",
-          "behavior": "挑颜色",
-          "trigger": "配色单一",
-          "problem": "配色不友好",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "选品时",
-          "emotion": "期待",
-          "currentSolution": "等新款",
-          "switched": "未购买",
-          "userState": "决策期",
-          "evidenceLevel": "E3",
-          "painStatus": "C",
-          "sceneTag": "sc_aesthetic"
+          "rawText": "颜值即正义！为什么散热器的配色都是黑色啊，要白色粉色！",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "配色单一",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "配色不友好",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "颜值即正义！为什么散热器的配色都是黑色啊，要白色粉色！"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "期待"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "颜值即正义！为什么散热器的配色都是黑色啊，要白色粉色！"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_012",
-          "rawText": "我后来直接买散热器了，不然拍半小时根本扛不住。",
+          "schema_version": 2,
           "source": "zhihu",
           "publishDate": "2026-08-04",
           "user": "知乎用户 8E",
-          "scene": "户外长录",
-          "behavior": "购买",
-          "trigger": "扛不住",
-          "problem": "发热扛不住",
-          "painLevel": "high",
-          "duration": "半小时",
-          "frequency": "每次",
-          "emotion": "决定",
-          "currentSolution": "已购买散热器",
-          "switched": "已购买",
-          "userState": "主动采取行动",
-          "evidenceLevel": "E5",
-          "painStatus": "E",
-          "sceneTag": "sc_outdoor_video"
+          "rawText": "我后来直接买散热器了，不然拍半小时根本扛不住。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "owned",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "扛不住",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "发热扛不住",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "solution_adopted",
+              "basis_quote": "我后来直接买散热器了，不然拍半小时根本扛不住。"
+            },
+            "impact": {
+              "task_blocked": "true",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "我后来直接买散热器了，不然拍半小时根本扛不住。"
+            },
+            "solution": {
+              "solution_adopted": "true",
+              "solution_desc": "已购买散热器",
+              "purchase_signal": "true",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "决定"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E5",
+              "reason": "问题 + 主动采取解决行动"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "我后来直接买散热器了，不然拍半小时根本扛不住。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_013",
-          "rawText": "买了某爆款，颜值可以，但夹背式夹不稳，走两步就掉。",
+          "schema_version": 2,
           "source": "taobao",
           "publishDate": "2026-06-29",
           "user": "tb_匿名",
-          "scene": "外出拍摄",
-          "behavior": "走动拍摄",
-          "trigger": "夹不稳",
-          "problem": "脱落",
-          "painLevel": "high",
-          "duration": "每次",
-          "frequency": "每次",
-          "emotion": "失望",
-          "currentSolution": "退货",
-          "switched": "退货",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E6",
-          "painStatus": "E",
-          "sceneTag": "sc_after_buy"
+          "rawText": "买了某爆款，颜值可以，但夹背式夹不稳，走两步就掉。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "owned",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "夹不稳",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "脱落",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "solution_adopted",
+              "basis_quote": "买了某爆款，颜值可以，但夹背式夹不稳，走两步就掉。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "true",
+              "solution_desc": "退货",
+              "purchase_signal": "true",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "失望"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E5",
+              "reason": "问题 + 主动采取解决行动"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "买了某爆款，颜值可以，但夹背式夹不稳，走两步就掉。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_014",
-          "rawText": "直播两小时没电了，想边充边散热又卡位。",
+          "schema_version": 2,
           "source": "douyin",
           "publishDate": "2026-07-08",
           "user": "主播小楠",
-          "scene": "直播",
-          "behavior": "长直播",
-          "trigger": "耗电+发热",
-          "problem": "无法同时充+散热",
-          "painLevel": "high",
-          "duration": "直播期间",
-          "frequency": "每次",
-          "emotion": "无奈",
-          "currentSolution": "换有线",
-          "switched": "未解决",
-          "userState": "持续困扰",
-          "evidenceLevel": "E4",
-          "painStatus": "D",
-          "sceneTag": "sc_charging_shoot"
+          "rawText": "直播两小时没电了，想边充边散热又卡位。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "主播"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "耗电+发热",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "无法同时充+散热",
+              "symptoms": [
+                "卡"
+              ]
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "直播两小时没电了，想边充边散热又卡位。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "无奈"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "直播两小时没电了，想边充边散热又卡位。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.101Z"
+          }
         },
         {
           "id": "ev_015",
-          "rawText": "太理工男了哈哈，要是更圆润点的造型+白色我肯定买。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-04-25",
           "user": "桃子酱",
-          "scene": "选品",
-          "behavior": "挑造型",
-          "trigger": "造型硬朗",
-          "problem": "造型不友好",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "选品时",
-          "emotion": "期待",
-          "currentSolution": "等新款",
-          "switched": "未购买",
-          "userState": "决策期",
-          "evidenceLevel": "E3",
-          "painStatus": "C",
-          "sceneTag": "sc_aesthetic"
+          "rawText": "太理工男了哈哈，要是更圆润点的造型+白色我肯定买。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "造型硬朗",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "造型不友好",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "seeking_solution",
+              "basis_quote": "太理工男了哈哈，要是更圆润点的造型+白色我肯定买。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "false",
+              "solution_desc": "unknown",
+              "purchase_signal": "false",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "期待"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "太理工男了哈哈，要是更圆润点的造型+白色我肯定买。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_016",
-          "rawText": "现在天太热我都不出去拍了，等秋天再拍。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-08-12",
           "user": "小番茄",
-          "scene": "夏季",
-          "behavior": "放弃室外拍摄",
-          "trigger": "高温",
-          "problem": "已回避",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "已避免",
-          "emotion": "接受",
-          "currentSolution": "避开夏季",
-          "switched": "已回避",
-          "userState": "已解决",
-          "evidenceLevel": "E2",
-          "painStatus": "F",
-          "sceneTag": "sc_resolved"
+          "rawText": "现在天太热我都不出去拍了，等秋天再拍。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "夏季/高温",
+              "place": "户外",
+              "activity": "手机拍摄/录制",
+              "trigger": "高温",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "已回避",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "现在天太热我都不出去拍了，等秋天再拍。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "true",
+              "behavior_change": "true",
+              "basis_quote": "现在天太热我都不出去拍了，等秋天再拍。"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "接受"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E4",
+              "reason": "问题 + 实际后果"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.frequency",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "现在天太热我都不出去拍了，等秋天再拍。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_017",
-          "rawText": "录旁白的时候风扇声音收进去了，剪辑累死。",
+          "schema_version": 2,
           "source": "bilibili",
           "publishDate": "2026-05-22",
           "user": "UP主 Yuki",
-          "scene": "录 vlog 旁白",
-          "behavior": "同期声",
-          "trigger": "风扇噪音",
-          "problem": "噪音干扰录音",
-          "painLevel": "medium",
-          "duration": "每次录",
-          "frequency": "每次",
-          "emotion": "崩溃",
-          "currentSolution": "后期降噪",
-          "switched": "已购买但不便",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E4",
-          "painStatus": "E",
-          "sceneTag": "sc_noise"
+          "rawText": "录旁白的时候风扇声音收进去了，剪辑累死。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "UP主"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "风扇噪音",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "噪音干扰录音",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "录旁白的时候风扇声音收进去了，剪辑累死。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "崩溃"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "录旁白的时候风扇声音收进去了，剪辑累死。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_018",
-          "rawText": "手机壳和散热器一起用太重了，单独用又不散热。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-06-15",
           "user": "蜜桃气泡",
-          "scene": "带壳使用",
-          "behavior": "日常带壳",
-          "trigger": "重量",
-          "problem": "重量叠加",
-          "painLevel": "medium",
-          "duration": "持续",
-          "frequency": "每次",
-          "emotion": "纠结",
-          "currentSolution": "二选一",
-          "switched": "未购买",
-          "userState": "持续困扰",
-          "evidenceLevel": "E3",
-          "painStatus": "C",
-          "sceneTag": "sc_outdoor_video"
+          "rawText": "手机壳和散热器一起用太重了，单独用又不散热。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "重量",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "重量叠加",
+              "symptoms": [
+                "重"
+              ]
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "手机壳和散热器一起用太重了，单独用又不散热。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "纠结"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "手机壳和散热器一起用太重了，单独用又不散热。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_019",
-          "rawText": "磁吸款很方便，但是太厚了，揣兜里鼓鼓囊囊。",
+          "schema_version": 2,
           "source": "taobao",
           "publishDate": "2026-06-30",
           "user": "tb_小仙女",
-          "scene": "携带",
-          "behavior": "揣兜",
-          "trigger": "厚度",
-          "problem": "携带不便",
-          "painLevel": "medium",
-          "duration": "每次",
-          "frequency": "每次",
-          "emotion": "不满",
-          "currentSolution": "退货",
-          "switched": "退货",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E6",
-          "painStatus": "E",
-          "sceneTag": "sc_after_buy"
+          "rawText": "磁吸款很方便，但是太厚了，揣兜里鼓鼓囊囊。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "厚度",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "携带不便",
+              "symptoms": [
+                "厚"
+              ]
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "磁吸款很方便，但是太厚了，揣兜里鼓鼓囊囊。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "不满"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "磁吸款很方便，但是太厚了，揣兜里鼓鼓囊囊。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_020",
-          "rawText": "充电时手机烫更厉害，散热器根本压不住。",
+          "schema_version": 2,
           "source": "zhihu",
           "publishDate": "2026-07-30",
           "user": "知乎用户 9F",
-          "scene": "边充边拍",
-          "behavior": "边充边拍",
-          "trigger": "充电+运行",
-          "problem": "双重发热",
-          "painLevel": "high",
-          "duration": "持续",
-          "frequency": "每次",
-          "emotion": "绝望",
-          "currentSolution": "拆了散热",
-          "switched": "已弃用",
-          "userState": "已购买/弃用",
-          "evidenceLevel": "E4",
-          "painStatus": "E",
-          "sceneTag": "sc_charging_shoot"
+          "rawText": "充电时手机烫更厉害，散热器根本压不住。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "充电+运行",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "双重发热",
+              "symptoms": [
+                "烫"
+              ]
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "充电时手机烫更厉害，散热器根本压不住。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "绝望"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "充电时手机烫更厉害，散热器根本压不住。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_021",
-          "rawText": "外观太丑了我不好意思拍 vlog 时候露出来。",
+          "schema_version": 2,
           "source": "douyin",
           "publishDate": "2026-05-10",
           "user": "爱拍的小鱼",
-          "scene": "拍 vlog",
-          "behavior": "露镜",
-          "trigger": "外观丑",
-          "problem": "颜值门槛",
-          "painLevel": "medium",
-          "duration": "持续",
-          "frequency": "每次",
-          "emotion": "尴尬",
-          "currentSolution": "不用",
-          "switched": "已购但不用",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E4",
-          "painStatus": "E",
-          "sceneTag": "sc_aesthetic"
+          "rawText": "外观太丑了我不好意思拍 vlog 时候露出来。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "外观丑",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "颜值门槛",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "外观太丑了我不好意思拍 vlog 时候露出来。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "尴尬"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "外观太丑了我不好意思拍 vlog 时候露出来。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_022",
-          "rawText": "用了几天声音很大，风扇是金属叶片有异响。",
+          "schema_version": 2,
           "source": "taobao",
           "publishDate": "2026-08-01",
           "user": "tb_手机党",
-          "scene": "日常",
-          "behavior": "常规使用",
-          "trigger": "风扇异响",
-          "problem": "异响",
-          "painLevel": "medium",
-          "duration": "每次",
-          "frequency": "每次",
-          "emotion": "失望",
-          "currentSolution": "退货",
-          "switched": "退货",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E6",
-          "painStatus": "E",
-          "sceneTag": "sc_after_buy"
+          "rawText": "用了几天声音很大，风扇是金属叶片有异响。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "owned",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "风扇异响",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "异响",
+              "symptoms": [
+                "响"
+              ]
+            },
+            "pain": {
+              "status": "solution_adopted",
+              "basis_quote": "用了几天声音很大，风扇是金属叶片有异响。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "true",
+              "solution_desc": "退货",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "失望"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E5",
+              "reason": "问题 + 主动采取解决行动"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "用了几天声音很大，风扇是金属叶片有异响。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_023",
-          "rawText": "录书单的时候散热器的声音太明显，剪视频累死。",
+          "schema_version": 2,
           "source": "bilibili",
           "publishDate": "2026-06-18",
           "user": "UP主 Yuki",
-          "scene": "录书单 vlog",
-          "behavior": "同期声",
-          "trigger": "风扇噪音",
-          "problem": "噪音干扰录音",
-          "painLevel": "medium",
-          "duration": "每次录",
-          "frequency": "每次",
-          "emotion": "崩溃",
-          "currentSolution": "后期降噪",
-          "switched": "已购买但不便",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E4",
-          "painStatus": "E",
-          "sceneTag": "sc_noise"
+          "rawText": "录书单的时候散热器的声音太明显，剪视频累死。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "UP主"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "风扇噪音",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "噪音干扰录音",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "录书单的时候散热器的声音太明显，剪视频累死。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "崩溃"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "录书单的时候散热器的声音太明显，剪视频累死。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_024",
-          "rawText": "出去拍一次 vlog 手机就热得卡，回来都不想再拍了。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-07-05",
           "user": "豆豆日记",
-          "scene": "户外 vlog",
-          "behavior": "创作意愿",
-          "trigger": "卡顿",
-          "problem": "创作被打断",
-          "painLevel": "high",
-          "duration": "每次",
-          "frequency": "每次",
-          "emotion": "放弃",
-          "currentSolution": "放弃",
-          "switched": "未购买",
-          "userState": "放弃需求",
-          "evidenceLevel": "E4",
-          "painStatus": "D",
-          "sceneTag": "sc_long_shoot"
+          "rawText": "出去拍一次 vlog 手机就热得卡，回来都不想再拍了。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "户外",
+              "activity": "手机拍摄/录制",
+              "trigger": "卡顿",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "创作被打断",
+              "symptoms": [
+                "卡"
+              ]
+            },
+            "pain": {
+              "status": "impacted",
+              "basis_quote": "出去拍一次 vlog 手机就热得卡，回来都不想再拍了。"
+            },
+            "impact": {
+              "task_blocked": "true",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "出去拍一次 vlog 手机就热得卡，回来都不想再拍了。"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "放弃"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E4",
+              "reason": "问题 + 实际后果"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.frequency",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "出去拍一次 vlog 手机就热得卡，回来都不想再拍了。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_025",
-          "rawText": "才知道有这种产品！之前一直以为是手机壳内置的那种。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-08-15",
           "user": "路人甲",
-          "scene": "认知",
-          "behavior": "首次接触",
-          "trigger": "认知空白",
-          "problem": "无认知",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "N/A",
-          "emotion": "惊喜",
-          "currentSolution": "N/A",
-          "switched": "未购买",
-          "userState": "认知期",
-          "evidenceLevel": "E2",
-          "painStatus": "B",
-          "sceneTag": "sc_awareness"
+          "rawText": "才知道有这种产品！之前一直以为是手机壳内置的那种。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "认知空白",
+              "frequency": "recurring"
+            },
+            "problem": {
+              "core": "无认知",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "recurring",
+              "basis_quote": "才知道有这种产品！之前一直以为是手机壳内置的那种。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "惊喜"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "才知道有这种产品！之前一直以为是手机壳内置的那种。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_026",
-          "rawText": "希望造型可以再可爱点，粉色/薄荷绿都好看！",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-04-08",
           "user": "Anna 摄影",
-          "scene": "选品",
-          "behavior": "挑配色",
-          "trigger": "配色",
-          "problem": "配色期待",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "选品时",
-          "emotion": "期待",
-          "currentSolution": "等新款",
-          "switched": "未购买",
-          "userState": "决策期",
-          "evidenceLevel": "E3",
-          "painStatus": "C",
-          "sceneTag": "sc_aesthetic"
+          "rawText": "希望造型可以再可爱点，粉色/薄荷绿都好看！",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "配色",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "配色期待",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "希望造型可以再可爱点，粉色/薄荷绿都好看！"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "期待"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "希望造型可以再可爱点，粉色/薄荷绿都好看！"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_027",
-          "rawText": "现在我就拍短的，最多 5 分钟一段，热了停一会儿。",
+          "schema_version": 2,
           "source": "douyin",
           "publishDate": "2026-06-30",
           "user": "小白摄影师",
-          "scene": "分次录",
-          "behavior": "分次",
-          "trigger": "热了就停",
-          "problem": "已回避",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "已避免",
-          "emotion": "接受",
-          "currentSolution": "分次",
-          "switched": "已回避",
-          "userState": "已解决",
-          "evidenceLevel": "E2",
-          "painStatus": "F",
-          "sceneTag": "sc_resolved"
+          "rawText": "现在我就拍短的，最多 5 分钟一段，热了停一会儿。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "摄影师"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "热了就停",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "已回避",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "现在我就拍短的，最多 5 分钟一段，热了停一会儿。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "接受"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "现在我就拍短的，最多 5 分钟一段，热了停一会儿。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_028",
-          "rawText": "充电口被散热器挡住，Type-C 线插不进去。",
+          "schema_version": 2,
           "source": "taobao",
           "publishDate": "2026-07-25",
           "user": "tb_差评",
-          "scene": "充电",
-          "behavior": "边充边用",
-          "trigger": "结构冲突",
-          "problem": "充电口被挡",
-          "painLevel": "high",
-          "duration": "每次",
-          "frequency": "每次",
-          "emotion": "愤怒",
-          "currentSolution": "退货",
-          "switched": "退货",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E6",
-          "painStatus": "E",
-          "sceneTag": "sc_after_buy"
+          "rawText": "充电口被散热器挡住，Type-C 线插不进去。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "结构冲突",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "充电口被挡",
+              "symptoms": [
+                "挡住"
+              ]
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "充电口被散热器挡住，Type-C 线插不进去。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "愤怒"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "充电口被散热器挡住，Type-C 线插不进去。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_029",
-          "rawText": "直播想用但必须卸了散热器才能插电，太尴尬。",
+          "schema_version": 2,
           "source": "douyin",
           "publishDate": "2026-08-08",
           "user": "主播小楠",
-          "scene": "直播",
-          "behavior": "长直播",
-          "trigger": "充电口冲突",
-          "problem": "无法边充电",
-          "painLevel": "high",
-          "duration": "直播期间",
-          "frequency": "每次",
-          "emotion": "崩溃",
-          "currentSolution": "卸散热",
-          "switched": "已弃用",
-          "userState": "已购买/弃用",
-          "evidenceLevel": "E4",
-          "painStatus": "E",
-          "sceneTag": "sc_charging_shoot"
+          "rawText": "直播想用但必须卸了散热器才能插电，太尴尬。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "owned",
+              "role_hint": "主播"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "充电口冲突",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "无法边充电",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "dissatisfied",
+              "basis_quote": "直播想用但必须卸了散热器才能插电，太尴尬。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "true",
+              "basis_quote": "直播想用但必须卸了散热器才能插电，太尴尬。"
+            },
+            "solution": {
+              "solution_adopted": "true",
+              "solution_desc": "卸散热",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "dissatisfied"
+            },
+            "emotion": {
+              "labels": [
+                "崩溃"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E6",
+              "reason": "问题 + 解决方案 + 明确满意/不满意结果"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "直播想用但必须卸了散热器才能插电，太尴尬。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_030",
-          "rawText": "开会时候想录会议纪要，散热器嗡嗡的同事都听到了。",
+          "schema_version": 2,
           "source": "zhihu",
           "publishDate": "2026-07-15",
           "user": "知乎用户 3A",
-          "scene": "会议",
-          "behavior": "录会议",
-          "trigger": "噪音",
-          "problem": "噪音影响他人",
-          "painLevel": "medium",
-          "duration": "每次",
-          "frequency": "每次",
-          "emotion": "尴尬",
-          "currentSolution": "不用",
-          "switched": "已购买但不用",
-          "userState": "已购买/不满意",
-          "evidenceLevel": "E4",
-          "painStatus": "E",
-          "sceneTag": "sc_noise"
+          "rawText": "开会时候想录会议纪要，散热器嗡嗡的同事都听到了。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "手机拍摄/录制",
+              "trigger": "噪音",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "噪音影响他人",
+              "symptoms": [
+                "嗡嗡"
+              ]
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "开会时候想录会议纪要，散热器嗡嗡的同事都听到了。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "尴尬"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "开会时候想录会议纪要，散热器嗡嗡的同事都听到了。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_031",
-          "rawText": "我现在都不去外面拍了，就在家录，舒服多了。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-08-20",
           "user": "Lulu_life",
-          "scene": "室内",
-          "behavior": "改室内",
-          "trigger": "已回避",
-          "problem": "已回避",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "已避免",
-          "emotion": "接受",
-          "currentSolution": "室内",
-          "switched": "已回避",
-          "userState": "已解决",
-          "evidenceLevel": "E2",
-          "painStatus": "F",
-          "sceneTag": "sc_resolved"
+          "rawText": "我现在都不去外面拍了，就在家录，舒服多了。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "室内",
+              "activity": "手机拍摄/录制",
+              "trigger": "已回避",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "已回避",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "我现在都不去外面拍了，就在家录，舒服多了。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "true",
+              "behavior_change": "unknown",
+              "basis_quote": "我现在都不去外面拍了，就在家录，舒服多了。"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "接受"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E4",
+              "reason": "问题 + 实际后果"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.frequency",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "我现在都不去外面拍了，就在家录，舒服多了。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_032",
-          "rawText": "求推荐！看了三家都不知道买哪款，对比参数头大。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-08-25",
           "user": "困惑的新手",
-          "scene": "选品",
-          "behavior": "比较参数",
-          "trigger": "信息过载",
-          "problem": "决策难",
-          "painLevel": "low",
-          "duration": "选品期间",
-          "frequency": "选品时",
-          "emotion": "困惑",
-          "currentSolution": "问朋友",
-          "switched": "未购买",
-          "userState": "决策期",
-          "evidenceLevel": "E3",
-          "painStatus": "B",
-          "sceneTag": "sc_awareness"
+          "rawText": "求推荐！看了三家都不知道买哪款，对比参数头大。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "信息过载",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "决策难",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "seeking_solution",
+              "basis_quote": "求推荐！看了三家都不知道买哪款，对比参数头大。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "false",
+              "solution_desc": "unknown",
+              "purchase_signal": "false",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "困惑"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "求推荐！看了三家都不知道买哪款，对比参数头大。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_033",
-          "rawText": "关注了三个测评博主才决定买哪一款，小白真心累。",
+          "schema_version": 2,
           "source": "bilibili",
           "publishDate": "2026-08-18",
           "user": "困惑的新手",
-          "scene": "选购",
-          "behavior": "看测评",
-          "trigger": "信息分散",
-          "problem": "决策成本",
-          "painLevel": "low",
-          "duration": "选品期间",
-          "frequency": "选品时",
-          "emotion": "累",
-          "currentSolution": "看测评",
-          "switched": "未购买",
-          "userState": "决策期",
-          "evidenceLevel": "E3",
-          "painStatus": "B",
-          "sceneTag": "sc_awareness"
+          "rawText": "关注了三个测评博主才决定买哪一款，小白真心累。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [
+                "小白"
+              ],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "信息分散",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "决策成本",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "seeking_solution",
+              "basis_quote": "关注了三个测评博主才决定买哪一款，小白真心累。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "false",
+              "solution_desc": "unknown",
+              "purchase_signal": "false",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "累"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E3",
+              "reason": "明确场景 + 问题"
+            },
+            "unknowns": [
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.frequency",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "关注了三个测评博主才决定买哪一款，小白真心累。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_034",
-          "rawText": "手机散热器？听起来好高级哈哈。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-09-02",
           "user": "路人乙",
-          "scene": "N/A",
-          "behavior": "N/A",
-          "trigger": "N/A",
-          "problem": "N/A",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "N/A",
-          "emotion": "好奇",
-          "currentSolution": "N/A",
-          "switched": "未知",
-          "userState": "无",
-          "evidenceLevel": "E1",
-          "painStatus": "A",
-          "sceneTag": "sc_awareness"
+          "rawText": "手机散热器？听起来好高级哈哈。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "unknown",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "unknown",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "手机散热器？听起来好高级哈哈。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "好奇"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E1",
+              "reason": "只有情绪表达"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.trigger",
+              "scene.frequency",
+              "problem.core",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "手机散热器？听起来好高级哈哈。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_035",
-          "rawText": "哈哈哈笑死，散热器也要卷颜值了吗。",
+          "schema_version": 2,
           "source": "douyin",
           "publishDate": "2026-09-05",
           "user": "吃瓜群众",
-          "scene": "N/A",
-          "behavior": "N/A",
-          "trigger": "N/A",
-          "problem": "N/A",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "N/A",
-          "emotion": "调侃",
-          "currentSolution": "N/A",
-          "switched": "未知",
-          "userState": "无",
-          "evidenceLevel": "E1",
-          "painStatus": "A",
-          "sceneTag": "sc_aesthetic"
+          "rawText": "哈哈哈笑死，散热器也要卷颜值了吗。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "unknown",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "unknown",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "哈哈哈笑死，散热器也要卷颜值了吗。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [
+                "调侃"
+              ],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E1",
+              "reason": "只有情绪表达"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.trigger",
+              "scene.frequency",
+              "problem.core",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "哈哈哈笑死，散热器也要卷颜值了吗。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         },
         {
           "id": "ev_036",
-          "rawText": "路过看看，我先码住。",
+          "schema_version": 2,
           "source": "xhs",
           "publishDate": "2026-09-08",
           "user": "收藏党",
-          "scene": "N/A",
-          "behavior": "N/A",
-          "trigger": "N/A",
-          "problem": "N/A",
-          "painLevel": "low",
-          "duration": "N/A",
-          "frequency": "N/A",
-          "emotion": "无",
-          "currentSolution": "N/A",
-          "switched": "未知",
-          "userState": "无",
-          "evidenceLevel": "E1",
-          "painStatus": "A",
-          "sceneTag": "sc_awareness"
+          "rawText": "路过看看，我先码住。",
+          "extracted": {
+            "persona": {
+              "segment_hints": [],
+              "experience_with_product": "unknown",
+              "role_hint": "unknown"
+            },
+            "scene": {
+              "time": "unknown",
+              "place": "unknown",
+              "activity": "unknown",
+              "trigger": "unknown",
+              "frequency": "unknown"
+            },
+            "problem": {
+              "core": "unknown",
+              "symptoms": []
+            },
+            "pain": {
+              "status": "experienced",
+              "basis_quote": "路过看看，我先码住。"
+            },
+            "impact": {
+              "task_blocked": "unknown",
+              "abandoned_activity": "unknown",
+              "behavior_change": "unknown",
+              "basis_quote": "unknown"
+            },
+            "solution": {
+              "solution_adopted": "unknown",
+              "solution_desc": "unknown",
+              "purchase_signal": "unknown",
+              "solved_status": "unknown",
+              "satisfaction": "unknown"
+            },
+            "emotion": {
+              "labels": [],
+              "intensity": "unknown"
+            },
+            "evidence": {
+              "level": "E1",
+              "reason": "只有情绪表达"
+            },
+            "unknowns": [
+              "persona.segment_hints",
+              "persona.experience_with_product",
+              "persona.role_hint",
+              "scene.time",
+              "scene.place",
+              "scene.activity",
+              "scene.trigger",
+              "scene.frequency",
+              "problem.core",
+              "impact.basis_quote",
+              "solution.solution_desc",
+              "solution.satisfaction",
+              "emotion.labels",
+              "solution.solved_status"
+            ],
+            "quotes": [
+              "路过看看，我先码住。"
+            ]
+          },
+          "extraction": {
+            "ok": true,
+            "provider": "rule-migration-v1to2",
+            "errors": [],
+            "extractedAt": "2026-09-11T07:11:38.102Z"
+          }
         }
       ]
     }
