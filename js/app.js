@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.114";
+var APP_VERSION = "5.9.115";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -1677,6 +1677,7 @@ function render() {
     case "reading": renderReading(); break;
     case "rsync": renderReadingSync(); break;
     case "xhsfav": renderXhsFav(); break;
+    case "consumer": renderConsumer(); break;
     default: renderHome(); break;
   }
   renderNav();
@@ -1711,6 +1712,7 @@ function renderHeader() {
     newssum: ["新闻摘要", "每日 8 点全球要闻 · 历史回顾"],
     learn: ["知识学习", "AI 小知识 · 金融小知识 · 卡片速学"],
     xhsfav: ["收藏知识库", "小红书收藏 · 分类汇总 · 关键词检索"],
+    consumer: ["Consumer Intelligence", "消费者洞察引擎 · 证据 → 洞察 → 机会"],
     reading: ["阅读", "书 / 电子书 / 播客 / 演讲 + AI 探讨"],
     rsync: ["百度网盘", "百度网盘音频 · 自动连播"],
   };
@@ -2219,7 +2221,8 @@ function renderGrowthHome() {
     { id: "aihot", icon: "🤖", title: "AI 资讯", color: "rgba(10,132,255,0.13)", count: 0, desc: "AIHOT 每日简报 · 精选 · 热点" },
     { id: "newssum", icon: "📰", title: "新闻摘要", color: "rgba(100,210,255,0.13)", count: 0, desc: "每日 8 点全球要闻 · 历史回顾" },
     { id: "learn", icon: "🧠", title: "知识学习", color: "rgba(191,90,242,0.14)", count: (typeof learnCount === "function") ? learnCount() : 0, desc: "AI 小知识 · 金融小知识 · 卡片速学" },
-    { id: "xhsfav", icon: "📌", title: "收藏知识库", color: "rgba(255,45,85,0.13)", count: (typeof xfCount === "function") ? xfCount() : 0, desc: "小红书收藏 · 分类汇总 · 关键词检索" }
+    { id: "xhsfav", icon: "📌", title: "收藏知识库", color: "rgba(255,45,85,0.13)", count: (typeof xfCount === "function") ? xfCount() : 0, desc: "小红书收藏 · 分类汇总 · 关键词检索" },
+    { id: "consumer", icon: "🧠", title: "Consumer Intelligence", color: "rgba(94,92,230,0.13)", count: 0, desc: "消费者洞察引擎 · 证据→洞察→机会" }
   ];
 
   c.innerHTML =
