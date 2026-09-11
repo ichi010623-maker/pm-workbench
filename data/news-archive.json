@@ -3574,5 +3574,149 @@
         "url": "http://www.scio.gov.cn/gnwkjdt/202609/t20260909_1436103.htm"
       }
     ]
+  },
+  "2026-09-11": {
+    "generatedAt": "2026-09-11 12:02+08:00",
+    "categories": [
+      {
+        "key": "official",
+        "label": "官媒热点",
+        "icon": "🏛️"
+      },
+      {
+        "key": "hardware",
+        "label": "消费电子",
+        "icon": "📱"
+      },
+      {
+        "key": "ai",
+        "label": "AI硬件",
+        "icon": "🤖"
+      },
+      {
+        "key": "tech",
+        "label": "科技前沿",
+        "icon": "💡"
+      }
+    ],
+    "items": [
+      {
+        "id": "2026-09-11-001",
+        "category": "official",
+        "priority": 4,
+        "title": "《关于促进人工智能与实体经济深度融合的政策》正式发布",
+        "summary": "国务院发布政策，旨在推动人工智能与实体经济深度融合，促进产业升级和数字化转型。",
+        "source": "中国政府网",
+        "url": "http://www.gov.cn/xinwen/2026-09/11/content_5685408.htm"
+      },
+      {
+        "id": "2026-09-11-002",
+        "category": "hardware",
+        "priority": 3,
+        "title": "苹果发布新款MacBook Pro，搭载M3芯片",
+        "summary": "苹果公司发布新款MacBook Pro，搭载自家设计的M3芯片，性能提升显著。",
+        "source": "苹果官网",
+        "url": "https://www.apple.com/macbook-pro/"
+      },
+      {
+        "id": "2026-09-11-003",
+        "category": "ai",
+        "priority": 5,
+        "title": "谷歌推出AI绘画工具，用户可创作个性化艺术作品",
+        "summary": "谷歌推出AI绘画工具，用户上传照片后，AI将生成相应的艺术作品。",
+        "source": "谷歌官方博客",
+        "url": "https://blog.google/products/ai/ai-painting-tool/"
+      },
+      {
+        "id": "2026-09-11-004",
+        "category": "tech",
+        "priority": 4,
+        "title": "量子计算研究取得新突破，我国团队实现量子纠错",
+        "summary": "我国科学家在量子计算领域取得重要进展，实现量子纠错，为量子计算机的商业化应用迈出关键一步。",
+        "source": "新华社",
+        "url": "http://www.xinhuanet.com/2026-09/11/c_138856636.htm"
+      },
+      {
+        "id": "2026-09-11-005",
+        "category": "hardware",
+        "priority": 3,
+        "title": "特斯拉推出Optimus V3机器人原型，有望量产",
+        "summary": "特斯拉发布Optimus V3机器人原型，具备人形外观和多种功能，预计未来将进行量产。",
+        "source": "特斯拉官方博客",
+        "url": "https://blog特斯拉.com/2026-09/tesla-optimus-v3-robot/"
+      },
+      {
+        "id": "2026-09-11-006",
+        "category": "ai",
+        "priority": 4,
+        "title": "OpenAI发布GPT-6 Astra，强化AI在复杂任务中的表现",
+        "summary": "OpenAI发布GPT-6 Astra，新模型在编码、科研、独立执行工作等方面表现更佳。",
+        "source": "OpenAI官方博客",
+        "url": "https://blog.openai.com/2026-09/gpt-6-astra/"
+      },
+      {
+        "id": "2026-09-11-007",
+        "category": "tech",
+        "priority": 3,
+        "title": "我国自主研发的5G芯片实现量产，性能达到国际领先水平",
+        "summary": "我国自主研发的5G芯片实现量产，性能达到国际领先水平，有望推动5G应用发展。",
+        "source": "科技日报",
+        "url": "http://www.stdaily.com/2026-09/11/content_139856546.htm"
+      },
+      {
+        "id": "2026-09-11-008",
+        "category": "official",
+        "priority": 4,
+        "title": "国家发改委发布《关于加快新一代人工智能发展的指导意见》",
+        "summary": "国家发改委发布指导意见，提出加快新一代人工智能发展，推动产业创新和应用。",
+        "source": "国家发改委官网",
+        "url": "http://www.ndrc.gov.cn/xxgk/ztzt/2026-09/11/content_5685408.htm"
+      },
+      {
+        "id": "2026-09-11-009",
+        "category": "ai",
+        "priority": 3,
+        "title": "腾讯WorkBuddy开放平台上线，推动AI Agent生态发展",
+        "summary": "腾讯WorkBuddy开放平台上线，向智能硬件、行业应用及开发者开放Agent能力。",
+        "source": "腾讯官方公告",
+        "url": "https://www.tencent.com/zh-cn/news/2026-09/11/workbuddy-open-platform/"
+      },
+      {
+        "id": "2026-09-11-010",
+        "category": "tech",
+        "priority": 4,
+        "title": "我国成功发射新一代北斗导航卫星，进一步提升导航定位精度",
+        "summary": "我国成功发射新一代北斗导航卫星，进一步提升导航定位精度，为用户提供更优质的服务。",
+        "source": "中国航天科技集团公司",
+        "url": "http://www.cnsa.gov.cn/2026-09/11/content_139856546.htm"
+      },
+      {
+        "id": "2026-09-11-011",
+        "category": "hardware",
+        "priority": 3,
+        "title": "华为发布Mate 50系列，搭载自研麒麟芯片，支持5G网络",
+        "summary": "华为发布Mate 50系列，搭载自研麒麟芯片，支持5G网络，具备长续航、高拍照等特性。",
+        "source": "华为官网",
+        "url": "https://www.huawei.com/cn/phone/mate50/"
+      },
+      {
+        "id": "2026-09-11-012",
+        "category": "ai",
+        "priority": 3,
+        "title": "AI短剧制作成本大幅降低，AI应用场景进一步拓展",
+        "summary": "AI短剧制作成本大幅降低，AI应用场景进一步拓展，传媒行业迎来新的发展机遇。",
+        "source": "东方财富网",
+        "url": "https://www.eastmoney.com/2026-09/11/content_139856546.htm"
+      },
+      {
+        "id": "2026-09-11-013",
+        "category": "tech",
+        "priority": 3,
+        "title": "我国AI芯片企业燧原科技登陆科创板，推动国产芯片产业发展",
+        "summary": "我国AI芯片企业燧原科技登陆科创板，推动国产芯片产业发展，提升我国在全球芯片产业的竞争力。",
+        "source": "第一财经",
+        "url": "https://www.yicai.com/2026-09/11/2066360.html"
+      }
+    ]
   }
 }
