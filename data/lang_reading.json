@@ -601,7 +601,69 @@
         "content": "Sports teach us discipline and teamwork. Winning is not everything; effort and sportsmanship count too.",
         "translation": "体育教会我们纪律和团队合作。胜利不是一切；努力和体育精神也很重要。"
       }
+    ],
+    "2026-09-11": [
+      {
+        "level": "入门",
+        "title": "Smart Cities",
+        "content": "Smart cities use technology to improve daily life. Sensors and apps help manage traffic and energy use.",
+        "translation": "智慧城市利用技术改善日常生活。传感器和应用程序帮助管理交通和能源使用。"
+      },
+      {
+        "level": "进阶",
+        "title": "Yoga Basics",
+        "content": "Yoga combines physical postures, breathing, and meditation. It's good for flexibility and mental health.",
+        "translation": "瑜伽结合了身体姿势、呼吸和冥想。它有助于提高柔韧性和心理健康。"
+      },
+      {
+        "level": "挑战",
+        "title": "Global Warming Effects",
+        "content": "Global warming affects weather patterns, causing more extreme events like hurricanes and floods.",
+        "translation": "全球变暖影响天气模式，导致更极端的事件，如飓风和洪水。"
+      },
+      {
+        "level": "入门",
+        "title": "Cooking with Spices",
+        "content": "Spices add flavor to food. They can also have health benefits like reducing inflammation.",
+        "translation": "香料可以为食物增添风味。它们还可以带来健康益处，如减少炎症。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Science of Sleep",
+        "content": "Sleep is essential for brain health. It helps with memory and learning, and repairs cells.",
+        "translation": "睡眠对大脑健康至关重要。它有助于记忆和学习，并修复细胞。"
+      },
+      {
+        "level": "挑战",
+        "title": "Ocean Conservation",
+        "content": "Protecting oceans is crucial for our planet. It maintains biodiversity and provides essential resources.",
+        "translation": "保护海洋对我们星球至关重要。它维持生物多样性，并提供必要的资源。"
+      },
+      {
+        "level": "入门",
+        "title": "Travel Apps",
+        "content": "Travel apps make planning easier. They offer information on attractions, transportation, and accommodations.",
+        "translation": "旅行应用程序使计划变得更容易。它们提供有关景点、交通和住宿的信息。"
+      },
+      {
+        "level": "进阶",
+        "title": "Mindfulness Meditation",
+        "content": "Mindfulness meditation teaches you to focus on the present moment. It reduces stress and improves concentration.",
+        "translation": "正念冥想教您专注于当下时刻。它减少压力并提高专注力。"
+      },
+      {
+        "level": "挑战",
+        "title": "Smartphone Habits",
+        "content": "Smartphone habits can affect your sleep. Limiting screen time before bed can improve sleep quality.",
+        "translation": "智能手机习惯会影响您的睡眠。在睡前限制屏幕时间可以提高睡眠质量。"
+      },
+      {
+        "level": "入门",
+        "title": "Daily Routines",
+        "content": "Having a daily routine helps you stay organized. It includes activities like exercise, work, and relaxation.",
+        "translation": "拥有日常例行程序可以帮助您保持有条理。它包括运动、工作和放松等活动。"
+      }
     ]
   },
-  "updatedAt": "2026-09-09T14:21:00+08:00"
+  "updatedAt": "2026-09-11T13:17:00+08:00"
 }
