@@ -1,4 +1,4 @@
-// Consumer Intelligence 模块测试 · v5.9.115
+// Consumer Intelligence 模块测试 · v5.9.116
 // 验证：数据 schema、6 项严格计数、Pain Status A-F、Evidence Level E1-E6、视图渲染、3 层分离、Insight-证据可追溯
 const fs = require("fs");
 const vm = require("vm");
@@ -268,7 +268,25 @@ section("L. 全局 API");
   ok(evKeys.indexOf("E6") >= 0, "含 E6 黄金证据");
 }
 
+// ============ M. 工作台首页接线（消费者洞察必须出现在首页模块网格） ============
+section("M. 工作台首页接线");
+{
+  // 静态检查 app.js 的三处接线（首页 sections 网格 + 路由 case + 标题映射）
+  const appJs = fs.readFileSync("/Users/ichi/WorkBuddy/2026-07-30-21-36-02/pm-workbench-auto/js/app.js", "utf8");
+  ok(appJs.indexOf('case "consumer": renderConsumer();') >= 0, "navigate 路由含 case consumer");
+  ok(appJs.indexOf('consumer: ["Consumer Intelligence"') >= 0, "moduleTitles 含 consumer 标题");
+  ok(appJs.indexOf('id: "consumer", icon: "🧠", title: "消费者洞察"') >= 0, "首页 sections 网格含「消费者洞察」卡片");
+  // 该卡片必须与「需求洞察」同区（工作模块区），而不是埋在被移除的成长 hub 里
+  const insIdx = appJs.indexOf('title: "需求洞察"');
+  const ciIdx = appJs.indexOf('title: "消费者洞察"');
+  ok(insIdx >= 0 && ciIdx > insIdx, "「消费者洞察」紧跟「需求洞察」之后（同属工作模块区）");
+  ok(appJs.indexOf('desc: "消费者洞察引擎') === -1, "成长 hub 中的重复卡片已移除");
+  // index.html 必须加载模块脚本
+  const idxHtml = fs.readFileSync("/Users/ichi/WorkBuddy/2026-07-30-21-36-02/pm-workbench-auto/index.html", "utf8");
+  ok(idxHtml.indexOf("js/consumer.js") >= 0, "index.html 已加载 js/consumer.js");
+}
+
 console.log("\n=========================================");
-console.log("v5.9.115 Consumer Intelligence 测试：通过 " + pass + " / 失败 " + fail);
+console.log("v5.9.116 Consumer Intelligence 测试：通过 " + pass + " / 失败 " + fail);
 console.log("=========================================");
 process.exit(fail > 0 ? 1 : 0);
