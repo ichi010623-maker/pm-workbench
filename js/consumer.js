@@ -226,6 +226,9 @@
     var st = (x.pain && x.pain.status) || "unknown";
     var lv = (x.evidence && x.evidence.level) || "E1";
     var audit = (typeof ciAudit === "function") ? ciAudit(rec) : { ok: true, warnings: [] };
+    var sm = sourceMeta(rec.source);
+    var recUser = rec.user || "匿名";
+    var recUserLabel = (recUser === "匿名") ? recUser : ("@" + recUser);
 
     function kv(k, v) {
       var isU = (v === "unknown" || v === "" || (Array.isArray(v) && !v.length));
@@ -238,6 +241,13 @@
         '<span class="ci-ext-t">' + (saved ? "已保存" : "提取结果（预览）") + '</span>' +
         badge(st + " · " + (PAIN_LABEL[st] || st), PAIN_COLOR[st] || "#94a3b8") +
         badge(lv + " " + ((typeof CI_EVIDENCE_DEF !== "undefined" && CI_EVIDENCE_DEF[lv]) || ""), LEVEL_COLOR[lv] || "#94a3b8") +
+      '</div>' +
+
+      '<div class="ci-ext-meta">' +
+        '<span class="ci-ext-meta-source">' + sm.icon + ' ' + esc(sm.name) + '</span>' +
+        '<span class="ci-ext-meta-user">' + esc(recUserLabel) + '</span>' +
+        '<span class="ci-ext-meta-date">📅 ' + esc(rec.publishDate || "未知日期") + '</span>' +
+        '<span class="ci-ext-meta-evid">' + esc(rec.id || "无ID") + '</span>' +
       '</div>' +
 
       (audit.ok ? '<div class="ci-audit-ok">✅ 规则审计通过：未发现无原文支撑的判断</div>'
@@ -448,16 +458,19 @@
       var lv = (x.evidence && x.evidence.level) || "E1";
       var sm = sourceMeta(rec.source);
       var a = (typeof ciAudit === "function") ? ciAudit(rec) : { ok: true, warnings: [] };
+      var recUser = rec.user || "匿名";
+      var recUserLabel = (recUser === "匿名") ? recUser : ("@" + recUser);
       html += '<div class="ci-rec" onclick="CI_VIEW=\'record:' + r.id + ':' + rec.id + '\';renderConsumer()">' +
         '<div class="ci-rec-h">' +
-          badge(sm.icon + " " + sm.name, sm.color) +
+          '<span class="ci-rec-source">' + sm.icon + ' ' + esc(sm.name) + '</span>' +
+          '<span class="ci-rec-user">' + esc(recUserLabel) + '</span>' +
           badge(st + " " + (PAIN_LABEL[st] || st), PAIN_COLOR[st] || "#94a3b8") +
           badge(lv, LEVEL_COLOR[lv] || "#94a3b8") +
           (a.ok ? "" : '<span class="ci-flag">⚠ ' + a.warnings.length + '</span>') +
           '<span class="ci-rec-date">' + esc(rec.publishDate || "") + '</span>' +
         '</div>' +
         '<div class="ci-rec-q">' + esc(rec.rawText) + '</div>' +
-        '<div class="ci-rec-f">' + esc((x.problem && x.problem.core) || "unknown") + '</div>' +
+        '<div class="ci-rec-f">❗ ' + esc((x.problem && x.problem.core) || "unknown") + '</div>' +
       '</div>';
     });
     html += '</div></div>';
