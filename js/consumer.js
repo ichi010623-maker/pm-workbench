@@ -259,18 +259,20 @@
       '<div class="ci-kv-group"><div class="ci-kv-h">👤 用户是谁 persona</div>' +
         kv("身份线索", x.persona && x.persona.segment_hints) +
         kv("产品经验", x.persona && x.persona.experience_with_product) +
-        kv("角色", x.persona && x.persona.role_hint) + '</div>' +
+        kv("角色", x.persona && x.persona.role_hint) +
+        kv("需求强度", x.persona && x.persona.need_strength) + '</div>' +
 
       '<div class="ci-kv-group"><div class="ci-kv-h">📍 场景 scene</div>' +
         kv("时间", x.scene && x.scene.time) + kv("地点", x.scene && x.scene.place) +
         kv("活动", x.scene && x.scene.activity) + kv("触发条件", x.scene && x.scene.trigger) +
-        kv("频率", x.scene && x.scene.frequency) + '</div>' +
+        kv("频率", x.scene && x.scene.frequency) + kv("持续时间", x.scene && x.scene.duration) + '</div>' +
 
       '<div class="ci-kv-group"><div class="ci-kv-h">❗ 问题 problem</div>' +
         kv("核心", x.problem && x.problem.core) + kv("表现", x.problem && x.problem.symptoms) + '</div>' +
 
       '<div class="ci-kv-group"><div class="ci-kv-h">💢 痛点 pain</div>' +
         kv("状态", (x.pain && x.pain.status) || "unknown") +
+        kv("痛感", (x.pain && x.pain.intensity) || "unknown") +
         '<div class="ci-kv"><span class="ci-k">原文支撑</span><span class="ci-v ci-quote">' + esc((x.pain && x.pain.basis_quote) || "unknown") + '</span></div></div>' +
 
       '<div class="ci-kv-group"><div class="ci-kv-h">📉 实际后果 impact</div>' +
@@ -340,102 +342,82 @@
     if (typeof showToast === "function") showToast("已保存 1 条结构化事实", "success");
   }
 
-  // ============ 研究详情 ============
-  function ciViewResearch(c, rid) {
-    var r = ciGet(rid);
-    if (!r) { c.innerHTML = '<div class="empty-state"><div class="empty-text">研究不存在</div></div>'; return; }
-    var recs = ciRecords(r);
-    var agg = ciAggregate(recs);
-    var pdist = ciPainDist(recs);
-    var ldist = ciLevelDist(recs);
-    var scen = ciSceneAgg(recs, 5);
-    var sdist = ciSourceDist(recs);
-    var f = filt();
-
-    var list = recs.slice();
-    if (f.source !== "all") list = list.filter(function (x) { return x.source === f.source; });
-    if (f.pain !== "all") list = list.filter(function (x) { return x.extracted.pain.status === f.pain; });
-    if (f.level !== "all") list = list.filter(function (x) { return x.extracted.evidence.level === f.level; });
-
-    var html = '';
-
-    // 头部
-    html += '<div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
-      '<button class="btn btn-ghost sm" onclick="CI_VIEW=\'list\';renderConsumer()">← 返回</button>' +
-      '<button class="btn btn-primary sm" onclick="window.CI_EXTRACT_TARGET=\'' + r.id + '\';CI_VIEW=\'extract\';renderConsumer()">📥 提取单条内容</button>' +
-      '</div>';
-
-    html += '<div class="card ci-rh">' +
-      '<div class="ci-rh-t">' + esc(r.title || r.subject) + '</div>' +
-      '<div class="ci-rh-meta">研究对象 <b>' + esc(r.subject) + '</b> · 目标用户 <b>' + esc(r.targetUsers || "") + '</b></div>' +
-      '<div class="ci-rh-meta">' + esc((r.timeWindow && r.timeWindow.label) || "") + ' · 共 ' + recs.length + ' 条原始内容</div>' +
-      '</div>';
-
-    // ★ 聚合层（唯一允许出现计数的地方）
-    html += '<div class="ci-sec"><div class="ci-sec-h"><span class="ci-sec-n">A</span><span>聚合计数</span>' +
-      '<span class="ci-sec-tag">仅本层产出计数 · 单条分析不含计数</span></div>';
-
-    html += '<div class="ci-ladder">' +
-      ciLadderCell("提及条数", agg.mention_count, "#64748b") +
-      ciLadderCell("去重用户", agg.unique_users, "#0a84ff") +
-      ciLadderCell("相关用户", agg.relevant_users, "#0891b2") +
-      ciLadderCell("明确痛苦", agg.pain_confirmed_users, "#e11d48") +
-      ciLadderCell("寻求方案", agg.solution_seeking_users, "#f59e0b") +
-      ciLadderCell("已购/退货", agg.purchase_users, "#8b5cf6") +
-      '</div>';
-    html += '<div class="ci-funnel-note">漏斗严格递减：条数 ≠ 人数，<strong>Mention ≠ Pain</strong>。所有数字由记录实时聚合，不由 AI 生成。</div>';
-
-    // 痛点状态分布
-    html += '<div class="ci-sub-h">痛点状态分布（pain.status）</div><div class="ci-bars">';
-    pdist.forEach(function (d) {
-      if (!d.mentions) return;
-      var col = PAIN_COLOR[d.status] || "#94a3b8";
-      var pct = agg.mention_count ? Math.round(d.mentions / agg.mention_count * 100) : 0;
-      html += '<div class="ci-bar-row"><span class="ci-bar-l" style="color:' + col + '">' + esc(PAIN_LABEL[d.status] || d.status) + '</span>' +
-        '<span class="ci-bar-track"><span class="ci-bar-fill" style="width:' + pct + '%;background:' + col + '"></span></span>' +
-        '<span class="ci-bar-v">' + d.mentions + ' 条 / ' + d.users + ' 人</span></div>';
-    });
-    html += '</div>';
-
-    // 证据等级分布
-    html += '<div class="ci-sub-h">证据等级分布（evidence.level）</div><div class="ci-bars">';
-    ldist.forEach(function (d) {
-      if (!d.mentions) return;
-      var col = LEVEL_COLOR[d.level];
-      var pct = agg.mention_count ? Math.round(d.mentions / agg.mention_count * 100) : 0;
-      html += '<div class="ci-bar-row"><span class="ci-bar-l" style="color:' + col + '">' + d.level + '</span>' +
-        '<span class="ci-bar-track"><span class="ci-bar-fill" style="width:' + pct + '%;background:' + col + '"></span></span>' +
-        '<span class="ci-bar-v">' + d.mentions + ' 条</span></div>';
-    });
-    html += '</div>';
-
-    // 场景聚合
-    html += '<div class="ci-sub-h">场景聚合（仅统计 extracted.scene 中非 unknown 的值）</div>';
-    ["time", "place", "activity", "trigger"].forEach(function (k) {
-      var arr = scen[k] || [];
-      var label = { time: "时间", place: "地点", activity: "活动", trigger: "触发条件" }[k];
-      html += '<div class="ci-scene-line"><span class="ci-scene-k">' + label + '</span><span class="ci-scene-v">' +
-        (arr.length ? arr.map(function (x) { return esc(x.name) + " <b>" + x.count + "</b>"; }).join(" · ") : '<span class="ci-unknown">全部 unknown</span>') +
-        '</span></div>';
-    });
-
-    // 来源分布
-    html += '<div class="ci-sub-h">来源分布</div><div class="ci-src-row">' +
-      sdist.map(function (s) { var m = sourceMeta(s.source); return '<span class="ci-src">' + m.icon + ' ' + m.name + ' <b>' + s.count + '</b></span>'; }).join("") +
-      '</div>';
-
-    // 规则审计
-    var au = agg.audit;
-    if (au) {
-      html += '<div class="ci-sub-h">规则审计（可质疑）</div>';
-      html += au.flagged === 0
-        ? '<div class="ci-audit-ok">✅ ' + au.clean + '/' + au.total + ' 条记录未发现「无原文支撑」的判断</div>'
-        : '<div class="ci-audit-warn">⚠️ ' + au.flagged + '/' + au.total + ' 条存在疑点，请逐条回看原文</div>';
+  // ============ 研究详情（8 段报告 + Insight Cards + 3 层分离）============
+  function ciLayerTag(layer) {
+    var map = { FACT: ["FACT", "#0a84ff"], INTERPRETATION: ["INTERPRETATION", "#f59e0b"], HYPOTHESIS: ["HYPOTHESIS", "#8b5cf6"] };
+    var m = map[layer] || ["FACT", "#0a84ff"];
+    return '<span class="ci-layer" style="background:' + m[1] + '22;color:' + m[1] + ';border-color:' + m[1] + '55">' + m[0] + '</span>';
+  }
+  function ciInputCell(k, v) { return '<div class="ci-input-cell"><div class="ci-input-k">' + esc(k) + '</div><div class="ci-input-v">' + esc(v || "—") + '</div></div>'; }
+  function ciInputRow(inp) {
+    var plats = (inp.platforms || []).map(function (p) { return sourceMeta(p).icon + ' ' + sourceMeta(p).name; }).join(" · ");
+    return '<div class="ci-inputs">' +
+      ciInputCell("研究对象", inp.subject) + ciInputCell("目标用户", inp.targetUsers) +
+      ciInputCell("平台", plats) + ciInputCell("时间", inp.timeWindow) + '</div>';
+  }
+  function ciPipeline(stages) {
+    if (!stages || !stages.length) return '';
+    var cells = stages.map(function (s) {
+      return '<div class="ci-pipe-cell"><div class="ci-pipe-n">' + s.stage + '</div><div class="ci-pipe-l">' + esc(s.label) + '</div><div class="ci-pipe-d">' + esc(s.desc) + '</div></div>';
+    }).join('<div class="ci-pipe-arrow">→</div>');
+    return '<div class="card ci-pipe-card"><div class="card-body"><div class="ci-pipe-title">🔗 分析链路</div><div class="ci-pipe">' + cells + '</div></div></div>';
+  }
+  function ciInsightCardsView(cards) {
+    var cells = (cards || []).map(function (cd) {
+      return '<div class="ci-card"><div class="ci-card-top"><span class="ci-card-t">' + esc(cd.title) + '</span>' + ciLayerTag(cd.layer) + '</div>' +
+        '<div class="ci-card-metric">' + esc(cd.metric) + '</div><div class="ci-card-sub">' + esc(cd.sub) + '</div>' +
+        '<div class="ci-card-drill">' + esc(cd.drill) + '</div></div>';
+    }).join("");
+    return '<div class="ci-cards">' + cells + '</div>';
+  }
+  function ciRenderBlock(b) {
+    if (b.type === "kv") {
+      var items = (b.items && b.items.length) ? b.items.map(function (i) { return '<span class="ci-tag">' + esc(i.k) + ' <b>' + esc(i.v) + '</b></span>'; }).join("") : '<span class="ci-unknown">全部 unknown</span>';
+      return '<div class="ci-block"><div class="ci-block-h">' + esc(b.title) + '</div><div class="ci-tags">' + items + '</div></div>';
     }
-    html += '</div>';
-
-    // 记录列表
-    html += '<div class="ci-sec"><div class="ci-sec-h"><span class="ci-sec-n">B</span><span>原始记录（' + list.length + ' / ' + recs.length + '）</span></div>';
+    if (b.type === "dist") {
+      var rows = (b.items || []).map(function (i) {
+        var pct = i.v ? Math.min(100, Math.round(i.v * 6)) : 0;
+        return '<div class="ci-bar-row"><span class="ci-bar-l">' + esc(i.k) + '</span>' +
+          '<span class="ci-bar-track"><span class="ci-bar-fill" style="width:' + pct + '%;background:#64748b"></span></span>' +
+          '<span class="ci-bar-v">' + esc(i.v) + '</span></div>';
+      }).join("");
+      return '<div class="ci-block"><div class="ci-block-h">' + esc(b.title) + '</div>' + (rows || '<span class="ci-unknown">无</span>') + '</div>';
+    }
+    if (b.type === "funnel") {
+      var fc = (b.items || []).map(function (i, idx) {
+        return '<div class="ci-funnel-cell"><div class="ci-funnel-n">' + esc(i.v) + '</div><div class="ci-funnel-l">' + esc(i.k) + '</div></div>' + (idx < b.items.length - 1 ? '<div class="ci-funnel-arrow">▸</div>' : '');
+      }).join("");
+      return '<div class="ci-block"><div class="ci-block-h">' + esc(b.title) + '</div><div class="ci-funnel">' + fc + '</div><div class="ci-funnel-note">漏斗严格递减：条数 ≠ 人数，<strong>Mention ≠ Pain</strong>。所有数字由记录实时聚合，不由 AI 生成。</div></div>';
+    }
+    if (b.type === "note") {
+      return '<div class="ci-block"><div class="ci-block-h">' + esc(b.title) + '</div><div class="ci-note">' + esc(b.text) + '</div></div>';
+    }
+    if (b.type === "lifecycle") {
+      var lc = (b.items || []).map(function (i) {
+        var col = PAIN_COLOR[i.status] || "#94a3b8";
+        var on = i.mentions > 0;
+        return '<div class="ci-life-cell' + (on ? ' ci-life-on' : '') + '" style="' + (on ? 'border-color:' + col + ';background:' + col + '14' : '') + '">' +
+          '<div class="ci-life-stage">' + esc(i.stage) + '</div><div class="ci-life-n" style="color:' + (on ? col : '#cbd5e1') + '">' + i.mentions + '</div>' +
+          '<div class="ci-life-d">' + esc(i.desc) + '</div></div>';
+      }).join('<div class="ci-life-arrow">→</div>');
+      return '<div class="ci-block"><div class="ci-block-h">' + esc(b.title) + '</div><div class="ci-life">' + lc + '</div></div>';
+    }
+    if (b.type === "opps") {
+      var os = (b.items || []).map(function (o) {
+        var wcol = { "高": "#e11d48", "中": "#f59e0b", "低": "#94a3b8" }[o.weight] || "#94a3b8";
+        return '<div class="ci-opp"><span class="ci-opp-w" style="color:' + wcol + '">[' + esc(o.weight) + ']</span> ' + esc(o.text) +
+          '<div class="ci-opp-basis">依据：' + esc(o.basis) + '</div></div>';
+      }).join("");
+      return '<div class="ci-block"><div class="ci-block-h">' + esc(b.title) + '</div>' + (os || '<span class="ci-unknown">暂无可推导机会</span>') + '</div>';
+    }
+    if (b.type === "evidence") {
+      return '<div class="ci-block"><div class="ci-block-h">' + esc(b.title) + '</div><div class="ci-note">共 ' + b.count + ' 条，向下至「原始记录」可逐条点击回看原文。</div></div>';
+    }
+    return '';
+  }
+  function ciEvidenceSection(r, list, f) {
+    var html = '<div class="ci-sec"><div class="ci-sec-h"><span class="ci-sec-n">08</span><span>Evidence · 原始记录</span>' + ciLayerTag("FACT") + '</div>';
     html += '<div class="ci-filters">' +
       '<select onchange="window.CI_FILTER.source=this.value;renderConsumer()">' +
         '<option value="all">全部平台</option>' +
@@ -449,7 +431,6 @@
         '<option value="all">全部证据等级</option>' +
         ["E1", "E2", "E3", "E4", "E5", "E6"].map(function (k) { return '<option value="' + k + '"' + (f.level === k ? " selected" : "") + '>' + k + '</option>'; }).join("") +
       '</select></div>';
-
     html += '<div class="ci-rec-list">';
     if (!list.length) html += '<div class="empty-text">无匹配记录</div>';
     list.forEach(function (rec) {
@@ -474,6 +455,54 @@
       '</div>';
     });
     html += '</div></div>';
+    return html;
+  }
+
+  function ciViewResearch(c, rid) {
+    var r = ciGet(rid);
+    if (!r) { c.innerHTML = '<div class="empty-state"><div class="empty-text">研究不存在</div></div>'; return; }
+    var recs = ciRecords(r);
+    var f = filt();
+
+    // 过滤（仅作用于 08 段 Evidence 列表）
+    var list = recs.slice();
+    if (f.source !== "all") list = list.filter(function (x) { return x.source === f.source; });
+    if (f.pain !== "all") list = list.filter(function (x) { return x.extracted.pain.status === f.pain; });
+    if (f.level !== "all") list = list.filter(function (x) { return x.extracted.evidence.level === f.level; });
+
+    var report = (typeof ciBuildReport === "function") ? ciBuildReport(r, recs) : null;
+    var inp = report ? report.inputs : { subject: r.subject, targetUsers: r.targetUsers, platforms: r.platforms, timeWindow: (r.timeWindow && r.timeWindow.label) };
+
+    var html = '';
+    // 头部 + 4 输入
+    html += '<div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
+      '<button class="btn btn-ghost sm" onclick="CI_VIEW=\'list\';renderConsumer()">← 返回</button>' +
+      '<button class="btn btn-primary sm" onclick="window.CI_EXTRACT_TARGET=\'' + r.id + '\';CI_VIEW=\'extract\';renderConsumer()">📥 提取单条内容</button>' +
+      '</div>';
+    html += '<div class="card ci-rh">' +
+      '<div class="ci-rh-t">' + esc(r.title || r.subject) + '</div>' +
+      ciInputRow(inp) +
+      '<div class="ci-rh-meta">共 ' + recs.length + ' 条原始内容 · 证据等级 E1-E6</div>' +
+      '</div>';
+
+    // 7 段管线（链路可视化）
+    html += ciPipeline(report ? report.pipeline : []);
+
+    // Insight Cards（7 张）
+    if (report) html += ciInsightCardsView(report.cards);
+
+    // 8 段报告
+    if (report) {
+      report.sections.forEach(function (sec) {
+        html += '<div class="ci-sec"><div class="ci-sec-h"><span class="ci-sec-n">' + sec.no + '</span><span>' + esc(sec.title) + '</span>' +
+          ciLayerTag(sec.layer) + '</div>';
+        sec.blocks.forEach(function (b) { html += ciRenderBlock(b); });
+        html += '</div>';
+      });
+    }
+
+    // 08 段 Evidence 列表
+    html += ciEvidenceSection(r, list, f);
 
     c.innerHTML = html;
   }

@@ -1,6 +1,6 @@
 {
-  "version": "1.0",
-  "updatedAt": "2026-09-11",
+  "version": "3.0",
+  "updatedAt": "2026-09-12",
   "researches": [
     {
       "id": "r_magsafe_cooler_2026",
@@ -33,14 +33,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "夏季/高温",
               "place": "户外",
               "activity": "手机拍摄/录制",
               "trigger": "高温+长时间拍摄",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "short"
             },
             "problem": {
               "core": "手机发热、掉帧",
@@ -51,7 +53,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "夏天出去拍照真的烫得不敢拿，拍十几分钟就开始掉帧。"
+              "basis_quote": "夏天出去拍照真的烫得不敢拿，拍十几分钟就开始掉帧。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -108,14 +111,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "户外",
               "activity": "手机拍摄/录制",
               "trigger": "夏季+长时间",
-              "frequency": "recurring"
+              "frequency": "recurring",
+              "duration": "short"
             },
             "problem": {
               "core": "发热+卡后台",
@@ -125,7 +130,8 @@
             },
             "pain": {
               "status": "seeking_solution",
-              "basis_quote": "我每次出去玩拍 vlog，半小时手机就烫得要关后台，求推荐。"
+              "basis_quote": "我每次出去玩拍 vlog，半小时手机就烫得要关后台，求推荐。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "true",
@@ -181,14 +187,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "摄影师"
+              "role_hint": "摄影师",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "夏季/高温",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "高温",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "卡顿",
@@ -198,7 +206,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "真的夏天拍视频受不了，拍一会手机就开始卡。"
+              "basis_quote": "真的夏天拍视频受不了，拍一会手机就开始卡。",
+              "intensity": "medium"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -255,14 +264,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "owned",
-              "role_hint": "设计师"
+              "role_hint": "设计师",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "散热器和镜头位冲突",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "遮挡镜头",
@@ -272,7 +283,8 @@
             },
             "pain": {
               "status": "dissatisfied",
-              "basis_quote": "买了一个某品牌的，半边摄像头挡住了我广角镜头，真的服了。"
+              "basis_quote": "买了一个某品牌的，半边摄像头挡住了我广角镜头，真的服了。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -330,14 +342,16 @@
                 "女生"
               ],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "无",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "颜值不匹配",
@@ -345,7 +359,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "希望散热器能好看一点，目前市面上的都太理工男了，不适合女生。"
+              "basis_quote": "希望散热器能好看一点，目前市面上的都太理工男了，不适合女生。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -404,14 +419,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "owned",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "low"
             },
             "scene": {
               "time": "unknown",
               "place": "室内",
               "activity": "手机拍摄/录制",
               "trigger": "已回避",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "已回避",
@@ -421,7 +438,8 @@
             },
             "pain": {
               "status": "solved",
-              "basis_quote": "后来我就只在空调房里拍了，手机也不会太烫。"
+              "basis_quote": "后来我就只在空调房里拍了，手机也不会太烫。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -474,14 +492,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "owned",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "过热",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "卡顿+过热",
@@ -491,7 +511,8 @@
             },
             "pain": {
               "status": "solution_adopted",
-              "basis_quote": "拍 vlog 真的卡到爆炸，手机又热又慢，只能一段一段录。"
+              "basis_quote": "拍 vlog 真的卡到爆炸，手机又热又慢，只能一段一段录。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "true",
@@ -547,14 +568,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "owned",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "重量",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "brief"
             },
             "problem": {
               "core": "手酸",
@@ -565,7 +588,8 @@
             },
             "pain": {
               "status": "dissatisfied",
-              "basis_quote": "我买的那个太重了，挂手机上一会儿手就酸。"
+              "basis_quote": "我买的那个太重了，挂手机上一会儿手就酸。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -622,14 +646,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "摄影师"
+              "role_hint": "摄影师",
+              "need_strength": "high"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "磁吸位冲突",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "无法同时散热+充电",
@@ -637,7 +663,8 @@
             },
             "pain": {
               "status": "impacted",
-              "basis_quote": "想边充电边拍，散热器和充电只能选一个，气死了。"
+              "basis_quote": "想边充电边拍，散热器和充电只能选一个，气死了。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "true",
@@ -694,14 +721,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "咖啡店",
               "activity": "unknown",
               "trigger": "安静环境",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "噪音",
@@ -711,7 +740,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "风扇一开就嗡嗡的，咖啡店完全不敢拿出来用。"
+              "basis_quote": "风扇一开就嗡嗡的，咖啡店完全不敢拿出来用。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -770,14 +800,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "配色单一",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "配色不友好",
@@ -785,7 +817,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "颜值即正义！为什么散热器的配色都是黑色啊，要白色粉色！"
+              "basis_quote": "颜值即正义！为什么散热器的配色都是黑色啊，要白色粉色！",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -845,14 +878,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "owned",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "扛不住",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "short"
             },
             "problem": {
               "core": "发热扛不住",
@@ -860,7 +895,8 @@
             },
             "pain": {
               "status": "solution_adopted",
-              "basis_quote": "我后来直接买散热器了，不然拍半小时根本扛不住。"
+              "basis_quote": "我后来直接买散热器了，不然拍半小时根本扛不住。",
+              "intensity": "high"
             },
             "impact": {
               "task_blocked": "true",
@@ -916,14 +952,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "owned",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "夹不稳",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "脱落",
@@ -931,7 +969,8 @@
             },
             "pain": {
               "status": "solution_adopted",
-              "basis_quote": "买了某爆款，颜值可以，但夹背式夹不稳，走两步就掉。"
+              "basis_quote": "买了某爆款，颜值可以，但夹背式夹不稳，走两步就掉。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -989,14 +1028,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "主播"
+              "role_hint": "主播",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "耗电+发热",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "ongoing"
             },
             "problem": {
               "core": "无法同时充+散热",
@@ -1006,7 +1047,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "直播两小时没电了，想边充边散热又卡位。"
+              "basis_quote": "直播两小时没电了，想边充边散热又卡位。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1064,14 +1106,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "造型硬朗",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "造型不友好",
@@ -1079,7 +1123,8 @@
             },
             "pain": {
               "status": "seeking_solution",
-              "basis_quote": "太理工男了哈哈，要是更圆润点的造型+白色我肯定买。"
+              "basis_quote": "太理工男了哈哈，要是更圆润点的造型+白色我肯定买。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1139,14 +1184,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "夏季/高温",
               "place": "户外",
               "activity": "手机拍摄/录制",
               "trigger": "高温",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "已回避",
@@ -1154,7 +1201,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "现在天太热我都不出去拍了，等秋天再拍。"
+              "basis_quote": "现在天太热我都不出去拍了，等秋天再拍。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1210,14 +1258,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "UP主"
+              "role_hint": "UP主",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "风扇噪音",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "噪音干扰录音",
@@ -1225,7 +1275,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "录旁白的时候风扇声音收进去了，剪辑累死。"
+              "basis_quote": "录旁白的时候风扇声音收进去了，剪辑累死。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1283,14 +1334,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "重量",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "重量叠加",
@@ -1300,7 +1353,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "手机壳和散热器一起用太重了，单独用又不散热。"
+              "basis_quote": "手机壳和散热器一起用太重了，单独用又不散热。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1360,14 +1414,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "厚度",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "携带不便",
@@ -1377,7 +1433,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "磁吸款很方便，但是太厚了，揣兜里鼓鼓囊囊。"
+              "basis_quote": "磁吸款很方便，但是太厚了，揣兜里鼓鼓囊囊。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1437,14 +1494,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "充电+运行",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "双重发热",
@@ -1454,7 +1513,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "充电时手机烫更厉害，散热器根本压不住。"
+              "basis_quote": "充电时手机烫更厉害，散热器根本压不住。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1514,14 +1574,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "外观丑",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "颜值门槛",
@@ -1529,7 +1591,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "外观太丑了我不好意思拍 vlog 时候露出来。"
+              "basis_quote": "外观太丑了我不好意思拍 vlog 时候露出来。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1588,14 +1651,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "owned",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "风扇异响",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "异响",
@@ -1605,7 +1670,8 @@
             },
             "pain": {
               "status": "solution_adopted",
-              "basis_quote": "用了几天声音很大，风扇是金属叶片有异响。"
+              "basis_quote": "用了几天声音很大，风扇是金属叶片有异响。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1663,14 +1729,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "UP主"
+              "role_hint": "UP主",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "风扇噪音",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "噪音干扰录音",
@@ -1678,7 +1746,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "录书单的时候散热器的声音太明显，剪视频累死。"
+              "basis_quote": "录书单的时候散热器的声音太明显，剪视频累死。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1736,14 +1805,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "high"
             },
             "scene": {
               "time": "unknown",
               "place": "户外",
               "activity": "手机拍摄/录制",
               "trigger": "卡顿",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "创作被打断",
@@ -1753,7 +1824,8 @@
             },
             "pain": {
               "status": "impacted",
-              "basis_quote": "出去拍一次 vlog 手机就热得卡，回来都不想再拍了。"
+              "basis_quote": "出去拍一次 vlog 手机就热得卡，回来都不想再拍了。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "true",
@@ -1810,14 +1882,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "high"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "认知空白",
-              "frequency": "recurring"
+              "frequency": "recurring",
+              "duration": "unknown"
             },
             "problem": {
               "core": "无认知",
@@ -1825,7 +1899,8 @@
             },
             "pain": {
               "status": "recurring",
-              "basis_quote": "才知道有这种产品！之前一直以为是手机壳内置的那种。"
+              "basis_quote": "才知道有这种产品！之前一直以为是手机壳内置的那种。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1884,14 +1959,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "配色",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "配色期待",
@@ -1899,7 +1976,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "希望造型可以再可爱点，粉色/薄荷绿都好看！"
+              "basis_quote": "希望造型可以再可爱点，粉色/薄荷绿都好看！",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -1959,14 +2037,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "摄影师"
+              "role_hint": "摄影师",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "热了就停",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "brief"
             },
             "problem": {
               "core": "已回避",
@@ -1974,7 +2054,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "现在我就拍短的，最多 5 分钟一段，热了停一会儿。"
+              "basis_quote": "现在我就拍短的，最多 5 分钟一段，热了停一会儿。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2032,14 +2113,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "结构冲突",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "充电口被挡",
@@ -2049,7 +2132,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "充电口被散热器挡住，Type-C 线插不进去。"
+              "basis_quote": "充电口被散热器挡住，Type-C 线插不进去。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2109,14 +2193,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "owned",
-              "role_hint": "主播"
+              "role_hint": "主播",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "充电口冲突",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "无法边充电",
@@ -2124,7 +2210,8 @@
             },
             "pain": {
               "status": "dissatisfied",
-              "basis_quote": "直播想用但必须卸了散热器才能插电，太尴尬。"
+              "basis_quote": "直播想用但必须卸了散热器才能插电，太尴尬。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2178,14 +2265,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "手机拍摄/录制",
               "trigger": "噪音",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "噪音影响他人",
@@ -2195,7 +2284,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "开会时候想录会议纪要，散热器嗡嗡的同事都听到了。"
+              "basis_quote": "开会时候想录会议纪要，散热器嗡嗡的同事都听到了。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2254,14 +2344,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "室内",
               "activity": "手机拍摄/录制",
               "trigger": "已回避",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "已回避",
@@ -2269,7 +2361,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "我现在都不去外面拍了，就在家录，舒服多了。"
+              "basis_quote": "我现在都不去外面拍了，就在家录，舒服多了。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2326,14 +2419,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "信息过载",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "决策难",
@@ -2341,7 +2436,8 @@
             },
             "pain": {
               "status": "seeking_solution",
-              "basis_quote": "求推荐！看了三家都不知道买哪款，对比参数头大。"
+              "basis_quote": "求推荐！看了三家都不知道买哪款，对比参数头大。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2403,14 +2499,16 @@
                 "小白"
               ],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "信息分散",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "决策成本",
@@ -2418,7 +2516,8 @@
             },
             "pain": {
               "status": "seeking_solution",
-              "basis_quote": "关注了三个测评博主才决定买哪一款，小白真心累。"
+              "basis_quote": "关注了三个测评博主才决定买哪一款，小白真心累。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2477,14 +2576,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "unknown",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "unknown",
@@ -2492,7 +2593,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "手机散热器？听起来好高级哈哈。"
+              "basis_quote": "手机散热器？听起来好高级哈哈。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2554,14 +2656,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "unknown",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "unknown",
@@ -2569,7 +2673,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "哈哈哈笑死，散热器也要卷颜值了吗。"
+              "basis_quote": "哈哈哈笑死，散热器也要卷颜值了吗。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2631,14 +2736,16 @@
             "persona": {
               "segment_hints": [],
               "experience_with_product": "unknown",
-              "role_hint": "unknown"
+              "role_hint": "unknown",
+              "need_strength": "medium"
             },
             "scene": {
               "time": "unknown",
               "place": "unknown",
               "activity": "unknown",
               "trigger": "unknown",
-              "frequency": "unknown"
+              "frequency": "unknown",
+              "duration": "unknown"
             },
             "problem": {
               "core": "unknown",
@@ -2646,7 +2753,8 @@
             },
             "pain": {
               "status": "experienced",
-              "basis_quote": "路过看看，我先码住。"
+              "basis_quote": "路过看看，我先码住。",
+              "intensity": "unknown"
             },
             "impact": {
               "task_blocked": "unknown",
@@ -2698,5 +2806,6 @@
         }
       ]
     }
-  ]
+  ],
+  "schemaVersion": 3
 }

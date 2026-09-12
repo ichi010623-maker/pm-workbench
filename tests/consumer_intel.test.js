@@ -14,6 +14,7 @@ const SRC = {
   prompt: fs.readFileSync(ROOT + "/js/consumer/prompt.js", "utf8"),
   extract: fs.readFileSync(ROOT + "/js/consumer/extract.js", "utf8"),
   aggregate: fs.readFileSync(ROOT + "/js/consumer/aggregate.js", "utf8"),
+  insights: fs.readFileSync(ROOT + "/js/consumer/insights.js", "utf8"),
   ui: fs.readFileSync(ROOT + "/js/consumer.js", "utf8")
 };
 const SEED = JSON.parse(fs.readFileSync(ROOT + "/data/consumer_intel.json", "utf8"));
@@ -38,8 +39,8 @@ function mkSandbox() {
   };
   sb.window = sb;
   vm.createContext(sb);
-  // 按依赖顺序加载（schema → rules → prompt → extract → aggregate → ui）
-  ["schema", "rules", "prompt", "extract", "aggregate"].forEach(k => vm.runInContext(SRC[k], sb));
+  // 按依赖顺序加载（schema → rules → prompt → extract → aggregate → insights → ui）
+  ["schema", "rules", "prompt", "extract", "aggregate", "insights"].forEach(k => vm.runInContext(SRC[k], sb));
   return sb;
 }
 function loadUI(sb) { vm.runInContext(SRC.ui, sb); }
@@ -296,16 +297,31 @@ section("H. UI 渲染");
   ok(html.indexOf("ci-rule-chips") >= 0, "列表含规则标签");
   ok(html.indexOf("提取单条内容") >= 0, "列表含提取入口");
 
-  // 研究详情
+  // 研究详情（8 段报告 + Insight Cards + 链路 + 三层分离）
   vm.runInContext("CI_VIEW='research:r_magsafe_cooler_2026'", sb);
   html = vm.runInContext("(function(){var c=document.getElementById('app-content');c.innerHTML='';try{renderConsumer()}catch(e){return 'ERR:'+e.message}return c.innerHTML})()", sb);
   ok(html.indexOf("ERR:") < 0, "研究详情无渲染错误");
-  ok(html.indexOf("聚合计数") >= 0, "含聚合计数区");
-  ok(html.indexOf("ci-ladder") >= 0, "聚合区渲染漏斗");
-  ok(html.indexOf("痛点状态分布") >= 0, "含痛点状态分布");
-  ok(html.indexOf("证据等级分布") >= 0, "含证据等级分布");
-  ok(html.indexOf("场景聚合") >= 0, "含场景聚合");
-  ok(html.indexOf("规则审计") >= 0, "含规则审计区");
+  // 8 段结构
+  ok(html.indexOf("用户是谁") >= 0, "含 01 用户是谁");
+  ok(html.indexOf("机会方向") >= 0, "含 07 机会方向");
+  ok(html.indexOf("Evidence") >= 0, "含 08 Evidence 溯源");
+  // Insight Cards
+  ok(html.indexOf("ci-cards") >= 0, "含 Insight Cards 容器");
+  ok(html.indexOf("用户规模") >= 0, "含 Insight Card·用户规模");
+  ok(html.indexOf("机会方向") >= 0, "含 Insight Card·机会方向");
+  // 分析链路
+  ok(html.indexOf("ci-pipe") >= 0, "含分析链路可视化");
+  ok(html.indexOf("分析链路") >= 0, "含链路标题");
+  // 三层分离标签
+  ok(html.indexOf("FACT") >= 0, "含 FACT 层标签");
+  ok(html.indexOf("HYPOTHESIS") >= 0, "含 HYPOTHESIS 层标签");
+  // 6 项计数漏斗（Mention≠Pain）
+  ok(html.indexOf("ci-funnel") >= 0, "含 Mention≠Pain 漏斗");
+  ok(html.indexOf("寻求方案") >= 0, "漏斗含「寻求方案」计数");
+  ok(html.indexOf("已换/购产品") >= 0, "漏斗含「已换/购产品」计数");
+  // 场景 / 规则审计 / 记录列表
+  ok(html.indexOf("场景") >= 0, "含 02 场景段");
+  ok(html.indexOf("规则审计") >= 0, "含规则审计判读");
   ok(html.indexOf("原始记录") >= 0, "含记录列表");
   const recCount = (html.match(/class="ci-rec"/g) || []).length;
   ok(recCount === 36, "渲染 36 条记录（实际 " + recCount + "）");
@@ -371,10 +387,10 @@ section("K. Gold Fixtures · 真实句级");
   const GOLD = [
     { id: "T01", text: "拍视频的时候手机有点热。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "拍视频", trigger: "拍视频时", frequency: "once" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "once", duration: "unknown" },
         problem: { core: "手机发热", symptoms: ["有点热"] },
-        pain: { status: "experienced", basis_quote: "拍视频的时候手机有点热" },
+        pain: { status: "mentioned", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
         solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
         emotion: { labels: [], intensity: "low" },
@@ -387,10 +403,10 @@ section("K. Gold Fixtures · 真实句级");
     },
     { id: "T02", text: "我每次拍十几分钟手机就开始烫。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "连续拍摄", trigger: "连续拍摄十几分钟", frequency: "recurring" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "recurring", duration: "unknown" },
         problem: { core: "手机发热", symptoms: ["烫手"] },
-        pain: { status: "recurring", basis_quote: "我每次拍十几分钟手机就开始烫" },
+        pain: { status: "recurring", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
         solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
         emotion: { labels: [], intensity: "medium" },
@@ -402,10 +418,10 @@ section("K. Gold Fixtures · 真实句级");
     },
     { id: "T03", text: "夏天在外面拍视频，手机特别容易发烫。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
-        scene: { time: "夏天", place: "户外", activity: "拍视频", trigger: "夏天+户外拍摄", frequency: "recurring" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "unknown", duration: "unknown" },
         problem: { core: "手机发热", symptoms: ["特别容易发烫"] },
-        pain: { status: "recurring", basis_quote: "手机特别容易发烫" },
+        pain: { status: "experienced", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
         solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
         emotion: { labels: [], intensity: "medium" },
@@ -416,10 +432,10 @@ section("K. Gold Fixtures · 真实句级");
     },
     { id: "T04", text: "拍一会儿手机发烫，然后画面开始掉帧。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "拍视频", trigger: "持续拍摄", frequency: "unknown" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "once", duration: "unknown" },
         problem: { core: "手机发热导致画面掉帧", symptoms: ["发烫", "画面掉帧"] },
-        pain: { status: "impacted", basis_quote: "拍一会儿手机发烫，然后画面开始掉帧" },
+        pain: { status: "impacted", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "true", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "画面开始掉帧" },
         solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
         emotion: { labels: [], intensity: "medium" },
@@ -431,10 +447,10 @@ section("K. Gold Fixtures · 真实句级");
     },
     { id: "T05", text: "拍视频手机太热了，我后来买了个散热器。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "拍视频", trigger: "拍视频时手机过热", frequency: "unknown" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "once", duration: "unknown" },
         problem: { core: "手机发热", symptoms: ["太热"] },
-        pain: { status: "solution_adopted", basis_quote: "我后来买了个散热器" },
+        pain: { status: "solution_adopted", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
         solution: { solution_adopted: "true", solution_desc: "买了个散热器", purchase_signal: "true", solved_status: "unknown", satisfaction: "unknown" },
         emotion: { labels: ["无奈"], intensity: "medium" },
@@ -446,10 +462,10 @@ section("K. Gold Fixtures · 真实句级");
     },
     { id: "T06", text: "买了散热器以后终于可以连续拍半小时了。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "连续拍摄", trigger: "使用散热器后", frequency: "unknown" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "once", duration: "unknown" },
         problem: { core: "之前无法连续长时间拍摄", symptoms: ["不能连续拍"] },
-        pain: { status: "solved", basis_quote: "买了散热器以后终于可以连续拍半小时了" },
+        pain: { status: "solved", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "false", abandoned_activity: "false", behavior_change: "false", basis_quote: "现在可以连续拍半小时了" },
         solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "true", solved_status: "solved", satisfaction: "satisfied" },
         emotion: { labels: ["释然"], intensity: "medium" },
@@ -461,10 +477,10 @@ section("K. Gold Fixtures · 真实句级");
     },
     { id: "T07", text: "我买的散热器声音太大，录视频的时候很烦。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "录视频", trigger: "录视频时散热器运转", frequency: "unknown" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "once", duration: "unknown" },
         problem: { core: "散热器噪音", symptoms: ["声音太大", "很烦"] },
-        pain: { status: "experienced", basis_quote: "录视频的时候很烦" },
+        pain: { status: "solution_adopted", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
         solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "true", solved_status: "not_solved", satisfaction: "dissatisfied" },
         emotion: { labels: ["烦躁"], intensity: "medium" },
@@ -475,10 +491,10 @@ section("K. Gold Fixtures · 真实句级");
     },
     { id: "T08", text: "现在用散热器已经没什么问题了。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
-        scene: { time: "现在", place: "unknown", activity: "未知（上下文隐含为原场景）", trigger: "使用散热器", frequency: "unknown" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "once", duration: "unknown" },
         problem: { core: "原问题已不再出现", symptoms: [] },
-        pain: { status: "solved", basis_quote: "现在用散热器已经没什么问题了" },
+        pain: { status: "solved", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "false", abandoned_activity: "false", behavior_change: "false", basis_quote: "现在用散热器已经没什么问题了" },
         solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "unknown", solved_status: "solved", satisfaction: "satisfied" },
         emotion: { labels: [], intensity: "low" },
@@ -490,10 +506,10 @@ section("K. Gold Fixtures · 真实句级");
     },
     { id: "T09", text: "手机热得我都不敢边充边拍。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "边充电边拍摄", trigger: "边充边拍", frequency: "unknown" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "once", duration: "unknown" },
         problem: { core: "手机发热导致不敢边充边拍", symptoms: ["手机热"] },
-        pain: { status: "impacted", basis_quote: "手机热得我都不敢边充边拍" },
+        pain: { status: "impacted", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "unknown", abandoned_activity: "true", behavior_change: "true", basis_quote: "我都不敢边充边拍" },
         solution: { solution_adopted: "true", solution_desc: "规避：避免边充电边拍", purchase_signal: "unknown", solved_status: "not_solved", satisfaction: "unknown" },
         emotion: { labels: ["担忧"], intensity: "medium" },
@@ -505,10 +521,10 @@ section("K. Gold Fixtures · 真实句级");
     },
     { id: "T10", text: "每次直播十分钟左右手机就开始卡。",
       extracted: {
-        persona: { segment_hints: ["主播"], experience_with_product: "used", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "直播", trigger: "直播十分钟左右", frequency: "recurring" },
+        persona: { segment_hints: ["主播"], experience_with_product: "used", role_hint: "unknown", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "recurring", duration: "unknown" },
         problem: { core: "直播时手机卡顿", symptoms: ["手机卡", "发热（隐含）"] },
-        pain: { status: "recurring", basis_quote: "每次直播十分钟左右手机就开始卡" },
+        pain: { status: "recurring", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "true", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "手机就开始卡" },
         solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
         emotion: { labels: [], intensity: "medium" },
@@ -543,10 +559,10 @@ section("K. Gold Fixtures · 真实句级");
     const r = sb.ciAudit({
       rawText: "听说这个散热器挺好用的，但我没用过。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "unknown", trigger: "unknown", frequency: "unknown" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "unknown", duration: "unknown" },
         problem: { core: "unknown", symptoms: [] },
-        pain: { status: "mentioned", basis_quote: "听说这个散热器挺好用的" },
+        pain: { status: "mentioned", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
         solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
         emotion: { labels: [], intensity: "unknown" },
@@ -564,10 +580,10 @@ section("K. Gold Fixtures · 真实句级");
     const r = sb.ciAudit({
       rawText: "我买了个散热器。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "owned", role_hint: "unknown" },
-        scene: { time: "unknown", place: "unknown", activity: "unknown", trigger: "unknown", frequency: "unknown" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "unknown", duration: "unknown" },
         problem: { core: "发热", symptoms: [] },
-        pain: { status: "solution_adopted", basis_quote: "我买了个散热器" },
+        pain: { status: "mentioned", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
         solution: { solution_adopted: "true", solution_desc: "散热器", purchase_signal: "true", solved_status: "solved", satisfaction: "unknown" },
         emotion: { labels: [], intensity: "unknown" },
@@ -584,10 +600,10 @@ section("K. Gold Fixtures · 真实句级");
     const r = sb.ciAudit({
       rawText: "今天拍视频手机有点烫。",
       extracted: {
-        persona: { segment_hints: [], experience_with_product: "none", role_hint: "unknown" },
-        scene: { time: "今天", place: "unknown", activity: "拍视频", trigger: "unknown", frequency: "recurring" },
+        persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "", need_strength: "unknown" },
+        scene: { time: "", place: "", activity: "", trigger: "", frequency: "recurring", duration: "unknown" },
         problem: { core: "发热", symptoms: ["有点烫"] },
-        pain: { status: "experienced", basis_quote: "今天拍视频手机有点烫" },
+        pain: { status: "mentioned", intensity: "unknown", basis_quote: "" },
         impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
         solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
         emotion: { labels: [], intensity: "low" },
@@ -602,6 +618,6 @@ section("K. Gold Fixtures · 真实句级");
 }
 
 console.log("\n=========================================");
-console.log("v5.9.118 Consumer Intelligence 提取层测试：通过 " + pass + " / 失败 " + fail);
+console.log("v5.9.120 Consumer Intelligence 提取层测试：通过 " + pass + " / 失败 " + fail);
 console.log("=========================================");
 process.exit(fail > 0 ? 1 : 0);

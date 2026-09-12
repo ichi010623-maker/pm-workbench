@@ -27,7 +27,15 @@
               "想买", "肯定买", "打算买", "准备买", "会买", "买哪款", "买哪个", "在考虑", "买哪一款", "买哪一"],
     impacted: ["不能", "中断", "放弃", "拍不了", "卡死", "关机", "没法", "影响", "扛不住", "顶不住", "直接停", "被迫",
                "只能", "关后台", "卡到", "不想再", "扛不住", "顶不住", "不敢", "不敢再", "不敢边", "不敢开", "拍不下去", "不敢用"],
-    mentionOnly: ["听说", "据说", "看到有人说", "是不是", "好像", "才知道"]
+    mentionOnly: ["听说", "据说", "看到有人说", "是不是", "好像", "才知道"],
+    // 持续时间（新增）
+    duration_brief: ["几秒", "一下子", "一会儿", "几分钟", "没几分钟", "几分钟就", "不到一分钟", "几十秒"],
+    duration_short: ["十几分钟", "二十分钟", "十来分钟", "半小时", "30 分钟", "没半小时", "不到半小时", "二三十分钟", "十五分钟", "十分钟"],
+    duration_ongoing: ["半小时以上", "一个小时", "一两个小时", "两小时", "很长时间", "持续", "一直没停", "长时间", "一整天", "一下午", "半天", "一直持续", "持续拍摄"],
+    // 痛感强度（新增：与 emotion 独立）
+    pain_high: ["扛不住", "顶不住", "崩溃", "绝望", "严重影响", "拍不下去", "放弃", "中断", "关机", "放弃拍摄", "无法继续", "拍不了", "没法用", "不能继续"],
+    pain_medium: ["影响", "很烦", "受不了", "烦躁", "焦虑", "麻烦", "困扰", "影响任务", "耽误", "麻烦得很", "很影响"],
+    pain_low: ["有点", "小问题", "小毛病", "一点点", "没什么大碍", "还行", "凑合", "还能用", "轻微"]
   };
 
   function hasAny(text, list) {
@@ -149,6 +157,32 @@
         rule: "规则7", field: "solution.solution_adopted",
         message: "原文为「听说/据说」类转述，不足以判断用户本人已采用该产品"
       });
+    }
+
+    // 规则11（新增）：scene.duration 显式判定
+    var dur = x.scene && x.scene.duration;
+    if (dur && dur !== "unknown") {
+      var cueMap = { brief: CUES.duration_brief, short: CUES.duration_short, ongoing: CUES.duration_ongoing };
+      var cueList = cueMap[dur] || [];
+      if (cueList.length && !hasAny(t, cueList)) {
+        warnings.push({
+          rule: "规则11", field: "scene.duration",
+          message: "duration=" + dur + " 但原文无 " + (cueList.slice(0, 3).join("/")) + " 等时间长度表述"
+        });
+      }
+    }
+
+    // 规则12（新增）：pain.intensity 与 emotion.intensity 应独立判断
+    var pi = pain.intensity;
+    var ei = x.emotion && x.emotion.intensity;
+    if (pi && pi !== "unknown" && ei && ei !== "unknown") {
+      // 高痛感必须有原文支撑
+      if (pi === "high" && !hasAny(t, CUES.pain_high) && !hasAny(t, CUES.impacted)) {
+        warnings.push({
+          rule: "规则12", field: "pain.intensity",
+          message: "pain.intensity=high 但原文无明显后果/扛不住类表述，可能是与 emotion.intensity 混淆"
+        });
+      }
     }
 
     // 规则9：情绪强度不得推断痛点强度（结构性检查）

@@ -52,10 +52,12 @@
   };
 
   // 其余枚举
-  var SOLVED_STATUS = ["solved", "not_solved", "unknown"];
+  var SOLVED_STATUS = ["solved", "not_solved", "partial", "unknown"];
   var SATISFACTION = ["satisfied", "dissatisfied", "mixed", "unknown"];
   var FREQUENCY = ["once", "recurring", "unknown"];
   var INTENSITY = ["low", "medium", "high", "unknown"];
+  var PAIN_INTENSITY = ["low", "medium", "high", "unknown"];
+  var DURATION = ["brief", "short", "ongoing", "unknown"];
   var EXPERIENCE = ["none", "owned", "used", "unknown"];
   var TRI = ["true", "false", "unknown"]; // 三值布尔（无法判断时为 unknown）
 
@@ -79,25 +81,27 @@
       persona: {
         type: "object",
         additionalProperties: false,
-        required: ["segment_hints", "experience_with_product", "role_hint"],
+        required: ["segment_hints", "experience_with_product", "role_hint", "need_strength"],
         description: "用户是谁。仅记录原文中明确出现的身份线索。",
         properties: {
           segment_hints: { type: "array", items: { type: "string" }, description: "原文中明确出现的身份/人群线索（如「宝妈」「上班族」）。无则为空数组。" },
           experience_with_product: { type: "string", enum: EXPERIENCE, description: "原文体现的对该产品的经验：none=从未使用 / owned=拥有 / used=使用过 / unknown=未说明。" },
-          role_hint: { type: "string", description: "原文自述的职业或角色；未提及则 unknown。" }
+          role_hint: { type: "string", description: "原文自述的职业或角色；未提及则 unknown。" },
+          need_strength: { type: "string", enum: PAIN_INTENSITY, description: "需求强度：用户表达对此问题的需要有多强（从描述中推断）。" }
         }
       },
       scene: {
         type: "object",
         additionalProperties: false,
-        required: ["time", "place", "activity", "trigger", "frequency"],
+        required: ["time", "place", "activity", "trigger", "frequency", "duration"],
         description: "用户在什么场景。未提及一律 unknown。",
         properties: {
           time: { type: "string", description: "时间线索（如「夏天」「每天下午」）；未提及 unknown。" },
           place: { type: "string", description: "地点线索（如「户外」「咖啡店」）；未提及 unknown。" },
           activity: { type: "string", description: "正在做的事（如「拍 vlog」）；未提及 unknown。" },
           trigger: { type: "string", description: "触发条件（如「高温+长时间拍摄」）；未提及 unknown。" },
-          frequency: { type: "string", enum: FREQUENCY, description: "场景发生频率。仅当原文出现「每次/一直/经常/总是」等反复语义才可为 recurring。" }
+          frequency: { type: "string", enum: FREQUENCY, description: "场景发生频率。仅当原文出现「每次/一直/经常/总是」等反复语义才可为 recurring。" },
+          duration: { type: "string", enum: DURATION, description: "单次场景持续时间。brief=几分钟 / short=半小时内 / ongoing=半小时以上。仅当原文给出时间长度才可判定，否则 unknown。" }
         }
       },
       problem: {
@@ -113,10 +117,11 @@
       pain: {
         type: "object",
         additionalProperties: false,
-        required: ["status", "basis_quote"],
-        description: "痛点状态。必须由 basis_quote 支撑，判断不了就 unknown。",
+        required: ["status", "intensity", "basis_quote"],
+        description: "痛点状态。必须由 basis_quote 支撑，判断不了就 unknown。intensity 与 emotion.intensity 独立（痛感 ≠ 情绪强度）。",
         properties: {
           status: { type: "string", enum: PAIN_STATUS },
+          intensity: { type: "string", enum: PAIN_INTENSITY, description: "痛感强度（对生活的实际影响）。与 emotion.intensity（情绪宣泄强度）独立：用户可能情绪激动但痛感低，也可能情绪平静但痛感高。" },
           basis_quote: { type: "string", description: "支撑该 status 的原文片段；status=unknown 时填 unknown。" }
         }
       },
@@ -277,10 +282,10 @@
    */
   function safeFallback() {
     return {
-      persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "unknown" },
-      scene: { time: "unknown", place: "unknown", activity: "unknown", trigger: "unknown", frequency: "unknown" },
+      persona: { segment_hints: [], experience_with_product: "unknown", role_hint: "unknown", need_strength: "unknown" },
+      scene: { time: "unknown", place: "unknown", activity: "unknown", trigger: "unknown", frequency: "unknown", duration: "unknown" },
       problem: { core: "unknown", symptoms: [] },
-      pain: { status: "unknown", basis_quote: "unknown" },
+      pain: { status: "unknown", intensity: "unknown", basis_quote: "unknown" },
       impact: { task_blocked: "unknown", abandoned_activity: "unknown", behavior_change: "unknown", basis_quote: "unknown" },
       solution: { solution_adopted: "unknown", solution_desc: "unknown", purchase_signal: "unknown", solved_status: "unknown", satisfaction: "unknown" },
       emotion: { labels: [], intensity: "unknown" },
@@ -309,10 +314,14 @@
   root.CI_SCHEMA = EXTRACTION_SCHEMA;
   root.CI_PAIN_STATUS = PAIN_STATUS;
   root.CI_PAIN_PRIORITY = PAIN_PRIORITY;
+  root.CI_PAIN_INTENSITY = PAIN_INTENSITY;
   root.CI_EVIDENCE_LEVELS = EVIDENCE_LEVELS;
   root.CI_EVIDENCE_DEF = EVIDENCE_DEF;
   root.CI_SOLVED_STATUS = SOLVED_STATUS;
   root.CI_SATISFACTION = SATISFACTION;
+  root.CI_DURATION = DURATION;
+  root.CI_FREQUENCY = FREQUENCY;
+  root.CI_INTENSITY = INTENSITY;
   root.CI_FORBIDDEN_FIELDS = FORBIDDEN_FIELDS;
   root.ciValidateExtraction = validate;
   root.ciSafeFallback = safeFallback;

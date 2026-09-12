@@ -12,14 +12,16 @@
           "word": "apple",
           "zh": "苹果",
           "hint": "字母 A 最常见的发音",
-          "speakText": "a"
+          "speakText": "a",
+          "wipa": "/ˈæpəl/"
         },
         {
           "ipa": "/eɪ/",
           "word": "cake",
           "zh": "蛋糕",
           "hint": "a_e / ai 组合发字母名",
-          "speakText": "ay"
+          "speakText": "ay",
+          "wipa": "/keɪk/"
         }
       ],
       "nameSpeak": "ay"
@@ -33,7 +35,8 @@
           "word": "ball",
           "zh": "球",
           "hint": "清浊对比：/p/ 不震动，/b/ 震动",
-          "speakText": "buh"
+          "speakText": "buh",
+          "wipa": "/bɔl/"
         }
       ],
       "nameSpeak": "bee"
@@ -47,14 +50,16 @@
           "word": "cat",
           "zh": "猫",
           "hint": "C 后接 a/o/u 常发 /k/",
-          "speakText": "kuh"
+          "speakText": "kuh",
+          "wipa": "/kæt/"
         },
         {
           "ipa": "/s/",
           "word": "city",
           "zh": "城市",
           "hint": "C 后接 e/i/y 常发 /s/",
-          "speakText": "s"
+          "speakText": "suh",
+          "wipa": "/ˈsɪti/"
         }
       ],
       "nameSpeak": "see"
@@ -68,7 +73,8 @@
           "word": "dog",
           "zh": "狗",
           "hint": "清浊对比：/t/ 不震动，/d/ 震动",
-          "speakText": "duh"
+          "speakText": "duh",
+          "wipa": "/dɔɡ/"
         }
       ],
       "nameSpeak": "dee"
@@ -82,14 +88,16 @@
           "word": "egg",
           "zh": "鸡蛋",
           "hint": "字母 E 最常见的发音是 /e/ 而非字母名 /iː/",
-          "speakText": "eh"
+          "speakText": "eh",
+          "wipa": "/ɛɡ/"
         },
         {
           "ipa": "/iː/",
           "word": "he",
           "zh": "他",
           "hint": "ee / e_e 组合发字母名",
-          "speakText": "ee"
+          "speakText": "ee",
+          "wipa": "/hiː/"
         }
       ],
       "nameSpeak": "ee"
@@ -103,7 +111,8 @@
           "word": "fish",
           "zh": "鱼",
           "hint": "上齿轻咬下唇送气",
-          "speakText": "fuh"
+          "speakText": "fuh",
+          "wipa": "/fɪʃ/"
         }
       ],
       "nameSpeak": "ef"
@@ -117,14 +126,16 @@
           "word": "go",
           "zh": "去",
           "hint": "G 后接 a/o/u 常发 /g/",
-          "speakText": "guh"
+          "speakText": "guh",
+          "wipa": "/ɡoʊ/"
         },
         {
           "ipa": "/dʒ/",
           "word": "giraffe",
           "zh": "长颈鹿",
           "hint": "G 后接 e/i/y 常发 /dʒ/",
-          "speakText": "juh"
+          "speakText": "juh",
+          "wipa": "/dʒəˈræf/"
         }
       ],
       "nameSpeak": "gee"
@@ -138,7 +149,8 @@
           "word": "hat",
           "zh": "帽子",
           "hint": "喉咙呼气，类似哈气",
-          "speakText": "h"
+          "speakText": "huh",
+          "wipa": "/hæt/"
         }
       ],
       "nameSpeak": "aitch"
@@ -152,14 +164,16 @@
           "word": "sit",
           "zh": "坐",
           "hint": "字母 I 最常见的发音是 /ɪ/ 而非字母名 /aɪ/",
-          "speakText": "ih"
+          "speakText": "ih",
+          "wipa": "/sɪt/"
         },
         {
           "ipa": "/aɪ/",
           "word": "kite",
           "zh": "风筝",
           "hint": "i_e 组合发字母名",
-          "speakText": "eye"
+          "speakText": "eye",
+          "wipa": "/kaɪt/"
         }
       ],
       "nameSpeak": "eye"
@@ -173,7 +187,8 @@
           "word": "jump",
           "zh": "跳",
           "hint": "J 通常只发 /dʒ/",
-          "speakText": "juh"
+          "speakText": "juh",
+          "wipa": "/dʒʌmp/"
         }
       ],
       "nameSpeak": "jay"
@@ -187,7 +202,8 @@
           "word": "kite",
           "zh": "风筝",
           "hint": "K 通常发 /k/（kn 开头时 K 不发音）",
-          "speakText": "kuh"
+          "speakText": "kuh",
+          "wipa": "/kaɪt/"
         }
       ],
       "nameSpeak": "kay"
@@ -201,7 +217,8 @@
           "word": "lion",
           "zh": "狮子",
           "hint": "舌尖抵上齿龈",
-          "speakText": "l"
+          "speakText": "luh",
+          "wipa": "/ˈlaɪən/"
         }
       ],
       "nameSpeak": "el"
@@ -215,7 +232,8 @@
           "word": "moon",
           "zh": "月亮",
           "hint": "闭唇鼻音",
-          "speakText": "muh"
+          "speakText": "muh",
+          "wipa": "/muːn/"
         }
       ],
       "nameSpeak": "em"
@@ -229,7 +247,8 @@
           "word": "nose",
           "zh": "鼻子",
           "hint": "舌尖抵上齿龈鼻音",
-          "speakText": "nuh"
+          "speakText": "nuh",
+          "wipa": "/noʊz/"
         }
       ],
       "nameSpeak": "en"
@@ -243,14 +262,16 @@
           "word": "hot",
           "zh": "热",
           "hint": "美式常发 /ɑː/，英式 /ɒ/",
-          "speakText": "o"
+          "speakText": "o",
+          "wipa": "/hɑt/"
         },
         {
           "ipa": "/əʊ/",
           "word": "no",
           "zh": "不",
           "hint": "o_e 组合发字母名",
-          "speakText": "oh"
+          "speakText": "oh",
+          "wipa": "/noʊ/"
         }
       ],
       "nameSpeak": "oh"
@@ -264,7 +285,8 @@
           "word": "pig",
           "zh": "猪",
           "hint": "清音：声带不震动",
-          "speakText": "puh"
+          "speakText": "puh",
+          "wipa": "/pɪɡ/"
         }
       ],
       "nameSpeak": "pee"
@@ -278,7 +300,8 @@
           "word": "queen",
           "zh": "女王",
           "hint": "Q 几乎总是与 U 连用发 /kw/",
-          "speakText": "kwuh"
+          "speakText": "kwuh",
+          "wipa": "/kwin/"
         }
       ],
       "nameSpeak": "cue"
@@ -292,7 +315,8 @@
           "word": "red",
           "zh": "红色",
           "hint": "卷舌音，舌尖卷向上颚",
-          "speakText": "ruh"
+          "speakText": "ruh",
+          "wipa": "/rɛd/"
         }
       ],
       "nameSpeak": "ar"
@@ -306,14 +330,16 @@
           "word": "sun",
           "zh": "太阳",
           "hint": "清音",
-          "speakText": "s"
+          "speakText": "suh",
+          "wipa": "/sʌn/"
         },
         {
           "ipa": "/z/",
           "word": "is",
           "zh": "是",
           "hint": "词尾 s 在浊音后常发 /z/",
-          "speakText": "zz"
+          "speakText": "zuh",
+          "wipa": "/ɪz/"
         }
       ],
       "nameSpeak": "ess"
@@ -327,7 +353,8 @@
           "word": "tiger",
           "zh": "老虎",
           "hint": "清音",
-          "speakText": "tuh"
+          "speakText": "tuh",
+          "wipa": "/ˈtaɪɡɚ/"
         }
       ],
       "nameSpeak": "tee"
@@ -341,14 +368,16 @@
           "word": "cup",
           "zh": "杯子",
           "hint": "字母 U 最常见的发音是 /ʌ/ 而非字母名 /juː/",
-          "speakText": "uh"
+          "speakText": "uh",
+          "wipa": "/kʌp/"
         },
         {
           "ipa": "/juː/",
           "word": "use",
           "zh": "使用",
           "hint": "u_e 组合发字母名",
-          "speakText": "you"
+          "speakText": "you",
+          "wipa": "/juːz/"
         }
       ],
       "nameSpeak": "you"
@@ -362,7 +391,8 @@
           "word": "van",
           "zh": "货车",
           "hint": "浊音：上齿咬下唇 + 声带震动",
-          "speakText": "v"
+          "speakText": "vuh",
+          "wipa": "/væn/"
         }
       ],
       "nameSpeak": "vee"
@@ -376,7 +406,8 @@
           "word": "water",
           "zh": "水",
           "hint": "圆唇滑音",
-          "speakText": "wuh"
+          "speakText": "wuh",
+          "wipa": "/ˈwɔtɚ/"
         }
       ],
       "nameSpeak": "double you"
@@ -390,7 +421,8 @@
           "word": "box",
           "zh": "盒子",
           "hint": "X 通常发 /ks/",
-          "speakText": "ks"
+          "speakText": "ks",
+          "wipa": "/bɑks/"
         }
       ],
       "nameSpeak": "ex"
@@ -404,14 +436,16 @@
           "word": "yes",
           "zh": "是",
           "hint": "词首 Y 发 /j/",
-          "speakText": "yuh"
+          "speakText": "yuh",
+          "wipa": "/jɛs/"
         },
         {
           "ipa": "/aɪ/",
           "word": "my",
           "zh": "我的",
           "hint": "词尾 Y 常发 /aɪ/ 或 /i/",
-          "speakText": "eye"
+          "speakText": "eye",
+          "wipa": "/maɪ/"
         }
       ],
       "nameSpeak": "why"
@@ -425,7 +459,8 @@
           "word": "zoo",
           "zh": "动物园",
           "hint": "浊音，声带震动",
-          "speakText": "zz"
+          "speakText": "zuh",
+          "wipa": "/zuː/"
         }
       ],
       "nameSpeak": "zee"
