@@ -663,7 +663,63 @@
         "content": "Having a daily routine helps you stay organized. It includes activities like exercise, work, and relaxation.",
         "translation": "拥有日常例行程序可以帮助您保持有条理。它包括运动、工作和放松等活动。"
       }
+    ],
+    "2026-09-12": [
+      {
+        "level": "入门",
+        "title": "Smart Cities",
+        "content": "Smart cities use technology to improve daily life. Sensors and apps help manage traffic and energy use.",
+        "translation": "智慧城市利用科技改善日常生活。传感器和应用程序帮助管理交通和能源使用。"
+      },
+      {
+        "level": "进阶",
+        "title": "Cooking with Herbs",
+        "content": "Herbs add flavor to dishes without extra calories. They are also rich in nutrients and can boost your health.",
+        "translation": "香草可以为菜肴增添风味而不增加额外卡路里。它们还富含营养，可以增强你的健康。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Art of Hiking",
+        "content": "Hiking is a great way to stay fit and enjoy nature. It requires planning, physical strength, and a sense of adventure.",
+        "translation": "徒步旅行是保持健康和享受自然的好方法。它需要计划、体力和冒险精神。"
+      },
+      {
+        "level": "入门",
+        "title": "The Science of Sleep",
+        "content": "Sleep is crucial for health. It helps the brain process information and the body to repair itself.",
+        "translation": "睡眠对健康至关重要。它帮助大脑处理信息，让身体自我修复。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Power of Laughter",
+        "content": "Laughter is a powerful stress reliever. It can improve mood, boost the immune system, and make relationships stronger.",
+        "translation": "笑声是一种强大的压力缓解剂。它可以改善情绪，增强免疫系统，并使关系更加牢固。"
+      },
+      {
+        "level": "挑战",
+        "title": "Cultural Diversity",
+        "content": "Cultural diversity enriches societies. It allows for the exchange of ideas and the celebration of different traditions.",
+        "translation": "文化多样性丰富了社会。它允许交换思想和庆祝不同的传统。"
+      },
+      {
+        "level": "入门",
+        "title": "The Importance of Exercise",
+        "content": "Regular exercise is essential for maintaining good health. It helps control weight, improves mood, and boosts energy levels.",
+        "translation": "定期锻炼对保持良好健康至关重要。它有助于控制体重，改善情绪，并提高能量水平。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Psychology of Dreams",
+        "content": "Dreams are a way for the mind to process emotions and experiences. They can reveal hidden thoughts and feelings.",
+        "translation": "梦是大脑处理情绪和经验的方式。它们可以揭示隐藏的思想和感受。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Beauty of Nature",
+        "content": "Nature offers a wide range of beauty. From mountains to oceans, it provides a sense of peace and wonder.",
+        "translation": "自然提供了广泛的美。从山脉到海洋，它提供了和平与惊奇的感觉。"
+      }
     ]
   },
-  "updatedAt": "2026-09-11T13:17:00+08:00"
+  "updatedAt": "2026-09-12T13:19:00+08:00"
 }

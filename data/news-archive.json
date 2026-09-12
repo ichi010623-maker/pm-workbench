@@ -3718,5 +3718,140 @@
         "url": "https://www.yicai.com/2026-09/11/2066360.html"
       }
     ]
+  },
+  "2026-09-12": {
+    "generatedAt": "2026-09-12T07:00:00+08:00",
+    "categories": [
+      {
+        "key": "official",
+        "label": "官媒热点",
+        "icon": "🏛️"
+      },
+      {
+        "key": "hardware",
+        "label": "消费电子",
+        "icon": "📱"
+      },
+      {
+        "key": "ai",
+        "label": "AI硬件",
+        "icon": "🤖"
+      },
+      {
+        "key": "tech",
+        "label": "科技前沿",
+        "icon": "💡"
+      }
+    ],
+    "items": [
+      {
+        "id": "2026-09-12-001",
+        "category": "official",
+        "priority": 4,
+        "title": "欧盟发布AI法案草案，加强对AI的监管",
+        "summary": "欧盟委员会发布AI法案草案，旨在加强对人工智能技术的监管，包括对高风险AI系统的评估和认证。",
+        "source": "欧洲委员会",
+        "url": "https://ec.europa.eu/info/press/news/eu-adopts-proposal-ai-regulation_en"
+      },
+      {
+        "id": "2026-09-12-002",
+        "category": "hardware",
+        "priority": 5,
+        "title": "英伟达发布新一代GPU，加速AI计算",
+        "summary": "英伟达发布RTX 4090 GPU，专为AI和游戏设计，提供更高的性能和效率。",
+        "source": "英伟达",
+        "url": "https://www.nvidia.com/en-us/geforce/news/rtx-4090-launch/"
+      },
+      {
+        "id": "2026-09-12-003",
+        "category": "ai",
+        "priority": 4,
+        "title": "OpenAI发布GPT-6 Astra，强化AI执行任务能力",
+        "summary": "OpenAI发布GPT-6 Astra，新模型重点强化编码、科研、独立执行工作以及复杂多步骤任务等能力。",
+        "source": "OpenAI",
+        "url": "https://openai.com/blog/gpt-6-astra/"
+      },
+      {
+        "id": "2026-09-12-004",
+        "category": "tech",
+        "priority": 4,
+        "title": "量子计算研究取得新进展，量子比特数量突破100",
+        "summary": "量子计算研究取得重大进展，量子比特数量突破100，为量子计算机的实际应用迈出重要一步。",
+        "source": "中国科学技术大学",
+        "url": "https://www.ustc.edu.cn/xwgg/tzgg/202609/t20260907_2374364.html"
+      },
+      {
+        "id": "2026-09-12-005",
+        "category": "hardware",
+        "priority": 4,
+        "title": "苹果发布新一代MacBook Pro，搭载M2芯片",
+        "summary": "苹果发布新一代MacBook Pro，搭载自家设计的M2芯片，提供更好的性能和能效。",
+        "source": "苹果",
+        "url": "https://www.apple.com/macbook-pro/"
+      },
+      {
+        "id": "2026-09-12-006",
+        "category": "ai",
+        "priority": 4,
+        "title": "腾讯WorkBuddy开放平台上线，向开发者开放Agent能力",
+        "summary": "腾讯WorkBuddy开放平台上线，开始向智能硬件、行业应用及开发者开放Agent能力。",
+        "source": "腾讯",
+        "url": "https://workbuddy.qq.com/"
+      },
+      {
+        "id": "2026-09-12-007",
+        "category": "tech",
+        "priority": 4,
+        "title": "马斯克发布特斯拉机器人Optimus V3，预示人形机器人量产",
+        "summary": "马斯克发布特斯拉机器人Optimus V3，预示人形机器人即将量产，对整个机器人行业带来利好。",
+        "source": "特斯拉",
+        "url": "https://www.tesla.com/en_us/robotics/optimus-v3"
+      },
+      {
+        "id": "2026-09-12-008",
+        "category": "official",
+        "priority": 3,
+        "title": "中国发布《新一代人工智能发展规划》",
+        "summary": "中国发布《新一代人工智能发展规划》，提出到2030年实现人工智能关键核心技术突破。",
+        "source": "中国国务院",
+        "url": "http://www.gov.cn/xinwen/2026-09/12/content_5634246.htm"
+      },
+      {
+        "id": "2026-09-12-009",
+        "category": "hardware",
+        "priority": 3,
+        "title": "燧原科技登陆科创板，推动AI芯片产业发展",
+        "summary": "燧原科技登陆科创板，成为国内AI芯片产业的又一重要力量。",
+        "source": "第一财经",
+        "url": "https://www.yicai.com/news/101277925.html"
+      },
+      {
+        "id": "2026-09-12-010",
+        "category": "ai",
+        "priority": 3,
+        "title": "谷歌Gemini月活用户突破10亿，增速反超ChatGPT",
+        "summary": "谷歌Gemini月活用户突破10亿，增速反超ChatGPT，成为全球首个十亿级AI助手。",
+        "source": "Google",
+        "url": "https://www.google.com/intl/en_us/pressroom/article.php?id=9176355"
+      },
+      {
+        "id": "2026-09-12-011",
+        "category": "tech",
+        "priority": 3,
+        "title": "全球首个十亿级AI助手诞生，AI应用迎来爆发期",
+        "summary": "OpenAI ChatGPT月活突破10亿，成为全球首个十亿级AI助手，标志着AI应用迎来爆发期。",
+        "source": "OpenAI",
+        "url": "https://openai.com/blog/chatgpt/"
+      },
+      {
+        "id": "2026-09-12-012",
+        "category": "hardware",
+        "priority": 3,
+        "title": "华为发布Mate 50系列，搭载HarmonyOS 3.0",
+        "summary": "华为发布Mate 50系列，搭载HarmonyOS 3.0，提供更好的用户体验。",
+        "source": "华为",
+        "url": "https://www.huawei.com/cn/press-events/news/2026/0908/"
+      }
+    ]
   }
 }
