@@ -587,7 +587,116 @@
           ]
         }
       ]
+    },
+    "2026-09-13": {
+      "date": "2026-09-13",
+      "mode": "rss",
+      "sources": {
+        "BBC": 0,
+        "BBC商业": 0,
+        "BBC科技": 0,
+        "Al Jazeera": 0,
+        "NPR": 10,
+        "Guardian世界": 0,
+        "Guardian科技": 0,
+        "Guardian商业": 0
+      },
+      "rssCount": 10,
+      "brief": [
+        "Celine Dion巴黎演唱会圆满落幕，罕见疾病后重返舞台。",
+        "美国首次将合法永久居民遣返回阿富汗。",
+        "前橄榄球运动员Gareth Thomas呼吁消除对HIV的歧视。",
+        "特朗普访问爱尔兰，谈论北爱尔兰统一问题。",
+        "OpenAI和AnthropicCEO呼吁放缓AI发展速度。",
+        "迈阿密飞机坠毁事件引发对亚马逊货运航空安全的担忧。"
+      ],
+      "groups": [
+        {
+          "cat": "国际",
+          "icon": "🌍",
+          "items": [
+            {
+              "title": "Celine Dion巴黎演唱会圆满落幕",
+              "summary": "加拿大歌手Celine Dion在巴黎完成16场演唱会。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/nx-s1-5967534/celine-dion-performance-paris"
+            },
+            {
+              "title": "美国首次遣返合法永久居民",
+              "summary": "美国首次将合法永久居民遣返回阿富汗。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/nx-s1-5967476/alien-removal-court-deportation-afganistan"
+            },
+            {
+              "title": "前橄榄球运动员呼吁消除对HIV的歧视",
+              "summary": "前橄榄球运动员Gareth Thomas呼吁消除对HIV的歧视。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/g-s1-142404/hiv-aids-brazil-stigma"
+            }
+          ]
+        },
+        {
+          "cat": "科技",
+          "icon": "💻",
+          "items": [
+            {
+              "title": "特朗普访问爱尔兰讨论统一问题",
+              "summary": "特朗普访问爱尔兰，谈论北爱尔兰统一问题。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/g-s1-143076/trump-meets-irelands-leaders"
+            },
+            {
+              "title": "OpenAI和AnthropicCEO呼吁放缓AI发展",
+              "summary": "OpenAI和AnthropicCEO呼吁放缓AI发展速度。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/nx-s1-5950588/openai-anthropic-ai-safety-researchers-hacks"
+            },
+            {
+              "title": "迈阿密飞机坠毁引发安全担忧",
+              "summary": "迈阿密飞机坠毁事件引发对亚马逊货运航空安全的担忧。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/nx-s1-5964931/miami-airport-amazon-cargo-crash"
+            }
+          ]
+        },
+        {
+          "cat": "社会",
+          "icon": "🌏",
+          "items": [
+            {
+              "title": "Charlie Kirk被暗杀后邻里互相曝光",
+              "summary": "Charlie Kirk被暗杀后，邻里间互相曝光。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/nx-s1-5952234/charlie-kirk-death-doxing"
+            },
+            {
+              "title": "巴勒斯坦作家日记档案转移至苏格兰",
+              "summary": "巴勒斯坦作家Raja Shehadeh的日记档案被秘密转移到苏格兰。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/g-s1-142760/palestinian-writer-archive-scotland-israel-shehadeh"
+            },
+            {
+              "title": "癌症幸存者医保问题引发争议",
+              "summary": "癌症幸存者因新医保工作要求失去残疾保险。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/nx-s1-5966884/insurance-coverage-cancer-disability-medicaid"
+            }
+          ]
+        },
+        {
+          "cat": "纪念",
+          "icon": "🇨🇳",
+          "items": [
+            {
+              "title": "9/11事件25周年民众哀悼",
+              "summary": "9/11事件25周年，美国民众仍感哀悼。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/12/nx-s1-5958560/opinion-25-years-on-a-nation-still-mourns"
+            }
+          ]
+        }
+      ]
     }
   },
-  "updatedAt": "2026-09-02T10:21:00+08:00"
+  "updatedAt": "2026-09-13T17:11:00+08:00"
 }
