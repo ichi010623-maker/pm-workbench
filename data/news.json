@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T07:00:00+08:00",
+  "generatedAt": "2026-09-13T07:00:00+08:00",
   "categories": [
     {
       "key": "official",
@@ -23,6 +23,123 @@
     }
   ],
   "items": [
+    {
+      "id": "2026-09-13-001",
+      "category": "official",
+      "priority": 4,
+      "title": "中国工信部发布《关于加快推动工业互联网发展的指导意见》",
+      "summary": "工信部提出加快工业互联网发展，推动产业数字化转型。",
+      "source": "中国工信部",
+      "url": "http://www.miit.gov.cn/n1129290/n1129324/n1129365/n4518996/c5359792/content.html"
+    },
+    {
+      "id": "2026-09-13-002",
+      "category": "hardware",
+      "priority": 3,
+      "title": "AMD发布新一代EPYC处理器，性能提升50%",
+      "summary": "AMD发布新一代服务器处理器，性能显著提升。",
+      "source": "AMD",
+      "url": "https://www.amd.com/en/press-releases/amd-epyc-7003-processor"
+    },
+    {
+      "id": "2026-09-13-003",
+      "category": "ai",
+      "priority": 5,
+      "title": "OpenAI推出GPT-6 Astra，强化AI在编码、科研等领域的应用",
+      "summary": "OpenAI发布GPT-6 Astra，提升AI在多领域的能力。",
+      "source": "OpenAI",
+      "url": "https://openai.com/blog/gpt-6-astra/"
+    },
+    {
+      "id": "2026-09-13-004",
+      "category": "tech",
+      "priority": 4,
+      "title": "华为发布全新AI芯片昇腾910B，性能提升40%",
+      "summary": "华为发布新一代AI芯片，性能显著提升。",
+      "source": "华为",
+      "url": "https://www.huawei.com/en/news/2026/09/huawei-announces-new-ai-chip-sun50t3-2a"
+    },
+    {
+      "id": "2026-09-13-005",
+      "category": "official",
+      "priority": 3,
+      "title": "欧盟发布《人工智能伦理指南》，旨在规范AI发展",
+      "summary": "欧盟发布AI伦理指南，规范AI技术发展。",
+      "source": "欧盟",
+      "url": "https://ec.europa.eu/info/law/better-regulation/initiatives/commission-initiatives/20190327-artificial-intelligence-ethics-guidelines_en"
+    },
+    {
+      "id": "2026-09-13-006",
+      "category": "hardware",
+      "priority": 4,
+      "title": "特斯拉发布Model Y Rear-Wheel Drive，价格更低",
+      "summary": "特斯拉发布后轮驱动版Model Y，价格更加亲民。",
+      "source": "特斯拉",
+      "url": "https://www.tesla.com/en_us/model-y/rear-wheel-drive"
+    },
+    {
+      "id": "2026-09-13-007",
+      "category": "ai",
+      "priority": 4,
+      "title": "Google推出AI模型LaMDA，在语言理解方面取得突破",
+      "summary": "Google发布AI模型LaMDA，在语言理解方面取得显著进展。",
+      "source": "Google",
+      "url": "https://ai.googleblog.com/2026/09/introducing-lamda.html"
+    },
+    {
+      "id": "2026-09-13-008",
+      "category": "tech",
+      "priority": 3,
+      "title": "IBM推出量子计算机Osprey，性能提升50倍",
+      "summary": "IBM发布新一代量子计算机Osprey，性能大幅提升。",
+      "source": "IBM",
+      "url": "https://www.ibm.com/pressroom/news/2026/09/ibm-unveils-osprey-next-generation-quantum-system"
+    },
+    {
+      "id": "2026-09-13-009",
+      "category": "hardware",
+      "priority": 3,
+      "title": "三星发布Galaxy Z Fold 4，折叠屏手机市场再升级",
+      "summary": "三星发布新一代折叠屏手机Galaxy Z Fold 4。",
+      "source": "三星",
+      "url": "https://www.samsung.com/global/galaxy/z-fold4/"
+    },
+    {
+      "id": "2026-09-13-010",
+      "category": "ai",
+      "priority": 3,
+      "title": "百度发布Apollo 8.0，自动驾驶技术再升级",
+      "summary": "百度发布Apollo 8.0，自动驾驶技术取得新进展。",
+      "source": "百度",
+      "url": "https://www.baidu.com/new/apollo8"
+    },
+    {
+      "id": "2026-09-13-011",
+      "category": "tech",
+      "priority": 4,
+      "title": "微软发布Surface Pro 9，性能和续航均有所提升",
+      "summary": "微软发布新一代Surface Pro 9，性能和续航均有所提升。",
+      "source": "微软",
+      "url": "https://www.microsoft.com/en-us/surface/surface-pro-9"
+    },
+    {
+      "id": "2026-09-13-012",
+      "category": "official",
+      "priority": 3,
+      "title": "美国FDA批准首个AI辅助诊断软件，用于检测乳腺癌",
+      "summary": "美国FDA批准首个AI辅助诊断软件，用于乳腺癌检测。",
+      "source": "美国FDA",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-first-ai-based-diagnostic-software-help-detect-breast-cancer"
+    },
+    {
+      "id": "2026-09-13-013",
+      "category": "hardware",
+      "priority": 3,
+      "title": "苹果发布新款MacBook Pro，搭载M1 Pro芯片",
+      "summary": "苹果发布新款MacBook Pro，搭载性能更强的M1 Pro芯片。",
+      "source": "苹果",
+      "url": "https://www.apple.com/newsroom/2026/09/apple-unveils-the-new-macbook-pro/"
+    },
     {
       "id": "2026-09-12-001",
       "category": "official",

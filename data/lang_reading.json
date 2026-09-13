@@ -719,7 +719,69 @@
         "content": "Nature offers a wide range of beauty. From mountains to oceans, it provides a sense of peace and wonder.",
         "translation": "自然提供了广泛的美。从山脉到海洋，它提供了和平与惊奇的感觉。"
       }
+    ],
+    "2026-09-13": [
+      {
+        "level": "入门",
+        "title": "Smart Cars",
+        "content": "Smart cars are becoming more common. They can park themselves and alert drivers of dangers. This technology is improving road safety.",
+        "translation": "智能汽车越来越普遍。它们可以自动停车，并警告驾驶员危险。这项技术正在改善道路安全。"
+      },
+      {
+        "level": "进阶",
+        "title": "Morning Habits",
+        "content": "Starting your day with a healthy breakfast and exercise can boost your energy and focus. Good morning habits lead to a productive day.",
+        "translation": "用健康的早餐和锻炼开始你的一天可以提升你的能量和专注力。良好的早晨习惯可以让你的一天更有成效。"
+      },
+      {
+        "level": "挑战",
+        "title": "Ocean Life",
+        "content": "The ocean is home to thousands of species. Protecting marine life is crucial for maintaining ecological balance. Let's conserve our oceans!",
+        "translation": "海洋是成千上万物种的家园。保护海洋生物对于维持生态平衡至关重要。让我们保护我们的海洋！"
+      },
+      {
+        "level": "入门",
+        "title": "Healthy Snacks",
+        "content": "Snacking on nuts and fruits can provide energy and nutrients. Choose healthy snacks to maintain a balanced diet.",
+        "translation": "吃坚果和水果可以作为零食提供能量和营养。选择健康的零食以维持均衡的饮食。"
+      },
+      {
+        "level": "进阶",
+        "title": "Cooking Spices",
+        "content": "Spices add flavor to food and have health benefits. Learn to use spices in cooking for a delicious and nutritious meal.",
+        "translation": "香料可以增加食物的风味，并且有健康益处。学习在烹饪中使用香料，以制作美味又营养的餐点。"
+      },
+      {
+        "level": "挑战",
+        "title": "Space Exploration",
+        "content": "Space exploration has led to new discoveries about our universe. It inspires scientists and dreamers to explore the unknown.",
+        "translation": "太空探索已经引领我们对宇宙的新发现。它激励科学家和梦想家去探索未知。"
+      },
+      {
+        "level": "入门",
+        "title": "Cultural Exchange",
+        "content": "Traveling to different countries allows us to learn about new cultures. Cultural exchange enriches our understanding of the world.",
+        "translation": "去不同的国家旅行让我们能够了解新的文化。文化交流丰富了我们对世界的理解。"
+      },
+      {
+        "level": "进阶",
+        "title": "Work-Life Balance",
+        "content": "Balancing work and personal life is important for mental and physical health. Set aside time for relaxation and hobbies.",
+        "translation": "平衡工作和个人生活对于心理健康和身体健康很重要。留出时间放松和培养爱好。"
+      },
+      {
+        "level": "挑战",
+        "title": "Art Appreciation",
+        "content": "Art has the power to express emotions and ideas. Learning to appreciate art can enrich your life and perspective.",
+        "translation": "艺术有表达情感和思想的力量。学会欣赏艺术可以丰富你的生活和视角。"
+      },
+      {
+        "level": "入门",
+        "title": "Daily Routines",
+        "content": "Establishing a daily routine can help you stay organized and focused. Consistency in your daily activities improves productivity.",
+        "translation": "建立日常例行程序可以帮助你保持有条理和专注。你在日常活动中的持续性可以提高生产力。"
+      }
     ]
   },
-  "updatedAt": "2026-09-12T13:19:00+08:00"
+  "updatedAt": "2026-09-13T15:54:00+08:00"
 }
