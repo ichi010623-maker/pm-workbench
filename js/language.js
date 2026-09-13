@@ -1466,8 +1466,46 @@ function lgPhonLetterDetail(ch) {
  * Phase 2 · Sound Pairs 听辨训练（Minimal Pairs —— 核心学习单元）
  * ============================================================ */
 var lgPairState = {}; // { id: { idx, correct, total, done[] } } 训练会话状态（内存）
+// 听辨训练错题池（localStorage）：{ pairId: [{aWord, bWord, ts}] }
+// 同一 pairId 内同 aWord+bWord 不重复；答对一次自动移除
+var lgPairMissBank = null;
+function lgPairMissLoadAll() {
+  if (lgPairMissBank) return lgPairMissBank;
+  try { lgPairMissBank = JSON.parse(localStorage.getItem("lgPhonPairMiss_v1") || "{}") || {}; }
+  catch (e) { lgPairMissBank = {}; }
+  return lgPairMissBank;
+}
+function lgPairMissSaveAll() {
+  try { localStorage.setItem("lgPhonPairMiss_v1", JSON.stringify(lgPairMissBank || {})); } catch (e) {}
+}
+function lgPairMissGet(pairId) {
+  var all = lgPairMissLoadAll();
+  return all[pairId] || (all[pairId] = []);
+}
+function lgPairMissAdd(pairId, aWord, bWord) {
+  var arr = lgPairMissGet(pairId);
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].aWord === aWord && arr[i].bWord === bWord) return false;
+  }
+  arr.push({ aWord: aWord, bWord: bWord, ts: Date.now() });
+  lgPairMissSaveAll();
+  return true;
+}
+function lgPairMissRemove(pairId, aWord, bWord) {
+  var all = lgPairMissLoadAll();
+  var arr = all[pairId] || [];
+  var out = arr.filter(function (x) { return !(x.aWord === aWord && x.bWord === bWord); });
+  if (out.length !== arr.length) { all[pairId] = out; lgPairMissSaveAll(); return true; }
+  return false;
+}
+function lgPairMissTotal() {
+  var all = lgPairMissLoadAll();
+  var n = 0;
+  for (var k in all) if (Array.isArray(all[k])) n += all[k].length;
+  return n;
+}
 function lgPairGet(id) {
-  return lgPairState[id] || (lgPairState[id] = { idx: 0, correct: 0, total: 0, answered: false, lastRight: null, lastPair: null });
+  return lgPairState[id] || (lgPairState[id] = { idx: 0, correct: 0, total: 0, answered: false, lastRight: null, lastPair: null, missRest: 0 });
 }
 function lgPhonPairsPage() {
   if (!lgPairs) { lgPairsLoad(function () { render(); }); return '<div class="lg-card"><div class="empty-state"><div class="empty-text">加载中…</div></div></div>'; }
@@ -1736,6 +1774,46 @@ function lgPracLoadStats() {
 function lgPracSaveStats() {
   try { localStorage.setItem("lgPhonPracStats", JSON.stringify(lgPracStats)); } catch (e) {}
 }
+// 错题池：每个错题独立条目，含原题全部信息（w/ipa/zh/modeId/ts）；同一题命中多次不重复，命中答对后从池中移除
+// localStorage key: lgPhonPracMiss_v1
+var lgPracMissBank = [];
+var __lgPracMissLoaded = false;
+function lgPracMissLoad() {
+  if (__lgPracMissLoaded) return lgPracMissBank;
+  try { lgPracMissBank = JSON.parse(localStorage.getItem("lgPhonPracMiss_v1") || "[]") || []; }
+  catch (e) { lgPracMissBank = []; }
+  __lgPracMissLoaded = true;
+  return lgPracMissBank;
+}
+function lgPracMissSave() {
+  try { localStorage.setItem("lgPhonPracMiss_v1", JSON.stringify(lgPracMissBank)); } catch (e) {}
+}
+// 以「w + modeId」为去重键
+function lgPracMissAdd(modeId, item) {
+  lgPracMissLoad();
+  var key = (item.w || "") + "|" + modeId;
+  for (var i = 0; i < lgPracMissBank.length; i++) {
+    if (((lgPracMissBank[i].w || "") + "|" + lgPracMissBank[i].modeId) === key) return false;
+  }
+  lgPracMissBank.push({ modeId: modeId, w: item.w, ipa: item.ipa || "", zh: item.zh || "", src: item.src || "", ts: Date.now() });
+  lgPracMissSave();
+  return true;
+}
+function lgPracMissRemove(modeId, w) {
+  lgPracMissLoad();
+  var key = (w || "") + "|" + modeId;
+  var out = lgPracMissBank.filter(function (x) { return ((x.w || "") + "|" + x.modeId) !== key; });
+  if (out.length !== lgPracMissBank.length) { lgPracMissBank = out; lgPracMissSave(); return true; }
+  return false;
+}
+function lgPracMissCount() {
+  lgPracMissLoad();
+  return lgPracMissBank.length;
+}
+function lgPracMissClear() {
+  lgPracMissBank = [];
+  lgPracMissSave();
+}
 // 训练词库：只取拼读 Pattern 词（整词 IPA 最准，保证 word2ipa/听写有唯一正确答案）
 function lgPracBank() {
   var bank = [];
@@ -1787,15 +1865,20 @@ var LG_PRAC_MODES = [
 // 模式主页
 function lgPhonPracHome() {
   lgPracLoadStats();
-  var head = '<div class="lg-card"><div class="lg-card-h">🎯 Phase 5 · 拼读实战 <span class="lg-sub">4 种训练模式</span></div>' +
-    '<div class="lg-hint">四种模式循环练习 Phase 4 拼读词库（13 个 Pattern · 52 词）。建议每天每模式各做一组 10 题。</div>' +
-    '<div class="lg-row" style="gap:8px;margin:6px 0"><button class="lg-btn ghost" onclick="lgPhonView=null;render()">← 🗺 路径</button></div></div>';
+  var missN = lgPracMissCount();
+  var total = lgPracBank().length;
+  var head = '<div class="lg-card"><div class="lg-card-h">🎯 Phase 5 · 拼读实战 <span class="lg-sub">4 种训练模式 · 自动刷题</span></div>' +
+    '<div class="lg-hint">四种模式循环练习 Phase 4 拼读词库（' + total + ' 词，自动洗牌出题）。建议每天每模式各做一组 10 题。</div>' +
+    '<div class="lg-row" style="gap:8px;margin:6px 0"><button class="lg-btn ghost" onclick="lgPhonView=null;render()">← 🗺 路径</button>' +
+    (missN ? '<button class="lg-btn primary" onclick="lgPracReviewHome()">📝 复习错题 (' + missN + ')</button>' : '') +
+    '</div></div>';
   var cards = LG_PRAC_MODES.map(function (m) {
     var acc = lgPracAcc(m.id);
     var s = lgPracGet(m.id);
+    var missOfMode = lgPracMissLoad().filter(function (x) { return x.modeId === m.id; }).length;
     return '<div class="phon-prac-card" onclick="lgPracStart(\'' + m.id + '\')">' +
       '<div class="phon-prac-ic">' + m.icon + '</div>' +
-      '<div class="phon-prac-body"><div class="phon-prac-t">' + m.name + '</div>' +
+      '<div class="phon-prac-body"><div class="phon-prac-t">' + m.name + (missOfMode ? ' <span class="miss-chip">错 ' + missOfMode + '</span>' : '') + '</div>' +
       '<div class="phon-prac-d">' + m.desc + '</div>' +
       '<div class="phon-prac-hint">' + m.hint + '</div></div>' +
       '<div class="phon-prac-stat">' + (acc !== null ? acc + '%<div class="sub">' + s.c + '/' + s.n + '</div>' : '<div class="new">新</div>') + '</div>' +
@@ -1803,11 +1886,53 @@ function lgPhonPracHome() {
   }).join("");
   return head + '<div class="lg-card">' + cards + '</div>';
 }
-function lgPracStart(modeId) {
+// 错题复习入口：列出 4 种模式各自的错题数，让用户选择复习哪一类（或一键清空）
+function lgPracReviewHome() {
+  var miss = lgPracMissLoad();
+  if (!miss.length) { if (typeof showToast === "function") showToast("🎉 没有错题"); return; }
+  var head = '<div class="lg-card"><div class="lg-card-h">📝 复习错题 <span class="lg-sub">共 ' + miss.length + ' 题</span></div>' +
+    '<div class="lg-hint">错题本会自动累积本机历史。点击下方模式 → 答对的题会从错题本移除。建议每天抽时间清空。</div>' +
+    '<div class="lg-row" style="gap:8px;margin:6px 0">' +
+    '<button class="lg-btn ghost" onclick="lgPhonView=\'prac\';render()">← 模式</button>' +
+    '<button class="lg-btn warn" onclick="if(confirm(\'确认清空全部 ' + miss.length + ' 个错题？此操作不可撤销\')){lgPracMissClear();if(typeof showToast===\"function\")showToast(\'已清空\');lgPhonView=\'prac\';render()}">🗑 清空错题</button>' +
+    '</div></div>';
+  var cards = LG_PRAC_MODES.map(function (m) {
+    var n = miss.filter(function (x) { return x.modeId === m.id; }).length;
+    return '<div class="phon-prac-card"' + (n ? ' onclick="lgPracStart(\'' + m.id + '\', {reviewOnly:true})"' : '') + '>' +
+      '<div class="phon-prac-ic">' + m.icon + '</div>' +
+      '<div class="phon-prac-body"><div class="phon-prac-t">' + m.name + (n ? ' <span class="miss-chip">错 ' + n + '</span>' : '') + '</div>' +
+      '<div class="phon-prac-d">' + (n ? '点击进入' + n + ' 题专项复习' : '暂无错题') + '</div></div>' +
+      '<div class="phon-prac-stat">' + (n ? '<b>' + n + '</b>' : '✓') + '</div>' +
+      '</div>';
+  }).join("");
+  return head + '<div class="lg-card">' + cards + '</div>';
+}
+function lgPracStart(modeId, opts) {
   lgPracLoadStats();
-  lgPrac = { mode: modeId, idx: 0, correct: 0, answered: false, wrongs: [], round: lgPracRound(10) };
+  var reviewOnly = !!(opts && opts.reviewOnly);
+  lgPrac = {
+    mode: modeId, idx: 0, correct: 0, answered: false, wrongs: [],
+    reviewOnly: reviewOnly,
+    round: reviewOnly ? lgPracRoundFromMiss(modeId, 10) : lgPracRound(10)
+  };
+  if (reviewOnly && !lgPrac.round.length) {
+    if (typeof showToast === "function") showToast("🎉 错题池已清空，先去练新题吧");
+    lgPhonView = "prac"; render(); return;
+  }
   lgPhonView = "prac:" + modeId;
   render();
+}
+// 从错题池抽取一轮（去重、按模式过滤；空则返回 []）
+function lgPracRoundFromMiss(modeId, n) {
+  var miss = lgPracMissLoad().filter(function (x) { return x.modeId === modeId; });
+  if (!miss.length) return [];
+  for (var i = miss.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = miss[i]; miss[i] = miss[j]; miss[j] = t;
+  }
+  return miss.slice(0, Math.min(n || 10, miss.length)).map(function (x) {
+    return { w: x.w, ipa: x.ipa, zh: x.zh, src: x.src };
+  });
 }
 function lgPracFindMode(id) {
   for (var i = 0; i < LG_PRAC_MODES.length; i++) { if (LG_PRAC_MODES[i].id === id) return LG_PRAC_MODES[i]; }
@@ -1829,10 +1954,14 @@ function lgPhonPracPlay(modeId) {
 
   var body = "";
   if (modeId === "ipa2word") {
-    // 音标 + 朗读按钮；不显示中文释义（会剧透答案）
+    // 音标 + 两个朗读按钮（逐音朗读音标 + 整词发音）：让用户对照两种声音判断选项
     var spk = lgPhonIpaSpeak(q.ipa);
-    body = '<div class="lg-card phon-prac-probe"><div class="phon-prac-q">这个音标读什么？<span class="lg-sub">（🔊 逐音朗读音标，非整词发音）</span></div>' +
-      '<div class="phon-prac-ipa">' + q.ipa + (spk ? ' <button class="phon-speak-btn" title="逐音朗读音标（非整词发音）" onclick="lgPhonSpeak(\'' + lgEscapeJs(spk) + '\',\'' + region + '\')">🔊</button>' : '') + '</div></div>';
+    body = '<div class="lg-card phon-prac-probe"><div class="phon-prac-q">这个音标读什么？</div>' +
+      '<div class="phon-prac-ipa">' + q.ipa + '</div>' +
+      '<div class="phon-prac-speakers">' +
+      (spk ? '<button class="phon-speak-btn" title="逐音朗读音标（如 /keɪk/ → kuh-ay-kuh）" onclick="lgPhonSpeak(\'' + lgEscapeJs(spk) + '\',\'' + region + '\')">🔊 逐音读音标</button>' : '') +
+      '<button class="phon-speak-btn" title="整词发音（更接近真实口语）" onclick="lgPhonSpeak(\'' + lgEscapeJs(q.w) + '\',\'' + region + '\')">🔊 听整词</button>' +
+      '</div></div>';
     body += lgPracChoiceHtml(modeId, q, "w");
   } else if (modeId === "word2ipa") {
     body = '<div class="lg-card phon-prac-probe"><div class="phon-prac-q">下面单词的音标是？</div>' +
@@ -1843,8 +1972,13 @@ function lgPhonPracPlay(modeId) {
       '<button class="phon-big-speak" onclick="lgPhonSpeak(\'' + lgEscapeJs(q.w) + '\',\'' + region + '\')">🔊 听发音</button></div>';
     body += lgPracChoiceHtml(modeId, q, "w");
   } else if (modeId === "dictation") {
+    // 听音写音标：先听单词 TTS，再提供「逐音朗读音标」按钮作为对照参考
+    // （解决"音标读音不准确"的反馈——用户能听到骨架序列，对照自己写的音标）
+    var ipaSay = lgPhonIpaSpeak(q.ipa);
     body = '<div class="lg-card phon-prac-probe"><div class="phon-prac-q">听发音，写下完整音标（含长音 ː 等符号）</div>' +
-      '<button class="phon-big-speak" onclick="lgPhonSpeak(\'' + lgEscapeJs(q.w) + '\',\'' + region + '\')">🔊 再听一次</button></div>';
+      '<button class="phon-big-speak" onclick="lgPhonSpeak(\'' + lgEscapeJs(q.w) + '\',\'' + region + '\')">🔊 再听一次</button>' +
+      (ipaSay ? '<button class="phon-speak-btn" style="margin-left:8px" title="对照参考：逐音朗读该词的标准音标" onclick="lgPhonSpeak(\'' + lgEscapeJs(ipaSay) + '\',\'' + region + '\')">🔊 听音标（逐音）</button>' : '') +
+      '</div>';
     body += lgPracTypeHtml(modeId, q, region);
   }
   return head + body;
@@ -1858,7 +1992,11 @@ function lgIpaNorm(x) {
     .replace(/ɡ/g, "g")   // U+0261 脚本 g → ASCII g
     .replace(/ː/g, ":")   // U+02D0 长音符 → ASCII :
     .replace(/ʧ/g, "tʃ").replace(/ʤ/g, "dʒ")
-    .replace(/ɹ/g, "r");
+    .replace(/ɹ/g, "r")
+    // ASCII 元音字母归一为 IPA（部分数据源用字母 i/u/o 而 phonetics.json 用 ɪ/ʌ/ɒ，不归一会漏音）
+    .replace(/i(?![ː:])/g, "ɪ")    // 单 i → /ɪ/（保护 iː / i:）
+    .replace(/u(?![ː:])/g, "ʌ")    // 单 u → /ʌ/（保护 uː / u:）
+    .replace(/o(?![ʊu:uː])/g, "ɒ"); // 单 o → /ɒ/（保护 oʊ / o:/uː/ʊ）
 }
 function lgPhonIpaSpeak(ipa) {
   var s = lgIpaNorm(String(ipa || "").replace(/[\/\[\]]/g, ""));
@@ -1982,9 +2120,14 @@ function lgPracAnswer(modeId, val) {
   lgPrac.answered = true;
   lgPrac.lastOk = right;
   lgPrac.lastPick = val;
-  if (right) lgPrac.correct++;
+  if (right) {
+    lgPrac.correct++;
+    if (lgPrac.reviewOnly) lgPracMissRemove(modeId, q.w); // 复习模式答对：自动从错题池移除
+  } else {
+    lgPrac.wrongs.push(q.w + " → " + q.ipa);
+    lgPracMissAdd(modeId, { w: q.w, ipa: q.ipa, zh: q.zh, src: q.src });
+  }
   lgPracRecord(modeId, right);
-  if (!right) lgPrac.wrongs.push(q.w + " → " + q.ipa);
   render();
 }
 // 打字判题
@@ -1999,9 +2142,14 @@ function lgPracType(modeId) {
   lgPrac.answered = true;
   lgPrac.lastOk = right;
   lgPrac.lastTyped = typed;
-  if (right) lgPrac.correct++;
+  if (right) {
+    lgPrac.correct++;
+    if (lgPrac.reviewOnly) lgPracMissRemove(modeId, q.w);
+  } else {
+    lgPrac.wrongs.push(q.w + " → " + q.ipa);
+    lgPracMissAdd(modeId, { w: q.w, ipa: q.ipa, zh: q.zh, src: q.src });
+  }
   lgPracRecord(modeId, right);
-  if (!right) lgPrac.wrongs.push(q.w + " → " + q.ipa);
   render();
 }
 function lgPracNext(modeId) {
@@ -2029,8 +2177,32 @@ function lgPhonPairTrain(id) {
   var s = lgPairGet(id);
   var region = lgPhonRegion || "US";
   var pairs = p.pairs || [];
-  // 出题：当前词对 = pairs[s.idx % pairs.length]；随机左右
-  var cur = pairs[s.idx % pairs.length];
+  var missList = lgPairMissGet(id);
+  // 出题顺序：先做错题（打乱），再做新题，最后循环
+  var order = [];
+  missList.forEach(function (x) { order.push([x.aWord, x.bWord, x._zhA || "", x._zhB || ""]); });
+  // 给错题补 zh（从 p.pairs 里查）
+  if (p.pairs && p.pairs.length) {
+    var zhMap = {};
+    p.pairs.forEach(function (pp) { zhMap[pp[0] + "|" + pp[1]] = [pp[2] || "", pp[3] || ""]; });
+    order = order.map(function (q) {
+      var k = q[0] + "|" + q[1];
+      var zh = zhMap[k] || [q[2], q[3]];
+      return [q[0], q[1], zh[0], zh[1]];
+    });
+  }
+  // 剩余未在错题里的加入
+  pairs.forEach(function (q) {
+    var exists = false;
+    for (var j = 0; j < order.length; j++) if (order[j][0] === q[0] && order[j][1] === q[1]) { exists = true; break; }
+    if (!exists) order.push(q);
+  });
+  // s.missRest 在第一次进入页面或重置时 = 当前错题数（用于底部统计）
+  if (s.missRest === undefined) s.missRest = 0;
+  // 当前题索引 = s.idx（不超过 order 长度）
+  var idx = s.idx % order.length;
+  s.missRest = missList.length; // 每次重渲更新，让按钮"做错题"按钮显示计数
+  var cur = order[idx];
   var rightIsA = Math.random() < 0.5; // 标准答案是 A(左) 还是 B(右)
   var rightWord = rightIsA ? cur[0] : cur[1];
   var rightZh = rightIsA ? cur[2] : cur[3];
@@ -2079,7 +2251,29 @@ function lgPairAnswer(id, side) {
   if (s.answered) return;
   var right = side === (s._rightIsA ? "A" : "B");
   s.total++;
-  if (right) s.correct++;
+  if (right) {
+    s.correct++;
+    if (s.missRest) s.missRest--;  // 答对一次错题复习位减一
+    // 答对自动从错题池移除（针对这一对）
+    if (s._rightWord && s._pairOther) lgPairMissRemove(id, s._pairOther, s._rightWord);
+    else if (s._rightWord) {
+      // 不确定左右，反向匹配尝试移除
+      var all = (lgPairs.vowelPairs || []).concat(lgPairs.consPairs || []);
+      var pp = null; for (var i = 0; i < all.length; i++) if (all[i].id === id) { pp = all[i]; break; }
+      if (pp) {
+        var cur = (pp.pairs || [])[s.idx % (pp.pairs || []).length];
+        if (cur) lgPairMissRemove(id, cur[0], cur[1]);
+      }
+    }
+  } else {
+    // 答错：加入错题池
+    var all2 = (lgPairs.vowelPairs || []).concat(lgPairs.consPairs || []);
+    var pp2 = null; for (var k2 = 0; k2 < all2.length; k2++) if (all2[k2].id === id) { pp2 = all2[k2]; break; }
+    if (pp2) {
+      var cur2 = (pp2.pairs || [])[s.idx % (pp2.pairs || []).length];
+      if (cur2) lgPairMissAdd(id, cur2[0], cur2[1]);
+    }
+  }
   s.answered = true;
   s.lastRight = right;
   if (right && typeof DB !== "undefined" && DB.logActivity) DB.logActivity("language", "听辨正确 " + id);

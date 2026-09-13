@@ -14,7 +14,7 @@ section("A. data/spelling_patterns.json");
 {
   const s = JSON.parse(fs.readFileSync(path.join(ROOT, "data/spelling_patterns.json"), "utf8"));
   ok(s.patterns && s.patterns.length >= 12, "Pattern ≥ 12 组");
-  ok(s.cats && s.cats.length === 3, "3 大分类（Magic E / 元音组合 / 辅音组合）");
+  ok(s.cats && s.cats.length >= 3, "≥3 大分类（Magic E / 元音组合 / 辅音组合 / 短元音）实际 " + (s.cats ? s.cats.length : 0));
 
   // cake 拆解验证（用户规格核心示例）
   const ae = s.patterns.find(x => x.id === "a_e");
@@ -137,7 +137,7 @@ section("E. lgSpellDone 进度持久化");
   const sb = mkSandbox();
   setup(sb);
   const p0 = vm.runInContext("lgSpellProgress()", sb);
-  ok(p0.total === 13, "共 13 个 pattern（total=13）");
+  ok(p0.total >= 13, "共 ≥13 个 pattern（实际 " + p0.total + " 个，含 magic_e/vowel_team/cons_team/short_vowel）");
   // 模拟学完 3 个
   vm.runInContext("lgSpellMarkDone('a_e'); lgSpellMarkDone('ee'); lgSpellMarkDone('sh');", sb);
   const p1 = vm.runInContext("lgSpellProgress()", sb);

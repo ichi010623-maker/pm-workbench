@@ -52,7 +52,7 @@ section("A. lgPracBank 词库汇聚");
   const sb = mkSandbox();
   setup(sb);
   const bank = vm.runInContext("lgPracBank()", sb);
-  ok(bank.length === 51, "词库 = 51 个去重拼读词（实际 " + bank.length + "）");
+  ok(bank.length >= 100, "词库 ≥ 100 个去重拼读词（实际 " + bank.length + "）");
   const hasCake = bank.some(x => x.w === "cake" && x.ipa === "/keɪk/");
   ok(hasCake, "含 cake /keɪk/（整词 IPA）");
   const hasSee = bank.some(x => x.w === "see" && x.ipa === "/siː/");

@@ -40,7 +40,7 @@ function section(name) { console.log("\n▶ " + name); }
   ok(bySymbol["/θ/"].speakText === "th", "/θ/ → th（TTS 多读 /θ/）");
   ok(bySymbol["/ʃ/"].speakText === "sh", "/ʃ/ → sh");
   ok(bySymbol["/ʒ/"].speakText === "zh", "/ʒ/ → zh");
-  ok(bySymbol["/tʃ/"].speakText === "ch", "/tʃ/ → ch");
+  ok(bySymbol["/tʃ/"].speakText === "chuh", "/tʃ/ → chuh (避免 TTS 读成字母名 'see-aitch')");
   ok(bySymbol["/ŋ/"].speakText === "ng", "/ŋ/ → ng");
 
   section("D. 汇总页 HTML onclick 朗读 speakText");
