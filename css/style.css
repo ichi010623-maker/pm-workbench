@@ -82,6 +82,8 @@
 }
 .auth-btn-primary { background: var(--accent-blue); color: #fff; }
 .auth-btn-ghost { background: var(--bg-tertiary); color: var(--text-primary); }
+.auth-btn-offline { background: transparent; color: var(--text-tertiary); margin-top: 6px; font-size: 12px; padding: 8px 16px; border: 1px dashed var(--border-color, #e2e8f0); }
+.auth-btn-offline:hover { background: var(--bg-secondary, #f8fafc); color: var(--text-primary); }
 .auth-msg { color: var(--accent-red); font-size: 13px; min-height: 18px; margin-bottom: 8px; }
 .auth-hint { color: var(--text-tertiary); font-size: 11px; margin-top: 12px; line-height: 1.5; }
 
@@ -6860,3 +6862,154 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 .ci-opp:last-child{margin-bottom:0}
 .ci-opp-w{font-weight:800;margin-right:4px}
 .ci-opp-basis{font-size:10px;color:#7c3aed;margin-top:4px;line-height:1.5}
+
+/* ====== 📚 小说创作模块 v5.9.126 ====== */
+.nv-intro{font-size:13px;line-height:1.7;color:#1e293b}
+.nv-intro-line{margin-bottom:6px}
+.nv-intro-actions{margin-top:10px;display:flex;gap:8px}
+.nv-rule-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.nv-chip{font-size:11px;background:#f5f3ff;border:1px solid #ede9fe;color:#6d28d9;border-radius:9px;padding:2px 8px}
+.nv-dim{color:#94a3b8;font-size:11px}
+.nv-tabs{display:flex;gap:6px;margin:10px 0 8px;background:#f8fafc;border-radius:11px;padding:4px;border:1px solid #e2e8f0}
+.nv-tab{flex:1;text-align:center;font-size:13px;font-weight:600;color:#64748b;padding:7px 0;border-radius:8px;cursor:pointer;user-select:none}
+.nv-tab.active{background:#fff;color:#6d28d9;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.nv-subtabs{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap}
+.nv-subtab{font-size:12px;background:#f5f3ff;color:#6d28d9;border-radius:8px;padding:5px 10px;cursor:pointer;user-select:none;border:1px solid transparent}
+.nv-subtab.active{background:#ede9fe;border-color:#c4b5fd;font-weight:600}
+.nv-b{font-size:10px;font-weight:600;border-radius:5px;padding:1px 6px;margin-right:3px;display:inline-block}
+.nv-book-card{margin-bottom:8px;cursor:pointer;transition:transform .12s}
+.nv-book-card:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+.nv-book-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.nv-book-title{font-size:15px;font-weight:700;color:#1e293b}
+.nv-book-genre{font-size:10px;background:#ede9fe;color:#6d28d9;border-radius:5px;padding:1px 6px}
+.nv-book-progress{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.nv-progress-track{flex:1;height:8px;background:#ede9fe;border-radius:4px;overflow:hidden}
+.nv-progress-fill{height:100%;background:linear-gradient(90deg,#8b5cf6,#a78bfa);transition:width .3s}
+.nv-progress-num{font-size:10px;color:#6d28d9;font-weight:600;white-space:nowrap}
+.nv-book-meta{display:flex;gap:10px;font-size:11px;color:#475569;margin-bottom:4px}
+.nv-warn{color:#ef4444;font-weight:600}
+.nv-book-lastms{font-size:10px;color:#94a3b8;border-top:1px dashed #ede9fe;padding-top:5px;margin-top:4px}
+
+.nv-ms-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed #ede9fe}
+.nv-ms-row:last-child{border-bottom:0}
+.nv-ms-date{font-size:11px;color:#8b5cf6;font-weight:600;flex-shrink:0;padding-top:1px}
+.nv-ms-content{flex:1;font-size:12px;line-height:1.5;color:#1e293b}
+.nv-ms-text{color:#64748b;font-size:11px;margin-top:3px}
+
+.nv-list-item{padding:8px 10px;background:#fff;border:1px solid #ede9fe;border-radius:9px;margin-bottom:6px;cursor:pointer;transition:background .12s}
+.nv-list-item:hover{background:#faf5ff}
+.nv-li-head{font-size:13px;color:#1e293b;margin-bottom:3px}
+.nv-li-sub{margin-bottom:3px}
+.nv-li-text{font-size:12px;color:#475569;line-height:1.5;margin-bottom:2px}
+
+.nv-outline-book{margin-bottom:14px;padding-bottom:10px;border-bottom:1px dashed #ede9fe}
+.nv-outline-book:last-child{border-bottom:0}
+.nv-outline-h{font-size:14px;font-weight:700;color:#6d28d9;margin-bottom:6px}
+.nv-outline-vol{font-size:13px;font-weight:600;color:#7c3aed;margin:8px 0 4px;padding-left:4px;border-left:3px solid #c4b5fd}
+.nv-outline-ch{padding-left:18px;margin-bottom:5px;font-size:12px;line-height:1.55}
+.nv-outline-ch b{color:#1e293b}
+
+.nv-fs-book{margin-bottom:14px}
+.nv-fs-book-h{font-size:13px;font-weight:700;color:#6d28d9;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid #ede9fe}
+.nv-fs-item{padding:7px 10px;background:#fff;border:1px solid #ede9fe;border-radius:8px;margin-bottom:5px;cursor:pointer;transition:background .12s}
+.nv-fs-item:hover{background:#faf5ff}
+
+.nv-detail-h{font-size:15px;font-weight:700;color:#1e293b;margin-bottom:8px}
+.nv-detail-row{font-size:12px;color:#475569;line-height:1.7;margin-bottom:6px}
+.nv-quote{background:#faf5ff;border-left:3px solid #8b5cf6;padding:6px 10px;margin-top:4px;font-style:italic;color:#1e293b}
+.nv-detail-actions{margin-top:10px}
+.nv-label{font-size:11px;color:#64748b;margin-bottom:4px}
+.nv-fs-trans{display:flex;flex-wrap:wrap;gap:5px}
+.nv-rel-line{font-size:12px;padding:2px 0}
+
+.nv-write-book{margin-bottom:10px}
+.nv-write-book-h{font-size:13px;font-weight:700;color:#6d28d9;margin-bottom:5px}
+.nv-write-ch{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:#faf5ff;border-radius:7px;margin-bottom:4px;cursor:pointer;transition:background .12s}
+.nv-write-ch:hover{background:#ede9fe}
+.nv-write-ch-l{font-size:13px;color:#1e293b}
+.nv-write-ch-r{display:flex;align-items:center;gap:6px}
+
+.nv-scaffold-card label{display:block;font-size:11px;color:#64748b;margin:8px 0 3px;font-weight:600}
+.nv-scaffold-card select,.nv-scaffold-card input,.nv-scaffold-card textarea{width:100%;border:1px solid #e2e8f0;border-radius:7px;padding:6px 8px;font-size:12px;font-family:inherit;box-sizing:border-box}
+.nv-scaffold-card textarea{resize:vertical;line-height:1.5}
+.nv-scaffold-card .nv-form{margin-top:14px;padding-top:14px;border-top:1px dashed #ede9fe}
+.nv-scaffold-card .nv-form:first-of-type{padding-top:0;border-top:0}
+.nv-form-h{font-size:13px;font-weight:700;color:#6d28d9;margin-bottom:6px}
+.nv-fs-checks{display:flex;flex-direction:column;gap:3px;margin-bottom:6px}
+.nv-fs-check{font-size:12px;padding:3px 0;cursor:pointer;color:#1e293b}
+.nv-fs-check input{margin-right:5px;width:auto}
+.nv-result{margin-top:8px;padding:8px 10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:7px;font-size:12px}
+.nv-result-err{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+.nv-pre{background:#f8fafc;border:1px solid #e2e8f0;border-radius:6px;padding:6px 8px;font-size:11px;line-height:1.6;white-space:pre-wrap;word-break:break-word;color:#1e293b}
+
+.nv-chapter-text{background:#fff;border:1px solid #ede9fe;border-radius:7px;padding:10px 12px;font-size:13px;line-height:1.85;color:#1e293b;font-family:Georgia,"PingFang SC","Hiragino Sans GB",serif}
+.nv-review-card{margin-top:8px}
+.nv-review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.nv-rv-cell{background:#faf5ff;border:1px solid #ede9fe;border-radius:7px;padding:6px;text-align:center}
+.nv-rv-label{font-size:10px;color:#64748b}
+.nv-rv-val{font-size:15px;font-weight:700;color:#6d28d9}
+.nv-rv-issues{margin-top:6px}
+.nv-issue{font-size:12px;padding:5px 0;border-top:1px dashed #ede9fe;line-height:1.5;color:#1e293b}
+.nv-issue:first-child{border-top:0}
+.nv-issue-type{font-size:10px;border-radius:4px;padding:1px 6px;margin-right:4px;font-weight:600}
+.nv-rv-ok{color:#10b981;font-size:12px;margin-top:6px;font-weight:600}
+
+.nv-note-row{padding:8px 10px;background:#faf5ff;border:1px solid #ede9fe;border-radius:8px;margin-bottom:6px;font-size:12px;line-height:1.6;color:#1e293b}
+.nv-note-row>div{margin-bottom:3px}
+.nv-note-h{font-size:11px;color:#8b5cf6;font-weight:600}
+
+.nv-rev-row{padding:8px 10px;background:#fff;border:1px solid #ede9fe;border-radius:8px;margin-bottom:6px;cursor:pointer}
+.nv-rev-h{font-size:13px;font-weight:600;color:#1e293b;margin-bottom:4px}
+.nv-rev-scores{display:flex;gap:10px;font-size:11px;color:#64748b;margin-bottom:4px}
+.nv-rev-scores b{color:#6d28d9;font-size:13px}
+.nv-rev-issues{padding:5px 8px;font-size:12px;line-height:1.6}
+.nv-rev-manual{font-size:11px;color:#64748b;margin-top:4px;border-top:1px dashed #ede9fe;padding-top:4px}
+
+.nv-bar-chart{display:flex;align-items:flex-end;gap:6px;height:90px;padding:6px 0;border-bottom:1px solid #ede9fe}
+.nv-bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:3px;min-width:0}
+.nv-bar{width:100%;max-width:18px;background:linear-gradient(180deg,#a78bfa,#7c3aed);border-radius:3px 3px 0 0}
+.nv-bar-label{font-size:9px;color:#94a3b8;writing-mode:horizontal-tb}
+.nv-recap-list{margin:6px 0 0 18px;line-height:1.85;font-size:12px;color:#1e293b}
+.nv-recap-list li{margin-bottom:3px}
+
+/* ====== 📚 小说创作 v5.9.133 skill 化追加 ====== */
+.nv-rules-card{margin-bottom:10px}
+.nv-rules{display:grid;grid-template-columns:1fr;gap:6px;margin-top:6px}
+.nv-rule-block{background:#faf5ff;border:1px solid #ede9fe;border-radius:7px;padding:7px 10px;font-size:12px}
+.nv-rule-block ul{margin:4px 0 0 16px;line-height:1.7;color:#1e293b}
+.nv-rule-block li{margin-bottom:2px}
+.nv-rule-p0{color:#b91c1c;font-weight:700}
+.nv-rule-p1{color:#c2410c;font-weight:700}
+.nv-rule-p2{color:#a16207;font-weight:700}
+
+.nv-spec-card{background:#faf5ff;border:1px solid #ede9fe;border-radius:8px;padding:9px 11px;margin-top:8px;font-size:12px;color:#1e293b;line-height:1.6}
+.nv-spec-h{font-weight:700;color:#6d28d9;margin-bottom:5px}
+.nv-spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+.nv-spec-grid > div{padding:5px 7px;background:#fff;border-radius:5px;border:1px solid #ede9fe}
+.nv-spec-row{margin-top:4px;line-height:1.7}
+
+.nv-redline-card{margin-top:8px;border-left:3px solid #ef4444}
+.nv-redline-row{font-size:12px;padding:5px 0;border-top:1px dashed #fecaca;line-height:1.6;color:#1e293b}
+.nv-redline-row:first-child{border-top:0}
+.nv-redline-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.nv-redline-tag{font-size:10px;font-weight:600;border-radius:4px;padding:1px 7px;display:inline-block}
+.nv-tag-P0{background:#fee2e2;color:#b91c1c}
+.nv-tag-P1{background:#ffedd5;color:#c2410c}
+.nv-tag-P2{background:#fef9c3;color:#a16207}
+
+.nv-rv-cell-mini{background:#fff;border:1px solid #ede9fe;border-radius:5px;padding:4px 5px;text-align:center;min-width:60px}
+.nv-rv-label-mini{font-size:9px;color:#64748b}
+.nv-rv-val-mini{font-size:13px;font-weight:700}
+.nv-rv-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:6px 0}
+.nv-rv-cell{background:#faf5ff;border:1px solid #ede9fe;border-radius:7px;padding:6px;text-align:center}
+.nv-rv-label{font-size:10px;color:#64748b}
+.nv-rv-val{font-size:15px;font-weight:700;color:#6d28d9}
+
+.nv-spec-help .card-body{font-size:12px;line-height:1.7}
+.nv-advance-intro{margin-bottom:10px}
+
+.nv-log-row{font-size:12px;padding:5px 0;border-top:1px dashed #ede9fe;line-height:1.6;color:#1e293b}
+.nv-log-row:first-child{border-top:0}
+.nv-log-ts{color:#8b5cf6;font-weight:600;font-family:ui-monospace,monospace;font-size:11px;margin-right:4px}
+
+.nv-rev-total{margin-top:4px;padding:4px 8px;font-size:12px;color:#475569}

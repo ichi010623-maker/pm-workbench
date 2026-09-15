@@ -3,37 +3,36 @@
    离线缓存 + 自动更新 + 隐私保护
    ============================================ */
 
-const CACHE_VERSION = "v5.9.128";
+const CACHE_VERSION = "v5.9.133";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const APP_SHELL_ASSETS = [];
 
 // Install: skip caching static assets entirely — all files use network-first
+// v5.9.132: 主动 unregister 所有 SW，避免旧缓存干扰诊断页加载
 self.addEventListener("install", function(event) {
-  console.log("[SW] Installing " + CACHE_VERSION + " [network-first mode]");
-  event.waitUntil(self.skipWaiting());
+  console.log("[SW] Installing " + CACHE_VERSION + " [self-unregister mode]");
+  event.waitUntil(self.skipWaiting().then(function() {
+    return self.registration.unregister();
+  }).then(function() {
+    return self.clients.matchAll();
+  }).then(function(clients) {
+    clients.forEach(function(client) { client.postMessage({ type: "SW_SELF_UNREGISTERED", version: CACHE_VERSION }); });
+  }));
 });
 
 // Activate: clean old caches, claim clients, notify reload
+// v5.9.132: activate 时立即 unregister，清掉所有 v5.9.131 及更早 SW 残留
 self.addEventListener("activate", function(event) {
-  console.log("[SW] Activating " + CACHE_VERSION);
+  console.log("[SW] Activating " + CACHE_VERSION + " (self-unregister)");
   event.waitUntil(
-    caches.keys().then(function(keys) {
-      return Promise.all(
-        keys.filter(function(key) { return key !== CACHE_NAME; })
-          .map(function(key) {
-            console.log("[SW] Deleting old cache:", key);
-            return caches.delete(key);
-          })
-      );
+    self.registration.unregister().then(function() {
+      return caches.keys();
+    }).then(function(keys) {
+      return Promise.all(keys.map(function(key) { return caches.delete(key); }));
     }).then(function() {
-      return self.clients.claim();
-    }).then(function() {
-      // Notify all clients to reload (fixes standalone PWA stuck on old version)
-      return self.clients.matchAll().then(function(clients) {
-        clients.forEach(function(client) {
-          client.postMessage({ type: "SW_UPDATED", version: CACHE_VERSION });
-        });
-      });
+      return self.clients.matchAll();
+    }).then(function(clients) {
+      clients.forEach(function(client) { client.postMessage({ type: "SW_SELF_UNREGISTERED", version: CACHE_VERSION }); });
     })
   );
 });
