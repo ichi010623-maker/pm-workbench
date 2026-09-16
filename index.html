@@ -137,7 +137,7 @@
     <div id="modal-sheet"></div>
   </div>
 
-  <!-- v5.9.135: Supabase 本地化（消除国内手机端对 jsdelivr CDN 的依赖，CDN 不可达时曾导致整页卡死白屏） -->
+  <!-- v5.9.136: Supabase 本地化（消除国内手机端对 jsdelivr CDN 的依赖，CDN 不可达时曾导致整页卡死白屏） -->
   <script defer src="js/vendor/supabase.min.js?v=5.9.136"></script>
   <script>
     // 兜底：本地 vendor 缺失/损坏时才回退 CDN（解析期 document.write，不阻塞正常路径）
@@ -202,15 +202,15 @@
   <script src="js/intel/state.js?v=5.9.136"></script>
   <script src="js/intel/render.js?v=5.9.136"></script>
 
-  <!-- ===== v5.9.135 启动自愈 watchdog =====
+  <!-- ===== v5.9.136 启动自愈 watchdog =====
        手机端在弱网 / SW 旧缓存 / CDN 不可达时可能白屏且无任何提示。
        若 7 秒后仍无任何界面渲染出来，自动弹出恢复面板（清缓存重载 / 诊断页 / 离线入口）。 -->
   <script>
   (function () {
-    var V = "5.9.135";
+    var V = "5.9.136";
     var settled = false;
 
-    // v5.9.135: URL ?reset=1 —— 一键清 SW + 清缓存后重新加载（手机端自救最快路径）
+    // v5.9.136: URL ?reset=1 —— 一键清 SW + 清缓存后重新加载（手机端自救最快路径）
     if (location.search.indexOf("reset=1") >= 0) {
       try {
         var __t = [];

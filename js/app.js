@@ -5919,6 +5919,14 @@ async function init() {
       var __appEl2 = document.getElementById("app"); if (__appEl2) __appEl2.classList.remove("hidden");
       try { if (typeof SyncManager !== "undefined") SyncManager._isAuthed = true; } catch (__e1b) {}
       if (typeof PrivacyManager !== "undefined") { try { PrivacyManager._isLocked = false; } catch (__e2b) {} }
+      // v5.9.136: 后台探测云端；被平台限制时在同步条说明原因（不阻塞首屏）
+      try {
+        if (typeof SyncManager !== "undefined" && SyncManager.probeCloud) {
+          SyncManager.probeCloud().then(function () {
+            try { SyncManager.renderBar(); } catch (e) {}
+          }).catch(function () {});
+        }
+      } catch (e) {}
       try { await initApp(); } catch (__e3b) { console.error("[offline] initApp failed:", __e3b); }
       return;
     }
@@ -5932,6 +5940,14 @@ async function init() {
       try { if (typeof SyncManager !== "undefined") SyncManager._isAuthed = true; } catch (__e1) {}
       if (typeof PrivacyManager !== "undefined") { try { PrivacyManager._isLocked = false; } catch (__e2) {} }
       if (typeof showToast === "function") showToast("⚡ 应急绕过模式（数据仅本地）", "warn");
+      // v5.9.136: 同步探测云端状态（不阻塞）
+      try {
+        if (typeof SyncManager !== "undefined" && SyncManager.probeCloud) {
+          SyncManager.probeCloud().then(function () {
+            try { SyncManager.renderBar(); } catch (e) {}
+          }).catch(function () {});
+        }
+      } catch (e) {}
       try { await initApp(); } catch (__e3) { console.error("[bypass] initApp failed:", __e3); }
       return;
     }
@@ -5970,6 +5986,16 @@ async function init() {
     if (!SyncManager.isAuthed()) {
       try { bindAuthUI(); } catch (e) {}
       showAuth();
+      // v5.9.136: 后台探测云端（不阻塞登录页渲染）；不可用时补上明确指引横幅，
+      // 避免「点登录 → 只看到英文报错 → 反复重试」的死循环。
+      try {
+        if (SyncManager.probeCloud) {
+          SyncManager.probeCloud().then(function () {
+            try { renderCloudNotice(); } catch (e) {}
+            try { SyncManager.renderBar(); } catch (e) {}
+          }).catch(function () {});
+        }
+      } catch (e) {}
       return;
     }
     hideAuth();
@@ -5991,26 +6017,24 @@ async function init() {
 async function initApp() {
   // === VERSION CHECK: force refresh if app was updated ===
   var storedVersion = localStorage.getItem("_app_version");
+  var _needVerBackup = false;
   if (storedVersion !== APP_VERSION) {
-    console.log("[App] Version mismatch: stored=" + storedVersion + ", current=" + APP_VERSION + ". Updating...");
-    // Save backup before version change (in case reload causes issues)
+    // v5.9.136 重写「版本更新」策略 —— 不再强制 reload
+    // 旧逻辑：备份 + 注销全部 SW + 清空全部 cache + window.location.reload(true)
+    //   → reload 后必须重新下载全部资源（app.js ~372KB + css + 多个 data/*.json），
+    //     慢网络 / 手机弱网 / Mac 后台标签页下出现长时间白屏，
+    //     用户看到「页面只出来一半 / 显示不全 / 一直打不开」。
+    // 新逻辑：软更新 —— 本次照常渲染（用户无感），仅记录版本 + 让 SW 自查更新；
+    //     新版本由 SW 的 network-first 策略在下次自然打开时生效，离线能力不被破坏。
+    console.log("[App] Version " + storedVersion + " → " + APP_VERSION + " (soft update, no reload)");
+    _needVerBackup = true;
     try {
-      DB.init();
-      await BackupDB.save("\u7248\u672c\u66f4\u65b0\u524d\u5907\u4efd", DB.data);
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (rs) {
+          rs.forEach(function (r) { try { r.update(); } catch (e) {} });
+        }).catch(function () {});
+      }
     } catch (e) {}
-    // Unregister old SW first
-    if ("serviceWorker" in navigator) {
-      var registrations = await navigator.serviceWorker.getRegistrations();
-      for (var r of registrations) { r.unregister(); }
-    }
-    // Clear SW caches
-    if ("caches" in window) {
-      var keys = await caches.keys();
-      for (var k of keys) { await caches.delete(k); }
-    }
-    localStorage.setItem("_app_version", APP_VERSION);
-    window.location.reload(true);
-    return;
   }
   localStorage.setItem("_app_version", APP_VERSION);
 
@@ -6019,6 +6043,10 @@ async function initApp() {
 
   // Init data
   DB.init();
+  // v5.9.136: 版本更新前的数据备份改为「后台异步」，绝不阻塞首屏渲染
+  if (_needVerBackup) {
+    try { BackupDB.save("版本更新前备份", DB.data).catch(function () {}); } catch (e) {}
+  }
   // 行业情报增强：初始化 history/fav/custom 容器
   if (typeof ensureIndustry === "function") ensureIndustry();
 
@@ -6165,6 +6193,54 @@ if (document.readyState === "loading") {
     var lastSyncAt = 0;
     var lastError = null;
     var lastPushRetryAt = 0;
+    // v5.9.136: 云端可用性（null=未探测 / true=被平台限制 / false=可用）
+    var cloudBlocked = null;
+    var cloudBlockedReason = "";
+    var cloudProbeAt = 0;
+
+    // v5.9.136: 探测云端是否可用。Supabase 免费额度耗尽时项目整体被限制，返回 402 + exceed_egress_quota。
+    // 目的：不再让用户反复点登录只看到英文报错，而是给出可执行的本地替代路径。
+    async function probeCloud(force) {
+      if (!SUPABASE_URL || !SUPABASE_ANON_KEY ||
+          SUPABASE_URL.indexOf("REPLACE") === 0 || SUPABASE_ANON_KEY.indexOf("REPLACE") === 0) {
+        cloudBlocked = true; cloudBlockedReason = "unconfigured";
+        return { ok: false, code: 0, reason: "unconfigured" };
+      }
+      if (!force && cloudBlocked !== null && (Date.now() - cloudProbeAt) < 60000) {
+        return { ok: cloudBlocked === false, code: cloudBlocked ? 402 : 200, reason: cloudBlockedReason };
+      }
+      cloudProbeAt = Date.now();
+      var ctrl = (typeof AbortController !== "undefined") ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, 7000) : null;
+      try {
+        var r = await fetch(SUPABASE_URL + "/auth/v1/health", {
+          headers: { apikey: SUPABASE_ANON_KEY },
+          signal: ctrl ? ctrl.signal : undefined,
+          cache: "no-store"
+        });
+        if (timer) clearTimeout(timer);
+        var txt = "";
+        try { txt = await r.text(); } catch (e) {}
+        if (r.status === 402) {
+          cloudBlocked = true;
+          cloudBlockedReason = /egress_quota/i.test(txt) ? "quota" : "restricted";
+          return { ok: false, code: 402, reason: cloudBlockedReason, detail: String(txt).slice(0, 200) };
+        }
+        // 200/401 都说明服务在运行（401 仅表示无有效 token）
+        cloudBlocked = false; cloudBlockedReason = "";
+        return { ok: true, code: r.status };
+      } catch (e) {
+        if (timer) clearTimeout(timer);
+        // 网络层失败不等同于「被平台限制」，保持 null 以便下次重试
+        cloudBlocked = null; cloudBlockedReason = "network";
+        return { ok: false, code: 0, reason: "network", error: (e && e.message) || String(e) };
+      }
+    }
+
+    function cloudNoticeText() {
+      if (cloudBlockedReason === "unconfigured") return "云端未配置，当前为本机模式。";
+      return "云端服务已被平台暂停（Supabase 项目免费额度用尽）。跨设备同步与登录暂时不可用，本机数据完整可用。";
+    }
 
     async function init() {
       if (!window.supabase || !SUPABASE_URL || SUPABASE_URL.indexOf("REPLACE") === 0 || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY.indexOf("REPLACE") === 0) {
@@ -6208,7 +6284,22 @@ if (document.readyState === "loading") {
     function renderBar() {
       var bar = document.getElementById("sync-bar");
       if (!bar) return;
-      if (status === "guest") { bar.classList.add("hidden"); return; }
+      if (status === "guest") {
+        // v5.9.136: 云端被平台限制时，即使是游客/本地模式也明确告知原因，
+        // 否则用户会反复尝试登录却不理解为何始终失败。
+        var dismissed = false;
+        try { dismissed = localStorage.getItem("hw_pm_cloud_notice_off") === "1"; } catch (e) {}
+        if (cloudBlocked === true && !dismissed) {
+          bar.className = "sync-bar sync-offline";
+          bar.classList.remove("hidden");
+          bar.innerHTML = '<span class="sync-dot"></span><span class="sync-text">☁️ ' +
+            escapeHtml(cloudNoticeText()) + '</span>' +
+            '<button class="sync-btn" onclick="SyncManager.dismissCloudNotice()">知道了</button>';
+          return;
+        }
+        bar.classList.add("hidden");
+        return;
+      }
       bar.classList.remove("hidden");
       var map = {
         online:  { c: "sync-online",  icon: "🟢", t: "已同步云端" },
@@ -6334,6 +6425,16 @@ if (document.readyState === "loading") {
     }
     function authErr(e) {
       if (!e) return "未知错误";
+      // v5.9.136: 平台级限制（免费额度用尽 → 402）优先识别，给可执行的中文指引
+      var raw = ((e.message || "") + " " + (e.msg || "") + " " + (e.error_description || "")).toLowerCase();
+      if (e.status === 402 || e.code === 402 || raw.indexOf("egress_quota") >= 0 ||
+          raw.indexOf("exceed_egress") >= 0 || raw.indexOf("spend cap") >= 0 ||
+          raw.indexOf("service for this project is restricted") >= 0) {
+        cloudBlocked = true;
+        if (!cloudBlockedReason || cloudBlockedReason === "network") cloudBlockedReason = "quota";
+        return "云端服务已被平台暂停（Supabase 项目免费额度用尽），登录与同步暂不可用。" +
+               "请点下方「⚡ 离线使用（不同步）」直接进入，本机数据完整保留。";
+      }
       var m = (e.message || "").toLowerCase();
       if (m.indexOf("invalid login") >= 0 || m.indexOf("invalid credentials") >= 0)
         return "邮箱或密码不正确，或该账号尚未完成邮箱确认（请到 Supabase 控制台关闭「Confirm email」后重新注册）";
@@ -6343,6 +6444,8 @@ if (document.readyState === "loading") {
         return "邮箱尚未确认，请先查收确认邮件，或到 Supabase 控制台关闭「Confirm email」";
       if (m.indexOf("password should be") >= 0)
         return "密码太短，至少需要 6 位";
+      if (m.indexOf("failed to fetch") >= 0 || m.indexOf("networkerror") >= 0 || m.indexOf("load failed") >= 0)
+        return "网络无法连接云端服务。可先「⚡ 离线使用」进入，稍后网络恢复再登录同步。";
       return e.message || "未知错误";
     }
     async function logout() {
@@ -6351,12 +6454,23 @@ if (document.readyState === "loading") {
       session = null; setStatus("guest");
     }
     function isAuthed() { return !!session; }
+    // v5.9.136: 允许用户关掉「云端已暂停」提示条（避免长期占用首屏）
+    function dismissCloudNotice() {
+      try { localStorage.setItem("hw_pm_cloud_notice_off", "1"); } catch (e) {}
+      renderBar();
+    }
     window.addEventListener("online", function() { if (session) setStatus("online"); });
     window.addEventListener("offline", function() { if (session) setStatus("offline"); });
 
     return {
       init: init, pull: pull, schedulePush: schedulePush, forcePush: forcePush, flushPush: flushPush,
       login: login, signup: signup, logout: logout, isAuthed: isAuthed,
+      // v5.9.136: 云端可用性探测与提示（供登录页横幅 / 应用内提示条使用）
+      probeCloud: probeCloud,
+      isCloudBlocked: function () { return cloudBlocked === true; },
+      cloudNoticeText: cloudNoticeText,
+      renderBar: renderBar,
+      dismissCloudNotice: dismissCloudNotice,
       getEmail: function() { return session ? (session.user && session.user.email) || "" : ""; },
       getStatus: function() { return status; }, getLastError: function() { return lastError; }
     };
@@ -6373,20 +6487,60 @@ if (document.readyState === "loading") {
     if (s) s.classList.add("hidden");
     document.getElementById("app").classList.remove("hidden");
   }
+  // v5.9.136: 离线直达（登录页按钮 / 云端暂停横幅 / 全局应急共用同一路径）
+  function goOfflineMode(showMsg) {
+    try { localStorage.setItem("hw_pm_offline_permanent", "1"); } catch (__e0) {}
+    var __hide = function(id) { var el = document.getElementById(id); if (el) el.classList.add("hidden"); };
+    __hide("auth-screen"); __hide("lock-screen"); __hide("privacy-notice");
+    var __app = document.getElementById("app"); if (__app) __app.classList.remove("hidden");
+    try { if (typeof SyncManager !== "undefined") SyncManager._isAuthed = true; } catch (__e1) {}
+    try { initApp(); } catch (__e2) { console.error("[offline] initApp failed:", __e2); }
+    if (showMsg !== false && typeof showToast === "function") showToast("⚡ 离线模式（数据仅本地，永久生效）", "warn");
+  }
+  try { window.__cloudGoOffline = function () { goOfflineMode(true); }; } catch (e) {}
+  try {
+    window.__cloudRetryProbe = function () {
+      var msg = document.getElementById("auth-msg");
+      if (msg) msg.textContent = "正在重试连接云端…";
+      SyncManager.probeCloud(true).then(function (r) {
+        renderCloudNotice();
+        try { SyncManager.renderBar(); } catch (e) {}
+        if (msg) {
+          msg.textContent = r && r.ok
+            ? "云端已恢复，可以登录了"
+            : "云端仍不可用：" + (r && r.reason === "quota" ? "免费额度已用尽" : "连接失败");
+        }
+      }).catch(function () { if (msg) msg.textContent = "重试失败，请稍后再试"; });
+    };
+  } catch (e) {}
+
+  // v5.9.136: 登录页「云端不可用」横幅 —— 直接给出可执行动作，避免反复试登录
+  function renderCloudNotice() {
+    var card = document.querySelector("#auth-screen .auth-card");
+    if (!card) return;
+    var old = card.querySelector(".cloud-notice");
+    if (old && old.parentNode) old.parentNode.removeChild(old);
+    if (typeof SyncManager === "undefined" || !SyncManager.isCloudBlocked || !SyncManager.isCloudBlocked()) return;
+    var div = document.createElement("div");
+    div.className = "cloud-notice";
+    div.innerHTML =
+      '<b>☁️ 云端服务已被平台暂停</b><br>' +
+      escapeHtml(SyncManager.cloudNoticeText()) +
+      '<div class="cn-actions">' +
+        '<button class="primary" onclick="window.__cloudGoOffline()">⚡ 直接进入（离线模式）</button>' +
+        '<button onclick="window.__cloudRetryProbe()">🔄 重试连接</button>' +
+      '</div>';
+    var anchor = card.querySelector(".auth-sub");
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(div, anchor.nextSibling);
+    else card.insertBefore(div, card.firstChild);
+  }
+
   function bindAuthUI() {
     // v5.9.130: 离线模式按钮（跳过 Supabase 登录，本地数据完整保留）
     var ob = document.getElementById("auth-offline-btn");
     if (ob && !ob.__bound) {
       ob.__bound = true;
-      ob.onclick = function() {
-        try { localStorage.setItem("hw_pm_offline_permanent", "1"); } catch (__e0) {}
-        var __hide = function(id) { var el = document.getElementById(id); if (el) el.classList.add("hidden"); };
-        __hide("auth-screen"); __hide("lock-screen"); __hide("privacy-notice");
-        var __app = document.getElementById("app"); if (__app) __app.classList.remove("hidden");
-        try { if (typeof SyncManager !== "undefined") SyncManager._isAuthed = true; } catch (__e1) {}
-        try { initApp(); } catch (__e2) { console.error("[offline] initApp failed:", __e2); }
-        if (typeof showToast === "function") showToast("⚡ 离线模式（数据仅本地，永久生效）", "warn");
-      };
+      ob.onclick = function() { goOfflineMode(true); };
     }
     var lb = document.getElementById("auth-login-btn");
     var sb = document.getElementById("auth-signup-btn");
@@ -6395,10 +6549,24 @@ if (document.readyState === "loading") {
       var pwd = document.getElementById("auth-password").value || "";
       var msg = document.getElementById("auth-msg");
       if (!email || pwd.length < 6) { msg.textContent = "请输入邮箱和至少 6 位密码"; return; }
+      // v5.9.136: 已知云端被平台限制时不再发无效请求，直接给可执行指引
+      if (typeof SyncManager !== "undefined" && SyncManager.isCloudBlocked && SyncManager.isCloudBlocked()) {
+        msg.textContent = "云端服务已被平台暂停，登录不可用。请点上方「⚡ 直接进入（离线模式）」继续。";
+        renderCloudNotice();
+        return;
+      }
       msg.textContent = "登录中…";
       SyncManager.login(email, pwd).then(function(r) {
-        if (r.error) { msg.textContent = "登录失败：" + SyncManager.authErr(r.error); return; }
+        if (r && r.error) {
+          msg.textContent = "登录失败：" + SyncManager.authErr(r.error);
+          if (SyncManager.isCloudBlocked && SyncManager.isCloudBlocked()) renderCloudNotice();
+          else SyncManager.probeCloud(true).then(function () { renderCloudNotice(); }).catch(function () {});
+          return;
+        }
         msg.textContent = ""; location.reload();
+      }).catch(function (e) {
+        msg.textContent = "登录失败：" + SyncManager.authErr(e);
+        SyncManager.probeCloud(true).then(function () { renderCloudNotice(); }).catch(function () {});
       });
     };
     if (sb) sb.onclick = function() {
