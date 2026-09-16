@@ -1,116 +1,150 @@
 /* ============================================
-   硬件PM工作台 v5.9.69 - Service Worker
-   离线缓存 + 自动更新 + 隐私保护
+   硬件PM工作台 Service Worker
+   v5.9.135 - 离线壳 + 网络优先 + 版本化缓存（修复手机端打不开）
+
+   设计目标（按优先级）：
+   1. 有网 → 永远拿最新（network-first，绝不锁死旧版本）
+   2. 无网/弱网 → 回退缓存，至少能打开上次成功访问过的版本（离线可用）
+   3. 版本升级 → 新 SW 立即接管 + 清旧缓存
+   4. 故障自救 → ?reset=1 一键清 SW + 清缓存
    ============================================ */
 
-const CACHE_VERSION = "v5.9.134";
+const CACHE_VERSION = "v5.9.135";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
-const APP_SHELL_ASSETS = [];
+const NETWORK_TIMEOUT_MS = 8000;
 
-// Install: skip caching static assets entirely — all files use network-first
-// v5.9.132: 主动 unregister 所有 SW，避免旧缓存干扰诊断页加载
-self.addEventListener("install", function(event) {
-  console.log("[SW] Installing " + CACHE_VERSION + " [self-unregister mode]");
-  event.waitUntil(self.skipWaiting().then(function() {
-    return self.registration.unregister();
-  }).then(function() {
-    return self.clients.matchAll();
-  }).then(function(clients) {
-    clients.forEach(function(client) { client.postMessage({ type: "SW_SELF_UNREGISTERED", version: CACHE_VERSION }); });
-  }));
-});
-
-// Activate: clean old caches, claim clients, notify reload
-// v5.9.132: activate 时立即 unregister，清掉所有 v5.9.131 及更早 SW 残留
-self.addEventListener("activate", function(event) {
-  console.log("[SW] Activating " + CACHE_VERSION + " (self-unregister)");
+// ===== Install: 预缓存最小壳（只放不随版本变化的静态资源，避免锁死版本）=====
+self.addEventListener("install", function (event) {
+  console.log("[SW] Installing " + CACHE_VERSION + " [offline-shell + network-first]");
   event.waitUntil(
-    self.registration.unregister().then(function() {
-      return caches.keys();
-    }).then(function(keys) {
-      return Promise.all(keys.map(function(key) { return caches.delete(key); }));
-    }).then(function() {
-      return self.clients.matchAll();
-    }).then(function(clients) {
-      clients.forEach(function(client) { client.postMessage({ type: "SW_SELF_UNREGISTERED", version: CACHE_VERSION }); });
+    caches.open(CACHE_NAME).then(function (cache) {
+      return cache.addAll(["./manifest.json"]).catch(function (e) {
+        console.log("[SW] precache skipped:", e && e.message);
+      });
+    }).then(function () {
+      return self.skipWaiting();
     })
   );
 });
 
-// Fetch strategy
-self.addEventListener("fetch", function(event) {
-  var url = new URL(event.request.url);
-  if (event.request.method !== "GET") return;
-
-  // Skip non-local requests
-  if (!url.hostname.includes(self.location.hostname)) return;
-
-  // index.html: NETWORK-FIRST (always get latest HTML, critical for updates)
-  if (isIndexHtml(url.pathname)) {
-    event.respondWith(networkFirstWithCache(event.request));
-    return;
-  }
-
-  // ALL assets: NETWORK-FIRST (always fetch latest, fall back to cache for offline)
-  event.respondWith(networkFirstWithCache(event.request));
+// ===== Activate: 清旧缓存 + 立即接管所有页面 =====
+self.addEventListener("activate", function (event) {
+  console.log("[SW] Activating " + CACHE_VERSION);
+  event.waitUntil(
+    caches.keys().then(function (keys) {
+      return Promise.all(
+        keys.filter(function (k) { return k !== CACHE_NAME; }).map(function (k) {
+          console.log("[SW] Deleting old cache:", k);
+          return caches.delete(k);
+        })
+      );
+    }).then(function () {
+      return self.clients.claim();
+    }).then(function () {
+      return self.clients.matchAll();
+    }).then(function (clients) {
+      clients.forEach(function (client) {
+        client.postMessage({ type: "SW_UPDATED", version: CACHE_VERSION });
+      });
+    })
+  );
 });
+
+function isSameOrigin(url) {
+  return url.hostname === self.location.hostname;
+}
 
 function isIndexHtml(pathname) {
   return pathname === "/" || pathname.endsWith("/") || pathname.endsWith("/index.html");
 }
 
 function isStaticAsset(pathname) {
-  return pathname.endsWith(".css") || pathname.endsWith(".js") || pathname.endsWith(".json") || pathname.endsWith(".svg");
+  return /\.(js|css|json|svg|png|jpg|jpeg|webp|woff2?|ttf)$/.test(pathname);
 }
 
-// Network-first: try network, fall back to cache, cache the response
-function networkFirstWithCache(request) {
-  return fetch(request).then(function(response) {
-    if (!response || response.status !== 200) return response;
-    var clone = response.clone();
-    caches.open(CACHE_NAME).then(function(cache) {
-      cache.put(request, clone);
-    });
-    return response;
-  }).catch(function() {
-    return caches.match(request).then(function(cached) {
-      return cached || new Response("Offline — 请连接网络后重试", {
-        status: 503,
-        statusText: "Service Unavailable",
-        headers: { "Content-Type": "text/plain; charset=utf-8" }
-      });
+// 带超时的 fetch（弱网时快速失败，尽早回退缓存，避免白屏等待）
+function fetchWithTimeout(request, ms) {
+  return new Promise(function (resolve, reject) {
+    var timer = setTimeout(function () { reject(new Error("network timeout")); }, ms);
+    fetch(request).then(function (r) {
+      clearTimeout(timer); resolve(r);
+    }, function (e) {
+      clearTimeout(timer); reject(e);
     });
   });
 }
 
-// Cache-first: serve from cache, update cache in background
-function cacheFirstWithBgUpdate(request) {
-  return caches.match(request).then(function(cached) {
-    // Fetch and update cache in background
-    var fetchPromise = fetch(request).then(function(response) {
-      if (response && response.status === 200) {
-        var clone = response.clone();
-        caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(request, clone);
+// Network-first + 写缓存 + 失败回退缓存
+function networkFirst(request) {
+  return fetchWithTimeout(request, NETWORK_TIMEOUT_MS).then(function (response) {
+    if (response && response.status === 200 && response.type === "basic") {
+      var clone = response.clone();
+      caches.open(CACHE_NAME).then(function (cache) {
+        cache.put(request, clone).catch(function () {});
+      });
+    }
+    return response;
+  }).catch(function () {
+    return caches.match(request).then(function (cached) {
+      if (cached) return cached;
+      // 导航请求兜底：尝试任意缓存中的 index.html（离线打开已访问过的应用）
+      if (request.mode === "navigate") {
+        return caches.match("./index.html").then(function (idx) {
+          if (idx) return idx;
+          return new Response(
+            "<!doctype html><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>" +
+            "<body style='font-family:-apple-system,system-ui,sans-serif;padding:28px;text-align:center;color:#0f172a'>" +
+            "<div style='font-size:38px'>📡</div><h3>暂时离线</h3>" +
+            "<p style='color:#64748b;font-size:13px;line-height:1.8'>当前无网络，且本地暂无可用缓存。<br>请连接网络后重试。</p>" +
+            "<button onclick='location.reload()' style='margin-top:8px;padding:12px 20px;border:0;border-radius:12px;background:#0a84ff;color:#fff;font-size:15px'>重新加载</button>" +
+            "</body>",
+            { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } }
+          );
         });
       }
-      return response;
-    }).catch(function() {});
-
-    // Return cached immediately
-    if (cached) return cached;
-
-    // Wait for network if not cached
-    return fetchPromise;
+      return new Response("Offline", { status: 503, statusText: "Offline" });
+    });
   });
 }
 
-// Listen for messages from main thread
-self.addEventListener("message", function(event) {
+// ===== Fetch =====
+self.addEventListener("fetch", function (event) {
+  var req = event.request;
+  if (req.method !== "GET") return;
+
+  var url;
+  try { url = new URL(req.url); } catch (e) { return; }
+
+  // 跨域（Supabase API / CDN）一律直连，SW 不介入
+  if (!isSameOrigin(url)) return;
+
+  // watchdog 强制刷新路径（?r=timestamp）绕过缓存直取网络
+  if (url.search.indexOf("r=") >= 0 || url.search.indexOf("reset=1") >= 0) {
+    event.respondWith(fetch(req).catch(function () { return caches.match(req); }));
+    return;
+  }
+
+  // 首页 / 导航 / 静态资源：全部 network-first（保证拿最新，离线回退缓存）
+  if (isIndexHtml(url.pathname) || req.mode === "navigate" || isStaticAsset(url.pathname)) {
+    event.respondWith(networkFirst(req));
+    return;
+  }
+
+  // 其他请求：直连
+});
+
+// ===== Messages from main thread =====
+self.addEventListener("message", function (event) {
   if (!event.data) return;
 
   if (event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
+  }
+
+  if (event.data.type === "CLEAR_CACHES") {
+    caches.keys().then(function (keys) {
+      return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+    });
   }
 
   if (event.data.type === "CHECK_VERSION") {
@@ -121,7 +155,7 @@ self.addEventListener("message", function(event) {
 });
 
 // ===== Web Push 每日简报推送 =====
-self.addEventListener("push", function(event) {
+self.addEventListener("push", function (event) {
   var data = { title: "📋 每日简报", body: "今日资讯已更新，点击查看完整简报" };
   try { if (event.data) data = event.data.json(); } catch (e) {}
   var opts = {
@@ -134,11 +168,11 @@ self.addEventListener("push", function(event) {
   event.waitUntil(self.registration.showNotification(data.title || "📋 每日简报", opts));
 });
 
-self.addEventListener("notificationclick", function(event) {
+self.addEventListener("notificationclick", function (event) {
   event.notification.close();
   var target = (event.notification.data && event.notification.data.url) || "/";
   event.waitUntil(
-    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(function(clients) {
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(function (clients) {
       for (var i = 0; i < clients.length; i++) {
         if ("focus" in clients[i]) { clients[i].navigate(target); return clients[i].focus(); }
       }

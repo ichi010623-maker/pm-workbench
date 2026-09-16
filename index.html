@@ -13,8 +13,8 @@
   <meta name="description" content="硬件产品经理每日中枢工作台 - 云端同步，登录后数据实时存于云端">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20180%20180%22%3E%3Crect%20width%3D%22180%22%20height%3D%22180%22%20rx%3D%2242%22%20fill%3D%22%23FF69B4%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2210%22%20width%3D%22160%22%20height%3D%22160%22%20rx%3D%2236%22%20fill%3D%22%23FF8EC5%22%20opacity%3D%220.5%22%2F%3E%3Ctext%20x%3D%2290%22%20y%3D%22126%22%20font-size%3D%2295%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-family%3D%22KaiTi%2CSTKaiti%2Cserif%22%20font-weight%3D%22bold%22%3E%E5%A3%B9%3C%2Ftext%3E%3C%2Fsvg%3E">
-  <title>硬件PM工作台 v5.9.134</title>
-  <link rel="stylesheet" href="css/style.css?v=5.9.134">
+  <title>硬件PM工作台 v5.9.135</title>
+  <link rel="stylesheet" href="css/style.css?v=5.9.135">
 <script async src="https://beacon.cdn.qq.com/sdk/4.5.9/beacon_web.min.js"></script>
 <script>
 (function(){
@@ -137,58 +137,168 @@
     <div id="modal-sheet"></div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/recipes.js?v=5.9.134"></script>
-  <script src="js/fridge.js?v=5.9.134"></script>
-  <script src="js/outfit.js?v=5.9.134"></script>
-  <script src="js/english.js?v=5.9.134"></script>
-  <script src="js/language.js?v=5.9.134"></script>
-  <script src="js/intel/core.js?v=5.9.134"></script>
-  <script src="js/intel/history.js?v=5.9.134"></script>
-  <script src="js/intel/fav.js?v=5.9.134"></script>
-  <script src="js/intel/comments.js?v=5.9.134"></script>
-  <script src="js/intel/llm/prompts.js?v=5.9.134"></script>
-  <script src="js/intel/llm/providers.js?v=5.9.134"></script>
-  <script src="js/intel/llm/parser.js?v=5.9.134"></script>
-  <script src="js/intel/llm/client.js?v=5.9.134"></script>
-  <script src="js/invest.js?v=5.9.134"></script>
-  <script src="js/sport.js?v=5.9.134"></script>
-  <script src="js/fitness.js?v=5.9.134"></script>
-  <script src="js/checkin.js?v=5.9.134"></script>
-  <script src="js/xhs.js?v=5.9.134"></script>
-  <script src="js/mr.js?v=5.9.134"></script>
-  <script src="js/aioutputs.js?v=5.9.134"></script>
-  <script src="js/demandmine.js?v=5.9.134"></script>
-  <script src="js/truenorth.js?v=5.9.134"></script>
-  <script src="js/ari.js?v=5.9.134"></script>
-  <script src="js/vendor/hls.min.js?v=5.9.134"></script>
-  <script src="js/reading.js?v=5.9.134"></script>
-  <script src="js/audiosync.js?v=5.9.134"></script>
-  <script src="js/aihot.js?v=5.9.134"></script>
-  <script src="js/knowledge.js?v=5.9.134"></script>
-  <script src="js/xhsfav.js?v=5.9.134"></script>
-  <script src="js/consumer/schema.js?v=5.9.134"></script>
-  <script src="js/consumer/rules.js?v=5.9.134"></script>
-  <script src="js/consumer/prompt.js?v=5.9.134"></script>
-  <script src="js/consumer/extract.js?v=5.9.134"></script>
-  <script src="js/consumer/aggregate.js?v=5.9.134"></script>
-  <script src="js/consumer/insights.js?v=5.9.134"></script>
-  <script src="js/consumer.js?v=5.9.134"></script>
-  <script src="js/novel.js?v=5.9.134"></script>
-  <script src="js/diet.js?v=5.9.134"></script>
-  <script src="js/app.js?v=5.9.134"></script>
+  <!-- v5.9.135: Supabase 本地化（消除国内手机端对 jsdelivr CDN 的依赖，CDN 不可达时曾导致整页卡死白屏） -->
+  <script defer src="js/vendor/supabase.min.js?v=5.9.135"></script>
+  <script>
+    // 兜底：本地 vendor 缺失/损坏时才回退 CDN（解析期 document.write，不阻塞正常路径）
+    window.addEventListener("DOMContentLoaded", function () {
+      if (!window.supabase) {
+        var s = document.createElement("script");
+        s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+        document.head.appendChild(s);
+      }
+    });
+  </script>
+  <script src="js/recipes.js?v=5.9.135"></script>
+  <script src="js/fridge.js?v=5.9.135"></script>
+  <script src="js/outfit.js?v=5.9.135"></script>
+  <script src="js/english.js?v=5.9.135"></script>
+  <script src="js/language.js?v=5.9.135"></script>
+  <script src="js/intel/core.js?v=5.9.135"></script>
+  <script src="js/intel/history.js?v=5.9.135"></script>
+  <script src="js/intel/fav.js?v=5.9.135"></script>
+  <script src="js/intel/comments.js?v=5.9.135"></script>
+  <script src="js/intel/llm/prompts.js?v=5.9.135"></script>
+  <script src="js/intel/llm/providers.js?v=5.9.135"></script>
+  <script src="js/intel/llm/parser.js?v=5.9.135"></script>
+  <script src="js/intel/llm/client.js?v=5.9.135"></script>
+  <script src="js/invest.js?v=5.9.135"></script>
+  <script src="js/sport.js?v=5.9.135"></script>
+  <script src="js/fitness.js?v=5.9.135"></script>
+  <script src="js/checkin.js?v=5.9.135"></script>
+  <script src="js/xhs.js?v=5.9.135"></script>
+  <script src="js/mr.js?v=5.9.135"></script>
+  <script src="js/aioutputs.js?v=5.9.135"></script>
+  <script src="js/demandmine.js?v=5.9.135"></script>
+  <script src="js/truenorth.js?v=5.9.135"></script>
+  <script src="js/ari.js?v=5.9.135"></script>
+  <script src="js/vendor/hls.min.js?v=5.9.135"></script>
+  <script src="js/reading.js?v=5.9.135"></script>
+  <script src="js/audiosync.js?v=5.9.135"></script>
+  <script src="js/aihot.js?v=5.9.135"></script>
+  <script src="js/knowledge.js?v=5.9.135"></script>
+  <script src="js/xhsfav.js?v=5.9.135"></script>
+  <script src="js/consumer/schema.js?v=5.9.135"></script>
+  <script src="js/consumer/rules.js?v=5.9.135"></script>
+  <script src="js/consumer/prompt.js?v=5.9.135"></script>
+  <script src="js/consumer/extract.js?v=5.9.135"></script>
+  <script src="js/consumer/aggregate.js?v=5.9.135"></script>
+  <script src="js/consumer/insights.js?v=5.9.135"></script>
+  <script src="js/consumer.js?v=5.9.135"></script>
+  <script src="js/novel.js?v=5.9.135"></script>
+  <script src="js/diet.js?v=5.9.135"></script>
+  <script src="js/app.js?v=5.9.135"></script>
   <!-- 行业情报渲染层（Sprint 1.5 自 app.js 下沉；须在 app.js 之后加载：renderIndustry 依赖 app.js 顶层 let industrySub 等运行时全局） -->
   <!-- v2.0 sections（Sprint 2-6）：注册中心 + 各 section，须在 render.js 之前加载 -->
-  <script src="js/intel/sections/index.js?v=5.9.134"></script>
-  <script src="js/intel/sections/shell.js?v=5.9.134"></script>
-  <script src="js/intel/sections/today.js?v=5.9.134"></script>
-  <script src="js/intel/sections/pm.js?v=5.9.134"></script>
-  <script src="js/intel/sections/world.js?v=5.9.134"></script>
-  <script src="js/intel/sections/finance.js?v=5.9.134"></script>
-  <script src="js/intel/sections/ai.js?v=5.9.134"></script>
-  <script src="js/intel/sections/tech.js?v=5.9.134"></script>
-  <script src="js/intel/sections/industry.js?v=5.9.134"></script>
-  <script src="js/intel/state.js?v=5.9.134"></script>
-  <script src="js/intel/render.js?v=5.9.134"></script>
+  <script src="js/intel/sections/index.js?v=5.9.135"></script>
+  <script src="js/intel/sections/shell.js?v=5.9.135"></script>
+  <script src="js/intel/sections/today.js?v=5.9.135"></script>
+  <script src="js/intel/sections/pm.js?v=5.9.135"></script>
+  <script src="js/intel/sections/world.js?v=5.9.135"></script>
+  <script src="js/intel/sections/finance.js?v=5.9.135"></script>
+  <script src="js/intel/sections/ai.js?v=5.9.135"></script>
+  <script src="js/intel/sections/tech.js?v=5.9.135"></script>
+  <script src="js/intel/sections/industry.js?v=5.9.135"></script>
+  <script src="js/intel/state.js?v=5.9.135"></script>
+  <script src="js/intel/render.js?v=5.9.135"></script>
+
+  <!-- ===== v5.9.135 启动自愈 watchdog =====
+       手机端在弱网 / SW 旧缓存 / CDN 不可达时可能白屏且无任何提示。
+       若 7 秒后仍无任何界面渲染出来，自动弹出恢复面板（清缓存重载 / 诊断页 / 离线入口）。 -->
+  <script>
+  (function () {
+    var V = "5.9.135";
+    var settled = false;
+
+    // v5.9.135: URL ?reset=1 —— 一键清 SW + 清缓存后重新加载（手机端自救最快路径）
+    if (location.search.indexOf("reset=1") >= 0) {
+      try {
+        var __t = [];
+        if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+          __t.push(navigator.serviceWorker.getRegistrations().then(function (rs) {
+            return Promise.all(rs.map(function (r) { return r.unregister(); }));
+          }));
+        }
+        if (window.caches && caches.keys) {
+          __t.push(caches.keys().then(function (ks) {
+            return Promise.all(ks.map(function (k) { return caches.delete(k); }));
+          }));
+        }
+        Promise.all(__t).then(function () {
+          location.replace(location.pathname + "?r=" + Date.now());
+        }, function () {
+          location.replace(location.pathname + "?r=" + Date.now());
+        });
+        return;
+      } catch (e) {}
+    }
+
+    function visible(id) {
+      var el = document.getElementById(id);
+      if (!el) return false;
+      if (el.classList && el.classList.contains("hidden")) return false;
+      return el.offsetHeight > 0 || el.offsetWidth > 0 || (el.textContent || "").trim().length > 0;
+    }
+    function appAlive() {
+      return visible("privacy-notice") || visible("lock-screen") || visible("auth-screen") || visible("app");
+    }
+    function markAlive() { if (appAlive()) settled = true; }
+    // 监听渲染活动：任何一次 DOM 变化都说明 JS 活着
+    try {
+      new MutationObserver(markAlive).observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+    } catch (e) {}
+    setTimeout(markAlive, 1200);
+
+    setTimeout(function () {
+      if (settled || appAlive()) return;
+      // 白屏 → 渲染恢复面板
+      var d = document.createElement("div");
+      d.id = "boot-recovery";
+      d.style.cssText = "position:fixed;inset:0;z-index:99999;background:#f4f5f8;color:#111;display:flex;align-items:center;justify-content:center;padding:20px;font-family:-apple-system,system-ui,sans-serif";
+      d.innerHTML =
+        '<div style="max-width:420px;width:100%;background:#fff;border-radius:16px;padding:22px;box-shadow:0 8px 32px rgba(0,0,0,.12)">' +
+        '<div style="font-size:34px;text-align:center">🛠️</div>' +
+        '<div style="font-size:17px;font-weight:700;text-align:center;margin:8px 0 4px">页面没能加载出来</div>' +
+        '<div style="font-size:12px;color:#64748b;text-align:center;line-height:1.7">通常是网络或旧缓存导致（v' + V + '）。<br>点下面的按钮即可自助恢复，数据不会丢失。</div>' +
+        '<button id="br-reset" style="width:100%;margin-top:16px;padding:13px;border:0;border-radius:12px;background:#0a84ff;color:#fff;font-size:15px;font-weight:600;-webkit-appearance:none">🔄 清除缓存并重新加载</button>' +
+        '<button id="br-offline" style="width:100%;margin-top:9px;padding:13px;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#0f172a;font-size:15px;font-weight:600;-webkit-appearance:none">⚡ 离线模式打开（跳过后台同步）</button>' +
+        '<a href="safe.html" style="display:block;text-align:center;margin-top:12px;font-size:12px;color:#0a84ff;text-decoration:none">数据诊断与恢复页 →</a>' +
+        '<div id="br-msg" style="font-size:11px;color:#94a3b8;text-align:center;margin-top:10px"></div>' +
+        '</div>';
+      document.body.appendChild(d);
+
+      function msg(t) { var m = document.getElementById("br-msg"); if (m) m.textContent = t; }
+
+      document.getElementById("br-reset").onclick = function () {
+        msg("正在清理缓存…");
+        var done = function () {
+          try { localStorage.removeItem("hw_pm_try_reset_count"); } catch (e) {}
+          location.replace(location.pathname + "?r=" + Date.now());
+        };
+        var tasks = [];
+        try {
+          if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+            tasks.push(navigator.serviceWorker.getRegistrations().then(function (rs) {
+              return Promise.all(rs.map(function (r) { return r.unregister(); }));
+            }));
+          }
+        } catch (e) {}
+        try {
+          if (window.caches && caches.keys) {
+            tasks.push(caches.keys().then(function (ks) {
+              return Promise.all(ks.map(function (k) { return caches.delete(k); }));
+            }));
+          }
+        } catch (e) {}
+        Promise.all(tasks).then(done, done);
+      };
+
+      document.getElementById("br-offline").onclick = function () {
+        try { localStorage.setItem("hw_pm_offline_permanent", "1"); } catch (e) {}
+        location.replace(location.pathname + "?offline=1&r=" + Date.now());
+      };
+    }, 7000);
+  })();
+  </script>
 </body>
 </html>

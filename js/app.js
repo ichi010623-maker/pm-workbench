@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.134";
+var APP_VERSION = "5.9.135";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -6141,8 +6141,19 @@ async function initApp() {
   render();
 }
 
+// v5.9.135: 修复启动结构缺陷 —— 原先 SyncManager / bindAuthUI / toggleHistory 全部定义在
+// `if (document.readyState === "loading")` 分支内，走 else 分支时（DOM 已解析完才执行脚本）
+// SyncManager 为 undefined，init() 里的认证门直接抛错，手机端极易白屏。
+// 现改为：init 的分支调用与"定义块"解耦，两条路径都必定完成定义。
+function __bootApp() {
+  try { init(); } catch (e) { console.error("[boot] init threw:", e); }
+}
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", function() { init(); });
+  document.addEventListener("DOMContentLoaded", __bootApp);
+} else {
+  setTimeout(__bootApp, 0);
+}
+{
 
   // ===== Supabase 同步层 =====
   var SyncManager = (function() {
@@ -6409,8 +6420,6 @@ if (document.readyState === "loading") {
     if (el.classList.contains("hidden")) { el.classList.remove("hidden"); if (ar) ar.textContent = "▾"; }
     else { el.classList.add("hidden"); if (ar) ar.textContent = "▸"; }
   }
-} else {
-  init();
 }
 
 
