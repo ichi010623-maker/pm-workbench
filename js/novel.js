@@ -132,6 +132,129 @@
   }
 
   // ============================================================
+  // 4.5 my-novel-writer skill：生成规范 v2.0 + 违禁词 + Prompt 组装器
+  // ============================================================
+  var SKILL_RULES = {
+    WORD_RANGE: { min: 2200, max: 2500 },
+    BANNED: [
+      { word: "杀", subs: ["陨落", "寂灭", "诛杀"] },
+      { word: "死", subs: ["魂飞魄散", "灰飞烟灭"] },
+      { word: "血", subs: ["猩红", "染血", "殷红"] }
+    ],
+    BANG_POINTS: /(打脸|震惊|突破|升级|领悟|宝物|神兵|灵药|晋升|逆袭|奇遇)/,
+    AUTHOR_NOTE: /作者说/
+  };
+
+  function nvBannedScan(text) {
+    var out = [];
+    if (!text) return out;
+    SKILL_RULES.BANNED.forEach(function (b) {
+      var m = String(text).split(b.word).length - 1;
+      if (m > 0) out.push({ word: b.word, count: m, subs: b.subs });
+    });
+    return out;
+  }
+
+  // 生成规范 v2.0 逐项检查（7 项：字数/爽点/钩子/作者说/视角/违禁词/逻辑闭环）
+  function nvSkillChecklist(chId) {
+    var ch = nvChapter(chId);
+    if (!ch) return null;
+    var book = nvGet(ch.bookId);
+    var wc = nvCnWordCount(ch.draft);
+    var tail = String(ch.draft || "").slice(-80);
+    var items = [];
+    var wcOk = wc >= SKILL_RULES.WORD_RANGE.min && wc <= SKILL_RULES.WORD_RANGE.max;
+    items.push({ k: "word_count", label: "字数 2200-2500", ok: wcOk,
+      detail: "当前 " + wc + " 字" + (wcOk ? "" : (wc < SKILL_RULES.WORD_RANGE.min ? " · 偏短：补心理独白/环境渲染/动作细节/配角反应" : " · 偏长：删注水段落")),
+      level: wcOk ? "ok" : "P1" });
+    var bang = SKILL_RULES.BANG_POINTS.test(ch.draft);
+    items.push({ k: "bang", label: "爽点 ≥ 1（打脸/突破/宝物/情感）", ok: bang,
+      detail: bang ? "已命中爽点要素" : "缺爽点：加打脸反转、实力突破、获得宝物或情感互动",
+      level: bang ? "ok" : "P1" });
+    var hook = /[？?…]|却|谁知|下一|突然|身影|究竟/.test(tail);
+    items.push({ k: "hook", label: "结尾钩子", ok: hook,
+      detail: hook ? "结尾留有悬念要素" : "结尾平淡：补悬念 / 新危机 / 新目标",
+      level: hook ? "ok" : "P2" });
+    var author = SKILL_RULES.AUTHOR_NOTE.test(ch.draft);
+    items.push({ k: "author", label: "作者说（读者互动）", ok: author,
+      detail: author ? "已含作者说" : "章末缺「作者说」段落（求收藏/推荐票引导）",
+      level: author ? "ok" : "P2" });
+    var pov = (book && book.pov) || "third";
+    var povOk = pov !== "first" || /我/.test(ch.draft);
+    items.push({ k: "pov", label: "视角一致（" + (pov === "first" ? "第一人称" : "第三人称") + "）", ok: povOk,
+      detail: povOk ? "视角符合本书设定" : "本书设定第一人称，但正文未出现「我」视角",
+      level: povOk ? "ok" : "P1" });
+    var banned = nvBannedScan(ch.draft);
+    items.push({ k: "banned", label: "违禁词（审核规避）", ok: banned.length === 0,
+      detail: banned.length ? banned.map(function (b) { return "「" + b.word + "」×" + b.count + " → 替换：" + b.subs.join("/"); }).join("；") : "未命中",
+      level: banned.length ? "P2" : "ok" });
+    items.push({ k: "logic", label: "逻辑闭环（人工核对）", ok: true,
+      detail: "受伤恢复 / 物品去向 / 情绪连贯 / 战力合理 —— 写后人工过一遍", level: "hint" });
+    var pass = items.filter(function (i) { return i.ok; }).length;
+    return { items: items, pass: pass, total: items.length };
+  }
+
+  // Prompt 组装器：书设定 + 人物卡 + 世界观 + 上一章摘要 + spec + 规范 v2.0 → 可复制全文
+  function nvBuildPrompt(bookId, chNum) {
+    var book = nvGet(bookId);
+    if (!book) return null;
+    var d = nvDB();
+    var ch = d.chapters.filter(function (c) { return c.bookId === bookId && c.num === chNum; })[0];
+    var chars = d.chars.filter(function (c) { return c.bookId === bookId; });
+    var lastCh = d.chapters.filter(function (c) { return c.bookId === bookId && c.num === chNum - 1; })[0];
+    var style = book.style || "网文";
+    var L = [];
+    L.push("你是一位专业的网络小说作家，擅长创作" + style + "风格的长篇小说。");
+    L.push("你的作品特点：情节紧凑、人物鲜活、世界观完整、爽点密集。");
+    L.push("");
+    L.push("请根据以下设定和大纲，创作小说《" + book.title + "》的第 " + chNum + " 章" + (ch ? "「" + ch.title + "」" : "") + "。");
+    L.push("");
+    L.push("【核心设定】");
+    if (chars.length) {
+      chars.forEach(function (c) {
+        L.push("- " + c.name + "：" + (c.arc || "") + (c.traits && c.traits.length ? "（性格：" + c.traits.join("、") + "）" : ""));
+      });
+    } else L.push("（暂无人物设定）");
+    L.push("");
+    L.push("【世界观】");
+    L.push(book.world ? JSON.stringify(book.world) : (book.desc || "（暂无世界观设定）"));
+    L.push("");
+    L.push("【风格】");
+    L.push(style + (book.pov === "first" ? " · 第一人称「我」视角，不可切换" : ""));
+    L.push("");
+    L.push("【剧情上下文】");
+    if (lastCh) {
+      L.push("上一章「" + lastCh.title + "」：" + String(lastCh.draft || "").slice(0, 200) + (String(lastCh.draft || "").length > 200 ? "…" : ""));
+    } else L.push("（这是第一章，无需前文摘要）");
+    L.push("");
+    L.push("【本章大纲 / Spec】");
+    if (ch && ch.spec) {
+      if (ch.spec.must_happen && ch.spec.must_happen.length) L.push("必须发生：" + ch.spec.must_happen.join("；"));
+      if (ch.spec.key_scenes && ch.spec.key_scenes.length) L.push("关键场景：" + ch.spec.key_scenes.join("；"));
+      if (ch.spec.new_hooks && ch.spec.new_hooks.length) L.push("新钩子：" + ch.spec.new_hooks.join("；"));
+      if (ch.spec.tension && ch.spec.tension.length) L.push("张力曲线：" + ch.spec.tension.map(function (t) { return "p" + t.position + "=" + t.value; }).join(" → "));
+      if (ch.goal) L.push("本章目标：" + ch.goal);
+    } else if (ch && ch.goal) {
+      L.push(ch.goal);
+    } else L.push("（暂无大纲）");
+    L.push("");
+    L.push("【严格写作要求】");
+    L.push("1. 字数控制：正文必须严格控制在 2200-2500 字（中文）。禁止短章或注水。");
+    L.push("2. 情节结构：开篇快速切入冲突（黄金三章法则）；中段铺垫博弈升级危机；结尾留下钩子（悬念、新危机、新目标）。");
+    L.push("3. 爽点设计：每章至少 1 个（打脸反转 / 实力突破 / 获得宝物 / 情感互动）。");
+    L.push("4. 细节描写：心理独白、环境渲染（光影声音气味温度）、动作慢镜头、配角反应。");
+    L.push("5. 逻辑闭环：伏笔回收；受伤/物品/等级不可突变；以弱胜强需金手指或计谋；时间线清晰。");
+    if (book.pov === "first") L.push("6. 视角要求：严格使用第一人称「我」的视角，不可切换。");
+    L.push("7. 输出格式：纯文本小说内容，无需 Markdown。");
+    L.push("");
+    L.push("【违禁词替换】（避免审核问题）");
+    SKILL_RULES.BANNED.forEach(function (b) { L.push("- 「" + b.word + "」→ " + b.subs.join("、")); });
+    L.push("");
+    L.push("请开始创作高质量的章节内容。");
+    return L.join("\n");
+  }
+
+  // ============================================================
   // 5. 5 维评审（skill：阅读者 25 / 编审 25 / 故事家 25 / 文学 15 / 毒舌 10）
   // ============================================================
   var REVIEW_ROLES = [
@@ -171,12 +294,14 @@
     if (redHits.some(function(h){return h.id==="trope_savior";})) troll -= 12;
     if (wc > 5000) troll -= 8;
     if (wc < 1200) troll -= 5;
+    var banned = nvBannedScan(ch.draft);
+    if (banned.length) troll -= Math.min(6, 2 * banned.length);
     var scores = {
       reader: { score: clamp(reader, 40, 100), weight: 25, note: "字数 " + wc + " · 张力密度 " + tens },
       editor: { score: clamp(editor, 40, 100), weight: 25, note: "P0×" + p0 + " · P1×" + p1 + " · P2×" + p2 },
       storyteller: { score: clamp(storyteller, 40, 100), weight: 25, note: "伏笔铺设 ×" + bookFs.length + (ch.spec ? " · 有 spec" : " · 无 spec") },
       literary: { score: clamp(literary, 40, 100), weight: 15, note: "字数规模 " + wc },
-      troll: { score: clamp(troll, 40, 100), weight: 10, note: "红线命中 " + redHits.length + " 项" }
+      troll: { score: clamp(troll, 40, 100), weight: 10, note: "红线命中 " + redHits.length + " 项" + (banned.length ? " · 违禁词 " + banned.length + " 组" : "") }
     };
     var totalW = 0, weighted = 0;
     REVIEW_ROLES.forEach(function(r){
@@ -184,7 +309,9 @@
       totalW += r.weight;
     });
     var final = Math.round(weighted / totalW);
-    return { scores: scores, finalScore: final, flags: redHits.map(function(h){return h.level+":"+h.id;}) };
+    var flags = redHits.map(function(h){return h.level+":"+h.id;});
+    banned.forEach(function (b) { flags.push("P2:banned_" + b.word); });
+    return { scores: scores, finalScore: final, flags: flags };
   }
 
   function nvSaveReview(chapterId, scoresObj, flags, notes) {
@@ -449,15 +576,54 @@
     html += tabBarHtml();
 
     var sub = (typeof root.NV_OVERVIEW_SUB !== "undefined") ? root.NV_OVERVIEW_SUB : "chars";
-    var subs = [{k:"chars",t:"👤 角色 ("+d.chars.length+")"},{k:"events",t:"⚡ 事件 ("+d.events.length+")"},{k:"foreshadows",t:"🌱 伏笔 ("+d.foreshadows.length+")"}];
+    var subs = [{k:"chars",t:"👤 角色 ("+d.chars.length+")"},{k:"events",t:"⚡ 事件 ("+d.events.length+")"},{k:"foreshadows",t:"🌱 伏笔 ("+d.foreshadows.length+")"},{k:"world",t:"🌍 世界观"}];
     html += '<div class="nv-subtabs">' + subs.map(function(x){
       return '<span class="nv-subtab' + (sub === x.k ? " active" : "") + '" onclick="NV_OVERVIEW_SUB=\'' + x.k + '\';render()">' + x.t + '</span>';
     }).join("") + '</div>';
 
     if (sub === "events") return renderOverviewEvents(c, html);
     if (sub === "foreshadows") return renderOverviewForeshadows(c, html);
+    if (sub === "world") return renderOverviewWorld(c, html);
     return renderOverviewChars(c, html);
   }
+
+  // 世界观表（my-novel-writer skill 模板：基础设定/核心规则/历史传说/重要地点/伏笔悬念）
+  function renderOverviewWorld(c, head) {
+    var d = nvDB();
+    var editBook = (typeof root.NV_WORLD_EDIT !== "undefined") ? root.NV_WORLD_EDIT : null;
+    d.books.forEach(function (b) {
+      head += '<div class="card nv-world-card"><div class="card-body">' +
+        '<div class="nv-detail-h">🌍 ' + esc(b.title) +
+        (b.style ? ' <span class="nv-b" style="background:#8b5cf622;color:#8b5cf6">' + esc(b.style) + '</span>' : '') +
+        ' <span class="nv-b" style="background:#0ea5e922;color:#0ea5e9">' + (b.pov === "first" ? "第一人称" : "第三人称") + '</span></div>';
+      if (b.world) {
+        var w = b.world;
+        if (w.basic) head += '<div class="nv-w-row"><b>🌐 基础设定</b>：' + esc(w.basic) + '</div>';
+        if (w.rules) head += '<div class="nv-w-row"><b>🔮 核心规则</b>：' + esc(w.rules) + '</div>';
+        if (w.history) head += '<div class="nv-w-row"><b>📜 历史传说</b>：' + esc(w.history) + '</div>';
+        if (w.places && w.places.length) head += '<div class="nv-w-row"><b>🏙️ 重要地点</b>：' + w.places.map(function (p) { return badge(typeof p === "string" ? p : (p.name || "—"), "#0ea5e9"); }).join(" ") + '</div>';
+        if (w.customs) head += '<div class="nv-w-row"><b>📚 文化习俗</b>：' + esc(w.customs) + '</div>';
+        if (w.mystery) head += '<div class="nv-w-row"><b>⚠️ 伏笔悬念</b>：' + esc(w.mystery) + '</div>';
+      } else {
+        head += '<div class="nv-dim" style="margin-top:6px">暂无世界观设定 · 点「✏️ 编辑」按模板填写（基础设定/核心规则/历史传说/重要地点/文化习俗/伏笔悬念）</div>';
+      }
+      head += '<div style="margin-top:8px"><button class="btn btn-ghost sm" onclick="nvWorldEdit(\'' + b.id + '\')">✏️ 编辑世界观</button></div>';
+      if (editBook === b.id) {
+        head += '<div class="nv-dim" style="margin-top:6px;font-size:11px">上次编辑保存于 JSON 弹窗 · 字段：basic / rules / history / places / customs / mystery</div>';
+      }
+      head += '</div></div>';
+    });
+    c.innerHTML = head;
+  }
+  root.nvWorldEdit = function (bookId) {
+    var b = nvGet(bookId);
+    if (!b) return;
+    var def = b.world || { basic: "", rules: "", history: "", places: [], customs: "", mystery: "" };
+    var s = prompt("编辑世界观（JSON）：", JSON.stringify(def, null, 2));
+    if (s === null) return;
+    try { b.world = JSON.parse(s); nvSave(); root.NV_WORLD_EDIT = bookId; if (typeof render === "function") render(); }
+    catch (e) { if (typeof showToast === "function") showToast("JSON 解析失败：" + e.message, "error"); }
+  };
 
   function renderOverviewChars(c, head) {
     var d = nvDB();
@@ -528,8 +694,42 @@
       html += '<div class="nv-rel-line">' + badge(o ? o.name : r.with, "#475569") + ' · ' + esc(r.type) + '</div>';
     });
     html += '</div></div></div>';
+    // 人物卡（my-novel-writer skill 模板：外貌/心理/秘密/成长弧光）
+    if (ch.card) {
+      var cd = ch.card;
+      html += '<div class="card"><div class="card-body">' +
+        '<div class="nv-detail-h">📇 人物卡</div>';
+      if (cd.appearance) html += '<div class="nv-detail-row"><b>外貌特征</b>：' + esc(cd.appearance) + '</div>';
+      if (cd.fear) html += '<div class="nv-detail-row"><b>恐惧/执念</b>：' + esc(cd.fear) + '</div>';
+      if (cd.catchphrase) html += '<div class="nv-detail-row"><b>口头禅/习惯</b>：' + esc(cd.catchphrase) + '</div>';
+      if (cd.secret) html += '<div class="nv-detail-row"><b>秘密</b>：' + esc(cd.secret) + '</div>';
+      if (cd.arcStart || cd.arcConflict || cd.arcTurn || cd.arcEnd) {
+        html += '<div class="nv-detail-row"><b>📈 成长弧光</b>：' +
+          '<div class="nv-arc-line">起点：' + esc(cd.arcStart || "—") + '</div>' +
+          '<div class="nv-arc-line">冲突：' + esc(cd.arcConflict || "—") + '</div>' +
+          '<div class="nv-arc-line">转折：' + esc(cd.arcTurn || "—") + '</div>' +
+          '<div class="nv-arc-line">终点：' + esc(cd.arcEnd || "—") + '</div></div>';
+      }
+      html += '<div style="margin-top:8px"><button class="btn btn-ghost sm" onclick="nvCardEdit(\'' + ch.id + '\')">✏️ 编辑人物卡</button></div>' +
+        '</div></div>';
+    } else {
+      html += '<div class="card"><div class="card-body">' +
+        '<div class="nv-detail-h">📇 人物卡</div>' +
+        '<div class="nv-dim" style="margin-top:4px">暂无人物卡 · 模板字段：外貌 / 恐惧执念 / 口头禅 / 秘密 / 成长弧光（起点·冲突·转折·终点）</div>' +
+        '<div style="margin-top:8px"><button class="btn btn-ghost sm" onclick="nvCardEdit(\'' + ch.id + '\')">✏️ 创建人物卡</button></div>' +
+        '</div></div>';
+    }
     c.innerHTML = html;
   }
+  root.nvCardEdit = function (charId) {
+    var ch = nvChar(charId);
+    if (!ch) return;
+    var def = ch.card || { appearance: "", fear: "", catchphrase: "", secret: "", arcStart: "", arcConflict: "", arcTurn: "", arcEnd: "" };
+    var s = prompt("编辑人物卡（JSON）：", JSON.stringify(def, null, 2));
+    if (s === null) return;
+    try { ch.card = JSON.parse(s); nvSave(); if (typeof render === "function") render(); }
+    catch (e) { if (typeof showToast === "function") showToast("JSON 解析失败：" + e.message, "error"); }
+  };
 
   function renderNovelFsDetail(c, fsId) {
     var f = nvForeshadow(fsId);
@@ -762,6 +962,8 @@
       '<button class="btn btn-primary sm" onclick="nvChEdit(\'' + ch.id + '\')">✏️ 编辑正文</button>' +
       '<button class="btn btn-primary sm" onclick="nvChEditSpec(\'' + ch.id + '\')">📝 编辑 spec</button>' +
       '<button class="btn btn-ghost sm" onclick="nvChReReview(\'' + ch.id + '\')">🔄 重跑 5 维</button>' +
+      '<button class="btn btn-ghost sm" onclick="nvSkillCheck(\'' + ch.id + '\')">✅ 规范检查</button>' +
+      '<button class="btn btn-ghost sm" onclick="nvSkillPrompt(\'' + ch.bookId + '\',' + ch.num + ')">🤖 生成 Prompt</button>' +
       '</div>';
 
     html += '<div class="card"><div class="card-body">' +
@@ -805,6 +1007,21 @@
           '<b>' + esc(h.label) + '</b> · 「' + esc(h.sample) + '」 · 修法：' + esc(h.fix) + '</div>';
       });
       html += '</div></div>';
+    }
+
+    if ((typeof root.NV_SKILL_CHK !== "undefined") && root.NV_SKILL_CHK === ch.id) {
+      var chk = nvSkillChecklist(ch.id);
+      if (chk) {
+        var chkCol = chk.pass === chk.total ? "#10b981" : (chk.pass >= 4 ? "#f59e0b" : "#ef4444");
+        html += '<div class="card nv-skill-card"><div class="card-body">' +
+          '<div class="nv-detail-h">✅ 生成规范 v2.0 检查 · <b style="color:' + chkCol + '">' + chk.pass + '/' + chk.total + '</b> 通过</div>';
+        chk.items.forEach(function (it) {
+          var ic = it.level === "ok" ? "✅" : (it.level === "hint" ? "💡" : (it.level === "P1" ? "🟠" : "🟡"));
+          html += '<div class="nv-skill-item">' + ic + ' <b>' + esc(it.label) + '</b>' +
+            '<div class="nv-dim" style="font-size:11px;margin-left:22px">' + esc(it.detail) + '</div></div>';
+        });
+        html += '</div></div>';
+      }
     }
 
     if (rev && rev.scores) {
@@ -889,6 +1106,25 @@
     nvSaveReview(chId, r.scores, r.flags, "（自动跑分）");
     if (typeof showToast === "function") showToast("✅ 重跑完成 · 总分 " + r.finalScore, "success");
     if (typeof render === "function") render();
+  };
+  root.nvSkillCheck = function (chId) {
+    var chk = nvSkillChecklist(chId);
+    if (!chk) { if (typeof showToast === "function") showToast("章不存在", "error"); return; }
+    root.NV_SKILL_CHK = chId;
+    if (typeof showToast === "function") showToast(chk.pass === chk.total ? "✅ 规范全过 " + chk.pass + "/" + chk.total : "⚠ 规范检查 " + chk.pass + "/" + chk.total + " · 详见下方", chk.pass === chk.total ? "success" : "warn");
+    if (typeof render === "function") render();
+  };
+  root.nvSkillPrompt = function (bookId, chNum) {
+    var p = nvBuildPrompt(bookId, chNum);
+    if (!p) { if (typeof showToast === "function") showToast("书不存在", "error"); return; }
+    var done = function () { if (typeof showToast === "function") showToast("📋 生成 Prompt 已复制 · 粘贴到任意 LLM 即可", "success"); };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(p).then(done, function () { prompt("复制生成 Prompt（Cmd+C）：", p); });
+      } else {
+        prompt("复制生成 Prompt（Cmd+C）：", p);
+      }
+    } catch (e) { prompt("复制生成 Prompt（Cmd+C）：", p); }
   };
 
   // ============================================================
@@ -1112,6 +1348,12 @@
     scanRedLines: nvScanRedLines,
     autoReview: nvAutoReview,
     saveReview: nvSaveReview,
+    Skill: {
+      rules: SKILL_RULES,
+      bannedScan: nvBannedScan,
+      checklist: nvSkillChecklist,
+      buildPrompt: nvBuildPrompt
+    },
     polish: nvScaffoldPolish,
     continue: nvScaffoldContinue,
     enqueueAdvance: nvEnqueueAdvance,

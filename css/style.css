@@ -6971,6 +6971,12 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 .nv-bar-label{font-size:9px;color:#94a3b8;writing-mode:horizontal-tb}
 .nv-recap-list{margin:6px 0 0 18px;line-height:1.85;font-size:12px;color:#1e293b}
 .nv-recap-list li{margin-bottom:3px}
+/* v5.9.134 my-novel-writer skill 融合 */
+.nv-skill-card{border-left:3px solid #10b981}
+.nv-skill-item{margin:7px 0;font-size:12px;line-height:1.6}
+.nv-world-card{border-left:3px solid #0ea5e9}
+.nv-w-row{margin:7px 0;font-size:12px;line-height:1.7}
+.nv-arc-line{margin:3px 0 0 16px;font-size:12px;color:#475569}
 
 /* ====== 📚 小说创作 v5.9.133 skill 化追加 ====== */
 .nv-rules-card{margin-bottom:10px}

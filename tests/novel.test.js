@@ -1,4 +1,4 @@
-// 小说创作模块测试 · v5.9.133（skill 化版本）
+// 小说创作模块测试 · v5.9.134（skill 化版本）
 // 覆盖：字数统计 / CRUD / 伏笔状态机 / 5 维评审 / P0-P2 红线 / spec 字段 / 推进队列 / UI 渲染
 const fs = require("fs");
 const vm = require("vm");
@@ -263,6 +263,79 @@ section("O. Seed 数据完整性");
   var rev = SEED.reviews.find(function(x){return x.chapterId==="ch1_02"});
   ok(rev && rev.scores && rev.scores.reader && rev.scores.editor && rev.scores.storyteller && rev.scores.literary && rev.scores.troll, "ch1_02 review 5 维齐全");
   ok(rev.finalScore === 87, "ch1_02 finalScore = 87");
+}
+
+// ============ P. my-novel-writer skill：规范 v2.0 + 违禁词 + Prompt 组装器 ============
+section("P. Skill 规范 v2.0（checklist / banned / buildPrompt / world / card）");
+{
+  // P1 违禁词扫描
+  {
+    const sb = mkSandbox({ seedLoaded: true });
+    withSeed(sb);
+    const hits = sb.Novel.Skill.bannedScan("他杀了敌，血溅三尺，宁死不降。");
+    eq(hits.length, 3, "违禁词扫描：杀/血/死 全命中");
+    ok(hits[0].subs.length === 3 && hits[0].subs.indexOf("陨落") >= 0, "杀 → 替换建议含陨落");
+    eq(sb.Novel.Skill.bannedScan("风平浪静").length, 0, "无违禁词 → 空数组");
+    eq(sb.Novel.Skill.bannedScan("").length, 0, "空文本 → 空数组");
+  }
+  // P2 规范检查清单（7 项）
+  {
+    const sb = mkSandbox({ seedLoaded: true });
+    withSeed(sb);
+    const chk = sb.Novel.Skill.checklist("ch1_01");
+    ok(chk && chk.items.length === 7, "checklist 7 项");
+    const ks = chk.items.map(i => i.k).join(",");
+    ok(ks === "word_count,bang,hook,author,pov,banned,logic", "checklist 项顺序与键名");
+    const wcItem = chk.items.find(i => i.k === "word_count");
+    ok(wcItem.ok === false && /偏短/.test(wcItem.detail), "ch1_01 示例章字数偏短 → P1 提示含补全建议");
+    // 违禁词命中章：老丹断臂文本无违禁词，造一个含「死」的章验证 P2 标记
+    const c3 = sb.DB.data.novel.chapters.find(x => x.id === "ch1_03");
+    const draftBackup = c3.draft;
+    c3.draft = (draftBackup || "") + "\n\n他死了。";
+    const chk2 = sb.Novel.Skill.checklist("ch1_03");
+    const bannedItem = chk2.items.find(i => i.k === "banned");
+    ok(bannedItem.ok === false && /「死」/.test(bannedItem.detail), "含死文本 → 违禁词项 fail + 替换建议");
+    c3.draft = draftBackup;
+  }
+  // P3 Prompt 组装器
+  {
+    const sb = mkSandbox({ seedLoaded: true });
+    withSeed(sb);
+    const p = sb.Novel.Skill.buildPrompt("book_xuanshenji", 2);
+    ok(p && p.indexOf("《荒神祭》") >= 0 && p.indexOf("第 2 章") >= 0, "prompt 含书名与章号");
+    ok(p.indexOf("2200-2500") >= 0, "prompt 含字数硬性指标");
+    ok(p.indexOf("林渊") >= 0 && p.indexOf("姜禾") >= 0, "prompt 含人物卡");
+    ok(p.indexOf("半文半白") >= 0, "prompt 含书籍风格");
+    ok(p.indexOf("违禁词替换") >= 0 && p.indexOf("陨落") >= 0, "prompt 含违禁词替换表");
+    const pSpec = sb.Novel.Skill.buildPrompt("book_xuanshenji", 1);
+    ok(pSpec.indexOf("必须发生") >= 0 && pSpec.indexOf("张力曲线") >= 0, "第 1 章（有 spec）prompt 含 must_happen + 张力曲线");
+    ok(pSpec.indexOf("火攻宗门") >= 0, "spec must_happen 内容注入");
+    ok(p.indexOf("上一章") >= 0 || p.indexOf("这是第一章") >= 0, "prompt 含上一章摘要或首章提示");
+    const pFirst = sb.Novel.Skill.buildPrompt("book_fuguang", 1);
+    ok(pFirst.indexOf("第一人称") >= 0, "浮光（first 视角）prompt 含第一人称要求");
+    eq(sb.Novel.Skill.buildPrompt("no_book", 1), null, "书不存在 → null");
+  }
+  // P4 seed：world / style / pov / 人物卡
+  {
+    ok(SEED.books[0].world && SEED.books[0].world.basic && SEED.books[0].world.rules && SEED.books[0].world.mystery, "荒神祭 world 三块齐全");
+    ok(SEED.books[0].pov === "third" && SEED.books[0].style, "荒神祭 pov=third + style");
+    ok(SEED.books[1].pov === "first", "浮光 pov=first");
+    const lin = SEED.chars.find(c => c.id === "c1_lin_yun");
+    ok(lin.card && lin.card.appearance && lin.card.fear && lin.card.arcStart && lin.card.arcEnd, "林渊人物卡（外貌/恐惧/弧光起点终点）");
+  }
+  // P5 autoReview 融合违禁词
+  {
+    const sb = mkSandbox({ seedLoaded: true });
+    withSeed(sb);
+    const c3 = sb.DB.data.novel.chapters.find(x => x.id === "ch1_03");
+    const draftBackup = c3.draft;
+    c3.draft = (draftBackup || "") + "\n\n他死了，血溅当场。";
+    const r = sb.Novel.autoReview("ch1_03");
+    ok(r.flags.indexOf("P2:banned_死") >= 0 && r.flags.indexOf("P2:banned_血") >= 0, "autoReview flags 含 banned 死/血");
+    const trollNote = r.scores.troll.note;
+    ok(/违禁词/.test(trollNote), "troll note 含违禁词统计");
+    c3.draft = draftBackup;
+  }
 }
 
 console.log("\n=== 通过 " + pass + " / 失败 " + fail + " ===");
