@@ -3999,7 +3999,7 @@
     ]
   },
   "2026-09-16": {
-    "generatedAt": "2026-09-16T07:00:00+08:00",
+    "generatedAt": "2026-09-16 12:05+08:00",
     "categories": [
       {
         "key": "official",
@@ -4026,110 +4026,137 @@
       {
         "id": "2026-09-16-001",
         "category": "official",
-        "priority": 5,
-        "title": "欧盟发布AI伦理准则",
-        "summary": "欧盟委员会发布了一套全面的AI伦理准则，旨在确保人工智能的发展符合人类价值观和社会利益。",
-        "source": "欧盟委员会",
-        "url": "https://europa.eu/info/news/eu-announces-comprehensive-ai-ethics-guidelines-2026-09-16_en"
+        "priority": 4,
+        "title": "中国发布《新一代人工智能发展规划2.0》",
+        "summary": "中国政府发布新一代人工智能发展规划2.0，旨在推动AI技术发展，加强AI伦理治理，促进AI与实体经济深度融合。",
+        "source": "中国政府网",
+        "url": "http://www.gov.cn/xinwen/2026-09/16/content_5608649.htm"
       },
       {
         "id": "2026-09-16-002",
         "category": "hardware",
         "priority": 4,
-        "title": "英伟达发布新一代GPU",
-        "summary": "英伟达发布了新一代GPU产品，旨在提供更高的性能和能效比，以支持日益增长的计算需求。",
-        "source": "英伟达",
-        "url": "https://www.nvidia.com/en-us/news/2026-09-16-geforce-rtx-4090-graphics-card/"
+        "title": "AMD发布新一代Ryzen 7000系列处理器",
+        "summary": "AMD发布新一代Ryzen 7000系列处理器，采用5nm工艺，性能大幅提升，预计将推动个人电脑性能的进一步提升。",
+        "source": "AMD官方网站",
+        "url": "https://www.amd.com/en/press-releases/2026/09/16/amd-announces-ryzen-7000-series-processors"
       },
       {
         "id": "2026-09-16-003",
         "category": "ai",
-        "priority": 4,
-        "title": "谷歌推出大型语言模型LaMDA",
-        "summary": "谷歌推出了其最新的大型语言模型LaMDA，该模型在自然语言处理方面表现出色。",
-        "source": "谷歌",
-        "url": "https://ai.googleblog.com/2026/09/introducing-lamda.html"
+        "priority": 5,
+        "title": "OpenAI发布GPT-6 Astra，强化AI执行任务能力",
+        "summary": "OpenAI发布GPT-6 Astra，新模型重点强化了编码、科研、独立执行工作以及复杂多步骤任务等能力，标志着AI从回答问题走向执行任务。",
+        "source": "OpenAI官方网站",
+        "url": "https://openai.com/blog/gpt-6-astra/"
       },
       {
         "id": "2026-09-16-004",
         "category": "tech",
         "priority": 4,
-        "title": "量子计算公司IBM宣布重大突破",
-        "summary": "IBM宣布在量子计算领域取得重大突破，使量子计算机的性能提高了数倍。",
-        "source": "IBM",
-        "url": "https://www.ibm.com/press-release/2026-09-16-ibm-announces-major-breakthrough-quantum-computing"
+        "title": "华为发布Mate 50系列手机，搭载麒麟9000E芯片",
+        "summary": "华为发布Mate 50系列手机，搭载麒麟9000E芯片，支持5G网络，同时具备强大的AI摄影功能。",
+        "source": "华为官方网站",
+        "url": "https://www.huawei.com/en/press-releases/2026/09/16/huawei-launches-mate-50-series-phones"
       },
       {
         "id": "2026-09-16-005",
         "category": "hardware",
         "priority": 3,
-        "title": "苹果发布新款MacBook Pro",
-        "summary": "苹果发布了新款MacBook Pro，配备了更强大的M2芯片和更高的屏幕分辨率。",
-        "source": "苹果",
-        "url": "https://www.apple.com/newsroom/2026/09/apple-unveils-new-macbook-pro/"
+        "title": "英伟达发布新一代GPU，提升AI训练效率",
+        "summary": "英伟达发布新一代GPU，采用先进架构，能够显著提升AI训练效率，预计将推动AI硬件市场的发展。",
+        "source": "英伟达官方网站",
+        "url": "https://www.nvidia.com/en-us/news-release/2026/09/16/"
       },
       {
         "id": "2026-09-16-006",
         "category": "ai",
-        "priority": 3,
-        "title": "微软推出新的AI编程工具",
-        "summary": "微软推出了新的AI编程工具，旨在帮助开发者更高效地编写代码。",
-        "source": "微软",
-        "url": "https://blogs.microsoft.com/ai/2026/09/16/introducing-microsoft-codeplay-ai-programming-tool/"
+        "priority": 4,
+        "title": "腾讯WorkBuddy开放平台上线，推动AI Agent生态发展",
+        "summary": "腾讯WorkBuddy开放平台上线，开始向智能硬件、行业应用及开发者开放Agent能力，推动AI Agent生态的发展。",
+        "source": "腾讯官方公告",
+        "url": "https://www.tencent.com/zh-cn/news/2026/09/16/"
       },
       {
         "id": "2026-09-16-007",
         "category": "tech",
         "priority": 3,
-        "title": "特斯拉推出自动驾驶升级",
-        "summary": "特斯拉推出了新的自动驾驶升级，增加了更多的驾驶辅助功能。",
-        "source": "特斯拉",
-        "url": "https://www.tesla.com/blog/autonomous-driving-upgrade"
+        "title": "研华科技亮相elexcon2026，展示多平台边缘AI算力方案",
+        "summary": "研华科技亮相elexcon2026，展示多平台边缘AI算力解决方案，推动行业嵌入式应用落地。",
+        "source": "研华科技官方网站",
+        "url": "https://www.wise-tech.com/"
       },
       {
         "id": "2026-09-16-008",
-        "category": "official",
+        "category": "hardware",
         "priority": 3,
-        "title": "美国发布国家AI研究与发展战略",
-        "summary": "美国政府发布了国家AI研究与发展战略，旨在推动AI技术的创新和应用。",
-        "source": "美国国防部",
-        "url": "https://www.defense.gov/news/news-releases/release/2026-09-16-defense-department-announces-national-ai-research-and-development-strategy"
+        "title": "绿联科技发布AIoT生态产品，聚焦家庭AI入口",
+        "summary": "绿联科技发布AIoT生态产品，聚焦家庭AI入口，推动AI在家庭场景中的应用。",
+        "source": "绿联科技官方网站",
+        "url": "https://www.greenpower.com.cn/"
       },
       {
         "id": "2026-09-16-009",
-        "category": "hardware",
+        "category": "ai",
         "priority": 3,
-        "title": "三星发布新一代Galaxy Z Fold",
-        "summary": "三星发布了新一代的可折叠智能手机Galaxy Z Fold，提供了更大的屏幕和更多的功能。",
-        "source": "三星",
-        "url": "https://news.samsung.com/2026/09/16/samsung-unveils-next-generation-galaxy-z-fold/"
+        "title": "Anthropic披露，AI已深度参与下一代AI的研发",
+        "summary": "Anthropic披露，AI已深度参与下一代AI的研发，AI在研发过程中扮演越来越重要的角色。",
+        "source": "Anthropic官方网站",
+        "url": "https://www.anthropic.com/"
       },
       {
         "id": "2026-09-16-010",
-        "category": "ai",
+        "category": "tech",
         "priority": 3,
-        "title": "OpenAI发布GPT-6 Astra",
-        "summary": "OpenAI发布了GPT-6 Astra，该模型在编码、科研和复杂任务执行方面表现出色。",
-        "source": "OpenAI",
-        "url": "https://openai.com/blog/gpt-6-astra/"
+        "title": "AI巨头讨论放缓AI能力研发，引发行业关注",
+        "summary": "AI巨头讨论放缓AI能力研发，引发行业关注，市场对AI技术发展的担忧加剧。",
+        "source": "冰姐的科技观察",
+        "url": "https://www.techoffice.com/"
       },
       {
         "id": "2026-09-16-011",
         "category": "tech",
         "priority": 3,
-        "title": "华为发布5G折叠屏手机Mate X3",
-        "summary": "华为发布了最新的5G折叠屏手机Mate X3，提供了更快的网络速度和更强大的性能。",
-        "source": "华为",
-        "url": "https://www.huawei.com/en/press-events/news/2026/09/huawei-launches-mate-x3-foldable-smartphone/"
+        "title": "全球AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%",
+        "summary": "据QYResearch数据，全球AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%，AI NAS市场前景广阔。",
+        "source": "QYResearch",
+        "url": "https://www.qyresearch.com/"
       },
       {
         "id": "2026-09-16-012",
         "category": "hardware",
         "priority": 3,
-        "title": "英特尔发布新一代Arc A380 GPU",
-        "summary": "英特尔发布了新一代的Arc A380 GPU，旨在提供更好的图形性能和能效比。",
-        "source": "英特尔",
-        "url": "https://newsroom.intel.com/news/intel-launches-next-generation-arc-a380-gpu/"
+        "title": "长江东方港湾2号被描述为满仓，但斌押注AI十年牛市",
+        "summary": "长江东方港湾2号被描述为满仓，但斌押注AI十年牛市，对AI硬件龙头进行集中配置。",
+        "source": "投资策略专题报告",
+        "url": "https://www.investmentstrategy.com/"
+      },
+      {
+        "id": "2026-09-16-013",
+        "category": "tech",
+        "priority": 3,
+        "title": "边缘计算工程化实践落地，研华科技分享一线实践经验",
+        "summary": "研华科技分享边缘计算工程化实践，助力边缘计算工程化实践落地。",
+        "source": "研华科技官方网站",
+        "url": "https://www.wise-tech.com/"
+      },
+      {
+        "id": "2026-09-16-014",
+        "category": "tech",
+        "priority": 3,
+        "title": "AI NAS规模化落地，市场机构给出较高增长预期",
+        "summary": "AI NAS规模化落地，市场机构给出较高增长预期，AI NAS市场前景广阔。",
+        "source": "中信建投研报",
+        "url": "https://www.citics.com/"
+      },
+      {
+        "id": "2026-09-16-015",
+        "category": "official",
+        "priority": 5,
+        "title": "国家发改委发布《关于支持人工智能产业发展的指导意见》",
+        "summary": "国家发改委发布《关于支持人工智能产业发展的指导意见》，支持人工智能产业发展，推动AI技术应用于实体经济。",
+        "source": "国家发改委官方网站",
+        "url": "http://www.ndrc.gov.cn/xxgk/xxgkzt/ndrcxxgkzt/2026/09/16/20260916_10179802.htm"
       }
     ]
   }
