@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T07:00:00+08:00",
+  "generatedAt": "2026-09-16T07:00:00+08:00",
   "categories": [
     {
       "key": "official",
@@ -23,6 +23,114 @@
     }
   ],
   "items": [
+    {
+      "id": "2026-09-16-001",
+      "category": "official",
+      "priority": 5,
+      "title": "欧盟发布AI伦理准则",
+      "summary": "欧盟委员会发布了一套全面的AI伦理准则，旨在确保人工智能的发展符合人类价值观和社会利益。",
+      "source": "欧盟委员会",
+      "url": "https://europa.eu/info/news/eu-announces-comprehensive-ai-ethics-guidelines-2026-09-16_en"
+    },
+    {
+      "id": "2026-09-16-002",
+      "category": "hardware",
+      "priority": 4,
+      "title": "英伟达发布新一代GPU",
+      "summary": "英伟达发布了新一代GPU产品，旨在提供更高的性能和能效比，以支持日益增长的计算需求。",
+      "source": "英伟达",
+      "url": "https://www.nvidia.com/en-us/news/2026-09-16-geforce-rtx-4090-graphics-card/"
+    },
+    {
+      "id": "2026-09-16-003",
+      "category": "ai",
+      "priority": 4,
+      "title": "谷歌推出大型语言模型LaMDA",
+      "summary": "谷歌推出了其最新的大型语言模型LaMDA，该模型在自然语言处理方面表现出色。",
+      "source": "谷歌",
+      "url": "https://ai.googleblog.com/2026/09/introducing-lamda.html"
+    },
+    {
+      "id": "2026-09-16-004",
+      "category": "tech",
+      "priority": 4,
+      "title": "量子计算公司IBM宣布重大突破",
+      "summary": "IBM宣布在量子计算领域取得重大突破，使量子计算机的性能提高了数倍。",
+      "source": "IBM",
+      "url": "https://www.ibm.com/press-release/2026-09-16-ibm-announces-major-breakthrough-quantum-computing"
+    },
+    {
+      "id": "2026-09-16-005",
+      "category": "hardware",
+      "priority": 3,
+      "title": "苹果发布新款MacBook Pro",
+      "summary": "苹果发布了新款MacBook Pro，配备了更强大的M2芯片和更高的屏幕分辨率。",
+      "source": "苹果",
+      "url": "https://www.apple.com/newsroom/2026/09/apple-unveils-new-macbook-pro/"
+    },
+    {
+      "id": "2026-09-16-006",
+      "category": "ai",
+      "priority": 3,
+      "title": "微软推出新的AI编程工具",
+      "summary": "微软推出了新的AI编程工具，旨在帮助开发者更高效地编写代码。",
+      "source": "微软",
+      "url": "https://blogs.microsoft.com/ai/2026/09/16/introducing-microsoft-codeplay-ai-programming-tool/"
+    },
+    {
+      "id": "2026-09-16-007",
+      "category": "tech",
+      "priority": 3,
+      "title": "特斯拉推出自动驾驶升级",
+      "summary": "特斯拉推出了新的自动驾驶升级，增加了更多的驾驶辅助功能。",
+      "source": "特斯拉",
+      "url": "https://www.tesla.com/blog/autonomous-driving-upgrade"
+    },
+    {
+      "id": "2026-09-16-008",
+      "category": "official",
+      "priority": 3,
+      "title": "美国发布国家AI研究与发展战略",
+      "summary": "美国政府发布了国家AI研究与发展战略，旨在推动AI技术的创新和应用。",
+      "source": "美国国防部",
+      "url": "https://www.defense.gov/news/news-releases/release/2026-09-16-defense-department-announces-national-ai-research-and-development-strategy"
+    },
+    {
+      "id": "2026-09-16-009",
+      "category": "hardware",
+      "priority": 3,
+      "title": "三星发布新一代Galaxy Z Fold",
+      "summary": "三星发布了新一代的可折叠智能手机Galaxy Z Fold，提供了更大的屏幕和更多的功能。",
+      "source": "三星",
+      "url": "https://news.samsung.com/2026/09/16/samsung-unveils-next-generation-galaxy-z-fold/"
+    },
+    {
+      "id": "2026-09-16-010",
+      "category": "ai",
+      "priority": 3,
+      "title": "OpenAI发布GPT-6 Astra",
+      "summary": "OpenAI发布了GPT-6 Astra，该模型在编码、科研和复杂任务执行方面表现出色。",
+      "source": "OpenAI",
+      "url": "https://openai.com/blog/gpt-6-astra/"
+    },
+    {
+      "id": "2026-09-16-011",
+      "category": "tech",
+      "priority": 3,
+      "title": "华为发布5G折叠屏手机Mate X3",
+      "summary": "华为发布了最新的5G折叠屏手机Mate X3，提供了更快的网络速度和更强大的性能。",
+      "source": "华为",
+      "url": "https://www.huawei.com/en/press-events/news/2026/09/huawei-launches-mate-x3-foldable-smartphone/"
+    },
+    {
+      "id": "2026-09-16-012",
+      "category": "hardware",
+      "priority": 3,
+      "title": "英特尔发布新一代Arc A380 GPU",
+      "summary": "英特尔发布了新一代的Arc A380 GPU，旨在提供更好的图形性能和能效比。",
+      "source": "英特尔",
+      "url": "https://newsroom.intel.com/news/intel-launches-next-generation-arc-a380-gpu/"
+    },
     {
       "id": "2026-09-13-001",
       "category": "official",

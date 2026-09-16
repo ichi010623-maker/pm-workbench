@@ -781,7 +781,63 @@
         "content": "Establishing a daily routine can help you stay organized and focused. Consistency in your daily activities improves productivity.",
         "translation": "建立日常例行程序可以帮助你保持有条理和专注。你在日常活动中的持续性可以提高生产力。"
       }
+    ],
+    "2026-09-16": [
+      {
+        "level": "入门",
+        "title": "Robotics Basics",
+        "content": "Robots are machines that can perform tasks automatically. They are used in various fields like manufacturing and healthcare.",
+        "translation": "机器人是能够自动执行任务的机器。它们被用于各种领域，如制造业和医疗保健。"
+      },
+      {
+        "level": "进阶",
+        "title": "Smart Cities",
+        "content": "Smart cities use technology to improve quality of life. Sensors and apps help manage traffic, energy, and more.",
+        "translation": "智慧城市利用技术来改善生活质量。传感器和应用程序帮助管理交通、能源等。"
+      },
+      {
+        "level": "挑战",
+        "title": "Cooking with Herbs",
+        "content": "Herbs add flavor to dishes without many calories. They are also rich in nutrients and can boost your health.",
+        "translation": "香草可以为菜肴增添风味而不增加很多卡路里。它们还富含营养，可以促进你的健康。"
+      },
+      {
+        "level": "入门",
+        "title": "Travel Safety",
+        "content": "When traveling, always check the weather forecast. It helps you pack the right clothes and avoid bad weather.",
+        "translation": "在旅行时，总是检查天气预报。它有助于你打包合适的衣服，避免恶劣天气。"
+      },
+      {
+        "level": "进阶",
+        "title": "Mind Mapping",
+        "content": "Mind mapping is a visual technique for organizing thoughts. It helps in brainstorming and planning projects.",
+        "translation": "思维导图是一种视觉化的组织思想的技术。它有助于头脑风暴和项目规划。"
+      },
+      {
+        "level": "挑战",
+        "title": "Sustainable Fashion",
+        "content": "Sustainable fashion focuses on eco-friendly materials and ethical production. It's a growing trend in the industry.",
+        "translation": "可持续时尚注重环保材料和道德生产。这是该行业的一个增长趋势。"
+      },
+      {
+        "level": "入门",
+        "title": "Healthy Habits",
+        "content": "Regular exercise and a balanced diet are key to a healthy lifestyle. They help prevent diseases and improve mood.",
+        "translation": "定期锻炼和均衡饮食是健康生活方式的关键。它们有助于预防疾病和提高情绪。"
+      },
+      {
+        "level": "进阶",
+        "title": "Cultural Exchange",
+        "content": "Cultural exchange promotes understanding between different societies. It can be through language learning or international travel.",
+        "translation": "文化交流促进了不同社会之间的理解。它可以通过语言学习或国际旅行来实现。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Science of Sleep",
+        "content": "Sleep is crucial for physical and mental health. Understanding sleep cycles can improve sleep quality and energy levels.",
+        "translation": "睡眠对身心健康至关重要。了解睡眠周期可以提高睡眠质量和精力水平。"
+      }
     ]
   },
-  "updatedAt": "2026-09-13T15:54:00+08:00"
+  "updatedAt": "2026-09-16T11:23:00+08:00"
 }
