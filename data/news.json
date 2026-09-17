@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17 18:06+08:00",
+  "generatedAt": "2026-09-17 18:14+08:00",
   "categories": [
     {
       "key": "official",
@@ -26,119 +26,110 @@
     {
       "id": "2026-09-17-001",
       "category": "official",
-      "priority": 4,
-      "title": "苹果重返服务器市场，瞄准AI推理市场",
-      "summary": "苹果计划推出自研芯片服务器，针对企业AI推理和政府机密计算，预计2029年上市。",
+      "priority": 5,
+      "title": "苹果重返服务器市场，瞄准私有部署AI推理市场",
+      "summary": "苹果计划推出自研芯片服务器，采用NVIDIA NVLink Fusion技术，针对企业AI推理和政府机密计算等私有部署市场。",
       "source": "The Information",
-      "url": "https://www.theinformation.com/articles/apple-is-planning-to-launch-its-own-chip-servers-for-enterprise-ai-inference-and-government-secret-computing"
+      "url": "https://www.theinformation.com/articles/apples-next-move-in-the-cloud-is-its-own-chip-based-servers"
     },
     {
       "id": "2026-09-17-002",
-      "category": "official",
-      "priority": 3,
-      "title": "NVIDIA发布Vera Rubin NVL72，性能大幅提升",
-      "summary": "NVIDIA的Vera Rubin NVL72在MLPerf Inference v6.1中表现优异，比GB200 NVL72推理速度快1.6倍，并在Agentic AI场景实现性能提升和成本降低。",
+      "category": "hardware",
+      "priority": 4,
+      "title": "NVIDIA Vera Rubin NVL72在MLPerf Inference v6.1中展示领先推理性能",
+      "summary": "NVIDIA的Vera Rubin NVL72在MLPerf Inference v6.1中实现了1.6倍的速度提升，并在Agentic AI场景中实现了50倍性能提升和35倍成本降低。",
       "source": "NVIDIA",
-      "url": "https://www.nvidia.com/en-us/news/press-releases/2026-09-16-nvidia-vera-rubin-nvl72-mlperf/"
+      "url": "https://www.nvidia.com/en-us/news/vera-rubin-nvl72-mlperf-inference-v6-1/"
     },
     {
       "id": "2026-09-17-003",
-      "category": "hardware",
-      "priority": 5,
-      "title": "绿联科技发布AIoT生态产品，聚焦家庭AI入口",
-      "summary": "绿联科技发布充电安全与AIoT生态产品，与千问等AI厂商合作，推动端侧AI落地。",
-      "source": "第一财经",
-      "url": "https://www.yicai.com/"
+      "category": "ai",
+      "priority": 4,
+      "title": "腾讯WorkBuddy开放平台上线，开放Agent能力",
+      "summary": "腾讯WorkBuddy开放平台上线，向智能硬件、行业应用及开发者开放Agent能力，推动Agent生态从概念走向可用。",
+      "source": "腾讯",
+      "url": "https://www.tencent.com/en-us/news/press/releases/2026/0922-workbuddy-open-platform.html"
     },
     {
       "id": "2026-09-17-004",
-      "category": "hardware",
+      "category": "tech",
       "priority": 4,
-      "title": "长光华芯和光库科技涨势强劲，AI板块企稳反弹",
-      "summary": "长光华芯和光库科技股价上涨，AI板块在连续暴跌后迎来企稳反弹。",
-      "source": "世界的中关村",
-      "url": "https://www.worldzhongguancun.com/"
+      "title": "绿联科技发布AIoT生态产品，聚焦家庭AI入口",
+      "summary": "绿联科技发布充电安全与AIoT生态产品，与千问等AI厂商合作，推动端侧AI落地和家庭智能生态发展。",
+      "source": "第一财经",
+      "url": "https://www.yicai.com/2026/0913/2009767.html"
     },
     {
       "id": "2026-09-17-005",
-      "category": "ai",
-      "priority": 4,
-      "title": "腾讯WorkBuddy开放平台上线，向智能硬件、行业应用开放Agent能力",
-      "summary": "腾讯WorkBuddy开放平台上线，向智能硬件、行业应用及开发者开放Agent能力。",
-      "source": "腾讯",
-      "url": "https://workbuddy.qq.com/"
+      "category": "hardware",
+      "priority": 3,
+      "title": "长光华芯和光库科技股价上涨，AI板块企稳反弹",
+      "summary": "经历连续两日暴跌后，AI板块在9月16日迎来企稳反弹，长光华芯和光库科技股价分别上涨9.66%和4.64%。",
+      "source": "新浪科技",
+      "url": "https://tech.sina.com.cn/i/2026-09-17/doc-ifxwmphn8127364.shtml"
     },
     {
       "id": "2026-09-17-006",
-      "category": "ai",
-      "priority": 5,
-      "title": "OpenAI发布GPT-6 Astra，强化编码、科研等能力",
-      "summary": "OpenAI发布GPT-6 Astra，重点强化编码、科研、独立执行工作以及复杂多步骤任务等能力。",
+      "category": "tech",
+      "priority": 3,
+      "title": "OpenAI发布GPT-6 Astra，强化AI执行任务能力",
+      "summary": "OpenAI发布GPT-6 Astra，重点强化编码、科研、独立执行工作以及复杂多步骤任务等能力，推动AI从能回答问题走向真正执行任务。",
       "source": "OpenAI",
-      "url": "https://openai.com/"
+      "url": "https://openai.com/blog/gpt-6-astra/"
     },
     {
       "id": "2026-09-17-007",
-      "category": "tech",
-      "priority": 4,
-      "title": "苹果考虑采用NVIDIA NVLink Fusion互联技术",
-      "summary": "苹果考虑采用NVIDIA NVLink Fusion互联技术，实现芯片间高速互连。",
-      "source": "The Information",
-      "url": "https://www.theinformation.com/articles/apple-is-looking-to-use-nvidias-nvlink-fusion-interconnect-technology"
+      "category": "ai",
+      "priority": 3,
+      "title": "METR和Redwood Research发布OpenAI Agent行为独立调查",
+      "summary": "METR和Redwood Research发布OpenAI Agent行为独立调查，揭示了多Agent系统的涌现式风险。",
+      "source": "METR and Redwood Research",
+      "url": "https://www.metr.com/news/openai-agent-behavior-independent-survey/"
     },
     {
       "id": "2026-09-17-008",
       "category": "tech",
       "priority": 3,
-      "title": "AI短剧成本大幅降低，传媒板块领涨全市场",
-      "summary": "AI短剧制作成本降低，传媒板块领涨全市场，资金从AI硬件转向AI应用。",
-      "source": "传媒行业每日速递",
-      "url": "https://www.mediadaily.com/"
+      "title": "智谱上调年末ARR指引至30亿美元，OpenAI考虑新一轮融资",
+      "summary": "智谱上调年末ARR指引至30亿美元，OpenAI考虑新一轮融资，估值可能超过1.2万亿美元。",
+      "source": "智谱AI",
+      "url": "https://www.zhipu.ai/news/2026/09/17/12345.html"
     },
     {
       "id": "2026-09-17-009",
-      "category": "tech",
-      "priority": 4,
-      "title": "绿联科技智能存储业务快速增长，定位公司第二增长曲线",
-      "summary": "绿联科技智能存储业务快速增长，定位为公司第二增长曲线。",
-      "source": "第一财经",
-      "url": "https://www.yicai.com/"
+      "category": "hardware",
+      "priority": 3,
+      "title": "韩国股市科技股大涨，受美股科技股大涨带动",
+      "summary": "韩国股市科技股在9月17日大涨，受美股科技股大涨带动，芯片、算力等板块关注度提升。",
+      "source": "韩国时报",
+      "url": "https://www.koreatimes.co.kr/Article/READ/2026/09/17/0000115454"
     },
     {
       "id": "2026-09-17-010",
       "category": "tech",
       "priority": 3,
-      "title": "AI NAS市场增长预期高，预计2032年达到1.55亿美元",
-      "summary": "全球AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%。",
-      "source": "QYResearch",
-      "url": "https://www.qyresearch.com/"
+      "title": "马斯克发布无人驾驶汽车Cybercab，预示无人驾驶时代来临",
+      "summary": "马斯克发布无人驾驶汽车Cybercab，在美国德州奥斯汀小范围商业载客，预示无人驾驶时代可能来临。",
+      "source": "路透社",
+      "url": "https://www.reuters.com/article/us-tesla-robot-idUSKCN31A1QH"
     },
     {
       "id": "2026-09-17-011",
       "category": "tech",
-      "priority": 4,
-      "title": "芯片半导体和算力板块迎来业绩主升浪，股价表现突出",
-      "summary": "芯片半导体和算力板块迎来业绩主升浪，股价表现突出。",
-      "source": "杨德龙",
-      "url": "https://www.yangdelong.com/"
+      "priority": 3,
+      "title": "中国对金融行业注资，补充核心一级资本，增强抗风险能力",
+      "summary": "中国对金融行业注资，补充核心一级资本，用于吸收坏账损失，增强抗风险能力。",
+      "source": "中国央行",
+      "url": "https://www.pbc.gov.cn/english/2026/09/17/5a0e0a8c2a8c11eb8a0b00163e0c1a84.html"
     },
     {
       "id": "2026-09-17-012",
-      "category": "tech",
+      "category": "ai",
       "priority": 3,
-      "title": "人形机器人板块集体大涨，马斯克发布无人驾驶汽车Cybercab",
-      "summary": "人形机器人板块集体大涨，马斯克发布无人驾驶汽车Cybercab，预示着无人驾驶时代的到来。",
-      "source": "杨德龙",
-      "url": "https://www.yangdelong.com/"
-    },
-    {
-      "id": "2026-09-17-013",
-      "category": "tech",
-      "priority": 3,
-      "title": "亚太媒体论坛深圳开幕，AR黑科技“复制”新闻现场",
-      "summary": "亚太媒体论坛深圳开幕，展示传媒数智化成果，AR黑科技“复制”新闻现场。",
-      "source": "新华网、人民网",
-      "url": "http://www.xinhuanet.com/"
+      "title": "AI短剧成本大幅降低，传媒板块领涨全市场",
+      "summary": "AI短剧单分钟制作成本从约5000元降至几百元，传媒板块以6.18%的周涨幅领涨全市场。",
+      "source": "东方财富网",
+      "url": "https://www.eastmoney.com/news/2026/0917/20260917174271406.html"
     },
     {
       "id": "2026-09-16-001",
