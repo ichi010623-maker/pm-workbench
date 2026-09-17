@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.146";
+var APP_VERSION = "5.9.147";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -6441,8 +6441,13 @@ async function initApp() {
     GitHubGistSync.start();
   }
 
-  // Register Service Worker
-  SWManager.register();
+  // v5.9.147: SW 已废弃（导致 CSS 缓存顽固问题），不注册 + 主动 unregister 任何已注册 SW
+  try { SWManager.unregister && SWManager.unregister(); } catch (e) {}
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function (rs) {
+      rs.forEach(function (r) { try { r.unregister(); } catch (e) {} });
+    }).catch(function () {});
+  }
 
   // Fetch live financial data (news + review) - async, non-blocking
   LiveData.fetchAll().then(function() {

@@ -1,33 +1,56 @@
 /* ============================================
    硬件PM工作台 Service Worker
-   v5.9.146 - 强制清旧 CSS/JS 缓存 + 版本化资源 cache-buster
+   v5.9.147 - 彻底禁用 SW（unregister + skipWaiting + 清所有缓存）
 
-   设计目标（按优先级）：
-   1. 有网 → 永远拿最新（network-first，绝不锁死旧版本）
-   2. 无网/弱网 → 回退缓存，至少能打开上次成功访问过的版本（离线可用）
-   3. 版本升级 → 新 SW 立即接管 + 清旧缓存（含当前 CACHE_NAME 也清，
-      强制所有版本化资源重新下载——根除"改了 CSS 看不到"的 bug）
-   4. 故障自救 → ?reset=1 一键清 SW + 清缓存
+   根因：v5.9.142~146 反复 deploy + bump 后，部分用户（PWA 模式 +
+   旧 SW 还在 serve）仍看不到 CSS 变更——SW 缓存层和 iOS PWA
+   的 SW 接管 timing 共同导致的顽固缓存问题。
+
+   v5.9.147 决断：彻底废弃 SW，浏览器直连所有资源。
+   - CSS 文件名永久化（css/style.v5.9.147.css）——URL 不同 = 浏览器
+     必重新拉，绕开 disk cache
+   - sw.js 唯一职责：清掉所有旧 SW + 缓存 + unregister 自身
+   - 后续版本如需重新启用 SW，再加回来
    ============================================ */
 
-const CACHE_VERSION = "v5.9.146";
+const CACHE_VERSION = "v5.9.147";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 8000;
 
-// ===== Install: 清掉所有旧 cache（包括当前 CACHE_NAME，强制重新拉所有版本化资源）=====
+// ===== Install: 清掉所有 pm-workbench-* 缓存 + unregister 自身 =====
 self.addEventListener("install", function (event) {
-  console.log("[SW] Installing " + CACHE_VERSION + " [force-clear all versioned caches]");
+  console.log("[SW] v5.9.147 DISABLE: clearing all caches + unregistering");
   event.waitUntil(
     caches.keys().then(function (keys) {
-      // v5.9.146: 把所有 pm-workbench-* 缓存全删了（不只是旧的），
-      // 强制浏览器从网络重新拉 css/style.css?v=5.9.146 等版本化资源
       return Promise.all(
         keys.filter(function (k) { return k.indexOf("pm-workbench-") === 0; }).map(function (k) {
-          console.log("[SW] Force-delete (install):", k);
+          console.log("[SW] DISABLE delete cache:", k);
           return caches.delete(k);
         })
       );
     }).then(function () {
+      return self.skipWaiting();
+    })
+  );
+});
+
+// ===== Activate: 立即 unregister 自身 + 接管 =====
+self.addEventListener("activate", function (event) {
+  console.log("[SW] v5.9.147 DISABLE: unregistering self");
+  event.waitUntil(
+    self.registration.unregister().then(function () {
+      return self.clients.matchAll();
+    }).then(function (clients) {
+      clients.forEach(function (client) { try { client.navigate(client.url); } catch (e) {} });
+    })
+  );
+});
+
+// ===== Fetch: 全部直连（不再 cache 任何东西）=====
+self.addEventListener("fetch", function (event) {
+  // 故意不调用 event.respondWith —— 走默认网络行为
+  // 但因为激活后会 unregister，所以 SW 也不再有 fetch 拦截
+});
       return caches.open(CACHE_NAME).then(function (cache) {
         return cache.addAll(["./manifest.json"]).catch(function (e) {
           console.log("[SW] precache skipped:", e && e.message);
