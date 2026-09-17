@@ -837,7 +837,63 @@
         "content": "Sleep is crucial for physical and mental health. Understanding sleep cycles can improve sleep quality and energy levels.",
         "translation": "睡眠对身心健康至关重要。了解睡眠周期可以提高睡眠质量和精力水平。"
       }
+    ],
+    "2026-09-17": [
+      {
+        "level": "入门",
+        "title": "Smartphones",
+        "content": "Smartphones have become an essential part of our daily lives. They help us stay connected and access information quickly.",
+        "translation": "智能手机已经成为我们日常生活的重要组成部分。它们帮助我们保持联系并快速获取信息。"
+      },
+      {
+        "level": "进阶",
+        "title": "Cooking with Herbs",
+        "content": "Herbs add flavor to dishes without extra calories. They are a healthy alternative to salt and sugar.",
+        "translation": "香草可以为菜肴增添风味而不增加额外的卡路里。它们是盐和糖的健康替代品。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Solar System",
+        "content": "The solar system consists of the sun, eight planets, and many moons. It is a fascinating part of our universe.",
+        "translation": "太阳系由太阳、八大行星和许多卫星组成。它是我们宇宙中一个迷人的部分。"
+      },
+      {
+        "level": "入门",
+        "title": "Public Transportation",
+        "content": "Using public transportation is a great way to save money and reduce traffic congestion.",
+        "translation": "使用公共交通是省钱和减少交通拥堵的好方法。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Importance of Sleep",
+        "content": "Sleep is crucial for physical and mental health. It helps us recharge and perform better.",
+        "translation": "睡眠对身心健康至关重要。它帮助我们充电并表现更好。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Brain",
+        "content": "The brain is a complex organ that controls our thoughts, emotions, and actions. It is the most powerful organ in our body.",
+        "translation": "大脑是一个复杂的器官，它控制着我们的思想、情感和行为。它是我们身体中最强大的器官。"
+      },
+      {
+        "level": "入门",
+        "title": "Art Museums",
+        "content": "Art museums are places where we can learn about different cultures and artistic styles.",
+        "translation": "艺术博物馆是我们了解不同文化和艺术风格的地方。"
+      },
+      {
+        "level": "进阶",
+        "title": "The Ocean",
+        "content": "The ocean covers most of the Earth's surface and is home to millions of species. It is essential for our survival.",
+        "translation": "海洋覆盖了地球的大部分表面，是数百万种生物的家园。它是我们生存的关键。"
+      },
+      {
+        "level": "挑战",
+        "title": "The Human Body",
+        "content": "The human body is an intricate system of organs and tissues that work together to keep us alive. It is a marvel of nature.",
+        "translation": "人体是一个由器官和组织构成的复杂系统，它们共同工作以维持我们的生命。它是自然的奇迹。"
+      }
     ]
   },
-  "updatedAt": "2026-09-16T11:23:00+08:00"
+  "updatedAt": "2026-09-17T17:50:00+08:00"
 }
