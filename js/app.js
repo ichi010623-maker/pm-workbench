@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.143";
+var APP_VERSION = "5.9.141";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -3806,10 +3806,11 @@ function copyAppVersion() {
 function openWebDavGuide() {
   var html = '<div class="nv-form"><div class="nv-form-h">☁️ 5 分钟部署坚果云 WebDAV 同步</div>' +
     '<div class="nv-form-intro">完全免费（坚果云 1GB/月 + Cloudflare 10 万次/天）。需要 1 个 Cloudflare 账号 + 1 个坚果云账号。</div>' +
-    '<div class="nv-card-sec"><div class="nv-card-label">第 1 步 · 部署 Cloudflare Worker 代理</div><div class="nv-card-val">1) 登录 <a href="https://dash.cloudflare.com" target="_blank" style="color:var(--accent-blue)">Cloudflare 仪表板</a> → Workers & Pages → Create Worker\n2) 粘贴代码（<a href="https://github.com/ichi010623-maker/pm-workbench/raw/main/cloud/webdav-proxy-template.js" target="_blank" style="color:var(--accent-blue)">点此下载模板</a>）→ Deploy\n3) 复制 Worker URL（形如 https://xxx.workers.dev）填入上方"代理地址"</div></div>' +
-    '<div class="nv-card-sec"><div class="nv-card-label">第 2 步 · 生成坚果云应用密码</div><div class="nv-card-val">1) 登录 <a href="https://www.jianguoyun.com" target="_blank" style="color:var(--accent-blue)">坚果云网页版</a> → 右上角头像 → 账户信息\n2) 安全 → 应用授权密码 → 添加授权\n3) 名称任意（如"工作台"）→ 生成\n4) 把生成的密码填入"应用密码"（非登录密码）</div></div>' +
-    '<div class="nv-card-sec"><div class="nv-card-label">第 3 步 · 填表启用</div><div class="nv-card-val">把代理地址、坚果云账号、应用密码填入上方表单 → 勾选"启用自动同步" → 保存 → 测试连接</div></div>' +
-    '<div class="nv-card-sec" style="background:rgba(16,185,129,0.06)"><div class="nv-card-label" style="color:#059669">✅ 工作原理</div><div class="nv-card-val">浏览器不直接连坚果云（无 CORS），而是通过你的 Worker 代理；Worker 用 Basic Auth 调用坚果云 WebDAV API；备份文件 = pm-backup.json，存在坚果云指定目录里；所有数据 0 离开你的坚果云账号。</div></div>' +
+    '<div class="nv-card-sec"><div class="nv-card-label">第 1 步 · 部署 Cloudflare Worker 代理</div><div class="nv-card-val">1) 登录 <a href="https://dash.cloudflare.com" target="_blank" style="color:var(--accent-blue)">Cloudflare 仪表板</a> → Workers & Pages → Create Worker\n2) 打开 <a href="https://ichi010623-maker.github.io/pm-workbench-site/cloud/webdav-proxy-template.js" target="_blank" style="color:var(--accent-blue)">Worker 模板</a> → Ctrl+A 复制 → 粘贴到 Cloudflare 编辑器 → Save and Deploy\n3) 顶部 Settings → Variables → Add 两个变量：NUTSTORE_USER = 登录邮箱/手机；NUTSTORE_APP_PASS = 见第 2 步的密码\n4) Deployments → 复制 Worker URL（形如 https://xxx.workers.dev）</div></div>' +
+    '<div class="nv-card-sec"><div class="nv-card-label">第 2 步 · 生成坚果云应用授权密码</div><div class="nv-card-val">1) 登录 <a href="https://www.jianguoyun.com" target="_blank" style="color:var(--accent-blue)">坚果云网页版</a> → 右上角头像 → 账户信息\n2) 左侧安全 → 第三方应用授权密码 → 添加\n3) 名称填"工作台"（任意）→ 提交 → 复制生成的密码（<b>只显示一次</b>，丢失则撤销重发）\n4) 回到 Cloudflare 把这串密码填到 NUTSTORE_APP_PASS 变量</div></div>' +
+    '<div class="nv-card-sec"><div class="nv-card-label">第 3 步 · 在 PWA 配置并启用</div><div class="nv-card-val">把 Worker URL、坚果云账号、应用密码填入上方表单 → 勾选"启用自动同步" → 💾 保存 → 🔌 测试连接 → 看到 ✅ 即生效</div></div>' +
+    '<div class="nv-card-sec" style="background:rgba(16,185,129,0.06)"><div class="nv-card-label" style="color:#059669">📖 完整图文指南</div><div class="nv-card-val"><a href="https://ichi010623-maker.github.io/pm-workbench-site/cloud/README-storage.md" target="_blank" style="color:var(--accent-blue)">→ 查看 5 分钟部署手册（cloud/README-storage.md）</a></div></div>' +
+    '<div class="nv-card-sec" style="background:rgba(99,102,241,0.06)"><div class="nv-card-label" style="color:#4f46e5">✅ 工作原理</div><div class="nv-card-val">浏览器不直接连坚果云（无 CORS），而是通过你的 Worker 代理；Worker 用 Basic Auth 调用坚果云 WebDAV API；备份文件 = pm-backup.json，存在坚果云指定目录里；所有数据 0 离开你的坚果云账号。</div></div>' +
     '<div class="nv-form-actions"><button class="btn btn-primary" onclick="closeModal()">我知道了</button></div></div>';
   if (typeof showModal === "function") showModal(html);
 }
