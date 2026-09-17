@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.139";
+var APP_VERSION = "5.9.140";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -838,6 +838,229 @@ const WebDAVSync = {
   }
 };
 
+// ===== GitHub Gist Sync (v5.9.140+) =====
+// 零服务器、纯 API、跨设备同步。所有数据存在用户私有 gist 里。
+// 备份包大小按 Gist 上限 100 MB（实际 < 5 MB）。
+const GitHubGistSync = {
+  KEY: "hw_pm_gist_config",
+  _cfg: null,
+  _pushTimer: null,
+  _pushScheduled: false,
+  _gistId: null,
+  _lastError: null,
+
+  init() {
+    try {
+      var s = localStorage.getItem(this.KEY);
+      this._cfg = s ? JSON.parse(s) : null;
+    } catch (e) { this._cfg = null; }
+    if (!this._cfg) this._cfg = { token: "", description: "硬件PM工作台 备份", enabled: false, gistId: null, lastSync: null };
+    this._gistId = this._cfg.gistId || null;
+
+    // 兜底：如果用户开了开关但没 gistId（首次启用），启动时尝试按描述匹配已有 gist
+    if (this._cfg.enabled && this._cfg.token && !this._gistId) {
+      var self = this;
+      this._findGistByDesc().then(function (id) {
+        if (id) { self._gistId = id; self._cfg.gistId = id; self.saveConfig(); }
+      }).catch(function () {});
+    }
+
+    // 监听页面隐藏，自动 flush
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") GitHubGistSync.flush();
+    });
+  },
+
+  saveConfig() {
+    if (!this._cfg) this._cfg = {};
+    this._cfg.gistId = this._gistId;
+    try { localStorage.setItem(this.KEY, JSON.stringify(this._cfg)); } catch (e) {}
+    if (this._cfg.enabled) this.start(); else this.stop();
+  },
+
+  getConfig() { return this._cfg || {}; },
+  getStatus() {
+    return {
+      enabled: !!(this._cfg && this._cfg.enabled && this._cfg.token),
+      gistId: this._gistId,
+      lastSync: (this._cfg && this._cfg.lastSync) || null,
+      error: this._lastError
+    };
+  },
+  updateToken(v) { if (!this._cfg) this._cfg = {}; this._cfg.token = (v || "").trim(); },
+  updateDesc(v) { if (!this._cfg) this._cfg = {}; this._cfg.description = v || "硬件PM工作台 备份"; },
+  updateEnabled(v) {
+    if (!this._cfg) this._cfg = {};
+    this._cfg.enabled = !!v;
+    this.saveConfig();
+    if (typeof render === "function") render();
+  },
+
+  _auth() {
+    return "Bearer " + (this._cfg.token || "");
+  },
+  _headers(json) {
+    var h = { "Authorization": this._auth(), "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" };
+    if (json) h["Content-Type"] = "application/json";
+    return h;
+  },
+  _apiBase() { return "https://api.github.com"; },
+
+  async _request(method, path, body) {
+    if (!this._cfg || !this._cfg.token) throw new Error("未填写 GitHub Token");
+    var url = this._apiBase() + path;
+    var opts = { method: method, headers: this._headers(!!body) };
+    if (body !== undefined) opts.body = JSON.stringify(body);
+    var resp = await fetch(url, opts);
+    if (!resp.ok) {
+      var txt = "";
+      try { txt = await resp.text(); } catch (e) {}
+      var msg = "HTTP " + resp.status;
+      try { var j = JSON.parse(txt); if (j.message) msg = j.message; } catch (e) {}
+      throw new Error(msg);
+    }
+    if (resp.status === 204) return null;
+    return await resp.json();
+  },
+
+  async testConnection() {
+    if (!this._cfg || !this._cfg.token) { showToast("请先填写 Token", "warning"); return false; }
+    showToast("正在测试 GitHub 连接…", "info");
+    try {
+      var me = await this._request("GET", "/user");
+      this._lastError = null;
+      showToast("✅ 连接成功 · " + (me.login || "GitHub"), "success");
+      return true;
+    } catch (e) {
+      this._lastError = e.message;
+      showToast("❌ " + e.message, "warning");
+      if (typeof render === "function") render();
+      return false;
+    }
+  },
+
+  async _findGistByDesc() {
+    // 列出当前用户的 gist（最多 100 个），按描述匹配
+    var list = await this._request("GET", "/gists?per_page=100");
+    if (!Array.isArray(list)) return null;
+    var desc = this._cfg.description || "硬件PM工作台 备份";
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].description === desc) return list[i].id;
+    }
+    return null;
+  },
+
+  async _createGist(pkg) {
+    var body = {
+      description: this._cfg.description || "硬件PM工作台 备份",
+      public: false,
+      files: {
+        "pm-backup.json": { content: JSON.stringify(pkg) }
+      }
+    };
+    var r = await this._request("POST", "/gists", body);
+    this._gistId = r.id;
+    return r;
+  },
+
+  async _updateGist(pkg) {
+    var body = {
+      description: this._cfg.description || "硬件PM工作台 备份",
+      files: {
+        "pm-backup.json": { content: JSON.stringify(pkg) }
+      }
+    };
+    return await this._request("PATCH", "/gists/" + this._gistId, body);
+  },
+
+  async uploadNow() {
+    if (!this._cfg || !this._cfg.token) { showToast("请先填写 Token 并保存", "warning"); return; }
+    if (!this._cfg.enabled) { showToast("请先启用自动同步", "warning"); return; }
+    showToast("正在同步到 GitHub Gist…", "info");
+    try {
+      var pkg = await CloudBackup.buildPackage();
+      if (this._gistId) {
+        await this._updateGist(pkg);
+      } else {
+        await this._createGist(pkg);
+      }
+      this._cfg.gistId = this._gistId;
+      this._cfg.lastSync = new Date().toISOString();
+      this._lastError = null;
+      this.saveConfig();
+      showToast("✅ 已同步到 Gist (" + formatDateTime(this._cfg.lastSync) + ")", "success");
+      if (typeof render === "function") render();
+    } catch (e) {
+      this._lastError = e.message;
+      showToast("同步失败: " + e.message, "warning");
+      if (typeof render === "function") render();
+    }
+  },
+
+  async pullAndRestore() {
+    if (!this._cfg || !this._cfg.token) { showToast("请先填写 Token", "warning"); return; }
+    showToast("正在从 Gist 拉取…", "info");
+    try {
+      // 优先用 _gistId，否则按描述查找
+      if (!this._gistId) {
+        var id = await this._findGistByDesc();
+        if (!id) { showToast("未找到匹配的 Gist（描述：" + this._cfg.description + "）", "warning"); return; }
+        this._gistId = id;
+        this._cfg.gistId = id;
+        this.saveConfig();
+      }
+      var g = await this._request("GET", "/gists/" + this._gistId);
+      var f = g.files && g.files["pm-backup.json"];
+      if (!f) { showToast("Gist 中无 pm-backup.json", "warning"); return; }
+      var content = f.content || (f.truncated ? "" : "");
+      if (!content) {
+        // 截断时通过 raw_url 拉
+        var raw = await fetch(f.raw_url);
+        content = await raw.text();
+      }
+      var pkg = JSON.parse(content);
+      if (confirm("⚠️ 从 Gist 恢复将覆盖本地当前数据。\n\n云端备份时间: " + formatDateTime(pkg.exportedAt) + "\n确定继续？")) {
+        var r = await restorePackage(pkg);
+        showToast("已从 Gist 恢复（图片 " + r.imagesRestored + " 张）", "success");
+        if (typeof render === "function") render();
+      }
+    } catch (e) {
+      this._lastError = e.message;
+      showToast("拉取失败: " + e.message, "warning");
+      if (typeof render === "function") render();
+    }
+  },
+
+  schedulePush() {
+    if (!this._cfg || !this._cfg.enabled || !this._cfg.token) return;
+    if (this._pushScheduled) return;
+    this._pushScheduled = true;
+    var self = this;
+    setTimeout(function () {
+      self._pushScheduled = false;
+      self.uploadNow().catch(function (e) { console.warn("[Gist] auto-push failed", e); });
+    }, 8000);
+  },
+
+  flush() {
+    if (!this._cfg || !this._cfg.enabled || !this._cfg.token) return;
+    this.uploadNow().catch(function (e) { console.warn("[Gist] flush failed", e); });
+  },
+
+  start() {
+    if (!this._cfg || !this._cfg.enabled || !this._cfg.token) return;
+    this.stop();
+    var self = this;
+    this._pushTimer = setInterval(function () {
+      self.uploadNow().catch(function (e) { console.warn("[Gist] periodic push failed", e); });
+    }, 30 * 60 * 1000);
+  },
+
+  stop() {
+    if (this._pushTimer) { clearInterval(this._pushTimer); this._pushTimer = null; }
+  }
+};
+
 // ===== 全局超时工具：根治 Supabase / IndexedDB 请求 hang 导致的无限白屏 =====
 function _withTimeout(promise, ms, label) {
   var _label = label || "request";
@@ -1516,6 +1739,7 @@ const DB = {
       localStorage.setItem(this.KEY, JSON.stringify(this.data));
     }
     if (typeof WebDAVSync !== "undefined") WebDAVSync.schedulePush();
+    if (typeof GitHubGistSync !== "undefined") GitHubGistSync.schedulePush();
   },
   async saveWithBackup() {
     this.data.meta.lastUpdated = new Date().toISOString();
@@ -3452,7 +3676,73 @@ async function renderSettings() {
     '<div class="card" style="cursor:pointer" onclick="downloadCloudBackup()"><div class="flex-between"><div class="card-title">📥 下载完整备份</div><div style="color:var(--text-secondary)">→</div></div><div class="card-body">把云端数据（含图片）打包成 JSON 下载到本机<br><span style="font-size:11px;color:var(--text-tertiary)">数据已实时存于云端，此为主动备份副本</span></div></div>' +
     '<div class="card" style="cursor:pointer" onclick="runManualBackup()"><div class="flex-between"><div class="card-title">💾 保存本地快照</div><div style="color:var(--text-secondary)">→</div></div><div class="card-body">在浏览器 IndexedDB 存一份手动快照<br><span style="font-size:11px;color:var(--text-tertiary)">一次性手动快照，非自动</span></div></div>' +
 
-    /* 坚果云 WebDAV 自动同步设置已移除 */
+    /* v5.9.140 恢复：坚果云 WebDAV 配置 UI（handler 完整，仅缺 UI） */
+    '<div class="section-title"><span class="emoji">☁️</span> 免费云端同步 · 坚果云 WebDAV</div>' +
+    '<div class="card">' +
+      '<div class="card-body" style="padding:14px">' +
+        '<div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:10px">通过 <b>坚果云 WebDAV + Cloudflare Worker 代理</b> 实现跨设备同步。<b>完全免费</b>（坚果云 1GB/月、Cloudflare 10万次/天），数据存你坚果云账号、Worker 公开可部署。' +
+          '<br><a href="javascript:void(0)" onclick="openWebDavGuide()" style="color:var(--accent-blue);font-size:12px">📖 查看 5 分钟部署指南</a>' +
+        '</div>' +
+        '<div class="form-group"><div class="form-label">Cloudflare Worker 代理地址 <span class="nv-f-req">*</span></div>' +
+          '<input class="form-input" id="wd-proxy" type="text" placeholder="https://your-worker.workers.dev" value="' + escapeHtml(wdProxy) + '">' +
+          '<div class="form-hint" style="font-size:11px;color:var(--text-tertiary);margin-top:4px">把 Worker 部署后填入，模板：<a href="https://github.com/ichi010623-maker/pm-workbench/raw/main/cloud/webdav-proxy-template.js" target="_blank" style="color:var(--accent-blue)">点此下载</a></div>' +
+        '</div>' +
+        '<div class="form-group"><div class="form-label">坚果云账号 <span class="nv-f-req">*</span></div>' +
+          '<input class="form-input" id="wd-user" type="text" placeholder="登录坚果云用的邮箱/手机" value="' + escapeHtml(wdUser) + '">' +
+        '</div>' +
+        '<div class="form-group"><div class="form-label">应用密码 <span class="nv-f-req">*</span></div>' +
+          '<input class="form-input" id="wd-pass" type="password" placeholder="坚果云·账户信息·应用密码（非登录密码）" value="' + escapeHtml(wdPass) + '">' +
+          '<div class="form-hint" style="font-size:11px;color:var(--text-tertiary);margin-top:4px">生成路径：坚果云网页版 → 右上头像 → 账户信息 → 安全 → 应用授权密码（新增应用）</div>' +
+        '</div>' +
+        '<div class="form-group"><div class="form-label">备份目录名</div>' +
+          '<input class="form-input" id="wd-folder" type="text" placeholder="PM工作台备份" value="' + escapeHtml(wdFolder) + '">' +
+        '</div>' +
+        '<div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="wd-enabled" ' + (wd.enabled ? "checked" : "") + '> 启用自动同步（每 15 分钟 + 关键操作后）</label></div>' +
+        '<div class="btn-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">' +
+          '<button class="btn btn-primary" onclick="saveWebDavConfig()">💾 保存配置</button>' +
+          '<button class="btn btn-secondary" onclick="testWebDav()">🔌 测试连接</button>' +
+          '<button class="btn btn-secondary" onclick="WebDAVSync.uploadNow()">⬆️ 立即上传</button>' +
+          '<button class="btn btn-secondary" onclick="WebDAVSync.pullAndRestore()">⬇️ 从云端恢复</button>' +
+        '</div>' +
+        '<div style="font-size:12px;color:var(--text-secondary);margin-top:10px;padding:8px;background:rgba(139,92,246,0.06);border-radius:8px">' +
+          '当前状态：' + (wdEnabled ? '<b style="color:#059669">已启用</b>' : '<b style="color:#dc2626">未启用</b>') +
+          (wdLastSync ? ' · 上次同步：' + formatDateTime(wdLastSync) : '') +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+
+    /* v5.9.140 新增：GitHub Gist 同步（更简单 · 纯 API · 免服务器） */
+    '<div class="section-title"><span class="emoji">🐙</span> 更简单：GitHub Gist 同步（v5.9.140+）</div>' +
+    (function() {
+      var gs = GitHubGistSync.getConfig();
+      var gsStatus = GitHubGistSync.getStatus();
+      return '<div class="card">' +
+        '<div class="card-body" style="padding:14px">' +
+          '<div style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:10px">用 <b>GitHub Personal Access Token + 私有 Gist</b> 做云端备份。<b>完全免费</b>、<b>免服务器</b>、跨设备直连（需可访问 github.com）。' +
+            '<br><a href="javascript:void(0)" onclick="openGistGuide()" style="color:var(--accent-blue);font-size:12px">📖 获取 Token 指引（5 分钟）</a>' +
+          '</div>' +
+          '<div class="form-group"><div class="form-label">GitHub PAT <span class="nv-f-req">*</span></div>' +
+            '<input class="form-input" id="gist-token" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx（gist 权限）" value="' + escapeHtml(gs.token || "") + '" oninput="GitHubGistSync.updateToken(this.value)">' +
+          '</div>' +
+          '<div class="form-group"><div class="form-label">Gist 描述（仅作标识）</div>' +
+            '<input class="form-input" id="gist-desc" type="text" placeholder="硬件PM工作台 备份" value="' + escapeHtml(gs.description || "硬件PM工作台 备份") + '" oninput="GitHubGistSync.updateDesc(this.value)">' +
+          '</div>' +
+          '<div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="gist-enabled" ' + (gs.enabled ? "checked" : "") + ' onchange="GitHubGistSync.updateEnabled(this.checked)"> 启用自动同步（每 30 分钟 + 关键操作后）</label></div>' +
+          '<div class="btn-row" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">' +
+            '<button class="btn btn-primary" onclick="GitHubGistSync.saveConfig()">💾 保存配置</button>' +
+            '<button class="btn btn-secondary" onclick="GitHubGistSync.testConnection()">🔌 测试连接</button>' +
+            '<button class="btn btn-secondary" onclick="GitHubGistSync.uploadNow()">⬆️ 立即上传</button>' +
+            '<button class="btn btn-secondary" onclick="GitHubGistSync.pullAndRestore()">⬇️ 从云端恢复</button>' +
+          '</div>' +
+          '<div style="font-size:12px;color:var(--text-secondary);margin-top:10px;padding:8px;background:rgba(99,102,241,0.06);border-radius:8px">' +
+            '当前状态：' + (gsStatus.enabled ? '<b style="color:#059669">已启用</b>' : '<b style="color:#dc2626">未启用</b>') +
+            (gsStatus.gistId ? ' · Gist ID: <code style="background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px;font-size:11px">' + escapeHtml(gsStatus.gistId.slice(0, 12) + "…") + '</code>' : '') +
+            (gsStatus.lastSync ? ' · 上次同步：' + formatDateTime(gsStatus.lastSync) : '') +
+            (gsStatus.error ? ' · <span style="color:#dc2626">' + escapeHtml(gsStatus.error) + '</span>' : '') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    })() +
 
     '<div class="section-title"><span class="emoji">📦</span> 手动下载备份（迁移 / 兜底）</div>' +
     '<div class="cloud-backup-section">' +
@@ -3510,6 +3800,29 @@ function copyAppVersion() {
   } else {
     showToast(text, "info");
   }
+}
+
+// ===== 部署引导弹窗：WebDAV / Gist =====
+function openWebDavGuide() {
+  var html = '<div class="nv-form"><div class="nv-form-h">☁️ 5 分钟部署坚果云 WebDAV 同步</div>' +
+    '<div class="nv-form-intro">完全免费（坚果云 1GB/月 + Cloudflare 10 万次/天）。需要 1 个 Cloudflare 账号 + 1 个坚果云账号。</div>' +
+    '<div class="nv-card-sec"><div class="nv-card-label">第 1 步 · 部署 Cloudflare Worker 代理</div><div class="nv-card-val">1) 登录 <a href="https://dash.cloudflare.com" target="_blank" style="color:var(--accent-blue)">Cloudflare 仪表板</a> → Workers & Pages → Create Worker\n2) 粘贴代码（<a href="https://github.com/ichi010623-maker/pm-workbench/raw/main/cloud/webdav-proxy-template.js" target="_blank" style="color:var(--accent-blue)">点此下载模板</a>）→ Deploy\n3) 复制 Worker URL（形如 https://xxx.workers.dev）填入上方"代理地址"</div></div>' +
+    '<div class="nv-card-sec"><div class="nv-card-label">第 2 步 · 生成坚果云应用密码</div><div class="nv-card-val">1) 登录 <a href="https://www.jianguoyun.com" target="_blank" style="color:var(--accent-blue)">坚果云网页版</a> → 右上角头像 → 账户信息\n2) 安全 → 应用授权密码 → 添加授权\n3) 名称任意（如"工作台"）→ 生成\n4) 把生成的密码填入"应用密码"（非登录密码）</div></div>' +
+    '<div class="nv-card-sec"><div class="nv-card-label">第 3 步 · 填表启用</div><div class="nv-card-val">把代理地址、坚果云账号、应用密码填入上方表单 → 勾选"启用自动同步" → 保存 → 测试连接</div></div>' +
+    '<div class="nv-card-sec" style="background:rgba(16,185,129,0.06)"><div class="nv-card-label" style="color:#059669">✅ 工作原理</div><div class="nv-card-val">浏览器不直接连坚果云（无 CORS），而是通过你的 Worker 代理；Worker 用 Basic Auth 调用坚果云 WebDAV API；备份文件 = pm-backup.json，存在坚果云指定目录里；所有数据 0 离开你的坚果云账号。</div></div>' +
+    '<div class="nv-form-actions"><button class="btn btn-primary" onclick="closeModal()">我知道了</button></div></div>';
+  if (typeof showModal === "function") showModal(html);
+}
+
+function openGistGuide() {
+  var html = '<div class="nv-form"><div class="nv-form-h">🐙 3 分钟配置 GitHub Gist 同步（最简）</div>' +
+    '<div class="nv-form-intro">完全免费、免服务器、跨设备直连。仅需 GitHub 账号 + 5 分钟。</div>' +
+    '<div class="nv-card-sec"><div class="nv-card-label">第 1 步 · 创建 Personal Access Token</div><div class="nv-card-val">1) 登录 <a href="https://github.com/settings/tokens" target="_blank" style="color:var(--accent-blue)">GitHub Token 设置</a> → Generate new token (classic)\n2) Note 填"工作台同步"；Expiration 选"无期限"；Scopes 仅勾 <b>gist</b>\n3) 点 Generate token → 复制 ghp_xxx 开头的字符串（只显示一次！）</div></div>' +
+    '<div class="nv-card-sec"><div class="nv-card-label">第 2 步 · 填入工作台</div><div class="nv-card-val">把 Token 粘贴到上方"GitHub PAT"输入框 → 勾选"启用自动同步" → 保存 → 测试连接</div></div>' +
+    '<div class="nv-card-sec" style="background:rgba(99,102,241,0.06)"><div class="nv-card-label" style="color:#4f46e5">✅ 工作原理</div><div class="nv-card-val">首次启用时，工作台在你的 GitHub 账号下创建一个 <b>私有</b> Gist（仅你可见），写入 pm-backup.json；之后每 30 分钟自动更新该 Gist；切到新设备时填同一 Token → 点"从云端恢复"即可。</div></div>' +
+    '<div class="nv-card-sec" style="background:rgba(245,158,11,0.06)"><div class="nv-card-label" style="color:#b45309">⚠️ 注意事项</div><div class="nv-card-val">· Token 等同密码，<b>勿分享</b>，丢则去 GitHub 撤销重发\n· 单 Gist 上限 100 MB（工作台数据通常 &lt; 5 MB，远低于上限）\n· 大陆访问 github.com 需 VPN（这就是"零元、跨设备"方案的代价）</div></div>' +
+    '<div class="nv-form-actions"><button class="btn btn-primary" onclick="closeModal()">我知道了</button></div></div>';
+  if (typeof showModal === "function") showModal(html);
 }
 
 // ===== 账号操作：退出 / 切换 / 添加（均先登出当前账号，回到登录门）=====
@@ -6108,10 +6421,16 @@ async function initApp() {
   // Init cloud backup state (no auto-download; manual download only)
   CloudBackup.init();
 
-  // Init WebDAV sync (Nutstore) — config UI removed, safe no-op if unconfigured
+  // Init WebDAV sync (Nutstore) — v5.9.140 恢复 UI
   WebDAVSync.init();
   WebDAVSync.start();
   WebDAVSync.checkOnStartup();
+
+  // Init GitHub Gist sync (v5.9.140+) — 零服务器、纯 API、跨设备
+  if (typeof GitHubGistSync !== "undefined") {
+    GitHubGistSync.init();
+    GitHubGistSync.start();
+  }
 
   // Register Service Worker
   SWManager.register();

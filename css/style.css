@@ -7118,3 +7118,86 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
   border: 1px solid rgba(255,159,10,0.45); background: #fff; color: #b45309;
 }
 .cloud-notice button.primary { background: var(--accent-blue); border-color: var(--accent-blue); color: #fff; }
+
+/* ============================================
+ * 小说模块 v5.9.140 · 字段卡片化
+ * 解决痛点：表单字段挤在一起、详情页字段无视觉边界
+ * 配套 HTML 结构（已就位）：nv-form / nv-f-* / nv-card-grid / nv-card-kv / nv-card-sec
+ * ============================================ */
+
+/* --- 表单容器（编辑页用） --- */
+.nv-form{background:#fff;border:1px solid #ede9fe;border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(109,40,217,0.04)}
+.nv-form-h{font-size:14px;font-weight:700;color:#6d28d9;margin:0 0 4px;display:flex;align-items:center;gap:6px}
+.nv-form-h::before{content:"";display:inline-block;width:3px;height:14px;background:linear-gradient(180deg,#8b5cf6,#6d28d9);border-radius:2px}
+.nv-form-intro{font-size:12px;color:#64748b;line-height:1.6;margin:0 0 12px;padding:8px 10px;background:#faf5ff;border-left:3px solid #c4b5fd;border-radius:6px}
+.nv-form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px dashed #ede9fe}
+.nv-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:8px}
+.nv-form-grid.cols-1{grid-template-columns:1fr}
+.nv-form-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+.nv-form-grid > .nv-f-row{grid-column:1 / -1}
+.nv-form-grid > .nv-f-row.half{grid-column:auto}
+
+/* --- 字段单元 --- */
+.nv-f-row{display:flex;flex-direction:column;margin-bottom:10px;position:relative}
+.nv-f-row.half{display:inline-block;width:calc(50% - 7px);margin-right:14px}
+.nv-f-row.half:nth-of-type(2n){margin-right:0}
+.nv-f-label{font-size:12px;font-weight:600;color:#475569;margin-bottom:4px;display:flex;align-items:center;gap:4px;line-height:1.4}
+.nv-f-label::after{content:"";flex:0 0 auto}
+.nv-f-req{color:#ef4444;font-size:13px;line-height:1;font-weight:700}
+.nv-f-hint{font-size:11px;color:#94a3b8;margin-top:3px;line-height:1.4}
+.nv-f-input{width:100%;font-size:13px;color:#1e293b;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 10px;transition:all .15s ease;box-sizing:border-box;font-family:inherit;outline:none}
+.nv-f-input:hover{border-color:#cbd5e1;background:#fff}
+.nv-f-input:focus{border-color:#8b5cf6;background:#fff;box-shadow:0 0 0 3px rgba(139,92,246,0.12)}
+.nv-f-input::placeholder{color:#cbd5e1}
+.nv-f-ta{resize:vertical;min-height:60px;line-height:1.6}
+.nv-f-input[type="number"]{font-variant-numeric:tabular-nums}
+select.nv-f-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%2394a3b8' d='M0 0l5 6 5-6z'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+
+/* --- 详情页：key-value 单元格 + 节 --- */
+.nv-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 12px;margin-bottom:12px;padding:10px 12px;background:linear-gradient(180deg,#faf5ff 0%,#fff 100%);border:1px solid #ede9fe;border-radius:10px}
+.nv-card-kv{display:flex;flex-direction:column;gap:2px;min-width:0}
+.nv-card-k{font-size:11px;color:#8b5cf6;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.nv-card-v{font-size:13px;color:#1e293b;font-weight:500;line-height:1.5;word-break:break-word}
+.nv-card-kv.empty .nv-card-v{color:#cbd5e1;font-style:italic}
+.nv-card-sec{background:#fff;border:1px solid #f1f5f9;border-radius:10px;padding:10px 12px;margin-bottom:10px;transition:border-color .15s}
+.nv-card-sec:hover{border-color:#ede9fe}
+.nv-card-label{font-size:11px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.nv-card-label::before{content:"";display:inline-block;width:2px;height:11px;background:#8b5cf6;border-radius:1px}
+.nv-card-val{font-size:13px;color:#1e293b;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.nv-card-val.empty{color:#cbd5e1;font-style:italic}
+.nv-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+.nv-2col > *{min-width:0}
+
+/* --- 面包屑 / 详情头部 --- */
+.nv-crumb{display:flex;align-items:center;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.nv-crumb-t{font-size:13px;color:#64748b;font-weight:600}
+.nv-detail-h{font-size:16px;font-weight:700;color:#1e293b;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid #ede9fe;display:flex;align-items:center;gap:8px}
+.nv-detail-h::before{content:"";display:inline-block;width:4px;height:18px;background:linear-gradient(180deg,#8b5cf6,#6d28d9);border-radius:2px}
+.nv-detail-row{display:flex;gap:12px;padding:8px 0;border-bottom:1px dashed #f1f5f9}
+.nv-detail-row:last-child{border-bottom:0}
+.nv-detail-row .nv-card-k{flex:0 0 80px;align-self:start;padding-top:1px}
+.nv-detail-row .nv-card-v{flex:1}
+
+/* --- 暗色适配 --- */
+@media (prefers-color-scheme: dark){
+  .nv-form{background:var(--card-bg,#1e1e2e);border-color:rgba(139,92,246,0.25)}
+  .nv-form-intro{background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.4);color:#a5b4fc}
+  .nv-form-h{color:#a78bfa}
+  .nv-form-actions{border-color:rgba(139,92,246,0.2)}
+  .nv-f-label{color:#cbd5e1}
+  .nv-f-input{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:#e2e8f0}
+  .nv-f-input:focus{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(139,92,246,0.2);background:rgba(255,255,255,0.06)}
+  .nv-f-hint{color:#64748b}
+  .nv-card-grid{background:linear-gradient(180deg,rgba(139,92,246,0.06) 0%,rgba(30,30,46,0.3) 100%);border-color:rgba(139,92,246,0.2)}
+  .nv-card-k{color:#a78bfa}
+  .nv-card-v{color:#e2e8f0}
+  .nv-card-kv.empty .nv-card-v{color:#64748b}
+  .nv-card-sec{background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06)}
+  .nv-card-sec:hover{border-color:rgba(139,92,246,0.2)}
+  .nv-card-label{color:#a78bfa}
+  .nv-card-val{color:#e2e8f0}
+  .nv-card-val.empty{color:#475569}
+  .nv-detail-h{color:#e2e8f0;border-color:rgba(139,92,246,0.25)}
+  .nv-crumb-t{color:#94a3b8}
+  .nv-detail-row{border-color:rgba(255,255,255,0.06)}
+}
