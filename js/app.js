@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.142";
+var APP_VERSION = "5.9.143";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -6273,14 +6273,8 @@ async function init() {
     // Render lock numpad
     renderLockNumpad();
 
-    // Check if privacy accepted
-    if (!PrivacyManager.isPrivacyAccepted()) {
-      // Privacy notice is visible by default (no hidden class in HTML)
-      document.getElementById("app").classList.add("hidden");
-      return;
-    }
-
-    // Privacy accepted → hide notice, show app
+    // v5.9.143: 取消隐私保护声明拦截 —— 启动时直接放行（声明 HTML 仍保留，默认 hidden；老用户自动写 accepted 标记）
+    if (!PrivacyManager.isPrivacyAccepted()) PrivacyManager.acceptPrivacy();
     document.getElementById("privacy-notice").classList.add("hidden");
 
     // Check if app lock is enabled
