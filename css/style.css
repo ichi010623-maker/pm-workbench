@@ -7145,13 +7145,27 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 .nv-f-label::after{content:"";flex:0 0 auto}
 .nv-f-req{color:#ef4444;font-size:13px;line-height:1;font-weight:700}
 .nv-f-hint{font-size:11px;color:#94a3b8;margin-top:3px;line-height:1.4}
-.nv-f-input{width:100%;font-size:13px;color:#1e293b;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 10px;transition:all .15s ease;box-sizing:border-box;font-family:inherit;outline:none}
-.nv-f-input:hover{border-color:#cbd5e1;background:#fff}
-.nv-f-input:focus{border-color:#8b5cf6;background:#fff;box-shadow:0 0 0 3px rgba(139,92,246,0.12)}
-.nv-f-input::placeholder{color:#cbd5e1}
-.nv-f-ta{resize:vertical;min-height:60px;line-height:1.6}
+/* v5.9.142: 加强边框 + 阴影三层（默认/hover/focus 立体感） */
+.nv-f-input{width:100%;font-size:13px;color:#1e293b;background:#fff;border:2px solid #cbd5e1;border-radius:9px;padding:9px 12px;transition:border-color .15s ease,box-shadow .15s ease,background-color .15s ease,transform .08s ease;box-sizing:border-box;font-family:inherit;outline:none;box-shadow:0 1px 2px rgba(15,23,42,0.04),inset 0 1px 0 rgba(255,255,255,0.6)}
+.nv-f-input:hover{border-color:#94a3b8;background:#fff;box-shadow:0 2px 4px rgba(15,23,42,0.06),inset 0 1px 0 rgba(255,255,255,0.6)}
+.nv-f-input:focus{border-color:#7c3aed;background:#fff;box-shadow:0 0 0 4px rgba(139,92,246,0.18),0 2px 8px rgba(139,92,246,0.12)}
+.nv-f-input::placeholder{color:#94a3b8}
+.nv-f-input:disabled,.nv-f-input[readonly]{background:#f1f5f9;color:#64748b;cursor:not-allowed;border-color:#e2e8f0;box-shadow:none}
+.nv-f-ta{resize:vertical;min-height:70px;line-height:1.65}
 .nv-f-input[type="number"]{font-variant-numeric:tabular-nums}
-select.nv-f-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%2394a3b8' d='M0 0l5 6 5-6z'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+select.nv-f-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%2364748b' d='M0 0l5 6 5-6z'/></svg>");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;background-color:#fff}
+/* 数字输入：去掉原生 spinner 的突兀外观 */
+.nv-f-input[type="number"]::-webkit-inner-spin-button,.nv-f-input[type="number"]::-webkit-outer-spin-button{opacity:0.5}
+
+/* 书籍下拉（章节/写作页顶部的「切换书」控件）— v5.9.142 补齐 */
+.nv-booksel{font-size:13px;font-weight:600;color:#1e293b;background:#fff;border:2px solid #cbd5e1;border-radius:9px;padding:8px 34px 8px 12px;cursor:pointer;outline:none;transition:all .15s ease;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%2364748b' d='M0 0l5 6 5-6z'/></svg>");background-repeat:no-repeat;background-position:right 12px center;box-shadow:0 1px 2px rgba(15,23,42,0.04)}
+.nv-booksel:hover{border-color:#94a3b8;box-shadow:0 2px 4px rgba(15,23,42,0.06)}
+.nv-booksel:focus{border-color:#7c3aed;box-shadow:0 0 0 4px rgba(139,92,246,0.18)}
+
+/* 章节正文编辑器 — v5.9.142 强化视觉 */
+.nv-editor{width:100%;font-size:14px;line-height:1.8;color:#1e293b;background:#fff;border:2px solid #cbd5e1;border-radius:10px;padding:14px 16px;box-sizing:border-box;font-family:Georgia,"Source Han Serif SC",serif;outline:none;transition:all .15s ease;resize:vertical;min-height:300px;box-shadow:0 2px 4px rgba(15,23,42,0.05),inset 0 1px 0 rgba(255,255,255,0.6)}
+.nv-editor:hover{border-color:#94a3b8;box-shadow:0 4px 8px rgba(15,23,42,0.07),inset 0 1px 0 rgba(255,255,255,0.6)}
+.nv-editor:focus{border-color:#7c3aed;box-shadow:0 0 0 4px rgba(139,92,246,0.18),0 4px 12px rgba(139,92,246,0.10)}
 
 /* --- 详情页：key-value 单元格 + 节 --- */
 .nv-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 12px;margin-bottom:12px;padding:10px 12px;background:linear-gradient(180deg,#faf5ff 0%,#fff 100%);border:1px solid #ede9fe;border-radius:10px}
@@ -7185,9 +7199,17 @@ select.nv-f-input{cursor:pointer;appearance:none;background-image:url("data:imag
   .nv-form-h{color:#a78bfa}
   .nv-form-actions{border-color:rgba(139,92,246,0.2)}
   .nv-f-label{color:#cbd5e1}
-  .nv-f-input{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);color:#e2e8f0}
-  .nv-f-input:focus{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(139,92,246,0.2);background:rgba(255,255,255,0.06)}
+  .nv-f-input{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.18);color:#e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.04)}
+  .nv-f-input:hover{border-color:rgba(255,255,255,0.28);background:rgba(255,255,255,0.06);box-shadow:0 2px 4px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.04)}
+  .nv-f-input:focus{border-color:#a78bfa;box-shadow:0 0 0 4px rgba(139,92,246,0.25),0 2px 8px rgba(139,92,246,0.18);background:rgba(255,255,255,0.08)}
+  .nv-f-input:disabled,.nv-f-input[readonly]{background:rgba(255,255,255,0.02);color:#64748b;border-color:rgba(255,255,255,0.08)}
   .nv-f-hint{color:#64748b}
+  .nv-booksel{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.18);color:#e2e8f0}
+  .nv-booksel:hover{border-color:rgba(255,255,255,0.28)}
+  .nv-booksel:focus{border-color:#a78bfa;box-shadow:0 0 0 4px rgba(139,92,246,0.25)}
+  .nv-editor{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.18);color:#e2e8f0;box-shadow:0 2px 4px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.04)}
+  .nv-editor:hover{border-color:rgba(255,255,255,0.28);box-shadow:0 4px 8px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.04)}
+  .nv-editor:focus{border-color:#a78bfa;box-shadow:0 0 0 4px rgba(139,92,246,0.25),0 4px 12px rgba(139,92,246,0.18)}
   .nv-card-grid{background:linear-gradient(180deg,rgba(139,92,246,0.06) 0%,rgba(30,30,46,0.3) 100%);border-color:rgba(139,92,246,0.2)}
   .nv-card-k{color:#a78bfa}
   .nv-card-v{color:#e2e8f0}
