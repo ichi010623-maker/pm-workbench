@@ -14,9 +14,17 @@
   // ============================================================
   // 1. 数据层
   // ============================================================
+  var NV_TABLES = ["books", "chars", "events", "foreshadows", "chapters", "reviews", "milestones",
+    "advances", "relations", "inspirations", "materials", "emotions"];
   function nvDB() {
-    if (typeof DB === "undefined" || !DB.data) return { books: [], chars: [], events: [], foreshadows: [], chapters: [], reviews: [], milestones: [], advances: [] };
-    if (!DB.data.novel) DB.data.novel = { books: [], chars: [], events: [], foreshadows: [], chapters: [], reviews: [], milestones: [], advances: [] };
+    if (typeof DB === "undefined" || !DB.data) {
+      var empty = {};
+      NV_TABLES.forEach(function (k) { empty[k] = []; });
+      return empty;
+    }
+    if (!DB.data.novel || typeof DB.data.novel !== "object") DB.data.novel = {};
+    // 自愈：任何调用方（渲染 / 导出 / 医生 / 测试）拿到的都是齐备的表结构
+    NV_TABLES.forEach(function (k) { if (!Array.isArray(DB.data.novel[k])) DB.data.novel[k] = []; });
     return DB.data.novel;
   }
   function nvSave() { if (typeof DB !== "undefined" && DB.save) { try { DB.save(); } catch (e) {} } }
@@ -507,11 +515,8 @@
   // ============================================================
   var MIGRATED = false;
   function nvEnsureArrays() {
-    var d = nvDB();
-    ["books", "chars", "events", "foreshadows", "chapters", "reviews", "milestones", "advances",
-      "relations", "inspirations", "materials", "emotions"].forEach(function (k) {
-      if (!Array.isArray(d[k])) d[k] = [];
-    });
+    var d = nvDB();  // nvDB 已自愈全部表
+    NV_TABLES.forEach(function (k) { if (!Array.isArray(d[k])) d[k] = []; });
     return d;
   }
   function nvBookOf(item, books) {

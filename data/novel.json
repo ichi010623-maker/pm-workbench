@@ -23,54 +23,34 @@
       "volumes": [
         {
           "num": 1,
-          "title": "残玉",
-          "chapters": [
-            {
-              "num": 1,
-              "title": "灭门之夜",
-              "goal": "林渊与老丹逃亡，老丹为救他重伤，留半截残玉。"
-            },
-            {
-              "num": 2,
-              "title": "圣女姜禾",
-              "goal": "林渊重伤，被姜禾救下，却发现她是圣女。"
-            },
-            {
-              "num": 3,
-              "title": "莫枭现世",
-              "goal": "莫枭以荒神残魂之力屠尽小派，向林渊下战书。"
-            },
-            {
-              "num": 4,
-              "title": "赤羽反戈",
-              "goal": "赤羽想起莫枭救命之恩，临阵倒戈。"
-            },
-            {
-              "num": 5,
-              "title": "玄女降旨",
-              "goal": "玄女断言林渊与姜禾为旧约双魂，下令分离。"
-            },
-            {
-              "num": 6,
-              "title": "纪仇守墓",
-              "goal": "纪仇与林渊相认，承诺守墓十年。"
-            }
-          ]
+          "title": "灭门之夜",
+          "range": "01—06"
         },
         {
           "num": 2,
-          "title": "荒神祭坛（规划中）",
-          "chapters": [
-            {
-              "num": 7,
-              "title": "未命名",
-              "goal": ""
-            }
-          ]
+          "title": "圣女与仇",
+          "range": "07—16"
+        },
+        {
+          "num": 3,
+          "title": "双魂旧约",
+          "range": "17—26"
+        },
+        {
+          "num": 4,
+          "title": "荒神祭坛",
+          "range": "27—40"
         }
       ],
       "style": "东方玄幻，半文半白，注重意境",
-      "pov": "third"
+      "pov": "third",
+      "oneLiner": "半截残玉牵出的旧约，逼一个复仇少年在记忆与执念之间重新选择。",
+      "themes": [
+        "复仇",
+        "记忆",
+        "牺牲",
+        "选择"
+      ]
     },
     {
       "id": "book_fuguang",
@@ -93,43 +73,29 @@
       "volumes": [
         {
           "num": 1,
-          "title": "原型",
-          "chapters": [
-            {
-              "num": 1,
-              "title": "深夜 DEMO",
-              "goal": "陈哲独自调原型，遇见路过的苏宁。"
-            },
-            {
-              "num": 2,
-              "title": "天使轮",
-              "goal": "苏宁牵线，陈哲完成 500 万融资。"
-            },
-            {
-              "num": 3,
-              "title": "何远出逃",
-              "goal": "何远被边缘化，带核心代码出走。"
-            },
-            {
-              "num": 4,
-              "title": "林佳加盟",
-              "goal": "林佳以产品合伙人身份加入浮光。"
-            },
-            {
-              "num": 5,
-              "title": "父亲去世",
-              "goal": "老陈突发心梗，陈哲返家整理遗物。"
-            },
-            {
-              "num": 6,
-              "title": "硬盘开启",
-              "goal": "陈哲在父亲忌日打开硬盘，看见 1998 年的视频。"
-            }
-          ]
+          "title": "深夜 DEMO",
+          "range": "01—06"
+        },
+        {
+          "num": 2,
+          "title": "天使与谎言",
+          "range": "07—16"
+        },
+        {
+          "num": 3,
+          "title": "散场之后",
+          "range": "17—24"
         }
       ],
       "style": "都市现实，克制白描",
-      "pov": "first"
+      "pov": "first",
+      "oneLiner": "深夜会议室里的一句玩笑，成了他们共同命运的名字。",
+      "themes": [
+        "理想",
+        "友情",
+        "时代",
+        "告别"
+      ]
     }
   ],
   "chars": [
@@ -139,9 +105,10 @@
       "role": "主角",
       "arc": "灭门遗孤→复仇者→秩序重建者",
       "traits": [
-        "冷静",
-        "决绝",
-        "重情"
+        "沉默",
+        "执拗",
+        "护短",
+        "记仇"
       ],
       "secrets": [
         "荒神血脉觉醒",
@@ -172,15 +139,34 @@
         }
       ],
       "card": {
-        "appearance": "十八岁少年，左侧眉骨一道旧疤，常年穿洗得发白的灰袍，随身带半截残玉",
-        "fear": "怕自己变成和仇人一样的人；怕忘记师父的样子",
-        "catchphrase": "无口头禅；习惯在动手前先摸一次残玉",
-        "secret": "他能听见残玉深处的低语，从未告诉任何人",
-        "arcStart": "宗门覆灭后的逃亡者，只剩复仇一个念头",
-        "arcConflict": "复仇之火与师父遗训「留人一线」的撕扯",
-        "arcTurn": "发现仇人背后另有黑手，仇恨的对象开始动摇",
-        "arcEnd": "放下屠刀不是原谅，而是选择成为守碑人"
-      }
+        "appearance": "十八岁少年，左侧眉骨一道旧疤，常年穿洗得发白的灰袍，随身带半截残玉。",
+        "fear": "怕自己变成和仇人一样的人；怕忘记师父的样子。",
+        "catchphrase": "无口头禅；习惯在动手前先摸一次残玉。",
+        "secret": "他能听见残玉深处的低语，从未告诉任何人。",
+        "arcStart": "宗门覆灭后的逃亡者，只剩复仇一个念头。",
+        "arcConflict": "复仇之火与师父遗训「留人一线」的撕扯。",
+        "arcTurn": "发现仇人背后另有黑手，仇恨的对象开始动摇。",
+        "arcEnd": "放下屠刀不是原谅，而是选择成为守碑人。"
+      },
+      "bookId": "book_xuanshenji",
+      "age": "18",
+      "job": "亡宗遗徒",
+      "city": "荒山禁地",
+      "personality": [
+        "沉默",
+        "执拗",
+        "护短",
+        "记仇"
+      ],
+      "desire": "查清灭门真凶，为老丹立一块碑。",
+      "fear": "变成和仇人一样的人；忘记师父的样子。",
+      "flaw": "把「不连累别人」当成理所当然，所以从不解释。",
+      "loveView": "先护住，再谈喜欢。",
+      "habits": [
+        "动手前先摸一次残玉",
+        "夜里擦刀",
+        "不吃别人递的东西"
+      ]
     },
     {
       "id": "c1_jiang_he",
@@ -188,9 +174,10 @@
       "role": "女主",
       "arc": "宗门圣女→叛徒→并肩",
       "traits": [
-        "聪慧",
-        "隐忍",
-        "决断"
+        "温软",
+        "清醒",
+        "能忍",
+        "心软"
       ],
       "secrets": [
         "身负旧约",
@@ -207,7 +194,35 @@
           "with": "c1_xuan_nv",
           "type": "旧约双魂"
         }
-      ]
+      ],
+      "bookId": "book_xuanshenji",
+      "age": "20",
+      "job": "玄女座下圣女",
+      "city": "云台",
+      "personality": [
+        "温软",
+        "清醒",
+        "能忍",
+        "心软"
+      ],
+      "desire": "想弄明白自己到底是人，还是玄女手里的一件祭器。",
+      "fear": "被证明只是「旧约」的一环，从未真正活过。",
+      "flaw": "习惯先照顾别人，最后才想起自己。",
+      "loveView": "一起活着，比一起死重要。",
+      "habits": [
+        "替人挡在前面",
+        "把药分成两份"
+      ],
+      "card": {
+        "appearance": "素白衣衫，腕上一道旧疤，常年戴玄女赐的银铃。",
+        "fear": "被当作祭器的替代品。",
+        "catchphrase": "「你先走。」",
+        "secret": "银铃其实是玄女控制她的媒介。",
+        "arcStart": "被供奉的圣女，顺从且空洞。",
+        "arcConflict": "对林渊的心动与「圣女不可有情」的戒条冲突。",
+        "arcTurn": "亲手砸碎银铃，代价是重伤。",
+        "arcEnd": "从祭器变成有名字的人。"
+      }
     },
     {
       "id": "c1_old_dan",
@@ -215,8 +230,9 @@
       "role": "师父",
       "arc": "云游者→牺牲者",
       "traits": [
-        "慈悲",
-        "嗜酒"
+        "粗糙",
+        "护犊",
+        "嘴硬"
       ],
       "secrets": [
         "荒神祭坛看守"
@@ -228,7 +244,34 @@
           "with": "c1_lin_yun",
           "type": "师徒（已亡）"
         }
-      ]
+      ],
+      "bookId": "book_xuanshenji",
+      "age": "六十余",
+      "job": "青云宗长老（已故）",
+      "city": "青云宗",
+      "personality": [
+        "粗糙",
+        "护犊",
+        "嘴硬"
+      ],
+      "desire": "把林渊从宗门那盘棋里摘出去。",
+      "fear": "林渊重走自己的老路。",
+      "flaw": "什么都自己扛，从不解释为什么。",
+      "loveView": "一生只守一个承诺。",
+      "habits": [
+        "喝酒不喝水",
+        "说三句话就咳嗽"
+      ],
+      "card": {
+        "appearance": "独臂老人，左臂烧得卷边，腰上别着半截玉的锦囊。",
+        "fear": "林渊认出他真正的身份。",
+        "catchphrase": "「留着，将来有人会来认。」",
+        "secret": "他是当年火并的另一方幸存者。",
+        "arcStart": "宗门里最不起眼的长老。",
+        "arcConflict": "保林渊与保宗门的两难。",
+        "arcTurn": "以命断后。",
+        "arcEnd": "死亡；遗言留下半截残玉。"
+      }
     },
     {
       "id": "c1_mo_xiao",
@@ -236,8 +279,9 @@
       "role": "反派",
       "arc": "复仇者→觉醒者",
       "traits": [
-        "阴鸷",
-        "执着"
+        "狠",
+        "幽默",
+        "重诺"
       ],
       "secrets": [
         "荒神残魂"
@@ -253,7 +297,34 @@
           "with": "c1_chi_yu",
           "type": "暗中恩主"
         }
-      ]
+      ],
+      "bookId": "book_xuanshenji",
+      "age": "三十余",
+      "job": "叛宗者 / 影宗少主",
+      "city": "荒北",
+      "personality": [
+        "狠",
+        "幽默",
+        "重诺"
+      ],
+      "desire": "用荒神残魂重建影宗，让所有人都欠他一句话。",
+      "fear": "死在无人记得的地方。",
+      "flaw": "把所有人当作可以交换的筹码。",
+      "loveView": "喜欢就抢，抢来就丢。",
+      "habits": [
+        "杀人前先笑",
+        "只喝冷茶"
+      ],
+      "card": {
+        "appearance": "黑衣，腰间挂一排铜铃，左眼蒙着布。",
+        "fear": "被遗忘。",
+        "catchphrase": "「你欠我一句话。」",
+        "secret": "他曾经救过林渊一命，为了留下这笔债。",
+        "arcStart": "灭门案执行者之一。",
+        "arcConflict": "对林渊的赏识与立场对立。",
+        "arcTurn": "放弃杀林渊，改让他欠人情。",
+        "arcEnd": "成为旧约的真正破局者，也失去一切。"
+      }
     },
     {
       "id": "c1_chi_yu",
@@ -261,8 +332,9 @@
       "role": "师弟",
       "arc": "忠诚→动摇→回归",
       "traits": [
-        "憨直",
-        "热血"
+        "直",
+        "重义",
+        "易动摇"
       ],
       "secrets": [
         "莫枭救命之恩"
@@ -278,7 +350,34 @@
           "with": "c1_mo_xiao",
           "type": "暗中恩主"
         }
-      ]
+      ],
+      "bookId": "book_xuanshenji",
+      "age": "二十余",
+      "job": "影宗执刃",
+      "city": "荒北",
+      "personality": [
+        "直",
+        "重义",
+        "易动摇"
+      ],
+      "desire": "想做个被需要的人。",
+      "fear": "再做一次错的选择。",
+      "flaw": "太容易被一句话说服。",
+      "loveView": "谁对我好，我就跟谁。",
+      "habits": [
+        "随身带半块残玉",
+        "习惯站在门口"
+      ],
+      "card": {
+        "appearance": "短打劲装，背上双刃，另半块残玉挂在颈间。",
+        "fear": "被莫枭抛弃。",
+        "catchphrase": "「这次我自己选。」",
+        "secret": "他是老丹旧部的儿子。",
+        "arcStart": "莫枭最锋利的刀。",
+        "arcConflict": "林渊身上看到老丹的影子。",
+        "arcTurn": "阵前反戈。",
+        "arcEnd": "替林渊挡下致命一击。"
+      }
     },
     {
       "id": "c1_xuan_nv",
@@ -286,8 +385,9 @@
       "role": "上界神使",
       "arc": "观察者→裁决者",
       "traits": [
-        "超然",
-        "威严"
+        "冷",
+        "宿命论",
+        "悲悯"
       ],
       "secrets": [
         "荒神旧约的另一半"
@@ -299,7 +399,34 @@
           "with": "c1_jiang_he",
           "type": "旧约双魂"
         }
-      ]
+      ],
+      "bookId": "book_xuanshenji",
+      "age": "不详",
+      "job": "玄女 / 旧约守望者",
+      "city": "云台",
+      "personality": [
+        "冷",
+        "宿命论",
+        "悲悯"
+      ],
+      "desire": "让旧约按既定轨道走完。",
+      "fear": "旧约崩坏，一切死的人白死。",
+      "flaw": "把人当成变量，不把变量当人。",
+      "loveView": "与她无关。",
+      "habits": [
+        "从不直视别人",
+        "说话只留半句"
+      ],
+      "card": {
+        "appearance": "白纱覆面，脚不沾尘，铃声先于人至。",
+        "fear": "旧约失控。",
+        "catchphrase": "「命数如此。」",
+        "secret": "她自己就是上一个「旧约双魂」的活祭。",
+        "arcStart": "规则的代表。",
+        "arcConflict": "看见林渊与姜禾的真心，开始怀疑规则。",
+        "arcTurn": "亲手篡改旧约。",
+        "arcEnd": "以自身为祭，换两人一线生机。"
+      }
     },
     {
       "id": "c1_ji_chou",
@@ -307,8 +434,9 @@
       "role": "师妹",
       "arc": "被救者→守墓人",
       "traits": [
-        "怯弱",
-        "坚韧"
+        "木讷",
+        "固执",
+        "认死理"
       ],
       "secrets": [
         "林渊血脉亲妹"
@@ -320,7 +448,34 @@
           "with": "c1_lin_yun",
           "type": "不知情的血亲"
         }
-      ]
+      ],
+      "bookId": "book_xuanshenji",
+      "age": "二十余",
+      "job": "守墓人",
+      "city": "溪边义庄",
+      "personality": [
+        "木讷",
+        "固执",
+        "认死理"
+      ],
+      "desire": "把每一个死人都记下来。",
+      "fear": "墓碑上最后一个名字是自己写的。",
+      "flaw": "只会用守墓的方式表达感情。",
+      "loveView": "陪着就是全部。",
+      "habits": [
+        "随身带炭条",
+        "记住每一块碑的位置"
+      ],
+      "card": {
+        "appearance": "灰布短褐，指甲缝里永远有泥，怀里揣着一块碎镜。",
+        "fear": "忘记任何一个名字。",
+        "catchphrase": "「名字刻上了，就不算白死。」",
+        "secret": "碎镜里映出的是他自己的前世。",
+        "arcStart": "旁观者。",
+        "arcConflict": "在守墓与复仇之间选择。",
+        "arcTurn": "把碎镜交给林渊。",
+        "arcEnd": "成为新的守碑人。"
+      }
     },
     {
       "id": "c2_chen_zhe",
@@ -328,8 +483,10 @@
       "role": "主角",
       "arc": "普通工程师→独角兽 CEO",
       "traits": [
-        "务实",
-        "内敛"
+        "轴",
+        "敏感",
+        "能熬",
+        "不善表达"
       ],
       "secrets": [
         "父亲遗产真相"
@@ -353,7 +510,35 @@
           "with": "c2_old_chen",
           "type": "父子（已亡）"
         }
-      ]
+      ],
+      "bookId": "book_fuguang",
+      "age": "28",
+      "job": "产品经理 / 创业者",
+      "city": "深圳",
+      "personality": [
+        "轴",
+        "敏感",
+        "能熬",
+        "不善表达"
+      ],
+      "desire": "做一个真正被人用起来的东西。",
+      "fear": "十年后回看，发现自己只是感动了自己。",
+      "flaw": "把情绪都憋在产品里，不说出来。",
+      "loveView": "我们一起把这个做完。",
+      "habits": [
+        "凌晨改原型",
+        "喝冷掉的咖啡"
+      ],
+      "card": {
+        "appearance": "黑框眼镜，帆布包，常年一件洗旧的卫衣。",
+        "fear": "团队散了。",
+        "catchphrase": "「再改一版。」",
+        "secret": "他早就写好了离职信，一直没发。",
+        "arcStart": "深夜会议室里死磕 DEMO 的产品经理。",
+        "arcConflict": "理想与融资逻辑的拉扯。",
+        "arcTurn": "在最关键的一次融资里选择保住团队。",
+        "arcEnd": "公司没做成，但人都还好。"
+      }
     },
     {
       "id": "c2_su_ning",
@@ -361,8 +546,9 @@
       "role": "女主",
       "arc": "投行精英→共同创始人",
       "traits": [
-        "锋利",
-        "温柔"
+        "利落",
+        "讲情义",
+        "刀子嘴"
       ],
       "secrets": [
         "前合伙人旧案"
@@ -374,7 +560,34 @@
           "with": "c2_chen_zhe",
           "type": "恋人 / 联合创始人"
         }
-      ]
+      ],
+      "bookId": "book_fuguang",
+      "age": "27",
+      "job": "联合创始人 / 运营",
+      "city": "深圳",
+      "personality": [
+        "利落",
+        "讲情义",
+        "刀子嘴"
+      ],
+      "desire": "把这件事做成，也把人留住。",
+      "fear": "散伙饭那天一个人不到。",
+      "flaw": "替别人做决定，说是为你好。",
+      "loveView": "并肩比承诺重要。",
+      "habits": [
+        "开会先倒水",
+        "群备注永远是最长的那个"
+      ],
+      "card": {
+        "appearance": "齐肩短发，运动鞋，包里永远有备用充电宝。",
+        "fear": "被留下。",
+        "catchphrase": "「先说事，再说人。」",
+        "secret": "她私下替陈哲挡过一次法务风险。",
+        "arcStart": "被一句话招来的合伙人。",
+        "arcConflict": "离开还是留下。",
+        "arcTurn": "在最难的时候签下第二份合约。",
+        "arcEnd": "成为唯一还在的人。"
+      }
     },
     {
       "id": "c2_he_yuan",
@@ -382,8 +595,9 @@
       "role": "对手",
       "arc": "前上司→对手→对手",
       "traits": [
-        "圆滑",
-        "短视"
+        "体面",
+        "算计",
+        "念旧"
       ],
       "secrets": [
         "挪用公款"
@@ -395,7 +609,34 @@
           "with": "c2_chen_zhe",
           "type": "前下属 / 对手"
         }
-      ]
+      ],
+      "bookId": "book_fuguang",
+      "age": "40",
+      "job": "投资人",
+      "city": "北京 / 深圳",
+      "personality": [
+        "体面",
+        "算计",
+        "念旧"
+      ],
+      "desire": "投出一个能写进自己履历的项目。",
+      "fear": "被人当面说「你不过如此」。",
+      "flaw": "把人情当筹码，却真的被伤过。",
+      "loveView": "各取所需，别谈感情。",
+      "habits": [
+        "喝茶不喝咖啡",
+        "说话先停顿两秒"
+      ],
+      "card": {
+        "appearance": "灰西装，袖扣很贵，笑起来眼角没有纹。",
+        "fear": "被看穿。",
+        "catchphrase": "「我理解你的难处，但是……」",
+        "secret": "挪用公款是为了补另一个项目的窟窿。",
+        "arcStart": "天使轮的推手。",
+        "arcConflict": "在保住自己与保住团队之间选择。",
+        "arcTurn": "出逃前留下一封手写信。",
+        "arcEnd": "在机场回头，但没能留下。"
+      }
     },
     {
       "id": "c2_lin_jia",
@@ -403,8 +644,9 @@
       "role": "联合创始人",
       "arc": "海归→产品负责人",
       "traits": [
-        "直觉强",
-        "执拗"
+        "明亮",
+        "直接",
+        "记仇也记好"
       ],
       "secrets": [
         "与陈哲大学恩怨"
@@ -416,7 +658,34 @@
           "with": "c2_chen_zhe",
           "type": "大学同学 / 联合创始人"
         }
-      ]
+      ],
+      "bookId": "book_fuguang",
+      "age": "26",
+      "job": "视觉设计师",
+      "city": "深圳",
+      "personality": [
+        "明亮",
+        "直接",
+        "记仇也记好"
+      ],
+      "desire": "做一套自己会用的设计。",
+      "fear": "变成自己讨厌的那种「专业的人」。",
+      "flaw": "什么都先笑着说没事。",
+      "loveView": "喜欢就说，不喜欢就走。",
+      "habits": [
+        "通宵画稿",
+        "把耳机挂脖子上"
+      ],
+      "card": {
+        "appearance": "挑染一小撮头发，指甲上永远有没洗干净的颜料。",
+        "fear": "被当成可替代的。",
+        "catchphrase": "「先别动，我看一眼。」",
+        "secret": "大学时的那次抄袭指控，替陈哲背了。",
+        "arcStart": "被挖来的设计师。",
+        "arcConflict": "留下做设计还是去做能挣钱的事。",
+        "arcTurn": "在最后一版界面里署上自己的名字。",
+        "arcEnd": "离开，但作品留下。"
+      }
     },
     {
       "id": "c2_old_chen",
@@ -425,7 +694,8 @@
       "arc": "缺席者→记忆者",
       "traits": [
         "沉默",
-        "固执"
+        "手巧",
+        "嘴硬心软"
       ],
       "secrets": [
         "遗产藏于旧硬盘"
@@ -437,7 +707,34 @@
           "with": "c2_chen_zhe",
           "type": "父子（已亡）"
         }
-      ]
+      ],
+      "bookId": "book_fuguang",
+      "age": "60+",
+      "job": "中学物理教师（已故）",
+      "city": "潮汕",
+      "personality": [
+        "沉默",
+        "手巧",
+        "嘴硬心软"
+      ],
+      "desire": "看儿子做一件正经事。",
+      "fear": "儿子像自己一样一辈子没说出口。",
+      "flaw": "一生没说过「我为你骄傲」。",
+      "loveView": "陪你妈坐了四十年，就够了。",
+      "habits": [
+        "修一切坏电器",
+        "把报纸叠得整整齐齐"
+      ],
+      "card": {
+        "appearance": "灰中山装，手上有机油味，抽屉里全是零件。",
+        "fear": "被儿子看不起。",
+        "catchphrase": "「钱不够就说。」",
+        "secret": "硬盘里的视频是他偷偷录的创业劝告。",
+        "arcStart": "不理解却支持的父亲。",
+        "arcConflict": "病重与儿子融资撞期。",
+        "arcTurn": "去世前把硬盘塞进旧书里。",
+        "arcEnd": "硬盘开启，成了全书最后一句话。"
+      }
     }
   ],
   "events": [
@@ -447,8 +744,20 @@
       "chapter": 1,
       "type": "plot",
       "title": "灭门夜",
-      "summary": "老丹携林渊逃离宗派火并，老丹重伤。",
+      "summary": "宗门遭火攻，老丹携林渊逃离火并，老丹重伤。",
       "affectedChars": [
+        "c1_lin_yun",
+        "c1_old_dan"
+      ],
+      "time": "17岁·冬",
+      "order": 0,
+      "happened": "宗门遭火攻，老丹携林渊逃离火并，老丹重伤。",
+      "feeling": "恐惧 → 麻木",
+      "impact": "林渊失去宗门与师父。",
+      "chapters": [
+        1
+      ],
+      "chars": [
         "c1_lin_yun",
         "c1_old_dan"
       ]
@@ -459,8 +768,20 @@
       "chapter": 1,
       "type": "conflict",
       "title": "老丹之死",
-      "summary": "老丹在禁地出口以身挡刀，留下半截残玉。",
+      "summary": "老丹伤重不治，把半截残玉交给林渊。",
       "affectedChars": [
+        "c1_old_dan"
+      ],
+      "time": "17岁·冬·夜",
+      "order": 1,
+      "happened": "老丹伤重不治，把半截残玉交给林渊。",
+      "feeling": "崩塌",
+      "impact": "林渊踏上复仇之路，得半截残玉。",
+      "chapters": [
+        1,
+        2
+      ],
+      "chars": [
         "c1_old_dan"
       ]
     },
@@ -470,8 +791,20 @@
       "chapter": 2,
       "type": "plot",
       "title": "再遇姜禾",
-      "summary": "林渊被圣女姜禾救下，却遭宗门通缉。",
+      "summary": "溪边义庄再遇姜禾，对方出手相救。",
       "affectedChars": [
+        "c1_lin_yun",
+        "c1_jiang_he"
+      ],
+      "time": "17岁·春",
+      "order": 2,
+      "happened": "溪边义庄再遇姜禾，对方出手相救。",
+      "feeling": "警惕 → 动摇",
+      "impact": "主线搭档关系建立。",
+      "chapters": [
+        2
+      ],
+      "chars": [
         "c1_lin_yun",
         "c1_jiang_he"
       ]
@@ -482,8 +815,19 @@
       "chapter": 3,
       "type": "plot",
       "title": "莫枭现世",
-      "summary": "莫枭携荒神残魂之力屠尽小派，挑衅林渊。",
+      "summary": "莫枭亲自现身，承认灭门夜由他执行。",
       "affectedChars": [
+        "c1_mo_xiao"
+      ],
+      "time": "17岁·春",
+      "order": 3,
+      "happened": "莫枭亲自现身，承认灭门夜由他执行。",
+      "feeling": "恨 → 迟疑",
+      "impact": "主要反派登场。",
+      "chapters": [
+        3
+      ],
+      "chars": [
         "c1_mo_xiao"
       ]
     },
@@ -493,8 +837,19 @@
       "chapter": 4,
       "type": "plot",
       "title": "赤羽动摇",
-      "summary": "赤羽发现莫枭救命之恩，陷入两难。",
+      "summary": "赤羽在阵前动摇，被莫枭当众羞辱。",
       "affectedChars": [
+        "c1_chi_yu"
+      ],
+      "time": "17岁·夏",
+      "order": 4,
+      "happened": "赤羽在阵前动摇，被莫枭当众羞辱。",
+      "feeling": "挣扎",
+      "impact": "影宗内部出现裂缝。",
+      "chapters": [
+        4
+      ],
+      "chars": [
         "c1_chi_yu"
       ]
     },
@@ -504,8 +859,19 @@
       "chapter": 4,
       "type": "conflict",
       "title": "赤羽反戈",
-      "summary": "赤羽在最后关头背叛林渊，带走残玉半块。",
+      "summary": "赤羽反戈投林渊，暴露影宗布防。",
       "affectedChars": [
+        "c1_chi_yu"
+      ],
+      "time": "17岁·夏",
+      "order": 5,
+      "happened": "赤羽反戈投林渊，暴露影宗布防。",
+      "feeling": "决断",
+      "impact": "林渊第一次主动选择「留人一线」。",
+      "chapters": [
+        4
+      ],
+      "chars": [
         "c1_chi_yu"
       ]
     },
@@ -519,16 +885,39 @@
       "affectedChars": [
         "c1_xuan_nv",
         "c1_jiang_he"
+      ],
+      "time": "17岁·秋",
+      "order": 6,
+      "happened": "玄女断言林渊与姜禾为旧约双魂，必须分离。",
+      "feeling": "宿命感",
+      "impact": "双魂设定浮出，主角二人被迫分离。",
+      "chapters": [
+        5
+      ],
+      "chars": [
+        "c1_xuan_nv",
+        "c1_jiang_he"
       ]
     },
     {
       "id": "e1_08",
       "bookId": "book_xuanshenji",
-      "chapter": 5,
+      "chapter": 6,
       "type": "conflict",
       "title": "林渊拒命",
-      "summary": "林渊为救姜禾血祭残玉，显露荒神血脉。",
+      "summary": "纪仇守墓三年，交出一块碎镜。",
       "affectedChars": [
+        "c1_lin_yun"
+      ],
+      "time": "18岁·春",
+      "order": 7,
+      "happened": "纪仇守墓三年，交出一块碎镜。",
+      "feeling": "沉静",
+      "impact": "守碑人线索打开，为末卷埋线。",
+      "chapters": [
+        6
+      ],
+      "chars": [
         "c1_lin_yun"
       ]
     },
@@ -542,6 +931,18 @@
       "affectedChars": [
         "c1_ji_chou",
         "c1_lin_yun"
+      ],
+      "time": "—",
+      "order": 8,
+      "happened": "纪仇拼出半块碎镜，认出林渊血脉。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
+        "c1_ji_chou",
+        "c1_lin_yun"
       ]
     },
     {
@@ -552,6 +953,17 @@
       "title": "守墓人誓言",
       "summary": "纪仇答应守墓十年，换林渊全力一搏。",
       "affectedChars": [
+        "c1_ji_chou"
+      ],
+      "time": "—",
+      "order": 9,
+      "happened": "纪仇答应守墓十年，换林渊全力一搏。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
         "c1_ji_chou"
       ]
     },
@@ -565,6 +977,18 @@
       "affectedChars": [
         "c1_mo_xiao",
         "c1_ji_chou"
+      ],
+      "time": "—",
+      "order": 10,
+      "happened": "莫枭夜访纪仇，要她交出林渊行踪。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
+        "c1_mo_xiao",
+        "c1_ji_chou"
       ]
     },
     {
@@ -576,6 +1000,17 @@
       "summary": "纪仇守墓六年，江湖传言林渊已死。",
       "affectedChars": [
         "c1_ji_chou"
+      ],
+      "time": "—",
+      "order": 11,
+      "happened": "纪仇守墓六年，江湖传言林渊已死。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
+        "c1_ji_chou"
       ]
     },
     {
@@ -584,8 +1019,20 @@
       "chapter": 1,
       "type": "plot",
       "title": "深夜 DEMO",
-      "summary": "陈哲独自在会议室调试产品原型，遇苏宁。",
+      "summary": "凌晨十一次改版，第一版原型跑通。",
       "affectedChars": [
+        "c2_chen_zhe",
+        "c2_su_ning"
+      ],
+      "time": "2016·深冬",
+      "order": 12,
+      "happened": "凌晨十一次改版，第一版原型跑通。",
+      "feeling": "亢奋 → 疲惫",
+      "impact": "公司雏形出现。",
+      "chapters": [
+        1
+      ],
+      "chars": [
         "c2_chen_zhe",
         "c2_su_ning"
       ]
@@ -596,8 +1043,20 @@
       "chapter": 2,
       "type": "plot",
       "title": "天使轮",
-      "summary": "苏宁牵线，陈哲完成 500 万天使融资。",
+      "summary": "何远出席会议室，当场决定投天使轮。",
       "affectedChars": [
+        "c2_chen_zhe",
+        "c2_su_ning"
+      ],
+      "time": "2017·春",
+      "order": 13,
+      "happened": "何远出席会议室，当场决定投天使轮。",
+      "feeling": "期待 → 忐忑",
+      "impact": "拿到天使轮，代价是对赌条款。",
+      "chapters": [
+        2
+      ],
+      "chars": [
         "c2_chen_zhe",
         "c2_su_ning"
       ]
@@ -608,8 +1067,19 @@
       "chapter": 3,
       "type": "conflict",
       "title": "何远离职",
-      "summary": "何远被边缘化后带核心代码出走，加入对手。",
+      "summary": "何远挪用公款被陈哲发现，凌晨出逃。",
       "affectedChars": [
+        "c2_he_yuan"
+      ],
+      "time": "2017·夏",
+      "order": 14,
+      "happened": "何远挪用公款被陈哲发现，凌晨出逃。",
+      "feeling": "猜疑",
+      "impact": "信任开始崩解。",
+      "chapters": [
+        3
+      ],
+      "chars": [
         "c2_he_yuan"
       ]
     },
@@ -619,8 +1089,19 @@
       "chapter": 4,
       "type": "plot",
       "title": "林佳加盟",
-      "summary": "林佳作为产品合伙人加入，填补产品空白。",
+      "summary": "林佳加盟，带来最后一版视觉方案。",
       "affectedChars": [
+        "c2_lin_jia"
+      ],
+      "time": "2017·秋",
+      "order": 15,
+      "happened": "林佳加盟，带来最后一版视觉方案。",
+      "feeling": "热",
+      "impact": "设计团队补齐。",
+      "chapters": [
+        4
+      ],
+      "chars": [
         "c2_lin_jia"
       ]
     },
@@ -630,8 +1111,20 @@
       "chapter": 5,
       "type": "plot",
       "title": "父亲去世",
-      "summary": "老陈突发心梗，陈哲返家整理遗物。",
+      "summary": "老陈病逝，陈哲在路演现场接到电话。",
       "affectedChars": [
+        "c2_chen_zhe",
+        "c2_old_chen"
+      ],
+      "time": "2018·冬",
+      "order": 16,
+      "happened": "老陈病逝，陈哲在路演现场接到电话。",
+      "feeling": "空白",
+      "impact": "父亲去世与融资撞期，成为永久遗憾。",
+      "chapters": [
+        5
+      ],
+      "chars": [
         "c2_chen_zhe",
         "c2_old_chen"
       ]
@@ -642,8 +1135,20 @@
       "chapter": 5,
       "type": "plot",
       "title": "旧硬盘",
-      "summary": "陈哲在父亲床底发现封存的旧硬盘。",
+      "summary": "旧书夹层中的硬盘被打开，视频播放。",
       "affectedChars": [
+        "c2_chen_zhe"
+      ],
+      "time": "2018·冬·后",
+      "order": 17,
+      "happened": "旧书夹层中的硬盘被打开，视频播放。",
+      "feeling": "释然",
+      "impact": "全书收束在父亲留下的视频里。",
+      "chapters": [
+        5,
+        6
+      ],
+      "chars": [
         "c2_chen_zhe"
       ]
     },
@@ -656,6 +1161,17 @@
       "summary": "何远举报陈哲产品抄袭，启动行业阻击。",
       "affectedChars": [
         "c2_he_yuan"
+      ],
+      "time": "—",
+      "order": 18,
+      "happened": "何远举报陈哲产品抄袭，启动行业阻击。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
+        "c2_he_yuan"
       ]
     },
     {
@@ -666,6 +1182,17 @@
       "title": "媒体围攻",
       "summary": "负面稿件铺天盖地，董事会动摇。",
       "affectedChars": [
+        "c2_chen_zhe"
+      ],
+      "time": "—",
+      "order": 19,
+      "happened": "负面稿件铺天盖地，董事会动摇。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
         "c2_chen_zhe"
       ]
     },
@@ -678,6 +1205,17 @@
       "summary": "林佳主导发布公开信，反转舆论。",
       "affectedChars": [
         "c2_lin_jia"
+      ],
+      "time": "—",
+      "order": 20,
+      "happened": "林佳主导发布公开信，反转舆论。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
+        "c2_lin_jia"
       ]
     },
     {
@@ -688,6 +1226,17 @@
       "title": "苏宁背书",
       "summary": "苏宁以个人信用为陈哲背书。",
       "affectedChars": [
+        "c2_su_ning"
+      ],
+      "time": "—",
+      "order": 21,
+      "happened": "苏宁以个人信用为陈哲背书。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
         "c2_su_ning"
       ]
     },
@@ -700,6 +1249,17 @@
       "summary": "诉讼拖延三个月，公司现金告急。",
       "affectedChars": [
         "c2_chen_zhe"
+      ],
+      "time": "—",
+      "order": 22,
+      "happened": "诉讼拖延三个月，公司现金告急。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
+        "c2_chen_zhe"
       ]
     },
     {
@@ -710,6 +1270,17 @@
       "title": "硬盘开启",
       "summary": "陈哲在父亲忌日破解硬盘，看见一段视频。",
       "affectedChars": [
+        "c2_chen_zhe"
+      ],
+      "time": "—",
+      "order": 23,
+      "happened": "陈哲在父亲忌日破解硬盘，看见一段视频。",
+      "feeling": "",
+      "impact": "",
+      "chapters": [
+        6
+      ],
+      "chars": [
         "c2_chen_zhe"
       ]
     }
@@ -723,7 +1294,11 @@
       "setupSnippet": "老丹把那半块玉塞进他掌心：'留着，将来有人会来认。'",
       "payoffChapter": 4,
       "status": "paid",
-      "note": "第 4 章赤羽反戈时揭示另半块残玉存在"
+      "note": "第 4 章赤羽反戈时揭示另半块残玉存在",
+      "appearances": [
+        1,
+        4
+      ]
     },
     {
       "id": "fs1_02",
@@ -733,7 +1308,10 @@
       "setupSnippet": "血从林渊掌心渗出，玉色骤变，隐约显现一尊神相。",
       "payoffChapter": null,
       "status": "pending",
-      "note": "第 7 卷兑现：血脉溯源"
+      "note": "第 7 卷兑现：血脉溯源",
+      "appearances": [
+        5
+      ]
     },
     {
       "id": "fs1_03",
@@ -743,7 +1321,10 @@
       "setupSnippet": "老丹断气前看着林渊，嘴型像是要说一个字。",
       "payoffChapter": null,
       "status": "pending",
-      "note": "第 3 卷揭晓：莫枭才是真凶"
+      "note": "第 3 卷揭晓：莫枭才是真凶",
+      "appearances": [
+        1
+      ]
     },
     {
       "id": "fs1_04",
@@ -753,7 +1334,10 @@
       "setupSnippet": "她把怀里那面破碎的铜镜翻了过来，背面隐约有半行字。",
       "payoffChapter": null,
       "status": "setup",
-      "note": "尚未展开"
+      "note": "尚未展开",
+      "appearances": [
+        6
+      ]
     },
     {
       "id": "fs1_05",
@@ -763,7 +1347,10 @@
       "setupSnippet": "赤羽想起五年前那个雪夜，有人替他挡了一刀。",
       "payoffChapter": null,
       "status": "pending",
-      "note": "赤羽为何动摇的根因"
+      "note": "赤羽为何动摇的根因",
+      "appearances": [
+        4
+      ]
     },
     {
       "id": "fs1_06",
@@ -773,7 +1360,10 @@
       "setupSnippet": "玄女手指划过林渊与姜禾的眉心：'你们是同一道伤口。'",
       "payoffChapter": null,
       "status": "setup",
-      "note": "尚未展开"
+      "note": "尚未展开",
+      "appearances": [
+        5
+      ]
     },
     {
       "id": "fs1_07",
@@ -783,7 +1373,10 @@
       "setupSnippet": "莫枭对着空荡荡的石台拜了三拜，像在等一个约定。",
       "payoffChapter": null,
       "status": "lost",
-      "note": "目前伏笔被作者遗忘，需要提醒"
+      "note": "目前伏笔被作者遗忘，需要提醒",
+      "appearances": [
+        3
+      ]
     },
     {
       "id": "fs1_08",
@@ -793,7 +1386,10 @@
       "setupSnippet": "纪仇的左手腕上有一道细小的烫痕，与林渊年少时的伤疤分毫不差。",
       "payoffChapter": null,
       "status": "setup",
-      "note": "尚未展开"
+      "note": "尚未展开",
+      "appearances": [
+        6
+      ]
     },
     {
       "id": "fs2_01",
@@ -803,7 +1399,10 @@
       "setupSnippet": "老陈临终前写下的那张纸条，背面是他从未见过的字迹。",
       "payoffChapter": null,
       "status": "pending",
-      "note": "硬盘内的关键线索"
+      "note": "硬盘内的关键线索",
+      "appearances": [
+        5
+      ]
     },
     {
       "id": "fs2_02",
@@ -813,7 +1412,10 @@
       "setupSnippet": "林佳看见陈哲第一眼，笑着伸手，迟疑了半拍。",
       "payoffChapter": null,
       "status": "pending",
-      "note": "第 8 章兑现"
+      "note": "第 8 章兑现",
+      "appearances": [
+        4
+      ]
     },
     {
       "id": "fs2_03",
@@ -823,7 +1425,11 @@
       "setupSnippet": "何远离开前匆匆注销了一个子账户。",
       "payoffChapter": 6,
       "status": "paid",
-      "note": "第 6 章负面稿件中暗示"
+      "note": "第 6 章负面稿件中暗示",
+      "appearances": [
+        3,
+        6
+      ]
     },
     {
       "id": "fs2_04",
@@ -833,7 +1439,10 @@
       "setupSnippet": "苏宁签字时停顿了一秒，笔尖在纸上留了一个墨点。",
       "payoffChapter": null,
       "status": "pending",
-      "note": "第 5 卷揭晓"
+      "note": "第 5 卷揭晓",
+      "appearances": [
+        2
+      ]
     },
     {
       "id": "fs2_05",
@@ -843,7 +1452,10 @@
       "setupSnippet": "陈哲随口说了句：'我怕有一天它会认识我。'",
       "payoffChapter": null,
       "status": "setup",
-      "note": "尚未展开"
+      "note": "尚未展开",
+      "appearances": [
+        1
+      ]
     },
     {
       "id": "fs2_06",
@@ -853,7 +1465,10 @@
       "setupSnippet": "屏幕亮起，老陈的脸出现在 1998 年的镜头里。",
       "payoffChapter": null,
       "status": "setup",
-      "note": "核心悬念，待续写"
+      "note": "核心悬念，待续写",
+      "appearances": [
+        6
+      ]
     },
     {
       "id": "fs2_07",
@@ -863,7 +1478,10 @@
       "setupSnippet": "何远接到电话时低声：'爸爸下周再去看你。'",
       "payoffChapter": null,
       "status": "lost",
-      "note": "目前伏笔被作者遗忘"
+      "note": "目前伏笔被作者遗忘",
+      "appearances": [
+        3
+      ]
     },
     {
       "id": "fs2_08",
@@ -873,7 +1491,10 @@
       "setupSnippet": "陈哲脱口而出：'叫浮光。'",
       "payoffChapter": null,
       "status": "pending",
-      "note": "第 12 章揭晓：取自父亲信中一句话"
+      "note": "第 12 章揭晓：取自父亲信中一句话",
+      "appearances": [
+        2
+      ]
     }
   ],
   "chapters": [
@@ -958,7 +1579,22 @@
       },
       "reviewFlags": [
         "P0:insight_ending"
-      ]
+      ],
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch1_02",
@@ -969,7 +1605,22 @@
       "goal": "林渊重伤，被姜禾救下，却发现她是圣女。",
       "draft": "姜禾看见他时，他已经在雪地里躺了三天。她本可以绕开，毕竟这一带通缉令漫天飞，救一个来历不明的少年风险极大。但她没绕。她把他带回药庐，亲自上药。醒来第一眼，林渊看见她腰间那块圣女令牌，本能地握紧了怀里的残玉。姜禾察觉到了，没问，只是把汤碗放下，说：\"先养伤，命比秘密重。\"林渊第一次觉得，有人不是因为他是谁而救他。",
       "wordCount": 135,
-      "status": "revised"
+      "status": "revised",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch1_03",
@@ -980,7 +1631,22 @@
       "goal": "莫枭以荒神残魂之力屠尽小派，向林渊下战书。",
       "draft": "莫枭站在石台上，对着空荡荡的祭坛拜了三拜，像在等一个约定。一阵阴风过，他抬起眼，嘴角一勾，屠了离祭坛最近的那个小派，只为逼林渊现身。林渊赶到时，地上已无活口，墙上却留了一行字：\"林渊，我等你十年。\"林渊盯着那行字，指节捏得发白。他第一次知道，恨一个人，原来是要用时间的。",
       "wordCount": 115,
-      "status": "draft"
+      "status": "draft",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch1_04",
@@ -991,7 +1657,22 @@
       "goal": "赤羽想起莫枭救命之恩，临阵倒戈。",
       "draft": "赤羽想起五年前那个雪夜，他被追杀到绝路，有人替他挡了一刀，他甚至没看清那人的脸，只记得那人转身时袖口露出的一角黑袍。他没想过，那人会是莫枭。直到此刻莫枭在他耳边轻声说：\"我还以为你忘了。\"赤羽的刀尖从林渊背后刺入又抽出，没有停顿。林渊倒在血泊里，赤羽把那半块残玉交到莫枭手上，第一次觉得自己不像自己。",
       "wordCount": 134,
-      "status": "draft"
+      "status": "draft",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch1_05",
@@ -1002,7 +1683,22 @@
       "goal": "玄女断言林渊与姜禾为旧约双魂，下令分离。",
       "draft": "玄女从云端降下时没有任何预兆，姜禾正在给林渊换药。她抬起手，两指并拢，划过林渊与姜禾的眉心：\"你们是同一道伤口。\"她声音冷淡，却压不住颤抖：\"旧约不可违，分离是你们的命。\"姜禾的手指停在林渊肩头，林渊听见自己说：\"我不认。\"血从他掌心渗出，玉色骤变，隐约显现一尊神相。玄女退后一步，第一次露出惊惧之色。",
       "wordCount": 127,
-      "status": "draft"
+      "status": "draft",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch1_06",
@@ -1013,7 +1709,22 @@
       "goal": "纪仇与林渊相认，承诺守墓十年。",
       "draft": "纪仇拄着半根竹杖走进破庙时，林渊几乎没认出她。她左手腕上有一道细小的烫痕，与林渊年少时的伤疤分毫不差。她从怀里摸出半面碎镜，翻了过来，背面隐约有半行字。\"哥，\"她说，\"我守十年，你去做该做的事。\"林渊想说话，但她已经转身。庙外雪越下越大，他听见自己的声音：\"纪仇。\"她没回头，只抬了抬手。",
       "wordCount": 120,
-      "status": "draft"
+      "status": "draft",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch2_01",
@@ -1080,7 +1791,22 @@
       },
       "reviewFlags": [
         "P1:abstract_psych"
-      ]
+      ],
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch2_02",
@@ -1091,7 +1817,22 @@
       "goal": "苏宁牵线，陈哲完成 500 万融资。",
       "draft": "签字那天苏宁手有点抖，笔尖在纸上留了一个墨点。陈哲看着她，忽然说：\"就叫浮光。\"苏宁抬头，愣了一下，没问为什么。她比陈哲自己更早看出这个名字的份量——它不像一家公司，像一句没说完的话。走出律所时她给他发了一条：\"记得那天你在会议室说的。\"陈哲没回，因为他也记得，只是没想到有人比他记得更久。",
       "wordCount": 124,
-      "status": "revised"
+      "status": "revised",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch2_03",
@@ -1102,7 +1843,22 @@
       "goal": "何远被边缘化，带核心代码出走。",
       "draft": "何远是在周会上被宣布\"调任战略顾问\"的，那一刻他没立刻发作，只是回到工位上把自己负责的模块依次备份了一遍。临走前他接了一个电话，压低声音说：\"爸爸下周再去看你。\"他不知道那一刻财务已经在查他的子账户了。他把 U 盘揣进口袋，没和任何人告别就离开了。直到半年后陈哲才从竞争对手的产品里发现，那段代码，几乎一行没改。",
       "wordCount": 137,
-      "status": "revised"
+      "status": "revised",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch2_04",
@@ -1113,7 +1869,22 @@
       "goal": "林佳以产品合伙人身份加入浮光。",
       "draft": "林佳走进会议室的第一眼，陈哲就注意到她笑着伸手时迟疑了半拍。后来陈哲才听说，那是他们大学毕设答辩赛最后一次握手。她是答辩人，他是评委。\"我抢了你的冠军，\"她坐下后第一句话，\"但今天我不是来道歉的。\"陈哲给她倒了杯水，没接话。半年后，浮光的产品能跑进 Gartner 报告，林佳写的那一页被引用次数最高。",
       "wordCount": 124,
-      "status": "draft"
+      "status": "draft",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch2_05",
@@ -1124,7 +1895,22 @@
       "goal": "老陈突发心梗，陈哲返家整理遗物。",
       "draft": "陈哲接到电话时正在跟林佳对 PRD，他说\"等一下\"，然后听见自己说\"我马上回\"。老陈床底下那个铁皮盒子，是陈哲用刀撬开的。里面有一张纸条，背面是他从未见过的字迹；还有一块旧硬盘，型号是 1998 年最常见的那种。他把硬盘抱在怀里坐了一夜，没打开。",
       "wordCount": 98,
-      "status": "draft"
+      "status": "draft",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     },
     {
       "id": "ch2_06",
@@ -1135,7 +1921,22 @@
       "goal": "陈哲在父亲忌日打开硬盘，看见 1998 年的视频。",
       "draft": "陈哲选在父亲忌日打开硬盘。他没告诉苏宁，也没告诉林佳。屏幕亮起，老陈的脸出现在 1998 年的镜头里，穿着一件他从没见过的西装。视频很短，只有一分半钟。他看完没哭。他知道从今天起，浮光这个名字要被重新定义——它不再是他随口说的一个玩笑，而是他父亲留给他的一段债。",
       "wordCount": 111,
-      "status": "draft"
+      "status": "draft",
+      "card": {
+        "plot": {
+          "start": "",
+          "conflict": "",
+          "climax": "",
+          "end": ""
+        },
+        "emotion": {
+          "a": "",
+          "aFrom": "",
+          "aTo": ""
+        },
+        "mustAppear": [],
+        "mustNot": []
+      }
     }
   ],
   "reviews": [
@@ -1273,5 +2074,491 @@
       "reflection": "都市题材节奏更紧，对话占比要压到 30% 以内。"
     }
   ],
-  "advances": []
+  "advances": [],
+  "relations": [
+    {
+      "id": "rel1_01",
+      "bookId": "book_xuanshenji",
+      "a": "林渊",
+      "b": "姜禾",
+      "type": "救赎 / 暧昧",
+      "past": "雪夜相救",
+      "now": "同行试探",
+      "conflict": "她是玄女的棋子",
+      "state": "谨慎靠近",
+      "changes": [
+        {
+          "ch": 2,
+          "note": "义庄初遇，她替他挡了一刀",
+          "ts": "2026-09-16T10:00:00.000Z"
+        },
+        {
+          "ch": 5,
+          "note": "玄女降旨后二人被迫分道",
+          "ts": "2026-09-16T10:00:00.000Z"
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "rel1_02",
+      "bookId": "book_xuanshenji",
+      "a": "林渊",
+      "b": "莫枭",
+      "type": "仇敌",
+      "past": "灭门夜水火",
+      "now": "短暂合作",
+      "conflict": "仇与债无法两清",
+      "state": "对峙",
+      "changes": [
+        {
+          "ch": 3,
+          "note": "莫枭承认自己是执行者",
+          "ts": "2026-09-16T10:00:00.000Z"
+        },
+        {
+          "ch": 4,
+          "note": "莫枭放他一条生路，留下人情债",
+          "ts": "2026-09-16T10:00:00.000Z"
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "rel1_03",
+      "bookId": "book_xuanshenji",
+      "a": "林渊",
+      "b": "老丹",
+      "type": "师徒",
+      "past": "抚养与传授",
+      "now": "生死已隔",
+      "conflict": "遗言与真相冲突",
+      "state": "追忆",
+      "changes": [
+        {
+          "ch": 1,
+          "note": "老丹以命断后",
+          "ts": "2026-09-16T10:00:00.000Z"
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "rel1_04",
+      "bookId": "book_xuanshenji",
+      "a": "赤羽",
+      "b": "莫枭",
+      "type": "上下级 → 决裂",
+      "past": "影宗最锋利的刀",
+      "now": "反戈",
+      "conflict": "忠诚与良知",
+      "state": "决裂",
+      "changes": [
+        {
+          "ch": 4,
+          "note": "阵前反戈",
+          "ts": "2026-09-16T10:00:00.000Z"
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "rel1_05",
+      "bookId": "book_xuanshenji",
+      "a": "纪仇",
+      "b": "林渊",
+      "type": "旁观者 → 同行者",
+      "past": "溪边义庄的守墓人",
+      "now": "同路",
+      "conflict": "一个要记，一个要杀",
+      "state": "互信建立",
+      "changes": [
+        {
+          "ch": 6,
+          "note": "交出碎镜",
+          "ts": "2026-09-16T10:00:00.000Z"
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "rel2_01",
+      "bookId": "book_fuguang",
+      "a": "陈哲",
+      "b": "苏宁",
+      "type": "合伙人",
+      "past": "一句话招来的人",
+      "now": "并肩",
+      "conflict": "她替他做决定，他从不解释",
+      "state": "绑定",
+      "changes": [
+        {
+          "ch": 1,
+          "note": "深夜会议室第一次并肩",
+          "ts": "2026-09-16T10:00:00.000Z"
+        },
+        {
+          "ch": 5,
+          "note": "父亲去世时她守在现场",
+          "ts": "2026-09-16T10:00:00.000Z"
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "rel2_02",
+      "bookId": "book_fuguang",
+      "a": "陈哲",
+      "b": "何远",
+      "type": "创始人 × 投资人",
+      "past": "天使轮的推手",
+      "now": "猜疑",
+      "conflict": "人情与筹码",
+      "state": "破裂",
+      "changes": [
+        {
+          "ch": 2,
+          "note": "天使轮当场拍板",
+          "ts": "2026-09-16T10:00:00.000Z"
+        },
+        {
+          "ch": 3,
+          "note": "挪用公款败露",
+          "ts": "2026-09-16T10:00:00.000Z"
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "rel2_03",
+      "bookId": "book_fuguang",
+      "a": "陈哲",
+      "b": "林佳",
+      "type": "同事 / 未说的喜欢",
+      "past": "大学旧事",
+      "now": "并肩做设计",
+      "conflict": "他从没说过谢谢",
+      "state": "克制",
+      "changes": [
+        {
+          "ch": 4,
+          "note": "最后一版界面交付",
+          "ts": "2026-09-16T10:00:00.000Z"
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "rel2_04",
+      "bookId": "book_fuguang",
+      "a": "老陈",
+      "b": "陈哲",
+      "type": "父子",
+      "past": "沉默的二十年",
+      "now": "生死已隔",
+      "conflict": "谁都没说出口的话",
+      "state": "追忆",
+      "changes": [
+        {
+          "ch": 5,
+          "note": "病逝于融资当晚",
+          "ts": "2026-09-16T10:00:00.000Z"
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    }
+  ],
+  "inspirations": [
+    {
+      "id": "insp1_01",
+      "bookId": "book_xuanshenji",
+      "text": "老丹其实一直没把那半截残玉当信物，他只是想给林渊一个继续活下去的理由。",
+      "type": "人物细节",
+      "chars": [
+        "c1_old_dan",
+        "c1_lin_yun"
+      ],
+      "targetChapter": 12,
+      "related": "半截残玉",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "insp1_02",
+      "bookId": "book_xuanshenji",
+      "text": "玄女的银铃声应该在姜禾砸铃之后再出现一次——从别人身上传来。",
+      "type": "伏笔",
+      "chars": [
+        "c1_jiang_he",
+        "c1_xuan_nv"
+      ],
+      "targetChapter": 18,
+      "related": "旧约双魂",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "insp1_03",
+      "bookId": "book_xuanshenji",
+      "text": "纪仇的碎镜里映出的脸，应该和林渊长得一样，但没人当场说破。",
+      "type": "转折",
+      "chars": [
+        "c1_ji_chou"
+      ],
+      "targetChapter": 26,
+      "related": "纪仇身世",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "insp2_01",
+      "bookId": "book_fuguang",
+      "text": "公司真名来自苏宁那句玩笑——建议在第 20 章才让读者恍然大悟。",
+      "type": "结构",
+      "chars": [
+        "c2_su_ning"
+      ],
+      "targetChapter": 20,
+      "related": "公司真名由来",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "insp2_02",
+      "bookId": "book_fuguang",
+      "text": "父亲硬盘里的视频不要拍脸，只给手和桌上的零件特写。",
+      "type": "场景",
+      "chars": [
+        "c2_old_chen"
+      ],
+      "targetChapter": 6,
+      "related": "硬盘里的视频",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "insp2_03",
+      "bookId": "book_fuguang",
+      "text": "散伙饭那天应该下暴雨，这样谁哭都看不出来。",
+      "type": "场景",
+      "chars": [
+        "c2_chen_zhe",
+        "c2_su_ning",
+        "c2_lin_jia"
+      ],
+      "targetChapter": 22,
+      "related": "",
+      "ts": "2026-09-16T10:00:00.000Z"
+    }
+  ],
+  "materials": [
+    {
+      "id": "mat1_01",
+      "bookId": "book_xuanshenji",
+      "kind": "参考台词",
+      "title": "留人一线",
+      "content": "「杀人容易，留人一线难。你师父一辈子就只做了这一件难事。」",
+      "tags": [
+        "老丹",
+        "主题"
+      ],
+      "url": "",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "mat1_02",
+      "bookId": "book_xuanshenji",
+      "kind": "地点",
+      "title": "溪边义庄",
+      "content": "荒山脚下三间土屋，屋后一条浅溪，溪边立着一排无名木牌。",
+      "tags": [
+        "场景"
+      ],
+      "url": "",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "mat1_03",
+      "bookId": "book_xuanshenji",
+      "kind": "片段",
+      "title": "残玉低语",
+      "content": "夜深时残玉会响，像是有人在很远的雪地里叫他的名字。",
+      "tags": [
+        "超自然",
+        "氛围"
+      ],
+      "url": "",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "mat1_04",
+      "bookId": "book_xuanshenji",
+      "kind": "图片",
+      "title": "宗门废墟参考",
+      "content": "焦黑的梁柱、被烧卷的门环、雪落在灰烬上。",
+      "tags": [
+        "视觉"
+      ],
+      "url": "",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "mat2_01",
+      "bookId": "book_fuguang",
+      "kind": "参考台词",
+      "title": "再改一版",
+      "content": "「再改一版。」——他说了十一次，第十二次终于有人回了一句「好」。",
+      "tags": [
+        "口头禅"
+      ],
+      "url": "",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "mat2_02",
+      "bookId": "book_fuguang",
+      "kind": "地点",
+      "title": "深夜会议室",
+      "content": "白板上一层层被擦掉的架构图，桌上七个冷掉的咖啡杯。",
+      "tags": [
+        "场景",
+        "时代"
+      ],
+      "url": "",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "mat2_03",
+      "bookId": "book_fuguang",
+      "kind": "音乐",
+      "title": "循环播放的歌单",
+      "content": "2017 年那几个通宵，团队只用一张歌单，第一首和最后一首是同一首。",
+      "tags": [
+        "氛围"
+      ],
+      "url": "",
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "mat2_04",
+      "bookId": "book_fuguang",
+      "kind": "片段",
+      "title": "硬盘开启",
+      "content": "旧书被翻开，夹层里滑出一块硬盘，标签上是父亲的钢笔字。",
+      "tags": [
+        "结尾",
+        "关键场景"
+      ],
+      "url": "",
+      "ts": "2026-09-16T10:00:00.000Z"
+    }
+  ],
+  "emotions": [
+    {
+      "id": "emo1_01",
+      "bookId": "book_xuanshenji",
+      "a": "林渊",
+      "b": "姜禾",
+      "points": [
+        {
+          "ch": 1,
+          "stage": "陌生",
+          "value": 0
+        },
+        {
+          "ch": 2,
+          "stage": "防备",
+          "value": 15
+        },
+        {
+          "ch": 3,
+          "stage": "怀旧",
+          "value": 32
+        },
+        {
+          "ch": 5,
+          "stage": "动摇",
+          "value": 58
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "emo1_02",
+      "bookId": "book_xuanshenji",
+      "a": "林渊",
+      "b": "莫枭",
+      "points": [
+        {
+          "ch": 1,
+          "stage": "恨",
+          "value": 95
+        },
+        {
+          "ch": 3,
+          "stage": "对峙",
+          "value": 88
+        },
+        {
+          "ch": 4,
+          "stage": "动摇",
+          "value": 62
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "emo2_01",
+      "bookId": "book_fuguang",
+      "a": "陈哲",
+      "b": "苏宁",
+      "points": [
+        {
+          "ch": 1,
+          "stage": "陌生",
+          "value": 8
+        },
+        {
+          "ch": 2,
+          "stage": "同行",
+          "value": 45
+        },
+        {
+          "ch": 4,
+          "stage": "信任",
+          "value": 72
+        },
+        {
+          "ch": 5,
+          "stage": "依赖",
+          "value": 86
+        },
+        {
+          "ch": 6,
+          "stage": "选择",
+          "value": 92
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    },
+    {
+      "id": "emo2_02",
+      "bookId": "book_fuguang",
+      "a": "陈哲",
+      "b": "何远",
+      "points": [
+        {
+          "ch": 2,
+          "stage": "感激",
+          "value": 70
+        },
+        {
+          "ch": 3,
+          "stage": "猜疑",
+          "value": 40
+        },
+        {
+          "ch": 6,
+          "stage": "释然",
+          "value": 55
+        }
+      ],
+      "ts": "2026-09-16T10:00:00.000Z"
+    }
+  ]
 }

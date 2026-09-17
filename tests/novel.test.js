@@ -440,7 +440,9 @@ section("R. 编辑 API（书籍/卷/世界观/章节/人物/关系/时间线/伏
   eq(sb.Novel.events(b.id)[0].affectedChars[0], "甲", "affectedChars 兼容字段同步");
 
   const fs1 = E.foreshadow(null, { bookId: b.id, title: "礼物", setupChapter: 5, payoffChapter: 20, status: "setup" });
-  eq(sb.Novel.foreshadows(b.id).filter(function (x) { return x.id === fs1.id; }).length, 1, "新建伏笔");
+  const fsg = sb.Novel.bookFs(b.id);
+  eq(fsg.setup.filter(function (x) { return x.id === fs1.id; }).length, 1, "新建伏笔（按状态分组 setup）");
+  ok(sb.Novel.pendingFs(b.id).some(function (x) { return x.id === fs1.id; }), "pendingFs 含未回收伏笔");
 
   const it = E.inspiration(null, { bookId: b.id, text: "灵感内容", type: "人物细节", chars: ["甲"], targetChapter: 8 });
   eq(sb.Novel.inspirations(b.id)[0].text, "灵感内容", "新建灵感");
