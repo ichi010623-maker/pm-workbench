@@ -7137,10 +7137,10 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
 .nv-form-grid > .nv-f-row{grid-column:1 / -1}
 .nv-form-grid > .nv-f-row.half{grid-column:auto}
 
-/* --- 字段单元（v5.9.144 独立卡片：白底 + 1px 灰边 + 圆角 + hover/focus-within 反馈） --- */
-.nv-f-row{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;margin-bottom:10px;transition:border-color .15s ease,box-shadow .15s ease,background-color .15s ease;position:relative;display:flex;flex-direction:column}
-.nv-f-row:hover{border-color:#cbd5e1;box-shadow:0 1px 3px rgba(15,23,42,0.04)}
-.nv-f-row:focus-within{border-color:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,0.12),0 2px 6px rgba(139,92,246,0.08);background:#fcfaff}
+/* --- 字段单元（v5.9.145 强化：2px 深灰边 + 浅紫底 + 大内边距 + 强 hover/focus-within 反馈） --- */
+.nv-f-row{background:#faf5ff;border:2px solid #c4b5fd;border-radius:12px;padding:12px 14px;margin-bottom:12px;transition:border-color .15s ease,box-shadow .15s ease,background-color .15s ease,transform .08s ease;position:relative;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(139,92,246,0.04)}
+.nv-f-row:hover{border-color:#a78bfa;background:#f3edff;box-shadow:0 2px 6px rgba(139,92,246,0.10)}
+.nv-f-row:focus-within{border-color:#7c3aed;background:#fff;box-shadow:0 0 0 4px rgba(139,92,246,0.22),0 4px 12px rgba(139,92,246,0.15);transform:translateY(-1px)}
 .nv-f-row.half{display:flex;width:100%;margin-right:0}
 .nv-f-label{font-size:11px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;display:flex;align-items:center;gap:4px;line-height:1.3}
 .nv-f-label::before{content:"";display:inline-block;width:2px;height:10px;background:#8b5cf6;border-radius:1px}
@@ -7200,9 +7200,9 @@ select.nv-f-input:focus{background-color:#fff}
   .nv-form-h{color:#a78bfa;border-color:rgba(139,92,246,0.2)}
   .nv-form-intro{background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.4);color:#a5b4fc}
   .nv-form-actions{border-color:rgba(139,92,246,0.2)}
-  .nv-f-row{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12)}
-  .nv-f-row:hover{border-color:rgba(255,255,255,0.22);box-shadow:0 1px 3px rgba(0,0,0,0.4)}
-  .nv-f-row:focus-within{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(139,92,246,0.22),0 2px 6px rgba(139,92,246,0.15);background:rgba(255,255,255,0.06)}
+  .nv-f-row{background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.4)}
+  .nv-f-row:hover{border-color:rgba(167,139,250,0.6);background:rgba(139,92,246,0.12);box-shadow:0 2px 6px rgba(139,92,246,0.2)}
+  .nv-f-row:focus-within{border-color:#a78bfa;background:rgba(255,255,255,0.1);box-shadow:0 0 0 4px rgba(139,92,246,0.3),0 4px 12px rgba(139,92,246,0.25)}
   .nv-f-label{color:#a78bfa}
   .nv-f-label::before{background:#a78bfa}
   .nv-f-input{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);color:#e2e8f0}

@@ -9,7 +9,7 @@
    4. 故障自救 → ?reset=1 一键清 SW + 清缓存
    ============================================ */
 
-const CACHE_VERSION = "v5.9.144";
+const CACHE_VERSION = "v5.9.145";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 8000;
 
