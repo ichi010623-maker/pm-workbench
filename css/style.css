@@ -7125,35 +7125,37 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
  * 配套 HTML 结构（已就位）：nv-form / nv-f-* / nv-card-grid / nv-card-kv / nv-card-sec
  * ============================================ */
 
-/* --- 表单容器（编辑页用） --- */
-.nv-form{background:#fff;border:1px solid #ede9fe;border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(109,40,217,0.04)}
-.nv-form-h{font-size:14px;font-weight:700;color:#6d28d9;margin:0 0 4px;display:flex;align-items:center;gap:6px}
+/* --- 表单容器（v5.9.144 降级为透明分组，字段自带卡片） --- */
+.nv-form{background:transparent;border:0;padding:0;margin-bottom:18px;box-shadow:none}
+.nv-form-h{font-size:15px;font-weight:700;color:#6d28d9;margin:0 0 10px;display:flex;align-items:center;gap:6px;padding:4px 0 6px;border-bottom:1px solid #ede9fe}
 .nv-form-h::before{content:"";display:inline-block;width:3px;height:14px;background:linear-gradient(180deg,#8b5cf6,#6d28d9);border-radius:2px}
 .nv-form-intro{font-size:12px;color:#64748b;line-height:1.6;margin:0 0 12px;padding:8px 10px;background:#faf5ff;border-left:3px solid #c4b5fd;border-radius:6px}
-.nv-form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px dashed #ede9fe}
-.nv-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:8px}
+.nv-form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:14px;border-top:1px dashed #ede9fe}
+.nv-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:0}
 .nv-form-grid.cols-1{grid-template-columns:1fr}
 .nv-form-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
 .nv-form-grid > .nv-f-row{grid-column:1 / -1}
 .nv-form-grid > .nv-f-row.half{grid-column:auto}
 
-/* --- 字段单元 --- */
-.nv-f-row{display:flex;flex-direction:column;margin-bottom:10px;position:relative}
-.nv-f-row.half{display:inline-block;width:calc(50% - 7px);margin-right:14px}
-.nv-f-row.half:nth-of-type(2n){margin-right:0}
-.nv-f-label{font-size:12px;font-weight:600;color:#475569;margin-bottom:4px;display:flex;align-items:center;gap:4px;line-height:1.4}
-.nv-f-label::after{content:"";flex:0 0 auto}
-.nv-f-req{color:#ef4444;font-size:13px;line-height:1;font-weight:700}
-.nv-f-hint{font-size:11px;color:#94a3b8;margin-top:3px;line-height:1.4}
-/* v5.9.142: 加强边框 + 阴影三层（默认/hover/focus 立体感） */
-.nv-f-input{width:100%;font-size:13px;color:#1e293b;background:#fff;border:2px solid #cbd5e1;border-radius:9px;padding:9px 12px;transition:border-color .15s ease,box-shadow .15s ease,background-color .15s ease,transform .08s ease;box-sizing:border-box;font-family:inherit;outline:none;box-shadow:0 1px 2px rgba(15,23,42,0.04),inset 0 1px 0 rgba(255,255,255,0.6)}
-.nv-f-input:hover{border-color:#94a3b8;background:#fff;box-shadow:0 2px 4px rgba(15,23,42,0.06),inset 0 1px 0 rgba(255,255,255,0.6)}
-.nv-f-input:focus{border-color:#7c3aed;background:#fff;box-shadow:0 0 0 4px rgba(139,92,246,0.18),0 2px 8px rgba(139,92,246,0.12)}
+/* --- 字段单元（v5.9.144 独立卡片：白底 + 1px 灰边 + 圆角 + hover/focus-within 反馈） --- */
+.nv-f-row{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;margin-bottom:10px;transition:border-color .15s ease,box-shadow .15s ease,background-color .15s ease;position:relative;display:flex;flex-direction:column}
+.nv-f-row:hover{border-color:#cbd5e1;box-shadow:0 1px 3px rgba(15,23,42,0.04)}
+.nv-f-row:focus-within{border-color:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,0.12),0 2px 6px rgba(139,92,246,0.08);background:#fcfaff}
+.nv-f-row.half{display:flex;width:100%;margin-right:0}
+.nv-f-label{font-size:11px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;display:flex;align-items:center;gap:4px;line-height:1.3}
+.nv-f-label::before{content:"";display:inline-block;width:2px;height:10px;background:#8b5cf6;border-radius:1px}
+.nv-f-req{color:#ef4444;font-size:13px;line-height:1;font-weight:700;margin-left:2px}
+.nv-f-hint{font-size:11px;color:#94a3b8;margin-top:5px;line-height:1.4}
+/* v5.9.144: input 在 .nv-f-row 卡片内，自身边框弱化（1px + 浅灰），padding 缩小；外层卡片负责主视觉边界 */
+.nv-f-input{width:100%;font-size:13px;color:#1e293b;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:7px;padding:7px 10px;transition:border-color .15s ease,box-shadow .15s ease,background-color .15s ease;box-sizing:border-box;font-family:inherit;outline:none}
+.nv-f-input:hover{border-color:#cbd5e1;background:#fff}
+.nv-f-input:focus{border-color:#7c3aed;background:#fff;box-shadow:0 0 0 3px rgba(139,92,246,0.15)}
 .nv-f-input::placeholder{color:#94a3b8}
-.nv-f-input:disabled,.nv-f-input[readonly]{background:#f1f5f9;color:#64748b;cursor:not-allowed;border-color:#e2e8f0;box-shadow:none}
-.nv-f-ta{resize:vertical;min-height:70px;line-height:1.65}
+.nv-f-input:disabled,.nv-f-input[readonly]{background:#f1f5f9;color:#64748b;cursor:not-allowed;border-color:#e2e8f0}
+.nv-f-ta{resize:vertical;min-height:60px;line-height:1.6}
 .nv-f-input[type="number"]{font-variant-numeric:tabular-nums}
-select.nv-f-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%2364748b' d='M0 0l5 6 5-6z'/></svg>");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;background-color:#fff}
+select.nv-f-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%2364748b' d='M0 0l5 6 5-6z'/></svg>");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;background-color:#f8fafc}
+select.nv-f-input:focus{background-color:#fff}
 /* 数字输入：去掉原生 spinner 的突兀外观 */
 .nv-f-input[type="number"]::-webkit-inner-spin-button,.nv-f-input[type="number"]::-webkit-outer-spin-button{opacity:0.5}
 
@@ -7194,15 +7196,22 @@ select.nv-f-input{cursor:pointer;appearance:none;background-image:url("data:imag
 
 /* --- 暗色适配 --- */
 @media (prefers-color-scheme: dark){
-  .nv-form{background:var(--card-bg,#1e1e2e);border-color:rgba(139,92,246,0.25)}
+  .nv-form{background:transparent;border:0}
+  .nv-form-h{color:#a78bfa;border-color:rgba(139,92,246,0.2)}
   .nv-form-intro{background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.4);color:#a5b4fc}
-  .nv-form-h{color:#a78bfa}
   .nv-form-actions{border-color:rgba(139,92,246,0.2)}
-  .nv-f-label{color:#cbd5e1}
-  .nv-f-input{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.18);color:#e2e8f0;box-shadow:0 1px 2px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.04)}
-  .nv-f-input:hover{border-color:rgba(255,255,255,0.28);background:rgba(255,255,255,0.06);box-shadow:0 2px 4px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.04)}
-  .nv-f-input:focus{border-color:#a78bfa;box-shadow:0 0 0 4px rgba(139,92,246,0.25),0 2px 8px rgba(139,92,246,0.18);background:rgba(255,255,255,0.08)}
+  .nv-f-row{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12)}
+  .nv-f-row:hover{border-color:rgba(255,255,255,0.22);box-shadow:0 1px 3px rgba(0,0,0,0.4)}
+  .nv-f-row:focus-within{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(139,92,246,0.22),0 2px 6px rgba(139,92,246,0.15);background:rgba(255,255,255,0.06)}
+  .nv-f-label{color:#a78bfa}
+  .nv-f-label::before{background:#a78bfa}
+  .nv-f-input{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.15);color:#e2e8f0}
+  .nv-f-input:hover{border-color:rgba(255,255,255,0.28);background:rgba(255,255,255,0.08)}
+  .nv-f-input:focus{border-color:#a78bfa;background:rgba(255,255,255,0.1);box-shadow:0 0 0 3px rgba(139,92,246,0.25)}
+  .nv-f-input::placeholder{color:#64748b}
   .nv-f-input:disabled,.nv-f-input[readonly]{background:rgba(255,255,255,0.02);color:#64748b;border-color:rgba(255,255,255,0.08)}
+  select.nv-f-input{background-color:rgba(255,255,255,0.06)}
+  select.nv-f-input:focus{background-color:rgba(255,255,255,0.1)}
   .nv-f-hint{color:#64748b}
   .nv-booksel{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.18);color:#e2e8f0}
   .nv-booksel:hover{border-color:rgba(255,255,255,0.28)}
