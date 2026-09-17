@@ -1,25 +1,37 @@
 /* ============================================
    硬件PM工作台 Service Worker
-   v5.9.135 - 离线壳 + 网络优先 + 版本化缓存（修复手机端打不开）
+   v5.9.146 - 强制清旧 CSS/JS 缓存 + 版本化资源 cache-buster
 
    设计目标（按优先级）：
    1. 有网 → 永远拿最新（network-first，绝不锁死旧版本）
    2. 无网/弱网 → 回退缓存，至少能打开上次成功访问过的版本（离线可用）
-   3. 版本升级 → 新 SW 立即接管 + 清旧缓存
+   3. 版本升级 → 新 SW 立即接管 + 清旧缓存（含当前 CACHE_NAME 也清，
+      强制所有版本化资源重新下载——根除"改了 CSS 看不到"的 bug）
    4. 故障自救 → ?reset=1 一键清 SW + 清缓存
    ============================================ */
 
-const CACHE_VERSION = "v5.9.145";
+const CACHE_VERSION = "v5.9.146";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 8000;
 
-// ===== Install: 预缓存最小壳（只放不随版本变化的静态资源，避免锁死版本）=====
+// ===== Install: 清掉所有旧 cache（包括当前 CACHE_NAME，强制重新拉所有版本化资源）=====
 self.addEventListener("install", function (event) {
-  console.log("[SW] Installing " + CACHE_VERSION + " [offline-shell + network-first]");
+  console.log("[SW] Installing " + CACHE_VERSION + " [force-clear all versioned caches]");
   event.waitUntil(
-    caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(["./manifest.json"]).catch(function (e) {
-        console.log("[SW] precache skipped:", e && e.message);
+    caches.keys().then(function (keys) {
+      // v5.9.146: 把所有 pm-workbench-* 缓存全删了（不只是旧的），
+      // 强制浏览器从网络重新拉 css/style.css?v=5.9.146 等版本化资源
+      return Promise.all(
+        keys.filter(function (k) { return k.indexOf("pm-workbench-") === 0; }).map(function (k) {
+          console.log("[SW] Force-delete (install):", k);
+          return caches.delete(k);
+        })
+      );
+    }).then(function () {
+      return caches.open(CACHE_NAME).then(function (cache) {
+        return cache.addAll(["./manifest.json"]).catch(function (e) {
+          console.log("[SW] precache skipped:", e && e.message);
+        });
       });
     }).then(function () {
       return self.skipWaiting();
@@ -27,14 +39,14 @@ self.addEventListener("install", function (event) {
   );
 });
 
-// ===== Activate: 清旧缓存 + 立即接管所有页面 =====
+// ===== Activate: 再次清旧 + 立即接管 =====
 self.addEventListener("activate", function (event) {
   console.log("[SW] Activating " + CACHE_VERSION);
   event.waitUntil(
     caches.keys().then(function (keys) {
       return Promise.all(
         keys.filter(function (k) { return k !== CACHE_NAME; }).map(function (k) {
-          console.log("[SW] Deleting old cache:", k);
+          console.log("[SW] Deleting old cache (activate):", k);
           return caches.delete(k);
         })
       );

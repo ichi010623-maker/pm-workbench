@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.145";
+var APP_VERSION = "5.9.146";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -6335,6 +6335,20 @@ async function initApp() {
     // 新逻辑：软更新 —— 本次照常渲染（用户无感），仅记录版本 + 让 SW 自查更新；
     //     新版本由 SW 的 network-first 策略在下次自然打开时生效，离线能力不被破坏。
     console.log("[App] Version " + storedVersion + " → " + APP_VERSION + " (soft update, no reload)");
+    // v5.9.146: 版本更新时主动 fetch 新 css + 检查 .nv-f-row 是否含紫色（#c4b5fd）
+    // 不匹配则提示用户手动清缓存（避免用户"看不到效果"无从下手）
+    try {
+      fetch("css/style.css?v=" + APP_VERSION + "&_=" + Date.now(), { cache: "no-store" })
+        .then(function (r) { return r.ok ? r.text() : ""; })
+        .then(function (txt) {
+          if (txt && txt.indexOf("#c4b5fd") < 0) {
+            console.warn("[App] CSS version " + APP_VERSION + " 未生效，可能浏览器命中旧缓存。试试 Cmd+Shift+R 强刷或在 URL 加 ?reset=1");
+            if (typeof showToast === "function") showToast("⚠️ 样式未更新，强刷一次（Cmd+Shift+R）", "warning");
+          } else {
+            console.log("[App] CSS " + APP_VERSION + " ✓ 字段卡样式已生效");
+          }
+        }).catch(function () {});
+    } catch (e) {}
     _needVerBackup = true;
     try {
       if ("serviceWorker" in navigator) {
