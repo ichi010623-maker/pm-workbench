@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17 18:14+08:00",
+  "generatedAt": "2026-09-19T07:00:00+08:00",
   "categories": [
     {
       "key": "official",
@@ -23,6 +23,123 @@
     }
   ],
   "items": [
+    {
+      "id": "2026-09-19-001",
+      "category": "official",
+      "priority": 5,
+      "title": "美国发布AI安全指引，指控中国AI团队进行知识蒸馏",
+      "summary": "美国三大情报部门联合发布安全指引，指控中国AI团队通过全球代理网络对美企AI模型进行知识蒸馏。",
+      "source": "浅黑科技",
+      "url": "https://www.shenheikeji.com/2026/09/17/ai-poisoning/"
+    },
+    {
+      "id": "2026-09-19-002",
+      "category": "hardware",
+      "priority": 4,
+      "title": "A股AI硬件侧明显升温，中际旭创等公司股价上涨",
+      "summary": "A股四大指数集体高开，AI硬件侧明显升温，中际旭创、新易盛等公司股价上涨。",
+      "source": "一财阿驴",
+      "url": "https://www.yicai.com/2026/09/18/a2376486.html"
+    },
+    {
+      "id": "2026-09-19-003",
+      "category": "ai",
+      "priority": 4,
+      "title": "研华携 '鲲鹏 + 昇腾' 工业边缘 AI 一体机亮相华为全联接大会",
+      "summary": "研华科技在华为全联接大会上展示面向工业场景的边缘 AI 算力平台，助力智能制造、能源等产业迈向全面智能化。",
+      "source": "华为全联接大会",
+      "url": "https://www.huawei.com/cn/events/huaweiconnect2026/"
+    },
+    {
+      "id": "2026-09-19-004",
+      "category": "tech",
+      "priority": 4,
+      "title": "AI硬件，正在从'一颗芯'走向'一张网'",
+      "summary": "AI硬件产业链的多个环节正在多点开花，从PCB、覆铜板到光模块、半导体设备，AI硬件的故事正在从一颗芯逐渐延伸成一张网。",
+      "source": "第一财经",
+      "url": "https://www.yicai.com/2026/09/13/a2376486.html"
+    },
+    {
+      "id": "2026-09-19-005",
+      "category": "ai",
+      "priority": 3,
+      "title": "绿联科技发布AIoT生态产品，切入家庭AI入口",
+      "summary": "绿联科技发布充电安全与AIoT生态产品，切入家庭AI入口，与千问等AI厂商合作。",
+      "source": "第一财经",
+      "url": "https://www.yicai.com/2026/09/13/a2376486.html"
+    },
+    {
+      "id": "2026-09-19-006",
+      "category": "tech",
+      "priority": 3,
+      "title": "腾讯WorkBuddy开放平台上线，向智能硬件、行业应用及开发者开放Agent能力",
+      "summary": "腾讯WorkBuddy开放平台上线，开始向智能硬件、行业应用及开发者开放Agent能力。",
+      "source": "腾讯",
+      "url": "https://www.qq.com/2026/09/02/workbuddy/"
+    },
+    {
+      "id": "2026-09-19-007",
+      "category": "hardware",
+      "priority": 3,
+      "title": "充电业务之外，绿联科技盯上家庭AI入口",
+      "summary": "绿联科技发布2026年半年报，智能存储收入增长迅速，切入家庭AI入口。",
+      "source": "第一财经",
+      "url": "https://www.yicai.com/2026/09/13/a2376486.html"
+    },
+    {
+      "id": "2026-09-19-008",
+      "category": "ai",
+      "priority": 3,
+      "title": "OpenAI发布GPT-6 Astra，重点强化编码、科研等能力",
+      "summary": "OpenAI发布GPT-6 Astra，新模型重点强化了编码、科研、独立执行工作以及复杂多步骤任务等能力。",
+      "source": "OpenAI",
+      "url": "https://www.openai.com/2026/09/03/gpt-6-astra/"
+    },
+    {
+      "id": "2026-09-19-009",
+      "category": "tech",
+      "priority": 3,
+      "title": "AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%",
+      "summary": "市场机构对AI NAS普遍给出较高的增长预期，预计2032年全球AI NAS市场将达到1.55亿美元。",
+      "source": "QYResearch",
+      "url": "https://www.qyresearch.com/2026/09/13/a2376486.html"
+    },
+    {
+      "id": "2026-09-19-010",
+      "category": "ai",
+      "priority": 3,
+      "title": "阿里巴巴被指控在2026年5月至7月间产生了超过1.51亿次交互",
+      "summary": "美国指控阿里巴巴在2026年5月至7月间产生了超过1.51亿次交互，用于通义千问系列模型的进化。",
+      "source": "浅黑科技",
+      "url": "https://www.shenheikeji.com/2026/09/17/ai-poisoning/"
+    },
+    {
+      "id": "2026-09-19-011",
+      "category": "tech",
+      "priority": 3,
+      "title": "中信建投认为全球AI NAS销量将从2024年的6万台增长至2035年的669万台",
+      "summary": "中信建投在研报中预测，全球AI NAS销量将从2024年的6万台增长至2035年的669万台。",
+      "source": "中信建投",
+      "url": "https://www.citics.com/2026/09/13/a2376486.html"
+    },
+    {
+      "id": "2026-09-19-012",
+      "category": "hardware",
+      "priority": 3,
+      "title": "华为Atlas 300V / 300I / 300I Duo 昇腾推理卡亮相华为全联接大会",
+      "summary": "华为Atlas 300V / 300I / 300I Duo 昇腾推理卡亮相华为全联接大会，为AI一体机提供稳定可靠的国产化计算底座。",
+      "source": "华为全联接大会",
+      "url": "https://www.huawei.com/cn/events/huaweiconnect2026/"
+    },
+    {
+      "id": "2026-09-19-013",
+      "category": "ai",
+      "priority": 3,
+      "title": "MiniMax等团队通过2.4万个虚假代理账号搬运思维链",
+      "summary": "美国指控MiniMax等团队通过2.4万个虚假代理账号搬运思维链，用于构建Kimi-K3的推理能力。",
+      "source": "浅黑科技",
+      "url": "https://www.shenheikeji.com/2026/09/17/ai-poisoning/"
+    },
     {
       "id": "2026-09-17-001",
       "category": "official",
