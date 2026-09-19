@@ -765,20 +765,73 @@
     return '<div class="nv-f-row">' + h + "</div>";
   }
   function nvOpenForm(title, fields, values, onSave, intro) {
+    return nvOpenFormEx(title, null, fields, values, onSave, intro);
+  }
+
+  /**
+   * v5.9.149: 分 Section 表单渲染
+   * @param {string} title  - 弹窗大标题（如"新建小说"）
+   * @param {Array|null} sections - [{ title:"基本信息", fields:[...] }, ...]  分组；传 null 时退化为平铺
+   * @param {Array} [fallbackFields] - sections 为 null 时使用平铺字段（向后兼容）
+   * @param {Object} values - 字段值映射
+   * @param {Function} onSave - 保存回调
+   * @param {string} [intro] - 顶部说明（可选）
+   * @param {Object} [opts] - { saveLabel:"保存小说", cancelLabel:"取消" }
+   */
+  function nvOpenFormEx(title, sections, fallbackFields, values, onSave, intro, opts) {
     values = values || {};
+    opts = opts || {};
+    var saveLabel = opts.saveLabel || "保存";
+    var cancelLabel = opts.cancelLabel || "取消";
     var fid = "f" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
-    FORMS[fid] = { fields: fields, onSave: onSave };
-    var html = '<div class="nv-form"><div class="nv-form-h">' + esc(title) + "</div>";
+    FORMS[fid] = { fields: nvFlatFields(sections, fallbackFields), onSave: onSave };
+
+    var html = '<div class="nv-form">';
+    if (title) html += '<div class="nv-form-h">' + esc(title) + "</div>";
     if (intro) html += '<div class="nv-form-intro">' + esc(intro) + "</div>";
-    fields.forEach(function (f) {
-      var val = values[f.k];
-      if (Array.isArray(val)) val = val.join("\n");
-      html += nvFieldHtml(f, val);
-    });
+
+    if (sections && sections.length) {
+      sections.forEach(function (sec, idx) {
+        html += '<div class="nv-form-section' + (idx === 0 ? " first" : "") + '">';
+        if (sec.title) {
+          html += '<div class="nv-form-section-h">' + esc(sec.title) + "</div>";
+        }
+        if (sec.subtitle) {
+          html += '<div class="nv-form-section-sub">' + esc(sec.subtitle) + "</div>";
+        }
+        (sec.fields || []).forEach(function (f) {
+          var val = values[f.k];
+          if (Array.isArray(val)) val = val.join("\n");
+          html += nvFieldHtml(f, val);
+        });
+        html += "</div>";
+      });
+    } else if (fallbackFields) {
+      fallbackFields.forEach(function (f) {
+        var val = values[f.k];
+        if (Array.isArray(val)) val = val.join("\n");
+        html += nvFieldHtml(f, val);
+      });
+    }
+
     html += '<div class="nv-form-actions">' +
-      '<button class="btn btn-ghost" onclick="closeModal()">取消</button>' +
-      '<button class="btn btn-primary" onclick="nvFormSave(\'' + fid + '\')">保存</button></div></div>';
+      '<button class="nv-form-cancel" onclick="closeModal()">' + esc(cancelLabel) + "</button>" +
+      '<button class="nv-form-save nv-btn-primary" onclick="nvFormSave(\'' + fid + '\')">' + esc(saveLabel) + "</button>" +
+      "</div></div>";
     if (typeof showModal === "function") showModal(html);
+    return fid;
+  }
+
+  // 提取所有字段（Section + 平铺都支持）用于 nvFormSave 读取
+  function nvFlatFields(sections, fallback) {
+    if (sections && sections.length) {
+      var out = [];
+      sections.forEach(function (sec) {
+        (sec.fields || []).forEach(function (f) { out.push(f); });
+      });
+      return out;
+    }
+    return fallback || [];
   }
   function nvReadForm(spec) {
     var out = {}, err = null;
@@ -2247,22 +2300,46 @@
   }
   root.nvEditBook = function (id) {
     var b = id ? nvGet(id) : null;
-    nvOpenForm(id ? "编辑小说设定" : "新建小说", [
-      { k: "title", label: "书名", req: true, ph: "例：后来我们都学会了爱" },
-      { k: "genre", label: "类型 / 题材", ph: "例：都市 · 破镜重圆" },
-      { k: "oneLiner", label: "一句话故事", type: "textarea", rows: 2, ph: "七年后重逢的前任，在过去与现在之间，重新选择彼此。" },
-      { k: "themes", label: "主题", type: "tags", ph: "爱、失去、选择、成长（用、分隔）" },
-      { k: "style", label: "文风", ph: "例：东方玄幻，半文半白" },
-      { k: "pov", label: "叙事视角", type: "select", options: [{ v: "third", t: "第三人称" }, { v: "first", t: "第一人称（我）" }] },
-      { k: "targetWords", label: "目标字数", type: "number", ph: "200000" },
-      { k: "status", label: "状态", type: "select", options: STATUS_OPTS }
-    ], b ? {
+    // v5.9.149: 分 3 个 Section 渲染（基本信息 / 创作设置 / 创作状态）
+    // 业务字段全部保留不变（themes / style / pov / targetWords / status）；
+    // 仅 themes 字段的 label 显示名改为「写作风格」（用户要求）
+    var sections = [
+      {
+        title: "基本信息",
+        subtitle: "书的核心信息，将作为首页展示",
+        fields: [
+          { k: "title", label: "书名", req: true, ph: "例：后来我们都学会了爱" },
+          { k: "genre", label: "类型 / 题材", ph: "例：都市 · 破镜重圆" },
+          { k: "oneLiner", label: "一句话故事", type: "textarea", rows: 3, ph: "七年后重逢的前任，在过去与现在之间，重新选择彼此。" }
+        ]
+      },
+      {
+        title: "创作设置",
+        subtitle: "写作偏好与目标设定",
+        fields: [
+          { k: "themes", label: "写作风格", type: "tags", ph: "都市 · 现实向 · 慢热（用、分隔）", hint: "题材 / 风格标签，多个用、分隔" },
+          { k: "style", label: "文风", ph: "例：东方玄幻，半文半白" },
+          { k: "pov", label: "叙事视角", type: "select", options: [{ v: "third", t: "第三人称" }, { v: "first", t: "第一人称（我）" }] },
+          { k: "targetWords", label: "目标字数", type: "number", ph: "200000" }
+        ]
+      },
+      {
+        title: "创作状态",
+        subtitle: "当前进度，影响首页统计",
+        fields: [
+          { k: "status", label: "状态", type: "select", options: STATUS_OPTS }
+        ]
+      }
+    ];
+    var defaults = { pov: "third", status: "writing", style: "网文" };
+    var values = b ? {
       title: b.title, genre: b.genre, oneLiner: b.oneLiner, themes: b.themes, style: b.style,
       pov: b.pov || "third", targetWords: b.targetWords, status: b.status || "writing"
-    } : { pov: "third", status: "writing", style: "网文" }, function (v) {
+    } : defaults;
+    nvOpenFormEx(id ? "编辑小说设定" : "新建小说", sections, null, values, function (v) {
       var obj = EDIT.book(id, v);
       if (!id) root.NV_BOOK = obj.id;
-    });
+    }, null, { saveLabel: id ? "保存修改" : "保存小说" });
   };
   root.nvEditVolume = function (num) {
     var book = nvCurBook();

@@ -7125,41 +7125,62 @@ mark{background:#fff3a3;color:inherit;border-radius:3px;padding:0 1px}
  * 配套 HTML 结构（已就位）：nv-form / nv-f-* / nv-card-grid / nv-card-kv / nv-card-sec
  * ============================================ */
 
-/* --- 表单容器（v5.9.148 截图风格：白底 + 极浅灰边 + 14px 大圆角 + 大内边距） --- */
-.nv-form{background:transparent;border:0;padding:0;margin-bottom:20px;box-shadow:none}
-.nv-form-h{font-size:18px;font-weight:700;color:#0f172a;margin:0 0 16px;display:flex;align-items:center;gap:8px;padding:0 4px}
+/* --- v5.9.149: 表单分 Section 结构 + label 可见 + placeholder 弱化 --- */
+.nv-form{background:transparent;border:0;padding:0;margin-bottom:0;box-shadow:none}
+.nv-form-h{font-size:20px;font-weight:700;color:#0f172a;margin:0 0 20px;display:flex;align-items:center;gap:8px;padding:0;letter-spacing:-.3px}
 .nv-form-h::before{content:"";display:none}
-.nv-form-intro{font-size:13px;color:#64748b;line-height:1.6;margin:0 0 16px;padding:0 4px;background:transparent;border-left:0;border-radius:0}
-.nv-form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;padding:0 4px;justify-content:stretch;border-top:0}
-.nv-form-actions .btn{flex:1;padding:14px 18px;font-size:15px;font-weight:600;border-radius:14px;min-width:0}
+.nv-form-intro{font-size:13px;color:#64748b;line-height:1.6;margin:0 0 20px;padding:0;background:transparent;border-left:0;border-radius:0}
+
+/* --- Section 分组（v5.9.149 新增） --- */
+.nv-form-section{margin-top:28px}
+.nv-form-section.first{margin-top:0}
+.nv-form-section-h{font-size:11px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;margin:0 0 14px;padding:0;display:flex;align-items:center;gap:6px}
+.nv-form-section-h::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#ede9fe 0%,transparent 100%);margin-left:8px}
+.nv-form-section-sub{font-size:12px;color:#94a3b8;margin:-8px 0 14px;line-height:1.5;padding:0}
+
+/* --- 字段独立卡片（v5.9.149：白底 + 极浅灰边 + 14px 大圆角 + 字段间距 16px） --- */
+.nv-f-row{background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;padding:12px 14px;margin-bottom:16px;transition:border-color .15s ease,box-shadow .15s ease;position:relative;display:flex;flex-direction:column}
+.nv-f-row:hover{border-color:#cbd5e1}
+.nv-f-row:focus-within{border-color:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,0.10)}
+.nv-f-row.half{display:flex;width:100%;margin-right:0}
+
+/* label 可见（v5.9.149：垂直结构 label → hint → input） */
+.nv-f-label{font-size:13px;font-weight:600;color:#334155;line-height:1.4;margin:0 0 6px;display:flex;align-items:center;gap:4px;letter-spacing:.1px}
+.nv-f-label::before{content:none}
+.nv-f-req{color:#ef4444;font-size:13px;font-weight:700;margin-left:1px;line-height:1}
+.nv-f-hint{font-size:11px;color:#94a3b8;margin-top:6px;line-height:1.5;padding:0 2px}
+
+/* input 透明无边框（v5.9.149：select/textarea/number 高度统一 = 22px 行高 + 2px padding） */
+.nv-f-input{width:100%;font-size:15px;color:#0f172a;background:transparent;border:0;border-radius:0;padding:0;transition:none;box-sizing:border-box;font-family:inherit;outline:none;line-height:22px;font-weight:400;height:22px}
+.nv-f-input::placeholder{color:#a8b3c0;font-weight:400}
+.nv-f-input:hover{background:transparent;border-color:transparent}
+.nv-f-input:focus{background:transparent;box-shadow:none;border-color:transparent}
+.nv-f-input:disabled,.nv-f-input[readonly]{background:transparent;color:#94a3b8;cursor:not-allowed}
+/* textarea 高度自适应 + 纵向 resize */
+.nv-f-ta{resize:vertical;min-height:72px;height:auto;line-height:1.65;font-family:inherit}
+/* select 高度与 text input 一致 + 箭头靠右 */
+select.nv-f-input{cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'><path fill='%2394a3b8' d='M0 0l6 7 6-7z'/></svg>");background-repeat:no-repeat;background-position:right 0 center;padding-right:26px;background-color:transparent;text-overflow:ellipsis}
+select.nv-f-input:focus{background-color:transparent}
+.nv-f-input[type="number"]{font-variant-numeric:tabular-nums;font-size:15px;-moz-appearance:textfield}
+.nv-f-input[type="number"]::-webkit-outer-spin-button,.nv-f-input[type="number"]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* 网格双列（保留以备其他弹窗用） */
 .nv-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;margin-top:0}
 .nv-form-grid.cols-1{grid-template-columns:1fr}
 .nv-form-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
 .nv-form-grid > .nv-f-row{grid-column:1 / -1}
 .nv-form-grid > .nv-f-row.half{grid-column:auto}
 
-/* 字段独立卡片（v5.9.148：白底 + 极浅灰边 + 14px 大圆角 + 留白大） */
-.nv-f-row{background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;padding:14px 16px;margin-bottom:14px;transition:border-color .15s ease,box-shadow .15s ease;position:relative;display:flex;flex-direction:column}
-.nv-f-row:hover{border-color:#cbd5e1}
-.nv-f-row:focus-within{border-color:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,0.10)}
-.nv-f-row.half{display:flex;width:100%;margin-right:0}
-
-/* label 视觉隐藏（a11y 仍可读，placeholder 充作视觉提示 —— 截图风格） */
-.nv-f-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.nv-f-label::before{content:none}
-.nv-f-req{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-.nv-f-hint{font-size:12px;color:#94a3b8;margin-top:6px;line-height:1.4;padding:0 2px}
-
-/* input 透明无边框，靠外层 .nv-f-row 卡片做边界（截图风格） */
-.nv-f-input{width:100%;font-size:15px;color:#0f172a;background:transparent;border:0;border-radius:0;padding:2px 0;transition:none;box-sizing:border-box;font-family:inherit;outline:none;line-height:1.5;font-weight:400}
-.nv-f-input::placeholder{color:#94a3b8;font-weight:400}
-.nv-f-input:hover{background:transparent;border-color:transparent}
-.nv-f-input:focus{background:transparent;box-shadow:none;border-color:transparent}
-.nv-f-input:disabled,.nv-f-input[readonly]{background:transparent;color:#94a3b8;cursor:not-allowed}
-.nv-f-ta{resize:none;min-height:60px;line-height:1.6}
-.nv-f-input[type="number"]{font-variant-numeric:tabular-nums;font-size:15px}
-select.nv-f-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%2394a3b8' d='M0 0l5 6 5-6z'/></svg>");background-repeat:no-repeat;background-position:right 0 center;padding-right:24px;background-color:transparent}
-select.nv-f-input:focus{background-color:transparent}
+/* --- 操作区（v5.9.149：取消文字按钮 + 保存主色大按钮，左对齐 + 右对齐） --- */
+.nv-form-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:32px;padding:16px 0 0;border-top:1px solid #f1f5f9}
+.nv-form-cancel{background:transparent;border:0;color:#64748b;font-size:14px;font-weight:500;padding:8px 12px;cursor:pointer;border-radius:8px;transition:color .15s,background-color .15s}
+.nv-form-cancel:hover{color:#0f172a;background:#f1f5f9}
+.nv-form-cancel:active{background:#e2e8f0}
+.nv-form-save{background:var(--accent-blue,#3b82f6);color:#fff;border:0;padding:13px 28px;font-size:15px;font-weight:600;border-radius:12px;cursor:pointer;transition:background-color .15s,transform .08s,box-shadow .15s;box-shadow:0 1px 2px rgba(59,130,246,0.20);min-width:120px}
+.nv-form-save:hover{background:#2563eb;box-shadow:0 2px 8px rgba(59,130,246,0.30)}
+.nv-form-save:active{transform:translateY(1px);background:#1d4ed8}
+/* 兼容旧版调用方的 .btn-primary 在 actions 里的样式 */
+.nv-form-actions .btn-primary{flex:0 0 auto}
 /* 数字输入：去掉原生 spinner 的突兀外观 */
 .nv-f-input[type="number"]::-webkit-inner-spin-button,.nv-f-input[type="number"]::-webkit-outer-spin-button{opacity:0.5}
 
@@ -7198,19 +7219,28 @@ select.nv-f-input:focus{background-color:transparent}
 .nv-detail-row .nv-card-k{flex:0 0 80px;align-self:start;padding-top:1px}
 .nv-detail-row .nv-card-v{flex:1}
 
-/* --- 暗色适配（v5.9.148：保持白底卡风格，加深边线 + 蓝 focus） --- */
+/* --- 暗色适配（v5.9.149）--- */
 @media (prefers-color-scheme: dark){
   .nv-form{background:transparent;border:0}
   .nv-form-h{color:#f1f5f9}
   .nv-form-intro{color:#94a3b8}
-  .nv-form-actions{border-color:transparent}
+  .nv-form-section-h{color:#a78bfa}
+  .nv-form-section-h::after{background:linear-gradient(90deg,rgba(139,92,246,0.25) 0%,transparent 100%)}
+  .nv-form-section-sub{color:#64748b}
+  .nv-form-actions{border-color:rgba(255,255,255,0.06)}
   .nv-f-row{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.14)}
   .nv-f-row:hover{border-color:rgba(255,255,255,0.24)}
   .nv-f-row:focus-within{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(59,130,246,0.18)}
+  .nv-f-label{color:#cbd5e1}
   .nv-f-input{color:#e2e8f0}
   .nv-f-input::placeholder{color:#64748b}
   .nv-f-input:disabled,.nv-f-input[readonly]{color:#64748b}
   .nv-f-hint{color:#64748b}
+  .nv-form-cancel{color:#94a3b8}
+  .nv-form-cancel:hover{color:#e2e8f0;background:rgba(255,255,255,0.06)}
+  .nv-form-cancel:active{background:rgba(255,255,255,0.10)}
+  .nv-form-save{background:#3b82f6}
+  .nv-form-save:hover{background:#60a5fa}
   .nv-booksel{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.18);color:#e2e8f0}
   .nv-booksel:hover{border-color:rgba(255,255,255,0.28)}
   .nv-booksel:focus{border-color:#a78bfa;box-shadow:0 0 0 4px rgba(139,92,246,0.25)}
