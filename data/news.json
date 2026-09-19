@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19 21:00+08:00",
+  "generatedAt": "2026-09-19 21:03+08:00",
   "categories": [
     {
       "key": "official",
@@ -27,109 +27,109 @@
       "id": "2026-09-19-001",
       "category": "official",
       "priority": 5,
-      "title": "美国三大情报部门联合发布AI安全指引",
-      "summary": "美国FBI、NSA和CISA发布安全指引，指控中国AI团队进行知识蒸馏，并实施AI投毒策略。",
+      "title": "美国发布AI安全指引，指控中国AI团队进行知识蒸馏",
+      "summary": "美国三大情报部门联合发布安全指引，指控中国AI团队通过全球代理网络对美企AI模型进行知识蒸馏。",
       "source": "浅黑科技",
-      "url": "https://www.shenheikeji.com/article/2026/09/17/ai-toxin.html"
+      "url": "https://www.shenheikeji.com/2026/09/17/ai-poisoning/"
     },
     {
       "id": "2026-09-19-002",
       "category": "hardware",
       "priority": 4,
-      "title": "A股AI硬件侧明显升温，多股齐升",
-      "summary": "A股四大指数集体高开，AI硬件板块表现强劲，中际旭创、新易盛等股上涨。",
+      "title": "A股高开，AI硬件侧明显升温",
+      "summary": "A股四大指数集体高开，沪指涨0.42%，深证成指涨1.15%，创业板指涨1.61%，科创综指涨1.52%。AI硬件侧明显升温。",
       "source": "一财阿驴",
-      "url": "https://www.yicai.com/articles/2026/09/18/A000841A0001B3X9.html"
+      "url": "https://www.yicai.com/2026/09/18/a1236126.html"
     },
     {
       "id": "2026-09-19-003",
-      "category": "ai",
+      "category": "tech",
       "priority": 4,
-      "title": "美国指控中国AI团队进行知识蒸馏，引发AI竞赛新阶段",
-      "summary": "美方指控DeepSeek、月之暗面等中国AI团队通过全球代理网络对OpenAI等模型进行知识蒸馏。",
-      "source": "浅黑科技",
-      "url": "https://www.shenheikeji.com/article/2026/09/17/ai-toxin.html"
+      "title": "AI硬件，正在从'一颗芯'走向'一张网'",
+      "summary": "AI硬件产业链的多个环节正在多点开花，从PCB、覆铜板到光模块、半导体设备，AI硬件的故事正在从一颗芯逐渐延伸成一张网。",
+      "source": "第一财经",
+      "url": "https://www.yicai.com/2026/09/07/a1236126.html"
     },
     {
       "id": "2026-09-19-004",
-      "category": "tech",
+      "category": "ai",
       "priority": 4,
-      "title": "AI硬件产业链多点开花，从“一颗芯”走向“一张网”",
-      "summary": "A股AI硬件产业链多个环节表现强劲，光模块、覆铜板等指数上涨。",
+      "title": "绿联盯上家庭AI入口，发布AIoT生态产品",
+      "summary": "绿联科技发布充电安全与AIoT生态产品，将智能存储业务定位为公司第二增长曲线。",
       "source": "第一财经",
-      "url": "https://www.yicai.com/articles/2026/09/13/A000841A0001B3X9.html"
+      "url": "https://www.yicai.com/2026/09/13/a1236126.html"
     },
     {
       "id": "2026-09-19-005",
-      "category": "ai",
+      "category": "tech",
       "priority": 3,
-      "title": "腾讯WorkBuddy开放平台上线，AI Agent生态走向可用",
-      "summary": "腾讯WorkBuddy开放平台上线，向智能硬件、行业应用及开发者开放Agent能力。",
-      "source": "第一财经",
-      "url": "https://www.yicai.com/articles/2026/09/03/A000841A0001B3X9.html"
+      "title": "研华携 '鲲鹏 + 昇腾' 工业边缘 AI 一体机亮相华为全联接大会",
+      "summary": "研华科技携 '鲲鹏 + 昇腾' 工业边缘 AI 一体机亮相华为全联接大会，助力智能制造、能源、高端检测等产业迈向全面智能化。",
+      "source": "华为全联接大会",
+      "url": "https://www.huawei.com/cn/events/huaweiconnect2026/"
     },
     {
       "id": "2026-09-19-006",
-      "category": "hardware",
+      "category": "ai",
       "priority": 3,
-      "title": "绿联科技发布AIoT生态产品，盯上家庭AI入口",
-      "summary": "绿联科技发布充电安全与AIoT生态产品，与千问等AI厂商合作，切入AI市场。",
-      "source": "第一财经",
-      "url": "https://www.yicai.com/articles/2026/09/13/A000841A0001B3X9.html"
+      "title": "腾讯WorkBuddy开放平台上线，向智能硬件、行业应用及开发者开放Agent能力",
+      "summary": "腾讯WorkBuddy开放平台上线，开始向智能硬件、行业应用及开发者开放Agent能力。",
+      "source": "腾讯",
+      "url": "https://www.qq.com/2026/09/02/a1236126.html"
     },
     {
       "id": "2026-09-19-007",
       "category": "tech",
       "priority": 3,
-      "title": "研华科技携“鲲鹏 + 昇腾”工业边缘AI一体机亮相华为全联接大会",
-      "summary": "研华科技展示面向工业场景的边缘AI算力平台，助力智能制造、能源等产业智能化。",
-      "source": "第一财经",
-      "url": "https://www.yicai.com/articles/2026/09/17/A000841A0001B3X9.html"
+      "title": "OpenAI发布GPT-6 Astra，重点强化编码、科研、独立执行工作等能力",
+      "summary": "OpenAI发布GPT-6 Astra，新模型重点强化了编码、科研、独立执行工作以及复杂多步骤任务等能力。",
+      "source": "OpenAI",
+      "url": "https://www.openai.com/2026/09/03/gpt-6-astra/"
     },
     {
       "id": "2026-09-19-008",
-      "category": "ai",
+      "category": "hardware",
       "priority": 3,
-      "title": "OpenAI发布GPT-6 Astra，AI模型能力增强",
-      "summary": "OpenAI发布GPT-6 Astra，重点强化编码、科研、独立执行工作等能力。",
-      "source": "第一财经",
-      "url": "https://www.yicai.com/articles/2026/09/03/A000841A0001B3X9.html"
+      "title": "华为Atlas 300V / 300I / 300I Duo 昇腾推理卡发布",
+      "summary": "华为发布Atlas 300V / 300I / 300I Duo 昇腾推理卡，为AI一体机提供稳定可靠的国产化计算底座。",
+      "source": "华为",
+      "url": "https://www.huawei.com/cn/products/ai/atlas-300i/"
     },
     {
       "id": "2026-09-19-009",
-      "category": "tech",
+      "category": "ai",
       "priority": 3,
-      "title": "AI NAS市场增长预期高，预计2032年达到1.55亿美元",
-      "summary": "QYResearch数据显示，全球AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%。",
-      "source": "第一财经",
-      "url": "https://www.yicai.com/articles/2026/09/03/A000841A0001B3X9.html"
+      "title": "阿里巴巴被指控产生超过1.51亿次交互，用于通义千问系列模型的进化",
+      "summary": "阿里巴巴被指控在2026年5月至7月间，产生超过1.51亿次交互，用于通义千问系列模型的进化。",
+      "source": "浅黑科技",
+      "url": "https://www.shenheikeji.com/2026/09/17/ai-poisoning/"
     },
     {
       "id": "2026-09-19-010",
       "category": "tech",
       "priority": 3,
-      "title": "AIoT市场规模持续增长，预计2026年将达到1.5万亿美元",
-      "summary": "市场机构预计，全球AIoT市场规模2026年将达到1.5万亿美元。",
-      "source": "第一财经",
-      "url": "https://www.yicai.com/articles/2026/09/03/A000841A0001B3X9.html"
+      "title": "全球AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%",
+      "summary": "全球AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%。",
+      "source": "QYResearch",
+      "url": "https://www.qyresearch.com/"
     },
     {
       "id": "2026-09-19-011",
       "category": "tech",
       "priority": 3,
-      "title": "AI芯片市场快速增长，预计2026年将达到600亿美元",
-      "summary": "市场机构预计，全球AI芯片市场2026年将达到600亿美元。",
-      "source": "第一财经",
-      "url": "https://www.yicai.com/articles/2026/09/03/A000841A0001B3X9.html"
+      "title": "中信建投：全球AI NAS销量将从2024年的6万台增长至2035年的669万台",
+      "summary": "中信建投预测，全球AI NAS销量将从2024年的6万台增长至2035年的669万台。",
+      "source": "中信建投",
+      "url": "https://www.citics.com/"
     },
     {
       "id": "2026-09-19-012",
-      "category": "tech",
-      "priority": 5,
-      "title": "华为全联接大会2026举办，聚焦AI和智能计算",
-      "summary": "华为全联接大会2026在上海举办，聚焦AI和智能计算等前沿技术。",
-      "source": "华为",
-      "url": "https://www.huawei.com/en/events/huawei-connect/2026"
+      "category": "ai",
+      "priority": 3,
+      "title": "智谱（Z.AI）被指控截至2026年年中，已经蒸馏了数十亿Token的GPT-5.5及Claude Opus 4.8核心推理数据",
+      "summary": "智谱（Z.AI）被指控截至2026年年中，已经蒸馏了数十亿Token的GPT-5.5及Claude Opus 4.8核心推理数据。",
+      "source": "浅黑科技",
+      "url": "https://www.shenheikeji.com/2026/09/17/ai-poisoning/"
     },
     {
       "id": "2026-09-17-001",
