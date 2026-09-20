@@ -696,7 +696,115 @@
           ]
         }
       ]
+    },
+    "2026-09-20": {
+      "date": "2026-09-20",
+      "mode": "rss",
+      "sources": {
+        "BBC": 0,
+        "BBC商业": 0,
+        "BBC科技": 0,
+        "Al Jazeera": 0,
+        "NPR": 10,
+        "Guardian世界": 0,
+        "Guardian科技": 0,
+        "Guardian商业": 0
+      },
+      "rssCount": 10,
+      "brief": [
+        "联合国扩展黎巴嫩停火监督任务",
+        "特朗普禁止CNN等媒体记者进入白宫",
+        "阿富汗喀布尔生活五年后变化",
+        "考古学家在阿拉斯加抢救受台风影响的文物",
+        "美联储加息并解释利率机制"
+      ],
+      "groups": [
+        {
+          "cat": "国际",
+          "icon": "🌍",
+          "items": [
+            {
+              "title": "黎巴嫩南部新边界线",
+              "summary": "联合国20年前扩展其在黎巴嫩的授权，以监督以色列与伊朗支持的真主党之间的停火。",
+              "source": "NPR",
+              "url": "https://www.npr.org/sections/the-picture-show/2026/09/19/g-s1-139752/the-new-lines-of-southern-lebanon"
+            },
+            {
+              "title": "特朗普禁止CNN等媒体记者进入白宫",
+              "summary": "特朗普总统禁止CNN、Politico和MS NOW记者进入白宫，称其报道为“虚构和谎言”。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/19/nx-s1-5974854/trump-cnn-msnow-politico-ban"
+            },
+            {
+              "title": "俄罗斯在占领的乌克兰地区举行议会选举",
+              "summary": "俄罗斯首次在其非法吞并的乌克兰地区举行议会选举。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/19/g-s1-144169/russia-holds-parliamentary-vote-in-areas-it-seized-from-ukraine"
+            }
+          ]
+        },
+        {
+          "cat": "社会",
+          "icon": "🏠",
+          "items": [
+            {
+              "title": "阿富汗喀布尔生活五年后变化",
+              "summary": "五年后，NPR探访喀布尔，了解阿富汗人在新政府严格社会限制下的生活。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/19/nx-s1-5961263/life-in-kabul-5-years-after-the-talibans-return"
+            },
+            {
+              "title": "贝特尔坚果的古老使用证据",
+              "summary": "新研究显示，古代人类遗骸表明贝特尔坚果（一种在亚洲部分地区流行的具有精神影响的植物种子）被习惯性使用。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/19/g-s1-144054/ancient-teeth-betel-nuts-mind-altering-drugs"
+            },
+            {
+              "title": "意大利西尼罗病毒传播加剧",
+              "summary": "意大利卫生当局看到证据表明，气温上升和更长的温暖季节有助于蚊子在更多月份内传播西尼罗病毒。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/19/g-s1-144162/as-europe-warms-italy-sees-west-nile-virus-spread"
+            }
+          ]
+        },
+        {
+          "cat": "财经",
+          "icon": "💼",
+          "items": [
+            {
+              "title": "美联储加息并解释利率机制",
+              "summary": "美联储本周首次加息，并解释了利率机制及其对经济的影响。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/19/nx-s1-5969816/federal-reserve-interest-rate-inflation-economy"
+            },
+            {
+              "title": "美国与丹麦达成协议，在格陵兰岛建立军事存在",
+              "summary": "特朗普总统表示，他与丹麦达成协议，加强美国在格陵兰岛的军事存在。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/19/g-s1-144158/us-and-denmark-reach-deal"
+            }
+          ]
+        },
+        {
+          "cat": "文化",
+          "icon": "📚",
+          "items": [
+            {
+              "title": "纪念自然作家安妮·迪拉德",
+              "summary": "安妮·迪拉德的《丁克溪朝圣者》一书使她成为最年轻的普利策奖获得者。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/19/nx-s1-5966624/opinion-remembering-annie-dillard-nature-writer"
+            },
+            {
+              "title": "阿拉斯加考古学家抢救受台风影响的文物",
+              "summary": "去年台风过后，考古学家正在努力在下一场风暴来临前尽可能多地抢救出文物。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/19/nx-s1-5966568/ex-typhoon-halong-nunallaq-artifacts-archaeological-dig-site-alaska-quinhagak"
+            }
+          ]
+        }
+      ]
     }
   },
-  "updatedAt": "2026-09-13T17:11:00+08:00"
+  "updatedAt": "2026-09-20T11:04:00+08:00"
 }
