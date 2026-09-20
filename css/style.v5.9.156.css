@@ -7316,3 +7316,9 @@ select.nv-f-input:hover,select.nv-f-input:focus{background-color:#f1f5f9}
 .lg-nce-add{flex-shrink:0;width:26px;height:26px;line-height:24px;text-align:center;border-radius:50%;border:1px solid var(--accent-color,#2563eb);color:var(--accent-color,#2563eb);font-size:15px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .lg-nce-add:active{opacity:.5}
 .lg-nce-done{flex-shrink:0;width:26px;text-align:center;color:var(--success-color,#16a34a);font-size:14px}
+
+/* ===== v5.9.162 听力：点击句中单词加入词库 ===== */
+.lg-listen-word{cursor:pointer;border-radius:4px;padding:0 1px;border-bottom:1px dotted transparent;-webkit-tap-highlight-color:transparent}
+.lg-listen-word:hover{background:rgba(59,130,246,0.15)}
+.lg-listen-word:active{opacity:0.6}
+.lg-listen-word.inbank{color:var(--text-tertiary);border-bottom-color:var(--border-color,rgba(0,0,0,0.15))}

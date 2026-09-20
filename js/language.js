@@ -3159,33 +3159,105 @@ function lgTokenize(s) {
   if (cur === "en") return String(s || "").split(/(\s+)/);
   return String(s || "").split("");
 }
-function lgArtWord(term) {
+/* =============================================================
+ * 点词取词（精读 / 听力共用）
+ * -------------------------------------------------------------
+ * 两个必须归一的地方：
+ * 1) 句首大写 —— "Excuse me!" 推出的是 "Excuse"，而词库键全是小写，
+ *    不归一则 lgLookupWord 查不到音标/释义，且点击后会与已有 "excuse"
+ *    生成两个并存的词条（去重也失效）。
+ * 2) 弯引号 —— 真实文本里是 don’t（U+2019），词库是 don't（ASCII）。
+ * 归一后仅用于「查库 / 去重 / 落库」；弹窗标题仍显示用户点到的原文。
+ * ============================================================= */
+function lgWordNormalize(cur, term) {
+  var t = String(term == null ? "" : term).trim().replace(/[\u2018\u2019]/g, "'");
+  if (cur === "en" && /^[A-Za-z][A-Za-z'\-]*$/.test(t)) return t.replace(/['\-]+$/, "").toLowerCase();
+  return t;
+}
+/* 当前语种词库的小写索引，渲染时用来标记「已在词库」 */
+function lgWordKnown(cur) {
+  var e = langGet(cur), set = {};
+  for (var i = 0; i < (e.words || []).length; i++) set[lgWordNormalize(cur, e.words[i].term)] = 1;
+  return set;
+}
+/* HTML 属性值转义：escapeHtml 走 textContent→innerHTML，不转义双引号，
+ * 直接拼进 value="…" 会被含引号的词打断 */
+function lgAttr(s) { return escapeHtml(s).replace(/"/g, "&quot;"); }
+function lgWordSourceTag(source) { return source === "listening" ? "听力" : "精读"; }
+function lgWordQuick(term, source) {
   var cur = langCur();
-  var e = langGet(cur);
-  var has = false;
-  for (var i = 0; i < e.words.length; i++) if (e.words[i].term === term) { has = true; break; }
+  var shown = String(term == null ? "" : term).trim();
+  if (!shown) return;
+  var key = lgWordNormalize(cur, shown);
+  var has = !!lgWordKnown(cur)[key];
+  var lw = lgLookupWord(cur, key);
+  var tag = lgWordSourceTag(source);
   showModal(
-    '<div class="modal-title">' + escapeHtml(term) + '</div>' +
+    '<div class="modal-title">' + escapeHtml(shown) + (lw && lw.reading ? ' <span class="lg-sub">' + escapeHtml(lw.reading) + '</span>' : '') + '</div>' +
     '<div class="lg-form" style="padding:0 16px">' +
-      '<label class="lg-fld"><span>释义</span><input class="lg-input" id="lgw-mean" placeholder="输入中文释义…"></label>' +
-      '<label class="lg-fld"><span>标签</span><input class="lg-input" id="lgw-tags" placeholder="精读,通勤"></label>' +
+      '<label class="lg-fld"><span>释义</span><input class="lg-input" id="lgw-mean" value="' + lgAttr(lw ? lw.meaning : "") + '" placeholder="输入中文释义…"></label>' +
+      '<label class="lg-fld"><span>标签</span><input class="lg-input" id="lgw-tags" value="' + lgAttr(tag) + '" placeholder="' + lgAttr(tag) + ',通勤"></label>' +
+      (lw && lw.example ? '<div class="lg-hint" style="margin:0">例句：' + escapeHtml(lw.example) + (lw.exampleCn ? ' / ' + escapeHtml(lw.exampleCn) : '') + '</div>' : '') +
     '</div>' +
     '<div class="btn-row" style="padding:0 16px 16px">' +
-      '<button class="btn btn-primary" style="flex:1" onclick="lgArtAddWord(\'' + lgEscapeJs(term) + '\')">' + (has ? "✓ 已在词库" : "＋ 加入词库") + '</button>' +
-      '<button class="btn btn-secondary" style="flex:1" onclick="lgSpeak(\'' + lgEscapeJs(term) + '\',\'' + cur + '\')">🔊 朗读</button>' +
+      (has
+        ? '<button class="btn btn-primary" style="flex:1" onclick="lgWordQuickDel(\'' + lgEscapeJs(shown) + '\',\'' + tag + '\')">🗑 移出词库</button>'
+        : '<button class="btn btn-primary" style="flex:1" onclick="lgWordQuickAdd(\'' + lgEscapeJs(shown) + '\',\'' + (source === "listening" ? "listening" : "reading") + '\')">＋ 加入词库</button>') +
+      '<button class="btn btn-secondary" style="flex:1" onclick="lgSpeak(\'' + lgEscapeJs(shown) + '\',\'' + cur + '\')">🔊 朗读</button>' +
     '</div>'
   );
 }
-function lgArtAddWord(term) {
+function lgWordQuickAdd(term, source) {
   var cur = langCur();
   var e = langGet(cur);
-  var mean = (document.getElementById("lgw-mean") || {}).value || "";
-  var tags = ((document.getElementById("lgw-tags") || {}).value || "").split(/[,，]/).map(function (s) { return s.trim(); }).filter(Boolean);
-  for (var i = 0; i < e.words.length; i++) if (e.words[i].term === term) { showToast("已在生词库中", "warning"); closeModal(); return; }
-  var lw = lgLookupWord(cur, term);
-  e.words.push({ id: lgUid(), term: term, reading: lw ? lw.reading : "", meaning: mean || (lw ? lw.meaning : ""), extra: "", example: lw ? lw.example : "", exampleCn: lw ? lw.exampleCn : "", tags: tags, level: 0, box: 0, next: today(), last: null, reps: 0, lapses: 0, from: "reading" });
+  var key = lgWordNormalize(cur, term);
+  if (!key) { showToast("单词为空", "warning"); return; }
+  var src = source === "listening" ? "listening" : "reading";
+  var mean = String((document.getElementById("lgw-mean") || {}).value || "").trim();
+  var rawTags = String((document.getElementById("lgw-tags") || {}).value || "").split(/[,，]/);
+  var tags = rawTags.map(function (s) { return s.trim(); }).filter(Boolean);
+  if (!tags.length) tags = [lgWordSourceTag(src)];
+  if (lgWordKnown(cur)[key]) { closeModal(); showToast("已在生词库中", "warning"); return; }
+  var lw = lgLookupWord(cur, key);
+  e.words.push({
+    id: lgUid(), term: key, reading: lw ? lw.reading : "", meaning: mean || (lw ? lw.meaning : ""),
+    extra: "", example: lw ? lw.example : "", exampleCn: lw ? lw.exampleCn : "",
+    tags: tags, level: 0, box: 0, next: today(), last: null, reps: 0, lapses: 0, from: src
+  });
   closeModal(); DB.save(); render();
-  showToast("已加入词库 📖", "success");
+  showToast("已加入词库 📖 " + key, "success");
+}
+function lgWordQuickDel(term, source) {
+  var cur = langCur();
+  var e = langGet(cur);
+  var key = lgWordNormalize(cur, term);
+  for (var i = 0; i < e.words.length; i++) {
+    if (lgWordNormalize(cur, e.words[i].term) === key) { e.words.splice(i, 1); break; }
+  }
+  closeModal(); DB.save(); render();
+  showToast("已移出词库：" + key, "success");
+}
+function lgArtWord(term) { lgWordQuick(term, "reading"); }
+function lgArtAddWord(term) { lgWordQuickAdd(term, "reading"); }
+/* 听力句子：点击句中单词加入词库 */
+function lgListenWord(term) { lgWordQuick(term, "listening"); }
+function lgListenWordFromBank(term) { lgWordQuickDel(term, "listening"); }
+/* 听力句子渲染：仅英文按词切分为可点词组；其他语种原样输出。
+ * 已在词库的词加 .inbank 弱化显示 —— 让陌生词在长句里一眼可见。 */
+function lgListenSentHtml(s, cur, wset) {
+  var text = String(s == null ? "" : s);
+  if (cur !== "en") return escapeHtml(text);
+  var set = wset || lgWordKnown(cur);
+  return text.split(/(\s+)/).map(function (tk) {
+    if (!tk || /^\s+$/.test(tk)) return escapeHtml(tk);
+    var m = tk.match(/[A-Za-z][A-Za-z'\u2019\-]*/);
+    if (!m) return escapeHtml(tk);
+    var i = tk.indexOf(m[0]), word = m[0];
+    var known = set[lgWordNormalize(cur, word)] ? " inbank" : "";
+    return escapeHtml(tk.slice(0, i)) +
+      '<span class="lg-listen-word' + known + '" onclick="event.stopPropagation();lgListenWord(\'' + lgEscapeJs(word) + '\')">' + escapeHtml(word) + '</span>' +
+      escapeHtml(tk.slice(i + word.length));
+  }).join("");
 }
 function lgAddMaterial() {
   showModal(
@@ -3272,18 +3344,21 @@ function lgRenderListening(cur) {
           '<button class="lg-btn ghost" onclick="lgListenDel(\'' + item.id + '\')">🗑 删除</button>' +
           '<button class="lg-btn ghost" onclick="lgListenId=null;render()">← 返回</button>' +
         '</div>' +
-        '<div class="lg-listen-list">' + sents.map(function (s, i) {
-          var active = lgListening && lgListening.id === item.id && lgListening.idx === i;
-          return '<div class="lg-listen-sent' + (active ? " active" : "") + '">' +
-            '<div class="lg-listen-t">' + (active ? "🔊 " : "") + escapeHtml(s.t) + '</div>' +
-            (s.tr ? '<div class="lg-listen-tr">' + escapeHtml(s.tr) + '</div>' : '') +
-            '<div class="lg-listen-ops">' +
-              '<span onclick="lgListenOne(\'' + item.id + '\',' + i + ')">🔊</span>' +
-              '<span onclick="lgListenWrong(\'' + lgEscapeJs(s.t) + '\')">❌ 听不懂</span>' +
-              '<span onclick="lgListenFav(\'' + lgEscapeJs(s.t) + '\')">⭐ 收藏</span>' +
-            '</div></div>';
-        }).join("") + '</div>' +
-        '<div class="lg-hint">💡 通勤/锁屏时可在播放后切到后台继续听（依赖浏览器音频支持）；「❌ 听不懂」自动收入错题集。</div>' +
+        '<div class="lg-listen-list">' + (function () {
+          var wset = lgWordKnown(cur);
+          return sents.map(function (s, i) {
+            var active = lgListening && lgListening.id === item.id && lgListening.idx === i;
+            return '<div class="lg-listen-sent' + (active ? " active" : "") + '">' +
+              '<div class="lg-listen-t">' + (active ? "🔊 " : "") + lgListenSentHtml(s.t, cur, wset) + '</div>' +
+              (s.tr ? '<div class="lg-listen-tr">' + escapeHtml(s.tr) + '</div>' : '') +
+              '<div class="lg-listen-ops">' +
+                '<span onclick="lgListenOne(\'' + item.id + '\',' + i + ')">🔊</span>' +
+                '<span onclick="lgListenWrong(\'' + lgEscapeJs(s.t) + '\')">❌ 听不懂</span>' +
+                '<span onclick="lgListenFav(\'' + lgEscapeJs(s.t) + '\')">⭐ 收藏</span>' +
+              '</div></div>';
+          }).join("");
+        })() + '</div>' +
+        '<div class="lg-hint">👆 ' + (cur === "en" ? '点击句中单词可加入词库（浅灰=已在词库，点开可移出）；' : '') + '通勤/锁屏时可在播放后切到后台继续听（依赖浏览器音频支持）；「❌ 听不懂」自动收入错题集。</div>' +
         '</div>';
     }
     lgListenId = null;
