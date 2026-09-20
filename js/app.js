@@ -7,7 +7,7 @@
    ============================================ */
 
 // ===== APP Version (bump on every deploy to force PWA refresh) =====
-var APP_VERSION = "5.9.167";
+var APP_VERSION = "5.9.168";
 
 // ===== 视口高度实测（修复 iOS PWA 下 -webkit-fill-available / dvh 偏矮导致底栏离屏底有空白）=====
 function setAppHeight() {
@@ -369,8 +369,13 @@ const SWManager = {
     });
 
     try {
+      // v5.9.167：注册 URL 携带 APP_VERSION，确保浏览器每次都拉新 sw.js
+      // （即使 SW 名不变，URL 变了 → 字节级 cache-bust → 必触发 update）
       this._registration = await navigator.serviceWorker.register("./sw.js?v=" + APP_VERSION);
       console.log("[SW] Registered:", this._registration.scope);
+
+      // 立即拉新（不等每小时的轮询；老 SW v5.9.166 不覆盖精读素材，用户当前看到的就是它）
+      try { await this._registration.update(); } catch (e) { console.log("[SW] update() failed:", e); }
 
       // If there's already a waiting worker, apply it
       if (this._registration.waiting) {
@@ -415,6 +420,46 @@ const SWManager = {
     this._applyAndReload();
     document.getElementById("update-bar").classList.add("hidden");
     window.location.reload();
+  },
+
+  /**
+   * v5.9.167 强升级兜底：用户从老 SW 升级到新版时，老 SW 不覆盖精读素材，
+   * 即便 update() 拉到新 SW，老的 controller 仍可能长期不交班（浏览器默认行为）。
+   * 启动时主动 ping 当前 controller，要到版本号；若不是 APP_VERSION 同款，
+   * 强制 unregister + 清缓存 + 重 register → 新 SW 立刻接管。
+   */
+  async _forceUpgradeIfStale() {
+    if (!("serviceWorker" in navigator) || !navigator.serviceWorker.controller) return;
+    var targetVersion = "v" + APP_VERSION;
+    var currentVersion = null;
+    try {
+      // SW 在 message handler 里支持 CHECK_VERSION（sw.js 里已有）
+      var ch = new MessageChannel();
+      var got = false;
+      ch.port1.onmessage = function (e) {
+        got = true;
+        if (e.data && e.data.version) currentVersion = e.data.version;
+      };
+      navigator.serviceWorker.controller.postMessage({ type: "CHECK_VERSION" }, [ch.port2]);
+      await new Promise(function (r) { setTimeout(r, 500); });
+      if (!got) return;
+    } catch (e) { return; }
+    console.log("[SW] controller version:", currentVersion, "target:", targetVersion);
+    if (currentVersion && currentVersion !== targetVersion) {
+      console.log("[SW] Forcing upgrade...");
+      try {
+        var regs = await navigator.serviceWorker.getRegistrations();
+        for (var i = 0; i < regs.length; i++) await regs[i].unregister();
+        if (typeof caches !== "undefined") {
+          try {
+            var ks = await caches.keys();
+            await Promise.all(ks.map(function (k) { return caches.delete(k); }));
+          } catch (e) {}
+        }
+        // 重 register，新 SW 会 install + skipWaiting + clients.claim
+        window.location.reload();
+      } catch (e) { console.log("[SW] force upgrade failed:", e); }
+    }
   }
 };
 
@@ -6352,9 +6397,13 @@ async function initApp() {
     _needVerBackup = true;
     try {
       if ("serviceWorker" in navigator) {
+        // v5.9.167：更新 SW 后强制检测 controller 版本号；不匹配则清缓存 + reload
+        // —— 让 v5.9.167 立刻接管精读素材（v5.9.166 的 SW 不覆盖 lang_read_*）
         navigator.serviceWorker.getRegistrations().then(function (rs) {
           rs.forEach(function (r) { try { r.update(); } catch (e) {} });
         }).catch(function () {});
+        // 延迟启动 force-upgrade 检测（等 controller 就绪后再 ping）
+        setTimeout(function () { try { SWManager._forceUpgradeIfStale(); } catch (e) {} }, 1500);
       }
     } catch (e) {}
   }
