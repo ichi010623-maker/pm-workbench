@@ -7291,3 +7291,28 @@ select.nv-f-input:hover,select.nv-f-input:focus{background-color:#f1f5f9}
 .lg-mat-ops{display:flex;gap:14px;flex-shrink:0;color:var(--text-secondary,#6b6b7b);font-size:15px;line-height:1.2;padding:1px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .lg-mat-ops span{transition:opacity .15s}
 .lg-mat-ops span:active{opacity:.5}
+
+/* ===== v5.9.161 听力：新概念英语素材库面板 ===== */
+.lg-nce{margin-top:10px;border:1px solid var(--border-color,rgba(0,0,0,.1));border-radius:12px;padding:12px;background:var(--bg-secondary,rgba(0,0,0,.02))}
+.lg-nce-h{font-size:14px;font-weight:600;color:var(--text-primary,#1c1c22);margin-bottom:10px}
+.lg-nce-tabs{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.lg-nce-tab{flex:1;min-width:120px;padding:8px 10px;border:1px solid var(--border-color,rgba(0,0,0,.12));border-radius:9px;background:transparent;color:var(--text-secondary,#6b6b7b);font-size:13px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lg-nce-tab.on{background:var(--accent-color,#2563eb);border-color:var(--accent-color,#2563eb);color:#fff;font-weight:600}
+.lg-nce-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.lg-nce-lbl{font-size:13px;color:var(--text-secondary,#6b6b7b)}
+.lg-nce-num{width:62px!important;text-align:center;padding:6px 8px!important;font-size:13px!important}
+.lg-nce-search{flex:1;min-width:150px;padding:6px 10px!important;font-size:13px!important}
+.lg-nce-stat{font-size:12px;color:var(--text-secondary,#6b6b7b);white-space:nowrap}
+.lg-nce-quick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.lg-nce-quick span{font-size:11px;padding:3px 8px;border-radius:20px;background:var(--bg-tertiary,rgba(0,0,0,.06));color:var(--text-secondary,#6b6b7b);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lg-nce-quick span:active{opacity:.6}
+.lg-nce-list{max-height:320px;overflow-y:auto;-webkit-overflow-scrolling:touch;border-radius:9px;background:var(--bg-primary,#fff);border:1px solid var(--border-color,rgba(0,0,0,.06))}
+.lg-nce-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid var(--border-color,rgba(0,0,0,.05))}
+.lg-nce-row:last-child{border-bottom:0}
+.lg-nce-row.done{opacity:.55}
+.lg-nce-info{flex:1;min-width:0}
+.lg-nce-t{font-size:13px;color:var(--text-primary,#1c1c22);line-height:1.35;word-break:break-word}
+.lg-nce-meta{font-size:11px;color:var(--text-secondary,#6b6b7b);margin-top:2px;line-height:1.35}
+.lg-nce-add{flex-shrink:0;width:26px;height:26px;line-height:24px;text-align:center;border-radius:50%;border:1px solid var(--accent-color,#2563eb);color:var(--accent-color,#2563eb);font-size:15px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lg-nce-add:active{opacity:.5}
+.lg-nce-done{flex-shrink:0;width:26px;text-align:center;color:var(--success-color,#16a34a);font-size:14px}

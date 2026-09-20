@@ -584,10 +584,9 @@ var LG_LISTEN_BUILTIN = {
     { title: "☕ 咖啡店点单", sents: [["What can I get for you?", "请问要喝点什么？"], ["A latte, please.", "一杯拿铁。"], ["Large or small?", "大杯还是小杯？"], ["Large, please.", "大杯，谢谢。"]] },
     { title: "🗺 问路", sents: [["Excuse me, where is the station?", "请问车站在哪里？"], ["Go straight and turn right.", "直走然后右转。"], ["Is it far from here?", "离这里远吗？"], ["About five minutes on foot.", "步行大约五分钟。"]] },
     { title: "🎙 BBC 6 Minute English · Coffee culture", sents: [["I can't start my day without coffee.", "没有咖啡我一天都过不了。"], ["How do you take your coffee?", "你的咖啡怎么喝？"], ["I prefer a flat white, no sugar.", "我喜欢馥芮白，不加糖。"], ["Specialty coffee is becoming a trend.", "精品咖啡正在成为一种潮流。"]] },
-    { title: "🎙 BBC 6 Minute English · Work-life balance", sents: [["How do you balance work and life?", "你如何平衡工作与生活？"], ["I try to leave work on time.", "我尽量按时下班。"], ["It's all about setting boundaries.", "关键在于设定边界。"], ["Remote work gives me more flexibility.", "远程工作给我更多灵活性。"]] },
-    { title: "📘 新概念 1 · L1 Excuse me!", sents: [["Excuse me!", "对不起！"], ["Yes?", "什么事？"], ["Is this your handbag?", "这是您的手提包吗？"], ["Pardon?", "您说什么？"]] },
-    { title: "📘 新概念 1 · L2 Is this your...?", sents: [["Is this your umbrella?", "这是您的雨伞吗？"], ["Is this your pen?", "这是您的钢笔吗？"], ["Is this your coat?", "这是您的大衣吗？"], ["Yes, it is. Thank you very much.", "是的，谢谢您。"]] },
-    { title: "📘 新概念 2 · L1 A private conversation", sents: [["Last week I went to the theatre.", "上星期我去了剧院。"], ["I had a very good seat.", "我的座位很好。"], ["The play was very interesting.", "话剧很有意思。"], ["I did not enjoy it.", "我并不喜欢。"]] }
+    { title: "🎙 BBC 6 Minute English · Work-life balance", sents: [["How do you balance work and life?", "你如何平衡工作与生活？"], ["I try to leave work on time.", "我尽量按时下班。"], ["It's all about setting boundaries.", "关键在于设定边界。"], ["Remote work gives me more flexibility.", "远程工作给我更多灵活性。"]] }
+    /* 新概念素材已由「📘 新概念素材库」统一提供（第一册 144 课 + 第二册 96 课），
+       此处不再重复内置，避免与素材库标题撞车导致导入去重误判 */
   ],
   ja: [
     { title: "👋 あいさつ", sents: [["おはようございます。", "早上好。"], ["今日はいい天気ですね。", "今天天气真好呢。"], ["そうですね。", "是啊。"], ["また明日。", "明天见。"]] },
@@ -3293,7 +3292,9 @@ function lgRenderListening(cur) {
     '<div class="lg-row" style="gap:8px">' +
       '<button class="lg-btn" onclick="lgListenForm()">＋ 添加听力素材</button>' +
       '<button class="lg-btn ghost" onclick="lgImportListen()">🎧 内置听力（' + (LG_LISTEN_BUILTIN[cur] || []).length + ' 组）</button>' +
+      (cur === "en" ? '<button class="lg-btn ghost" onclick="lgNceToggle()">📘 新概念素材库' + (lgNceOpen ? ' ▲' : ' ▼') + '</button>' : '') +
     '</div>' +
+    (cur === "en" && lgNceOpen ? lgNcePanel(cur) : '') +
     (cur === "en" ? '<div class="lg-row" style="gap:8px;margin-top:8px;flex-wrap:wrap">' +
       '<a class="lg-btn ghost" href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank" rel="noopener" style="text-decoration:none">🎙 BBC 6 Minute English（官方）↗</a>' +
       '<a class="lg-btn ghost" href="https://www.bbc.co.uk/sounds/series/p02nq0gn" target="_blank" rel="noopener" style="text-decoration:none">📻 BBC Sounds（直接收听）↗</a>' +
@@ -3315,6 +3316,173 @@ function lgRenderListening(cur) {
       }).join("") + '</div>') +
     '</div>' +
     (lgHist === "listen" ? lgCalHtml("listen", lgActMap(cur, "听力"), lgActSelHtml(cur, "听力", "听力练习")) : "");
+}
+/* =============================================================
+ * 新概念英语素材库（第一册 144 课 / 第二册 96 课）
+ * 数据：data/lang_listen_nce1.json / data/lang_listen_nce2.json（按册懒加载）
+ * 标题格式：📘 新概念 {册} · L{课号} {课名}
+ *   课号必须进标题 —— 第一册奇数课/偶数课常共用同一句型课名，
+ *   而导入是按 title 去重的，不带课号会互相误杀。
+ * ============================================================= */
+var LG_NCE_BOOKS = [
+  { id: 1, name: "第一册", desc: "First Things First · 英语初阶", file: "data/lang_listen_nce1.json", count: 144 },
+  { id: 2, name: "第二册", desc: "Practice and Progress · 实践与进步", file: "data/lang_listen_nce2.json", count: 96 }
+];
+var lgNceCache = {};        // { 1: {lessons:[...]}, 2: {...} }
+var lgNceOpen = false;      // 素材库面板是否展开
+var lgNceBook = 1;          // 面板当前册
+var lgNceQ = "";            // 课名/课号筛选
+var lgNceBusy = "";         // 加载提示文案
+
+function lgNceBookMeta(id) {
+  for (var i = 0; i < LG_NCE_BOOKS.length; i++) if (LG_NCE_BOOKS[i].id === id) return LG_NCE_BOOKS[i];
+  return LG_NCE_BOOKS[0];
+}
+function lgNceTitle(bookId, lesson) {
+  return "📘 新概念 " + bookId + " · L" + lesson.n + " " + lesson.t;
+}
+function lgNcePrefix(bookId) { return "📘 新概念 " + bookId + " · L"; }
+/* 该册已导入多少课（按标题前缀统计，去重后） */
+function lgNceImportedCount(cur, bookId) {
+  var e = langGet(cur), pre = lgNcePrefix(bookId), n = 0;
+  for (var i = 0; i < (e.listening || []).length; i++) {
+    if (String(e.listening[i].title || "").indexOf(pre) === 0) n++;
+  }
+  return n;
+}
+function lgNceLoad(bookId, cb) {
+  if (lgNceCache[bookId]) { if (cb) cb(lgNceCache[bookId]); return; }
+  if (typeof fetch !== "function") { showToast("当前环境不支持加载素材库", "error"); return; }
+  lgNceBusy = "正在加载…";
+  var finish = function (data) {
+    lgNceBusy = "";
+    if (data) lgNceCache[bookId] = data;
+    render();
+    if (data && cb) cb(data);
+  };
+  fetch(lgNceBookMeta(bookId).file).then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (j && j.lessons && j.lessons.length) finish(j);
+      else { finish(null); showToast("素材库数据为空", "error"); }
+    })
+    .catch(function () { finish(null); showToast("素材库加载失败，请检查网络后重试", "error"); });
+}
+function lgNceToggle() {
+  lgNceOpen = !lgNceOpen;
+  if (lgNceOpen && !lgNceCache[lgNceBook]) lgNceLoad(lgNceBook);
+  render();
+}
+function lgNcePickBook(id) { lgNceBook = id; if (!lgNceCache[id]) lgNceLoad(id); render(); }
+function lgNceInput(id, def) {
+  var el = document.getElementById(id);
+  return el ? String(el.value || "").trim() : def;
+}
+function lgNceSetRange(f, t) {
+  var a = document.getElementById("nce-from"), b = document.getElementById("nce-to");
+  if (a) a.value = f; if (b) b.value = t;
+}
+/* 导入课号范围（含端点）。已存在的标题跳过，可重复点。 */
+function lgNceImportRange(bookId, from, to) {
+  var data = lgNceCache[bookId];
+  if (!data) { lgNceLoad(bookId, function () { lgNceImportRange(bookId, from, to); }); return; }
+  var total = data.lessons.length;
+  var f = parseInt(from, 10), t = parseInt(to, 10);
+  if (isNaN(f)) f = 1;
+  if (isNaN(t)) t = total;
+  if (f < 1) f = 1;
+  if (t > total) t = total;
+  if (f > t) { showToast("课号范围不对：起始不能大于结束", "warning"); return; }
+  var cur = langCur(), e = langGet(cur);
+  var have = {}, i;
+  for (i = 0; i < (e.listening || []).length; i++) have[e.listening[i].title] = true;
+  var added = 0, skip = 0;
+  data.lessons.forEach(function (l) {
+    if (l.n < f || l.n > t) return;
+    var title = lgNceTitle(bookId, l);
+    if (have[title]) { skip++; return; }
+    e.listening.push({
+      id: lgUid(),
+      title: title,
+      sentences: l.s.map(function (s) {
+        var k = s.indexOf("|");
+        return { t: s.slice(0, k).trim(), tr: s.slice(k + 1).trim() };
+      }),
+      date: new Date().toISOString(),
+      builtin: true
+    });
+    added++;
+  });
+  DB.save(); render();
+  showToast(added ? "已导入 " + added + " 课（跳过已存在 " + skip + " 课）" : "L" + f + "–L" + t + " 已全部导入过", added ? "success" : "warning");
+}
+function lgNceImportInput(bookId) {
+  lgNceImportRange(bookId, lgNceInput("nce-from", 1), lgNceInput("nce-to", 20));
+}
+function lgNceImportAll(bookId) {
+  lgNceImportRange(bookId, 1, lgNceBookMeta(bookId).count);
+}
+/* 导入单课（面板列表里的 ＋） */
+function lgNceImportOne(bookId, n) { lgNceImportRange(bookId, n, n); }
+function lgNceSetQ(v) {
+  lgNceQ = String(v || "");
+  var box = document.getElementById("nce-list");
+  if (box) box.innerHTML = lgNceListHtml(langCur(), lgNceBook);
+}
+function lgNceListHtml(cur, bookId) {
+  var data = lgNceCache[bookId];
+  if (!data) return '<div class="lg-hint">' + (lgNceBusy || "加载中…") + '</div>';
+  var q = lgNceQ.trim().toLowerCase();
+  var have = {}, i;
+  var list = langGet(cur).listening || [];
+  for (i = 0; i < list.length; i++) have[list[i].title] = true;
+  var rows = data.lessons.filter(function (l) {
+    if (!q) return true;
+    return ("l" + l.n + " " + l.t + " " + (l.zh || "")).toLowerCase().indexOf(q) !== -1;
+  });
+  if (!rows.length) return '<div class="lg-hint">没有匹配的课目</div>';
+  return rows.map(function (l) {
+    var done = !!have[lgNceTitle(bookId, l)];
+    return '<div class="lg-nce-row' + (done ? ' done' : '') + '">' +
+      '<div class="lg-nce-info">' +
+        '<div class="lg-nce-t">L' + l.n + ' ' + escapeHtml(l.t) + '</div>' +
+        '<div class="lg-nce-meta">' + escapeHtml(l.zh || "") + (l.g ? ' · ' + escapeHtml(l.g) : '') + '</div>' +
+      '</div>' +
+      (done
+        ? '<span class="lg-nce-done">✓</span>'
+        : '<span class="lg-nce-add" title="导入本课" onclick="lgNceImportOne(' + bookId + ',' + l.n + ')">＋</span>') +
+    '</div>';
+  }).join("") + (rows.length > data.lessons.length ? "" : "");
+}
+function lgNcePanel(cur) {
+  if (cur !== "en") return "";
+  var meta = lgNceBookMeta(lgNceBook);
+  var done = lgNceImportedCount(cur, lgNceBook);
+  var tabs = LG_NCE_BOOKS.map(function (b) {
+    return '<button class="lg-nce-tab' + (b.id === lgNceBook ? ' on' : '') + '" onclick="lgNcePickBook(' + b.id + ')">' +
+      b.name + ' <span class="lg-sub">' + b.count + ' 课</span></button>';
+  }).join("");
+  var quick = [[1, 20], [21, 40], [41, 60], [61, 80], [81, 100], [101, 120], [121, meta.count]];
+  return '<div class="lg-nce">' +
+    '<div class="lg-nce-h">📘 新概念英语素材库 <span class="lg-sub">' + escapeHtml(meta.desc) + '</span></div>' +
+    '<div class="lg-nce-tabs">' + tabs + '</div>' +
+    '<div class="lg-nce-bar">' +
+      '<span class="lg-nce-lbl">课号</span>' +
+      '<input class="lg-input lg-nce-num" id="nce-from" value="1" inputmode="numeric">' +
+      '<span class="lg-nce-lbl">–</span>' +
+      '<input class="lg-input lg-nce-num" id="nce-to" value="20" inputmode="numeric">' +
+      '<button class="lg-btn" onclick="lgNceImportInput(' + lgNceBook + ')">📥 导入</button>' +
+      '<button class="lg-btn ghost" onclick="lgNceImportAll(' + lgNceBook + ')">整册导入</button>' +
+    '</div>' +
+    '<div class="lg-nce-quick">' + quick.map(function (p) {
+      return '<span onclick="lgNceSetRange(' + p[0] + ',' + Math.min(p[1], meta.count) + ')">L' + p[0] + '–L' + Math.min(p[1], meta.count) + '</span>';
+    }).join("") + '</div>' +
+    '<div class="lg-nce-bar">' +
+      '<input class="lg-input lg-nce-search" id="nce-q" placeholder="搜索课号或课名，如 12 / theatre" oninput="lgNceSetQ(this.value)">' +
+      '<span class="lg-nce-stat">已导入 ' + done + ' / ' + meta.count + ' 课</span>' +
+    '</div>' +
+    '<div class="lg-nce-list" id="nce-list">' + lgNceListHtml(cur, lgNceBook) + '</div>' +
+    '<div class="lg-hint">每课 3 句（英文 + 中文），点 ＋ 单独导入或按课号范围批量导入；已导入的课显示 ✓，可反复点不会重复。导入后可在「✏️ 编辑」里替换成自己手上的课文原文。</div>' +
+    '</div>';
 }
 /* 听力素材文本 ⇄ 句子数组（供新增/编辑双向无损转换） */
 function lgParseListenSents(raw) {
