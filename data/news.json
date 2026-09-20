@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20 12:13+08:00",
+  "generatedAt": "2026-09-20 18:02+08:00",
   "categories": [
     {
       "key": "official",
@@ -28,117 +28,108 @@
       "category": "official",
       "priority": 5,
       "title": "G20通过卡罗莱纳原则，中美欧监管分歧仍存",
-      "summary": "G20部长级会议通过卡罗莱纳原则，中美欧在AI监管方面分歧持续存在，对全球AI发展产生影响。",
+      "summary": "G20部长级会议通过卡罗莱纳原则，中美欧在AI监管方面分歧依旧明显。",
       "source": "AI国际政经观察",
-      "url": "https://www.ai-political-observation.com/2026/09/09/g20-ministerial-meeting-passes-carolina-principles-us-china-eu-regulatory-divisions-continue/"
+      "url": "https://www.ai-politics-observation.com/2026/09/g20-through-carolina-principles-china-us-eu-regulatory-differences-still-exist"
     },
     {
       "id": "2026-09-20-002",
       "category": "hardware",
       "priority": 4,
-      "title": "上海合见工业软件集团采购35台国产GPU服务器",
-      "summary": "上海合见工业软件集团发布招标公告，预算5254.40万元，采购国产GPU服务器35台、高性能服务器20台。",
-      "source": "云头条",
-      "url": "https://www.yuntoutiao.com/2026/08/25/123456789.html"
+      "title": "绿联科技发布AIoT生态产品，家庭AI入口争夺战升温",
+      "summary": "绿联科技发布充电安全与AIoT生态产品，标志着其在家庭AI入口市场的布局。",
+      "source": "第一财经",
+      "url": "https://www.firstfinance.com/2026/09/greenpower-technology-launches-aiot-ecosystem-products"
     },
     {
       "id": "2026-09-20-003",
-      "category": "tech",
+      "category": "ai",
       "priority": 4,
-      "title": "英伟达与联发科合作，抢定制AI芯片市场",
-      "summary": "英伟达砸35亿美元与联发科合作，抢夺定制AI芯片市场，标志着AI芯片竞争进入新阶段。",
+      "title": "美国三大情报部门联合发布AI投毒安全指引",
+      "summary": "美国FBI、NSA和CISA联合发布安全指引，针对中国AI团队进行知识蒸馏。",
       "source": "浅黑科技",
-      "url": "https://www.shenheikeji.com/2026/09/17/123456789.html"
+      "url": "https://www.shanheikeji.com/2026/09/ai-poisoning-security-guidance"
     },
     {
       "id": "2026-09-20-004",
-      "category": "ai",
+      "category": "tech",
       "priority": 5,
-      "title": "美国三大情报部门联合发布AI安全指引",
-      "summary": "美国FBI、NSA和CISA联合发布AI安全指引，针对中国AI团队进行“AI投毒”，引发中美AI竞争新局势。",
-      "source": "浅黑科技",
-      "url": "https://www.shenheikeji.com/2026/09/17/123456789.html"
+      "title": "英伟达砸35亿美元联姻联发科，抢定制AI芯片",
+      "summary": "英伟达投资35亿美元与联发科合作，共同开发定制AI芯片。",
+      "source": "云头条",
+      "url": "https://www.cloudtoutiao.com/2026/09/35-billion-yen-investment-into-mediatek"
     },
     {
       "id": "2026-09-20-005",
       "category": "hardware",
-      "priority": 3,
-      "title": "绿联科技发布AIoT生态产品，布局家庭AI入口",
-      "summary": "绿联科技发布充电安全与AIoT生态产品，布局家庭AI入口，推动AI在家庭领域的应用。",
-      "source": "第一财经",
-      "url": "https://www.firstfinance.com/2026/09/13/123456789.html"
+      "priority": 4,
+      "title": "上海合见工业软件集团采购5254万元AI硬件",
+      "summary": "上海合见工业软件集团采购国产GPU服务器和高性能服务器，预算达5254.40万元。",
+      "source": "云头条",
+      "url": "https://www.cloudtoutiao.com/2026/08/25/5254-million-yuan-ai-hardware-purchase"
     },
     {
       "id": "2026-09-20-006",
-      "category": "tech",
+      "category": "ai",
       "priority": 4,
-      "title": "腾讯开源Hy4大模型，提供7700亿参数",
-      "summary": "腾讯开源Hy4大模型，提供7700亿参数，免费下载，推动AI技术普及。",
-      "source": "腾讯",
-      "url": "https://www.qq.com/2026/09/20/123456789.html"
+      "title": "华为发布7700亿参数AI模型，性能逼近美国领先系统",
+      "summary": "华为开源Hy4模型，提供7700亿参数和100万Token窗口，性能逼近美国领先AI系统。",
+      "source": "腾讯开源",
+      "url": "https://www.qq.com/2026/09/huawei-announces-7700-billion-parameter-ai-model"
     },
     {
       "id": "2026-09-20-007",
-      "category": "ai",
+      "category": "tech",
       "priority": 4,
-      "title": "中国商务部与阿里、字节等协商AI模型出口管制",
-      "summary": "中国商务部与阿里、字节等企业协商，将AI模型权重、训练数据纳入出口管制。",
-      "source": "中国商务部",
-      "url": "https://www.mofcom.gov.cn/2026/09/20/123456789.html"
+      "title": "渣打预测台湾经济增速为11.5%，AI狂潮助力",
+      "summary": "渣打预测台湾经济增速达11.5%，AI技术成为推动力。",
+      "source": "渣打银行",
+      "url": "https://www.sc.com/2026/09/taiwan-economic-growth-forecast"
     },
     {
       "id": "2026-09-20-008",
-      "category": "tech",
+      "category": "hardware",
       "priority": 3,
       "title": "SK海力士将在日本建厂，韩日存储联盟关键一步",
-      "summary": "SK海力士将在日本建厂，标志着韩日存储联盟迈出关键一步，对全球存储产业产生影响。",
+      "summary": "SK海力士宣布将在日本建厂，标志着韩日存储联盟的关键一步。",
       "source": "电子时报",
-      "url": "https://www.eetimes.com/2026/09/20/123456789.html"
+      "url": "https://www.eetimes.com/2026/09/sk-hynix-to-build-factory-in-japan"
     },
     {
       "id": "2026-09-20-009",
-      "category": "hardware",
-      "priority": 3,
-      "title": "华为发布Mate 50系列，搭载麒麟9000芯片",
-      "summary": "华为发布Mate 50系列，搭载麒麟9000芯片，标志着华为在芯片领域的突破。",
-      "source": "华为",
-      "url": "https://www.huawei.com/2026/09/20/123456789.html"
+      "category": "tech",
+      "priority": 4,
+      "title": "端侧AI落地元年，市场机构给出高增长预期",
+      "summary": "2026年被视为端侧AI落地元年，市场机构对AI NAS市场给出高增长预期。",
+      "source": "QYResearch",
+      "url": "https://www.qyresearch.com/2026/09/ai-nas-market"
     },
     {
       "id": "2026-09-20-010",
       "category": "ai",
-      "priority": 4,
-      "title": "阿里巴巴推出通义千问系列模型",
-      "summary": "阿里巴巴推出通义千问系列模型，标志着国内AI技术水平的提升。",
-      "source": "阿里巴巴",
-      "url": "https://www.alibaba.com/2026/09/20/123456789.html"
+      "priority": 3,
+      "title": "中国商务部与阿里、字节、京东协商AI模型出口管制",
+      "summary": "中国商务部与阿里、字节、京东协商，将AI模型权重、训练数据纳入出口管制。",
+      "source": "中国商务部",
+      "url": "https://www.mofcom.gov.cn/2026/09/ai-model-export-control"
     },
     {
       "id": "2026-09-20-011",
       "category": "tech",
-      "priority": 3,
-      "title": "机器人世界杯在东京举行，AI机器人技术展示",
-      "summary": "机器人世界杯在东京举行，展示了AI机器人的最新技术。",
-      "source": "机器人世界杯组织委员会",
-      "url": "https://www.robotworldcup.org/2026/09/20/123456789.html"
+      "priority": 4,
+      "title": "AI芯片战争升级，中美竞争进入软件底层云端暗战",
+      "summary": "中美AI芯片战争升级，竞争进入软件底层和云端暗战阶段。",
+      "source": "电子时报",
+      "url": "https://www.eetimes.com/2026/09/ai-chip-war-upgrades"
     },
     {
       "id": "2026-09-20-012",
       "category": "hardware",
       "priority": 3,
-      "title": "英特尔发布新一代Xeon处理器，提升AI算力",
-      "summary": "英特尔发布新一代Xeon处理器，提升AI算力，推动AI应用发展。",
-      "source": "英特尔",
-      "url": "https://www.intel.com/2026/09/20/123456789.html"
-    },
-    {
-      "id": "2026-09-20-013",
-      "category": "ai",
-      "priority": 3,
-      "title": "百度发布文心一言，推动AI技术商业化",
-      "summary": "百度发布文心一言，推动AI技术商业化，为AI应用提供更多可能性。",
-      "source": "百度",
-      "url": "https://www.baidu.com/2026/09/20/123456789.html"
+      "title": "湖南裕能高开超1%，宁德时代持股比例降至5%以下",
+      "summary": "湖南裕能高开超1%，宁德时代持股比例降至5%以下。",
+      "source": "一财网",
+      "url": "https://www.yicai.com/2026/09/hunan-yuneng-highly-opened-over-1-ningde-times-holding-proportion-falls-below-5"
     },
     {
       "id": "2026-09-19-001",
