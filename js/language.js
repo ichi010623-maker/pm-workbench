@@ -3262,13 +3262,15 @@ function lgRenderListening(cur) {
       var sents = item.sentences || [];
       var rate = e.settings.rate || 0.9;
       var idx = lgListening && lgListening.id === item.id ? lgListening.idx : 0;
-      return '<div class="lg-card"><div class="lg-card-h">🎧 ' + escapeHtml(item.title) + '</div>' +
-        '<div class="lg-row" style="gap:8px;margin-bottom:10px">' +
+      return '<div class="lg-card"><div class="lg-card-h">🎧 ' + escapeHtml(item.title) + ' <span class="lg-sub">' + sents.length + ' 句</span></div>' +
+        '<div class="lg-row" style="gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
           '<button class="lg-btn" onclick="lgListenPlay(\'' + item.id + '\')">▶ 播放</button>' +
           '<button class="lg-btn ghost" onclick="lgListenStop()">⏹ 停止</button>' +
           '<button class="lg-btn ghost" onclick="lgListenRate(' + Math.max(0.5, rate - 0.15) + ')">−</button>' +
           '<span class="lg-mini on" style="padding:4px 8px">' + rate + 'x</span>' +
           '<button class="lg-btn ghost" onclick="lgListenRate(' + Math.min(1.75, rate + 0.15) + ')">＋</button>' +
+          '<button class="lg-btn ghost" onclick="lgListenEdit(\'' + item.id + '\')">✏️ 编辑</button>' +
+          '<button class="lg-btn ghost" onclick="lgListenDel(\'' + item.id + '\')">🗑 删除</button>' +
           '<button class="lg-btn ghost" onclick="lgListenId=null;render()">← 返回</button>' +
         '</div>' +
         '<div class="lg-listen-list">' + sents.map(function (s, i) {
@@ -3289,7 +3291,7 @@ function lgRenderListening(cur) {
   }
   return '<div class="lg-card"><div class="lg-card-h">🎧 听力训练 <span class="lg-sub">' + m1(cur) + ' · ' + list.length + ' 组</span>' + lgHistoryBtn("listen") + '</div>' +
     '<div class="lg-row" style="gap:8px">' +
-      '<button class="lg-btn" onclick="lgAddListening()">＋ 添加听力素材</button>' +
+      '<button class="lg-btn" onclick="lgListenForm()">＋ 添加听力素材</button>' +
       '<button class="lg-btn ghost" onclick="lgImportListen()">🎧 内置听力（' + (LG_LISTEN_BUILTIN[cur] || []).length + ' 组）</button>' +
     '</div>' +
     (cur === "en" ? '<div class="lg-row" style="gap:8px;margin-top:8px;flex-wrap:wrap">' +
@@ -3300,40 +3302,103 @@ function lgRenderListening(cur) {
     (list.length === 0 ? '<div class="empty-state"><div class="empty-text">还没有听力素材。点「＋ 添加听力素材」粘贴一组对话（每行一句，可带翻译），也可从精读素材一键转听力。</div></div>' :
       '<div class="lg-mat-list">' + list.map(function (it) {
         return '<div class="lg-mat" onclick="lgListenId=\'' + it.id + '\';render()">' +
-          '<div class="lg-mat-title">🎧 ' + escapeHtml(it.title) + '</div>' +
-          '<div class="lg-mat-meta">' + (it.sentences || []).length + ' 句 · ' + formatDateShort(it.date) + '</div></div>';
+          '<div class="lg-mat-head">' +
+            '<div class="lg-mat-info">' +
+              '<div class="lg-mat-title">🎧 ' + escapeHtml(it.title) + '</div>' +
+              '<div class="lg-mat-meta">' + (it.sentences || []).length + ' 句 · ' + formatDateShort(it.date) + '</div>' +
+            '</div>' +
+            '<div class="lg-mat-ops">' +
+              '<span title="编辑" onclick="event.stopPropagation();lgListenEdit(\'' + it.id + '\')">✏️</span>' +
+              '<span title="删除" onclick="event.stopPropagation();lgListenDel(\'' + it.id + '\')">🗑</span>' +
+            '</div>' +
+          '</div></div>';
       }).join("") + '</div>') +
     '</div>' +
     (lgHist === "listen" ? lgCalHtml("listen", lgActMap(cur, "听力"), lgActSelHtml(cur, "听力", "听力练习")) : "");
 }
-function lgAddListening() {
+/* 听力素材文本 ⇄ 句子数组（供新增/编辑双向无损转换） */
+function lgParseListenSents(raw) {
+  var lines = String(raw || "").split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
+  if (!lines.length) return [];
+  var hasSep = false;
+  for (var i = 0; i < lines.length; i++) if (lines[i].indexOf("|") !== -1) { hasSep = true; break; }
+  var out = [];
+  if (hasSep) {
+    // 新格式：每行一句，翻译用 | 分隔（可无损再编辑）
+    lines.forEach(function (ln) {
+      var p = ln.split("|");
+      var t = (p.shift() || "").trim();
+      var tr = p.join("|").trim();
+      if (t) out.push({ t: t, tr: tr });
+    });
+    return out;
+  }
+  // 旧格式兜底：奇数行原文，偶数行翻译
+  for (var k = 0; k < lines.length; k += 2) out.push({ t: lines[k], tr: lines[k + 1] || "" });
+  return out;
+}
+function lgSerializeListenSents(sents) {
+  return (sents || []).map(function (s) { return s.tr ? (s.t + " | " + s.tr) : s.t; }).join("\n");
+}
+var lgListenEditId = null;   // 非空 = 当前弹窗处于「编辑」态
+function lgAddListening() { lgListenForm(); }
+function lgListenForm(id) {
+  var e = langGet(langCur());
+  var it = null;
+  if (id) { for (var i = 0; i < e.listening.length; i++) if (e.listening[i].id === id) { it = e.listening[i]; break; } }
+  lgListenEditId = it ? it.id : null;
   showModal(
-    '<div class="modal-title">＋ 添加听力素材</div>' +
+    '<div class="modal-title">' + (it ? "✏️ 编辑听力素材" : "＋ 添加听力素材") + '</div>' +
     '<div class="lg-form">' +
-      '<label class="lg-fld"><span>标题</span><input class="lg-input" id="lgl-title" placeholder="e.g. 咖啡店点单对话"></label>' +
-      '<label class="lg-fld"><span>句子（每行一句）</span><textarea class="lg-input lg-textarea" id="lgl-sents" placeholder="Can I have a latte?\n大的拿铁可以吗？"></textarea></label>' +
-      '<div class="lg-hint" style="margin:0 16px 10px">奇数行=原文，偶数行=中文翻译（可选），自动配对。</div>' +
+      '<label class="lg-fld"><span>标题</span><input class="lg-input" id="lgl-title" value="' + escapeHtml(it ? it.title : "") + '" placeholder="e.g. 咖啡店点单对话"></label>' +
+      '<label class="lg-fld"><span>句子（每行一句）</span><textarea class="lg-input lg-textarea" id="lgl-sents" placeholder="Can I have a latte? | 大杯拿铁可以吗？">' + escapeHtml(it ? lgSerializeListenSents(it.sentences) : "") + '</textarea></label>' +
+      '<div class="lg-hint" style="margin:0 16px 10px">每行一句；翻译用 <b>|</b> 分隔，如 <b>Can I have a latte? | 大杯拿铁可以吗？</b>。不带 <b>|</b> 时按旧格式解析：奇数行原文、偶数行翻译。</div>' +
     '</div>' +
     '<div class="btn-row" style="padding:0 16px 16px">' +
-      '<button class="btn btn-primary" style="flex:1" onclick="lgSaveListening()">💾 保存</button>' +
+      '<button class="btn btn-primary" style="flex:1" onclick="lgListenSave()">💾 保存</button>' +
       '<button class="btn btn-secondary" style="flex:1" onclick="closeModal()">取消</button>' +
     '</div>'
   );
 }
-function lgSaveListening() {
+function lgListenSave() {
   function v(x) { var el = document.getElementById(x); return el ? el.value.trim() : ""; }
   var title = v("lgl-title") || "听力素材";
-  var raw = v("lgl-sents");
-  if (!raw) { showToast("请粘贴句子", "warning"); return; }
-  var lines = raw.split(/\n+/).map(function (s) { return s.trim(); }).filter(Boolean);
-  var sents = [];
-  for (var i = 0; i < lines.length; i += 2) {
-    sents.push({ t: lines[i], tr: lines[i + 1] || "" });
-  }
+  var sents = lgParseListenSents(v("lgl-sents"));
+  if (!sents.length) { showToast("请粘贴句子", "warning"); return; }
   var e = langGet(langCur());
+  if (lgListenEditId) {
+    var hit = false;
+    for (var i = 0; i < e.listening.length; i++) if (e.listening[i].id === lgListenEditId) {
+      e.listening[i].title = title;
+      e.listening[i].sentences = sents;
+      hit = true; break;
+    }
+    if (!hit) e.listening.push({ id: lgUid(), title: title, sentences: sents, date: new Date().toISOString() });
+    lgListenEditId = null;
+    closeModal(); DB.save(); render();
+    showToast("听力素材已更新", "success");
+    return;
+  }
   e.listening.push({ id: lgUid(), title: title, sentences: sents, date: new Date().toISOString() });
   closeModal(); DB.save(); render();
   showToast("听力素材已保存", "success");
+}
+function lgListenEdit(id) {
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  lgListening = null;
+  lgListenForm(id);
+}
+function lgListenDel(id) {
+  var e = langGet(langCur());
+  var it = null;
+  for (var i = 0; i < e.listening.length; i++) if (e.listening[i].id === id) { it = e.listening[i]; break; }
+  if (!it) return;
+  if (!confirm("删除听力素材「" + it.title + "」？删除后不可恢复。")) return;
+  e.listening = e.listening.filter(function (x) { return x.id !== id; });
+  if (lgListenId === id) lgListenId = null;
+  if (lgListening && lgListening.id === id) { if (window.speechSynthesis) window.speechSynthesis.cancel(); lgListening = null; }
+  DB.save(); render();
+  showToast("已删除", "success");
 }
 function lgListenOne(id, i) {
   var e = langGet(langCur());
