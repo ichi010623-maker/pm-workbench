@@ -195,5 +195,29 @@ chk(listHtml.indexOf("lg-nce-done") >= 0, "已导入的课渲染 ✓ 标记");
 chk(listHtml.indexOf("lg-nce-add") >= 0, "未导入的课渲染 ＋ 入口");
 chk((listHtml.match(/lg-nce-row/g) || []).length === 144, "默认列出全部 144 课");
 
+/* ---------- 6. 与听力页的接线（最容易静默断掉的一环） ---------- */
+console.log("【听力页接线】");
+sb.lgNceBook = 1; sb.lgNceQ = "";
+sb.lgNceOpen = false;
+let page = sb.lgRenderListening("en");
+chk(page.indexOf("📘 新概念素材库") >= 0, "收起时仍渲染出素材库入口按钮");
+chk(page.indexOf("lg-nce-list") === -1, "收起时不渲染面板主体");
+
+sb.lgNceOpen = true;
+page = sb.lgRenderListening("en");
+chk(page.indexOf("lg-nce-tabs") >= 0, "展开后监听页内渲染出两册切换");
+chk(page.indexOf("nce-from") >= 0 && page.indexOf("nce-to") >= 0, "展开后渲染出课号范围输入框");
+chk(page.indexOf("整册导入") >= 0, "展开后渲染出整册导入按钮");
+chk(/已导入 \d+ \/ 144 课/.test(page), "展开后渲染出已导入进度");
+chk(page.indexOf("L144") >= 0, "展开后列出第 144 课");
+chk((page.match(/lg-nce-done/g) || []).length === sb.lgNceImportedCount("en", 1), "✓ 数量与已导入数一致");
+
+const imported1 = sb.lgNceImportedCount("en", 1);
+sb.lgNcePickBook(2); sb.lgNceOpen = true;
+page = sb.lgRenderListening("en");
+chk(page.indexOf("A private conversation") >= 0, "切到第二册后列出第二册课目");
+chk(sb.lgNceImportedCount("en", 1) === imported1, "切册不影响已导入统计");
+sb.lgNcePickBook(1);
+
 console.log(ok ? "\n🎉 新概念素材库全部通过" : "\n❌ 存在失败项");
 process.exit(ok ? 0 : 1);
