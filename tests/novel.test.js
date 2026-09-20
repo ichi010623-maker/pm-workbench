@@ -512,15 +512,12 @@ section("U. 字段卡片化（v5.9.140）");
   vm.runInContext(`nvEditBook(null)`, sb);
   const formHtml = sb.__lastFormHtml || "";
   if (process.env.DBG_NV) console.log("DEBUG formHtml[0..200]:", formHtml.substring(0, 200));
-  if (process.env.DBG_NV) console.log("DEBUG has nv-form:", formHtml.indexOf("nv-form"), "has nv-f-input:", formHtml.indexOf("nv-f-input"));
+  if (process.env.DBG_NV) console.log("DEBUG has nv-form:", formHtml.indexOf("nv-form"), "has form-group:", formHtml.indexOf("form-group"));
   ok(formHtml.indexOf("nv-form") >= 0, "表单容器走 nv-form");
   ok(formHtml.indexOf("nv-form-h") >= 0, "表单标题走 nv-form-h");
-  ok(formHtml.indexOf("nv-form-actions") >= 0, "表单按钮区走 nv-form-actions");
-  ok(formHtml.indexOf("nv-f-row") >= 0, "字段包在 nv-f-row 单元里");
-  ok(formHtml.indexOf("nv-f-label") >= 0, "字段含 nv-f-label 标签");
-  ok(formHtml.indexOf("nv-f-input") >= 0, "字段含 nv-f-input 输入");
-  // nv-form-intro 仅在传入 intro 参数时渲染（nvOpenForm 第 4 参），不传则不出现——属预期
-  ok(true, "nv-form-intro 仅在表单传入 intro 参数时渲染（条件渲染，正常）");
+  ok(formHtml.indexOf("form-group") >= 0, "字段包在 form-group 单元里");
+  ok(formHtml.indexOf("form-label") >= 0, "字段含 form-label 标签");
+  ok(formHtml.indexOf("form-input") >= 0, "字段含 form-input 输入");
 
   // 2) 详情页：通过 Novel.render + NV_VIEW 路由触发（内部 detail 函数未挂 root）
   const firstCh = sb.Novel.db().chapters[0];

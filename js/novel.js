@@ -745,24 +745,26 @@
     var v = (val == null) ? "" : val;
     var id = nvfId(f.k);
     var common = 'id="' + id + '" data-k="' + f.k + '"';
-    var h = '<label class="nv-f-label" for="' + id + '">' + esc(f.label) +
-      (f.req ? ' <span class="nv-f-req">*</span>' : "") + "</label>";
+    // v5.9.154: 复用项目里已经存在的 form-group / form-label / form-input / form-textarea / form-select
+    // （这些类的样式在 css/style.css 第 605 行起，跟「新增物品」表单 100% 一致）
+    var h = '<label class="form-label" for="' + id + '">' + esc(f.label) +
+      (f.req ? ' <span style="color:#ef4444">*</span>' : "") + "</label>";
     if (f.type === "textarea" || f.type === "lines" || f.type === "tags") {
-      h += '<textarea class="nv-f-input nv-f-ta" ' + common + ' rows="' + (f.rows || 3) +
+      h += '<textarea class="form-textarea" ' + common + ' rows="' + (f.rows || 4) +
         '" placeholder="' + esc(f.ph || "") + '">' + esc(v) + "</textarea>";
     } else if (f.type === "select") {
-      h += '<select class="nv-f-input" ' + common + ">" + (f.options || []).map(function (o) {
+      h += '<select class="form-select" ' + common + ">" + (f.options || []).map(function (o) {
         var ov = (typeof o === "object") ? o.v : o;
         var ot = (typeof o === "object") ? o.t : o;
         return '<option value="' + esc(ov) + '"' + (String(v) === String(ov) ? " selected" : "") + ">" + esc(ot) + "</option>";
       }).join("") + "</select>";
     } else if (f.type === "number") {
-      h += '<input class="nv-f-input" type="number" ' + common + ' value="' + esc(v) + '" placeholder="' + esc(f.ph || "") + '">';
+      h += '<input class="form-input" type="number" ' + common + ' value="' + esc(v) + '" placeholder="' + esc(f.ph || "") + '">';
     } else {
-      h += '<input class="nv-f-input" type="text" ' + common + ' value="' + esc(v) + '" placeholder="' + esc(f.ph || "") + '">';
+      h += '<input class="form-input" type="text" ' + common + ' value="' + esc(v) + '" placeholder="' + esc(f.ph || "") + '">';
     }
-    if (f.hint) h += '<div class="nv-f-hint">' + esc(f.hint) + "</div>";
-    return '<div class="nv-f-row">' + h + "</div>";
+    if (f.hint) h += '<div class="form-label-hint">' + esc(f.hint) + "</div>";
+    return '<div class="form-group">' + h + "</div>";
   }
   function nvOpenForm(title, fields, values, onSave, intro) {
     return nvOpenFormEx(title, null, fields, values, onSave, intro);
@@ -799,22 +801,20 @@
         if (sec.subtitle) {
           html += '<div class="nv-form-section-sub">' + esc(sec.subtitle) + "</div>";
         }
-        // v5.9.153: 把 row:"half" 的相邻字段成对放进 grid（双列），其余字段独立单列
+        // v5.9.154: 把 row:"half" 的相邻字段成对放进 form-row（双列），其余单列
         var fields = sec.fields || [];
         var i = 0;
         while (i < fields.length) {
           var f = fields[i];
           if (f.row === "half" && fields[i + 1] && fields[i + 1].row === "half") {
-            // 配对成功 → 双列 grid
             var v1 = values[f.k]; if (Array.isArray(v1)) v1 = v1.join("\n");
             var v2 = values[fields[i + 1].k]; if (Array.isArray(v2)) v2 = v2.join("\n");
-            html += '<div class="nv-form-grid cols-2">';
+            html += '<div class="form-row">';
             html += nvFieldHtml(f, v1);
             html += nvFieldHtml(fields[i + 1], v2);
             html += "</div>";
             i += 2;
           } else {
-            // 单列
             var v = values[f.k]; if (Array.isArray(v)) v = v.join("\n");
             html += nvFieldHtml(f, v);
             i += 1;
@@ -831,8 +831,8 @@
     }
 
     html += '<div class="nv-form-actions">' +
-      '<button class="nv-form-cancel" onclick="closeModal()">' + esc(cancelLabel) + "</button>" +
-      '<button class="nv-form-save nv-btn-primary" onclick="nvFormSave(\'' + fid + '\')">' + esc(saveLabel) + "</button>" +
+      '<button class="btn btn-ghost" onclick="closeModal()">' + esc(cancelLabel) + "</button>" +
+      '<button class="btn btn-primary" onclick="nvFormSave(\'' + fid + '\')">' + esc(saveLabel) + "</button>" +
       "</div></div>";
     if (typeof showModal === "function") showModal(html);
     return fid;
