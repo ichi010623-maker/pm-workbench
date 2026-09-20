@@ -19,6 +19,7 @@ const fs = require("fs");
 const path = require("path");
 const E = require("./lib_epub");
 const M = require("./lib_magfetch");
+const SENSITIVE = require("./lib_filter");
 
 const ROOT = path.join(__dirname, "..");
 const DATA = path.join(ROOT, "data");
@@ -27,20 +28,44 @@ const REPO = "hehonghui/awesome-english-ebooks";
 
 /**
  * 刊物配置。
- * style 决定正文抽取策略：
- *   - economist：该 epub 带语义 class（te_article_title / te_section_title / te_article_rubric），按 class 精确抽
- *   - generic  ：无统一 class，按 <h1|h2> 标题 + 段落长度启发式抽
+ * 正文抽取靠 epub 里的语义 class（各刊由不同工具生成，class 名不通用）：
+ *   经济学人 te_article_title / te_section_title / te_article_rubric
+ *   纽约客   ny_article_h1_title / ny_article_category / ny_article_rubric / ny_article_author
+ *   其他     未识别时退回「<h1|h2> + 段落长度」启发式
+ *
+ * want         每期收录篇数（分类轮转挑选）
+ * bandWords    优先长度区间 —— 精读要的是 300~1800 词的中短文，
+ *              而不是 New Yorker 那种 1 万词的 Profiles 长报道
  */
 const MAGS = [
   { key: "economist", name: "经济学人", en: "The Economist", emoji: "📗", dir: "01_economist",
-    epubRe: /\.epub$/i, style: "economist", maxArticles: 14 },
+    epubRe: /\.epub$/i, want: 14, bandWords: [220, 1800], maxWords: 2000,
+    map: { title: "te_article_title", section: "te_section_title", rubric: "te_article_rubric", author: "te_article_author" } },
   { key: "newyorker", name: "纽约客", en: "The New Yorker", emoji: "🗽", dir: "02_new_yorker",
-    epubRe: /\.epub$/i, style: "generic", maxArticles: 10 },
+    epubRe: /\.epub$/i, want: 10, bandWords: [250, 2400], maxWords: 2600,
+    map: { title: "ny_article_h1_title", section: "ny_article_category", rubric: "ny_article_rubric", author: "ny_article_author" } },
   { key: "atlantic", name: "大西洋月刊", en: "The Atlantic", emoji: "🌊", dir: "04_atlantic",
-    epubRe: /\.epub$/i, style: "generic", maxArticles: 10 },
+    epubRe: /\.epub$/i, want: 10, bandWords: [400, 12000], maxWords: 2400, map: {} },
   { key: "wired", name: "连线", en: "Wired", emoji: "🔌", dir: "05_wired",
-    epubRe: /\.epub$/i, style: "generic", maxArticles: 10 }
+    epubRe: /\.epub$/i, want: 10, bandWords: [400, 12000], maxWords: 2400, map: {},
+    // Wired 的 feed 只有一个「Magazine Articles」，栏目要从文章页里的
+    // https://www.wired.com/category/<slug>/ 链接取
+    sectionFromUrl: /wired\.com\/category\/([a-z0-9\-]+)/i }
 ];
+
+/** 栏目 slug → 中文名（未收录的转成 Title Case 直接用） */
+const SECTION_CN = {
+  "big-story": "长篇特写", business: "商业", science: "科学", security: "安全",
+  gear: "装备", ideas: "观点", culture: "文化", backchannel: "科技深度",
+  "artificial-intelligence": "人工智能", "wired-guide": "消费指南",
+  transportation: "出行", design: "设计", "the-big-issue": "专题"
+};
+function sectionLabel(slug) {
+  if (!slug) return "";
+  const k = String(slug).toLowerCase();
+  if (SECTION_CN[k]) return SECTION_CN[k];
+  return k.split("-").map(function (w) { return w ? w[0].toUpperCase() + w.slice(1) : w; }).join(" ");
+}
 
 const ISSUE_RE = /(\d{4})[.\-_](\d{2})[.\-_](\d{2})/;
 
@@ -79,7 +104,7 @@ function byClass(html, cls, tag) {
   const re = new RegExp("<" + (tag || "[a-z0-9]+") + "\\b[^>]*class=[\"'][^\"']*\\b" + cls + "\\b[^\"']*[\"'][^>]*>([\\s\\S]*?)</", "i");
   const m = String(html).match(re);
   if (!m) return "";
-  return E.decodeEntities(m[1].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+  return E.cleanText(m[1]);
 }
 
 /** 正文：按 <p> 取段落，丢掉图片行 / 日期行 / 过短行 */
@@ -89,8 +114,8 @@ function paragraphText(html) {
   let m;
   while ((m = re.exec(html))) {
     const inner = m[1];
-    if (/<img\b/i.test(inner) && inner.replace(/<[^>]+>/g, "").trim().length < 4) continue;
-    const t = E.decodeEntities(inner.replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+    if (/<img\b/i.test(inner) && E.stripTags(inner).trim().length < 4) continue;
+    const t = E.cleanText(inner);
     if (t.length < 2) continue;
     if (/^\d{4}|^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/i.test(t) && t.length < 40) continue;
     paras.push(t);
@@ -98,41 +123,149 @@ function paragraphText(html) {
   return paras.join("\n\n");
 }
 
-/** 经济学人：语义 class 精确抽取 */
-function extractEconomist(chs) {
+/** 不收录的栏目（新闻摘要 / 读者来信 / 讣告 / 活动预告，不是可精读的文章） */
+const SKIP_SECTIONS = {
+  "the world this week": 1, letters: 1, "goings on": 1, "briefly noted": 1,
+  "the economist reads": 1, "economic & financial indicators": 1, "economic and financial indicators": 1,
+  obituary: 1, "the week": 1, "contributors": 1, "editor's note": 1
+};
+/** 按刊物屏蔽整块栏目：这些栏目整体是政治/地缘/冲突选题，逐条过滤不如整块不收 */
+const SKIP_SECTIONS_BY_MAG = {
+  economist: ["china", "united states", "middle east & africa", "europe", "international", "asia"]
+};
+
+/**
+ * 按语义 class 抽文章（各刊 class 名见 MAGS[].map）。
+ * 无 class 的刊物（calibre 转换的 Atlantic / Wired）走启发式：
+ *   h1 = 标题、h2 = 副题、`by X` 段落 = 作者、feed_N/index 里的首行 = 栏目。
+ * feedMap: { "feed_0/article_3/index_u16.html": "Features" }，由 calibreFeedSections 生成。
+ */
+function extractArticles(chs, mag, feedMap) {
+  const map = mag.map || {};
+  const useClass = !!map.title;
+  const need = mag.bandWords ? mag.bandWords[0] : 200;
   const arts = [];
   chs.forEach(function (c) {
-    if (c.words < 120) return;                       // 跳过封面 / 栏目索引页 / 广告页
-    const title = byClass(c.html, "te_article_title") || c.title;
+    // 栏目索引页不是文章（如 Wired 的「Magazine Articles」页）：
+    // 只匹配 feed_N/index*.html 这一层，不能写成 /index.*\.html$ ——
+    // 文章页恰恰是 feed_N/article_M/index_uXX.html，会被一起误杀。
+    if (/feed_\d+\/index[^\/]*\.html$/i.test(c.href)) return;
+    if (c.words < need) return;                      // 封面 / 栏目索引 / 广告页
+    let title, section = "", rubric = "", author = "";
+    if (useClass) {
+      title = byClass(c.html, map.title) || c.title;
+      section = (map.section && byClass(c.html, map.section)) || "";
+      rubric = (map.rubric && byClass(c.html, map.rubric)) || "";
+      author = (map.author && byClass(c.html, map.author)) || "";
+    } else {
+      const hs = E.extractHeadings(c.html);
+      title = hs[0] || c.title;
+      rubric = hs[1] || "";
+      const am = c.html.match(/<p[^>]*>\s*by\s+([A-Z][^<]{1,60}?)<\/p>/i);
+      if (am) author = am[1].trim();
+      section = (feedMap && feedMap[c.href]) || "";
+      if (mag.sectionFromUrl) {
+        const um = c.html.match(mag.sectionFromUrl);
+        if (um && um[1]) section = sectionLabel(um[1]);
+      }
+    }
     if (!title) return;
-    const section = byClass(c.html, "te_section_title") || "";
-    const rubric = byClass(c.html, "te_article_rubric") || "";
-    const body = paragraphText(c.html);
-    if (E.countWords(body) < 100) return;
-    arts.push({ section: section, rubric: rubric, title: title, content: body, words: E.countWords(body) });
+    if (/^(cover|contents|masthead|colophon|advert|table of|titlepage)/i.test(title)) return;
+    if (SENSITIVE.isSensitive(title, rubric)) return;    // 精读素材只收中性选题
+    const secKey = String(section || "").trim().toLowerCase();
+    if (SKIP_SECTIONS[secKey]) return;
+    const magSkip = SKIP_SECTIONS_BY_MAG[mag.key];
+    if (magSkip && magSkip.indexOf(secKey) !== -1) return;
+    if (!section) {
+      // 兜底：正文首行若是短行（栏目名），用它当分类
+      const first = (c.text.split("\n")[0] || "").trim();
+      if (first && first.length <= 40 && first !== title && /^[\w\s&'’\-.]{2,40}$/.test(first)) section = first;
+    }
+    let body = paragraphText(c.html) || c.text;
+    body = body.replace(/^\s*by\s+[^\n]{2,60}\n+/, "");     // 去掉开头的署名行
+    if (E.countWords(body) < need) return;
+    arts.push({ section: section, rubric: rubric, author: author, title: title, content: body, words: E.countWords(body) });
   });
   return arts;
 }
 
-/** 通用启发式：把每个「有标题且够长」的 spine 文件当一篇 */
-function extractGeneric(chs, hopts) {
-  hopts = hopts || {};
-  const minWords = hopts.minWords || 250;
-  const arts = [];
-  chs.forEach(function (c) {
-    if (c.words < minWords) return;
-    const title = c.title;
-    if (!title) return;
-    if (/^(cover|contents|masthead|colophon|advert)/i.test(title)) return;
-    const body = paragraphText(c.html) || c.text;
-    if (E.countWords(body) < minWords) return;
-    // 通用刊没有栏目字段：从正文里找全大写的栏目名（New Yorker 常见 "THE TALK" / "ANNALS OF ..."）
-    let section = "";
-    const cap = c.text.match(/\n([A-Z][A-Z '&]{3,40})\n/);
-    if (cap) section = cap[1].trim().replace(/\s+/g, " ");
-    arts.push({ section: section, rubric: "", title: title, content: body, words: E.countWords(body) });
+/**
+ * calibre 类 epub（Atlantic / Wired）：栏目名藏在 feed_N/index_*.html 的首行。
+ * 返回 { 文章href: 栏目名 } —— 按 href 前缀 feed_N/ 归属。
+ */
+function calibreFeedSections(buf, ents) {
+  const secOfFeed = {};
+  const NAV = /^(Next section|Previous section|Main menu|Section menu|Next|Previous)$/i;
+  ents.forEach(function (e) {
+    const m = e.name.match(/^(feed_\d+)\/index[^\/]*\.html$/i);
+    if (!m) return;
+    let parts = [];
+    try {
+      // 导航条是「| Next section | Main menu |」这种竖线拼成的单行，
+      // 必须按 | 一起切，否则整条导航会被当成栏目名（首跑真实事故）。
+      parts = E.htmlToText(E.readEntry(buf, e).toString("utf8"))
+        .split(/[\n|]/)
+        .map(function (s) { return s.replace(/\s+/g, " ").trim(); })
+        .filter(function (s) { return s && !NAV.test(s); });
+    } catch (_) { return; }
+    if (parts.length) secOfFeed[m[1]] = parts[0];
   });
-  return arts;
+  const map = {};
+  ents.forEach(function (e) {
+    const m = e.name.match(/^(feed_\d+)\//i);
+    if (m && secOfFeed[m[1]]) map[e.name] = secOfFeed[m[1]];
+  });
+  return map;
+}
+
+/**
+ * 选篇：先按长度band过滤（精读要中短文），再**按栏目轮转**挑选，
+ * 保证分类栏目多样（否则 Economics 的 Briefing 长文会挤掉所有短栏目）。
+ */
+function pickArticles(arts, mag) {
+  const band = mag.bandWords || [200, 2000];
+  let pool = arts.filter(function (a) { return a.words >= band[0] && a.words <= band[1]; });
+  if (pool.length < mag.want) {
+    pool = arts.filter(function (a) { return a.words >= band[0]; })
+      .sort(function (a, b) { return a.words - b.words; });
+  }
+  const bySec = {};
+  pool.forEach(function (a) {
+    const k = a.section || "其他";
+    (bySec[k] = bySec[k] || []).push(a);
+  });
+  const keys = Object.keys(bySec);
+  const out = [];
+  let guard = 0;
+  while (out.length < mag.want && keys.length && guard++ < 400) {
+    let added = false;
+    for (let i = 0; i < keys.length; i++) {
+      const arr = bySec[keys[i]];
+      if (arr.length) {
+        out.push(arr.shift());
+        added = true;
+        if (out.length >= mag.want) break;
+      }
+    }
+    if (!added) break;
+  }
+  return out;
+}
+
+/** 超长文截断到段落边界，避免单篇 1 万词把 JSON 撑爆（手机端没必要） */
+function capContent(text, maxWords) {
+  const w = E.countWords(text);
+  if (w <= maxWords) return { text: text, truncated: false };
+  const paras = text.split("\n\n");
+  const out = [];
+  let n = 0;
+  for (let i = 0; i < paras.length; i++) {
+    const pw = E.countWords(paras[i]);
+    if (n + pw > maxWords && out.length) break;
+    out.push(paras[i]);
+    n += pw;
+  }
+  return { text: out.join("\n\n"), truncated: true };
 }
 
 /* ---------------- 主流程 ---------------- */
@@ -169,20 +302,19 @@ async function fetchIssue(mag, issueDir) {
   const ents = E.listEntries(buf);
   const opf = E.parseOpf(buf, ents);
   const chs = readChapters(buf, ents, opf);
-  let arts = mag.style === "economist" ? extractEconomist(chs) : extractGeneric(chs);
+  const feedMap = Object.keys(mag.map || {}).length ? null : calibreFeedSections(buf, ents);
+  let arts = extractArticles(chs, mag, feedMap);
 
-  // 过滤：太短的（漫画/图表说明）与重复标题
+  // 去重（同标题）
   const seen = {};
   arts = arts.filter(function (a) {
-    if (a.words < 120) return false;
     const k = a.title.toLowerCase();
     if (seen[k]) return false;
     seen[k] = 1;
     return true;
   });
-  // 长的优先（同时保留一点栏目多样性：按栏目轮转取）
-  arts.sort(function (a, b) { return b.words - a.words; });
-  const picked = arts.slice(0, mag.maxArticles);
+
+  const picked = pickArticles(arts, mag);
   picked.sort(function (a, b) {
     if (a.section === b.section) return 0;
     return a.section < b.section ? -1 : 1;
@@ -194,13 +326,16 @@ async function fetchIssue(mag, issueDir) {
     src: "https://github.com/" + REPO + "/tree/master/" + rel,
     epub: epub.name,
     articles: picked.map(function (a, i) {
+      const cap = capContent(a.content, mag.maxWords || 2600);
       return {
         id: mag.key + "-" + issueDir.issue + "-" + (i + 1),
         section: a.section,
         rubric: a.rubric,
+        author: a.author,
         title: a.title,
-        words: a.words,
-        content: a.content
+        words: E.countWords(cap.text),
+        truncated: cap.truncated,
+        content: cap.text
       };
     })
   };
@@ -279,4 +414,4 @@ async function main() {
 if (require.main === module) {
   main().catch(function (e) { console.error("ERR", e && e.stack || e); process.exit(1); });
 }
-module.exports = { main, MAGS, extractEconomist, extractGeneric };
+module.exports = { main, MAGS, extractArticles, pickArticles, capContent, readChapters };

@@ -15,36 +15,34 @@ const githubPages = require("./deploy_github_pages");
 function todayStr() { return new Date().toISOString().slice(0, 10); }
 function bjTodayStr() { return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10); }
 
+/**
+ * 版本号升级：统一委托 cloud/bump_version.js（唯一真值实现）。
+ * 覆盖范围：index.html 的 <title> + 全部 ?v= + &b= 计数器 + CSS style.vX.css?v= 计数器，
+ *          js/app.js 的 APP_VERSION，sw.js 的 CACHE_VERSION。
+ * 历史遗留：这里原有一份只改 3 个文件的旧实现，漏掉 CSS ?v= 与 &b=，
+ *          导致「改了 CSS 但设备仍命中旧样式缓存」，故改为委托。
+ */
 function bumpVersion(BASE) {
-  const verFiles = {
-    index: path.join(BASE, "index.html"),
-    app: path.join(BASE, "js", "app.js"),
-    sw: path.join(BASE, "sw.js")
-  };
-  // 读当前版本
-  const title = fs.readFileSync(verFiles.index, "utf8");
-  const m = title.match(/硬件PM工作台 v(\d+\.\d+\.\d+)/);
-  if (!m) throw new Error("无法解析当前版本");
-  let [maj, min, pat] = m[1].split(".").map(Number);
-  pat += 1;
-  const nv = `${maj}.${min}.${pat}`;
-  const oldV = m[1];
-
-  let s = fs.readFileSync(verFiles.index, "utf8");
-  s = s.replace(new RegExp("v=" + oldV.replace(/\./g, "\\."), "g"), "v=" + nv);
-  s = s.replace(/硬件PM工作台 v[\d.]+/, "硬件PM工作台 v" + nv);
-  fs.writeFileSync(verFiles.index, s);
-
-  let a = fs.readFileSync(verFiles.app, "utf8");
-  a = a.replace(/APP_VERSION = "[^"]+"/, 'APP_VERSION = "' + nv + '"');
-  fs.writeFileSync(verFiles.app, a);
-
-  let w = fs.readFileSync(verFiles.sw, "utf8");
-  w = w.replace(/CACHE_VERSION = "v[^"]+"/, 'CACHE_VERSION = "v' + nv + '"');
-  fs.writeFileSync(verFiles.sw, w);
-
-  console.log(`[version] ${oldV} → ${nv}`);
+  const idx = path.join(BASE, "index.html");
+  const m = fs.readFileSync(idx, "utf8").match(/<title>[^<]*v(\d+\.\d+\.\d+)<\/title>/);
+  if (!m) throw new Error("无法解析当前版本（index.html <title>）");
+  const [maj, min, pat] = m[1].split(".").map(Number);
+  const nv = `${maj}.${min}.${pat + 1}`;
+  execSync(`${JSON.stringify(process.execPath)} ${JSON.stringify(path.join(__dirname, "bump_version.js"))} ${nv}`, { cwd: BASE, stdio: "inherit" });
+  console.log(`[version] ${m[1]} → ${nv}`);
   return nv;
+}
+
+/** 收集 data/lang_read_mag*.json 与 data/lang_read_ted*.json（分册数量会随素材增长） */
+function readAssetFiles(BASE) {
+  const dir = path.join(BASE, "data");
+  const out = [];
+  try {
+    for (const f of fs.readdirSync(dir)) {
+      if (/^lang_read_(mag|ted)(_[a-z]+)?\.json$/.test(f)) out.push("data/" + f);
+    }
+  } catch (_) {}
+  return out;
 }
 
 function runTests(BASE) {
@@ -142,8 +140,9 @@ async function finish(BASE, DATE, nv, CLOUD) {
   if (!runTests(BASE)) throw new Error("测试未通过，已中止");
   const changed = [
     "data/knowledge.json", "data/news.json", "data/news-archive.json", "data/aihot.json",
-    "data/lang_reading.json", "data/news_summary.json", "index.html", "js/app.js", "sw.js"
-  ];
+    "data/lang_reading.json", "data/news_summary.json", "index.html", "js/app.js", "sw.js",
+    "css/style.v5.9.156.css"
+  ].concat(readAssetFiles(BASE)).filter((f) => fs.existsSync(path.join(BASE, f)));
   const msg = `auto: v${nv} (${DATE})`;
   // 云端/CI 模式：把生成内容回写主库（GitHub），保证次日 checkout 基于最新数据
   if (CLOUD) {
@@ -214,7 +213,36 @@ async function mainNewsSummary(baseArg, dateArg) {
   console.log(`[run_newssum] 完成 ${DATE} 新闻摘要 → v${nv}`);
 }
 
+// 每周外刊 + TED 素材刷新（语言学习 → 精读模块）
+//   · scripts/fetch_magazines.js：抓 awesome-english-ebooks 最新一期 epub，解析分类正文 → data/lang_read_mag*.json
+//   · scripts/fetch_ted.js：按 TED 话题页采集演讲全文 + 中文字幕，8 大类均衡 → data/lang_read_ted*.json
+// 两个脚本各自幂等（同篇不重复入库），失败仅告警不阻断——库里已有素材仍可用。
+async function mainWeekly(baseArg, dateArg) {
+  const BASE = baseArg || process.argv[2] || path.join(__dirname, "..");
+  const DATE = dateArg || process.argv[3] || todayStr();
+  const CLOUD = process.env.CLOUD === "1";
+
+  console.log(`[run_weekly] BASE=${BASE} DATE=${DATE} CLOUD=${CLOUD}（外刊 + TED 每周刷新）`);
+
+  const steps = [
+    ["外刊", path.join(BASE, "scripts", "fetch_magazines.js"), []],
+    ["TED", path.join(BASE, "scripts", "fetch_ted.js"), ["--limit=64"]]
+  ];
+  for (const [label, script, args] of steps) {
+    if (!fs.existsSync(script)) { console.warn(`[weekly] 缺少脚本 ${script}，跳过 ${label}`); continue; }
+    const r = spawnSync(process.execPath, [script, ...args], {
+      cwd: BASE, stdio: "inherit", env: process.env, timeout: 20 * 60 * 1000
+    });
+    if (r.status !== 0) console.warn(`[weekly] ${label} 刷新未完成(exit ${r.status})，保留库内已有素材`);
+    else console.log(`[weekly] ${label} 刷新完成`);
+  }
+
+  const nv = bumpVersion(BASE);
+  await finish(BASE, DATE, nv, CLOUD);
+  console.log(`[run_weekly] 完成 ${DATE} → v${nv}`);
+}
+
 if (require.main === module) {
   main().catch((e) => { console.error("ERR", e.message); process.exit(1); });
 }
-module.exports = { main, mainNews, mainReading, mainNewsSummary, bumpVersion };
+module.exports = { main, mainNews, mainReading, mainNewsSummary, mainWeekly, bumpVersion };

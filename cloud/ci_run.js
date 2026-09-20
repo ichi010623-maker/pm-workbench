@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // GitHub Actions 入口（替代腾讯云 SCF scf_handler.js）
 // 由 .github/workflows/ci.yml 调用，按传入的 job 分派到云端编排器 run_daily.js / patrol.js
-// 用法: node cloud/ci_run.js <daily|news|reading|newssum|patrol> [repoDir]
+// 用法: node cloud/ci_run.js <daily|news|reading|newssum|patrol|weekly> [repoDir]
 //
 // 与 SCF 的差异：
 //   - Actions 已通过 actions/checkout 拉取最新主库，无需再从 Gitee 拉数据（prepareWorkdir 整段删除）
@@ -30,6 +30,8 @@ async function main() {
       return await runDaily.mainReading(BASE, bjDate);
     case "newssum":
       return await runDaily.mainNewsSummary(BASE, bjDate);
+    case "weekly":
+      return await runDaily.mainWeekly(BASE, DATE);
     case "patrol": {
       const patrol = require("./patrol");
       return await patrol.main(BASE);

@@ -17,15 +17,35 @@ const { looksLikeZip } = require("./lib_epub");
 const RAW = "https://raw.githubusercontent.com/";
 const API = "https://api.github.com/repos/";
 
+/**
+ * 读本机凭据（cloud/local.env，已 gitignore）。
+ * GitHub 未认证 API 只有 60 次/小时 —— 首跑要列 41+39+9+9 个目录，
+ * 很容易 403 限流；带上 fine-grained token 后额度 5000/小时。
+ * 只取 GH_TOKEN，其余键一概不碰；文件缺失时静默降级为匿名访问。
+ */
+function loadToken() {
+  try {
+    const env = fs.readFileSync(path.join(__dirname, "..", "cloud", "local.env"), "utf8");
+    const m = env.match(/^\s*GH_TOKEN\s*=\s*(\S+)\s*$/m);
+    return m ? m[1].replace(/^["']|["']$/g, "") : "";
+  } catch (_) { return ""; }
+}
+let TOKEN = loadToken();
+
 async function ghJSON(url, tries) {
-  tries = tries || 3;
+  tries = tries || 4;
   let lastErr;
   for (let i = 0; i < tries; i++) {
     try {
-      const r = await fetch(url, {
-        headers: { "User-Agent": "pm-workbench-magfetch", Accept: "application/vnd.github+json" }
-      });
-      if (r.status === 403 || r.status === 429) throw new Error("GitHub 限流 " + r.status);
+      const headers = { "User-Agent": "pm-workbench-magfetch", Accept: "application/vnd.github+json" };
+      if (TOKEN) headers.Authorization = "Bearer " + TOKEN;
+      const r = await fetch(url, { headers: headers });
+      if (r.status === 403 || r.status === 429) {
+        // 限流要等久一点：短退避重试等于白试
+        const wait = TOKEN ? 5000 : 20000 * (i + 1);
+        await new Promise(function (s) { setTimeout(s, wait); });
+        throw new Error("GitHub 限流 " + r.status + (TOKEN ? "（已带 token，稍后重试）" : "（未带 token，建议检查 cloud/local.env 的 GH_TOKEN）"));
+      }
       if (!r.ok) throw new Error("HTTP " + r.status + " " + url);
       return await r.json();
     } catch (e) {

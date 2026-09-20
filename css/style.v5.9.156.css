@@ -7341,3 +7341,41 @@ select.nv-f-input:hover,select.nv-f-input:focus{background-color:#f1f5f9}
 .lg-mat.mastered{opacity:.62}
 .lg-mat.mastered .lg-mat-title{font-weight:500}
 .lg-done-tag{color:var(--success,#16a34a);font-weight:600}
+
+/* ===== v5.9.164 精读：外刊 / TED / 划句式 ===== */
+.lg-read-tabs{display:flex;gap:6px;margin:0 0 10px;flex-wrap:wrap}
+.lg-read-tab{padding:7px 11px;border:1px solid var(--border-color);border-radius:9px;background:transparent;color:var(--text-secondary);font-size:13px;cursor:pointer;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.lg-read-tab.active{background:var(--accent-blue);border-color:var(--accent-blue);color:#fff;font-weight:600}
+/* 外刊 / TED 分类卡 */
+.lg-mag-list{display:flex;flex-direction:column;gap:10px}
+.lg-mag{border:1px solid var(--border-color);border-radius:var(--radius-md);overflow:hidden;background:var(--bg-secondary)}
+.lg-mag-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lg-mag-head:active{background:var(--bg-hover)}
+.lg-mag-name{font-size:14px;font-weight:600;color:var(--text-primary)}
+.lg-mag-name .lg-sub{font-weight:400;font-size:11px;color:var(--text-tertiary)}
+.lg-mag-count{font-size:11px;color:var(--text-secondary);white-space:nowrap}
+.lg-mag-issues{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 10px}
+.lg-mag-arts{padding:0 12px 10px;display:flex;flex-direction:column;gap:6px}
+.lg-mag-sec{font-size:11px;font-weight:700;letter-spacing:.3px;color:var(--accent-blue);margin:8px 0 2px;text-transform:uppercase}
+.lg-mag-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 10px}
+.lg-mag-chip{font-size:11px;color:var(--text-secondary);background:var(--bg-tertiary);border-radius:6px;padding:2px 7px}
+.lg-mag-src{font-size:11px;color:var(--accent-blue);text-decoration:none}
+.lg-mag-foot{padding:0 12px 11px;font-size:11px}
+.lg-mag-foot a{color:var(--text-tertiary);text-decoration:none}
+.lg-mat-sub{font-size:11px;color:var(--text-tertiary);margin-top:2px;line-height:1.35}
+/* 正文段落 */
+.lg-art-p{margin:0 0 12px;line-height:1.75}
+/* 划句式：可点句子 */
+.lg-sent{cursor:pointer;border-bottom:1px dashed transparent;border-radius:3px;padding:1px 0;-webkit-tap-highlight-color:transparent}
+.lg-sent:active{background:rgba(10,132,255,.18)}
+.lg-sent.saved{background:rgba(48,209,88,.14);border-bottom-color:rgba(48,209,88,.55);color:var(--text-primary)}
+/* 句式库 */
+.lg-pat-list{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.lg-pat{border:1px solid var(--border-color);border-radius:var(--radius-md);padding:11px 12px;background:var(--bg-secondary)}
+.lg-pat-text{font-size:14px;line-height:1.65;color:var(--text-primary)}
+.lg-pat-struct{font-size:12px;color:var(--accent-teal);margin-top:6px;line-height:1.5}
+.lg-pat-note{font-size:12px;color:var(--text-secondary);margin-top:5px;line-height:1.55}
+.lg-pat-foot{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:9px}
+.lg-pat-src{font-size:11px;color:var(--text-tertiary);margin-right:auto}
+.lg-pat-tag{font-size:10px;color:var(--text-secondary);border:1px solid var(--border-strong);border-radius:5px;padding:1px 6px}
+.lg-btn.sm{padding:3px 8px;font-size:12px;min-width:auto}

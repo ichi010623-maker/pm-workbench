@@ -97,6 +97,19 @@ function decodeEntities(s) {
   });
 }
 
+/** 剥标签（可反复调用：calibre 生成的 epub 里存在 &lt;em&gt; 这类二次转义） */
+function stripTags(s) { return String(s).replace(/<[^>]*>/g, " "); }
+/** 归一空白 */
+function squash(s) { return String(s).replace(/\s+/g, " ").trim(); }
+
+/**
+ * 文本清洗：解实体 → 再剥一次标签。
+ * 顺序很关键：epub 里常见 &lt;em&gt;标题&lt;/em&gt;，
+ * 若只「先剥标签再解实体」，解码后会凭空冒出一对真标签（首跑真实事故：
+ * Atlantic 标题渲染成 `Why <em>Widow's Bay</em> Is the Show of the Summer`）。
+ */
+function cleanText(s) { return squash(stripTags(decodeEntities(s))); }
+
 /**
  * XHTML → 纯文本。
  * 先把块级标签换成换行，再剥标签、解实体、压空白。
@@ -111,8 +124,9 @@ function htmlToText(html) {
   s = s.replace(/<(script|style|head)[\s\S]*?<\/\1>/gi, " ");
   // 块级 → 换行
   s = s.replace(/<\/?(p|div|section|article|li|ul|ol|tr|blockquote|figure|figcaption|h[1-6]|br|hr)\b[^>]*>/gi, "\n");
-  s = s.replace(/<[^>]+>/g, " ");
+  s = stripTags(s);
   s = decodeEntities(s);
+  s = stripTags(s);          // 解实体后再剥一次（处理 &lt;em&gt; 二次转义）
   s = s.replace(/\u00a0/g, " ");
   s = s.replace(/[ \t\f\v]+/g, " ");
   s = s.replace(/ *\n */g, "\n");
@@ -124,15 +138,27 @@ function htmlToText(html) {
 function extractTitle(html) {
   const m = String(html).match(/<h[123][^>]*>([\s\S]*?)<\/h[123]>/i);
   if (m) {
-    const t = decodeEntities(m[1].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+    const t = cleanText(m[1]);
     if (t) return t;
   }
   const t2 = String(html).match(/<title[^>]*>([\s\S]*?)<\/title>/i);
   if (t2) {
-    const t = decodeEntities(t2[1]).replace(/\s+/g, " ").trim();
+    const t = cleanText(t2[1]);
     if (t) return t;
   }
   return "";
+}
+
+/** 按出现顺序返回所有 h1-h3 文本（Atlantic/Wired 这类 calibre epub 用 [0]=标题 [1]=副题） */
+function extractHeadings(html) {
+  const out = [];
+  const re = /<h[123][^>]*>([\s\S]*?)<\/h[123]>/gi;
+  let m;
+  while ((m = re.exec(String(html)))) {
+    const t = cleanText(m[1]);
+    if (t) out.push(t);
+  }
+  return out;
 }
 
 /** 词数（英文按空白切分） */
@@ -192,6 +218,6 @@ function parseOpf(buf, entries) {
 }
 
 module.exports = {
-  listEntries, readEntry, looksLikeZip, htmlToText, extractTitle,
-  countWords, parseOpf, decodeEntities
+  listEntries, readEntry, looksLikeZip, htmlToText, extractTitle, extractHeadings,
+  countWords, parseOpf, decodeEntities, stripTags, cleanText
 };

@@ -14,12 +14,12 @@
  *
  * 用法：
  *   node scripts/fetch_ted.js                 # 增量：补最新若干条
- *   node scripts/fetch_ted.js --limit=48      # 库容量上限（默认 48）
- *   node scripts/fetch_ted.js --pages=2       # 抓取列表页数（默认 2 → 48 条）
+ *   node scripts/fetch_ted.js --limit=60      # 库容量上限（默认 48）
  *   node scripts/fetch_ted.js --force         # 重抓（覆盖已有条目）
  */
 const fs = require("fs");
 const path = require("path");
+const SENSITIVE = require("./lib_filter");
 
 const ROOT = path.join(__dirname, "..");
 const DATA = path.join(ROOT, "data");
@@ -32,23 +32,150 @@ const META_TOPICS = {
   "ted countdown": 1, "ted institute": 1, "tedmed": 1, "ted culture": 1
 };
 
-/* 话题中文名 + 分组顺序（未收录的落到「其他」，顺序按 order 排） */
-const TOPIC_CN = {
-  technology: ["科技", 1], science: ["科学", 2], business: ["商业", 3],
-  design: ["设计", 4], psychology: ["心理", 5], society: ["社会", 6],
-  health: ["健康", 7], education: ["教育", 8], culture: ["文化", 9],
-  innovation: ["创新", 10], ai: ["人工智能", 11], entrepreneur: ["创业", 12],
-  leadership: ["领导力", 13], communication: ["沟通", 14], collaboration: ["协作", 15],
-  "personal growth": ["个人成长", 16], happiness: ["幸福", 17], creativity: ["创造力", 18],
-  work: ["工作", 19], "global issues": ["全球议题", 20], sustainability: ["可持续", 21],
-  climate: ["气候", 22], data: ["数据", 23], future: ["未来", 24], media: ["媒体", 25],
-  art: ["艺术", 26], music: ["音乐", 27], photography: ["摄影", 28], film: ["影视", 29],
-  books: ["阅读", 30], sports: ["体育", 31], food: ["饮食", 32], travel: ["旅行", 33],
-  space: ["太空", 34], biology: ["生物", 35], medicine: ["医学", 36], engineering: ["工程", 37],
-  computers: ["计算机", 38], internet: ["互联网", 39], economics: ["经济", 40],
-  marketing: ["营销", 41], productivity: ["效率", 42], mindfulness: ["正念", 43],
-  language: ["语言", 44], writing: ["写作", 45]
+/**
+ * 话题 → 粗粒度分类（8 类）。
+ * TED 的原始话题非常细碎（democracy / astronomy / library / bullying…），
+ * 直接当分类会得到十几个各 1 条的分组，所以统一收敛到 8 个大类。
+ * 匹配规则：取该演讲 topics 里第一个能命中的别名（先大类顺序遍历，保证确定性）。
+ */
+const CATS = [
+  ["tech", "科技与AI", 1, ["technology", "ai", "artificial intelligence", "computers", "internet", "data",
+    "innovation", "future", "engineering", "robots", "machine learning", "algorithm", "blockchain",
+    "cryptocurrency", "virtual reality", "augmented reality", "software", "hardware", "electronics",
+    "space", "astronomy", "physics", "quantum", "mobility", "transportation", "drone", "3d printing",
+    "cybersecurity", "security", "privacy", "biotech", "invention", "digital"]],
+  ["business", "商业与职场", 2, ["business", "economics", "economy", "money", "finance", "investment",
+    "work", "marketing", "advertising", "entrepreneur", "entrepreneurship", "leadership", "productivity",
+    "management", "career", "strategy", "supply chain", "trade", "banking", "tax", "poverty",
+    "global development", "social business", "philanthropy", "business strategy", "venture capital"]],
+  ["science", "科学与自然", 3, ["science", "biology", "medicine", "medical research", "health",
+    "public health", "climate", "climate change", "sustainability", "environment", "nature", "ocean",
+    "oceans", "water", "energy", "agriculture", "genetics", "neuroscience", "bioethics", "conservation",
+    "wildlife", "plants", "ecology", "weather", "animals", "microbiology", "chemistry", "disease"]],
+  ["mind", "心理与成长", 4, ["psychology", "personal growth", "happiness", "mindfulness", "emotions",
+    "mental health", "self", "success", "time", "identity", "memory", "motivation", "habit",
+    "confidence", "stress", "anxiety", "depression", "wellness", "life", "aging", "death",
+    "meditation", "empathy", "vulnerability", "failure", "resilience", "creativity", "potential"]],
+  ["society", "社会与教育", 5, ["education", "community", "library", "libraries", "public space",
+    "teaching", "learning", "school", "university", "literacy", "mentorship", "urban planning", "cities",
+    "history", "anthropology", "archaeology", "geography", "population", "charity", "nonprofit",
+    "volunteering", "social media", "journalism", "news", "media", "documentary", "information"]],
+  ["culture", "文化与艺术", 6, ["culture", "art", "music", "design", "photography", "film", "books",
+    "literature", "writing", "language", "dance", "theater", "poetry", "architecture", "fashion",
+    "craft", "animation", "comics", "painting", "sculpture", "museums", "storytelling", "typography",
+    "visual art", "performance", "humor", "gaming", "entertainment", "creativity and design"]],
+  ["people", "沟通与人际", 7, ["communication", "collaboration", "relationships", "love",
+    "conversation", "interview", "negotiation", "trust", "teamwork", "friendship", "family",
+    "parenting", "networking", "public speaking", "listening", "conflict", "feedback", "presentation"]],
+  ["life", "生活与健康", 8, ["food", "cooking", "travel", "sports", "fitness", "sleep", "nutrition",
+    "exercise", "gardening", "lifestyle", "beauty", "shopping", "home", "diy", "adventure", "outdoor",
+    "running", "football", "basketball", "olympics", "coffee", "wine", "farming"]]
+];
+
+/**
+ * 明确不采集的话题。
+ * 这是给「英语精读」用的素材库，主题应当落在语言学习本身；
+ * 政治、宗教、性别、族群、战争、选举等争议性话题一律不收，
+ * 既避免学习内容跑偏，也避免把有争议的材料带进产品。
+ */
+const SKIP_TOPICS = {
+  politics: 1, "politics and government": 1, government: 1, democracy: 1, election: 1, elections: 1,
+  voting: 1, "us politics": 1, war: 1, military: 1, terrorism: 1, dictatorship: 1, "human rights": 1,
+  activism: 1, "social change": 1, protest: 1, religion: 1, faith: 1, gender: 1, "gender equality": 1,
+  race: 1, racism: 1, immigration: 1, refugees: 1, abortion: 1, law: 1, "criminal justice": 1,
+  police: 1, prison: 1, "death penalty": 1, sovereignty: 1, nationalism: 1, communism: 1,
+  capitalism: 1, corruption: 1, surveillance: 1, censorship: 1, "civil rights": 1, "gun control": 1,
+  "economic inequality": 1, "wealth gap": 1, "social justice": 1, "international relations": 1
 };
+
+function groupOf(topics) {
+  const lower = (topics || []).map(function (t) { return String(t || "").trim().toLowerCase(); });
+  for (let c = 0; c < CATS.length; c++) {
+    for (let i = 0; i < lower.length; i++) {
+      if (CATS[c][3].indexOf(lower[i]) !== -1) return CATS[c][0];
+    }
+  }
+  return "other";
+}
+function groupCN(key) {
+  for (let c = 0; c < CATS.length; c++) if (CATS[c][0] === key) return CATS[c][1];
+  return "其他";
+}
+function groupOrder(key) {
+  for (let c = 0; c < CATS.length; c++) if (CATS[c][0] === key) return CATS[c][2];
+  return 999;
+}
+/** 是否属于跳过的争议话题 */
+function isSkipped(topics) {
+  for (let i = 0; i < (topics || []).length; i++) {
+    if (SKIP_TOPICS[String(topics[i] || "").trim().toLowerCase()]) return true;
+  }
+  return false;
+}
+
+/**
+ * 采集源：TED 话题页。
+ * 为什么不用「全部演讲列表」翻页：/talks?sort=xxx&page=N 在服务端被忽略，
+ * page=1/2/3 返回完全相同的 24 条（2026-09 实测）。话题页 /topics/<slug>
+ * 反而给出该话题的精选演讲（16 条/页，talk 对象结构与列表页一致），
+ * 用它采集既能拿到足量素材，又天然完成「按类分组」。
+ */
+const TED_TOPICS = [
+  { cat: "tech", slug: "technology" },
+  { cat: "tech", slug: "innovation" },
+  { cat: "tech", slug: "computers" },
+  { cat: "tech", slug: "future" },
+  { cat: "tech", slug: "ai" },
+  { cat: "tech", slug: "space" },
+  { cat: "business", slug: "business" },
+  { cat: "business", slug: "economics" },
+  { cat: "business", slug: "work" },
+  { cat: "business", slug: "entrepreneur" },
+  { cat: "business", slug: "leadership" },
+  { cat: "business", slug: "marketing" },
+  { cat: "science", slug: "science" },
+  { cat: "science", slug: "biology" },
+  { cat: "science", slug: "health" },
+  { cat: "science", slug: "medicine" },
+  { cat: "science", slug: "sustainability" },
+  { cat: "science", slug: "nature" },
+  { cat: "mind", slug: "psychology" },
+  { cat: "mind", slug: "happiness" },
+  { cat: "mind", slug: "mindfulness" },
+  { cat: "mind", slug: "motivation" },
+  { cat: "mind", slug: "memory" },
+  { cat: "mind", slug: "success" },
+  { cat: "society", slug: "education" },
+  { cat: "society", slug: "community" },
+  { cat: "society", slug: "history" },
+  { cat: "society", slug: "cities" },
+  { cat: "society", slug: "journalism" },
+  { cat: "society", slug: "media" },
+  { cat: "culture", slug: "culture" },
+  { cat: "culture", slug: "art" },
+  { cat: "culture", slug: "design" },
+  { cat: "culture", slug: "music" },
+  { cat: "culture", slug: "photography" },
+  { cat: "culture", slug: "film" },
+  { cat: "culture", slug: "writing" },
+  { cat: "culture", slug: "language" },
+  { cat: "culture", slug: "creativity" },
+  { cat: "people", slug: "communication" },
+  { cat: "people", slug: "relationships" },
+  { cat: "people", slug: "collaboration" },
+  { cat: "people", slug: "love" },
+  { cat: "people", slug: "storytelling" },
+  { cat: "people", slug: "family" },
+  { cat: "people", slug: "parenting" },
+  { cat: "life", slug: "food" },
+  { cat: "life", slug: "travel" },
+  { cat: "life", slug: "sports" },
+  { cat: "life", slug: "fitness" },
+  { cat: "life", slug: "sleep" },
+  { cat: "life", slug: "gardening" }
+];
+/** 每个话题取前 N 条（话题页每页 16 条） */
+const PER_TOPIC = 8;
 
 function readJSON(p, dflt) { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch (_) { return dflt; } }
 function writeJSON(p, obj) {
@@ -104,24 +231,6 @@ function parseListPage(html) {
   });
 }
 
-/** 由 topics 选一个非元话题作为分组键 */
-function groupOf(topics) {
-  for (let i = 0; i < (topics || []).length; i++) {
-    const t = String(topics[i] || "").trim().toLowerCase();
-    if (!t || META_TOPICS[t]) continue;
-    return t;
-  }
-  return "other";
-}
-function groupCN(key) {
-  if (key === "other") return "其他";
-  return (TOPIC_CN[key] && TOPIC_CN[key][0]) || key;
-}
-function groupOrder(key) {
-  if (key === "other") return 999;
-  return (TOPIC_CN[key] && TOPIC_CN[key][1]) || 500;
-}
-
 /** 详情页 → {en:[段落], zh:[段落]} */
 function parseTranscript(html) {
   const j = nextData(html);
@@ -152,7 +261,6 @@ async function main() {
   const args = process.argv.slice(2);
   const force = args.indexOf("--force") !== -1;
   const limit = parseInt((args.filter(function (a) { return a.indexOf("--limit=") === 0; })[0] || "").split("=")[1], 10) || 48;
-  const pages = parseInt((args.filter(function (a) { return a.indexOf("--pages=") === 0; })[0] || "").split("=")[1], 10) || 2;
 
   const idxPath = path.join(DATA, "lang_read_ted.json");
   const idx = readJSON(idxPath, { updatedAt: null, talks: [] });
@@ -160,24 +268,62 @@ async function main() {
   const known = {};
   idx.talks.forEach(function (t) { known[t.id] = 1; });
 
-  // 1) 列表
+  // 1) 采集：话题页（带分类）+ 最新列表（保证新鲜度）
   const found = [];
-  for (let p = 1; p <= pages; p++) {
-    const html = await getHTML(TED + "/talks?sort=newest&page=" + p);
-    const arr = parseListPage(html);
-    found.push.apply(found, arr);
-    await sleep(400);
-    if (!arr.length) break;
+  for (const src of TED_TOPICS) {
+    try {
+      const arr = parseListPage(await getHTML(TED + "/topics/" + src.slug)).slice(0, PER_TOPIC);
+      arr.forEach(function (t) { t.catHint = src.cat; found.push(t); });
+      await sleep(250);
+    } catch (e) {
+      console.log("  ! 话题页失败 " + src.slug + ": " + e.message);
+    }
   }
+  try {
+    const latest = parseListPage(await getHTML(TED + "/talks?sort=newest"));
+    latest.forEach(function (t) { t.catHint = ""; found.push(t); });
+  } catch (_) {}
+
   const uniq = [];
   const seen = {};
-  found.forEach(function (t) { if (!seen[t.id]) { seen[t.id] = 1; uniq.push(t); } });
+  found.forEach(function (t) {
+    if (seen[t.id]) { if (!seen[t.id].catHint && t.catHint) seen[t.id].catHint = t.catHint; return; }
+    seen[t.id] = t;
+    uniq.push(t);
+  });
 
-  // 2) 只补没抓过的，且不超过总容量上限
-  let todo = uniq.filter(function (t) { return force || !known[t.id]; });
+  // 2) 过滤 + 按分类轮转编排（避免前几个话题把名额吃光，导致 8 个分类只剩 2 个）
+  const filtered = uniq.filter(function (t) {
+    const cat = t.catHint || groupOf(t.topics);
+    return cat !== "other" || !isSkipped(t.topics);
+  }).filter(function (t) {
+    return !isSkipped(t.topics) && !SENSITIVE.isSensitive(t.title);
+  });
+  const skipCnt = uniq.length - filtered.length;
+
+  const byCat = {};
+  filtered.forEach(function (t) {
+    const k = t.catHint || groupOf(t.topics);
+    (byCat[k] = byCat[k] || []).push(t);
+  });
+  const catKeys = Object.keys(byCat);
+  const balanced = [];
+  let guard = 0;
+  while (balanced.length < filtered.length && guard++ < 3000) {
+    let added = false;
+    for (let i = 0; i < catKeys.length; i++) {
+      const arr = byCat[catKeys[i]];
+      if (arr.length) { balanced.push(arr.shift()); added = true; }
+    }
+    if (!added) break;
+  }
+
+  let todo = balanced.filter(function (t) { return force || !known[t.id]; });
   const room = Math.max(0, limit - idx.talks.length);
   if (todo.length > room) todo = todo.slice(0, room);
-  console.log("[ted] 列表 " + uniq.length + " 条，待抓 " + todo.length + " 条（库内 " + idx.talks.length + "，上限 " + limit + "）");
+  console.log("[ted] 候选 " + uniq.length + " 条（过滤 " + skipCnt + " 条），分类候选 " +
+    catKeys.map(function (k) { return groupCN(k) + ":" + byCat[k].length; }).join(" ") +
+    "；待抓 " + todo.length + " 条（库内 " + idx.talks.length + "，上限 " + limit + "）");
 
   const bodies = {};
   let ok = 0;
@@ -185,7 +331,7 @@ async function main() {
     try {
       const body = await fetchTalk(t.slug);
       if (!body) { console.log("  - 跳过（无字幕）: " + t.slug); continue; }
-      const g = groupOf(t.topics);
+      const g = t.catHint || groupOf(t.topics);
       idx.talks = idx.talks.filter(function (x) { return x.id !== t.id; });
       idx.talks.push({
         id: t.id, slug: t.slug, title: t.title,
@@ -243,4 +389,4 @@ async function main() {
 if (require.main === module) {
   main().catch(function (e) { console.error("ERR", e && e.stack || e); process.exit(1); });
 }
-module.exports = { main, parseListPage, parseTranscript, groupOf, groupCN };
+module.exports = { main, parseListPage, parseTranscript, groupOf, groupCN, isSkipped };

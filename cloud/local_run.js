@@ -2,7 +2,7 @@
 /**
  * 本机自动化入口（免费方案，替代腾讯云 SCF 与 GitHub Actions）
  *
- * 用法: node cloud/local_run.js <daily|news|reading|newssum|patrol>
+ * 用法: node cloud/local_run.js <daily|news|reading|newssum|patrol|weekly>
  *
  * 职责：
  *   1. 读取 cloud/local.env 注入凭据（密钥不落定时任务、不进版本库）

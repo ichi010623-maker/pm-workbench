@@ -1,0 +1,464 @@
+{
+  "updatedAt": "2026-09-20T17:10:13+08:00",
+  "mags": [
+    {
+      "key": "economist",
+      "name": "经济学人",
+      "en": "The Economist",
+      "emoji": "📗",
+      "repo": "hehonghui/awesome-english-ebooks",
+      "dir": "01_economist",
+      "issues": [
+        {
+          "issue": "2026.09.19",
+          "date": "2026-09-19",
+          "src": "https://github.com/hehonghui/awesome-english-ebooks/tree/master/01_economist/te_2026.09.19",
+          "epub": "TheEconomist.2026.09.19.epub",
+          "articles": [
+            {
+              "id": "economist-2026.09.19-1",
+              "section": "Britain",
+              "rubric": "The covid-19 pandemic didn’t help",
+              "author": "",
+              "title": "More and more Britons are refusing to engage with the state",
+              "words": 1077,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-2",
+              "section": "Britain",
+              "rubric": "High time to take a history lesson",
+              "author": "",
+              "title": "Britain’s epidemic of school shirking is shocking, but fixable",
+              "words": 642,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-3",
+              "section": "Britain",
+              "rubric": "Big money, little effect",
+              "author": "",
+              "title": "Reform UK’s cash windfall should not frighten its opponents",
+              "words": 521,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-4",
+              "section": "Business",
+              "rubric": "Amid a safety freakout, it wants to slow down AI development",
+              "author": "",
+              "title": "Should Anthropic press pause on a potential $2trn IPO?",
+              "words": 1082,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-5",
+              "section": "Business",
+              "rubric": "Life for rota-nannies can be glamorous and gruelling",
+              "author": "",
+              "title": "Nannying for the ultra-rich is increasingly demanding—and lucrative",
+              "words": 844,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-6",
+              "section": "By Invitation",
+              "rubric": "Self-correcting forces will ensure that the coming wealth transfer doesn’t hurt American capitalism, write Eric Zwick and Owen Zidar",
+              "author": "",
+              "title": "Don’t fear the inheritocracy",
+              "words": 925,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-7",
+              "section": "Culture",
+              "rubric": "What biography and natural experiments reveal about leadership",
+              "author": "",
+              "title": "The right way to learn from Genghis Khan",
+              "words": 1103,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-8",
+              "section": "Culture",
+              "rubric": "A growing band of musicians wants fans to experience gigs the old-fashioned way",
+              "author": "",
+              "title": "The rise of the phone-free concert",
+              "words": 483,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-9",
+              "section": "Finance & economics",
+              "rubric": "The rich world is flirting with fiscal disaster",
+              "author": "",
+              "title": "Soaring bond yields, gaping deficits and towering debts: what could go wrong?",
+              "words": 1661,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-10",
+              "section": "Finance & economics",
+              "rubric": "A new generation of investors is buying up African stocks",
+              "author": "",
+              "title": "What Africa’s biggest IPO can do for its stock markets",
+              "words": 824,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-11",
+              "section": "Leaders",
+              "rubric": "America will struggle to make the technology safe while staying ahead of China",
+              "author": "",
+              "title": "Can the AI arms race be stopped?",
+              "words": 983,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-12",
+              "section": "Leaders",
+              "rubric": "Governments are still, alas, asleep",
+              "author": "",
+              "title": "Markets are waking up to the rich world’s reckless borrowing",
+              "words": 795,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-13",
+              "section": "Science & technology",
+              "rubric": "Crystal balls give way to LLMs",
+              "author": "",
+              "title": "Artificial intelligence now beats some of the best human forecasters",
+              "words": 1054,
+              "truncated": false
+            },
+            {
+              "id": "economist-2026.09.19-14",
+              "section": "Science & technology",
+              "rubric": "24 Fields Medal winners have written a letter of objection",
+              "author": "",
+              "title": "Top mathematicians are outraged by OpenAI’s methods",
+              "words": 772,
+              "truncated": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "newyorker",
+      "name": "纽约客",
+      "en": "The New Yorker",
+      "emoji": "🗽",
+      "repo": "hehonghui/awesome-english-ebooks",
+      "dir": "02_new_yorker",
+      "issues": [
+        {
+          "issue": "2026.09.21",
+          "date": "2026-09-21",
+          "src": "https://github.com/hehonghui/awesome-english-ebooks/tree/master/02_new_yorker/2026.09.21",
+          "epub": "new_yorker.2026.09.21.epub",
+          "articles": [
+            {
+              "id": "newyorker-2026.09.21-1",
+              "section": "A Reporter at Large",
+              "rubric": "A prominent dressage trainer shot a belligerent student—and now maintains that he’s the real victim.",
+              "author": "By Ian Parker",
+              "title": "She Made Me Do It",
+              "words": 2568,
+              "truncated": true
+            },
+            {
+              "id": "newyorker-2026.09.21-2",
+              "section": "Books",
+              "rubric": "“Dèy,” “Etna,” “Are They Dead Yet?,” and “Unbelonging.”",
+              "author": "",
+              "title": "Briefly Noted",
+              "words": 532,
+              "truncated": false
+            },
+            {
+              "id": "newyorker-2026.09.21-3",
+              "section": "Books",
+              "rubric": "America’s everywhere millionaires built fortunes from hot dogs, car dealerships, medical practices, and convenience stores. Then they learned how to protect them.",
+              "author": "By John Lanchester",
+              "title": "The Wealthiest—and Stealthiest—Class in America",
+              "words": 2593,
+              "truncated": true
+            },
+            {
+              "id": "newyorker-2026.09.21-4",
+              "section": "Brave New World",
+              "rubric": "A company called Fortell made an A.I.-powered device that tries to tune out background noise in real time. Does it work? Ask Fortell’s test subject, Steve Martin.",
+              "author": "By David Owen",
+              "title": "The Hearing Aid That Plays It by Ear",
+              "words": 861,
+              "truncated": false
+            },
+            {
+              "id": "newyorker-2026.09.21-5",
+              "section": "Closeup Dept.",
+              "rubric": "The director—and brother of Ken Burns—is releasing two new episodes of his long-running “New York: A Documentary Film,” this time covering Superstorm Sandy, COVID",
+              "author": "By Eric Lach",
+              "title": "Ric Burns, N.Y.C. Optimist",
+              "words": 809,
+              "truncated": false
+            },
+            {
+              "id": "newyorker-2026.09.21-6",
+              "section": "Comeback Dept.",
+              "rubric": "At the Conservatory Garden, the singer reflects on her new two-album set, “Sonic Memoir: Demos 1989-1998”; launching Lilith Fair with Sarah McLachlan; and the time Jay Leno made fun of her armpit hair.",
+              "author": "By Rachel Syme",
+              "title": "Paula Cole Doesn’t Want to Wait",
+              "words": 843,
+              "truncated": false
+            },
+            {
+              "id": "newyorker-2026.09.21-7",
+              "section": "Dept. of Science",
+              "rubric": "Godwits make the longest non-stop migration in the bird world. That might be the least of their marvels. Can they survive a changing planet?",
+              "author": "By Rivka Galchen",
+              "title": "The Incredible Journey of a Migratory Shorebird",
+              "words": 2462,
+              "truncated": true
+            },
+            {
+              "id": "newyorker-2026.09.21-8",
+              "section": "Fiction",
+              "rubric": "By Joyce Carol Oates",
+              "author": "By Joyce Carol Oates",
+              "title": "Lost Child",
+              "words": 2600,
+              "truncated": true
+            },
+            {
+              "id": "newyorker-2026.09.21-9",
+              "section": "Photo Booth",
+              "rubric": "Jerry Hsu captures the city’s manic extremes, with photographs of overturned cars, collisions, and a bank building ablaze.",
+              "author": "By Hua Hsu",
+              "title": "How a Skateboarder Sees Los Angeles",
+              "words": 1292,
+              "truncated": false
+            },
+            {
+              "id": "newyorker-2026.09.21-10",
+              "section": "Shouts & Murmurs",
+              "rubric": "By Shalom Auslander",
+              "author": "By Shalom Auslander",
+              "title": "My Surefire, Can’t-Lose Polymarket Bets",
+              "words": 519,
+              "truncated": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "atlantic",
+      "name": "大西洋月刊",
+      "en": "The Atlantic",
+      "emoji": "🌊",
+      "repo": "hehonghui/awesome-english-ebooks",
+      "dir": "04_atlantic",
+      "issues": [
+        {
+          "issue": "2026.09.02",
+          "date": "2026-09-02",
+          "src": "https://github.com/hehonghui/awesome-english-ebooks/tree/master/04_atlantic/2026.09.02",
+          "epub": "Atlantic_2026.09.02.epub",
+          "articles": [
+            {
+              "id": "atlantic-2026.09.02-1",
+              "section": "Culture & Critics",
+              "rubric": "Its blend of horror and comedy channels the spirit of the times.",
+              "author": "James Parker",
+              "title": "Why Widow’s Bay Is the Show of the Summer",
+              "words": 1125,
+              "truncated": false
+            },
+            {
+              "id": "atlantic-2026.09.02-2",
+              "section": "Culture & Critics",
+              "rubric": "In Richard Russo’s novels, the American dream feels like a cruel joke.",
+              "author": "Mark Oppenheimer",
+              "title": "Hard-Luck Men in Hardscrabble Towns",
+              "words": 2196,
+              "truncated": false
+            },
+            {
+              "id": "atlantic-2026.09.02-3",
+              "section": "Culture & Critics",
+              "rubric": "In his new novel, gay men struggle to escape violence in Kingston.",
+              "author": "Stephanie Burt",
+              "title": "Marlon James Returns to Realism, and to Jamaica",
+              "words": 2318,
+              "truncated": true
+            },
+            {
+              "id": "atlantic-2026.09.02-4",
+              "section": "Culture & Critics",
+              "rubric": "A neuroscientist dares to argue that old-fashioned psychoanalysis holds the key to curing mental illness.",
+              "author": "Scott Stossel",
+              "title": "What if Freud Was Right?",
+              "words": 2370,
+              "truncated": true
+            },
+            {
+              "id": "atlantic-2026.09.02-5",
+              "section": "Departments",
+              "rubric": "Readers respond to our May 2026 issue.",
+              "author": "",
+              "title": "The Key to Understanding the Traditionalists",
+              "words": 1228,
+              "truncated": false
+            },
+            {
+              "id": "atlantic-2026.09.02-6",
+              "section": "Dispatches",
+              "rubric": "The humble booklet is more than just a last redoubt against cheating. Staring down its empty pages, students discover what they’re capable of as writers and thinkers.",
+              "author": "Walt Hunter",
+              "title": "Bring Back the Blue-Book Exam",
+              "words": 1790,
+              "truncated": false
+            },
+            {
+              "id": "atlantic-2026.09.02-7",
+              "section": "Features",
+              "rubric": "An inside look at music’s widely misunderstood profession",
+              "author": "Matthew Aucoin",
+              "title": "The Mysterious Art of Conducting",
+              "words": 2346,
+              "truncated": true
+            },
+            {
+              "id": "atlantic-2026.09.02-8",
+              "section": "Features",
+              "rubric": "After years of decline, butterfly populations are rising—for now.",
+              "author": "Vann R. Newkirk II",
+              "title": "The Return of the Monarch",
+              "words": 2375,
+              "truncated": true
+            },
+            {
+              "id": "atlantic-2026.09.02-9",
+              "section": "Features",
+              "rubric": "Why are so few young people finding love?",
+              "author": "Faith Hill",
+              "title": "The Great Romance Slump",
+              "words": 2347,
+              "truncated": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "wired",
+      "name": "连线",
+      "en": "Wired",
+      "emoji": "🔌",
+      "repo": "hehonghui/awesome-english-ebooks",
+      "dir": "05_wired",
+      "issues": [
+        {
+          "issue": "2026.09.02",
+          "date": "2026-09-02",
+          "src": "https://github.com/hehonghui/awesome-english-ebooks/tree/master/05_wired/2026.09.02",
+          "epub": "wired_2026.09.02.epub",
+          "articles": [
+            {
+              "id": "wired-2026.09.02-1",
+              "section": "Magazine Articles",
+              "rubric": "THE AI ISSUE",
+              "author": "",
+              "title": "The AI Issue",
+              "words": 2342,
+              "truncated": true
+            },
+            {
+              "id": "wired-2026.09.02-2",
+              "section": "Magazine Articles",
+              "rubric": "",
+              "author": "",
+              "title": "The Baby Died. Whose Fault Is It? | WIRED",
+              "words": 2370,
+              "truncated": true
+            },
+            {
+              "id": "wired-2026.09.02-3",
+              "section": "商业",
+              "rubric": "",
+              "author": "",
+              "title": "Python Is So Slow. Can Julia Solve the Two-Language Problem?",
+              "words": 1212,
+              "truncated": false
+            },
+            {
+              "id": "wired-2026.09.02-4",
+              "section": "商业",
+              "rubric": "",
+              "author": "",
+              "title": "Ruby Is Not a Serious Programming Language",
+              "words": 1054,
+              "truncated": false
+            },
+            {
+              "id": "wired-2026.09.02-5",
+              "section": "文化",
+              "rubric": "",
+              "author": "",
+              "title": "Monica Lewinsky Has Always Hated Notifications",
+              "words": 1039,
+              "truncated": false
+            },
+            {
+              "id": "wired-2026.09.02-6",
+              "section": "文化",
+              "rubric": "",
+              "author": "",
+              "title": "Taylor Lorenz’s Screen Time Is Almost 17 Hours a Day. 17!!!",
+              "words": 1938,
+              "truncated": false
+            },
+            {
+              "id": "wired-2026.09.02-7",
+              "section": "装备",
+              "rubric": "Orbita MIDI Color Sequencer",
+              "author": "",
+              "title": "These Are Some of Our Favorite Brain-Boosting Toys for Kids of All Ages",
+              "words": 1549,
+              "truncated": false
+            },
+            {
+              "id": "wired-2026.09.02-8",
+              "section": "装备",
+              "rubric": "A 3-Person Tent",
+              "author": "",
+              "title": "14 New Tools for Taking on the Great Outdoors Properly",
+              "words": 1565,
+              "truncated": false
+            },
+            {
+              "id": "wired-2026.09.02-9",
+              "section": "长篇特写",
+              "rubric": "",
+              "author": "",
+              "title": "Elite Young Runners Are Becoming Freakishly Fast. Welcome to ‘Trackflation’",
+              "words": 2340,
+              "truncated": true
+            },
+            {
+              "id": "wired-2026.09.02-10",
+              "section": "长篇特写",
+              "rubric": "",
+              "author": "",
+              "title": "Streamer IShowSpeed Is Gen Z’s ESPN",
+              "words": 2067,
+              "truncated": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

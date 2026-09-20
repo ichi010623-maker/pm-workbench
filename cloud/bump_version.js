@@ -26,9 +26,10 @@ if (!oldVer) { console.error("未能从 index.html 提取当前版本号"); proc
 if (oldVer === newVer) { console.log("已是最新 " + newVer + "，跳过"); process.exit(0); }
 console.log("升级版本: " + oldVer + " → " + newVer);
 
+const patch = newVer.split(".")[2];   // 163 / 164 —— 独立计数器（&b= 与 CSS ?v= 用）
 const edits = [];
 
-// index.html: 标题 + 所有 ?v= 引用
+// index.html: 标题 + 所有 ?v= 引用 + &b= 计数器 + stylesheet 的 ?v= 计数器
 {
   const p = path.join(ROOT, "index.html");
   let t = fs.readFileSync(p, "utf8");
@@ -37,7 +38,18 @@ const edits = [];
   const re = new RegExp("(\\?v=)" + oldVer.replace(/\./g, "\\."), "g");
   const m = t.match(re);
   t = t.replace(re, "$1" + newVer);
-  if (t !== before) { fs.writeFileSync(p, t); edits.push("index.html: " + (m ? m.length : 0) + " 处 ?v= + 标题"); }
+  // &b=N：跟着 patch 走（历史遗留的第二计数器，此前一直靠手改）
+  const bMatches = t.match(/&b=\d+/g) || [];
+  t = t.replace(/(&b=)\d+/g, "$1" + patch);
+  // stylesheet 是「永久文件名 + 独立计数器」：style.v5.9.156.css?v=163
+  const cssMatches = t.match(/style\.v[\d.]+\.css\?v=\d+/g) || [];
+  t = t.replace(/(style\.v[\d.]+\.css\?v=)\d+/g, "$1" + patch);
+  if (t !== before) {
+    fs.writeFileSync(p, t);
+    edits.push("index.html: " + (m ? m.length : 0) + " 处 ?v= + 标题" +
+      (cssMatches.length ? " + CSS ?v=" + patch : "") +
+      (bMatches.length ? " + " + bMatches.length + " 处 &b=" + patch : ""));
+  }
 }
 
 // js/app.js

@@ -664,7 +664,7 @@ function lgNormalizeLang(e) {
   if (!e) return e;
   var def = {
     words: [], notes: [], materials: [], listening: [], wrongList: [], favorites: [],
-    packLoaded: {}, bank: [],
+    packLoaded: {}, bank: [], patterns: [],
     plan: { template: "commute", daily: 5, days: {} },
     stats: { studyLog: {}, totalSeconds: 0, learnedCount: 0, wrongTypes: {}, reviewCount: 0 },
     streak: 0, lastStudyDate: null, level: 0,
@@ -675,7 +675,7 @@ function lgNormalizeLang(e) {
     videoSeeded: false,
     activity: {}
   };
-  ["words", "notes", "materials", "listening", "wrongList", "favorites", "packLoaded", "bank", "plan", "stats", "settings", "readingPlan", "listenPlan", "spokenPlan", "wordbank", "videoCourses", "videoProgress", "videoNotes", "videoSeeded", "activity"].forEach(function (k) {
+  ["words", "notes", "materials", "listening", "wrongList", "favorites", "packLoaded", "bank", "patterns", "plan", "stats", "settings", "readingPlan", "listenPlan", "spokenPlan", "wordbank", "videoCourses", "videoProgress", "videoNotes", "videoSeeded", "activity"].forEach(function (k) {
     if (!e[k]) e[k] = def[k];
   });
   if (!e.stats.studyLog) e.stats.studyLog = {};
@@ -691,6 +691,7 @@ function langGet(code) {
       words: [], notes: [], materials: [], listening: [], wrongList: [], favorites: [],
       packLoaded: {},       // 已导入的词包
       bank: [],             // 场景词包展开后的词
+      patterns: [],         // 句式库（精读「划句式」的产出）
       plan: { template: "commute", daily: 5, days: {} },   // days: { date: [{t, done}] }
       stats: { studyLog: {}, totalSeconds: 0, learnedCount: 0, wrongTypes: {}, reviewCount: 0 },
       streak: 0, lastStudyDate: null, level: 0,
@@ -3052,79 +3053,308 @@ function lgTestExit() { lgTest = null; render(); }
 
 /* =============================================================
  * 模块三：精读阅读
+ * -------------------------------------------------------------
+ * 五个子视图（lgReadView）：
+ *   daily 每日推送 / mag 外刊 / ted TED / mine 我的素材 / pat 句式库
+ *
+ * 数据来源（全部懒加载，进入对应子视图才发请求）：
+ *   data/lang_reading.json              每日 10 篇（云端 LLM 生成）
+ *   data/lang_read_mag.json             外刊索引（刊物 → 期 → 文章元信息）
+ *   data/lang_read_mag_<key>.json       外刊正文（按刊物分册）
+ *   data/lang_read_ted.json             TED 索引（分组 + 元信息）
+ *   data/lang_read_ted_<group>.json     TED 正文（按分组分册）
+ * 用户数据：
+ *   e.materials  我的素材
+ *   e.patterns   句式库（划句式的产出）
+ *
+ * 懒加载约定：lgEnsure(key, url, cb) 只发一次请求，成功后回调 render()。
+ * 缓存键统一为 "mag:idx" / "mag:body:economist" / "ted:idx" / "ted:body:technology"，
+ * 这样「索引」和「分册正文」共用一套缓存与去重逻辑。
  * ============================================================= */
-var lgReadingId = null;        // 当前打开的素材 id
-var lgReadingDaily = null;     // 当前打开的每日推送 {date, idx}
-function lgOpenDailyArt(date, idx) { lgReadingDaily = { date: date, idx: idx }; lgReadingId = null; render(); }
-function lgReadingArticleHtml(art, cur, e, backHtml) {
-  var words = lgTokenize(art.content);
-  var marked = art.marks || [];
-  var txt = words.map(function (tk) {
+var lgReadingId = null;        // 我的素材：当前打开的文章 id
+var lgReadingDaily = null;     // 每日推送：{date, idx}
+var lgReadView = "daily";      // 当前子视图
+var lgMagArt = null;           // 外刊：{key, issue, id}
+var lgTedArt = null;           // TED：{group, id}
+var lgMagOpen = null;          // 外刊：展开的刊物 key
+var lgMagIssue = null;         // 外刊：展开的期号
+var lgTedGroup = null;         // TED：展开的分组 key
+var lgReadPatMode = false;     // 划句式模式开关
+var lgPatSearch = "";          // 句式库搜索词
+var lgReadSentBuf = [];        // 当前文章切出的句子（onclick 传下标，避免把长句塞进属性）
+var lgReadBodyBuf = "";        // 当前文章全文（朗读用，同样不塞进 onclick 属性）
+var lgReadSrcLabel = "";       // 当前文章的来源标签，用于句式归属
+var __lgStore = {};            // 懒加载缓存
+var __lgFetching = {};         // 请求去重
+
+function lgEnsure(key, url, cb) {
+  if (__lgStore[key] !== undefined) { cb && cb(); return; }
+  if (__lgFetching[key]) return;
+  __lgFetching[key] = 1;
+  fetch(url + "?v=" + APP_VERSION)
+    .then(function (r) { return r.json(); })
+    .then(function (j) { __lgStore[key] = j || {}; delete __lgFetching[key]; if (cb) cb(); })
+    .catch(function () { delete __lgFetching[key]; if (cb) cb(); });
+}
+function lgLoadingCard(msg) { return '<div class="lg-card"><div class="empty-state"><div class="empty-text">' + escapeHtml(msg) + '</div></div></div>'; }
+function lgEmptyCard(msg) { return '<div class="empty-state"><div class="empty-text">' + escapeHtml(msg) + '</div></div>'; }
+function lgOpenDailyArt(date, idx) { lgReadingDaily = { date: date, idx: idx }; lgReadingId = null; lgMagArt = null; lgTedArt = null; render(); }
+function lgSetReadView(v) {
+  lgReadView = v;
+  lgReadingId = null; lgReadingDaily = null; lgMagArt = null; lgTedArt = null;
+  lgReadPatMode = false; render();
+}
+
+/* ---------------- 划句式：切句 ---------------- */
+/**
+ * 英文长句切分（中文按标点切）。
+ * 要点：
+ *  - 句末标点后必须跟空白，且下一句以大写/数字/引号/括号开头，才算真断句；
+ *    否则 "3.5"、"U.S." 会被误切。
+ *  - 常见缩写（Mr./Dr./etc./Jan. 等）与首字母缩写（U.S.）不断句。
+ *  - 太短的碎片（<3 个字母）并入上一句，避免 "Yes." 之外的各种噪声。
+ */
+var LG_ABBR_RE = /(?:^|[\s"'“”(（])(Mr|Mrs|Ms|Dr|Prof|St|Mt|vs|etc|Inc|Ltd|Co|Corp|No|Jr|Sr|Fig|Vol|approx|Dept|Univ|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sept|Sep|Oct|Nov|Dec|U\.S|U\.K|U\.N|E\.U|e\.g|i\.e|a\.m|p\.m)\.$/i;
+function lgSplitSentences(text) {
+  var t = String(text == null ? "" : text).replace(/\s+/g, " ").trim();
+  if (!t) return [];
+  if (!/[A-Za-z]/.test(t)) {
+    // 中文/日文等：按句末标点切
+    return t.split(/(?<=[。！？!?；;])/).map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+  var out = [], buf = "", i = 0;
+  while (i < t.length) {
+    var ch = t[i];
+    buf += ch;
+    if (ch === "." || ch === "!" || ch === "?") {
+      while (i + 1 < t.length && /["'”’)\]]/.test(t[i + 1])) { i++; buf += t[i]; }
+      var atEnd = i + 1 >= t.length;
+      var rest = atEnd ? "" : t.slice(i + 1).replace(/^\s+/, "");
+      var hasSpace = atEnd || /\s/.test(t[i + 1] || "");
+      var prev = buf.length >= 2 ? buf[buf.length - 2] : "";
+      var decimal = ch === "." && /[0-9]/.test(prev) && /^[0-9]/.test(rest);
+      var abbr = LG_ABBR_RE.test(buf.trim());
+      var startsNew = atEnd || /^[A-Z0-9"'“”‘’(\[]/.test(rest);
+      if (hasSpace && !decimal && !abbr && startsNew) {
+        var s = buf.trim();
+        if (s.replace(/[^A-Za-z0-9]/g, "").length < 3 && out.length) { buf += " "; }
+        else { out.push(s); buf = ""; }
+      }
+    }
+    i++;
+  }
+  if (buf.trim()) out.push(buf.trim());
+  return out.filter(function (s) { return /[A-Za-z0-9\u4e00-\u9fa5]/.test(s); });
+}
+/** 句式去重键：归一空白 + 小写 + 弯引号拉直 */
+function lgPatKey(s) {
+  return String(s == null ? "" : s).replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"')
+    .replace(/\s+/g, " ").trim().toLowerCase();
+}
+function lgPatKnown(cur) {
+  var e = langGet(cur), set = {};
+  (e.patterns || []).forEach(function (p) { if (p && p.text) set[lgPatKey(p.text)] = 1; });
+  return set;
+}
+
+/* ---------------- 文章正文渲染 ---------------- */
+/**
+ * 划句式模式下：按段 → 按句切分，每句可点。
+ * 句子本体存在 lgReadSentBuf，onclick 只传下标（长句/引号/换行都不怕）。
+ */
+function lgReadSentHtml(text, cur, savedSet) {
+  lgReadSentBuf = [];
+  var paras = String(text == null ? "" : text).split(/\n{2,}/);
+  return paras.map(function (p) {
+    var sents = lgSplitSentences(p);
+    if (!sents.length) return "";
+    return '<p class="lg-art-p">' + sents.map(function (s) {
+      var idx = lgReadSentBuf.push(s) - 1;
+      var saved = savedSet[lgPatKey(s)] ? " saved" : "";
+      return '<span class="lg-sent' + saved + '" onclick="lgPatPick(' + idx + ')">' + escapeHtml(s) + '</span> ';
+    }).join("") + '</p>';
+  }).join("");
+}
+/** 点词模式：沿用原有 lgTokenize + lgArtWord */
+function lgReadWordHtml(text, cur, marked) {
+  var words = lgTokenize(text);
+  marked = marked || [];
+  return words.map(function (tk) {
     if (/^\s+$/.test(tk) || /^[.,!?;:、。，！？…「」『』()（）]+$/.test(tk)) return escapeHtml(tk);
     var clean = tk.replace(/[.,!?;:、。，！？…「」『』()（）]$/g, "");
     var isM = marked.indexOf(clean) !== -1;
     return '<span class="lg-art-word' + (isM ? " marked" : "") + '" onclick="lgArtWord(\'' + lgEscapeJs(clean) + '\')">' + escapeHtml(tk) + '</span>';
   }).join("");
-  return '<div class="lg-card"><div class="lg-card-h">📰 ' + escapeHtml(art.title) + '</div>' +
-    '<div class="lg-row" style="gap:8px;margin-bottom:10px">' +
-      '<button class="lg-btn" onclick="lgSpeak(\'' + lgEscapeJs(art.content) + '\',\'' + cur + '\',' + (e.settings.rate || 0.9) + ')">🔊 朗读全文</button>' +
-      '<button class="lg-btn ghost" onclick="lgSetRate(' + (e.settings.rate || 0.9) + ')">语速 ' + (e.settings.rate || 0.9) + 'x</button>' +
-      (art.translation ? '<button class="lg-btn ghost' + (lgReadingShowTrans ? " on" : "") + '" onclick="lgReadingShowTrans=!lgReadingShowTrans;render()">🌐 翻译</button>' : '') +
-      backHtml +
-    '</div>' +
-    '<div class="lg-art-text" style="font-size:' + lgFontSize() + 'px">' + txt + '</div>' +
-    (lgReadingShowTrans && art.translation ? '<div class="lg-trans"><div class="lg-trans-h">🌐 译文</div>' + escapeHtml(art.translation) + '</div>' : '') +
-    '<div class="lg-hint">👆 点击单词可朗读 / 加入单词；长按或选中文字可高亮批注。</div>' +
-    (marked.length ? '<div class="lg-marked-list">📌 已标注 ' + marked.length + ' 词：' + marked.map(function (w) { return '<span class="lg-marked">' + escapeHtml(w) + '</span>'; }).join("") + '</div>' : '') +
+}
+/**
+ * 统一文章阅读页。
+ * art: { title, content, translation, paras, meta[], src, kind }
+ *   - paras = {en:[], zh:[]} 时用段落数组；否则用 content 整段文本
+ */
+function lgReadingArticleHtml(art, cur, e, backHtml) {
+  art = art || {};
+  var body = art.content;
+  if (!body && art.paras && art.paras.en) body = art.paras.en.join("\n\n");
+  var trans = art.translation;
+  if (!trans && art.paras && art.paras.zh && art.paras.zh.length) trans = art.paras.zh.join("\n\n");
+  var rate = (e.settings && e.settings.rate) || 0.9;
+  var head = '<div class="lg-card"><div class="lg-card-h">📰 ' + escapeHtml(art.title || "未命名") + '</div>';
+  if (art.meta && art.meta.length) {
+    head += '<div class="lg-mag-meta">' + art.meta.map(function (m) {
+      return '<span class="lg-mag-chip">' + escapeHtml(m) + '</span>';
+    }).join("") + (art.src ? ' <a class="lg-mag-src" href="' + lgAttr(art.src) + '" target="_blank" rel="noopener">来源 ↗</a>' : '') + '</div>';
+  }
+  head += '<div class="lg-row" style="gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
+    '<button class="lg-btn" onclick="lgSpeak(\'' + lgEscapeJs(String(body).replace(/\s+/g, " ").slice(0, 3000)) + '\',\'' + cur + '\',' + rate + ')">🔊 朗读全文</button>' +
+    '<button class="lg-btn ghost' + (lgReadPatMode ? " on" : "") + '" onclick="lgReadPatMode=!lgReadPatMode;render()">🖍 划句式' + (lgReadPatMode ? "（开）" : "") + '</button>' +
+    (trans ? '<button class="lg-btn ghost' + (lgReadingShowTrans ? " on" : "") + '" onclick="lgReadingShowTrans=!lgReadingShowTrans;render()">🌐 翻译</button>' : '') +
+    backHtml +
+    '</div>';
+  var textHtml;
+  if (lgReadPatMode) {
+    textHtml = lgReadSentHtml(body, cur, lgPatKnown(cur));
+  } else {
+    textHtml = lgWordblockHtml(body, cur, art.marks);
+  }
+  return head +
+    '<div class="lg-art-text" style="font-size:' + lgFontSize() + 'px">' + textHtml + '</div>' +
+    (lgReadingShowTrans && trans ? '<div class="lg-trans"><div class="lg-trans-h">🌐 译文</div>' + escapeHtml(trans).replace(/\n/g, "<br>") + '</div>' : '') +
+    '<div class="lg-hint">' + (lgReadPatMode
+      ? '👆 点任意句子 → 收藏成「句式卡」，可标注句型结构与仿写。已收藏的句子会高亮。'
+      : '👆 点击单词可朗读 / 加入单词；切到「🖍 划句式」可按句子学习句型。') + '</div>' +
+    (art.paras && art.paras.zh && art.paras.zh.length && !lgReadingShowTrans
+      ? '<div class="lg-hint">💡 本篇为 TED 演讲，点「🌐 翻译」可看逐段中文字幕。</div>' : '') +
     '</div>';
 }
-function lgRenderReading(cur) {
-  var e = langGet(cur);
-  var mats = e.materials || [];
-  // 打开素材文章
-  if (lgReadingId) {
-    var art = null;
-    for (var i = 0; i < mats.length; i++) if (mats[i].id === lgReadingId) { art = mats[i]; break; }
-    if (art) return lgReadingArticleHtml(art, cur, e, '<button class="lg-btn ghost" onclick="lgReadingId=null;render()">← 返回列表</button>');
-    lgReadingId = null;
+/** 段落化的点词文本（保留换行，避免整篇挤成一坨） */
+function lgWordblockHtml(text, cur, marked) {
+  return String(text == null ? "" : text).split(/\n{2,}/).map(function (p) {
+    return '<p class="lg-art-p">' + lgReadWordHtml(p, cur, marked) + '</p>';
+  }).join("");
+}
+
+/* ---------------- 句式卡：收藏 / 编辑 / 删除 ---------------- */
+function lgPatPick(i) {
+  var s = lgReadSentBuf[i];
+  if (!s) return;
+  var cur = langCur();
+  var saved = !!lgPatKnown(cur)[lgPatKey(s)];
+  showModal(
+    '<div class="modal-title">🖍 划句式</div>' +
+    '<div class="lg-form">' +
+      '<label class="lg-fld"><span>原句</span><textarea class="lg-input lg-textarea" id="lgp-text">' + escapeHtml(s) + '</textarea></label>' +
+      '<label class="lg-fld"><span>句型结构</span><input class="lg-input" id="lgp-struct" placeholder="如 It is + adj. + that… / not only … but also …"></label>' +
+      '<label class="lg-fld"><span>笔记 / 仿写</span><textarea class="lg-input lg-textarea" id="lgp-note" placeholder="换成自己的内容仿写一句…"></textarea></label>' +
+      '<label class="lg-fld"><span>标签</span><input class="lg-input" id="lgp-tags" value="' + lgAttr(lgReadSrcLabel || "精读") + '"></label>' +
+    '</div>' +
+    '<div class="btn-row" style="padding:0 16px 16px">' +
+      (saved ? '<button class="btn btn-secondary" style="flex:1" onclick="closeModal()">已收藏过，去看看</button>'
+             : '<button class="btn btn-primary" style="flex:1" onclick="lgPatSave()">🔖 收藏句式</button>') +
+      '<button class="btn btn-secondary" style="flex:1" onclick="lgSpeak(\'' + lgEscapeJs(s.slice(0, 600)) + '\',\'' + cur + '\')">🔊 朗读</button>' +
+    '</div>'
+  );
+}
+function lgPatSave() {
+  var v = function (id) { var el = document.getElementById(id); return el ? el.value.trim() : ""; };
+  var cur = langCur(), e = langGet(cur);
+  var text = v("lgp-text");
+  if (!text) { showToast("句子为空", "warning"); return; }
+  e.patterns = e.patterns || [];
+  var tags = v("lgp-tags").split(/[,，]/).map(function (s) { return s.trim(); }).filter(Boolean);
+  e.patterns.unshift({
+    id: lgUid(), text: text, struct: v("lgp-struct"), note: v("lgp-note"),
+    tags: tags, source: lgReadSrcLabel || "精读", date: today()
+  });
+  closeModal(); DB.save(); render();
+  showToast("句式已收藏 🔖", "success");
+}
+function lgPatNew() {
+  var cur = langCur();
+  lgReadSentBuf = [""];
+  showModal(
+    '<div class="modal-title">🔖 手动添加句式</div>' +
+    '<div class="lg-form">' +
+      '<label class="lg-fld"><span>句子</span><textarea class="lg-input lg-textarea" id="lgp-text" placeholder="粘贴或输入一个值得模仿的句子…"></textarea></label>' +
+      '<label class="lg-fld"><span>句型结构</span><input class="lg-input" id="lgp-struct" placeholder="如 not only … but also …"></label>' +
+      '<label class="lg-fld"><span>笔记 / 仿写</span><textarea class="lg-input lg-textarea" id="lgp-note"></textarea></label>' +
+      '<label class="lg-fld"><span>标签</span><input class="lg-input" id="lgp-tags" value="手写"></label>' +
+    '</div>' +
+    '<div class="btn-row" style="padding:0 16px 16px">' +
+      '<button class="btn btn-primary" style="flex:1" onclick="lgPatSave()">🔖 保存</button>' +
+      '<button class="btn btn-secondary" style="flex:1" onclick="closeModal()">取消</button>' +
+    '</div>'
+  );
+}
+function lgPatEdit(id) {
+  var cur = langCur(), e = langGet(cur);
+  var p = (e.patterns || []).filter(function (x) { return x.id === id; })[0];
+  if (!p) return;
+  var esc = lgAttr;
+  showModal(
+    '<div class="modal-title">✏️ 编辑句式</div>' +
+    '<div class="lg-form">' +
+      '<label class="lg-fld"><span>句子</span><textarea class="lg-input lg-textarea" id="lgp-text">' + escapeHtml(p.text) + '</textarea></label>' +
+      '<label class="lg-fld"><span>句型结构</span><input class="lg-input" id="lgp-struct" value="' + esc(p.struct || "") + '"></label>' +
+      '<label class="lg-fld"><span>笔记 / 仿写</span><textarea class="lg-input lg-textarea" id="lgp-note">' + escapeHtml(p.note || "") + '</textarea></label>' +
+      '<label class="lg-fld"><span>标签</span><input class="lg-input" id="lgp-tags" value="' + esc((p.tags || []).join(",")) + '"></label>' +
+    '</div>' +
+    '<div class="btn-row" style="padding:0 16px 16px">' +
+      '<button class="btn btn-primary" style="flex:1" onclick="lgPatUpdate(\'' + lgEscapeJs(id) + '\')">💾 保存</button>' +
+      '<button class="btn btn-secondary" style="flex:1" onclick="lgPatDel(\'' + lgEscapeJs(id) + '\')">🗑 删除</button>' +
+    '</div>'
+  );
+}
+function lgPatUpdate(id) {
+  var v = function (x) { var el = document.getElementById(x); return el ? el.value.trim() : ""; };
+  var cur = langCur(), e = langGet(cur);
+  for (var i = 0; i < (e.patterns || []).length; i++) {
+    if (e.patterns[i].id !== id) continue;
+    e.patterns[i].text = v("lgp-text") || e.patterns[i].text;
+    e.patterns[i].struct = v("lgp-struct");
+    e.patterns[i].note = v("lgp-note");
+    e.patterns[i].tags = v("lgp-tags").split(/[,，]/).map(function (s) { return s.trim(); }).filter(Boolean);
+    break;
   }
-  // 打开每日推送文章
-  if (lgReadingDaily) {
-    lgReadingLoad(function () { render(); });
-    var darts = (__lgReading && __lgReading.days && __lgReading.days[lgReadingDaily.date]) || [];
-    var dart = darts[lgReadingDaily.idx];
-    if (dart) {
-      return lgReadingArticleHtml({ title: "📅 " + lgReadingDaily.date + " · " + dart.title, content: dart.content, translation: dart.translation, marks: [] }, cur, e,
-        '<button class="lg-btn ghost" onclick="lgReadingDaily=null;render()">← 返回每日推送</button>');
-    }
-    lgReadingDaily = null;
-  }
-  // 每日推送（云端 10 篇，按北京时间切日）
-  var dailyHtml = "";
+  closeModal(); DB.save(); render();
+  showToast("句式已更新", "success");
+}
+function lgPatDel(id) {
+  var cur = langCur(), e = langGet(cur);
+  e.patterns = (e.patterns || []).filter(function (x) { return x.id !== id; });
+  closeModal(); DB.save(); render();
+  showToast("句式已删除", "success");
+}
+
+/* ---------------- 子视图：每日推送 / 我的素材 / 句式库 ---------------- */
+function lgReadTabs() {
+  var items = [["daily", "📅 每日"], ["mag", "📰 外刊"], ["ted", "🎙 TED"], ["mine", "✍️ 我的"], ["pat", "🔖 句式"]];
+  return '<div class="lg-read-tabs">' + items.map(function (it) {
+    return '<div class="lg-read-tab' + (lgReadView === it[0] ? " active" : "") + '" onclick="lgSetReadView(\'' + it[0] + '\')">' + it[1] + '</div>';
+  }).join("") + '</div>';
+}
+function lgReadDailyHtml(cur) {
   lgReadingLoad(function () { render(); });
   var bjd = lgBjToday();
   var todayArts = (__lgReading && __lgReading.days && __lgReading.days[bjd]) || [];
-  dailyHtml = '<div class="lg-card"><div class="lg-card-h">📅 每日精读推送 <span class="lg-sub">' + (todayArts.length ? bjd + ' · ' + todayArts.length + ' 篇' : '每日 10 篇') + '</span>' + lgHistoryBtn("rd") + '</div>';
+  var h = '<div class="lg-card"><div class="lg-card-h">📅 每日精读推送 <span class="lg-sub">' + (todayArts.length ? bjd + ' · ' + todayArts.length + ' 篇' : '每日 10 篇') + '</span>' + lgHistoryBtn("rd") + '</div>';
   if (todayArts.length) {
-    dailyHtml += '<div class="lg-mat-list">' + todayArts.map(function (a, i) {
+    h += '<div class="lg-mat-list">' + todayArts.map(function (a, i) {
       return '<div class="lg-mat" onclick="lgOpenDailyArt(\'' + bjd + '\',' + i + ')">' +
         '<div class="lg-mat-tag">' + escapeHtml(a.level || "进阶") + '</div>' +
         '<div class="lg-mat-title">' + escapeHtml(a.title) + '</div>' +
         '<div class="lg-mat-meta">' + (a.content || "").length + ' 词 · 含中文翻译</div></div>';
     }).join("") + '</div>';
   } else {
-    dailyHtml += '<div class="empty-state"><div class="empty-text">' +
+    h += '<div class="empty-state"><div class="empty-text">' +
       (__lgReading ? '今日精读尚未推送，每天北京时间 00:05 云端自动更新 10 篇。' : '正在加载每日推送…') +
       '</div></div>';
   }
-  dailyHtml += '</div>';
-  // 历史日历（每日推送记录）
+  h += '</div>';
   var rdMap = {};
-  Object.keys(__lgReading && __lgReading.days || {}).forEach(function (d) { rdMap[d] = 1; });
+  Object.keys((__lgReading && __lgReading.days) || {}).forEach(function (d) { rdMap[d] = 1; });
   var rdSel = "";
   if (lgHist === "rd") {
-    var s = lgCalState["rd"] || {};
-    var sel = s.sel || lgBjToday();
+    var sel = (lgCalState["rd"] || {}).sel || lgBjToday();
     var selArts = (__lgReading && __lgReading.days && __lgReading.days[sel]) || [];
     rdSel = '<div class="aihot-archive-day"><div class="aihot-archive-day-h">📅 ' + sel + ' 精读推送</div>' +
       (selArts.length
@@ -3136,14 +3366,15 @@ function lgRenderReading(cur) {
         : '<div class="brief-empty" style="margin:0">该日期没有精读推送</div>') +
       '</div>';
   }
-  var histHtml = lgHist === "rd" ? lgCalHtml("rd", rdMap, rdSel, lgBjToday()) : "";
-
-  // 素材列表 + 导入
-  return dailyHtml + histHtml +
-    '<div class="lg-card"><div class="lg-card-h">📰 我的精读素材 <span class="lg-sub">' + m1(cur) + ' · ' + mats.length + ' 篇</span></div>' +
-    '<div class="lg-row" style="gap:8px">' +
+  return h + (lgHist === "rd" ? lgCalHtml("rd", rdMap, rdSel, lgBjToday()) : "");
+}
+function lgReadMineHtml(cur, e) {
+  var mats = e.materials || [];
+  return '<div class="lg-card"><div class="lg-card-h">📰 我的精读素材 <span class="lg-sub">' + m1(cur) + ' · ' + mats.length + ' 篇</span></div>' +
+    '<div class="lg-row" style="gap:8px;flex-wrap:wrap">' +
       '<button class="lg-btn" onclick="lgAddMaterial()">＋ 粘贴导入文本</button>' +
       '<button class="lg-btn ghost" onclick="lgImportReading()">📚 内置精选（' + (LG_READINGS[cur] || []).length + ' 篇）</button>' +
+      '<button class="lg-btn ghost" onclick="lgSetReadView(\'pat\')">🔖 句式库（' + (e.patterns || []).length + '）</button>' +
     '</div>' +
     (mats.length === 0 ? '<div class="empty-state"><div class="empty-text">还没有精读素材，点「＋ 粘贴导入文本」添加一篇（支持网页抓取内容粘贴 / TXT）。</div></div>' :
       '<div class="lg-mat-list">' + mats.map(function (m) {
@@ -3152,6 +3383,225 @@ function lgRenderReading(cur) {
           '<div class="lg-mat-meta">' + formatDateShort(m.date) + ' · ' + (m.content || "").length + ' 字' + (m.translation ? ' · 含翻译' : '') + '</div></div>';
       }).join("") + '</div>') +
     '</div>';
+}
+function lgReadPatHtml(cur, e) {
+  var list = (e.patterns || []).slice();
+  var q = lgPatSearch.trim().toLowerCase();
+  if (q) {
+    list = list.filter(function (p) {
+      return (p.text + " " + (p.struct || "") + " " + (p.note || "") + " " + (p.tags || []).join(" ")).toLowerCase().indexOf(q) !== -1;
+    });
+  }
+  var h = '<div class="lg-card"><div class="lg-card-h">🔖 句式库 <span class="lg-sub">' + m1(cur) + ' · ' + (e.patterns || []).length + ' 条</span></div>' +
+    '<div class="lg-row" style="gap:8px;flex-wrap:wrap">' +
+      '<button class="lg-btn" onclick="lgPatNew()">＋ 手动添加</button>' +
+      '<input class="lg-input" style="flex:1;min-width:120px" placeholder="搜索句子 / 结构 / 标签…" value="' + lgAttr(lgPatSearch) + '" oninput="lgPatSearch=this.value;render()">' +
+    '</div>';
+  if (!list.length) {
+    h += '<div class="empty-state"><div class="empty-text">' +
+      ((e.patterns || []).length ? '没有匹配的句式。' : '还没有句式卡。去「📅 每日」「📰 外刊」「🎙 TED」里打开一篇文章，点「🖍 划句式」，再点任意句子即可收藏。') +
+      '</div></div>';
+  } else {
+    h += '<div class="lg-pat-list">' + list.map(function (p) {
+      return '<div class="lg-pat">' +
+        '<div class="lg-pat-text">' + escapeHtml(p.text) + '</div>' +
+        (p.struct ? '<div class="lg-pat-struct">🧩 ' + escapeHtml(p.struct) + '</div>' : '') +
+        (p.note ? '<div class="lg-pat-note">✍️ ' + escapeHtml(p.note) + '</div>' : '') +
+        '<div class="lg-pat-foot">' +
+          '<span class="lg-pat-src">' + escapeHtml(p.source || "精读") + (p.date ? " · " + escapeHtml(formatDateShort(p.date)) : "") + '</span>' +
+          (p.tags && p.tags.length ? p.tags.map(function (t) { return '<span class="lg-pat-tag">' + escapeHtml(t) + '</span>'; }).join("") : '') +
+          '<button class="lg-btn ghost sm" onclick="lgSpeak(\'' + lgEscapeJs(String(p.text).slice(0, 600)) + '\',\'' + cur + '\')">🔊</button>' +
+          '<button class="lg-btn ghost sm" onclick="lgPatEdit(\'' + lgEscapeJs(p.id) + '\')">✏️</button>' +
+        '</div>' +
+      '</div>';
+    }).join("") + '</div>';
+  }
+  return h + '</div>';
+}
+
+/* ---------------- 子视图：外刊 ---------------- */
+function lgOpenMag(key) {
+  lgMagOpen = (lgMagOpen === key ? null : key);
+  var mag = lgMagCurrent(key);
+  lgMagIssue = (mag && mag.issues && mag.issues[0] && mag.issues[0].issue) || null;
+  render();
+}
+function lgMagCurrent(key) {
+  var idx = __lgStore["mag:idx"] || { mags: [] };
+  return (idx.mags || []).filter(function (m) { return m.key === key; })[0];
+}
+function lgPickMagIssue(key, issue) { lgMagIssue = issue; render(); }
+function lgOpenMagArt(key, issue, id) {
+  lgMagArt = { key: key, issue: issue, id: id };
+  lgReadingId = null; lgReadingDaily = null; lgTedArt = null;
+  lgReadPatMode = false;
+  lgEnsure("mag:body:" + key, "data/lang_read_mag_" + key + ".json", function () { render(); });
+  render();
+}
+function lgReadMagHtml() {
+  lgEnsure("mag:idx", "data/lang_read_mag.json", function () { render(); });
+  var idx = __lgStore["mag:idx"];
+  if (!idx) return lgLoadingCard("正在加载外刊目录…");
+  var mags = (idx.mags || []).filter(function (m) { return (m.issues || []).length; });
+  if (!mags.length) return lgLoadingCard("外刊库为空，等待每周自动更新（首次同步需要下载 epub，通常几分钟内完成）。");
+  var h = '<div class="lg-card"><div class="lg-card-h">📰 英文外刊 <span class="lg-sub">' + mags.length + ' 刊 · 每周自动更新</span></div>' +
+    '<div class="lg-hint">素材来自开源镜像 awesome-english-ebooks，按刊物分类；进入文章后可用「🖍 划句式」精读句型。</div>' +
+    '<div class="lg-mag-list">';
+  mags.forEach(function (m) {
+    var total = (m.issues || []).reduce(function (s, x) { return s + (x.articles || []).length; }, 0);
+    var open = lgMagOpen === m.key;
+    h += '<div class="lg-mag">' +
+      '<div class="lg-mag-head" onclick="lgOpenMag(\'' + m.key + '\')">' +
+        '<div class="lg-mag-name">' + (m.emoji || "📘") + ' ' + escapeHtml(m.name) + ' <span class="lg-sub">' + escapeHtml(m.en || "") + '</span></div>' +
+        '<div class="lg-mag-count">' + (m.issues || []).length + ' 期 · ' + total + ' 篇 ' + (open ? "▾" : "▸") + '</div>' +
+      '</div>';
+    if (open) {
+      var issues = m.issues || [];
+      var curIssue = issues.filter(function (x) { return x.issue === lgMagIssue; })[0] || issues[0];
+      h += '<div class="lg-mag-issues">' + issues.map(function (x) {
+        return '<div class="lg-read-tab' + (curIssue && curIssue.issue === x.issue ? " active" : "") + '" onclick="lgPickMagIssue(\'' + m.key + '\',\'' + x.issue + '\')">' + x.issue + '</div>';
+      }).join("") + '</div>';
+      if (curIssue) {
+        var secs = {};
+        (curIssue.articles || []).forEach(function (a) { (secs[a.section || "未分类"] = secs[a.section || "未分类"] || []).push(a); });
+        h += '<div class="lg-mag-arts">';
+        Object.keys(secs).forEach(function (s) {
+          h += '<div class="lg-mag-sec">' + escapeHtml(s) + '</div>';
+          secs[s].forEach(function (a) {
+            h += '<div class="lg-mat" onclick="lgOpenMagArt(\'' + m.key + '\',\'' + curIssue.issue + '\',\'' + a.id + '\')">' +
+              '<div class="lg-mat-title">' + escapeHtml(a.title) + '</div>' +
+              (a.rubric ? '<div class="lg-mat-sub">' + escapeHtml(a.rubric) + '</div>' : '') +
+              '<div class="lg-mat-meta">' + (a.words || 0) + ' 词</div></div>';
+          });
+        });
+        h += '</div>';
+        if (curIssue.src) h += '<div class="lg-mag-foot"><a href="' + lgAttr(curIssue.src) + '" target="_blank" rel="noopener">📦 本期原始 epub 来源 ↗</a></div>';
+      }
+    }
+    h += '</div>';
+  });
+  return h + '</div></div>';
+}
+
+/* ---------------- 子视图：TED ---------------- */
+function lgOpenTedGroup(g) { lgTedGroup = (lgTedGroup === g ? null : g); render(); }
+function lgOpenTedArt(group, id) {
+  lgTedArt = { group: group, id: id };
+  lgReadingId = null; lgReadingDaily = null; lgMagArt = null;
+  lgReadPatMode = false;
+  lgEnsure("ted:body:" + group, "data/lang_read_ted_" + group + ".json", function () { render(); });
+  render();
+}
+function lgReadTedHtml() {
+  lgEnsure("ted:idx", "data/lang_read_ted.json", function () { render(); });
+  var idx = __lgStore["ted:idx"];
+  if (!idx) return lgLoadingCard("正在加载 TED 演讲…");
+  var talks = idx.talks || [];
+  if (!talks.length) return lgLoadingCard("TED 素材为空，等待每周自动更新。");
+  var groups = (idx.groups || []).filter(function (g) { return g.count > 0; });
+  var h = '<div class="lg-card"><div class="lg-card-h">🎙 TED 演讲精读 <span class="lg-sub">' + talks.length + ' 场 · ' + groups.length + ' 类</span></div>' +
+    '<div class="lg-hint">按话题分类；正文为英文演讲全文，附逐段简体中文字幕，可直接「🖍 划句式」精读演讲句型。</div>' +
+    '<div class="lg-mag-list">';
+  groups.forEach(function (g) {
+    var list = talks.filter(function (t) { return t.topic === g.key; });
+    var open = lgTedGroup === g.key;
+    h += '<div class="lg-mag">' +
+      '<div class="lg-mag-head" onclick="lgOpenTedGroup(\'' + g.key + '\')">' +
+        '<div class="lg-mag-name">🎯 ' + escapeHtml(g.name) + '</div>' +
+        '<div class="lg-mag-count">' + list.length + ' 场 ' + (open ? "▾" : "▸") + '</div>' +
+      '</div>';
+    if (open) {
+      h += '<div class="lg-mag-arts">' + list.map(function (t) {
+        return '<div class="lg-mat" onclick="lgOpenTedArt(\'' + t.topic + '\',\'' + t.id + '\')">' +
+          '<div class="lg-mat-title">' + escapeHtml(t.title) + '</div>' +
+          '<div class="lg-mat-meta">' + escapeHtml(t.speaker || "") + (t.duration ? " · " + lgFmtDur(t.duration) : "") + (t.publishedAt ? " · " + escapeHtml(t.publishedAt) : "") + '</div></div>';
+      }).join("") + '</div>';
+    }
+    h += '</div>';
+  });
+  return h + '</div></div>';
+}
+function lgFmtDur(sec) {
+  sec = Number(sec) || 0;
+  var m = Math.floor(sec / 60), s = sec % 60;
+  return m + ":" + (s < 10 ? "0" : "") + s;
+}
+
+/* ---------------- 精读入口 ---------------- */
+/** 解析当前打开的文章；未打开任何文章时返回 null */
+function lgReadOpened(cur, e) {
+  // 1) 我的素材
+  if (lgReadingId) {
+    var mats = e.materials || [], art = null;
+    for (var i = 0; i < mats.length; i++) if (mats[i].id === lgReadingId) { art = mats[i]; break; }
+    if (art) {
+      lgReadSrcLabel = "我的素材";
+      return lgReadingArticleHtml({
+        title: art.title, content: art.content, translation: art.translation,
+        marks: art.marks, meta: [formatDateShort(art.date)]
+      }, cur, e, '<button class="lg-btn ghost" onclick="lgReadingId=null;render()">← 返回列表</button>');
+    }
+    lgReadingId = null;
+  }
+  // 2) 每日推送
+  if (lgReadingDaily) {
+    lgReadingLoad(function () { render(); });
+    var darts = (__lgReading && __lgReading.days && __lgReading.days[lgReadingDaily.date]) || [];
+    var dart = darts[lgReadingDaily.idx];
+    if (dart) {
+      lgReadSrcLabel = "每日精读";
+      return lgReadingArticleHtml({
+        title: dart.title, content: dart.content, translation: dart.translation, marks: [],
+        meta: [dart.level || "进阶", lgReadingDaily.date]
+      }, cur, e, '<button class="lg-btn ghost" onclick="lgReadingDaily=null;render()">← 返回每日推送</button>');
+    }
+    lgReadingDaily = null;
+  }
+  // 3) 外刊
+  if (lgMagArt) {
+    var mag = lgMagCurrent(lgMagArt.key);
+    var body = (__lgStore["mag:body:" + lgMagArt.key] || {}).bodies || {};
+    if (!body[lgMagArt.id]) { lgEnsure("mag:body:" + lgMagArt.key, "data/lang_read_mag_" + lgMagArt.key + ".json", function () { render(); }); return lgLoadingCard("正在加载文章正文…"); }
+    var iss = ((mag && mag.issues) || []).filter(function (x) { return x.issue === lgMagArt.issue; })[0];
+    var meta = ((iss && iss.articles) || []).filter(function (x) { return x.id === lgMagArt.id; })[0];
+    lgReadSrcLabel = (mag ? mag.name : "外刊") + (meta && meta.section ? " · " + meta.section : "");
+    return lgReadingArticleHtml({
+      title: (meta && meta.title) || "未命名",
+      content: body[lgMagArt.id],
+      src: iss ? iss.src : "",
+      meta: [mag ? mag.name : "外刊", lgMagArt.issue, meta && meta.section, (meta && meta.rubric) || "", (meta && meta.words ? meta.words + " 词" : "")].filter(Boolean)
+    }, cur, e, '<button class="lg-btn ghost" onclick="lgMagArt=null;render()">← 返回外刊</button>');
+  }
+  // 4) TED
+  if (lgTedArt) {
+    var idx = __lgStore["ted:idx"] || { talks: [] };
+    var talk = (idx.talks || []).filter(function (x) { return x.id === lgTedArt.id; })[0];
+    var tb = (__lgStore["ted:body:" + lgTedArt.group] || {}).bodies || {};
+    var rec = tb[lgTedArt.id];
+    if (!rec) { lgEnsure("ted:body:" + lgTedArt.group, "data/lang_read_ted_" + lgTedArt.group + ".json", function () { render(); }); return lgLoadingCard("正在加载演讲字幕…"); }
+    lgReadSrcLabel = "TED";
+    return lgReadingArticleHtml({
+      title: (talk && talk.title) || "TED Talk",
+      paras: { en: rec.en || [], zh: rec.zh || [] },
+      src: talk ? talk.src : "",
+      meta: [talk ? talk.speaker : "", talk ? lgFmtDur(talk.duration) : "", talk ? talk.topicName : "", talk ? talk.publishedAt : ""].filter(Boolean)
+    }, cur, e, '<button class="lg-btn ghost" onclick="lgTedArt=null;render()">← 返回 TED</button>');
+  }
+  return null;
+}
+function lgRenderReading(cur) {
+  var e = langGet(cur);
+  var opened = lgReadOpened(cur, e);
+  if (opened) return opened;
+  var body;
+  switch (lgReadView) {
+    case "mag": body = lgReadMagHtml(); break;
+    case "ted": body = lgReadTedHtml(); break;
+    case "mine": body = lgReadMineHtml(cur, e); break;
+    case "pat": body = lgReadPatHtml(cur, e); break;
+    default: body = lgReadDailyHtml(cur);
+  }
+  return lgReadTabs() + body;
 }
 function m1(cur) { return LG_META[cur].name; }
 function lgTokenize(s) {
