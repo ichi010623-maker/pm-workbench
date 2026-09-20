@@ -3591,11 +3591,12 @@ function lgDiffHtml(heard, target) {
 }
 
 /* =============================================================
- * 模块六（X）：/* =============================================================
  * 模块六：写作 & 一体化笔记中心
  * ============================================================= */
 function lgRenderNotes(cur) {
-小红书笔记导入（v5.9.156 · MiniMax-M3 总结）
+
+/* =============================================================
+ * 模块六（X）：小红书笔记导入（v5.9.156 · MiniMax-M3 总结）
  * 输入：小红书 URL（作记录）+ 手动粘贴正文
  * 调用 MiniMax-M3（OpenAI 兼容）做英文短句/词汇/翻译润色
  * 输出：原文 + 中文翻译 + 重点词汇 + 关键句
@@ -3742,7 +3743,7 @@ function lgRenderXhs(cur) {
             '<button class="btn btn-ghost sm" onclick="lgXhsDel(\'' + it.id + '\')">×</button>' +
           '</div>' +
         '</div>' +
-        '<div class="xhs-item-meta">' + escapeHtml(new Date(it.createdAt).toLocaleString()) + ' · ' + (it.lang || "en").toUpperCase() + (it.url ? ' · ' + escapeHtml(it.url.slice(0, 60)) + (it.url.length > 60 ? "…" : "")) : "") + '</div>' +
+        '<div class="xhs-item-meta">' + escapeHtml(new Date(it.createdAt).toLocaleString()) + ' · ' + (it.lang || "en").toUpperCase() + (it.url ? ' · ' + escapeHtml(it.url.length > 60 ? it.url.slice(0, 60) + "…" : it.url.slice(0, 60)) : "") + '</div>' +
         (it.summary ? '<details class="xhs-item-details"><summary>总结预览</summary><div class="xhs-item-summary">' + escapeHtml(it.summary.slice(0, 200)) + (it.summary.length > 200 ? "…" : "") + '</div></details>' : "") +
       '</div>';
     });
