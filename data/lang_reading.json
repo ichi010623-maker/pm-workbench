@@ -953,59 +953,65 @@
     "2026-09-20": [
       {
         "level": "入门",
+        "title": "Robotics Basics",
+        "content": "Robots are machines that can perform tasks automatically. They are used in various fields like manufacturing and healthcare. Today, they are becoming more advanced.",
+        "translation": "机器人是能够自动执行任务的机器。它们被用于各种领域，如制造业和医疗保健。如今，它们变得越来越先进。"
+      },
+      {
+        "level": "进阶",
+        "title": "Home Automation",
+        "content": "Home automation uses technology to control devices in your home. This can include lights, security systems, and even kitchen appliances. It makes your home more convenient.",
+        "translation": "家庭自动化使用技术来控制您家中的设备。这可以包括灯光、安全系统，甚至是厨房电器。这使您的家更加方便。"
+      },
+      {
+        "level": "挑战",
         "title": "Smart Cities",
-        "content": "Smart cities use technology to improve quality of life. Sensors and apps help manage traffic and public services.",
-        "translation": "智慧城市利用技术改善生活质量。传感器和应用程序帮助管理交通和公共服务。"
-      },
-      {
-        "level": "进阶",
-        "title": "Cooking Spices",
-        "content": "Cooking spices add flavor and health benefits. Cinnamon can lower blood sugar, and turmeric has anti-inflammatory properties.",
-        "translation": "烹饪香料可以增加风味和健康益处。肉桂可以降低血糖，姜黄具有抗炎特性。"
-      },
-      {
-        "level": "挑战",
-        "title": "Mindfulness Techniques",
-        "content": "Mindfulness techniques help reduce stress. Focusing on the present moment and deep breathing can improve mental health.",
-        "translation": "正念技巧有助于减少压力。专注于当下和深呼吸可以改善心理健康。"
+        "content": "Smart cities use technology to improve urban life. They have advanced systems for transportation, energy, and public safety. This leads to more efficient cities.",
+        "translation": "智慧城市使用技术来改善城市生活。它们拥有先进的交通、能源和公共安全系统。这导致城市更加高效。"
       },
       {
         "level": "入门",
-        "title": "Healthy Snacks",
-        "content": "Healthy snacks like nuts and fruits provide energy and nutrients. They are better choices than high-sugar snacks.",
-        "translation": "坚果和水果等健康小吃提供能量和营养。它们比高糖小吃更佳选择。"
+        "title": "Balloon Flights",
+        "content": "Balloon flights offer a unique view of the world from above. You can see the landscape, clouds, and even other balloons. It's an exciting experience.",
+        "translation": "热气球飞行提供从上方看世界的独特视角。您可以看见地形、云彩，甚至其他热气球。这是一次令人兴奋的经历。"
       },
       {
         "level": "进阶",
-        "title": "Travel Apps",
-        "content": "Travel apps make planning easier. They offer maps, translations, and reviews to help travelers navigate new places.",
-        "translation": "旅行应用程序使计划更加容易。它们提供地图、翻译和评论，帮助旅行者在新地方导航。"
+        "title": "Art of Photography",
+        "content": "Photography is the art of capturing moments. It requires skills in composition, lighting, and focus. A good photo can tell a story.",
+        "translation": "摄影是捕捉瞬间的艺术。它需要构图、光线和焦点的技巧。一张好的照片可以讲述一个故事。"
       },
       {
         "level": "挑战",
-        "title": "Art Appreciation",
-        "content": "Art appreciation involves understanding the emotions and stories behind a piece. It's not just about beauty.",
-        "translation": "艺术欣赏包括理解作品背后的情感和故事。它不仅仅是关于美丽。"
+        "title": "Ancient Civilizations",
+        "content": "Ancient civilizations like Egypt and Greece left behind magnificent structures. These structures provide insight into their culture and way of life.",
+        "translation": "如埃及和希腊这样的古文明留下了令人惊叹的建筑。这些结构提供了对他们的文化和生活方式的见解。"
       },
       {
         "level": "入门",
-        "title": "Daily Routines",
-        "content": "Daily routines can improve productivity and well-being. Consistent habits create a sense of balance and structure.",
-        "translation": "日常惯例可以提高生产力和幸福感。一致的习惯创造平衡和结构感。"
+        "title": "Healthy Habits",
+        "content": "Eating fruits and vegetables, exercising regularly, and getting enough sleep are healthy habits. They can improve your quality of life.",
+        "translation": "吃水果和蔬菜、定期锻炼、保证充足的睡眠是健康习惯。它们可以提高您的生活质量。"
       },
       {
         "level": "进阶",
-        "title": "Smartphone Habits",
-        "content": "Smartphone habits can affect sleep and concentration. Limiting screen time can improve mental health.",
-        "translation": "智能手机习惯会影响睡眠和专注力。限制屏幕时间可以提高心理健康。"
+        "title": "Mindfulness Meditation",
+        "content": "Mindfulness meditation is a practice that helps you focus on the present moment. It can reduce stress and improve concentration.",
+        "translation": "正念冥想是一种帮助你专注于当前时刻的练习。它可以减少压力并提高专注力。"
       },
       {
         "level": "挑战",
-        "title": "Quantum Computing",
-        "content": "Quantum computing uses qubits for processing. It has the potential to revolutionize fields like cryptography and medicine.",
-        "translation": "量子计算使用量子位进行处理。它有可能颠覆密码学和医学等领域。"
+        "title": "Ocean Exploration",
+        "content": "Ocean exploration involves exploring the depths of the ocean. It helps us understand marine life and the ocean's impact on climate.",
+        "translation": "海洋探索涉及探索海洋的深处。它帮助我们了解海洋生物和海洋对气候的影响。"
+      },
+      {
+        "level": "入门",
+        "title": "Sports Nutrition",
+        "content": "Sports nutrition is important for athletes. It involves eating the right foods to fuel your body for exercise and recovery.",
+        "translation": "运动营养对运动员很重要。它涉及食用正确的食物来为锻炼和恢复提供能量。"
       }
     ]
   },
-  "updatedAt": "2026-09-20T09:56:00+08:00"
+  "updatedAt": "2026-09-20T10:10:00+08:00"
 }
