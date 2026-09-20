@@ -1011,7 +1011,69 @@
         "content": "Sports nutrition is important for athletes. It involves eating the right foods to fuel your body for exercise and recovery.",
         "translation": "运动营养对运动员很重要。它涉及食用正确的食物来为锻炼和恢复提供能量。"
       }
+    ],
+    "2026-09-21": [
+      {
+        "level": "入门",
+        "title": "Smart Cars",
+        "content": "Smart cars are becoming more common. They have features like self-driving and voice control. These cars make driving safer and more convenient.",
+        "translation": "智能汽车越来越普遍。它们具有自动驾驶和语音控制等功能。这些汽车使驾驶更安全、更便利。"
+      },
+      {
+        "level": "进阶",
+        "title": "City Parks",
+        "content": "City parks are important for mental health. They provide green spaces and places to exercise. Parks can also be places for socializing and relaxation.",
+        "translation": "城市公园对心理健康很重要。它们提供绿地和锻炼场所。公园还可以是社交和放松的地方。"
+      },
+      {
+        "level": "挑战",
+        "title": "Ancient Art",
+        "content": "Ancient art can tell us a lot about the past. It reflects the culture and beliefs of the time. Art from thousands of years ago is still fascinating today.",
+        "translation": "古代艺术可以告诉我们很多关于过去的事情。它反映了那个时代的文化和信仰。数千年前艺术至今仍令人着迷。"
+      },
+      {
+        "level": "入门",
+        "title": "Healthy Habits",
+        "content": "Healthy habits can improve your life. Drinking water, exercising, and getting enough sleep are good habits. They help you feel better and live longer.",
+        "translation": "健康习惯可以改善你的生活。喝水、锻炼和保证充足的睡眠是良好的习惯。它们帮助你感觉更好，寿命更长。"
+      },
+      {
+        "level": "进阶",
+        "title": "Space Exploration",
+        "content": "Space exploration is a challenge. It requires advanced technology and teamwork. Many scientists and engineers work together to explore the universe.",
+        "translation": "太空探索是一项挑战。它需要先进的技术和团队合作。许多科学家和工程师共同努力探索宇宙。"
+      },
+      {
+        "level": "挑战",
+        "title": "Language Learning",
+        "content": "Learning a new language can be difficult. It requires practice and patience. However, speaking a second language can open many opportunities.",
+        "translation": "学习一门新语言可能很困难。它需要练习和耐心。然而，说一门第二语言可以打开许多机会。"
+      },
+      {
+        "level": "入门",
+        "title": "Cooking with Herbs",
+        "content": "Cooking with herbs can make food taste better. Herbs like basil and oregano add flavor and health benefits. Try adding them to your next meal!",
+        "translation": "用香草烹饪可以使食物味道更好。罗勒和牛至等香草可以增加风味和健康益处。尝试把它们加到你的下一顿饭中！"
+      },
+      {
+        "level": "进阶",
+        "title": "Art Museums",
+        "content": "Art museums are places to see beautiful paintings and sculptures. They can inspire creativity and teach us about different cultures.",
+        "translation": "艺术博物馆是欣赏美丽绘画和雕塑的地方。它们可以激发创造力并教我们关于不同文化的事情。"
+      },
+      {
+        "level": "挑战",
+        "title": "Global Warming Solutions",
+        "content": "Global warming is a serious problem. We need to find solutions to reduce carbon emissions. Renewable energy and sustainable practices can help.",
+        "translation": "全球变暖是一个严重的问题。我们需要找到减少碳排放的解决方案。可再生能源和可持续实践可以帮助。"
+      },
+      {
+        "level": "入门",
+        "title": "Daily Routines",
+        "content": "Having a daily routine can help you stay organized. It includes activities like waking up early, eating breakfast, and exercising.",
+        "translation": "拥有日常惯例可以帮助你保持有条理。它包括早起、吃早餐和锻炼等活动。"
+      }
     ]
   },
-  "updatedAt": "2026-09-20T10:10:00+08:00"
+  "updatedAt": "2026-09-21T00:07:00+08:00"
 }
