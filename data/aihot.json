@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-20T02:47:09.817Z",
+  "updatedAt": "2026-09-20T02:55:16.293Z",
   "source": "AIHOT",
   "attribution": "AI 资讯由 AIHOT 提供（aihot.virxact.com）",
   "brief": {
@@ -115,7 +115,7 @@
         "aihot": "https://aihot.news/items/cmu7bu9xu04terogr4pz0w6r4",
         "original": "https://github.com/anthropics/claude-code/releases/tag/v2.1.277"
       },
-      "sourceCount": 7,
+      "sourceCount": 8,
       "signalCount": 23,
       "latestAt": "2026-09-19T17:00:12.000Z"
     },
@@ -128,7 +128,7 @@
         "aihot": "https://aihot.news/items/cmu77kvz00tf6rowk9kl5o4k0",
         "original": "https://garymarcus.substack.com/p/wake-up-people-what-we-should-actually"
       },
-      "sourceCount": 13,
+      "sourceCount": 11,
       "signalCount": 25,
       "latestAt": "2026-09-20T01:23:27.833Z"
     },
@@ -169,7 +169,7 @@
       },
       "sourceCount": 5,
       "signalCount": 9,
-      "latestAt": "2026-09-20T02:09:35.000Z"
+      "latestAt": "2026-09-20T02:20:32.000Z"
     },
     {
       "rank": 8,
