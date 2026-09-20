@@ -1,8 +1,8 @@
 /* ============================================
    硬件PM工作台 Service Worker
-   v5.9.159 - 单实例「离线壳 + 网络优先」SW
+   v5.9.167 - 单实例「离线壳 + 网络优先 + 精读素材预缓存」SW
 
-   设计（合并 v5.9.135 离线壳与 v5.9.147 经验）：
+   设计（合并 v5.9.135 离线壳、v5.9.147 经验、v5.9.167 精读素材）：
    - 只保留 **一个** install / activate / fetch 监听器（历史版本误留了重复监听器
      并有孤立代码块，导致 sw.js 语法错误 → register() 直接失败 → 旧 SW 永久
      接管并持续 serve 老缓存，这正是「改了页面看不到」的根因）。
@@ -10,20 +10,54 @@
      网络失败回退缓存 → 保留离线能力。
    - 跨域请求（Supabase / CDN）一律直连，SW 不介入。
    - 新版本 activate 后 postMessage("SW_UPDATED") → app.js SWManager 自动 reload。
+
+   v5.9.167 新增：
+   - install 时除 manifest 之外，**主动预缓存精读模块全部素材**（4 刊外刊 + 8 类 TED = 13 个分册）。
+   - 这样 App 安装后第一次进入精读 tab，所有外刊/TED 列表/正文都已落地本地缓存，
+     不再依赖 Pages 拉取；弱网/跨网/打不开都能秒开。
+   - 单个 404 不阻塞其它资源（容错，避免旧版本没某个文件时 SW 装不上）。
+   - 列表变动只需重跑 `node scripts/build_reading_precache.js` 重新生成 PRECACHE_URLS 段。
    ============================================ */
 
-const CACHE_VERSION = "v5.9.166";
+const CACHE_VERSION = "v5.9.167";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 8000;
 
-// ===== Install: 预缓存离线壳 + skipWaiting =====
+// 预缓存清单（精读模块素材 + 应用壳）
+// 数据文件由 scripts/build_reading_precache.js 同步生成；列表变化时再跑一遍。
+const PRECACHE_URLS = [
+  "./manifest.json",
+  "./index.html",
+  "./css/style.v5.9.156.css",
+  "./js/app.js",
+  "./js/language.js",
+  "./data/lang_read_mag.json",
+  "./data/lang_read_mag_economist.json",
+  "./data/lang_read_mag_newyorker.json",
+  "./data/lang_read_mag_atlantic.json",
+  "./data/lang_read_mag_wired.json",
+  "./data/lang_read_ted.json",
+  "./data/lang_read_ted_tech.json",
+  "./data/lang_read_ted_business.json",
+  "./data/lang_read_ted_science.json",
+  "./data/lang_read_ted_mind.json",
+  "./data/lang_read_ted_society.json",
+  "./data/lang_read_ted_culture.json",
+  "./data/lang_read_ted_people.json",
+  "./data/lang_read_ted_life.json"
+];
+
+// ===== Install: 预缓存离线壳 + 精读素材 + skipWaiting =====
 self.addEventListener("install", function (event) {
-  console.log("[SW] Installing " + CACHE_VERSION);
+  console.log("[SW] Installing " + CACHE_VERSION + " (precache " + PRECACHE_URLS.length + ")");
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(["./manifest.json"]).catch(function (e) {
-        console.log("[SW] precache skipped:", e && e.message);
-      });
+      // 单个失败不阻塞其它资源（容错：旧版本没某个文件时仍能装上 SW）
+      return Promise.all(PRECACHE_URLS.map(function (u) {
+        return cache.add(u).catch(function (e) {
+          console.log("[SW] precache skip:", u, e && e.message);
+        });
+      }));
     }).then(function () {
       return self.skipWaiting();
     })
@@ -110,6 +144,33 @@ function networkFirst(request) {
   });
 }
 
+// Cache-first + 后台刷新：精读素材（已 install 预缓存），命中秒返回，
+// 同时异步去网络更新（后台拿到新版本后写回缓存；用户每次都能拿到上次成功的版本）。
+// 适用于：网络经常打不开、但素材每周更新一次的场景（用户每次冷启动拿到新内容，无需手动操作）。
+function cacheFirstStaleWhileRevalidate(request) {
+  return caches.match(request).then(function (cached) {
+    var networkFetch = fetchWithTimeout(request, NETWORK_TIMEOUT_MS).then(function (response) {
+      if (response && response.status === 200 && response.type === "basic") {
+        var clone = response.clone();
+        caches.open(CACHE_NAME).then(function (cache) {
+          cache.put(request, clone).catch(function () {});
+        });
+      }
+      return response;
+    }).catch(function () {
+      // 网络失败：返回缓存（若有），否则错误
+      if (cached) return cached;
+      return new Response("Offline", { status: 503, statusText: "Offline" });
+    });
+    return cached || networkFetch;
+  });
+}
+
+function isReadingAsset(pathname) {
+  // 精读素材：data/lang_read_mag*.json + data/lang_read_ted*.json
+  return /^\/data\/lang_read_(mag|ted)(_[a-z]+)?\.json$/.test(pathname);
+}
+
 // ===== Fetch（唯一监听器）=====
 self.addEventListener("fetch", function (event) {
   var req = event.request;
@@ -124,6 +185,14 @@ self.addEventListener("fetch", function (event) {
   // watchdog 强制刷新路径（?r=timestamp / ?reset=1）绕过缓存直取网络
   if (url.search.indexOf("r=") >= 0 || url.search.indexOf("reset=1") >= 0) {
     event.respondWith(fetch(req).catch(function () { return caches.match(req); }));
+    return;
+  }
+
+  // 精读素材：cache-first + 后台异步刷新（v5.9.167）
+  // 已经在 install 时预缓存，命中秒返回；后台异步去 Pages 拉新版本替换缓存。
+  // 用户每次启动都能拿到上一次成功的版本；周度更新无需手动操作。
+  if (isReadingAsset(url.pathname)) {
+    event.respondWith(cacheFirstStaleWhileRevalidate(req));
     return;
   }
 

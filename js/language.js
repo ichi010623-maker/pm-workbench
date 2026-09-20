@@ -735,6 +735,39 @@ function lgEnsureAll() {
   return lgGetAll();
 }
 
+/**
+ * App 启动时主动把精读素材预取到内存缓存（v5.9.167）：
+ * - 入口：renderLanguage 顶部触发一次（每天首次进入语言模块）
+ * - 行为：14 个 URL 并发 prefetch，命中 __lgStore；用户进入「外刊/TED」tab 时不再等待
+ * - 失败不阻塞（fetch 失败时 SW 仍会 cache-first 兜住；URL 列表与 sw.js PRECACHE_URLS 同步）
+ * - 测试：tests/reading_precache.test.js 静态校验这个数组与 data/ 实际分册数量一致
+ */
+var __lgPrecached = false;
+var LG_READING_PRECACHE_URLS = [
+  ["mag:idx", "data/lang_read_mag.json"],
+  ["mag:body:economist", "data/lang_read_mag_economist.json"],
+  ["mag:body:newyorker", "data/lang_read_mag_newyorker.json"],
+  ["mag:body:atlantic", "data/lang_read_mag_atlantic.json"],
+  ["mag:body:wired", "data/lang_read_mag_wired.json"],
+  ["ted:idx", "data/lang_read_ted.json"],
+  ["ted:body:tech", "data/lang_read_ted_tech.json"],
+  ["ted:body:business", "data/lang_read_ted_business.json"],
+  ["ted:body:science", "data/lang_read_ted_science.json"],
+  ["ted:body:mind", "data/lang_read_ted_mind.json"],
+  ["ted:body:society", "data/lang_read_ted_society.json"],
+  ["ted:body:culture", "data/lang_read_ted_culture.json"],
+  ["ted:body:people", "data/lang_read_ted_people.json"],
+  ["ted:body:life", "data/lang_read_ted_life.json"]
+];
+function lgPrecacheReading() {
+  if (__lgPrecached) return;
+  if (typeof APP_VERSION === "undefined") return;
+  __lgPrecached = true;
+  LG_READING_PRECACHE_URLS.forEach(function (pair) {
+    lgEnsure(pair[0], pair[1], null);
+  });
+}
+
 /* 统计 */
 function lgDueCount(code) { return langGet(code).words.filter(function (w) { return w.next <= today(); }).length; }
 function lgAllDue() { var n = 0; LG_LANGS.forEach(function (c) { n += lgDueCount(c); }); return n; }
@@ -782,6 +815,7 @@ function renderLanguage() {
   var c = document.getElementById("app-content");
   if (!c) return;
   lgEnsureAll();
+  lgPrecacheReading();
   var cur = langCur();
   var langBar = '<div class="lg-langbar">' + LG_LANGS.map(function (code) {
     var m = LG_META[code];
@@ -3091,10 +3125,31 @@ function lgEnsure(key, url, cb) {
   if (__lgStore[key] !== undefined) { cb && cb(); return; }
   if (__lgFetching[key]) return;
   __lgFetching[key] = 1;
+  // 三级兜底：fetch → SW 缓存（caches.match）→ 失败重试一次 → 仍失败 cb 空数据
+  // SW 的 cache-first 在 v5.9.167 已能直接命中，无需这里再走一次；
+  // 这里加 caches.match 是为了 SW 还没接管时（首次冷启动）的极端边界。
   fetch(url + "?v=" + APP_VERSION)
     .then(function (r) { return r.json(); })
     .then(function (j) { __lgStore[key] = j || {}; delete __lgFetching[key]; if (cb) cb(); })
-    .catch(function () { delete __lgFetching[key]; if (cb) cb(); });
+    .catch(function () {
+      if (typeof caches !== "undefined") {
+        caches.match(url).then(function (resp) {
+          if (resp) {
+            resp.clone().json().then(function (j) {
+              __lgStore[key] = j || {};
+              delete __lgFetching[key];
+              if (cb) cb();
+            }).catch(function () {
+              delete __lgFetching[key]; if (cb) cb();
+            });
+          } else {
+            delete __lgFetching[key]; if (cb) cb();
+          }
+        }).catch(function () { delete __lgFetching[key]; if (cb) cb(); });
+      } else {
+        delete __lgFetching[key]; if (cb) cb();
+      }
+    });
 }
 function lgLoadingCard(msg) { return '<div class="lg-card"><div class="empty-state"><div class="empty-text">' + escapeHtml(msg) + '</div></div></div>'; }
 function lgEmptyCard(msg) { return '<div class="empty-state"><div class="empty-text">' + escapeHtml(msg) + '</div></div>'; }
