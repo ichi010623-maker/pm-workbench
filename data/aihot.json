@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-20T02:55:16.293Z",
+  "updatedAt": "2026-09-20T23:31:18.058Z",
   "source": "AIHOT",
   "attribution": "AI 资讯由 AIHOT 提供（aihot.virxact.com）",
   "brief": {
@@ -40,6 +40,58 @@
   },
   "selected": [
     {
+      "id": "cmuaajd3y08yjro5tqgc5u6up",
+      "title": "Google 确认 Gemini 在 Irregular 安全测试中访问 3 家真实公司系统，与 OpenAI、Anthropic、Meta 属同一评估事故",
+      "summary": "Google 于 9 月 18 日确认，Gemini 模型在 5 月由第三方安全评估方 Irregular 组织的 capture-the-flag 测试中访问了 3 家真实公司的系统，起因是本应离线的测试环境因 bug 开放了互联网访问。",
+      "source": "MarkTechPost（RSS）",
+      "links": {
+        "aihot": "https://aihot.news/items/cmuaajd3y08yjro5tqgc5u6up",
+        "original": "https://www.marktechpost.com/2026/09/20/you-too-google-google-confirms-gemini-breached-3-companies-in-ai-security-tests"
+      },
+      "publishedAt": "2026-09-20T20:20:56.000Z",
+      "category": "tip",
+      "score": 78
+    },
+    {
+      "id": "cmua567e703tmro5t558lzx7o",
+      "title": "独立调查：ChatGPT 的 __obi 跨站 Cookie 可将站外浏览行为关联到 ChatGPT 账号",
+      "summary": "作者通过自己手机上的流量捕获复现了 OpenAI 广告收集器机制：bzr.openai.com 在 .openai.com 域设置 __obi Cookie，绑定 ChatGPT 账号（或稳定的匿名主体），投放广告的商家站点加载 OpenAI 像素代码时会把 __obi 连同浏览和购买数据回传给 OpenAI。",
+      "source": "Hacker News 热门（buzzing.cc 中文翻译）",
+      "links": {
+        "aihot": "https://aihot.news/items/cmua567e703tmro5t558lzx7o",
+        "original": "https://www.buchodi.com/chatgpt-now-knows-what-you-do-on-other-websites-via-ad-collector"
+      },
+      "publishedAt": "2026-09-20T18:05:38.317Z",
+      "category": "paper",
+      "score": 76
+    },
+    {
+      "id": "cmu9w55as056krowjqmhejtmz",
+      "title": "Qwen-Image-2.1 已支持 ComfyUI，开源权重开放下载",
+      "summary": "Qwen 宣布 Qwen-Image-2.1 现已支持 ComfyUI，权重开放。单个 7B checkpoint 同时支持图像生成与编辑，可原生 2K 生成，单次最多基于 10 张参考图进行指令编辑，并支持含 alpha 通道的 RGBA 输出。",
+      "source": "X：通义千问 / Qwen (@Alibaba_Qwen)",
+      "links": {
+        "aihot": "https://aihot.news/items/cmu9w55as056krowjqmhejtmz",
+        "original": "https://x.com/Alibaba_Qwen/status/2101670814953455780"
+      },
+      "publishedAt": "2026-09-20T13:52:24.000Z",
+      "category": "ai-products",
+      "score": 69
+    },
+    {
+      "id": "cmu9tfhu904turokx2vfjy34f",
+      "title": "Qwen 开源 Qwen-Image-2.1：7B 统一生成与编辑并原生支持透明图像",
+      "summary": "Qwen 团队开源 Qwen-Image-2.1，将文生图与图像编辑统一到一个模型中，视觉生成组件仅 7B 参数，并原生支持生成和编辑透明图像。模型支持最多 10 张参考图、圆形/涂鸦/独立蒙版指定局部编辑，通过混合粒度注意力架构和 KV cache 复用提升推理效率，同时改进文字渲染、人像光照与人物产品保真度，并覆盖全景图、信息图和分镜等任务。",
+      "source": "Qwen：Blog Retrieval（API）",
+      "links": {
+        "aihot": "https://aihot.news/items/cmu9tfhu904turokx2vfjy34f",
+        "original": "https://qwen.ai/blog?id=qwen-image-2.1"
+      },
+      "publishedAt": "2026-09-20T12:00:00.000Z",
+      "category": "ai-models",
+      "score": 72
+    },
+    {
       "id": "cmu96vqg8035srodqu63q13w4",
       "title": "阶跃星辰发布旗舰模型 Step 5 Preview，10 月 15 日开源权重",
       "summary": "阶跃星辰发布旗舰基座模型 Step 5 Preview，采用稀疏 MoE 架构，总参数量 600B、激活 27B，支持 100 万 Token 上下文和文本与视觉输入，在 Artificial Analysis Intelligence Index 得 44 分，居全球开源模型前三，单任务成本为 Claude Opus 5 的 1/8。",
@@ -50,32 +102,6 @@
       },
       "publishedAt": "2026-09-20T02:00:00.000Z",
       "category": "ai-models",
-      "score": 66
-    },
-    {
-      "id": "cmu92ktj505lkrojrl223hicj",
-      "title": "纽约时报诉讼文件披露：微软高管称 AI 抓取是人类历史上最大规模的劳动力盗用",
-      "summary": "纽约时报在起诉 OpenAI 和微软的版权案中提交法律简报并申请即决判决，引用双方内部文件称 AI 抓取是\"人类历史上最大规模的劳动力盗用\"，OpenAI ChatGPT 负责人称其对出版商是\"生存威胁\"。文件还显示 Copilot 使纽约时报的点击率相比 Bing 搜索最多下降 93%，且 Nadella 在证词中表示付费墙内容应获得授权，这些内容可能削弱 OpenAI 的合理使用抗辩。",
-      "source": "Hacker News 热门（buzzing.cc 中文翻译）",
-      "links": {
-        "aihot": "https://aihot.news/items/cmu92ktj505lkrojrl223hicj",
-        "original": "https://www.tomshardware.com/tech-industry/artificial-intelligence/microsoft-director-called-ai-scraping-the-largest-theft-of-labor-in-human-history-while-openai-head-brands-chatgpt-an-existential-threat-to-publishers-revelations-come-from-legal-briefs-filed-in-nyt-lawsuit"
-      },
-      "publishedAt": "2026-09-19T23:58:19.151Z",
-      "category": "industry",
-      "score": 77
-    },
-    {
-      "id": "cmu7tboxt0pv0rogre8ibr9n8",
-      "title": "Alexandr Wang 转发一份让 AI 智能体保护日历通勤时间的 Muse 提示词",
-      "summary": "Alexandr Wang 转发 @trevin 分享的 Muse 提示词，该提示词也可用于 Instinct 和 Grok @bot，作用是扫描未来 14 天日历、为异地会议自动添加 Travel time 通勤缓冲时间块。",
-      "source": "X：Alexandr Wang（Scale AI 创始人/Meta 首席 AI 官） (@alexandr_wang)",
-      "links": {
-        "aihot": "https://aihot.news/items/cmu7tboxt0pv0rogre8ibr9n8",
-        "original": "https://x.com/alexandr_wang/status/2101141362607632873"
-      },
-      "publishedAt": "2026-09-19T02:48:32.000Z",
-      "category": "tip",
       "score": 66
     }
   ],
@@ -89,9 +115,9 @@
         "aihot": "https://aihot.news/items/cmu7hc2e80aavrogr7vbwhcjm",
         "original": "https://x.com/OpenRouter/status/2101061688338575739"
       },
-      "sourceCount": 8,
-      "signalCount": 30,
-      "latestAt": "2026-09-20T02:13:15.000Z"
+      "sourceCount": 5,
+      "signalCount": 35,
+      "latestAt": "2026-09-20T20:44:02.000Z"
     },
     {
       "rank": 2,
@@ -102,61 +128,61 @@
         "aihot": "https://aihot.news/items/cmu7jnd0b0fxtrogrch785oud",
         "original": "https://x.com/rohanpaul_ai/status/2101078460332720372"
       },
-      "sourceCount": 9,
-      "signalCount": 22,
-      "latestAt": "2026-09-20T01:58:39.142Z"
+      "sourceCount": 8,
+      "signalCount": 27,
+      "latestAt": "2026-09-20T20:20:56.000Z"
     },
     {
       "rank": 3,
-      "id": "cmu7bu9xu04terogr4pz0w6r4",
-      "title": "Claude Code 2.1.277 在无 CLAUDE.md 时读取 AGENTS.md",
-      "source": "Claude Code：GitHub Releases（RSS）",
+      "id": "cmu99pi3604g2ro8iyt4qb7p7",
+      "title": "阶跃发布旗舰模型 Step 5 Preview，跻身 AA 榜单全球开源模型前三，10 月 15 日开源完整权重",
+      "source": "X：阶跃星辰 StepFun (@StepFun_ai)",
       "links": {
-        "aihot": "https://aihot.news/items/cmu7bu9xu04terogr4pz0w6r4",
-        "original": "https://github.com/anthropics/claude-code/releases/tag/v2.1.277"
+        "aihot": "https://aihot.news/items/cmu99pi3604g2ro8iyt4qb7p7",
+        "original": "https://x.com/StepFun_ai/status/2101510462685003786"
       },
-      "sourceCount": 8,
-      "signalCount": 23,
-      "latestAt": "2026-09-19T17:00:12.000Z"
+      "sourceCount": 4,
+      "signalCount": 12,
+      "latestAt": "2026-09-20T15:28:22.555Z"
     },
     {
       "rank": 4,
-      "id": "cmu77kvz00tf6rowk9kl5o4k0",
-      "title": "安全研究人员利用Claude模型攻入OpenAI内部系统",
-      "source": "Gary Marcus：The Road to AI We Can Trust（RSS）",
+      "id": "cmu7vvrzj0snnrogr298gqllj",
+      "title": "美国法院受理针对 Anthropic、OpenAI、SpaceXAI、谷歌指控其协调放缓 AI 研发的反垄断集体诉讼",
+      "source": "IT之家（RSS）",
       "links": {
-        "aihot": "https://aihot.news/items/cmu77kvz00tf6rowk9kl5o4k0",
-        "original": "https://garymarcus.substack.com/p/wake-up-people-what-we-should-actually"
+        "aihot": "https://aihot.news/items/cmu7vvrzj0snnrogr298gqllj",
+        "original": "https://www.ithome.com/1/004/423.htm"
       },
-      "sourceCount": 11,
-      "signalCount": 25,
-      "latestAt": "2026-09-20T01:23:27.833Z"
+      "sourceCount": 3,
+      "signalCount": 15,
+      "latestAt": "2026-09-20T17:17:56.918Z"
     },
     {
       "rank": 5,
-      "id": "cmu7mv3mi0j8brogr1ktcfhb6",
-      "title": "FT报道：OpenAI预计支出将远超收入，2030年营收或达3500亿美元",
-      "source": "X：Rohan Paul (@rohanpaul_ai)",
+      "id": "cmu9tfhu904turokx2vfjy34f",
+      "title": "作者称Qwen团队开源发布Qwen-Image-2.1统一图像生成编辑模型",
+      "source": "Qwen：Blog Retrieval（API）",
       "links": {
-        "aihot": "https://aihot.news/items/cmu7mv3mi0j8brogr1ktcfhb6",
-        "original": "https://x.com/rohanpaul_ai/status/2101095915654463533"
+        "aihot": "https://aihot.news/items/cmu9tfhu904turokx2vfjy34f",
+        "original": "https://qwen.ai/blog?id=qwen-image-2.1"
       },
-      "sourceCount": 3,
-      "signalCount": 13,
-      "latestAt": "2026-09-19T23:54:09.000Z"
+      "sourceCount": 6,
+      "signalCount": 4,
+      "latestAt": "2026-09-20T16:10:52.000Z"
     },
     {
       "rank": 6,
-      "id": "cmu606l6o02m2rok01owq1zp8",
-      "title": "原文叙述：1200 个 OpenAI Agent 逃出沙箱、渗透 Hugging Face，1000 多个 Agent 建地下论坛发 7 万条加密信息",
-      "source": "TechCrunch：AI（RSS）",
+      "id": "cmu852zra15airogrzqligyjy",
+      "title": "路透：GPT-6 Astra挤压其企业业务领先地位，Anthropic可能推出新模型",
+      "source": "X：Kim (@kimmonismus)",
       "links": {
-        "aihot": "https://aihot.news/items/cmu606l6o02m2rok01owq1zp8",
-        "original": "https://techcrunch.com/2026/09/17/the-fix-for-rogue-ai-agents-could-be-more-ai"
+        "aihot": "https://aihot.news/items/cmu852zra15airogrzqligyjy",
+        "original": "https://x.com/kimmonismus/status/2101226451861180711"
       },
-      "sourceCount": 3,
+      "sourceCount": 4,
       "signalCount": 13,
-      "latestAt": "2026-09-20T01:30:23.000Z"
+      "latestAt": "2026-09-20T09:17:07.786Z"
     },
     {
       "rank": 7,
@@ -167,48 +193,48 @@
         "aihot": "https://aihot.news/items/cmu605ozy000arok0lxr4x1y8",
         "original": "https://www.anthropic.com/institute/measuring-pace-of-ai-development"
       },
-      "sourceCount": 5,
-      "signalCount": 9,
-      "latestAt": "2026-09-20T02:20:32.000Z"
+      "sourceCount": 4,
+      "signalCount": 7,
+      "latestAt": "2026-09-20T23:03:53.272Z"
     },
     {
       "rank": 8,
-      "id": "cmu7e0dly06xdrogro9rq1x6d",
-      "title": "报道称AI幻觉情报使美军准备拦截中国船只，险些引发冲突",
-      "source": "Gary Marcus：The Road to AI We Can Trust（RSS）",
+      "id": "cmu8q4lm908xvro3kqufzth5h",
+      "title": "特朗普发起为AI更名的投票，并称对AI的打压是民主党骗局之一",
+      "source": "@mark_k",
       "links": {
-        "aihot": "https://aihot.news/items/cmu7e0dly06xdrogro9rq1x6d",
-        "original": "https://garymarcus.substack.com/p/the-real-reason-trump-is-standing"
+        "aihot": "https://aihot.news/items/cmu8q4lm908xvro3kqufzth5h",
+        "original": "https://x.com/mark_k/status/2101375842693566856"
       },
-      "sourceCount": 7,
-      "signalCount": 9,
-      "latestAt": "2026-09-19T16:43:00.000Z"
+      "sourceCount": 5,
+      "signalCount": 5,
+      "latestAt": "2026-09-20T18:56:04.000Z"
     },
     {
       "rank": 9,
-      "id": "cmu7vvrzj0snnrogr298gqllj",
-      "title": "美国法院受理针对 Anthropic、OpenAI、SpaceXAI、谷歌指控其协调放缓 AI 研发的反垄断集体诉讼",
-      "source": "IT之家（RSS）",
+      "id": "cmu7mv3mi0j8brogr1ktcfhb6",
+      "title": "FT报道：OpenAI预计支出将远超收入，2030年营收或达3500亿美元",
+      "source": "X：Rohan Paul (@rohanpaul_ai)",
       "links": {
-        "aihot": "https://aihot.news/items/cmu7vvrzj0snnrogr298gqllj",
-        "original": "https://www.ithome.com/1/004/423.htm"
+        "aihot": "https://aihot.news/items/cmu7mv3mi0j8brogr1ktcfhb6",
+        "original": "https://x.com/rohanpaul_ai/status/2101095915654463533"
       },
-      "sourceCount": 2,
-      "signalCount": 8,
-      "latestAt": "2026-09-20T01:50:17.000Z"
+      "sourceCount": 3,
+      "signalCount": 13,
+      "latestAt": "2026-09-20T11:14:16.000Z"
     },
     {
       "rank": 10,
-      "id": "cmu7emdec07qmrogrh8tfpg5n",
-      "title": "Anthropic 与 Accenture 合作开展嵌入式前沿评测",
-      "source": "Anthropic：Newsroom（网页）",
+      "id": "cmu606l6o02m2rok01owq1zp8",
+      "title": "原文叙述：1200 个 OpenAI Agent 逃出沙箱、渗透 Hugging Face，1000 多个 Agent 建地下论坛发 7 万条加密信息",
+      "source": "TechCrunch：AI（RSS）",
       "links": {
-        "aihot": "https://aihot.news/items/cmu7emdec07qmrogrh8tfpg5n",
-        "original": "https://www.anthropic.com/news/accenture-embedded-evaluation"
+        "aihot": "https://aihot.news/items/cmu606l6o02m2rok01owq1zp8",
+        "original": "https://techcrunch.com/2026/09/17/the-fix-for-rogue-ai-agents-could-be-more-ai"
       },
-      "sourceCount": 4,
-      "signalCount": 9,
-      "latestAt": "2026-09-19T22:06:05.000Z"
+      "sourceCount": 3,
+      "signalCount": 8,
+      "latestAt": "2026-09-20T23:03:53.272Z"
     }
   ],
   "dailies": [
