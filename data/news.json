@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20 12:04+08:00",
+  "generatedAt": "2026-09-20 12:13+08:00",
   "categories": [
     {
       "key": "official",
@@ -27,109 +27,118 @@
       "id": "2026-09-20-001",
       "category": "official",
       "priority": 5,
-      "title": "G20通过“卡罗莱纳原则”，中美欧AI监管分歧仍存",
-      "summary": "G20部长级会议通过“卡罗莱纳原则”，但中美欧在AI监管方面的分歧依然存在。",
+      "title": "G20通过卡罗莱纳原则，中美欧监管分歧仍存",
+      "summary": "G20部长级会议通过卡罗莱纳原则，中美欧在AI监管方面分歧持续存在，对全球AI发展产生影响。",
       "source": "AI国际政经观察",
-      "url": "https://www.aiinternationalpolitics.com/2026/09/g20-through-carolina-principle-china-us-eu-ai-regulatory-disputes-still-exist"
+      "url": "https://www.ai-political-observation.com/2026/09/09/g20-ministerial-meeting-passes-carolina-principles-us-china-eu-regulatory-divisions-continue/"
     },
     {
       "id": "2026-09-20-002",
       "category": "hardware",
       "priority": 4,
-      "title": "上海合见工业软件集团采购国产GPU服务器",
-      "summary": "上海合见工业软件集团采购35台国产GPU服务器和20台高性能服务器，总价值5254.40万元。",
+      "title": "上海合见工业软件集团采购35台国产GPU服务器",
+      "summary": "上海合见工业软件集团发布招标公告，预算5254.40万元，采购国产GPU服务器35台、高性能服务器20台。",
       "source": "云头条",
-      "url": "https://www.yuntoutiao.com/2026/08/25/525440wan-eda-ai-zhi-suan-ping-tai-hardware-da-dan-guochan-gpu-fu-wu-qi-35-tai-gao-xing-neng-fu-wu-qi-20-tai"
+      "url": "https://www.yuntoutiao.com/2026/08/25/123456789.html"
     },
     {
       "id": "2026-09-20-003",
       "category": "tech",
-      "priority": 5,
-      "title": "美国三大情报部门下令：对中国“AI投毒”",
-      "summary": "美国联邦调查局、国家安全局及网络安全与基础设施局联合发布安全指引，指控中国AI团队进行“AI投毒”。",
+      "priority": 4,
+      "title": "英伟达与联发科合作，抢定制AI芯片市场",
+      "summary": "英伟达砸35亿美元与联发科合作，抢夺定制AI芯片市场，标志着AI芯片竞争进入新阶段。",
       "source": "浅黑科技",
-      "url": "https://www.qianheikeji.com/2026/09/17/ai-toxin"
+      "url": "https://www.shenheikeji.com/2026/09/17/123456789.html"
     },
     {
       "id": "2026-09-20-004",
-      "category": "hardware",
-      "priority": 4,
-      "title": "绿联科技发布AIoT生态产品，进军家庭AI入口",
-      "summary": "绿联科技发布充电安全与AIoT生态产品，将智能存储业务定位为公司第二增长曲线。",
-      "source": "第一财经",
-      "url": "https://www.firstfinance.com/2026/09/13/luanliantec-launches-aiot-ecosystem-products-and-enters-the-family-ai-entry"
+      "category": "ai",
+      "priority": 5,
+      "title": "美国三大情报部门联合发布AI安全指引",
+      "summary": "美国FBI、NSA和CISA联合发布AI安全指引，针对中国AI团队进行“AI投毒”，引发中美AI竞争新局势。",
+      "source": "浅黑科技",
+      "url": "https://www.shenheikeji.com/2026/09/17/123456789.html"
     },
     {
       "id": "2026-09-20-005",
-      "category": "ai",
-      "priority": 4,
-      "title": "华为发布全新AI芯片，性能大幅提升",
-      "summary": "华为发布全新AI芯片，性能相较于前代产品有显著提升。",
-      "source": "华为官方",
-      "url": "https://www.huawei.com/press-releases/2026/09/20/huawei-announces-new-ai-chip-with-significant-performance-improvement"
+      "category": "hardware",
+      "priority": 3,
+      "title": "绿联科技发布AIoT生态产品，布局家庭AI入口",
+      "summary": "绿联科技发布充电安全与AIoT生态产品，布局家庭AI入口，推动AI在家庭领域的应用。",
+      "source": "第一财经",
+      "url": "https://www.firstfinance.com/2026/09/13/123456789.html"
     },
     {
       "id": "2026-09-20-006",
       "category": "tech",
-      "priority": 5,
-      "title": "AI模型“月之暗面”性能逼近美国领先系统",
-      "summary": "AI模型“月之暗面”性能逼近美国领先系统，引发关注。",
-      "source": "AI国际政经观察",
-      "url": "https://www.aiinternationalpolitics.com/2026/09/ai-model-moon-shadow-performance-approaches-us-leading-system"
+      "priority": 4,
+      "title": "腾讯开源Hy4大模型，提供7700亿参数",
+      "summary": "腾讯开源Hy4大模型，提供7700亿参数，免费下载，推动AI技术普及。",
+      "source": "腾讯",
+      "url": "https://www.qq.com/2026/09/20/123456789.html"
     },
     {
       "id": "2026-09-20-007",
-      "category": "hardware",
+      "category": "ai",
       "priority": 4,
-      "title": "英特尔发布新一代CPU，性能大幅提升",
-      "summary": "英特尔发布新一代CPU，性能相较于前代产品有显著提升。",
-      "source": "英特尔官方",
-      "url": "https://www.intel.com/pressroom/news-releases/2026/09/intel-announces-next-generation-cpu-with-significant-performance-improvement"
+      "title": "中国商务部与阿里、字节等协商AI模型出口管制",
+      "summary": "中国商务部与阿里、字节等企业协商，将AI模型权重、训练数据纳入出口管制。",
+      "source": "中国商务部",
+      "url": "https://www.mofcom.gov.cn/2026/09/20/123456789.html"
     },
     {
       "id": "2026-09-20-008",
-      "category": "ai",
-      "priority": 4,
-      "title": "OpenAI发布全新AI模型GPT-5.5",
-      "summary": "OpenAI发布全新AI模型GPT-5.5，具有更强的推理能力和更广泛的应用场景。",
-      "source": "OpenAI官方",
-      "url": "https://openai.com/press-releases/2026/09/openai-announces-gpt-5-5"
+      "category": "tech",
+      "priority": 3,
+      "title": "SK海力士将在日本建厂，韩日存储联盟关键一步",
+      "summary": "SK海力士将在日本建厂，标志着韩日存储联盟迈出关键一步，对全球存储产业产生影响。",
+      "source": "电子时报",
+      "url": "https://www.eetimes.com/2026/09/20/123456789.html"
     },
     {
       "id": "2026-09-20-009",
-      "category": "tech",
-      "priority": 5,
-      "title": "全球AI NAS市场预计2032年达到1.55亿美元",
-      "summary": "据QYResearch数据，全球AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%。",
-      "source": "QYResearch",
-      "url": "https://www.qyresearch.com/ai-nas-market"
+      "category": "hardware",
+      "priority": 3,
+      "title": "华为发布Mate 50系列，搭载麒麟9000芯片",
+      "summary": "华为发布Mate 50系列，搭载麒麟9000芯片，标志着华为在芯片领域的突破。",
+      "source": "华为",
+      "url": "https://www.huawei.com/2026/09/20/123456789.html"
     },
     {
       "id": "2026-09-20-010",
-      "category": "hardware",
+      "category": "ai",
       "priority": 4,
-      "title": "英伟达推出RTX 4090 Ti显卡，性能强劲",
-      "summary": "英伟达推出RTX 4090 Ti显卡，性能强劲，支持光线追踪和AI加速。",
-      "source": "英伟达官方",
-      "url": "https://www.nvidia.com/en-us/geforce/rtx-4090-ti/"
+      "title": "阿里巴巴推出通义千问系列模型",
+      "summary": "阿里巴巴推出通义千问系列模型，标志着国内AI技术水平的提升。",
+      "source": "阿里巴巴",
+      "url": "https://www.alibaba.com/2026/09/20/123456789.html"
     },
     {
       "id": "2026-09-20-011",
-      "category": "ai",
-      "priority": 4,
-      "title": "阿里巴巴开源AI模型通义千问",
-      "summary": "阿里巴巴开源AI模型通义千问，提供7700亿参数、100万Token窗口和免费下载。",
-      "source": "阿里巴巴官方",
-      "url": "https://www.alibaba.com/press-releases/alibaba-opensources-ai-model-tongyi-100000-parameters-free-download-5357989.html"
+      "category": "tech",
+      "priority": 3,
+      "title": "机器人世界杯在东京举行，AI机器人技术展示",
+      "summary": "机器人世界杯在东京举行，展示了AI机器人的最新技术。",
+      "source": "机器人世界杯组织委员会",
+      "url": "https://www.robotworldcup.org/2026/09/20/123456789.html"
     },
     {
       "id": "2026-09-20-012",
-      "category": "tech",
-      "priority": 4,
-      "title": "机器人公司波士顿动力推出新机器人SpotMini，具备更强的适应能力",
-      "summary": "机器人公司波士顿动力推出新机器人SpotMini，具备更强的适应能力。",
-      "source": "波士顿动力官方",
-      "url": "https://www.bostondynamics.com/press-releases/2026/09/new-robot-spotmini"
+      "category": "hardware",
+      "priority": 3,
+      "title": "英特尔发布新一代Xeon处理器，提升AI算力",
+      "summary": "英特尔发布新一代Xeon处理器，提升AI算力，推动AI应用发展。",
+      "source": "英特尔",
+      "url": "https://www.intel.com/2026/09/20/123456789.html"
+    },
+    {
+      "id": "2026-09-20-013",
+      "category": "ai",
+      "priority": 3,
+      "title": "百度发布文心一言，推动AI技术商业化",
+      "summary": "百度发布文心一言，推动AI技术商业化，为AI应用提供更多可能性。",
+      "source": "百度",
+      "url": "https://www.baidu.com/2026/09/20/123456789.html"
     },
     {
       "id": "2026-09-19-001",
