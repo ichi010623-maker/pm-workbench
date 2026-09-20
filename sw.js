@@ -13,7 +13,7 @@
    - 后续版本如需重新启用 SW，再加回来
    ============================================ */
 
-const CACHE_VERSION = "v5.9.158";
+const CACHE_VERSION = "v5.9.156";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 8000;
 

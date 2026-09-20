@@ -20,6 +20,7 @@ var LG_TABS = [
   { k: "video", t: "🎬 视频课" },
   { k: "test", t: "🧪 自测" },
   { k: "reading", t: "📰 精读" },
+  { k: "xhs", t: "📕 小红书" },
   { k: "listening", t: "🎧 听力" },
   { k: "speaking", t: "🗣 口语" },
   { k: "notes", t: "✍️ 写作笔记" },
@@ -809,6 +810,7 @@ function renderLanguage() {
     case "listening": body = lgRenderListening(cur); break;
     case "speaking": body = lgRenderSpeaking(cur); break;
     case "notes": body = lgRenderNotes(cur); break;
+    case "xhs": body = lgRenderXhs(cur); break;
     case "plan": body = lgRenderPlan(cur); break;
     case "stats": body = lgRenderStats(cur); break;
     default: body = lgRenderHome(cur);
@@ -3589,9 +3591,264 @@ function lgDiffHtml(heard, target) {
 }
 
 /* =============================================================
+ * 模块六（X）：/* =============================================================
  * 模块六：写作 & 一体化笔记中心
  * ============================================================= */
 function lgRenderNotes(cur) {
+小红书笔记导入（v5.9.156 · MiniMax-M3 总结）
+ * 输入：小红书 URL（作记录）+ 手动粘贴正文
+ * 调用 MiniMax-M3（OpenAI 兼容）做英文短句/词汇/翻译润色
+ * 输出：原文 + 中文翻译 + 重点词汇 + 关键句
+ * ============================================================= */
+var LG_XHS_KEY = "hw_pm_lg_xhs_v1"; // localStorage 持久化（结构：{ items: [{id,url,title,body,summary,vocab,sentences,createdAt}] }）
+var LG_XHS_PROMPT =
+  "你是英语学习助手，专为中国用户拆解英文小红书/笔记里的语言点。\n" +
+  "任务：\n" +
+  "1) 中文翻译摘要（≤120 字，保留原文梗概和语气）；\n" +
+  "2) 重点词汇：列出 6-10 个值得记的英文词/短语（生词、俚语、口语化表达、关键动词/形容词/名词），给出中文释义+原句例证；\n" +
+  "3) 关键句：挑出 3-5 句值得背诵/模仿的句子，提供中文译文；\n" +
+  "4) 学习建议：给出 2-3 条针对这篇文章的具体学习建议（口语/写作/语法）。\n" +
+  "输出用 Markdown，章节标题用 H2，词条用 bullet。";
+
+function lgXhsLoad() {
+  try { return JSON.parse(localStorage.getItem(LG_XHS_KEY) || '{"items":[]}') || {"items":[]}; }
+  catch (e) { return {"items":[]}; }
+}
+function lgXhsSave(s) {
+  try { localStorage.setItem(LG_XHS_KEY, JSON.stringify(s)); } catch (e) {}
+}
+function lgXhsUid() {
+  return "xhs_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+}
+function lgXhsGetCfg() {
+  // 复用 settings §model 的 aiCfg（hw_pm_ai_config）+ provider 选 minimax
+  try {
+    if (typeof loadAiConfig === "function") {
+      var c = loadAiConfig();
+      if (!c.provider) c.provider = "minimax";
+      return c;
+    }
+  } catch (e) {}
+  return { provider: "minimax", apiKey: "", apiUrl: "" };
+}
+function lgXhsExtract(content) {
+  var out = { text: "", vocab: [], sentences: [], advice: [] };
+  if (!content) return out;
+  // 抓 Markdown 段落
+  var lines = content.split("\n");
+  var mode = "";
+  lines.forEach(function (ln) {
+    var t = ln.trim();
+    if (/^#\s/.test(t) || /^##\s/.test(t)) {
+      var h = t.replace(/^#+\s*/, "");
+      if (/翻译|摘要|总结/i.test(h)) mode = "text";
+      else if (/词汇|单词|生词/i.test(h)) mode = "vocab";
+      else if (/关键句|句子|句型/i.test(h)) mode = "sentences";
+      else if (/建议|学习|方法/i.test(h)) mode = "advice";
+      else if (mode === "") mode = "text";
+      else mode = mode; // 保持
+      out[mode] = out[mode] || (mode === "vocab" || mode === "sentences" || mode === "advice" ? [] : "");
+    } else if (/^[-*]\s/.test(t)) {
+      if (mode === "vocab" || mode === "sentences" || mode === "advice") {
+        out[mode].push(t.replace(/^[-*]\s*/, ""));
+      } else {
+        out.text += (out.text ? "\n" : "") + t;
+      }
+    } else if (t) {
+      if (mode === "vocab" || mode === "sentences" || mode === "advice") {
+        // 兼容：未加 bullet 的也累积
+        if (out[mode].length === 0) out[mode].push(t);
+      } else {
+        out.text += (out.text ? "\n" : "") + t;
+      }
+    }
+  });
+  return out;
+}
+
+function lgXhsCallMinimax(prompt, cb) {
+  // v5.9.156: MiniMax-M3 / MiniMax-M2.7 等（OpenAI 兼容 v2 接口）
+  var cfg = lgXhsGetCfg();
+  var key = cfg.apiKey || cfg.minimaxKey || "";
+  var url = cfg.apiUrl || "https://api.minimax.chat/v1/text/chatcompletion_v2";
+  var model = cfg.model || "MiniMax-M3";
+  if (!key) {
+    showToast("请先在「设置 → AI 模型」里填写 MiniMax API Key", "warning");
+    return;
+  }
+  showToast("正在让 MiniMax-M3 总结…（10-30 秒）", "info");
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + key },
+    body: JSON.stringify({
+      model: model,
+      messages: [
+        { role: "system", content: LG_XHS_PROMPT },
+        { role: "user", content: prompt }
+      ]
+    })
+  }).then(function (r) { return r.json(); }).then(function (j) {
+    var text = (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
+    var err = (j && j.base_resp && j.base_resp.status_msg) || "";
+    if (!text && err) { showToast("MiniMax 调用失败：" + err, "warning"); cb(null); return; }
+    cb(text || "");
+  }).catch(function (e) {
+    showToast("MiniMax 调用失败：" + (e && e.message ? e.message : "网络/Key 不对"), "warning");
+    cb(null);
+  });
+}
+
+function lgRenderXhs(cur) {
+  var st = lgXhsLoad();
+  var items = st.items || [];
+  items.sort(function (a, b) { return (b.createdAt || 0) - (a.createdAt || 0); });
+
+  var html = '<div class="lg-card">' +
+    '<div class="lg-card-h">📕 小红书 / 英文内容总结</div>' +
+    '<div class="lg-card-sub">粘贴小红书笔记原文，MiniMax-M3 会拆解重点词汇/关键句/翻译</div>' +
+    '<div class="form-row">' +
+      '<div class="form-group" style="flex:1">' +
+        '<label class="form-label">小红书链接（可选，作记录用）</label>' +
+        '<input class="form-input" id="lg-xhs-url" placeholder="https://www.xiaohongshu.com/explore/...">' +
+      '</div>' +
+      '<div class="form-group" style="flex:0 0 160px">' +
+        '<label class="form-label">语种</label>' +
+        '<select class="form-select" id="lg-xhs-lang">' +
+          '<option value="en" ' + (cur === "en" ? "selected" : "") + '>英语</option>' +
+          '<option value="ja" ' + (cur === "ja" ? "selected" : "") + '>日语</option>' +
+          '<option value="ko" ' + (cur === "ko" ? "selected" : "") + '>韩语</option>' +
+        '</select>' +
+      '</div>' +
+    '</div>' +
+    '<div class="form-group">' +
+      '<label class="form-label">正文（手动粘贴）</label>' +
+      '<textarea class="form-textarea" id="lg-xhs-body" rows="6" placeholder="把小红书笔记的正文/标题/正文复制进来。空消息会被忽略。"></textarea>' +
+    '</div>' +
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">' +
+      '<button class="btn btn-primary" onclick="lgXhsSummarize()">🤖 MiniMax-M3 总结</button>' +
+      '<button class="btn btn-secondary" onclick="lgXhsSaveDraft()">💾 仅保存原文（不总结）</button>' +
+    '</div>' +
+  '</div>';
+
+  // 历史列表
+  if (items.length) {
+    html += '<div class="lg-card"><div class="lg-card-h">📚 历史记录 (' + items.length + ')</div>';
+    items.forEach(function (it) {
+      html += '<div class="xhs-item">' +
+        '<div class="xhs-item-h">' +
+          '<a class="xhs-item-title" href="' + escapeHtml(it.url || "#") + '" target="_blank" rel="noopener">' + escapeHtml(it.title || (it.url || "未命名笔记")) + '</a>' +
+          '<div class="xhs-item-actions">' +
+            '<button class="btn btn-ghost sm" onclick="lgXhsView(\'' + it.id + '\')">查看</button>' +
+            '<button class="btn btn-ghost sm" onclick="lgXhsDel(\'' + it.id + '\')">×</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="xhs-item-meta">' + escapeHtml(new Date(it.createdAt).toLocaleString()) + ' · ' + (it.lang || "en").toUpperCase() + (it.url ? ' · ' + escapeHtml(it.url.slice(0, 60)) + (it.url.length > 60 ? "…" : "")) : "") + '</div>' +
+        (it.summary ? '<details class="xhs-item-details"><summary>总结预览</summary><div class="xhs-item-summary">' + escapeHtml(it.summary.slice(0, 200)) + (it.summary.length > 200 ? "…" : "") + '</div></details>' : "") +
+      '</div>';
+    });
+    html += '</div>';
+  } else {
+    html += '<div class="lg-card"><div class="lg-card-sub" style="text-align:center;color:var(--text-tertiary)">暂无历史记录</div></div>';
+  }
+
+  // 详情弹窗容器（隐藏）
+  html += '<div id="lg-xhs-modal-host" style="display:none"></div>';
+  return html;
+}
+
+function lgXhsSummarize() {
+  var url = (document.getElementById("lg-xhs-url") || {}).value || "";
+  var body = (document.getElementById("lg-xhs-body") || {}).value || "";
+  var lang = (document.getElementById("lg-xhs-lang") || {}).value || "en";
+  if (!body.trim()) { showToast("正文不能为空", "warning"); return; }
+  var langName = { en: "英语", ja: "日语", ko: "韩语" }[lang] || "英语";
+  var userPrompt = "原文（" + langName + "）：\n\n" + body + (url ? "\n\n参考链接：" + url : "");
+  lgXhsCallMinimax(userPrompt, function (summary) {
+    if (!summary) return;
+    var st = lgXhsLoad();
+    st.items = st.items || [];
+    var parsed = lgXhsExtract(summary);
+    st.items.push({
+      id: lgXhsUid(),
+      url: url.trim(),
+      title: (body.split("\n")[0] || "").slice(0, 80).trim() || (url ? url.slice(0, 50) : "未命名笔记"),
+      body: body,
+      lang: lang,
+      summary: summary,
+      parsed: parsed,
+      createdAt: Date.now()
+    });
+    lgXhsSave(st);
+    showToast("✅ 已保存到「英语学习 → 📕 小红书」", "success");
+    if (typeof render === "function") render();
+  });
+}
+
+function lgXhsSaveDraft() {
+  var url = (document.getElementById("lg-xhs-url") || {}).value || "";
+  var body = (document.getElementById("lg-xhs-body") || {}).value || "";
+  var lang = (document.getElementById("lg-xhs-lang") || {}).value || "en";
+  if (!body.trim()) { showToast("正文不能为空", "warning"); return; }
+  var st = lgXhsLoad();
+  st.items = st.items || [];
+  st.items.push({
+    id: lgXhsUid(),
+    url: url.trim(),
+    title: (body.split("\n")[0] || "").slice(0, 80).trim() || (url ? url.slice(0, 50) : "未命名笔记"),
+    body: body,
+    lang: lang,
+    summary: "",
+    parsed: null,
+    createdAt: Date.now()
+  });
+  lgXhsSave(st);
+  showToast("已保存原文（未总结）", "success");
+  if (typeof render === "function") render();
+}
+
+function lgXhsView(id) {
+  var st = lgXhsLoad();
+  var it = (st.items || []).filter(function (x) { return x.id === id; })[0];
+  if (!it) return;
+  var parsed = it.parsed || lgXhsExtract(it.summary || "");
+  var mdHtml = renderMarkdownToHtml(it.summary || "（暂无总结，请点击上方「🤖 MiniMax-M3 总结」重新生成）");
+  var html = '<div class="nv-form">' +
+    '<div class="nv-form-h">' + escapeHtml(it.title || "未命名笔记") + '</div>' +
+    (it.url ? '<div class="form-group"><div class="form-label">链接</div><a href="' + escapeHtml(it.url) + '" target="_blank" rel="noopener" class="form-input" style="display:block;word-break:break-all;color:var(--accent-blue);text-decoration:underline">' + escapeHtml(it.url) + '</a></div>' : "") +
+    '<div class="form-group"><div class="form-label">正文（原文）</div><div class="xhs-body">' + escapeHtml(it.body) + '</div></div>' +
+    '<div class="form-group"><div class="form-label">MiniMax-M3 总结</div><div class="xhs-summary">' + mdHtml + '</div></div>' +
+    '</div>';
+  if (typeof showModal === "function") showModal(html);
+}
+
+function lgXhsDel(id) {
+  if (!confirm("确定删除这条小红书记录？")) return;
+  var st = lgXhsLoad();
+  st.items = (st.items || []).filter(function (x) { return x.id !== id; });
+  lgXhsSave(st);
+  if (typeof render === "function") render();
+}
+
+// 极简 Markdown → HTML（仅处理 h2/h3/bold/bullet/code，避免引入大库）
+function renderMarkdownToHtml(md) {
+  if (!md) return "";
+  var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); };
+  var html = esc(md);
+  // h2 / h3
+  html = html.replace(/^### (.+)$/gm, "<h3>$1</h3>").replace(/^## (.+)$/gm, "<h2>$1</h2>");
+  // 粗体 **x**
+  html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  // 行内代码 `x`
+  html = html.replace(/`([^`]+)`/g, "<code style=\"background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:4px;font-size:13px\">$1</code>");
+  // bullet（- 或 * 开头）
+  html = html.replace(/^[ \t]*[-*]\s+(.+)$/gm, "<div style=\"display:flex;gap:6px;margin:4px 0\"><span style=\"color:#94a3b8\">•</span><span>$1</span></div>");
+  // 段落（双换行 → </p>）
+  html = html.replace(/\n\n+/g, "</p><p>").replace(/^/, "<p>").replace(/$/, "</p>");
+  html = html.replace(/<p><\/p>/g, "").replace(/<p>(<h[23]>)/g, "$1").replace(/(<\/h[23]>)<\/p>/g, "$1");
+  // 单换行 → <br>
+  html = html.replace(/\n/g, "<br>");
+  return html;
+}
   var e = langGet(cur);
   var notes = e.notes || [];
   var q = lgNoteSearch.trim().toLowerCase();
