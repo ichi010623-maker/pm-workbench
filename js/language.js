@@ -3320,9 +3320,168 @@ function lgImportListen() {
 }
 
 /* =============================================================
+ * 听力素材：分类 / 掌握状态（纯函数，供列表与测试共用）
+ * 分类规则：
+ *   1) 「📘 新概念 1 · L12 Xxx」→ 按册分组「📘 新概念 第一册 / 第二册」
+ *   2) 其他含 " · " 的素材（如 🎙 BBC 6 Minute English · …）→ 取 " · " 前的来源名
+ *   3) 剩下的一律归入「📝 我的素材」
+ * 组内按**名称自然序**（L2 在 L10 之前，而非字典序）。
+ * 掌握状态：条目上的 `mastered` 布尔。老数据没有该字段 → 视作未掌握。
+ * ============================================================= */
+var lgListenFilter = "all";     // all | todo | done
+var lgListenCollapsed = {};     // { 分类key: true } = 该分类折叠
+var LG_LISTEN_MISC_KEY = "mine";
+
+function lgListenCat(title) {
+  var t = String(title == null ? "" : title).replace(/^🎧\s*/, "").trim();
+  var m = t.match(/^📘\s*新概念\s*([12一二])\s*·/);
+  if (m) {
+    var b = (m[1] === "一" || m[1] === "1") ? 1 : 2;
+    return { key: "nce:" + b, label: "📘 新概念 第" + (b === 1 ? "一" : "二") + "册", order: b * 10 };
+  }
+  var i = t.indexOf(" · ");
+  if (i > 0) {
+    var head = t.slice(0, i).trim();
+    if (head) return { key: "src:" + head, label: head, order: 100 };
+  }
+  return { key: LG_LISTEN_MISC_KEY, label: "📝 我的素材", order: 9000 };
+}
+/* 自然序比较：数字段按数值比（L2 < L10），其余按字符序 */
+function lgNaturalCompare(a, b) {
+  var pa = String(a == null ? "" : a).split(/(\d+)/);
+  var pb = String(b == null ? "" : b).split(/(\d+)/);
+  var n = Math.min(pa.length, pb.length);
+  for (var i = 0; i < n; i++) {
+    if (pa[i] === pb[i]) continue;
+    var nx = /^\d+$/.test(pa[i]), ny = /^\d+$/.test(pb[i]);
+    if (nx && ny) return parseInt(pa[i], 10) - parseInt(pb[i], 10);
+    return pa[i] < pb[i] ? -1 : 1;
+  }
+  return pa.length - pb.length;
+}
+/* 分组（组内已按名称排序，组间按 order 再按名称） */
+function lgListenGroupList(list) {
+  var map = {}, out = [];
+  (list || []).forEach(function (it) {
+    if (!it) return;
+    var c = lgListenCat(it.title);
+    if (!map[c.key]) { map[c.key] = { key: c.key, label: c.label, order: c.order, items: [] }; out.push(map[c.key]); }
+    map[c.key].items.push(it);
+  });
+  out.forEach(function (g) {
+    g.items.sort(function (a, b) { return lgNaturalCompare(a.title, b.title); });
+  });
+  out.sort(function (a, b) { return a.order - b.order || lgNaturalCompare(a.label, b.label); });
+  return out;
+}
+function lgListenStats(list) {
+  var t = 0, d = 0;
+  (list || []).forEach(function (it) { if (!it) return; t++; if (it.mastered) d++; });
+  return { total: t, done: d, todo: t - d };
+}
+function lgListenFilterList(list, f) {
+  var arr = list || [];
+  if (f === "todo") return arr.filter(function (it) { return it && !it.mastered; });
+  if (f === "done") return arr.filter(function (it) { return it && !!it.mastered; });
+  return arr.slice();
+}
+
+/* =============================================================
  * 模块四：听力训练
  * ============================================================= */
 var lgListenId = null;
+
+/* ---------- 掌握状态 / 分类交互 ---------- */
+function lgListenFind(id) {
+  var list = langGet(langCur()).listening || [];
+  for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+  return null;
+}
+function lgListenMaster(id) {
+  var it = lgListenFind(id);
+  if (!it) return;
+  it.mastered = !it.mastered;
+  it.masteredAt = it.mastered ? new Date().toISOString() : null;
+  DB.save(); render();
+  showToast(it.mastered ? "已标记为「已掌握」✅" : "已取消掌握，回到「未掌握」", it.mastered ? "success" : "warning");
+}
+function lgSetListenFilter(f) {
+  if (f !== "all" && f !== "todo" && f !== "done") f = "all";
+  lgListenFilter = f;
+  render();
+}
+function lgListenToggleCat(key) {
+  lgListenCollapsed[key] = !lgListenCollapsed[key];
+  render();
+}
+/* 整类批量标记（val=true 全部掌握 / false 全部取消） */
+function lgListenMasterCat(key, val) {
+  var list = langGet(langCur()).listening || [];
+  var v = !!val, n = 0;
+  list.forEach(function (it) {
+    if (!it || lgListenCat(it.title).key !== key) return;
+    if (!!it.mastered === v) return;
+    it.mastered = v;
+    it.masteredAt = v ? new Date().toISOString() : null;
+    n++;
+  });
+  DB.save(); render();
+  if (!n) { showToast("该分类无需变更", "warning"); return; }
+  showToast(v ? ("已把 " + n + " 组标记为「已掌握」") : ("已取消 " + n + " 组的掌握状态"), "success");
+}
+/* 单条素材卡片 */
+function lgListenCardHtml(it) {
+  var n = (it.sentences || []).length;
+  var id = lgEscapeJs(it.id);
+  return '<div class="lg-mat' + (it.mastered ? " mastered" : "") + '" onclick="lgListenId=\'' + id + '\';render()">' +
+    '<div class="lg-mat-head">' +
+      '<div class="lg-mat-info">' +
+        '<div class="lg-mat-title">' + (it.mastered ? "✅ " : "🎧 ") + escapeHtml(it.title) + '</div>' +
+        '<div class="lg-mat-meta">' + n + ' 句 · ' + formatDateShort(it.date) +
+          (it.mastered ? ' · <span class="lg-done-tag">已掌握</span>' : '') + '</div>' +
+      '</div>' +
+      '<div class="lg-mat-ops">' +
+        '<span title="' + (it.mastered ? "取消掌握" : "标记已掌握") + '" onclick="event.stopPropagation();lgListenMaster(\'' + id + '\')">' + (it.mastered ? "↩️" : "✅") + '</span>' +
+        '<span title="编辑" onclick="event.stopPropagation();lgListenEdit(\'' + id + '\')">✏️</span>' +
+        '<span title="删除" onclick="event.stopPropagation();lgListenDel(\'' + id + '\')">🗑</span>' +
+      '</div>' +
+    '</div></div>';
+}
+/* 听力列表：筛选 tab + 分类分组 */
+function lgListenListHtml(cur) {
+  var list = langGet(cur).listening || [];
+  var all = lgListenStats(list);
+  var tabs = '<div class="lg-listen-tabs">' +
+    [["all", "全部", all.total], ["todo", "⏳ 未掌握", all.todo], ["done", "✅ 已掌握", all.done]].map(function (t) {
+      return '<button class="lg-listen-tab' + (lgListenFilter === t[0] ? " on" : "") + '" onclick="lgSetListenFilter(\'' + t[0] + '\')">' +
+        t[1] + ' <span class="lg-listen-cnt">' + t[2] + '</span></button>';
+    }).join("") + '</div>';
+  var bar = '<div class="lg-listen-bar">' +
+    '<span class="lg-listen-prog">掌握进度 ' + all.done + ' / ' + all.total + '</span>' +
+    (all.todo ? '<span class="lg-listen-tip">还有 ' + all.todo + ' 组未掌握</span>' : '<span class="lg-listen-tip done">全部已掌握 🎉</span>') +
+    '</div>';
+  var shown = lgListenFilterList(list, lgListenFilter);
+  if (!shown.length) {
+    var why = lgListenFilter === "done" ? "还没有标记为「已掌握」的素材。打开素材点 ✅ 即可标记。"
+      : lgListenFilter === "todo" ? "没有未掌握的素材，全部掌握 🎉" : "还没有听力素材。";
+    return tabs + bar + '<div class="empty-state"><div class="empty-text">' + why + '</div></div>';
+  }
+  var groups = lgListenGroupList(shown);
+  return tabs + bar + groups.map(function (g) {
+    var gs = lgListenStats(g.items);
+    var col = !!lgListenCollapsed[g.key];
+    var k = lgEscapeJs(g.key);
+    return '<div class="lg-listen-group">' +
+      '<div class="lg-listen-gh">' +
+        '<span class="lg-listen-gt" onclick="lgListenToggleCat(\'' + k + '\')">' + (col ? "▶" : "▼") + ' ' + escapeHtml(g.label) + '</span>' +
+        '<span class="lg-listen-gc">' + g.items.length + ' 组 · 已掌握 ' + gs.done + '/' + g.items.length + '</span>' +
+        (gs.todo ? '<span class="lg-listen-gop" onclick="lgListenMasterCat(\'' + k + '\',true)">全掌握</span>' : '') +
+        (gs.done ? '<span class="lg-listen-gop" onclick="lgListenMasterCat(\'' + k + '\',false)">全取消</span>' : '') +
+      '</div>' +
+      (col ? '' : '<div class="lg-mat-list">' + g.items.map(lgListenCardHtml).join("") + '</div>') +
+    '</div>';
+  }).join("");
+}
 function lgRenderListening(cur) {
   var e = langGet(cur);
   var list = e.listening || [];
@@ -3333,13 +3492,14 @@ function lgRenderListening(cur) {
       var sents = item.sentences || [];
       var rate = e.settings.rate || 0.9;
       var idx = lgListening && lgListening.id === item.id ? lgListening.idx : 0;
-      return '<div class="lg-card"><div class="lg-card-h">🎧 ' + escapeHtml(item.title) + ' <span class="lg-sub">' + sents.length + ' 句</span></div>' +
+      return '<div class="lg-card"><div class="lg-card-h">' + (item.mastered ? "✅ " : "🎧 ") + escapeHtml(item.title) + ' <span class="lg-sub">' + sents.length + ' 句' + (item.mastered ? ' · 已掌握' : '') + '</span></div>' +
         '<div class="lg-row" style="gap:8px;margin-bottom:10px;flex-wrap:wrap">' +
           '<button class="lg-btn" onclick="lgListenPlay(\'' + item.id + '\')">▶ 播放</button>' +
           '<button class="lg-btn ghost" onclick="lgListenStop()">⏹ 停止</button>' +
           '<button class="lg-btn ghost" onclick="lgListenRate(' + Math.max(0.5, rate - 0.15) + ')">−</button>' +
           '<span class="lg-mini on" style="padding:4px 8px">' + rate + 'x</span>' +
           '<button class="lg-btn ghost" onclick="lgListenRate(' + Math.min(1.75, rate + 0.15) + ')">＋</button>' +
+          '<button class="lg-btn ghost" style="border-color:var(--accent,#3b82f6);color:var(--accent,#3b82f6)" onclick="lgListenMaster(\'' + item.id + '\')">' + (item.mastered ? "↩️ 取消掌握" : "✅ 标记已掌握") + '</button>' +
           '<button class="lg-btn ghost" onclick="lgListenEdit(\'' + item.id + '\')">✏️ 编辑</button>' +
           '<button class="lg-btn ghost" onclick="lgListenDel(\'' + item.id + '\')">🗑 删除</button>' +
           '<button class="lg-btn ghost" onclick="lgListenId=null;render()">← 返回</button>' +
@@ -3363,7 +3523,7 @@ function lgRenderListening(cur) {
     }
     lgListenId = null;
   }
-  return '<div class="lg-card"><div class="lg-card-h">🎧 听力训练 <span class="lg-sub">' + m1(cur) + ' · ' + list.length + ' 组</span>' + lgHistoryBtn("listen") + '</div>' +
+  return '<div class="lg-card"><div class="lg-card-h">🎧 听力训练 <span class="lg-sub">' + m1(cur) + ' · ' + list.length + ' 组 · 已掌握 ' + lgListenStats(list).done + '</span>' + lgHistoryBtn("listen") + '</div>' +
     '<div class="lg-row" style="gap:8px">' +
       '<button class="lg-btn" onclick="lgListenForm()">＋ 添加听力素材</button>' +
       '<button class="lg-btn ghost" onclick="lgImportListen()">🎧 内置听力（' + (LG_LISTEN_BUILTIN[cur] || []).length + ' 组）</button>' +
@@ -3376,19 +3536,7 @@ function lgRenderListening(cur) {
       '<a class="lg-btn ghost" href="https://zh.wikipedia.org/wiki/%E6%96%B0%E6%A6%82%E5%BF%B5%E8%8B%B1%E8%AF%AD" target="_blank" rel="noopener" style="text-decoration:none">📘 新概念英语（资源索引）↗</a>' +
     '</div>' : '') +
     (list.length === 0 ? '<div class="empty-state"><div class="empty-text">还没有听力素材。点「＋ 添加听力素材」粘贴一组对话（每行一句，可带翻译），也可从精读素材一键转听力。</div></div>' :
-      '<div class="lg-mat-list">' + list.map(function (it) {
-        return '<div class="lg-mat" onclick="lgListenId=\'' + it.id + '\';render()">' +
-          '<div class="lg-mat-head">' +
-            '<div class="lg-mat-info">' +
-              '<div class="lg-mat-title">🎧 ' + escapeHtml(it.title) + '</div>' +
-              '<div class="lg-mat-meta">' + (it.sentences || []).length + ' 句 · ' + formatDateShort(it.date) + '</div>' +
-            '</div>' +
-            '<div class="lg-mat-ops">' +
-              '<span title="编辑" onclick="event.stopPropagation();lgListenEdit(\'' + it.id + '\')">✏️</span>' +
-              '<span title="删除" onclick="event.stopPropagation();lgListenDel(\'' + it.id + '\')">🗑</span>' +
-            '</div>' +
-          '</div></div>';
-      }).join("") + '</div>') +
+      lgListenListHtml(cur)) +
     '</div>' +
     (lgHist === "listen" ? lgCalHtml("listen", lgActMap(cur, "听力"), lgActSelHtml(cur, "听力", "听力练习")) : "");
 }

@@ -12,7 +12,7 @@
    - 新版本 activate 后 postMessage("SW_UPDATED") → app.js SWManager 自动 reload。
    ============================================ */
 
-const CACHE_VERSION = "v5.9.162";
+const CACHE_VERSION = "v5.9.163";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 8000;
 

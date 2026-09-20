@@ -7322,3 +7322,22 @@ select.nv-f-input:hover,select.nv-f-input:focus{background-color:#f1f5f9}
 .lg-listen-word:hover{background:rgba(59,130,246,0.15)}
 .lg-listen-word:active{opacity:0.6}
 .lg-listen-word.inbank{color:var(--text-tertiary);border-bottom-color:var(--border-color,rgba(0,0,0,0.15))}
+
+/* ===== v5.9.163 听力：按名称分类 + 已掌握/未掌握 ===== */
+.lg-listen-tabs{display:flex;gap:8px;margin:10px 0 8px;flex-wrap:wrap}
+.lg-listen-tab{flex:1;min-width:96px;padding:8px 10px;border:1px solid var(--border-color);border-radius:9px;background:transparent;color:var(--text-secondary);font-size:13px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lg-listen-tab.on{background:var(--accent,#3b82f6);border-color:var(--accent,#3b82f6);color:#fff;font-weight:600}
+.lg-listen-cnt{font-size:11px;opacity:.75;margin-left:2px}
+.lg-listen-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.lg-listen-prog{font-size:12px;font-weight:600;color:var(--text-secondary)}
+.lg-listen-tip{font-size:11px;color:var(--text-tertiary)}
+.lg-listen-tip.done{color:var(--success,#16a34a)}
+.lg-listen-group{margin-bottom:12px}
+.lg-listen-gh{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:7px 10px;border-radius:9px;background:var(--bg-tertiary);margin-bottom:8px}
+.lg-listen-gt{flex:1;min-width:120px;font-size:13px;font-weight:600;color:var(--text-primary);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lg-listen-gc{font-size:11px;color:var(--text-tertiary);white-space:nowrap}
+.lg-listen-gop{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--border-color);color:var(--accent,#3b82f6);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lg-listen-gop:active{opacity:.55}
+.lg-mat.mastered{opacity:.62}
+.lg-mat.mastered .lg-mat-title{font-weight:500}
+.lg-done-tag{color:var(--success,#16a34a);font-weight:600}
