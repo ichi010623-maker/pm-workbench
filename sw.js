@@ -1,60 +1,28 @@
 /* ============================================
    硬件PM工作台 Service Worker
-   v5.9.147 - 彻底禁用 SW（unregister + skipWaiting + 清所有缓存）
+   v5.9.159 - 单实例「离线壳 + 网络优先」SW
 
-   根因：v5.9.142~146 反复 deploy + bump 后，部分用户（PWA 模式 +
-   旧 SW 还在 serve）仍看不到 CSS 变更——SW 缓存层和 iOS PWA
-   的 SW 接管 timing 共同导致的顽固缓存问题。
-
-   v5.9.147 决断：彻底废弃 SW，浏览器直连所有资源。
-   - CSS 文件名永久化（css/style.v5.9.147.css）——URL 不同 = 浏览器
-     必重新拉，绕开 disk cache
-   - sw.js 唯一职责：清掉所有旧 SW + 缓存 + unregister 自身
-   - 后续版本如需重新启用 SW，再加回来
+   设计（合并 v5.9.135 离线壳与 v5.9.147 经验）：
+   - 只保留 **一个** install / activate / fetch 监听器（历史版本误留了重复监听器
+     并有孤立代码块，导致 sw.js 语法错误 → register() 直接失败 → 旧 SW 永久
+     接管并持续 serve 老缓存，这正是「改了页面看不到」的根因）。
+   - 首页 / 导航 / 静态资源：network-first（8s 超时）→ 保证拿最新；
+     网络失败回退缓存 → 保留离线能力。
+   - 跨域请求（Supabase / CDN）一律直连，SW 不介入。
+   - 新版本 activate 后 postMessage("SW_UPDATED") → app.js SWManager 自动 reload。
    ============================================ */
 
-const CACHE_VERSION = "v5.9.157";
+const CACHE_VERSION = "v5.9.159";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 8000;
 
-// ===== Install: 清掉所有 pm-workbench-* 缓存 + unregister 自身 =====
+// ===== Install: 预缓存离线壳 + skipWaiting =====
 self.addEventListener("install", function (event) {
-  console.log("[SW] v5.9.147 DISABLE: clearing all caches + unregistering");
+  console.log("[SW] Installing " + CACHE_VERSION);
   event.waitUntil(
-    caches.keys().then(function (keys) {
-      return Promise.all(
-        keys.filter(function (k) { return k.indexOf("pm-workbench-") === 0; }).map(function (k) {
-          console.log("[SW] DISABLE delete cache:", k);
-          return caches.delete(k);
-        })
-      );
-    }).then(function () {
-      return self.skipWaiting();
-    })
-  );
-});
-
-// ===== Activate: 立即 unregister 自身 + 接管 =====
-self.addEventListener("activate", function (event) {
-  console.log("[SW] v5.9.147 DISABLE: unregistering self");
-  event.waitUntil(
-    self.registration.unregister().then(function () {
-      return self.clients.matchAll();
-    }).then(function (clients) {
-      clients.forEach(function (client) { try { client.navigate(client.url); } catch (e) {} });
-    })
-  );
-});
-
-// ===== Fetch: 全部直连（不再 cache 任何东西）=====
-self.addEventListener("fetch", function (event) {
-  // 故意不调用 event.respondWith —— 走默认网络行为
-  // 但因为激活后会 unregister，所以 SW 也不再有 fetch 拦截
-});
-      return caches.open(CACHE_NAME).then(function (cache) {
-        return cache.addAll(["./manifest.json"]).catch(function (e) {
-          console.log("[SW] precache skipped:", e && e.message);
-        });
+    caches.open(CACHE_NAME).then(function (cache) {
+      return cache.addAll(["./manifest.json"]).catch(function (e) {
+        console.log("[SW] precache skipped:", e && e.message);
       });
     }).then(function () {
       return self.skipWaiting();
@@ -62,14 +30,14 @@ self.addEventListener("fetch", function (event) {
   );
 });
 
-// ===== Activate: 再次清旧 + 立即接管 =====
+// ===== Activate: 清旧缓存 + 立即接管 + 通知主线程 =====
 self.addEventListener("activate", function (event) {
   console.log("[SW] Activating " + CACHE_VERSION);
   event.waitUntil(
     caches.keys().then(function (keys) {
       return Promise.all(
         keys.filter(function (k) { return k !== CACHE_NAME; }).map(function (k) {
-          console.log("[SW] Deleting old cache (activate):", k);
+          console.log("[SW] Deleting old cache:", k);
           return caches.delete(k);
         })
       );
@@ -79,7 +47,7 @@ self.addEventListener("activate", function (event) {
       return self.clients.matchAll();
     }).then(function (clients) {
       clients.forEach(function (client) {
-        client.postMessage({ type: "SW_UPDATED", version: CACHE_VERSION });
+        try { client.postMessage({ type: "SW_UPDATED", version: CACHE_VERSION }); } catch (e) {}
       });
     })
   );
@@ -142,7 +110,7 @@ function networkFirst(request) {
   });
 }
 
-// ===== Fetch =====
+// ===== Fetch（唯一监听器）=====
 self.addEventListener("fetch", function (event) {
   var req = event.request;
   if (req.method !== "GET") return;
@@ -153,7 +121,7 @@ self.addEventListener("fetch", function (event) {
   // 跨域（Supabase API / CDN）一律直连，SW 不介入
   if (!isSameOrigin(url)) return;
 
-  // watchdog 强制刷新路径（?r=timestamp）绕过缓存直取网络
+  // watchdog 强制刷新路径（?r=timestamp / ?reset=1）绕过缓存直取网络
   if (url.search.indexOf("r=") >= 0 || url.search.indexOf("reset=1") >= 0) {
     event.respondWith(fetch(req).catch(function () { return caches.match(req); }));
     return;

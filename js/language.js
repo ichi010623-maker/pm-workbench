@@ -3593,7 +3593,6 @@ function lgDiffHtml(heard, target) {
 /* =============================================================
  * 模块六：写作 & 一体化笔记中心
  * ============================================================= */
-function lgRenderNotes(cur) {
 
 /* =============================================================
  * 模块六（X）：小红书笔记导入（v5.9.156 · MiniMax-M3 总结）
@@ -3850,6 +3849,7 @@ function renderMarkdownToHtml(md) {
   html = html.replace(/\n/g, "<br>");
   return html;
 }
+function lgRenderNotes(cur) {
   var e = langGet(cur);
   var notes = e.notes || [];
   var q = lgNoteSearch.trim().toLowerCase();
