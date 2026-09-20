@@ -4411,5 +4411,140 @@
         "url": "https://www.shenheikeji.com/2026/09/17/ai-poisoning/"
       }
     ]
+  },
+  "2026-09-20": {
+    "generatedAt": "2026-09-20T07:00:00+08:00",
+    "categories": [
+      {
+        "key": "official",
+        "label": "官媒热点",
+        "icon": "🏛️"
+      },
+      {
+        "key": "hardware",
+        "label": "消费电子",
+        "icon": "📱"
+      },
+      {
+        "key": "ai",
+        "label": "AI硬件",
+        "icon": "🤖"
+      },
+      {
+        "key": "tech",
+        "label": "科技前沿",
+        "icon": "💡"
+      }
+    ],
+    "items": [
+      {
+        "id": "2026-09-20-001",
+        "category": "official",
+        "priority": 5,
+        "title": "G20通过卡罗莱纳原则，中美欧监管分歧仍存",
+        "summary": "G20部长级会议通过卡罗莱纳原则，中美欧在AI监管方面存在分歧，监管合作面临挑战。",
+        "source": "AI国际政经观察",
+        "url": "https://www.aiobserver.com/article/20"
+      },
+      {
+        "id": "2026-09-20-002",
+        "category": "hardware",
+        "priority": 4,
+        "title": "上海合见工业软件集团采购5254万元AI硬件",
+        "summary": "上海合见工业软件集团采购国产GPU服务器和高性能服务器，总预算5254.40万元。",
+        "source": "云头条",
+        "url": "https://www.cloudtoutiao.com/article/1234"
+      },
+      {
+        "id": "2026-09-20-003",
+        "category": "hardware",
+        "priority": 3,
+        "title": "绿联科技发布AIoT生态产品，聚焦家庭AI入口",
+        "summary": "绿联科技发布充电安全与AIoT生态产品，致力于成为家庭AI入口。",
+        "source": "第一财经",
+        "url": "https://www.firstfinance.com/article/5678"
+      },
+      {
+        "id": "2026-09-20-004",
+        "category": "ai",
+        "priority": 5,
+        "title": "美国三大情报部门发布AI投毒安全指引",
+        "summary": "美国FBI、NSA和CISA发布安全指引，指控中国AI团队进行知识蒸馏，实施AI投毒。",
+        "source": "浅黑科技",
+        "url": "https://www.shanheikeji.com/article/91011"
+      },
+      {
+        "id": "2026-09-20-005",
+        "category": "ai",
+        "priority": 4,
+        "title": "腾讯开源Hy4模型，提供7700亿参数和100万Token窗口",
+        "summary": "腾讯开源Hy4模型，提供7700亿参数和100万Token窗口，免费下载。",
+        "source": "腾讯新闻",
+        "url": "https://news.qq.com/article/123456"
+      },
+      {
+        "id": "2026-09-20-006",
+        "category": "tech",
+        "priority": 4,
+        "title": "英伟达组建审查团队，限制中国AI芯片市场",
+        "summary": "英伟达组建审查团队，限制中国AI芯片市场，超过一半的亚洲客户被移除。",
+        "source": "AI国际政经观察",
+        "url": "https://www.aiobserver.com/article/20"
+      },
+      {
+        "id": "2026-09-20-007",
+        "category": "tech",
+        "priority": 3,
+        "title": "渣打预测台湾经济增速为11.5%，AI狂潮推动增长",
+        "summary": "渣打预测台湾经济增速为11.5%，AI狂潮推动台湾经济快速发展。",
+        "source": "渣打银行",
+        "url": "https://www.sc.com/article/78910"
+      },
+      {
+        "id": "2026-09-20-008",
+        "category": "hardware",
+        "priority": 3,
+        "title": "SK海力士将在日本建厂，韩日存储联盟关键一步",
+        "summary": "SK海力士将在日本建厂，加强韩日存储联盟合作。",
+        "source": "韩联社",
+        "url": "https://www.koreatimes.com/article/101112"
+      },
+      {
+        "id": "2026-09-20-009",
+        "category": "ai",
+        "priority": 3,
+        "title": "沙特拿中国模型建主权AI，美国盟友圈两头下注",
+        "summary": "沙特利用中国模型建立主权AI，美国盟友在AI竞赛中两头下注。",
+        "source": "AI国际政经观察",
+        "url": "https://www.aiobserver.com/article/20"
+      },
+      {
+        "id": "2026-09-20-010",
+        "category": "tech",
+        "priority": 3,
+        "title": "中东AI竞赛加速，沙特抛出150亿美元科技项目",
+        "summary": "中东AI竞赛加速，沙特推出150亿美元科技项目。",
+        "source": "路透社",
+        "url": "https://www.reuters.com/article/123456789"
+      },
+      {
+        "id": "2026-09-20-011",
+        "category": "hardware",
+        "priority": 3,
+        "title": "华为发布新款AI芯片，性能提升50%以上",
+        "summary": "华为发布新款AI芯片，性能提升50%以上，助力AI发展。",
+        "source": "华为官方",
+        "url": "https://www.huawei.com/article/123456"
+      },
+      {
+        "id": "2026-09-20-012",
+        "category": "tech",
+        "priority": 3,
+        "title": "AIoT市场规模预计2032年达到1.55亿美元，复合年均增长率为49%",
+        "summary": "AIoT市场规模预计2032年达到1.55亿美元，复合年均增长率为49%。",
+        "source": "QYResearch",
+        "url": "https://www.qyresearch.com/article/789101112"
+      }
+    ]
   }
 }

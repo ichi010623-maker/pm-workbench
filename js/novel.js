@@ -799,11 +799,27 @@
         if (sec.subtitle) {
           html += '<div class="nv-form-section-sub">' + esc(sec.subtitle) + "</div>";
         }
-        (sec.fields || []).forEach(function (f) {
-          var val = values[f.k];
-          if (Array.isArray(val)) val = val.join("\n");
-          html += nvFieldHtml(f, val);
-        });
+        // v5.9.153: 把 row:"half" 的相邻字段成对放进 grid（双列），其余字段独立单列
+        var fields = sec.fields || [];
+        var i = 0;
+        while (i < fields.length) {
+          var f = fields[i];
+          if (f.row === "half" && fields[i + 1] && fields[i + 1].row === "half") {
+            // 配对成功 → 双列 grid
+            var v1 = values[f.k]; if (Array.isArray(v1)) v1 = v1.join("\n");
+            var v2 = values[fields[i + 1].k]; if (Array.isArray(v2)) v2 = v2.join("\n");
+            html += '<div class="nv-form-grid cols-2">';
+            html += nvFieldHtml(f, v1);
+            html += nvFieldHtml(fields[i + 1], v2);
+            html += "</div>";
+            i += 2;
+          } else {
+            // 单列
+            var v = values[f.k]; if (Array.isArray(v)) v = v.join("\n");
+            html += nvFieldHtml(f, v);
+            i += 1;
+          }
+        }
         html += "</div>";
       });
     } else if (fallbackFields) {
@@ -2300,17 +2316,15 @@
   }
   root.nvEditBook = function (id) {
     var b = id ? nvGet(id) : null;
-    // v5.9.149: 分 3 个 Section 渲染（基本信息 / 创作设置 / 创作状态）
-    // 业务字段全部保留不变（themes / style / pov / targetWords / status）；
-    // 仅 themes 字段的 label 显示名改为「写作风格」（用户要求）
+    // v5.9.153: 分 3 个 Section + 内部小 grid（双列字段）
     var sections = [
       {
         title: "基本信息",
         subtitle: "书的核心信息，将作为首页展示",
         fields: [
-          { k: "title", label: "书名", req: true, ph: "例：后来我们都学会了爱" },
-          { k: "genre", label: "类型 / 题材", ph: "例：都市 · 破镜重圆" },
-          { k: "oneLiner", label: "一句话故事", type: "textarea", rows: 3, ph: "七年后重逢的前任，在过去与现在之间，重新选择彼此。" }
+          { k: "title", label: "书名", req: true, ph: "例如：后来我们都学会了爱" },
+          { k: "genre", label: "类型 / 题材", ph: "例如：都市 · 破镜重圆", row: "half" },
+          { k: "oneLiner", label: "一句话故事", type: "textarea", ph: "七年后重逢的前任，在过去与现在之间，重新选择彼此。" }
         ]
       },
       {
@@ -2318,9 +2332,9 @@
         subtitle: "写作偏好与目标设定",
         fields: [
           { k: "themes", label: "写作风格", type: "tags", ph: "都市 · 现实向 · 慢热（用、分隔）", hint: "题材 / 风格标签，多个用、分隔" },
-          { k: "style", label: "文风", ph: "例：东方玄幻，半文半白" },
-          { k: "pov", label: "叙事视角", type: "select", options: [{ v: "third", t: "第三人称" }, { v: "first", t: "第一人称（我）" }] },
-          { k: "targetWords", label: "目标字数", type: "number", ph: "200000" }
+          { k: "style", label: "文风", ph: "例如：东方玄幻，半文半白", row: "half" },
+          { k: "pov", label: "叙事视角", type: "select", options: [{ v: "third", t: "第三人称" }, { v: "first", t: "第一人称（我）" }], row: "half" },
+          { k: "targetWords", label: "目标字数", type: "number", ph: "200000", row: "half" }
         ]
       },
       {
