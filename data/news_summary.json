@@ -804,7 +804,115 @@
           ]
         }
       ]
+    },
+    "2026-09-21": {
+      "date": "2026-09-21",
+      "mode": "rss",
+      "sources": {
+        "BBC": 0,
+        "BBC商业": 0,
+        "BBC科技": 0,
+        "Al Jazeera": 0,
+        "NPR": 10,
+        "Guardian世界": 0,
+        "Guardian科技": 0,
+        "Guardian商业": 0
+      },
+      "rssCount": 10,
+      "brief": [
+        "美国德克萨斯州发生移民局枪击事件，一人受伤。",
+        "坦桑尼亚野生动物保护区发现十头狮子死亡，疑似中毒。",
+        "德国总理梅尔在州选举中遭遇重挫，誓言继续推进改革。",
+        "特朗普称其华盛顿特区纪念性拱门将设军事设施。",
+        "印度金奈渔民的艰难生活引人关注。"
+      ],
+      "groups": [
+        {
+          "cat": "国际",
+          "icon": "🌍",
+          "items": [
+            {
+              "title": "美国德克萨斯州移民局枪击事件",
+              "summary": "联邦移民局人员在奥斯汀枪伤一人。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/nx-s1-5975517/ice-shooting-austin-texas"
+            },
+            {
+              "title": "坦桑尼亚狮子死亡事件",
+              "summary": "十头狮子在保护区死亡，疑似中毒。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/nx-s1-5975478/poison-suspected-in-deaths-of-ten-lions-in-game-reserve-in-tanzania"
+            },
+            {
+              "title": "德国总理梅尔选举受挫",
+              "summary": "梅尔誓言在州选举失败后继续推进改革。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/g-s1-144211/germanys-merz-vows-to-press-ahead-with-reforms-after-historic-state-election-defeat"
+            }
+          ]
+        },
+        {
+          "cat": "政治",
+          "icon": "🏛️",
+          "items": [
+            {
+              "title": "特朗普拱门军事化计划",
+              "summary": "特朗普称其华盛顿特区纪念性拱门将设军事设施。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/nx-s1-5975449/trump-washington-dc-arch-military-complex-snipers-drones"
+            },
+            {
+              "title": "美国有线电视巨头面临股东诉讼",
+              "summary": "福克斯公司需交出数百份文件以应对股东诉讼。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/nx-s1-5974900/fox-shareholders-murdoch-lawsuit"
+            },
+            {
+              "title": "乌克兰对莫斯科发动无人机袭击",
+              "summary": "乌克兰向俄罗斯发射超过1000架无人机，包括数百架袭击莫斯科。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/nx-s1-5975372/ukraine-fires-drones-at-russia-moscow"
+            }
+          ]
+        },
+        {
+          "cat": "社会",
+          "icon": "💼",
+          "items": [
+            {
+              "title": "印度金奈渔民生活",
+              "summary": "金奈市场展现渔民艰难生活。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/g-s1-143447/photos-fishermen-sea-india"
+            },
+            {
+              "title": "新奥尔良空置建筑变免费商店",
+              "summary": "新奥尔良一空置建筑成为免费商店和溜冰场。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/nx-s1-5940784/new-orleans-lower-ninth-ward-free-store"
+            },
+            {
+              "title": "美国家庭育儿成本高，祖父母帮忙增多",
+              "summary": "美国家庭育儿成本上升，更多家庭依赖祖父母。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/nx-s1-5963506/us-childcare-costs-astronomical-families-turning-to-grandparents"
+            }
+          ]
+        },
+        {
+          "cat": "其他",
+          "icon": "🌏",
+          "items": [
+            {
+              "title": "NPR大学生播客挑战赛",
+              "summary": "NPR再次举办大学生播客挑战赛，奖金丰厚。",
+              "source": "NPR",
+              "url": "https://www.npr.org/2026/09/20/nx-s1-5966588/nprs-college-podcast-challenge-is-back-for-2026"
+            }
+          ]
+        }
+      ]
     }
   },
-  "updatedAt": "2026-09-20T11:04:00+08:00"
+  "updatedAt": "2026-09-21T09:35:00+08:00"
 }
