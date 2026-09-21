@@ -6799,11 +6799,22 @@ if (document.readyState === "loading") {
 
     async function login(email, password) {
       if (!client) return { error: { message: "未配置 Supabase" } };
-      return client.auth.signInWithPassword({ email: email, password: password });
+      // v5.9.169：登录挂超时（12s）+ 网络异常时给可执行英文提示
+      // 历史症状：手机 PWA 在弱网/中转下 signInWithPassword 的 fetch 偶尔 hang，
+      //          用户看到「一直转圈没反应」直到手动关闭页面。
+      return _withTimeout(client.auth.signInWithPassword({ email: email, password: password }), 12000, "登录请求超时（12s），请检查网络或代理后重试。");
     }
     async function signup(email, password) {
       if (!client) return { error: { message: "未配置 Supabase" } };
-      return client.auth.signUp({ email: email, password: password });
+      return _withTimeout(client.auth.signUp({ email: email, password: password }), 12000, "注册请求超时（12s），请检查网络或代理后重试。");
+    }
+    function _withTimeout(promise, ms, msg) {
+      // Promise.race 形式：超时即 reject，UI 进 .catch 拿可执行提示
+      return new Promise(function (resolve, reject) {
+        var timer = setTimeout(function () { reject(new Error(msg || ("请求超时 " + ms + "ms"))); }, ms);
+        promise.then(function (r) { clearTimeout(timer); resolve(r); },
+                     function (e) { clearTimeout(timer); reject(e); });
+      });
     }
     function authErr(e) {
       if (!e) return "未知错误";
@@ -6828,6 +6839,9 @@ if (document.readyState === "loading") {
         return "密码太短，至少需要 6 位";
       if (m.indexOf("failed to fetch") >= 0 || m.indexOf("networkerror") >= 0 || m.indexOf("load failed") >= 0)
         return "网络无法连接云端服务。可先「⚡ 离线使用」进入，稍后网络恢复再登录同步。";
+      // v5.9.169: 12s 强制超时由 _withTimeout 抛出的 Error
+      if (m.indexOf("登录请求超时") >= 0 || m.indexOf("注册请求超时") >= 0 || m.indexOf("请求超时") >= 0)
+        return e.message + " · 网络/代理可能被拦截，可在设置里换代理或打开「⚡ 离线使用」直入。";
       return e.message || "未知错误";
     }
     async function logout() {
@@ -6863,6 +6877,17 @@ if (document.readyState === "loading") {
     var s = document.getElementById("auth-screen");
     if (s) s.classList.remove("hidden");
     document.getElementById("app").classList.add("hidden");
+    // v5.9.169: 首次进入登录页主动 probeCloud，弱网/挂起场景不再盲等
+    // ——
+    if (typeof SyncManager !== "undefined" && SyncManager.probeCloud) {
+      try {
+        SyncManager.probeCloud(true).then(function () {
+          if (SyncManager.isCloudBlocked && SyncManager.isCloudBlocked()) {
+            try { renderCloudNotice(); } catch (e) {}
+          }
+        }).catch(function () {});
+      } catch (e) {}
+    }
   }
   function hideAuth() {
     var s = document.getElementById("auth-screen");
@@ -6937,8 +6962,12 @@ if (document.readyState === "loading") {
         renderCloudNotice();
         return;
       }
-      msg.textContent = "登录中…";
+      // v5.9.169: 锁按钮防重入；提示带倒计时（12s 上限来自 login() 内部 _withTimeout）
+      msg.textContent = "登录中…（最多 12s）";
+      lb.disabled = true; if (sb) sb.disabled = true;
+      var _restoreBtn = function () { lb.disabled = false; if (sb) sb.disabled = false; };
       SyncManager.login(email, pwd).then(function(r) {
+        _restoreBtn();
         if (r && r.error) {
           msg.textContent = "登录失败：" + SyncManager.authErr(r.error);
           if (SyncManager.isCloudBlocked && SyncManager.isCloudBlocked()) renderCloudNotice();
@@ -6947,6 +6976,7 @@ if (document.readyState === "loading") {
         }
         msg.textContent = ""; location.reload();
       }).catch(function (e) {
+        _restoreBtn();
         msg.textContent = "登录失败：" + SyncManager.authErr(e);
         SyncManager.probeCloud(true).then(function () { renderCloudNotice(); }).catch(function () {});
       });
@@ -6956,11 +6986,14 @@ if (document.readyState === "loading") {
       var pwd = document.getElementById("auth-password").value || "";
       var msg = document.getElementById("auth-msg");
       if (!email || pwd.length < 6) { msg.textContent = "请输入邮箱和至少 6 位密码"; return; }
-      msg.textContent = "注册中…";
+      msg.textContent = "注册中…（最多 12s）";
+      sb.disabled = true; if (lb) lb.disabled = true;
+      var _restoreBtn2 = function () { sb.disabled = false; if (lb) lb.disabled = false; };
       SyncManager.signup(email, pwd).then(function(r) {
+        _restoreBtn2();
         if (r.error) { msg.textContent = "注册失败：" + SyncManager.authErr(r.error); return; }
         msg.textContent = "注册成功，正在登录…"; location.reload();
-      });
+      }).catch(function () { _restoreBtn2(); });
     };
   }
   function toggleHistory(d) {
