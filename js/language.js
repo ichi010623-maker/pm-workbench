@@ -25,8 +25,118 @@ var LG_TABS = [
   { k: "speaking", t: "🗣 口语" },
   { k: "notes", t: "✍️ 写作笔记" },
   { k: "plan", t: "🗓 计划" },
-  { k: "stats", t: "📊 复盘" }
+  { k: "stats", t: "📊 复盘" },
+  { k: "grammar", t: "📐 语法" }
 ];
+
+/* 内置基础语法（按语种），仅展示用；用户可在「语法」tab 自补充自定义项
+   每项结构：{id, cat, title, desc, examples:[{en, zh, note}]}
+   - id 在 builtin 域内稳定，加新项只能 append；修改不影响用户已看标记
+   - cat 大类：verb / noun / tense / clause / voice / mood / particle / form ...
+*/
+var LG_GRAMMAR_BUILTIN = {
+  en: [
+    { id: "en-verb-basic", cat: "动词", title: "动词基础：be / do / have", examples: [
+      { en: "I am a student.", zh: "我是一名学生。", note: "be 动词表示身份/状态" },
+      { en: "She has two cats.", zh: "她有两只猫。", note: "have 表示拥有" },
+      { en: "Do you like coffee?", zh: "你喜欢咖啡吗？", note: "do/does 用于一般疑问" }
+    ] },
+    { id: "en-tense-past", cat: "时态", title: "一般过去时", examples: [
+      { en: "I visited Paris last year.", zh: "我去年去了巴黎。", note: "过去发生的动作" },
+      { en: "She worked here in 2020.", zh: "她 2020 年在这里工作。", note: "规则动词加 -ed" },
+      { en: "They went home.", zh: "他们回家了。", note: "不规则动词 went（go 的过去式）" }
+    ] },
+    { id: "en-tense-present-perfect", cat: "时态", title: "现在完成时", examples: [
+      { en: "I have lived here for five years.", zh: "我在这里住了五年。", note: "have + 过去分词，表持续到现在的经历" },
+      { en: "She has just finished her homework.", zh: "她刚刚完成作业。", note: "just / already / yet 常用标志" },
+      { en: "Have you ever been to Japan?", zh: "你去过日本吗？", note: "经历提问" }
+    ] },
+    { id: "en-tense-future", cat: "时态", title: "一般将来时", examples: [
+      { en: "I will call you tomorrow.", zh: "我明天给你打电话。", note: "will + 动词原形" },
+      { en: "We are going to travel next week.", zh: "我们下周要旅行。", note: "be going to 表计划" },
+      { en: "The train leaves at 9.", zh: "火车 9 点出发。", note: "时间表/时刻表用一般现在时" }
+    ] },
+    { id: "en-tense-continuous", cat: "时态", title: "进行时（现在 / 过去）", examples: [
+      { en: "I am reading a book now.", zh: "我正在读一本书。", note: "be + V-ing" },
+      { en: "They were playing football when it rained.", zh: "下雨时他们正在踢足球。", note: "过去进行时 + when 从句" }
+    ] },
+    { id: "en-voice-passive", cat: "语态", title: "被动语态", examples: [
+      { en: "The cake was eaten by the children.", zh: "蛋糕被孩子们吃了。", note: "be + 过去分词 + by 施动者" },
+      { en: "English is spoken here.", zh: "这里说英语。", note: "省略 by 施动者（不必要或不重要）" }
+    ] },
+    { id: "en-clause-if", cat: "从句", title: "条件状语从句（if）", examples: [
+      { en: "If it rains, I will stay home.", zh: "如果下雨，我就待在家。", note: "主将从现：主句将来时，从句现在时" },
+      { en: "If I were you, I would go.", zh: "如果我是你，我会去。", note: "虚拟语气（与事实相反）" }
+    ] },
+    { id: "en-clause-relative", cat: "从句", title: "定语从句（who / which / where）", examples: [
+      { en: "The man who lives next door is a doctor.", zh: "住在隔壁的男人是医生。", note: "who 指人" },
+      { en: "The book which I bought is interesting.", zh: "我买的那本书很有趣。", note: "which 指物" },
+      { en: "This is the house where I was born.", zh: "这是我出生的地方。", note: "where 指地点" }
+    ] },
+    { id: "en-article", cat: "词法", title: "冠词 a / an / the", examples: [
+      { en: "a book", zh: "一本书", note: "辅音开头用 a" },
+      { en: "an apple", zh: "一个苹果", note: "元音开头用 an" },
+      { en: "the sun", zh: "太阳", note: "特指/独一无二用 the" }
+    ] },
+    { id: "en-modal-can", cat: "情态", title: "情态动词 can / could / may / might", examples: [
+      { en: "I can swim.", zh: "我会游泳。", note: "can 表能力" },
+      { en: "May I come in?", zh: "我可以进来吗？", note: "may 表请求许可" },
+      { en: "It might rain tomorrow.", zh: "明天可能会下雨。", note: "might 表可能性" }
+    ] },
+    { id: "en-comparative", cat: "词法", title: "比较级与最高级", examples: [
+      { en: "Tom is taller than Jack.", zh: "Tom 比 Jack 高。", note: "-er + than（短形容词）" },
+      { en: "This is the most interesting book I have read.", zh: "这是我读过的最有趣的书。", note: "the most + 多音节形容词" },
+      { en: "She is as tall as her mother.", zh: "她和她妈妈一样高。", note: "as ... as ... 平级比较" }
+    ] },
+    { id: "en-verb-ing-to", cat: "非谓语", title: "动名词与不定式", examples: [
+      { en: "I enjoy reading.", zh: "我喜欢阅读。", note: "enjoy + V-ing" },
+      { en: "I want to learn English.", zh: "我想学英语。", note: "want + to + V" },
+      { en: "She decided to leave.", zh: "她决定离开。", note: "decide 后只接不定式" }
+    ] }
+  ],
+  ja: [
+    { id: "ja-particle-wa", cat: "助词", title: "は / が（主题与主语）", examples: [
+      { en: "私は学生です。", zh: "我是学生。", note: "は 提示主题" },
+      { en: "誰が来ましたか。", zh: "谁来了？", note: "が 强调主语（新信息）" }
+    ] },
+    { id: "ja-particle-ni-de", cat: "助词", title: "に / で（时间/地点与场所）", examples: [
+      { en: "七時に起きました。", zh: "七点起床。", note: "に 表时间点" },
+      { en: "公園で遊びます。", zh: "在公园玩。", note: "で 表动作发生的场所" }
+    ] },
+    { id: "ja-form-te", cat: "动词", title: "て形（连接与请求）", examples: [
+      { en: "本を読んでください。", zh: "请读书。", note: "て形 + ください 表示请求" },
+      { en: "食べて、寝る。", zh: "吃完饭再睡觉。", note: "て形表动作顺序" }
+    ] },
+    { id: "ja-form-past", cat: "时态", title: "た形（过去 / 完成）", examples: [
+      { en: "昨日、公園へ行きました。", zh: "昨天去了公园。", note: "动词た形 表过去" },
+      { en: "食べたことがあります。", zh: "吃过（经验）。", note: "た形 + ことがある 表经验" }
+    ] },
+    { id: "ja-keigo", cat: "敬语", title: "敬体与简体（です/ます / だ/る）", examples: [
+      { en: "私は学生です。", zh: "我是学生。", note: "敬体（礼貌）" },
+      { en: "俺は学生だ。", zh: "我是学生。", note: "简体（口语/书写）" }
+    ] }
+  ],
+  ko: [
+    { id: "ko-particle-eun-neun", cat: "助词", title: "은/는 vs 이/가（主题与主语）", examples: [
+      { en: "저는 학생입니다.", zh: "我是学生。", note: "은/는 提示主题" },
+      { en: "누가 왔어요?", zh: "谁来了？", note: "이/가 强调主语" }
+    ] },
+    { id: "ko-particle-e-aesseo", cat: "助词", title: "에 / 에서（时点/场所）", examples: [
+      { en: "7시에 일어났어요.", zh: "7点起床了。", note: "에 表时间点" },
+      { en: "학교에서 공부해요.", zh: "在学校学习。", note: "에서 表动作场所" }
+    ] },
+    { id: "ko-form-past", cat: "时态", title: "过去时 -았/었어요", examples: [
+      { en: "어제 영화를 봤어요.", zh: "昨天看了电影。", note: "动词词干 + 았/었어요" }
+    ] },
+    { id: "ko-form-future", cat: "时态", title: "将来时 -ㄹ 거예요", examples: [
+      { en: "내일 갈 거예요.", zh: "明天会去。", note: "词干 + ㄹ 거예요" }
+    ] },
+    { id: "ko-formal-plain", cat: "敬语", title: "敬语 / 平语（-요 / -다）", examples: [
+      { en: "저는 학생이에요.", zh: "我是学生。", note: "敬语（一般对话）" },
+      { en: "나는 학생이다.", zh: "我是学生。", note: "平语（书面/亲近）" }
+    ] }
+  ]
+};
 
 /* 场景词包（4 场景 × 每语种 8 词）：travel 旅行 / food 美食 / rent 租房 / work 职场 */
 var LG_PACKS = {
@@ -665,6 +775,7 @@ function lgNormalizeLang(e) {
   var def = {
     words: [], notes: [], materials: [], listening: [], wrongList: [], favorites: [],
     packLoaded: {}, bank: [], patterns: [],
+    grammar: { builtin: [], custom: [], customSeen: 0, lastViewedId: null },
     plan: { template: "commute", daily: 5, days: {} },
     stats: { studyLog: {}, totalSeconds: 0, learnedCount: 0, wrongTypes: {}, reviewCount: 0 },
     streak: 0, lastStudyDate: null, level: 0,
@@ -675,9 +786,13 @@ function lgNormalizeLang(e) {
     videoSeeded: false,
     activity: {}
   };
-  ["words", "notes", "materials", "listening", "wrongList", "favorites", "packLoaded", "bank", "patterns", "plan", "stats", "settings", "readingPlan", "listenPlan", "spokenPlan", "wordbank", "videoCourses", "videoProgress", "videoNotes", "videoSeeded", "activity"].forEach(function (k) {
+  ["words", "notes", "materials", "listening", "wrongList", "favorites", "packLoaded", "bank", "patterns", "grammar", "plan", "stats", "settings", "readingPlan", "listenPlan", "spokenPlan", "wordbank", "videoCourses", "videoProgress", "videoNotes", "videoSeeded", "activity"].forEach(function (k) {
     if (!e[k]) e[k] = def[k];
   });
+  if (!e.grammar.builtin) e.grammar.builtin = [];
+  if (!e.grammar.custom) e.grammar.custom = [];
+  if (typeof e.grammar.customSeen !== "number") e.grammar.customSeen = 0;
+  if (typeof e.grammar.lastViewedId !== "string") e.grammar.lastViewedId = null;
   if (!e.stats.studyLog) e.stats.studyLog = {};
   if (!e.stats.wrongTypes) e.stats.wrongTypes = {};
   if (!e.plan.days) e.plan.days = {};
@@ -692,6 +807,8 @@ function langGet(code) {
       packLoaded: {},       // 已导入的词包
       bank: [],             // 场景词包展开后的词
       patterns: [],         // 句式库（精读「划句式」的产出）
+      // v5.9.172：语法库——builtin（系统内置基础语法，按语种）；custom（用户自补语法项）
+      grammar: { builtin: [], custom: [], customSeen: 0, lastViewedId: null },
       plan: { template: "commute", daily: 5, days: {} },   // days: { date: [{t, done}] }
       stats: { studyLog: {}, totalSeconds: 0, learnedCount: 0, wrongTypes: {}, reviewCount: 0 },
       streak: 0, lastStudyDate: null, level: 0,
@@ -847,6 +964,7 @@ function renderLanguage() {
     case "xhs": body = lgRenderXhs(cur); break;
     case "plan": body = lgRenderPlan(cur); break;
     case "stats": body = lgRenderStats(cur); break;
+    case "grammar": body = lgRenderGrammar(cur); break;
     default: body = lgRenderHome(cur);
   }
   c.innerHTML = langBar + tabBar + body;
@@ -5568,6 +5686,378 @@ function lgVidAddCourse(c) {
   closeModal();
   render();
   if (typeof showToast === "function") showToast("已导入《" + c.title.slice(0, 14) + "》· " + (c.episodes || []).length + " 集", "success");
+}
+
+/* =============================================================
+ * 模块九：语法学习（v5.9.172）
+ * - 内置基础语法（按语种，LG_GRAMMAR_BUILTIN，只读）
+ * - 用户自补充语法项（custom）：分类 / 标题 / 描述 / 例句列表 / 知识点列表
+ * - 列表视图：按类别分组，显示学习进度（已看/总数）+ 内置/自定义 标签
+ * - 详情视图：例句可点词加入词库，markSeen() 标记已学
+ * - CRUD：新建/编辑/删除（带 confirm）；搜索（标题+描述+例句+知识点）
+ * - 状态：内置项用 'builtin:<id>' 作为 key，custom 用 'custom:<uid>'
+ * ============================================================= */
+var LG_GRAMMAR_VIEW = "list"; // list | detail
+var LG_GRAMMAR_CUR_ID = null; // 当前查看项 id
+var LG_GRAMMAR_CUR_IS_CUSTOM = false; // 当前查看项是否为自定义
+var LG_GRAMMAR_SEARCH = ""; // 搜索词
+var LG_GRAMMAR_NEW_CAT = "自定义";
+function lgRenderGrammar(cur) {
+  var e = langGet(cur);
+  // 首次进入按需注入 builtin（幂等：相同 id 不覆盖已有 seen 标记）
+  lgGrammarSeedBuiltin(cur, e);
+  var builtin = e.grammar.builtin || [];
+  var custom = e.grammar.custom || [];
+  var search = (LG_GRAMMAR_SEARCH || "").trim().toLowerCase();
+
+  if (LG_GRAMMAR_VIEW === "detail" && LG_GRAMMAR_CUR_ID) {
+    var item = LG_GRAMMAR_CUR_IS_CUSTOM
+      ? custom.filter(function (x) { return x.id === LG_GRAMMAR_CUR_ID; })[0]
+      : builtin.filter(function (x) { return x.id === LG_GRAMMAR_CUR_ID; })[0];
+    if (item) {
+      // 更新最后访问（仅自定义可写）
+      if (LG_GRAMMAR_CUR_IS_CUSTOM) e.grammar.lastViewedId = LG_GRAMMAR_CUR_ID;
+      return lgGrammarDetailHtml(item, LG_GRAMMAR_CUR_IS_CUSTOM, cur);
+    }
+  }
+
+  // 列表视图：按 cat 分组
+  var all = [];
+  builtin.forEach(function (x) { all.push({ item: x, isCustom: false }); });
+  custom.forEach(function (x) { all.push({ item: x, isCustom: true }); });
+  // 搜索过滤
+  if (search) {
+    all = all.filter(function (rec) {
+      var x = rec.item;
+      var hay = (x.title || "") + " " + (x.desc || "") + " " + (x.cat || "");
+      if (x.examples && x.examples.length) hay += " " + x.examples.map(function (e2) { return (e2.en || "") + " " + (e2.zh || "") + " " + (e2.note || ""); }).join(" ");
+      if (x.notes && x.notes.length) hay += " " + x.notes.join(" ");
+      return hay.toLowerCase().indexOf(search) >= 0;
+    });
+  }
+  // 按 cat 分组
+  var byCat = {};
+  var catOrder = [];
+  all.forEach(function (rec) {
+    var c = rec.item.cat || "未分类";
+    if (!byCat[c]) { byCat[c] = []; catOrder.push(c); }
+    byCat[c].push(rec);
+  });
+  // 自定义项放最后
+  catOrder.sort(function (a, b) { if (a === "自定义") return 1; if (b === "自定义") return -1; return a.localeCompare(b, "zh-Hans"); });
+
+  // 学习进度：builtin 项数 + customSeen / 全部 custom 项数
+  var seenSet = (e.grammar.customSeen && typeof e.grammar.customSeen === "object") ? e.grammar.customSeen : {};
+  var customSeenCount = custom.filter(function (x) { return !!seenSet[x.id]; }).length;
+  var progressPct = custom.length ? Math.round(customSeenCount / custom.length * 100) : 0;
+
+  var html = '';
+  // 顶部：搜索 + 新增按钮 + 进度
+  html += '<div class="lg-grammar-top">' +
+    '<div class="lg-grammar-top-l">' +
+      '<input class="lg-input" id="lg-grammar-search" placeholder="搜索标题 / 例句 / 知识点" value="' + escapeHtml(LG_GRAMMAR_SEARCH || "") + '" oninput="lgGrammarOnSearch(this.value)">' +
+      '<button class="lg-btn sm ghost" onclick="lgGrammarClearSearch()">清空</button>' +
+    '</div>' +
+    '<div class="lg-grammar-top-r">' +
+      '<span class="lg-grammar-prog">自补语法进度 <b>' + customSeenCount + '</b>/' + custom.length + '（' + progressPct + '%）</span>' +
+      '<button class="lg-btn" onclick="lgGrammarNew()">＋ 新增语法</button>' +
+    '</div>' +
+  '</div>';
+
+  // 统计：builtin / custom 总数
+  html += '<div class="lg-grammar-stat-row">' +
+    '<span class="lg-chip">内置 <b>' + builtin.length + '</b> 项</span>' +
+    '<span class="lg-chip">我的 <b>' + custom.length + '</b> 项</span>' +
+  '</div>';
+
+  if (catOrder.length === 0) {
+    html += '<div class="lg-card"><div class="empty-state"><div class="empty-icon">📐</div>' +
+      '<div class="empty-text">没有匹配的语法项</div>' +
+      '<button class="lg-btn sm" onclick="lgGrammarNew()">＋ 新增语法</button>' +
+      '</div></div>';
+    return html;
+  }
+
+  catOrder.forEach(function (c) {
+    var items = byCat[c];
+    html += '<div class="lg-grammar-cat"><div class="lg-grammar-cat-h">' + escapeHtml(c) + ' · ' + items.length + ' 项</div>';
+    items.forEach(function (rec) {
+      var x = rec.item;
+      var isCustom = rec.isCustom;
+      var tag = isCustom ? '<span class="lg-grammar-tag my">我的</span>' : '<span class="lg-grammar-tag sys">内置</span>';
+      var seenMark = isCustom && seenSet[x.id] ? '<span class="lg-grammar-seen">✓</span>' : '';
+      var ops = isCustom
+        ? '<span class="lg-grammar-ops">' +
+            '<button class="lg-btn xs" onclick="lgGrammarEdit(\'' + escapeHtml(x.id) + '\')">✏️</button>' +
+            '<button class="lg-btn xs danger" onclick="lgGrammarDel(\'' + escapeHtml(x.id) + '\')">🗑</button>' +
+          '</span>'
+        : '';
+      html += '<div class="lg-grammar-item" onclick="lgGrammarOpen(\'' + escapeHtml(x.id) + '\',' + (isCustom ? "true" : "false") + ')">' +
+        tag + ' ' + seenMark +
+        '<div class="lg-grammar-item-main">' +
+          '<div class="lg-grammar-item-title">' + escapeHtml(x.title || "(未命名)") + '</div>' +
+          (x.desc ? '<div class="lg-grammar-item-desc">' + escapeHtml(x.desc) + '</div>' : '') +
+          (x.examples && x.examples.length ? '<div class="lg-grammar-item-meta">' + x.examples.length + ' 个例句</div>' : '') +
+        '</div>' +
+        ops +
+      '</div>';
+    });
+    html += '</div>';
+  });
+
+  return html;
+}
+
+// 注入 builtin（幂等：按 e.grammar.builtin 的 id 去重）
+function lgGrammarSeedBuiltin(cur, e) {
+  var src = LG_GRAMMAR_BUILTIN[cur] || [];
+  if (!e.grammar) e.grammar = { builtin: [], custom: [], customSeen: 0, lastViewedId: null };
+  if (!e.grammar.builtin) e.grammar.builtin = [];
+  var have = {};
+  e.grammar.builtin.forEach(function (x) { have[x.id] = true; });
+  src.forEach(function (x) {
+    if (!have[x.id]) e.grammar.builtin.push(JSON.parse(JSON.stringify(x)));
+  });
+}
+
+// 进入详情
+function lgGrammarOpen(id, isCustom) {
+  LG_GRAMMAR_CUR_ID = id;
+  LG_GRAMMAR_CUR_IS_CUSTOM = !!isCustom;
+  LG_GRAMMAR_VIEW = "detail";
+  render();
+}
+function lgGrammarBack() {
+  LG_GRAMMAR_CUR_ID = null;
+  LG_GRAMMAR_CUR_IS_CUSTOM = false;
+  LG_GRAMMAR_VIEW = "list";
+  render();
+}
+
+// 搜索
+function lgGrammarOnSearch(v) { LG_GRAMMAR_SEARCH = v; render(); }
+function lgGrammarClearSearch() { LG_GRAMMAR_SEARCH = ""; render(); }
+
+// 详情视图
+function lgGrammarDetailHtml(item, isCustom, cur) {
+  var html = '';
+  html += '<div class="lg-grammar-detail-top">' +
+    '<button class="lg-btn sm ghost" onclick="lgGrammarBack()">← 返回列表</button>' +
+    (isCustom
+      ? '<span class="lg-grammar-ops">' +
+          '<button class="lg-btn sm" onclick="lgGrammarEdit(\'' + escapeHtml(item.id) + '\')">✏️ 编辑</button>' +
+          '<button class="lg-btn sm danger" onclick="lgGrammarDel(\'' + escapeHtml(item.id) + '\')">🗑 删除</button>' +
+        '</span>'
+      : '<span class="lg-grammar-tag sys">内置</span>') +
+  '</div>';
+
+  html += '<div class="lg-grammar-detail">';
+  html += '<div class="lg-grammar-detail-cat">' + escapeHtml(item.cat || "未分类") + '</div>';
+  html += '<div class="lg-grammar-detail-title">' + escapeHtml(item.title || "(未命名)") + '</div>';
+  if (item.desc) html += '<div class="lg-grammar-detail-desc">' + escapeHtml(item.desc) + '</div>';
+
+  // 知识点
+  if (Array.isArray(item.notes) && item.notes.length) {
+    html += '<div class="lg-grammar-section-h">📌 知识点</div>';
+    html += '<ul class="lg-grammar-notes">';
+    item.notes.forEach(function (n) {
+      html += '<li>' + escapeHtml(n) + '</li>';
+    });
+    html += '</ul>';
+  }
+
+  // 例句
+  if (Array.isArray(item.examples) && item.examples.length) {
+    html += '<div class="lg-grammar-section-h">📝 例句</div>';
+    html += '<div class="lg-grammar-examples">';
+    item.examples.forEach(function (ex, idx) {
+      html += '<div class="lg-grammar-ex">' +
+        '<div class="lg-grammar-ex-n">'+ (idx+1) + '</div>' +
+        '<div class="lg-grammar-ex-main">' +
+          '<div class="lg-grammar-ex-en">' + lgGrammarWordsHtml(ex.en || "", cur) + '</div>' +
+          '<div class="lg-grammar-ex-zh">' + escapeHtml(ex.zh || "") + '</div>' +
+          (ex.note ? '<div class="lg-grammar-ex-note">💡 ' + escapeHtml(ex.note) + '</div>' : '') +
+        '</div>' +
+      '</div>';
+    });
+    html += '</div>';
+  }
+
+  html += '</div>';
+
+  // 已读标记（仅自定义类）
+  if (isCustom) {
+    var e = langGet(cur);
+    var seenSet = e.grammar.customSeen && typeof e.grammar.customSeen === "object" ? e.grammar.customSeen : (e.grammar.customSeen = {});
+    var seen = !!seenSet[item.id];
+    html += '<div class="lg-grammar-foot">' +
+      (seen
+        ? '<button class="lg-btn ghost" onclick="lgGrammarMarkSeen(\'' + escapeHtml(item.id) + '\', false)">↩️ 标记未学</button>'
+        : '<button class="lg-btn primary" onclick="lgGrammarMarkSeen(\'' + escapeHtml(item.id) + '\', true)">✓ 标记已学</button>') +
+    '</div>';
+  }
+  return html;
+}
+
+// 例句里的英文按词切，已在词库的词弱化（复用 lgWordNormalize + 词库查）
+function lgGrammarWordsHtml(en, cur) {
+  var e = langGet(cur);
+  var bank = (e.wordbank && e.wordbank.words) || [];
+  var set = {};
+  bank.forEach(function (w) { set[lgWordNormalize(w.term)] = true; });
+  var parts = en.split(/(\s+|[.,!?;:()\[\]"])/);
+  return parts.map(function (p) {
+    if (!p) return "";
+    var norm = lgWordNormalize(p);
+    var inBank = norm && set[norm];
+    if (inBank) return '<span class="lg-grammar-word inbank">' + escapeHtml(p) + '</span>';
+    return escapeHtml(p);
+  }).join("");
+}
+
+function lgGrammarMarkSeen(id, seen) {
+  var cur = langCur();
+  var e = langGet(cur);
+  if (!e.grammar.customSeen || typeof e.grammar.customSeen !== "object") e.grammar.customSeen = {};
+  if (seen) e.grammar.customSeen[id] = 1; else delete e.grammar.customSeen[id];
+  try { DB.save(); } catch (e) {}
+  render();
+}
+
+// CRUD - 新增
+function lgGrammarNew() {
+  // 用 showModal 创建表单弹窗
+  var cats = lgGrammarCatList();
+  var body =
+    '<div class="form-group"><label class="form-label">分类</label>' +
+    '<input class="form-input" id="lg-g-cat" list="lg-g-cats" placeholder="如：动词/时态/从句…" value="' + escapeHtml(LG_GRAMMAR_NEW_CAT) + '">' +
+    '<datalist id="lg-g-cats">' + cats.map(function (c) { return '<option value="' + escapeHtml(c) + '">'; }).join("") + '</datalist>' +
+    '</div>' +
+    '<div class="form-group"><label class="form-label">标题 *</label>' +
+    '<input class="form-input" id="lg-g-title" placeholder="如：现在完成时"></div>' +
+    '<div class="form-group"><label class="form-label">描述 / 语法规则</label>' +
+    '<textarea class="form-input" id="lg-g-desc" rows="3" placeholder="简要说明这条语法的用法"></textarea></div>' +
+    '<div class="form-group"><label class="form-label">例句（每行一句，格式：英文 | 中文 | 备注，竖线分隔，注释可省略）</label>' +
+    '<textarea class="form-input" id="lg-g-ex" rows="6" placeholder="I have lived here for five years.|我在这里住了五年。|have + 过去分词，表持续到现在的经历"></textarea></div>' +
+    '<div class="form-group"><label class="form-label">知识点（每行一条）</label>' +
+    '<textarea class="form-input" id="lg-g-notes" rows="3" placeholder="用于强调重点；可省略"></textarea></div>';
+  showModal({
+    title: "＋ 新增语法",
+    body: body,
+    okText: "保存",
+    onOk: function () { return lgGrammarSaveNew(); }
+  });
+}
+function lgGrammarCatList() {
+  var cur = langCur();
+  var e = langGet(cur);
+  var set = {};
+  (e.grammar.builtin || []).forEach(function (x) { if (x.cat) set[x.cat] = 1; });
+  (e.grammar.custom || []).forEach(function (x) { if (x.cat) set[x.cat] = 1; });
+  var arr = Object.keys(set);
+  if (arr.indexOf("自定义") < 0) arr.unshift("自定义");
+  return arr;
+}
+function lgGrammarParseForm() {
+  var cat = (document.getElementById("lg-g-cat").value || "").trim() || "自定义";
+  var title = (document.getElementById("lg-g-title").value || "").trim();
+  var desc = (document.getElementById("lg-g-desc").value || "").trim();
+  var exRaw = (document.getElementById("lg-g-ex").value || "");
+  var notesRaw = (document.getElementById("lg-g-notes").value || "");
+  if (!title) return { error: "请填写标题" };
+  var examples = [];
+  exRaw.split(/\n+/).forEach(function (line) {
+    var s = line.trim();
+    if (!s) return;
+    var parts = s.split("|");
+    var en = (parts[0] || "").trim();
+    var zh = (parts[1] || "").trim();
+    var note = (parts[2] || "").trim();
+    if (en) examples.push({ en: en, zh: zh, note: note });
+  });
+  var notes = notesRaw.split(/\n+/).map(function (s) { return s.trim(); }).filter(Boolean);
+  return { data: { cat: cat, title: title, desc: desc, examples: examples, notes: notes } };
+}
+function lgGrammarSaveNew() {
+  var r = lgGrammarParseForm();
+  if (r.error) { showToast(r.error, "warning"); return false; }
+  var cur = langCur();
+  var e = langGet(cur);
+  var id = "custom-" + (Date.now().toString(36)) + "-" + Math.random().toString(36).slice(2, 6);
+  e.grammar.custom.push(Object.assign({ id: id, createdAt: Date.now() }, r.data));
+  try { DB.save(); } catch (e) {}
+  showToast("已新增「" + r.data.title + "」", "success");
+  render();
+  return true;
+}
+
+// CRUD - 编辑
+function lgGrammarEdit(id) {
+  var cur = langCur();
+  var e = langGet(cur);
+  var x = (e.grammar.custom || []).filter(function (i) { return i.id === id; })[0];
+  if (!x) { showToast("未找到该语法项", "warning"); return; }
+  var cats = lgGrammarCatList();
+  var exText = (x.examples || []).map(function (ex) {
+    return [ex.en || "", ex.zh || "", ex.note || ""].join("|");
+  }).join("\n");
+  var notesText = (x.notes || []).join("\n");
+  var body =
+    '<div class="form-group"><label class="form-label">分类</label>' +
+    '<input class="form-input" id="lg-g-cat" list="lg-g-cats" value="' + escapeHtml(x.cat || "") + '">' +
+    '<datalist id="lg-g-cats">' + cats.map(function (c) { return '<option value="' + escapeHtml(c) + '">'; }).join("") + '</datalist>' +
+    '</div>' +
+    '<div class="form-group"><label class="form-label">标题 *</label>' +
+    '<input class="form-input" id="lg-g-title" value="' + escapeHtml(x.title || "") + '"></div>' +
+    '<div class="form-group"><label class="form-label">描述</label>' +
+    '<textarea class="form-input" id="lg-g-desc" rows="3">' + escapeHtml(x.desc || "") + '</textarea></div>' +
+    '<div class="form-group"><label class="form-label">例句</label>' +
+    '<textarea class="form-input" id="lg-g-ex" rows="6">' + escapeHtml(exText) + '</textarea></div>' +
+    '<div class="form-group"><label class="form-label">知识点</label>' +
+    '<textarea class="form-input" id="lg-g-notes" rows="3">' + escapeHtml(notesText) + '</textarea></div>';
+  showModal({
+    title: "✏️ 编辑语法",
+    body: body,
+    okText: "保存",
+    onOk: function () {
+      var r = lgGrammarParseForm();
+      if (r.error) { showToast(r.error, "warning"); return false; }
+      Object.assign(x, r.data);
+      try { DB.save(); } catch (e) {}
+      showToast("已保存", "success");
+      render();
+      return true;
+    }
+  });
+}
+
+// CRUD - 删除
+function lgGrammarDel(id) {
+  var cur = langCur();
+  var e = langGet(cur);
+  var x = (e.grammar.custom || []).filter(function (i) { return i.id === id; })[0];
+  if (!x) return;
+  if (typeof confirm === "function" && !confirm("删除语法项「" + (x.title || id) + "」？此操作不可恢复。")) return;
+  e.grammar.custom = e.grammar.custom.filter(function (i) { return i.id !== id; });
+  if (e.grammar.customSeen && typeof e.grammar.customSeen === "object") delete e.grammar.customSeen[id];
+  // 若详情视图打开的就是该 id → 返回列表
+  if (LG_GRAMMAR_CUR_ID === id && LG_GRAMMAR_CUR_IS_CUSTOM) {
+    LG_GRAMMAR_CUR_ID = null;
+    LG_GRAMMAR_CUR_IS_CUSTOM = false;
+    LG_GRAMMAR_VIEW = "list";
+  }
+  try { DB.save(); } catch (e) {}
+  showToast("已删除", "success");
+  render();
+}
+
+// CRUD 统计（用于首页/复盘）
+function lgGrammarStats(cur) {
+  var e = langGet(cur);
+  var seen = (e.grammar.customSeen && typeof e.grammar.customSeen === "object") ? e.grammar.customSeen : {};
+  var seenCount = 0;
+  (e.grammar.custom || []).forEach(function (x) { if (seen[x.id]) seenCount++; });
+  return { builtin: (e.grammar.builtin || []).length, custom: (e.grammar.custom || []).length, seen: seenCount };
 }
 
 // 自启学习计时器（页面打开后立即接管，无须用户点开始）
