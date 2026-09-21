@@ -34,106 +34,291 @@ var LG_TABS = [
    - id 在 builtin 域内稳定，加新项只能 append；修改不影响用户已看标记
    - cat 大类：verb / noun / tense / clause / voice / mood / particle / form ...
 */
+/* 内置基础语法（按语种），仅展示用；用户可在「语法」tab 自补充自定义项
+   每项结构：{id, cat, title, desc, examples:[{en, zh, note, hi?: [tokens]}], notes?: [...]}
+   - hi 是高亮 token 数组（例句渲染时用黄色高亮这些词，让语法点一眼可见）
+   - id 稳定；改内容不破坏用户已看标记
+   - 8 大类对应用户给的 8 张表：词性 / 句法成分 / 句子结构 / 时态 / 疑问代词 / 人称代词 等
+*/
 var LG_GRAMMAR_BUILTIN = {
   en: [
-    { id: "en-verb-basic", cat: "动词", title: "动词基础：be / do / have", examples: [
-      { en: "I am a student.", zh: "我是一名学生。", note: "be 动词表示身份/状态" },
-      { en: "She has two cats.", zh: "她有两只猫。", note: "have 表示拥有" },
-      { en: "Do you like coffee?", zh: "你喜欢咖啡吗？", note: "do/does 用于一般疑问" }
+    /* 一、单词词性（10种） */
+    { id: "en-pos-noun", cat: "词性", title: "名词（n.）：表示人、事物、地点", desc: "主要语法：名词单复数、名词所有格、主谓一致、变化规则等", examples: [
+      { en: "Apple is a fruit.", zh: "苹果是一种水果。", hi: ["Apple"], note: "Apple 单数名词" },
+      { en: "I have two cats.", zh: "我有两只猫。", hi: ["cats"], note: "复数加 s" },
+      { en: "China's economy is growing fast.", zh: "中国经济正在快速增长。", hi: ["China's"], note: "名词所有格加 's" }
+    ], notes: ["可数名词 / 不可数名词 / 专有名词", "复数变化：+s / +es / y→ies / 不规则（child→children）"] },
+    { id: "en-pos-verb", cat: "词性", title: "动词（v.）：表示动作或状态", desc: "be / 实义动词 / 情态动词 / 助动词 / 系动词 / 被动语态等", examples: [
+      { en: "She smiles every day.", zh: "她每天微笑。", hi: ["smiles"], note: "实义动词表动作" },
+      { en: "He is a teacher.", zh: "他是老师。", hi: ["is"], note: "be 动词作系动词" },
+      { en: "I can finish it.", zh: "我能完成它。", hi: ["can"], note: "情态动词" }
+    ], notes: ["及物动词 vs 不及物动词", "主动语态 vs 被动语态"] },
+    { id: "en-pos-adverb", cat: "词性", title: "副词（adv.）：修饰动词或形容词", desc: "时间副词 / 地点副词 / 方式副词 / 程度副词 / 关系副词", examples: [
+      { en: "He runs quickly.", zh: "他跑得快。", hi: ["quickly"], note: "方式副词修饰动词" },
+      { en: "She is very beautiful.", zh: "她非常漂亮。", hi: ["very"], note: "程度副词修饰形容词" }
     ] },
-    { id: "en-tense-past", cat: "时态", title: "一般过去时", examples: [
-      { en: "I visited Paris last year.", zh: "我去年去了巴黎。", note: "过去发生的动作" },
-      { en: "She worked here in 2020.", zh: "她 2020 年在这里工作。", note: "规则动词加 -ed" },
-      { en: "They went home.", zh: "他们回家了。", note: "不规则动词 went（go 的过去式）" }
+    { id: "en-pos-adjective", cat: "词性", title: "形容词（adj.）：修饰名词或代词", desc: "比较级 / 最高级 / 做定语或表语 / 宾语补足语", examples: [
+      { en: "She is a beautiful girl.", zh: "她是个漂亮女孩。", hi: ["beautiful"], note: "adj + n 做定语" },
+      { en: "She looks beautiful.", zh: "她看起来漂亮。", hi: ["beautiful"], note: "adj 做表语" }
     ] },
-    { id: "en-tense-present-perfect", cat: "时态", title: "现在完成时", examples: [
-      { en: "I have lived here for five years.", zh: "我在这里住了五年。", note: "have + 过去分词，表持续到现在的经历" },
-      { en: "She has just finished her homework.", zh: "她刚刚完成作业。", note: "just / already / yet 常用标志" },
-      { en: "Have you ever been to Japan?", zh: "你去过日本吗？", note: "经历提问" }
+    { id: "en-pos-numeral", cat: "词性", title: "数词（num.）：数量或顺序", desc: "序数词 / 基数词 / 日期的表达", examples: [
+      { en: "I have two apples.", zh: "我有两个苹果。", hi: ["two"], note: "基数词" },
+      { en: "She is the first one.", zh: "她是第一个。", hi: ["first"], note: "序数词" }
     ] },
-    { id: "en-tense-future", cat: "时态", title: "一般将来时", examples: [
-      { en: "I will call you tomorrow.", zh: "我明天给你打电话。", note: "will + 动词原形" },
-      { en: "We are going to travel next week.", zh: "我们下周要旅行。", note: "be going to 表计划" },
-      { en: "The train leaves at 9.", zh: "火车 9 点出发。", note: "时间表/时刻表用一般现在时" }
+    { id: "en-pos-pronoun", cat: "词性", title: "代词（pron.）：替代人或事物", desc: "人称代词 / 物主代词 / 指示代词 / 不定代词 / 疑问代词 / 反身代词", examples: [
+      { en: "I love this book.", zh: "我爱这本书。", hi: ["I", "this"], note: "人称代词 + 指示代词" },
+      { en: "She did it herself.", zh: "她自己做。", hi: ["herself"], note: "反身代词" }
     ] },
-    { id: "en-tense-continuous", cat: "时态", title: "进行时（现在 / 过去）", examples: [
-      { en: "I am reading a book now.", zh: "我正在读一本书。", note: "be + V-ing" },
-      { en: "They were playing football when it rained.", zh: "下雨时他们正在踢足球。", note: "过去进行时 + when 从句" }
+    { id: "en-pos-conjunction", cat: "词性", title: "连词（conj.）：连接词、短语、句子", desc: "从属连词 / 并列连词", examples: [
+      { en: "I like tea and coffee.", zh: "我喜欢茶和咖啡。", hi: ["and"], note: "并列连词" },
+      { en: "I stayed home because it rained.", zh: "我待在家因为下雨。", hi: ["because"], note: "从属连词引导原因状语" }
     ] },
-    { id: "en-voice-passive", cat: "语态", title: "被动语态", examples: [
-      { en: "The cake was eaten by the children.", zh: "蛋糕被孩子们吃了。", note: "be + 过去分词 + by 施动者" },
-      { en: "English is spoken here.", zh: "这里说英语。", note: "省略 by 施动者（不必要或不重要）" }
+    { id: "en-pos-interjection", cat: "词性", title: "感叹词（int.）：独立表达情感", desc: "独立于句子之外", examples: [
+      { en: "Oh! I forgot.", zh: "哦！我忘了。", hi: ["Oh!"], note: "表示惊讶" }
     ] },
-    { id: "en-clause-if", cat: "从句", title: "条件状语从句（if）", examples: [
-      { en: "If it rains, I will stay home.", zh: "如果下雨，我就待在家。", note: "主将从现：主句将来时，从句现在时" },
-      { en: "If I were you, I would go.", zh: "如果我是你，我会去。", note: "虚拟语气（与事实相反）" }
+    { id: "en-pos-preposition", cat: "词性", title: "介词（prep.）：表关系", desc: "地点介词 / 方向介词 / 时间介词 / 介词短语", examples: [
+      { en: "The book is on the desk.", zh: "书在桌上。", hi: ["on"], note: "地点介词" },
+      { en: "I'll see you at 5 o'clock.", zh: "我 5 点见你。", hi: ["at"], note: "时间介词" }
     ] },
-    { id: "en-clause-relative", cat: "从句", title: "定语从句（who / which / where）", examples: [
-      { en: "The man who lives next door is a doctor.", zh: "住在隔壁的男人是医生。", note: "who 指人" },
-      { en: "The book which I bought is interesting.", zh: "我买的那本书很有趣。", note: "which 指物" },
-      { en: "This is the house where I was born.", zh: "这是我出生的地方。", note: "where 指地点" }
+    { id: "en-pos-article", cat: "词性", title: "冠词（art.）：限定名词", desc: "定冠词 the / 不定冠词 a / an / 零冠词", examples: [
+      { en: "I saw a dog.", zh: "我看到一只狗。", hi: ["a"], note: "辅音开头用 a" },
+      { en: "I have an apple.", zh: "我有一个苹果。", hi: ["an"], note: "元音开头用 an" },
+      { en: "The sun is bright.", zh: "太阳很亮。", hi: ["The"], note: "独一无二用 the" }
     ] },
-    { id: "en-article", cat: "词法", title: "冠词 a / an / the", examples: [
-      { en: "a book", zh: "一本书", note: "辅音开头用 a" },
-      { en: "an apple", zh: "一个苹果", note: "元音开头用 an" },
-      { en: "the sun", zh: "太阳", note: "特指/独一无二用 the" }
+
+    /* 二、句子成分（8种） */
+    { id: "en-comp-subject", cat: "句法成分", title: "主语（Subject）：动作的发出者", examples: [
+      { en: "She made her brother sad.", zh: "她让弟弟伤心。", hi: ["She"], note: "She 是主语" }
     ] },
-    { id: "en-modal-can", cat: "情态", title: "情态动词 can / could / may / might", examples: [
-      { en: "I can swim.", zh: "我会游泳。", note: "can 表能力" },
-      { en: "May I come in?", zh: "我可以进来吗？", note: "may 表请求许可" },
-      { en: "It might rain tomorrow.", zh: "明天可能会下雨。", note: "might 表可能性" }
+    { id: "en-comp-predicate", cat: "句法成分", title: "谓语（Predicate）：句中的动作", examples: [
+      { en: "She made her brother sad.", zh: "她让弟弟伤心。", hi: ["made"], note: "made 是谓语" }
     ] },
-    { id: "en-comparative", cat: "词法", title: "比较级与最高级", examples: [
-      { en: "Tom is taller than Jack.", zh: "Tom 比 Jack 高。", note: "-er + than（短形容词）" },
-      { en: "This is the most interesting book I have read.", zh: "这是我读过的最有趣的书。", note: "the most + 多音节形容词" },
-      { en: "She is as tall as her mother.", zh: "她和她妈妈一样高。", note: "as ... as ... 平级比较" }
+    { id: "en-comp-object", cat: "句法成分", title: "宾语（Object）：动作的承受者", examples: [
+      { en: "She made her brother sad.", zh: "她让弟弟伤心。", hi: ["her brother"], note: "her brother 是宾语" }
     ] },
-    { id: "en-verb-ing-to", cat: "非谓语", title: "动名词与不定式", examples: [
-      { en: "I enjoy reading.", zh: "我喜欢阅读。", note: "enjoy + V-ing" },
-      { en: "I want to learn English.", zh: "我想学英语。", note: "want + to + V" },
-      { en: "She decided to leave.", zh: "她决定离开。", note: "decide 后只接不定式" }
+    { id: "en-comp-complement", cat: "句法成分", title: "表语（Complement）：说明主语", examples: [
+      { en: "She felt guilty.", zh: "她感到内疚。", hi: ["guilty"], note: "guilty 是表语" }
+    ] },
+    { id: "en-comp-attributive", cat: "句法成分", title: "定语（Attributive）：修饰主语或宾语", examples: [
+      { en: "I see my little John studying.", zh: "我看到我的小约翰在学习。", hi: ["little"], note: "little 修饰 John" }
+    ] },
+    { id: "en-comp-adverbial", cat: "句法成分", title: "状语（Adverbial）：时间 / 地点 / 原因 / 方式", examples: [
+      { en: "She made her brother sad yesterday.", zh: "昨天她让弟弟伤心。", hi: ["yesterday"], note: "时间状语" },
+      { en: "He studies at home.", zh: "他在家学习。", hi: ["at home"], note: "地点状语" }
+    ] },
+    { id: "en-comp-objcomp", cat: "句法成分", title: "宾语补足语（Object Complement）：补充说明宾语", examples: [
+      { en: "She made her brother sad.", zh: "她让弟弟伤心。", hi: ["sad"], note: "sad 补充说明 her brother" }
+    ] },
+    { id: "en-comp-appositive", cat: "句法成分", title: "同位语（Appositive）：一个名词说明另一个", examples: [
+      { en: "My brother John is kind.", zh: "我的哥哥约翰很善良。", hi: ["John"], note: "John 补充说明 my brother" }
+    ] },
+
+    /* 三、句子结构（8种） */
+    { id: "en-stru-sv", cat: "句子结构", title: "主 + 谓（S+V）", examples: [
+      { en: "He runs.", zh: "他跑。", hi: ["He", "runs"], note: "主 + 谓，最简句" },
+      { en: "He runs quickly.", zh: "他跑得快。", hi: ["quickly"], note: "加了方式状语" }
+    ] },
+    { id: "en-stru-svo", cat: "句子结构", title: "主 + 谓 + 宾（S+V+O）", examples: [
+      { en: "I like apples.", zh: "我喜欢苹果。", hi: ["I", "like", "apples"], note: "主谓宾" },
+      { en: "They built a house.", zh: "他们建了一个房子。", hi: ["They", "built", "a house"], note: "a house 是宾语" }
+    ] },
+    { id: "en-stru-svc", cat: "句子结构", title: "主 + 系 + 表（S+V+C）", examples: [
+      { en: "She is beautiful.", zh: "她很美。", hi: ["She", "is", "beautiful"], note: "is 是系动词" },
+      { en: "He is an engineer.", zh: "他是工程师。", hi: ["He", "is", "an engineer"], note: "an engineer 是表语" }
+    ] },
+    { id: "en-stru-svoo", cat: "句子结构", title: "主 + 谓 + 双宾（S+V+O+O）", examples: [
+      { en: "She shows me a book.", zh: "她向我展示一本书。", hi: ["She", "shows", "me", "a book"], note: "me 间接宾语 / a book 直接宾语" },
+      { en: "The teacher gives me his money.", zh: "老师把钱给了我。", hi: ["The teacher", "gives", "me", "his money"], note: "双宾语结构" }
+    ] },
+    { id: "en-stru-svoc", cat: "句子结构", title: "主 + 谓 + 宾 + 宾补（S+V+O+C）", examples: [
+      { en: "She made John sad.", zh: "她让约翰伤心。", hi: ["She", "made", "John", "sad"], note: "sad 是宾补" },
+      { en: "They call me John.", zh: "他们叫我约翰。", hi: ["They", "call", "me", "John"], note: "John 是宾补" }
+    ] },
+    { id: "en-stru-noun-clause", cat: "句子结构", title: "名词性从句（主 / 宾 / 表 / 同位语）", examples: [
+      { en: "That the earth is round is true.", zh: "地球是圆的是真的。", hi: ["That the earth is round"], note: "That 从句做主语" },
+      { en: "I believe that he is honest.", zh: "我相信他是诚实的。", hi: ["that he is honest"], note: "that 从句做宾语" }
+    ] },
+    { id: "en-stru-adj-clause", cat: "句子结构", title: "形容词性从句（定语从句）", examples: [
+      { en: "I remember the thing that his father said.", zh: "我记得他父亲说过的事。", hi: ["that his father said"], note: "that 引导定语从句" }
+    ] },
+    { id: "en-stru-adv-clause", cat: "句子结构", title: "副词性从句（状语从句）", examples: [
+      { en: "When it rains, I go to school by bus.", zh: "下雨时，我坐公交上学。", hi: ["When it rains"], note: "时间状语从句" },
+      { en: "If it rains, I will stay home.", zh: "如果下雨，我就待在家。", hi: ["If it rains"], note: "条件状语从句" }
+    ] },
+
+    /* 四、英语时态（16种） */
+    { id: "en-tense-01", cat: "时态", title: "① 一般现在时（do）", desc: "客观事实或规律", examples: [
+      { en: "I do my homework every day.", zh: "我每天做作业。", hi: ["do"], note: "always / usually / often / every day 是标志" }
+    ] },
+    { id: "en-tense-02", cat: "时态", title: "② 一般过去时（did）", desc: "过去发生的动作", examples: [
+      { en: "I did my homework yesterday.", zh: "我昨天做了作业。", hi: ["did"], note: "yesterday / ago / last + 时间 是标志" }
+    ] },
+    { id: "en-tense-03", cat: "时态", title: "③ 一般将来时（will do）", desc: "将来发生的动作", examples: [
+      { en: "I will do my homework tomorrow.", zh: "我明天会做作业。", hi: ["will do"], note: "tomorrow / soon / next + 时间 是标志" }
+    ] },
+    { id: "en-tense-04", cat: "时态", title: "④ 现在进行时（be doing）", desc: "此刻正在进行", examples: [
+      { en: "I am doing my homework now.", zh: "我现在正在做作业。", hi: ["am doing"], note: "now / look / listen 是标志" }
+    ] },
+    { id: "en-tense-05", cat: "时态", title: "⑤ 过去进行时（was/were doing）", desc: "过去某时正在进行的动作", examples: [
+      { en: "I was doing my homework at that time.", zh: "那时我正在做作业。", hi: ["was doing"], note: "at that time / at 9 yesterday" }
+    ] },
+    { id: "en-tense-06", cat: "时态", title: "⑥ 将来进行时（will be doing）", desc: "将来某时正在进行的动作", examples: [
+      { en: "I will be doing my homework at 9.", zh: "9 点我会在做作业。", hi: ["will be doing"], note: "将来 + 时间点" }
+    ] },
+    { id: "en-tense-07", cat: "时态", title: "⑦ 过去将来进行时（would be doing）", desc: "过去某时看将来某时正在进行", examples: [
+      { en: "I said I would be doing my homework at 8.", zh: "我说过 8 点我会在做作业。", hi: ["would be doing"], note: "said + would + be doing" }
+    ] },
+    { id: "en-tense-08", cat: "时态", title: "⑧ 现在完成进行时（have been doing）", desc: "从过去持续到现在并仍在继续", examples: [
+      { en: "I have been doing my homework for 2 hours.", zh: "我做作业已经 2 小时了。", hi: ["have been doing"], note: "for + 一段时间 是标志" }
+    ] },
+    { id: "en-tense-09", cat: "时态", title: "⑨ 过去完成进行时（had been doing）", desc: "过去的过去某时起一直持续", examples: [
+      { en: "I had been doing my homework for 2 hours before you came.", zh: "你回来之前我已经做了 2 小时作业。", hi: ["had been doing"], note: "过去的过去 + for + 一段时间" }
+    ] },
+    { id: "en-tense-10", cat: "时态", title: "⑩ 将来完成进行时（will have been doing）", desc: "将来某时已经持续一段时间", examples: [
+      { en: "Tomorrow we will have been using this tool for 10 years.", zh: "明天我们用这个工具就满 10 年了。", hi: ["will have been doing"], note: "将来 + for + 一段时间" }
+    ] },
+    { id: "en-tense-11", cat: "时态", title: "⑪ 过去完成时（had done）", desc: "过去的过去已完成", examples: [
+      { en: "I had done my homework before dinner.", zh: "我晚饭前就做完了作业。", hi: ["had done"], note: "by / before + 过去时间" }
+    ] },
+    { id: "en-tense-12", cat: "时态", title: "⑫ 现在完成时（have/has done）", desc: "对现在的影响或持续到现在的经历", examples: [
+      { en: "I have done my homework already.", zh: "我已经做完作业了。", hi: ["have done"], note: "already / yet / just / ever / never" }
+    ] },
+    { id: "en-tense-13", cat: "时态", title: "⑬ 将来完成时（will have done）", desc: "将来某时前已完成", examples: [
+      { en: "I will have done my homework by tomorrow.", zh: "我到明天就会做完作业。", hi: ["will have done"], note: "by + 将来时间" }
+    ] },
+    { id: "en-tense-14", cat: "时态", title: "⑭ 过去将来时（would do）", desc: "从过去某时看将来", examples: [
+      { en: "I said I would do my homework tomorrow.", zh: "我说过我明天会做作业。", hi: ["would do"], note: "said + would + V" }
+    ] },
+    { id: "en-tense-15", cat: "时态", title: "⑮ 过去将来完成时（would have done）", desc: "从过去某时看将来某时前已完成", examples: [
+      { en: "I said I would have done my homework before you came.", zh: "我说过你回来前我会做完作业。", hi: ["would have done"], note: "said + would + have done" }
+    ] },
+    { id: "en-tense-16", cat: "时态", title: "⑯ 过去将来完成进行时（would have been doing）", desc: "从过去某时看将来某时已持续一段时间", examples: [
+      { en: "They said tomorrow they would have been using this tool for 10 years.", zh: "他们说明天他们用这个工具就满 10 年了。", hi: ["would have been doing"], note: "said + would + have been doing" }
+    ] },
+
+    /* 五、疑问代词（20种） */
+    { id: "en-q-what", cat: "疑问代词", title: "what（问什么）", examples: [
+      { en: "What is your name?", zh: "你叫什么名字？", hi: ["What"] }
+    ] },
+    { id: "en-q-how", cat: "疑问代词", title: "how（问怎样）", examples: [
+      { en: "How are you?", zh: "你好吗？", hi: ["How"] }
+    ] },
+    { id: "en-q-why", cat: "疑问代词", title: "why（问原因）", examples: [
+      { en: "Why are you late?", zh: "你为什么迟到？", hi: ["Why"] }
+    ] },
+    { id: "en-q-howold", cat: "疑问代词", title: "how old（问年龄）", examples: [
+      { en: "How old are you?", zh: "你几岁了？", hi: ["How old"] }
+    ] },
+    { id: "en-q-where", cat: "疑问代词", title: "where（问哪里）", examples: [
+      { en: "Where do you live?", zh: "你住哪里？", hi: ["Where"] }
+    ] },
+    { id: "en-q-howmany", cat: "疑问代词", title: "how many（问多少，可数）", examples: [
+      { en: "How many apples do you have?", zh: "你有几个苹果？", hi: ["How many"] }
+    ] },
+    { id: "en-q-which", cat: "疑问代词", title: "which（问哪个）", examples: [
+      { en: "Which one do you like?", zh: "你喜欢哪一个？", hi: ["Which"] }
+    ] },
+    { id: "en-q-howmuch", cat: "疑问代词", title: "how much（问价格 / 不可数数量）", examples: [
+      { en: "How much is this?", zh: "这个多少钱？", hi: ["How much"] }
+    ] },
+    { id: "en-q-who", cat: "疑问代词", title: "who（问谁）", examples: [
+      { en: "Who is that?", zh: "那是谁？", hi: ["Who"] }
+    ] },
+    { id: "en-q-howtall", cat: "疑问代词", title: "how tall（问多高）", examples: [
+      { en: "How tall are you?", zh: "你多高？", hi: ["How tall"] }
+    ] },
+    { id: "en-q-whose", cat: "疑问代词", title: "whose（问谁的）", examples: [
+      { en: "Whose book is this?", zh: "这是谁的书？", hi: ["Whose"] }
+    ] },
+    { id: "en-q-howbig", cat: "疑问代词", title: "how big（问多大）", examples: [
+      { en: "How big is the room?", zh: "房间多大？", hi: ["How big"] }
+    ] },
+    { id: "en-q-whatcolor", cat: "疑问代词", title: "what color（问颜色）", examples: [
+      { en: "What color is your bag?", zh: "你的包是什么颜色？", hi: ["What color"] }
+    ] },
+    { id: "en-q-howlong", cat: "疑问代词", title: "how long（问多长 / 多久）", examples: [
+      { en: "How long have you lived here?", zh: "你在这里住了多久？", hi: ["How long"] }
+    ] },
+    { id: "en-q-whattime", cat: "疑问代词", title: "what time（问几点）", examples: [
+      { en: "What time is it?", zh: "几点了？", hi: ["What time"] }
+    ] },
+    { id: "en-q-howoften", cat: "疑问代词", title: "how often（问频率）", examples: [
+      { en: "How often do you exercise?", zh: "你多久锻炼一次？", hi: ["How often"] }
+    ] },
+    { id: "en-q-whatday", cat: "疑问代词", title: "what day（问星期 / 日期）", examples: [
+      { en: "What day is it today?", zh: "今天星期几？", hi: ["What day"] }
+    ] },
+    { id: "en-q-howsoon", cat: "疑问代词", title: "how soon（问多久之后）", examples: [
+      { en: "How soon will you arrive?", zh: "你多久后到？", hi: ["How soon"] }
+    ] },
+    { id: "en-q-when", cat: "疑问代词", title: "when（问何时）", examples: [
+      { en: "When did you arrive?", zh: "你什么时候到的？", hi: ["When"] }
+    ] },
+    { id: "en-q-howheavy", cat: "疑问代词", title: "how heavy（问多重）", examples: [
+      { en: "How heavy is this box?", zh: "这个盒子多重？", hi: ["How heavy"] }
+    ] },
+
+    /* 六、人称代词（8 组主格 + 宾格 + 物主代词） */
+    { id: "en-pro-1s", cat: "人称代词", title: "第一人称单数：I / me / my", examples: [
+      { en: "I love my book.", zh: "我爱我的书。", hi: ["I", "my"] }
+    ] },
+    { id: "en-pro-2s", cat: "人称代词", title: "第二人称单复同：you / you / your", examples: [
+      { en: "You like your job.", zh: "你喜欢你的工作。", hi: ["You", "your"] }
+    ] },
+    { id: "en-pro-3sm", cat: "人称代词", title: "第三人称单数阳：he / him / his", examples: [
+      { en: "He loves his dog.", zh: "他爱他的狗。", hi: ["He", "his"] }
+    ] },
+    { id: "en-pro-3sf", cat: "人称代词", title: "第三人称单数阴：she / her / her", examples: [
+      { en: "She loves her cat.", zh: "她爱她的猫。", hi: ["She", "her"] }
+    ] },
+    { id: "en-pro-1p", cat: "人称代词", title: "第一人称复数：we / us / our", examples: [
+      { en: "We love our country.", zh: "我们爱我们的国家。", hi: ["We", "our"] }
+    ] },
+    { id: "en-pro-3p", cat: "人称代词", title: "第三人称复数：they / them / their", examples: [
+      { en: "They love their kids.", zh: "他们爱他们的孩子。", hi: ["They", "their"] }
+    ] },
+    { id: "en-pro-it", cat: "人称代词", title: "第三人称单数中：it / it / its", examples: [
+      { en: "The dog wagged its tail.", zh: "狗摇了摇尾巴。", hi: ["its"] }
+    ] },
+    { id: "en-pro-demo", cat: "人称代词", title: "指示代词：this / that / these / those", examples: [
+      { en: "This is my book; those are yours.", zh: "这是我的书；那些是你的。", hi: ["This", "those"] }
     ] }
   ],
   ja: [
     { id: "ja-particle-wa", cat: "助词", title: "は / が（主题与主语）", examples: [
-      { en: "私は学生です。", zh: "我是学生。", note: "は 提示主题" },
-      { en: "誰が来ましたか。", zh: "谁来了？", note: "が 强调主语（新信息）" }
+      { en: "私は学生です。", zh: "我是学生。", hi: ["は"], note: "は 提示主题" },
+      { en: "誰が来ましたか。", zh: "谁来了？", hi: ["が"], note: "が 强调主语" }
     ] },
-    { id: "ja-particle-ni-de", cat: "助词", title: "に / で（时间/地点与场所）", examples: [
-      { en: "七時に起きました。", zh: "七点起床。", note: "に 表时间点" },
-      { en: "公園で遊びます。", zh: "在公园玩。", note: "で 表动作发生的场所" }
+    { id: "ja-particle-ni-de", cat: "助词", title: "に / で（时间 / 场所）", examples: [
+      { en: "七時に起きました。", zh: "七点起床。", hi: ["に"] },
+      { en: "公園で遊びます。", zh: "在公园玩。", hi: ["で"] }
     ] },
     { id: "ja-form-te", cat: "动词", title: "て形（连接与请求）", examples: [
-      { en: "本を読んでください。", zh: "请读书。", note: "て形 + ください 表示请求" },
-      { en: "食べて、寝る。", zh: "吃完饭再睡觉。", note: "て形表动作顺序" }
+      { en: "本を読んでください。", zh: "请读书。", hi: ["読んで"] }
     ] },
     { id: "ja-form-past", cat: "时态", title: "た形（过去 / 完成）", examples: [
-      { en: "昨日、公園へ行きました。", zh: "昨天去了公园。", note: "动词た形 表过去" },
-      { en: "食べたことがあります。", zh: "吃过（经验）。", note: "た形 + ことがある 表经验" }
+      { en: "昨日、公園へ行きました。", zh: "昨天去了公园。", hi: ["行きました"] }
     ] },
-    { id: "ja-keigo", cat: "敬语", title: "敬体与简体（です/ます / だ/る）", examples: [
-      { en: "私は学生です。", zh: "我是学生。", note: "敬体（礼貌）" },
-      { en: "俺は学生だ。", zh: "我是学生。", note: "简体（口语/书写）" }
+    { id: "ja-keigo", cat: "敬语", title: "敬体与简体（です / ます / だ / だ）", examples: [
+      { en: "私は学生です。", zh: "我是学生。", hi: ["です"] }
     ] }
   ],
   ko: [
     { id: "ko-particle-eun-neun", cat: "助词", title: "은/는 vs 이/가（主题与主语）", examples: [
-      { en: "저는 학생입니다.", zh: "我是学生。", note: "은/는 提示主题" },
-      { en: "누가 왔어요?", zh: "谁来了？", note: "이/가 强调主语" }
+      { en: "저는 학생입니다.", zh: "我是学生。", hi: ["는"] }
     ] },
-    { id: "ko-particle-e-aesseo", cat: "助词", title: "에 / 에서（时点/场所）", examples: [
-      { en: "7시에 일어났어요.", zh: "7点起床了。", note: "에 表时间点" },
-      { en: "학교에서 공부해요.", zh: "在学校学习。", note: "에서 表动作场所" }
+    { id: "ko-particle-e-aesseo", cat: "助词", title: "에 / 에서（时点 / 场所）", examples: [
+      { en: "7시에 일어났어요.", zh: "7点起床了。", hi: ["에"] },
+      { en: "학교에서 공부해요.", zh: "在学校学习。", hi: ["에서"] }
     ] },
     { id: "ko-form-past", cat: "时态", title: "过去时 -았/었어요", examples: [
-      { en: "어제 영화를 봤어요.", zh: "昨天看了电影。", note: "动词词干 + 았/었어요" }
+      { en: "어제 영화를 봤어요.", zh: "昨天看了电影。", hi: ["봤어요"] }
     ] },
     { id: "ko-form-future", cat: "时态", title: "将来时 -ㄹ 거예요", examples: [
-      { en: "내일 갈 거예요.", zh: "明天会去。", note: "词干 + ㄹ 거예요" }
+      { en: "내일 갈 거예요.", zh: "明天会去。", hi: ["갈"] }
     ] },
     { id: "ko-formal-plain", cat: "敬语", title: "敬语 / 平语（-요 / -다）", examples: [
-      { en: "저는 학생이에요.", zh: "我是学生。", note: "敬语（一般对话）" },
-      { en: "나는 학생이다.", zh: "我是学生。", note: "平语（书面/亲近）" }
+      { en: "저는 학생이에요.", zh: "我是学生。", hi: ["이에요"] }
     ] }
   ]
 };
@@ -775,7 +960,7 @@ function lgNormalizeLang(e) {
   var def = {
     words: [], notes: [], materials: [], listening: [], wrongList: [], favorites: [],
     packLoaded: {}, bank: [], patterns: [],
-    grammar: { builtin: [], custom: [], customSeen: 0, lastViewedId: null },
+    grammar: { builtin: [], custom: [], customSeen: {}, lastViewedId: null },
     plan: { template: "commute", daily: 5, days: {} },
     stats: { studyLog: {}, totalSeconds: 0, learnedCount: 0, wrongTypes: {}, reviewCount: 0 },
     streak: 0, lastStudyDate: null, level: 0,
@@ -791,7 +976,7 @@ function lgNormalizeLang(e) {
   });
   if (!e.grammar.builtin) e.grammar.builtin = [];
   if (!e.grammar.custom) e.grammar.custom = [];
-  if (typeof e.grammar.customSeen !== "number") e.grammar.customSeen = 0;
+  if (!e.grammar.customSeen || typeof e.grammar.customSeen !== "object") e.grammar.customSeen = {};
   if (typeof e.grammar.lastViewedId !== "string") e.grammar.lastViewedId = null;
   if (!e.stats.studyLog) e.stats.studyLog = {};
   if (!e.stats.wrongTypes) e.stats.wrongTypes = {};
@@ -808,7 +993,7 @@ function langGet(code) {
       bank: [],             // 场景词包展开后的词
       patterns: [],         // 句式库（精读「划句式」的产出）
       // v5.9.172：语法库——builtin（系统内置基础语法，按语种）；custom（用户自补语法项）
-      grammar: { builtin: [], custom: [], customSeen: 0, lastViewedId: null },
+      grammar: { builtin: [], custom: [], customSeen: {}, lastViewedId: null },
       plan: { template: "commute", daily: 5, days: {} },   // days: { date: [{t, done}] }
       stats: { studyLog: {}, totalSeconds: 0, learnedCount: 0, wrongTypes: {}, reviewCount: 0 },
       streak: 0, lastStudyDate: null, level: 0,
@@ -5689,52 +5874,63 @@ function lgVidAddCourse(c) {
 }
 
 /* =============================================================
- * 模块九：语法学习（v5.9.172）
- * - 内置基础语法（按语种，LG_GRAMMAR_BUILTIN，只读）
+ * 模块九：语法学习（v5.9.174 重构）
+ * - 内置基础语法（按语种，LG_GRAMMAR_BUILTIN，只读）— 8 大表：词性/句法成分/句子结构/时态/疑问代词/人称代词
  * - 用户自补充语法项（custom）：分类 / 标题 / 描述 / 例句列表 / 知识点列表
- * - 列表视图：按类别分组，显示学习进度（已看/总数）+ 内置/自定义 标签
- * - 详情视图：例句可点词加入词库，markSeen() 标记已学
- * - CRUD：新建/编辑/删除（带 confirm）；搜索（标题+描述+例句+知识点）
- * - 状态：内置项用 'builtin:<id>' 作为 key，custom 用 'custom:<uid>'
+ * - UI 与听力对齐（lg-listen-* 类风格）：学习计时 / 进度条 / 折叠组 / 卡片 / 点读
+ * - 例句点读：lgSpeak(en)；关键词按 hi 数组高亮不同颜色
+ * - 搜索：中英文全文匹配（lowercase + trim）
+ * - CRUD：showModal(html) 内嵌表单 + lgGrammarFormSubmit
  * ============================================================= */
 var LG_GRAMMAR_VIEW = "list"; // list | detail
-var LG_GRAMMAR_CUR_ID = null; // 当前查看项 id
-var LG_GRAMMAR_CUR_IS_CUSTOM = false; // 当前查看项是否为自定义
-var LG_GRAMMAR_SEARCH = ""; // 搜索词
+var LG_GRAMMAR_CUR_ID = null;
+var LG_GRAMMAR_CUR_IS_CUSTOM = false;
+var LG_GRAMMAR_SEARCH = "";
 var LG_GRAMMAR_NEW_CAT = "自定义";
+var LG_GRAMMAR_COLLAPSED = {}; // cat → bool（折叠状态，持久于内存即可）
+// v5.9.174：编辑/新建的草稿缓存（modal 弹出期间用户输入，提交时读取）
+var LG_GRAMMAR_DRAFT = null;
+
 function lgRenderGrammar(cur) {
   var e = langGet(cur);
-  // 首次进入按需注入 builtin（幂等：相同 id 不覆盖已有 seen 标记）
   lgGrammarSeedBuiltin(cur, e);
   var builtin = e.grammar.builtin || [];
   var custom = e.grammar.custom || [];
-  var search = (LG_GRAMMAR_SEARCH || "").trim().toLowerCase();
 
+  // 详情视图
   if (LG_GRAMMAR_VIEW === "detail" && LG_GRAMMAR_CUR_ID) {
     var item = LG_GRAMMAR_CUR_IS_CUSTOM
       ? custom.filter(function (x) { return x.id === LG_GRAMMAR_CUR_ID; })[0]
       : builtin.filter(function (x) { return x.id === LG_GRAMMAR_CUR_ID; })[0];
     if (item) {
-      // 更新最后访问（仅自定义可写）
       if (LG_GRAMMAR_CUR_IS_CUSTOM) e.grammar.lastViewedId = LG_GRAMMAR_CUR_ID;
       return lgGrammarDetailHtml(item, LG_GRAMMAR_CUR_IS_CUSTOM, cur);
     }
   }
 
-  // 列表视图：按 cat 分组
+  // 搜索：trim + 大小写不敏感
+  var search = (LG_GRAMMAR_SEARCH || "").trim().toLowerCase();
+
+  // 列表：合并 + 过滤
   var all = [];
   builtin.forEach(function (x) { all.push({ item: x, isCustom: false }); });
   custom.forEach(function (x) { all.push({ item: x, isCustom: true }); });
-  // 搜索过滤
   if (search) {
     all = all.filter(function (rec) {
       var x = rec.item;
-      var hay = (x.title || "") + " " + (x.desc || "") + " " + (x.cat || "");
-      if (x.examples && x.examples.length) hay += " " + x.examples.map(function (e2) { return (e2.en || "") + " " + (e2.zh || "") + " " + (e2.note || ""); }).join(" ");
-      if (x.notes && x.notes.length) hay += " " + x.notes.join(" ");
+      var hay = "";
+      hay += " " + (x.title || "");
+      hay += " " + (x.desc || "");
+      hay += " " + (x.cat || "");
+      if (Array.isArray(x.examples)) hay += " " + x.examples.map(function (e2) {
+        return " " + (e2.en || "") + " " + (e2.zh || "") + " " + (e2.note || "");
+      }).join(" ");
+      if (Array.isArray(x.notes)) hay += " " + x.notes.join(" ");
+      // 中英文都匹配：toLowerCase 即可（英文本身 case insensitive，中文不受影响）
       return hay.toLowerCase().indexOf(search) >= 0;
     });
   }
+
   // 按 cat 分组
   var byCat = {};
   var catOrder = [];
@@ -5743,84 +5939,118 @@ function lgRenderGrammar(cur) {
     if (!byCat[c]) { byCat[c] = []; catOrder.push(c); }
     byCat[c].push(rec);
   });
-  // 自定义项放最后
-  catOrder.sort(function (a, b) { if (a === "自定义") return 1; if (b === "自定义") return -1; return a.localeCompare(b, "zh-Hans"); });
+  // 自定义项放最后；内置类按内置顺序（词性→句法成分→句子结构→时态→疑问代词→人称代词）
+  var LG_G_BUILTIN_CAT_ORDER = ["词性", "句法成分", "句子结构", "时态", "疑问代词", "人称代词"];
+  catOrder.sort(function (a, b) {
+    if (a === "自定义") return 1;
+    if (b === "自定义") return -1;
+    var ai = LG_G_BUILTIN_CAT_ORDER.indexOf(a);
+    var bi = LG_G_BUILTIN_CAT_ORDER.indexOf(b);
+    if (ai >= 0 && bi >= 0) return ai - bi;
+    if (ai >= 0) return -1;
+    if (bi >= 0) return 1;
+    return a.localeCompare(b, "zh-Hans");
+  });
 
-  // 学习进度：builtin 项数 + customSeen / 全部 custom 项数
   var seenSet = (e.grammar.customSeen && typeof e.grammar.customSeen === "object") ? e.grammar.customSeen : {};
   var customSeenCount = custom.filter(function (x) { return !!seenSet[x.id]; }).length;
   var progressPct = custom.length ? Math.round(customSeenCount / custom.length * 100) : 0;
 
-  var html = '';
-  // 顶部：搜索 + 新增按钮 + 进度
-  html += '<div class="lg-grammar-top">' +
-    '<div class="lg-grammar-top-l">' +
-      '<input class="lg-input" id="lg-grammar-search" placeholder="搜索标题 / 例句 / 知识点" value="' + escapeHtml(LG_GRAMMAR_SEARCH || "") + '" oninput="lgGrammarOnSearch(this.value)">' +
-      '<button class="lg-btn sm ghost" onclick="lgGrammarClearSearch()">清空</button>' +
+  var html = "";
+  // 顶部统计行（与听力顶部风格对齐：进度 + 总数 + 学习计时）
+  html += '<div class="lg-grammar-head">' +
+    '<div class="lg-grammar-head-l">' +
+      '<div class="lg-grammar-head-title">📐 语法学习</div>' +
+      '<div class="lg-grammar-head-meta">' +
+        '<span class="lg-grammar-chip">内置 <b>' + builtin.length + '</b> 项</span>' +
+        '<span class="lg-grammar-chip">我的 <b>' + custom.length + '</b> 项</span>' +
+      '</div>' +
     '</div>' +
-    '<div class="lg-grammar-top-r">' +
-      '<span class="lg-grammar-prog">自补语法进度 <b>' + customSeenCount + '</b>/' + custom.length + '（' + progressPct + '%）</span>' +
-      '<button class="lg-btn" onclick="lgGrammarNew()">＋ 新增语法</button>' +
+    '<div class="lg-grammar-head-r">' +
+      '<div class="lg-grammar-prog">' +
+        '<div class="lg-grammar-prog-label">自补语法已学 <b>' + customSeenCount + '</b>/' + custom.length + ' · ' + progressPct + '%</div>' +
+        '<div class="lg-grammar-prog-bar"><div class="lg-grammar-prog-fill" style="width:' + progressPct + '%"></div></div>' +
+      '</div>' +
     '</div>' +
   '</div>';
 
-  // 统计：builtin / custom 总数
-  html += '<div class="lg-grammar-stat-row">' +
-    '<span class="lg-chip">内置 <b>' + builtin.length + '</b> 项</span>' +
-    '<span class="lg-chip">我的 <b>' + custom.length + '</b> 项</span>' +
+  // 搜索 + 新增（与听力一致：左 input 右按钮组）
+  html += '<div class="lg-grammar-toolbar">' +
+    '<input class="lg-input lg-grammar-search" id="lg-grammar-search" placeholder="搜索标题 / 例句 / 知识点（中英文均支持）" value="' + escapeHtml(LG_GRAMMAR_SEARCH || "") + '" oninput="lgGrammarOnSearch(this.value)">' +
+    (search ? '<button class="lg-btn sm ghost" onclick="lgGrammarClearSearch()">清空</button>' : '') +
+    '<button class="lg-btn" onclick="lgGrammarNew()">＋ 新增语法</button>' +
   '</div>';
 
   if (catOrder.length === 0) {
-    html += '<div class="lg-card"><div class="empty-state"><div class="empty-icon">📐</div>' +
-      '<div class="empty-text">没有匹配的语法项</div>' +
-      '<button class="lg-btn sm" onclick="lgGrammarNew()">＋ 新增语法</button>' +
+    html += '<div class="lg-card lg-grammar-empty"><div class="empty-state"><div class="empty-icon">📐</div>' +
+      '<div class="empty-text">' + (search ? "没有匹配「" + escapeHtml(search) + "」的语法项" : "还没有自定义语法，点右上角「＋ 新增语法」开始") + '</div>' +
+      (!search ? '<button class="lg-btn sm" onclick="lgGrammarNew()">＋ 新增语法</button>' : '') +
       '</div></div>';
     return html;
   }
 
+  // 各分类分组（与听力 lg-mat / lg-mat-head 风格对齐）
   catOrder.forEach(function (c) {
     var items = byCat[c];
-    html += '<div class="lg-grammar-cat"><div class="lg-grammar-cat-h">' + escapeHtml(c) + ' · ' + items.length + ' 项</div>';
-    items.forEach(function (rec) {
-      var x = rec.item;
-      var isCustom = rec.isCustom;
-      var tag = isCustom ? '<span class="lg-grammar-tag my">我的</span>' : '<span class="lg-grammar-tag sys">内置</span>';
-      var seenMark = isCustom && seenSet[x.id] ? '<span class="lg-grammar-seen">✓</span>' : '';
-      var ops = isCustom
-        ? '<span class="lg-grammar-ops">' +
-            '<button class="lg-btn xs" onclick="lgGrammarEdit(\'' + escapeHtml(x.id) + '\')">✏️</button>' +
-            '<button class="lg-btn xs danger" onclick="lgGrammarDel(\'' + escapeHtml(x.id) + '\')">🗑</button>' +
-          '</span>'
-        : '';
-      html += '<div class="lg-grammar-item" onclick="lgGrammarOpen(\'' + escapeHtml(x.id) + '\',' + (isCustom ? "true" : "false") + ')">' +
-        tag + ' ' + seenMark +
-        '<div class="lg-grammar-item-main">' +
-          '<div class="lg-grammar-item-title">' + escapeHtml(x.title || "(未命名)") + '</div>' +
-          (x.desc ? '<div class="lg-grammar-item-desc">' + escapeHtml(x.desc) + '</div>' : '') +
-          (x.examples && x.examples.length ? '<div class="lg-grammar-item-meta">' + x.examples.length + ' 个例句</div>' : '') +
-        '</div>' +
-        ops +
+    var collapsed = !!LG_GRAMMAR_COLLAPSED[c];
+    html += '<div class="lg-grammar-cat">' +
+      '<div class="lg-grammar-cat-h" onclick="lgGrammarToggleCat(\'' + escapeHtml(c).replace(/'/g, "\\'") + '\')">' +
+        '<span class="lg-grammar-cat-toggle">' + (collapsed ? "▸" : "▾") + '</span>' +
+        '<span class="lg-grammar-cat-name">' + escapeHtml(c) + '</span>' +
+        '<span class="lg-grammar-cat-count">' + items.length + ' 项</span>' +
       '</div>';
-    });
+    if (!collapsed) {
+      items.forEach(function (rec) {
+        html += lgGrammarListItemHtml(rec, cur);
+      });
+    }
     html += '</div>';
   });
 
   return html;
 }
 
-// 注入 builtin（幂等：按 e.grammar.builtin 的 id 去重）
+// 单个语法项卡片（与听力素材卡片对齐：标题 + 描述 + meta + 操作）
+function lgGrammarListItemHtml(rec, cur) {
+  var x = rec.item, isCustom = rec.isCustom;
+  var e = langGet(cur);
+  var seenSet = (e.grammar.customSeen && typeof e.grammar.customSeen === "object") ? e.grammar.customSeen : {};
+  var tag = isCustom ? '<span class="lg-grammar-tag my">我的</span>' : '<span class="lg-grammar-tag sys">内置</span>';
+  var seenMark = isCustom && seenSet[x.id] ? '<span class="lg-grammar-seen">✓ 已学</span>' : '';
+  var ops = isCustom
+    ? '<span class="lg-grammar-ops">' +
+        '<button class="lg-btn xs ghost" onclick="event.stopPropagation();lgGrammarEdit(\'' + escapeHtml(x.id) + '\')">✏️ 编辑</button>' +
+        '<button class="lg-btn xs danger" onclick="event.stopPropagation();lgGrammarDel(\'' + escapeHtml(x.id) + '\')">🗑</button>' +
+      '</span>'
+    : '<span class="lg-grammar-ops"><span class="lg-grammar-readonly">只读</span></span>';
+  return '<div class="lg-grammar-item" onclick="lgGrammarOpen(\'' + escapeHtml(x.id) + '\',' + (isCustom ? "true" : "false") + ')">' +
+    tag + ' ' + seenMark +
+    '<div class="lg-grammar-item-main">' +
+      '<div class="lg-grammar-item-title">' + escapeHtml(x.title || "(未命名)") + '</div>' +
+      (x.desc ? '<div class="lg-grammar-item-desc">' + escapeHtml(x.desc) + '</div>' : '') +
+      '<div class="lg-grammar-item-meta">' +
+        (x.examples && x.examples.length ? x.examples.length + ' 个例句' : '') +
+        (x.examples && x.examples.length && x.notes && x.notes.length ? ' · ' : '') +
+        (x.notes && x.notes.length ? x.notes.length + ' 个知识点' : '') +
+      '</div>' +
+    '</div>' +
+    ops +
+  '</div>';
+}
+
+// 注入 builtin（幂等：按 e.grammar.builtin 的 id 去重；只补缺失，不覆盖老项）
 function lgGrammarSeedBuiltin(cur, e) {
   var src = LG_GRAMMAR_BUILTIN[cur] || [];
-  if (!e.grammar) e.grammar = { builtin: [], custom: [], customSeen: 0, lastViewedId: null };
+  if (!e.grammar) e.grammar = { builtin: [], custom: [], customSeen: {}, lastViewedId: null };
   if (!e.grammar.builtin) e.grammar.builtin = [];
+  if (typeof e.grammar.customSeen !== "object") e.grammar.customSeen = {};
   var have = {};
-  e.grammar.builtin.forEach(function (x) { have[x.id] = true; });
+  e.grammar.builtin.forEach(function (x) { if (x && x.id) have[x.id] = true; });
   src.forEach(function (x) {
     if (!have[x.id]) e.grammar.builtin.push(JSON.parse(JSON.stringify(x)));
   });
 }
 
-// 进入详情
 function lgGrammarOpen(id, isCustom) {
   LG_GRAMMAR_CUR_ID = id;
   LG_GRAMMAR_CUR_IS_CUSTOM = !!isCustom;
@@ -5833,14 +6063,16 @@ function lgGrammarBack() {
   LG_GRAMMAR_VIEW = "list";
   render();
 }
-
-// 搜索
 function lgGrammarOnSearch(v) { LG_GRAMMAR_SEARCH = v; render(); }
 function lgGrammarClearSearch() { LG_GRAMMAR_SEARCH = ""; render(); }
+function lgGrammarToggleCat(c) {
+  LG_GRAMMAR_COLLAPSED[c] = !LG_GRAMMAR_COLLAPSED[c];
+  render();
+}
 
-// 详情视图
+// 详情视图：与听力卡片风格对齐（顶部 + 主区 + 例句 + 底部按钮）
 function lgGrammarDetailHtml(item, isCustom, cur) {
-  var html = '';
+  var html = "";
   html += '<div class="lg-grammar-detail-top">' +
     '<button class="lg-btn sm ghost" onclick="lgGrammarBack()">← 返回列表</button>' +
     (isCustom
@@ -5848,7 +6080,7 @@ function lgGrammarDetailHtml(item, isCustom, cur) {
           '<button class="lg-btn sm" onclick="lgGrammarEdit(\'' + escapeHtml(item.id) + '\')">✏️ 编辑</button>' +
           '<button class="lg-btn sm danger" onclick="lgGrammarDel(\'' + escapeHtml(item.id) + '\')">🗑 删除</button>' +
         '</span>'
-      : '<span class="lg-grammar-tag sys">内置</span>') +
+      : '<span class="lg-grammar-tag sys">内置 · 只读</span>') +
   '</div>';
 
   html += '<div class="lg-grammar-detail">';
@@ -5860,22 +6092,23 @@ function lgGrammarDetailHtml(item, isCustom, cur) {
   if (Array.isArray(item.notes) && item.notes.length) {
     html += '<div class="lg-grammar-section-h">📌 知识点</div>';
     html += '<ul class="lg-grammar-notes">';
-    item.notes.forEach(function (n) {
-      html += '<li>' + escapeHtml(n) + '</li>';
-    });
+    item.notes.forEach(function (n) { html += '<li>' + escapeHtml(n) + '</li>'; });
     html += '</ul>';
   }
 
   // 例句
   if (Array.isArray(item.examples) && item.examples.length) {
-    html += '<div class="lg-grammar-section-h">📝 例句</div>';
+    html += '<div class="lg-grammar-section-h">📝 例句（点喇叭读音 · 关键词高亮）</div>';
     html += '<div class="lg-grammar-examples">';
     item.examples.forEach(function (ex, idx) {
       html += '<div class="lg-grammar-ex">' +
-        '<div class="lg-grammar-ex-n">'+ (idx+1) + '</div>' +
+        '<div class="lg-grammar-ex-n">' + (idx + 1) + '</div>' +
         '<div class="lg-grammar-ex-main">' +
-          '<div class="lg-grammar-ex-en">' + lgGrammarWordsHtml(ex.en || "", cur) + '</div>' +
-          '<div class="lg-grammar-ex-zh">' + escapeHtml(ex.zh || "") + '</div>' +
+          '<div class="lg-grammar-ex-en">' +
+            lgGrammarHighlightEn(ex.en || "", ex.hi || []) +
+            ' <button class="lg-btn xs ghost lg-grammar-speak" onclick="lgGrammarSpeakExample(\'' + escapeHtml((ex.en || "").replace(/'/g, "\\'")) + '\',\'' + escapeHtml(cur) + '\')" title="朗读">🔊</button>' +
+          '</div>' +
+          (ex.zh ? '<div class="lg-grammar-ex-zh">' + escapeHtml(ex.zh) + '</div>' : '') +
           (ex.note ? '<div class="lg-grammar-ex-note">💡 ' + escapeHtml(ex.note) + '</div>' : '') +
         '</div>' +
       '</div>';
@@ -5885,33 +6118,92 @@ function lgGrammarDetailHtml(item, isCustom, cur) {
 
   html += '</div>';
 
-  // 已读标记（仅自定义类）
   if (isCustom) {
     var e = langGet(cur);
-    var seenSet = e.grammar.customSeen && typeof e.grammar.customSeen === "object" ? e.grammar.customSeen : (e.grammar.customSeen = {});
+    var seenSet = (e.grammar.customSeen && typeof e.grammar.customSeen === "object") ? e.grammar.customSeen : (e.grammar.customSeen = {});
     var seen = !!seenSet[item.id];
     html += '<div class="lg-grammar-foot">' +
+      '<button class="lg-btn sm ghost" onclick="lgGrammarSpeakAll(\'' + escapeHtml(cur) + '\')">🔊 朗读全部例句</button>' +
       (seen
         ? '<button class="lg-btn ghost" onclick="lgGrammarMarkSeen(\'' + escapeHtml(item.id) + '\', false)">↩️ 标记未学</button>'
         : '<button class="lg-btn primary" onclick="lgGrammarMarkSeen(\'' + escapeHtml(item.id) + '\', true)">✓ 标记已学</button>') +
+    '</div>';
+  } else {
+    html += '<div class="lg-grammar-foot">' +
+      '<button class="lg-btn sm ghost" onclick="lgGrammarSpeakAll(\'' + escapeHtml(cur) + '\')">🔊 朗读全部例句</button>' +
     '</div>';
   }
   return html;
 }
 
-// 例句里的英文按词切，已在词库的词弱化（复用 lgWordNormalize + 词库查）
-function lgGrammarWordsHtml(en, cur) {
+// 例句点读：直接读英文
+function lgGrammarSpeakExample(en, code) {
+  if (!en) return;
+  if (typeof lgSpeak === "function") lgSpeak(en, code, 0.85);
+}
+
+// 整段例句依次读
+function lgGrammarSpeakAll(code) {
+  var item = LG_GRAMMAR_CUR_IS_CUSTOM
+    ? (langGet(code).grammar.custom || []).filter(function (x) { return x.id === LG_GRAMMAR_CUR_ID; })[0]
+    : (langGet(code).grammar.builtin || []).filter(function (x) { return x.id === LG_GRAMMAR_CUR_ID; })[0];
+  if (!item || !item.examples || !item.examples.length) return;
+  var i = 0;
+  function next() {
+    if (i >= item.examples.length) return;
+    var ex = item.examples[i++];
+    if (!ex || !ex.en) return next();
+    if (typeof lgSpeak !== "function") return;
+    if (window.speechSynthesis) {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+    }
+    lgSpeak(ex.en, code, 0.85);
+    // 估算朗读时长：英文约 3 字/秒
+    setTimeout(next, Math.max(1800, ex.en.length * 200));
+  }
+  next();
+}
+
+// 例句英文高亮：按 hi 数组（多关键字）逐个匹配 + 已收词库词弱化
+function lgGrammarHighlightEn(en, hi) {
+  var cur = langCur();
   var e = langGet(cur);
   var bank = (e.wordbank && e.wordbank.words) || [];
-  var set = {};
-  bank.forEach(function (w) { set[lgWordNormalize(w.term)] = true; });
-  var parts = en.split(/(\s+|[.,!?;:()\[\]"])/);
-  return parts.map(function (p) {
-    if (!p) return "";
-    var norm = lgWordNormalize(p);
-    var inBank = norm && set[norm];
-    if (inBank) return '<span class="lg-grammar-word inbank">' + escapeHtml(p) + '</span>';
-    return escapeHtml(p);
+  var bankSet = {};
+  bank.forEach(function (w) { bankSet[lgWordNormalize(w.term)] = true; });
+
+  // 先把 hi 关键词作为高亮 token；其余按空格 + 标点切
+  // 处理顺序：先按 hi 切，再走 inbank 检测
+  var tokens = [{ kind: "plain", text: en }];
+  if (hi && hi.length) {
+    var hiSorted = hi.slice().sort(function (a, b) { return b.length - a.length; }); // 长优先
+    hiSorted.forEach(function (kw) {
+      var pat = new RegExp("(" + kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "g");
+      var newTokens = [];
+      tokens.forEach(function (tk) {
+        if (tk.kind !== "plain") { newTokens.push(tk); return; }
+        var parts = tk.text.split(pat);
+        parts.forEach(function (p) {
+          if (p === "") return;
+          if (p === kw) newTokens.push({ kind: "hi", text: p });
+          else newTokens.push({ kind: "plain", text: p });
+        });
+      });
+      tokens = newTokens;
+    });
+  }
+  return tokens.map(function (tk) {
+    if (tk.kind === "hi") {
+      return '<span class="lg-grammar-hi">' + escapeHtml(tk.text) + '</span>';
+    }
+    // plain: 按词切，找 inbank
+    var parts = tk.text.split(/(\s+|[.,!?;:()\[\]"])/);
+    return parts.map(function (p) {
+      if (!p) return "";
+      var norm = lgWordNormalize(p);
+      if (norm && bankSet[norm]) return '<span class="lg-grammar-word inbank">' + escapeHtml(p) + '</span>';
+      return escapeHtml(p);
+    }).join("");
   }).join("");
 }
 
@@ -5924,46 +6216,53 @@ function lgGrammarMarkSeen(id, seen) {
   render();
 }
 
-// CRUD - 新增
-function lgGrammarNew() {
-  // 用 showModal 创建表单弹窗
-  var cats = lgGrammarCatList();
-  var body =
-    '<div class="form-group"><label class="form-label">分类</label>' +
-    '<input class="form-input" id="lg-g-cat" list="lg-g-cats" placeholder="如：动词/时态/从句…" value="' + escapeHtml(LG_GRAMMAR_NEW_CAT) + '">' +
-    '<datalist id="lg-g-cats">' + cats.map(function (c) { return '<option value="' + escapeHtml(c) + '">'; }).join("") + '</datalist>' +
-    '</div>' +
-    '<div class="form-group"><label class="form-label">标题 *</label>' +
-    '<input class="form-input" id="lg-g-title" placeholder="如：现在完成时"></div>' +
-    '<div class="form-group"><label class="form-label">描述 / 语法规则</label>' +
-    '<textarea class="form-input" id="lg-g-desc" rows="3" placeholder="简要说明这条语法的用法"></textarea></div>' +
-    '<div class="form-group"><label class="form-label">例句（每行一句，格式：英文 | 中文 | 备注，竖线分隔，注释可省略）</label>' +
-    '<textarea class="form-input" id="lg-g-ex" rows="6" placeholder="I have lived here for five years.|我在这里住了五年。|have + 过去分词，表持续到现在的经历"></textarea></div>' +
-    '<div class="form-group"><label class="form-label">知识点（每行一条）</label>' +
-    '<textarea class="form-input" id="lg-g-notes" rows="3" placeholder="用于强调重点；可省略"></textarea></div>';
-  showModal({
-    title: "＋ 新增语法",
-    body: body,
-    okText: "保存",
-    onOk: function () { return lgGrammarSaveNew(); }
-  });
-}
 function lgGrammarCatList() {
   var cur = langCur();
   var e = langGet(cur);
   var set = {};
-  (e.grammar.builtin || []).forEach(function (x) { if (x.cat) set[x.cat] = 1; });
-  (e.grammar.custom || []).forEach(function (x) { if (x.cat) set[x.cat] = 1; });
+  (e.grammar.builtin || []).forEach(function (x) { if (x && x.cat) set[x.cat] = 1; });
+  (e.grammar.custom || []).forEach(function (x) { if (x && x.cat) set[x.cat] = 1; });
   var arr = Object.keys(set);
   if (arr.indexOf("自定义") < 0) arr.unshift("自定义");
   return arr;
 }
+
+// 表单草稿：保存用户输入（showModal 期间有效）
+function lgGrammarFormSubmit() {
+  var r = lgGrammarParseForm();
+  if (r.error) { showToast(r.error, "warning"); return false; }
+  var cur = langCur();
+  var e = langGet(cur);
+  if (LG_GRAMMAR_DRAFT && LG_GRAMMAR_DRAFT.mode === "edit" && LG_GRAMMAR_DRAFT.id) {
+    var hit = null;
+    for (var i = 0; i < e.grammar.custom.length; i++) {
+      if (e.grammar.custom[i].id === LG_GRAMMAR_DRAFT.id) { hit = e.grammar.custom[i]; break; }
+    }
+    if (hit) {
+      Object.assign(hit, r.data);
+      try { DB.save(); } catch (e) {}
+      showToast("已保存", "success");
+      LG_GRAMMAR_DRAFT = null;
+      closeModal(); render(); return true;
+    }
+  }
+  // 新增
+  var id = "custom-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 6);
+  e.grammar.custom.push(Object.assign({ id: id, createdAt: Date.now() }, r.data));
+  try { DB.save(); } catch (e) {}
+  showToast("已新增「" + r.data.title + "」", "success");
+  LG_GRAMMAR_DRAFT = null;
+  closeModal(); render();
+  return true;
+}
+
 function lgGrammarParseForm() {
-  var cat = (document.getElementById("lg-g-cat").value || "").trim() || "自定义";
-  var title = (document.getElementById("lg-g-title").value || "").trim();
-  var desc = (document.getElementById("lg-g-desc").value || "").trim();
-  var exRaw = (document.getElementById("lg-g-ex").value || "");
-  var notesRaw = (document.getElementById("lg-g-notes").value || "");
+  function v(id) { var el = document.getElementById(id); return el ? (el.value || "").trim() : ""; }
+  var cat = v("lg-g-cat") || "自定义";
+  var title = v("lg-g-title");
+  var desc = v("lg-g-desc");
+  var exRaw = document.getElementById("lg-g-ex") ? (document.getElementById("lg-g-ex").value || "") : "";
+  var notesRaw = document.getElementById("lg-g-notes") ? (document.getElementById("lg-g-notes").value || "") : "";
   if (!title) return { error: "请填写标题" };
   var examples = [];
   exRaw.split(/\n+/).forEach(function (line) {
@@ -5978,60 +6277,56 @@ function lgGrammarParseForm() {
   var notes = notesRaw.split(/\n+/).map(function (s) { return s.trim(); }).filter(Boolean);
   return { data: { cat: cat, title: title, desc: desc, examples: examples, notes: notes } };
 }
-function lgGrammarSaveNew() {
-  var r = lgGrammarParseForm();
-  if (r.error) { showToast(r.error, "warning"); return false; }
-  var cur = langCur();
-  var e = langGet(cur);
-  var id = "custom-" + (Date.now().toString(36)) + "-" + Math.random().toString(36).slice(2, 6);
-  e.grammar.custom.push(Object.assign({ id: id, createdAt: Date.now() }, r.data));
-  try { DB.save(); } catch (e) {}
-  showToast("已新增「" + r.data.title + "」", "success");
-  render();
-  return true;
+
+// 弹窗表单（沿用 showModal(html) + 内嵌按钮模式）
+function lgGrammarShowForm(opts) {
+  var cats = lgGrammarCatList();
+  var catsDatalist = cats.map(function (c) { return '<option value="' + escapeHtml(c) + '">'; }).join("");
+  var html =
+    '<div class="modal-title">' + (opts.mode === "edit" ? "✏️ 编辑语法" : "＋ 新增语法") + '</div>' +
+    '<div class="lg-form">' +
+      '<label class="lg-fld"><span>分类</span>' +
+        '<input class="lg-input" id="lg-g-cat" list="lg-g-cats" placeholder="如：词性 / 时态 / 从句 …" value="' + escapeHtml(opts.cat || LG_GRAMMAR_NEW_CAT) + '">' +
+        '<datalist id="lg-g-cats">' + catsDatalist + '</datalist>' +
+      '</label>' +
+      '<label class="lg-fld"><span>标题 *</span>' +
+        '<input class="lg-input" id="lg-g-title" value="' + escapeHtml(opts.title || "") + '" placeholder="如：现在完成时">' +
+      '</label>' +
+      '<label class="lg-fld"><span>描述 / 语法规则</span>' +
+        '<textarea class="lg-input lg-textarea" id="lg-g-desc" rows="3" placeholder="简要说明这条语法的用法">' + escapeHtml(opts.desc || "") + '</textarea>' +
+      '</label>' +
+      '<label class="lg-fld"><span>例句（每行一句，格式：英文 | 中文 | 备注，竖线分隔，备注可省略）</span>' +
+        '<textarea class="lg-input lg-textarea" id="lg-g-ex" rows="6" placeholder="I have lived here for five years.|我在这里住了五年。|have + 过去分词">' + escapeHtml(opts.exText || "") + '</textarea>' +
+      '</label>' +
+      '<label class="lg-fld"><span>知识点（每行一条）</span>' +
+        '<textarea class="lg-input lg-textarea" id="lg-g-notes" rows="3" placeholder="用于强调重点；可省略">' + escapeHtml(opts.notesText || "") + '</textarea>' +
+      '</label>' +
+      '<div class="lg-hint" style="margin:0 16px 4px;color:var(--text-tertiary);font-size:12px">每行一句；用 <b>|</b> 分隔英文 / 中文 / 备注，竖线为英文逗号变体，例句才能正常解析。</div>' +
+    '</div>' +
+    '<div class="btn-row" style="padding:0 16px 16px">' +
+      '<button class="btn btn-primary" style="flex:1" onclick="lgGrammarFormSubmit()">💾 保存</button>' +
+      '<button class="btn btn-secondary" style="flex:1" onclick="closeModal()">取消</button>' +
+    '</div>';
+  LG_GRAMMAR_DRAFT = opts;
+  showModal(html);
 }
 
-// CRUD - 编辑
+function lgGrammarNew() {
+  lgGrammarShowForm({ mode: "new", cat: LG_GRAMMAR_NEW_CAT, title: "", desc: "", exText: "", notesText: "" });
+}
+
 function lgGrammarEdit(id) {
   var cur = langCur();
   var e = langGet(cur);
   var x = (e.grammar.custom || []).filter(function (i) { return i.id === id; })[0];
   if (!x) { showToast("未找到该语法项", "warning"); return; }
-  var cats = lgGrammarCatList();
   var exText = (x.examples || []).map(function (ex) {
     return [ex.en || "", ex.zh || "", ex.note || ""].join("|");
   }).join("\n");
   var notesText = (x.notes || []).join("\n");
-  var body =
-    '<div class="form-group"><label class="form-label">分类</label>' +
-    '<input class="form-input" id="lg-g-cat" list="lg-g-cats" value="' + escapeHtml(x.cat || "") + '">' +
-    '<datalist id="lg-g-cats">' + cats.map(function (c) { return '<option value="' + escapeHtml(c) + '">'; }).join("") + '</datalist>' +
-    '</div>' +
-    '<div class="form-group"><label class="form-label">标题 *</label>' +
-    '<input class="form-input" id="lg-g-title" value="' + escapeHtml(x.title || "") + '"></div>' +
-    '<div class="form-group"><label class="form-label">描述</label>' +
-    '<textarea class="form-input" id="lg-g-desc" rows="3">' + escapeHtml(x.desc || "") + '</textarea></div>' +
-    '<div class="form-group"><label class="form-label">例句</label>' +
-    '<textarea class="form-input" id="lg-g-ex" rows="6">' + escapeHtml(exText) + '</textarea></div>' +
-    '<div class="form-group"><label class="form-label">知识点</label>' +
-    '<textarea class="form-input" id="lg-g-notes" rows="3">' + escapeHtml(notesText) + '</textarea></div>';
-  showModal({
-    title: "✏️ 编辑语法",
-    body: body,
-    okText: "保存",
-    onOk: function () {
-      var r = lgGrammarParseForm();
-      if (r.error) { showToast(r.error, "warning"); return false; }
-      Object.assign(x, r.data);
-      try { DB.save(); } catch (e) {}
-      showToast("已保存", "success");
-      render();
-      return true;
-    }
-  });
+  lgGrammarShowForm({ mode: "edit", id: id, cat: x.cat || "自定义", title: x.title || "", desc: x.desc || "", exText: exText, notesText: notesText });
 }
 
-// CRUD - 删除
 function lgGrammarDel(id) {
   var cur = langCur();
   var e = langGet(cur);
@@ -6040,7 +6335,6 @@ function lgGrammarDel(id) {
   if (typeof confirm === "function" && !confirm("删除语法项「" + (x.title || id) + "」？此操作不可恢复。")) return;
   e.grammar.custom = e.grammar.custom.filter(function (i) { return i.id !== id; });
   if (e.grammar.customSeen && typeof e.grammar.customSeen === "object") delete e.grammar.customSeen[id];
-  // 若详情视图打开的就是该 id → 返回列表
   if (LG_GRAMMAR_CUR_ID === id && LG_GRAMMAR_CUR_IS_CUSTOM) {
     LG_GRAMMAR_CUR_ID = null;
     LG_GRAMMAR_CUR_IS_CUSTOM = false;
@@ -6051,7 +6345,6 @@ function lgGrammarDel(id) {
   render();
 }
 
-// CRUD 统计（用于首页/复盘）
 function lgGrammarStats(cur) {
   var e = langGet(cur);
   var seen = (e.grammar.customSeen && typeof e.grammar.customSeen === "object") ? e.grammar.customSeen : {};

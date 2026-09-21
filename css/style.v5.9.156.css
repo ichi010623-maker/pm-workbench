@@ -7380,24 +7380,42 @@ select.nv-f-input:hover,select.nv-f-input:focus{background-color:#f1f5f9}
 .lg-pat-tag{font-size:10px;color:var(--text-secondary);border:1px solid var(--border-strong);border-radius:5px;padding:1px 6px}
 .lg-btn.sm{padding:3px 8px;font-size:12px;min-width:auto}
 
-/* ===== v5.9.172 语法学习 ===== */
-.lg-grammar-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 14px;background:var(--bg-secondary);border-radius:var(--radius-md);margin-bottom:10px;border:1px solid var(--border-color)}
-.lg-grammar-top-l{display:flex;align-items:center;gap:6px;flex:1 1 auto;min-width:240px}
-.lg-grammar-top-l .lg-input{flex:1}
-.lg-grammar-top-r{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-left:auto}
-.lg-grammar-prog{font-size:12px;color:var(--text-secondary)}
-.lg-grammar-prog b{color:var(--accent-purple);font-weight:600}
-.lg-grammar-stat-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.lg-grammar-stat-row .lg-chip{font-size:12px;color:var(--text-secondary);border:1px solid var(--border-color);border-radius:14px;padding:3px 10px;background:var(--bg-secondary)}
-.lg-grammar-stat-row .lg-chip b{color:var(--accent-purple);font-weight:600;margin-right:3px}
+
+/* ===== v5.9.174 语法学习重构（与听力 UI 对齐） ===== */
+.lg-grammar-head{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;padding:13px 14px;background:var(--bg-secondary);border-radius:var(--radius-md);margin-bottom:10px;border:1px solid var(--border-color)}
+.lg-grammar-head-l{flex:1 1 auto;min-width:220px}
+.lg-grammar-head-title{font-size:17px;font-weight:600;color:var(--text-primary);line-height:1.3}
+.lg-grammar-head-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.lg-grammar-chip{font-size:12px;color:var(--text-secondary);border:1px solid var(--border-color);border-radius:14px;padding:2px 10px;background:var(--bg-primary)}
+.lg-grammar-chip b{color:var(--accent-purple);font-weight:600;margin-right:3px}
+.lg-grammar-head-r{flex:0 0 240px;min-width:200px}
+.lg-grammar-prog{display:flex;flex-direction:column;gap:5px}
+.lg-grammar-prog-label{font-size:12px;color:var(--text-secondary)}
+.lg-grammar-prog-label b{color:var(--accent-purple);font-weight:600;margin:0 2px}
+.lg-grammar-prog-bar{height:6px;border-radius:3px;background:var(--bg-primary);overflow:hidden;border:1px solid var(--border-color)}
+.lg-grammar-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent-purple),#a78bfa);transition:width .25s ease}
+
+.lg-grammar-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.lg-grammar-search{flex:1;min-width:200px}
+
+.lg-grammar-empty{padding:32px 16px;text-align:center}
+.lg-grammar-empty .empty-icon{font-size:48px;margin-bottom:12px}
+.lg-grammar-empty .empty-text{font-size:14px;color:var(--text-secondary);margin-bottom:12px}
+
 .lg-grammar-cat{margin-bottom:14px}
-.lg-grammar-cat-h{font-size:12px;font-weight:600;color:var(--text-secondary);padding:6px 10px;background:var(--bg-secondary);border-radius:var(--radius-sm);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.lg-grammar-cat-h{font-size:13px;font-weight:600;color:var(--text-primary);padding:8px 12px;background:var(--bg-secondary);border-radius:var(--radius-sm);margin-bottom:8px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;border:1px solid var(--border-color)}
+.lg-grammar-cat-h:hover{background:var(--bg-tertiary,var(--bg-secondary))}
+.lg-grammar-cat-toggle{color:var(--text-secondary);font-size:14px;width:14px;display:inline-block}
+.lg-grammar-cat-name{flex:1}
+.lg-grammar-cat-count{font-size:11px;color:var(--text-tertiary);font-weight:500}
+
 .lg-grammar-item{display:flex;align-items:flex-start;gap:10px;padding:11px 12px;border:1px solid var(--border-color);border-radius:var(--radius-md);background:var(--bg-primary);margin-bottom:8px;cursor:pointer;transition:border-color .15s,transform .15s}
 .lg-grammar-item:hover{border-color:var(--accent-purple);transform:translateY(-1px)}
-.lg-grammar-tag{font-size:10px;padding:1px 6px;border-radius:4px;flex-shrink:0;line-height:1.5}
+.lg-grammar-tag{font-size:10px;padding:1px 6px;border-radius:4px;flex-shrink:0;line-height:1.6}
 .lg-grammar-tag.sys{background:#eef3ff;color:#4f46e5;border:1px solid #d8e0ff}
 .lg-grammar-tag.my{background:#f0fdf4;color:#16a34a;border:1px solid #c8f0d4}
-.lg-grammar-seen{font-size:11px;color:#16a34a;font-weight:600;flex-shrink:0;line-height:1.5}
+.lg-grammar-seen{font-size:10px;color:#16a34a;font-weight:600;flex-shrink:0;line-height:1.6;background:#dcfce7;padding:1px 6px;border-radius:4px;border:1px solid #bbf7d0}
+.lg-grammar-readonly{font-size:10px;color:var(--text-tertiary);padding:1px 6px;border-radius:4px;background:var(--bg-secondary);border:1px dashed var(--border-color);line-height:1.6}
 .lg-grammar-item-main{flex:1;min-width:0}
 .lg-grammar-item-title{font-size:14px;font-weight:500;color:var(--text-primary);line-height:1.55}
 .lg-grammar-item-desc{font-size:12px;color:var(--text-secondary);margin-top:4px;line-height:1.55;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
@@ -7422,8 +7440,19 @@ select.nv-f-input:hover,select.nv-f-input:focus{background-color:#f1f5f9}
 .lg-grammar-ex{display:flex;gap:10px;padding:10px 12px;border:1px solid var(--border-color);border-radius:var(--radius-sm);background:var(--bg-secondary)}
 .lg-grammar-ex-n{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--accent-purple);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:600}
 .lg-grammar-ex-main{flex:1;min-width:0}
-.lg-grammar-ex-en{font-size:14px;line-height:1.65;color:var(--text-primary)}
+.lg-grammar-ex-en{font-size:14px;line-height:1.65;color:var(--text-primary);display:flex;align-items:flex-start;gap:6px}
+.lg-grammar-ex-en > :first-child{flex:1}
+.lg-grammar-speak{flex-shrink:0;padding:2px 6px;font-size:11px}
 .lg-grammar-ex-zh{font-size:13px;color:var(--text-secondary);margin-top:3px;line-height:1.55}
 .lg-grammar-ex-note{font-size:12px;color:var(--accent-teal);margin-top:5px;line-height:1.55;background:var(--bg-primary);padding:4px 8px;border-radius:6px}
+/* v5.9.174 关键词高亮：不同语法分类用不同色，仿精读「划句式」 */
+.lg-grammar-hi{background:linear-gradient(180deg,transparent 60%,rgba(251,191,36,.45) 60%);color:var(--text-primary);font-weight:500;padding:0 1px;border-radius:2px}
+.lg-grammar-hi.cat-词性{background:linear-gradient(180deg,transparent 60%,rgba(96,165,250,.45) 60%)}
+.lg-grammar-hi.cat-时态{background:linear-gradient(180deg,transparent 60%,rgba(248,113,113,.45) 60%)}
+.lg-grammar-hi.cat-从句{background:linear-gradient(180deg,transparent 60%,rgba(167,139,250,.45) 60%)}
+.lg-grammar-hi.cat-句法成分{background:linear-gradient(180deg,transparent 60%,rgba(52,211,153,.45) 60%)}
+.lg-grammar-hi.cat-句子结构{background:linear-gradient(180deg,transparent 60%,rgba(251,191,36,.45) 60%)}
+.lg-grammar-hi.cat-疑问代词{background:linear-gradient(180deg,transparent 60%,rgba(244,114,182,.45) 60%)}
+.lg-grammar-hi.cat-人称代词{background:linear-gradient(180deg,transparent 60%,rgba(45,212,191,.45) 60%)}
 .lg-grammar-word.inbank{color:var(--text-tertiary);text-decoration:underline dotted;text-decoration-color:var(--border-strong)}
-.lg-grammar-foot{margin-top:12px;display:flex;justify-content:center;gap:8px}
+.lg-grammar-foot{margin-top:14px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
