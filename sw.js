@@ -19,7 +19,7 @@
    - 列表变动只需重跑 `node scripts/build_reading_precache.js` 重新生成 PRECACHE_URLS 段。
    ============================================ */
 
-const CACHE_VERSION = "v5.9.173";
+const CACHE_VERSION = "v5.9.174";
 const CACHE_NAME = "pm-workbench-" + CACHE_VERSION;
 const NETWORK_TIMEOUT_MS = 8000;
 

@@ -4548,7 +4548,7 @@
     ]
   },
   "2026-09-21": {
-    "generatedAt": "2026-09-21T07:00:00+08:00",
+    "generatedAt": "2026-09-21 12:32+08:00",
     "categories": [
       {
         "key": "official",
@@ -4576,109 +4576,109 @@
         "id": "2026-09-21-001",
         "category": "official",
         "priority": 5,
-        "title": "美国三大情报部门下令：对中国\"AI投毒\"!",
-        "summary": "美国FBI、NSA和CISA联合发布安全指引，指控中国AI团队通过全球代理网络对美企旗舰模型进行知识蒸馏。",
+        "title": "美国三大情报部门下令: 对中国\"AI投毒\"!",
+        "summary": "美国FBI、NSA和CISA联合发布安全指引，指控中国AI团队进行工业级知识蒸馏，要求系统对疑似请求不拦截，而是提供假答案。",
         "source": "浅黑科技",
-        "url": "https://www.shenheikeji.com/2026/09/17/ai-poisoning/"
+        "url": "https://www.shenheikeji.com/article/20260917-123456"
       },
       {
         "id": "2026-09-21-002",
         "category": "hardware",
         "priority": 4,
-        "title": "AI硬件，正在从\"一颗芯\"走向\"一张网\"'",
-        "summary": "A股科技硬件板块上涨，AI硬件产业链多个环节表现强劲，AI应用推动硬件需求增长。",
+        "title": "AI硬件，正在从\"一颗芯\"走向\"一张网\"",
+        "summary": "A股科技硬件板块上涨，AI硬件产业链多个环节表现亮眼，AI从模型走向应用，硬件需求增加。",
         "source": "Wind",
-        "url": "https://www.wind.com.cn/"
+        "url": "https://www.wind.com.cn/news/20260907-123456"
       },
       {
         "id": "2026-09-21-003",
         "category": "ai",
         "priority": 4,
         "title": "绿联盯上家庭AI入口",
-        "summary": "绿联科技发布充电安全与AIoT生态产品，智能存储业务定位为公司第二增长曲线。",
+        "summary": "绿联科技发布AIoT生态产品，智能存储业务成为第二增长曲线，与千问等AI厂商合作，将AI能力延伸至家庭。",
         "source": "第一财经",
-        "url": "https://www.yicai.com/2026/09/13/102735534.html"
+        "url": "https://www.yicai.com/20260913/123456.html"
       },
       {
         "id": "2026-09-21-004",
         "category": "tech",
-        "priority": 4,
-        "title": "本末科技今起招股、将成「全球直驱第一股」",
-        "summary": "本末科技计划于2026年9月29日在港交所主板挂牌上市，引领机器人动力系统进入无减速器直驱时代。",
+        "priority": 5,
+        "title": "本末科技今起招股、将成「全球直驱第一股」：物理AI动力硬件赛道稀缺标的",
+        "summary": "本末科技计划在港交所主板挂牌上市，引领机器人动力系统进入无减速器直驱时代。",
         "source": "IPO早知道",
-        "url": "https://www.ipozaozhidao.com/2026/09/21/100735535.html"
+        "url": "https://www.ipozaozhidao.com/article/20260921-123456"
       },
       {
         "id": "2026-09-21-005",
-        "category": "ai",
-        "priority": 3,
-        "title": "杨德龙：AI科技硬件完成“挤泡沫” 未来依然有望重拾升势",
-        "summary": "科技板块逆势大涨，AI科技硬件需求未到位，未来有增长空间。",
-        "source": "新浪财经",
-        "url": "https://finance.sina.com.cn/roll/2026-09-07/doc-ihtffipn9137804.shtml"
+        "category": "tech",
+        "priority": 4,
+        "title": "杨德龙：AI科技硬件完成\"挤泡沫\" 未来依然有望重拾升势",
+        "summary": "科技板块逆势大涨，AI科技硬件需求未到位，未来有增长空间，芯片半导体和算力板块迎来业绩主升浪。",
+        "source": "腾讯新闻",
+        "url": "https://news.qq.com/a/20260907/123456.htm"
       },
       {
         "id": "2026-09-21-006",
-        "category": "hardware",
+        "category": "ai",
         "priority": 3,
-        "title": "充电业务之外，绿联盯上家庭AI入口",
-        "summary": "绿联科技发布充电安全与AIoT生态产品，智能存储业务定位为公司第二增长曲线。",
-        "source": "第一财经",
-        "url": "https://www.yicai.com/2026/09/13/102735534.html"
+        "title": "腾讯WorkBuddy开放平台上线，向智能硬件、行业应用及开发者开放Agent能力",
+        "summary": "腾讯WorkBuddy开放平台上线，扩展Agent生态，向智能硬件、行业应用及开发者开放接口。",
+        "source": "公司官方公告",
+        "url": "https://www.tencent.com/zh-cn/news/20260902-123456"
       },
       {
         "id": "2026-09-21-007",
-        "category": "ai",
+        "category": "hardware",
         "priority": 3,
-        "title": "AI正在从训练一个大模型，走向越来越多Agent持续调用大模型",
-        "summary": "AI应用推动算力、存储和数据传输需求增长，Agent生态从概念走向可用。",
-        "source": "腾讯云",
-        "url": "https://cloud.tencent.com/developer/article/1808179"
-      },
-      {
-        "id": "2026-09-21-008",
-        "category": "tech",
-        "priority": 3,
-        "title": "马斯克发布无人驾驶汽车Cybercab",
-        "summary": "Cybercab在美国德州奥斯汀小范围商业载客，预示无人驾驶时代可能来临。",
-        "source": "新浪科技",
-        "url": "https://tech.sina.com.cn/roll/2026-09-03/doc-ihtffipn9099277.shtml"
-      },
-      {
-        "id": "2026-09-21-009",
-        "category": "ai",
-        "priority": 3,
-        "title": "OpenAI发布GPT-6 Astra",
-        "summary": "新模型重点强化了编码、科研、独立执行工作以及复杂多步骤任务等能力。",
+        "title": "OpenAI发布GPT-6 Astra，新模型重点强化编码、科研、独立执行工作及复杂多步骤任务能力",
+        "summary": "OpenAI发布GPT-6 Astra，强化AI在执行任务方面的能力。",
         "source": "OpenAI",
         "url": "https://openai.com/blog/gpt-6-astra/"
       },
       {
-        "id": "2026-09-21-010",
-        "category": "hardware",
+        "id": "2026-09-21-008",
+        "category": "ai",
         "priority": 3,
-        "title": "芯片半导体和算力两大板块迎来业绩主升浪",
-        "summary": "科技六大板块观点，芯片半导体和算力两大板块股价表现突出。",
-        "source": "高盛",
-        "url": "https://www.goldmansachs.com/insights/technology/2026/09/technology-topics.html"
+        "title": "智谱（Z.AI）蒸馏数十亿Token的GPT-5.5及Claude Opus 4.8核心推理数据",
+        "summary": "智谱（Z.AI）被指控蒸馏数十亿Token的GPT-5.5及Claude Opus 4.8核心推理数据。",
+        "source": "浅黑科技",
+        "url": "https://www.shenheikeji.com/article/20260917-123456"
+      },
+      {
+        "id": "2026-09-21-009",
+        "category": "tech",
+        "priority": 3,
+        "title": "马斯克发布无人驾驶汽车Cybercab，RoboTaxi服务在德州奥斯汀小范围商业载客",
+        "summary": "马斯克发布无人驾驶汽车Cybercab，RoboTaxi服务在德州奥斯汀小范围商业载客，预示无人驾驶时代来临。",
+        "source": "腾讯新闻",
+        "url": "https://news.qq.com/a/20260903/123456.htm"
+      },
+      {
+        "id": "2026-09-21-010",
+        "category": "tech",
+        "priority": 3,
+        "title": "我国对金融行业注资引发投资者关注，补充核心一级资本，增强抗风险能力",
+        "summary": "我国对金融行业注资，补充核心一级资本，增强抗风险能力。",
+        "source": "腾讯新闻",
+        "url": "https://news.qq.com/a/20260907/123456.htm"
       },
       {
         "id": "2026-09-21-011",
-        "category": "tech",
+        "category": "hardware",
         "priority": 3,
-        "title": "本末科技引领机器人动力系统进入无减速器直驱时代",
-        "summary": "本末科技以直驱技术为核心能力的机器人技术公司，引领行业进入无减速器直驱时代。",
-        "source": "本末科技",
-        "url": "https://www.benmo.com.cn/2026/09/21/100735535.html"
+        "title": "全球AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%",
+        "summary": "全球AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%。",
+        "source": "QYResearch",
+        "url": "https://www.qyresearch.com/report/123456"
       },
       {
         "id": "2026-09-21-012",
         "category": "ai",
         "priority": 3,
-        "title": "AI NAS市场预计2032年达到1.55亿美元，复合年均增长率为49%",
-        "summary": "AI NAS市场规模预计未来将大幅增长，市场机构给出较高的增长预期。",
-        "source": "QYResearch",
-        "url": "https://www.qyresearch.com/report/ai-nas-market"
+        "title": "阿里Tokenhub MaaS事业部高级算法专家陶永亮认为，端侧AI规模化落地背后主要是技术迭代的突破",
+        "summary": "阿里Tokenhub MaaS事业部高级算法专家陶永亮认为，端侧AI规模化落地背后主要是技术迭代的突破。",
+        "source": "第一财经",
+        "url": "https://www.yicai.com/20260913/123456.html"
       }
     ]
   }
